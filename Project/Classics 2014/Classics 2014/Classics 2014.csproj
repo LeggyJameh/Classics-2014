@@ -52,7 +52,9 @@
   <ItemGroup>
     <Compile Include="Camera Controller.cs" />
     <Compile Include="Data.cs" />
+    <Compile Include="Data_Accuracy.cs" />
     <Compile Include="Engine.cs" />
+    <Compile Include="EnumAndStruct.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="IO Controller.cs" />
     <Compile Include="Main.cs">

@@ -20,7 +20,6 @@ namespace Classics_2014
         byte[] buffer;
         SerialPort port;
         private Thread ListenThread;
-        Data dataToPassUp;
         private readonly ConcurrentQueue<Data> _queue;
         private readonly AutoResetEvent _signal;
         String portName;
@@ -28,8 +27,8 @@ namespace Classics_2014
 
         public Boolean WindDirection { get; private set; }
         public Boolean WindSpeed { get; private set; }
-        
-        #endregion 
+
+        #endregion
 
         public Serial_Controller(ref ConcurrentQueue<Data> _queue, ref AutoResetEvent _signal)
         {
@@ -70,51 +69,54 @@ namespace Classics_2014
         }
         private void DetermineConnection()
         {
-            //ToDo 
+            //ToDo Determine Connections
+            ReadOperation = new System.Action(AccuracyReadAndSplit);
         }
-        
+
         #region Read And Split Procedures
         private void AccuracyReadAndSplit()
         {
-            //ToDo Pass Into Accuracy Class Type
-        //            private void ListenThreadMethod()
-        //{
-        //    do
-        //    {
-               
-        //        dataTable = new EdataTable();
-        //        if (port.BytesToRead >= 19)
-        //        {
-        //            port.Read(buffer, 0, 19);
+            buffer = new byte[19];
+            do
+            {
+
+                Data_Accuracy Data = new Data_Accuracy();
+                if (port.BytesToRead >= 19)
+                {
+                    try
+                    {
+                        port.Read(buffer, 0, 19);
 
 
-        //            ASCIIEncoding eEnconder = new ASCIIEncoding();
-        //            string asciiString;
-        //            asciiString = eEnconder.GetString(buffer);
-        //            try
-        //            {
-        //                dataTable = SplitStream(asciiString);
-        //            }
-        //            catch { }
-        //            _queue.Enqueue(dataTable); 
-        //            _signal.Set();
-        //        }
-        //    } while (true);
-        //}
-        //private EdataTable SplitStream(string asciiStream)
-        //{
-        //    if (asciiStream[17] == '*') { dataTable.IsLanding = true; dataTable.LandingScore = Convert.ToByte(asciiStream.Substring(1, 2)); }
-        //        dataTable.Wind.Speed = float.Parse(asciiStream.Substring(3, 2) + '.' + asciiStream[5]);
-        //        dataTable.Wind.Direction = Convert.ToUInt16(asciiStream.Substring(6, 3));
-        //        dataTable.Wind.Time = asciiStream.Substring(10, 2);
-        //        dataTable.Wind.Time += ':';
-        //        dataTable.Wind.Time += asciiStream.Substring(12, 2);
-        //        dataTable.Wind.Time += ':';
-        //        dataTable.Wind.Time += asciiStream.Substring(14, 2);
-        //        return dataTable;
-            
-        //}
+                        ASCIIEncoding eEnconder = new ASCIIEncoding();
+                        string asciiString;
+                        asciiString = eEnconder.GetString(buffer);
+                        Data = SplitStream(asciiString);
+                    }
+                    catch
+                    { //ToDo Stream Is Incorrect Format after Port set up}
+                    }
+                    _queue.Enqueue(Data);
+                    _signal.Set();
+                }
+            } while (true);
         }
+        private Data_Accuracy SplitStream(string asciiStream)
+        {
+            Data_Accuracy Data = new Data_Accuracy();
+            if (asciiStream[17] == '*') { Data.IsLanding = true; Data.LandingScore = Convert.ToByte(asciiStream.Substring(1, 2)); }
+            Data.Speed = float.Parse(asciiStream.Substring(3, 2) + '.' + asciiStream[5]);
+            Data.Direction = Convert.ToUInt16(asciiStream.Substring(6, 3));
+            Data.Time = asciiStream.Substring(10, 2);
+            Data.Time += ':';
+            Data.Time += asciiStream.Substring(12, 2);
+            Data.Time += ':';
+            Data.Time += asciiStream.Substring(14, 2);
+            return Data;
+
+        }
+
         #endregion
     }
 }
+

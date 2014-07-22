@@ -9,11 +9,11 @@ namespace Classics_2014
 {
     class Network_Controller
     {
-       private readonly ConcurrentQueue<Data> _queue = new ConcurrentQueue<Data>();
+        private readonly ConcurrentQueue<Data> Data_queue = new ConcurrentQueue<Data>();
         private readonly AutoResetEvent _signal = new AutoResetEvent(false);
         public Network_Controller()
         {
-            Serial_Controller SerialController = new Serial_Controller(ref _queue, ref _signal);
+            Serial_Controller SerialController = new Serial_Controller(ref Data_queue, ref _signal);
         }
     }
 }

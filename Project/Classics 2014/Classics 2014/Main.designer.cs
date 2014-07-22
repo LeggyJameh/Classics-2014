@@ -163,6 +163,7 @@
             // 
             // buttonLoad
             // 
+            this.buttonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonLoad.Location = new System.Drawing.Point(369, 231);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(360, 44);
@@ -172,6 +173,7 @@
             // 
             // buttonHelp
             // 
+            this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonHelp.Location = new System.Drawing.Point(369, 320);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(360, 44);
@@ -181,6 +183,7 @@
             // 
             // buttonExit
             // 
+            this.buttonExit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonExit.Location = new System.Drawing.Point(369, 409);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(360, 44);

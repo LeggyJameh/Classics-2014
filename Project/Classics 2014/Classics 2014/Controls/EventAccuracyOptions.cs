@@ -12,7 +12,7 @@ namespace Classics_2014.Controls
     public partial class EventAccuracyOptions : UserControl
     {
         TabControl tabControl;
-        public EventAccuracyOptions(TabControl Main)
+        public EventAccuracyOptions(TabControl Main, Serial_Controller Serial_Controller, SQL_Controller Sql_Controller)
         {
             InitializeComponent();
             tabControl = Main;

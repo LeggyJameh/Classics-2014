@@ -148,6 +148,7 @@
             this.buttonCompetition.TabIndex = 0;
             this.buttonCompetition.Text = "Start New Event";
             this.buttonCompetition.UseVisualStyleBackColor = true;
+            this.buttonCompetition.Click += new System.EventHandler(this.buttonCompetition_Click);
             // 
             // pictureBox1
             // 

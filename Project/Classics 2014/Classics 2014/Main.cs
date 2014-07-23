@@ -21,5 +21,15 @@ namespace Classics_2014
             Application.Exit();
         }
 
+        private void buttonCompetition_Click(object sender, EventArgs e)
+        {
+            TabPage NewPage = new TabPage();
+            Classics_2014.Controls.EventAccuracyOptions EventTab = new Classics_2014.Controls.EventAccuracyOptions(this.tabControl);
+            NewPage.Controls.Add(EventTab);
+            EventTab.Dock = DockStyle.Fill;
+            NewPage.Text = "New Event";
+            tabControl.TabPages.Add(NewPage);
+            tabControl.SelectedTab = NewPage;
+        }
     }
 }

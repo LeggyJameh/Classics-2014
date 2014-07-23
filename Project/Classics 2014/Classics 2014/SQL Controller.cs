@@ -132,9 +132,9 @@ namespace Classics_2014
         #region Queries
         #region Create
 
-        public bool CreateCompetitor(string Name, string Team, string Nationality)
+        public bool CreateCompetitor(TCompetitor Competitor)
         {
-            string query = "INSERT INTO competitors (Name, Team, Nationality) VALUES ('" + Name + "', '" + Team + "', '" + Nationality + "');";
+            string query = "INSERT INTO competitors (Name, Team, Nationality) VALUES ('" + Competitor.name + "', '" + Competitor.team + "', '" + Competitor.nationality + "');";
             return ExecuteNonQuery(query);
         }
 
@@ -153,6 +153,12 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
+        public bool RemoveTeam(string Team)
+        {
+            string query = "UPDATE competitors SET Team='' WHERE Team='" + Team + "';";
+            return ExecuteNonQuery(query);
+        }
+
         #endregion
         #region Modify
 
@@ -161,9 +167,72 @@ namespace Classics_2014
         #endregion
         #region Get
 
+        public List<TCompetitor> GetCompetitorsByTeam(string Team, List<TCompetitor> CurrentCompetitors)
+        {
+            string query = "SELECT * FROM competitors WHERE Team='" + Team + "'";
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        TCompetitor CurrentCompetitor = new TCompetitor();
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
+                                case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
+                                case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                                case 3: CurrentCompetitor.nationality = DataReader.GetString(i); break;
+                            }
+                            if (i == 3) { CurrentCompetitors.Add(CurrentCompetitor); }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+            }
+            return CurrentCompetitors;
+        }
 
+        public List<string> GetTeams()
+        {
+            string query = "SELECT Team FROM competitors";
+            List<string> Teams = new List<string>();
 
-        private int GetLastInsertKey()
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            Teams.Add(DataReader.GetString(i));
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+            }
+
+            return Teams;
+        }
+
+        public int GetLastInsertKey()
         {
             string query = "SELECT last_insert_id()";
             int ID = 0;
@@ -190,6 +259,36 @@ namespace Classics_2014
                 this.CloseConnection();
             }
             return ID;
+        }
+
+        public bool DoesCompetitorExist(TCompetitor Competitor)
+        {
+            string query = "SELECT ID FROM competitors WHERE NAME='" + Competitor.name + "' AND Team='" + Competitor.team + "' AND Nationality ='" + Competitor.nationality + "'";
+            int ID = -2;
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            ID = DataReader.GetInt16(i);
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+            }
+            if (ID == -2) { return false; }
+            else { return true; }
         }
 
         #endregion

@@ -58,25 +58,46 @@
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
+            this.groupBoxCreateCompetitor = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.textBoxCompetitorName = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.buttonCompetitorCreateClose = new System.Windows.Forms.Button();
+            this.buttonCompetitorCreate = new System.Windows.Forms.Button();
+            this.label19 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
+            this.textBoxCompetitorNationality = new System.Windows.Forms.TextBox();
+            this.comboBoxCompetitorTeam = new System.Windows.Forms.ComboBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRemoveCompetitor = new System.Windows.Forms.Button();
+            this.listBoxSelectedCompetitors = new System.Windows.Forms.ListBox();
+            this.buttonCreateCompetitorShow = new System.Windows.Forms.Button();
+            this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonCompetitorExistingToSelected = new System.Windows.Forms.Button();
+            this.buttonCompetitorSelectedToExisting = new System.Windows.Forms.Button();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.listBoxExistingCompetitors = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxCreateTeam = new System.Windows.Forms.GroupBox();
-            this.groupBoxSelectTeams = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxTeamCreate = new System.Windows.Forms.TextBox();
             this.buttonTeamCreate = new System.Windows.Forms.Button();
-            this.listBoxExistingTeams = new System.Windows.Forms.ListBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.buttonTeamCreateClose = new System.Windows.Forms.Button();
+            this.groupBoxSelectTeams = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.buttonRemoveSelectedTeam = new System.Windows.Forms.Button();
             this.listBoxSelectedTeams = new System.Windows.Forms.ListBox();
+            this.buttonCreateTeamShow = new System.Windows.Forms.Button();
             this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonTeamExistingToSelected = new System.Windows.Forms.Button();
             this.buttonTeamSelectedToExisting = new System.Windows.Forms.Button();
-            this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
-            this.buttonCreateTeamShow = new System.Windows.Forms.Button();
-            this.buttonRemoveSelectedTeam = new System.Windows.Forms.Button();
-            this.label15 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.listBoxExistingTeams = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).BeginInit();
@@ -88,11 +109,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tableLayoutPanel9.SuspendLayout();
+            this.groupBoxCreateCompetitor.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
+            this.tableLayoutPanel12.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxCreateTeam.SuspendLayout();
-            this.groupBoxSelectTeams.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.groupBoxSelectTeams.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
             this.tableLayoutPanel8.SuspendLayout();
             this.SuspendLayout();
@@ -546,7 +572,7 @@
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.dataGridView1, 0, 1);
+            this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel9, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.tableLayoutPanel5, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(379, 3);
@@ -558,14 +584,285 @@
             this.tableLayoutPanel4.Size = new System.Drawing.Size(874, 802);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
-            // dataGridView1
+            // tableLayoutPanel9
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(3, 243);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(868, 556);
-            this.dataGridView1.TabIndex = 0;
+            this.tableLayoutPanel9.ColumnCount = 2;
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel9.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Controls.Add(this.groupBoxCreateCompetitor, 0, 0);
+            this.tableLayoutPanel9.Controls.Add(this.groupBox2, 1, 0);
+            this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 243);
+            this.tableLayoutPanel9.Name = "tableLayoutPanel9";
+            this.tableLayoutPanel9.RowCount = 1;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(868, 556);
+            this.tableLayoutPanel9.TabIndex = 2;
+            // 
+            // groupBoxCreateCompetitor
+            // 
+            this.groupBoxCreateCompetitor.Controls.Add(this.tableLayoutPanel10);
+            this.groupBoxCreateCompetitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxCreateCompetitor.Location = new System.Drawing.Point(3, 3);
+            this.groupBoxCreateCompetitor.Name = "groupBoxCreateCompetitor";
+            this.groupBoxCreateCompetitor.Size = new System.Drawing.Size(200, 550);
+            this.groupBoxCreateCompetitor.TabIndex = 0;
+            this.groupBoxCreateCompetitor.TabStop = false;
+            this.groupBoxCreateCompetitor.Text = "New Competitor";
+            this.groupBoxCreateCompetitor.Visible = false;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 1;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Controls.Add(this.textBoxCompetitorName, 0, 2);
+            this.tableLayoutPanel10.Controls.Add(this.label16, 0, 1);
+            this.tableLayoutPanel10.Controls.Add(this.buttonCompetitorCreateClose, 0, 0);
+            this.tableLayoutPanel10.Controls.Add(this.buttonCompetitorCreate, 0, 9);
+            this.tableLayoutPanel10.Controls.Add(this.label19, 0, 4);
+            this.tableLayoutPanel10.Controls.Add(this.label20, 0, 7);
+            this.tableLayoutPanel10.Controls.Add(this.textBoxCompetitorNationality, 0, 8);
+            this.tableLayoutPanel10.Controls.Add(this.comboBoxCompetitorTeam, 0, 5);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 10;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(194, 531);
+            this.tableLayoutPanel10.TabIndex = 0;
+            // 
+            // textBoxCompetitorName
+            // 
+            this.textBoxCompetitorName.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxCompetitorName.Location = new System.Drawing.Point(3, 57);
+            this.textBoxCompetitorName.Name = "textBoxCompetitorName";
+            this.textBoxCompetitorName.Size = new System.Drawing.Size(188, 20);
+            this.textBoxCompetitorName.TabIndex = 0;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label16.Location = new System.Drawing.Point(3, 37);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(188, 13);
+            this.label16.TabIndex = 2;
+            this.label16.Text = "Name:";
+            this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonCompetitorCreateClose
+            // 
+            this.buttonCompetitorCreateClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonCompetitorCreateClose.Location = new System.Drawing.Point(146, 3);
+            this.buttonCompetitorCreateClose.Name = "buttonCompetitorCreateClose";
+            this.buttonCompetitorCreateClose.Size = new System.Drawing.Size(45, 24);
+            this.buttonCompetitorCreateClose.TabIndex = 3;
+            this.buttonCompetitorCreateClose.Text = "Close";
+            this.buttonCompetitorCreateClose.UseVisualStyleBackColor = true;
+            this.buttonCompetitorCreateClose.Click += new System.EventHandler(this.buttonCompetitorCreateClose_Click);
+            // 
+            // buttonCompetitorCreate
+            // 
+            this.buttonCompetitorCreate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonCompetitorCreate.Location = new System.Drawing.Point(3, 243);
+            this.buttonCompetitorCreate.Name = "buttonCompetitorCreate";
+            this.buttonCompetitorCreate.Size = new System.Drawing.Size(188, 23);
+            this.buttonCompetitorCreate.TabIndex = 1;
+            this.buttonCompetitorCreate.Text = "Create";
+            this.buttonCompetitorCreate.UseVisualStyleBackColor = true;
+            this.buttonCompetitorCreate.Click += new System.EventHandler(this.buttonCompetitorCreate_Click);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label19.Location = new System.Drawing.Point(3, 117);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(188, 13);
+            this.label19.TabIndex = 4;
+            this.label19.Text = "Team:";
+            this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label20.Location = new System.Drawing.Point(3, 197);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(188, 13);
+            this.label20.TabIndex = 5;
+            this.label20.Text = "Nationality:";
+            this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // textBoxCompetitorNationality
+            // 
+            this.textBoxCompetitorNationality.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest;
+            this.textBoxCompetitorNationality.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.RecentlyUsedList;
+            this.textBoxCompetitorNationality.Dock = System.Windows.Forms.DockStyle.Top;
+            this.textBoxCompetitorNationality.Location = new System.Drawing.Point(3, 213);
+            this.textBoxCompetitorNationality.Name = "textBoxCompetitorNationality";
+            this.textBoxCompetitorNationality.Size = new System.Drawing.Size(188, 20);
+            this.textBoxCompetitorNationality.TabIndex = 6;
+            // 
+            // comboBoxCompetitorTeam
+            // 
+            this.comboBoxCompetitorTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxCompetitorTeam.FormattingEnabled = true;
+            this.comboBoxCompetitorTeam.Location = new System.Drawing.Point(3, 134);
+            this.comboBoxCompetitorTeam.Name = "comboBoxCompetitorTeam";
+            this.comboBoxCompetitorTeam.Size = new System.Drawing.Size(188, 21);
+            this.comboBoxCompetitorTeam.TabIndex = 7;
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel11);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(209, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(656, 550);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Select Competitors";
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 4;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.5F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.5F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
+            this.tableLayoutPanel11.Controls.Add(this.buttonRemoveCompetitor, 1, 2);
+            this.tableLayoutPanel11.Controls.Add(this.listBoxSelectedCompetitors, 3, 1);
+            this.tableLayoutPanel11.Controls.Add(this.buttonCreateCompetitorShow, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel12, 2, 1);
+            this.tableLayoutPanel11.Controls.Add(this.label17, 3, 0);
+            this.tableLayoutPanel11.Controls.Add(this.label18, 0, 0);
+            this.tableLayoutPanel11.Controls.Add(this.listBoxExistingCompetitors, 0, 1);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 16);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 3;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(650, 531);
+            this.tableLayoutPanel11.TabIndex = 0;
+            // 
+            // buttonRemoveCompetitor
+            // 
+            this.buttonRemoveCompetitor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRemoveCompetitor.Location = new System.Drawing.Point(149, 504);
+            this.buttonRemoveCompetitor.Name = "buttonRemoveCompetitor";
+            this.buttonRemoveCompetitor.Size = new System.Drawing.Size(140, 24);
+            this.buttonRemoveCompetitor.TabIndex = 1;
+            this.buttonRemoveCompetitor.Text = "Remove Competitor";
+            this.buttonRemoveCompetitor.UseVisualStyleBackColor = true;
+            this.buttonRemoveCompetitor.Click += new System.EventHandler(this.buttonRemoveCompetitor_Click);
+            // 
+            // listBoxSelectedCompetitors
+            // 
+            this.listBoxSelectedCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxSelectedCompetitors.FormattingEnabled = true;
+            this.listBoxSelectedCompetitors.Location = new System.Drawing.Point(360, 33);
+            this.listBoxSelectedCompetitors.Name = "listBoxSelectedCompetitors";
+            this.tableLayoutPanel11.SetRowSpan(this.listBoxSelectedCompetitors, 2);
+            this.listBoxSelectedCompetitors.Size = new System.Drawing.Size(287, 495);
+            this.listBoxSelectedCompetitors.TabIndex = 1;
+            // 
+            // buttonCreateCompetitorShow
+            // 
+            this.buttonCreateCompetitorShow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCreateCompetitorShow.Location = new System.Drawing.Point(3, 504);
+            this.buttonCreateCompetitorShow.Name = "buttonCreateCompetitorShow";
+            this.buttonCreateCompetitorShow.Size = new System.Drawing.Size(140, 24);
+            this.buttonCreateCompetitorShow.TabIndex = 0;
+            this.buttonCreateCompetitorShow.Text = "Create Competitor";
+            this.buttonCreateCompetitorShow.UseVisualStyleBackColor = true;
+            this.buttonCreateCompetitorShow.Click += new System.EventHandler(this.buttonCreateCompetitorShow_Click);
+            // 
+            // tableLayoutPanel12
+            // 
+            this.tableLayoutPanel12.ColumnCount = 1;
+            this.tableLayoutPanel12.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel12.Controls.Add(this.buttonCompetitorExistingToSelected, 0, 1);
+            this.tableLayoutPanel12.Controls.Add(this.buttonCompetitorSelectedToExisting, 0, 3);
+            this.tableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel12.Location = new System.Drawing.Point(295, 33);
+            this.tableLayoutPanel12.Name = "tableLayoutPanel12";
+            this.tableLayoutPanel12.RowCount = 5;
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
+            this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(59, 465);
+            this.tableLayoutPanel12.TabIndex = 2;
+            // 
+            // buttonCompetitorExistingToSelected
+            // 
+            this.buttonCompetitorExistingToSelected.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCompetitorExistingToSelected.Location = new System.Drawing.Point(3, 69);
+            this.buttonCompetitorExistingToSelected.Name = "buttonCompetitorExistingToSelected";
+            this.buttonCompetitorExistingToSelected.Size = new System.Drawing.Size(53, 126);
+            this.buttonCompetitorExistingToSelected.TabIndex = 0;
+            this.buttonCompetitorExistingToSelected.Text = ">";
+            this.buttonCompetitorExistingToSelected.UseVisualStyleBackColor = true;
+            this.buttonCompetitorExistingToSelected.Click += new System.EventHandler(this.buttonCompetitorExistingToSelected_Click);
+            // 
+            // buttonCompetitorSelectedToExisting
+            // 
+            this.buttonCompetitorSelectedToExisting.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCompetitorSelectedToExisting.Location = new System.Drawing.Point(3, 267);
+            this.buttonCompetitorSelectedToExisting.Name = "buttonCompetitorSelectedToExisting";
+            this.buttonCompetitorSelectedToExisting.Size = new System.Drawing.Size(53, 126);
+            this.buttonCompetitorSelectedToExisting.TabIndex = 1;
+            this.buttonCompetitorSelectedToExisting.Text = "<";
+            this.buttonCompetitorSelectedToExisting.UseVisualStyleBackColor = true;
+            this.buttonCompetitorSelectedToExisting.Click += new System.EventHandler(this.buttonCompetitorSelectedToExisting_Click);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label17.Location = new System.Drawing.Point(360, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(287, 30);
+            this.label17.TabIndex = 4;
+            this.label17.Text = "Selected Competitors";
+            this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.tableLayoutPanel11.SetColumnSpan(this.label18, 2);
+            this.label18.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label18.Location = new System.Drawing.Point(3, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(286, 30);
+            this.label18.TabIndex = 3;
+            this.label18.Text = "Existing Competitors";
+            this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // listBoxExistingCompetitors
+            // 
+            this.tableLayoutPanel11.SetColumnSpan(this.listBoxExistingCompetitors, 2);
+            this.listBoxExistingCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxExistingCompetitors.FormattingEnabled = true;
+            this.listBoxExistingCompetitors.Location = new System.Drawing.Point(3, 33);
+            this.listBoxExistingCompetitors.Name = "listBoxExistingCompetitors";
+            this.listBoxExistingCompetitors.Size = new System.Drawing.Size(286, 465);
+            this.listBoxExistingCompetitors.TabIndex = 0;
             // 
             // tableLayoutPanel5
             // 
@@ -594,17 +891,6 @@
             this.groupBoxCreateTeam.Text = "New Team";
             this.groupBoxCreateTeam.Visible = false;
             // 
-            // groupBoxSelectTeams
-            // 
-            this.groupBoxSelectTeams.Controls.Add(this.tableLayoutPanel7);
-            this.groupBoxSelectTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxSelectTeams.Location = new System.Drawing.Point(209, 3);
-            this.groupBoxSelectTeams.Name = "groupBoxSelectTeams";
-            this.groupBoxSelectTeams.Size = new System.Drawing.Size(656, 228);
-            this.groupBoxSelectTeams.TabIndex = 1;
-            this.groupBoxSelectTeams.TabStop = false;
-            this.groupBoxSelectTeams.Text = "Select Teams";
-            // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
@@ -612,7 +898,7 @@
             this.tableLayoutPanel6.Controls.Add(this.textBoxTeamCreate, 0, 2);
             this.tableLayoutPanel6.Controls.Add(this.buttonTeamCreate, 0, 3);
             this.tableLayoutPanel6.Controls.Add(this.label15, 0, 1);
-            this.tableLayoutPanel6.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.buttonTeamCreateClose, 0, 0);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
@@ -623,6 +909,59 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel6.Size = new System.Drawing.Size(194, 209);
             this.tableLayoutPanel6.TabIndex = 0;
+            // 
+            // textBoxTeamCreate
+            // 
+            this.textBoxTeamCreate.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.textBoxTeamCreate.Location = new System.Drawing.Point(3, 111);
+            this.textBoxTeamCreate.Name = "textBoxTeamCreate";
+            this.textBoxTeamCreate.Size = new System.Drawing.Size(188, 20);
+            this.textBoxTeamCreate.TabIndex = 0;
+            // 
+            // buttonTeamCreate
+            // 
+            this.buttonTeamCreate.Dock = System.Windows.Forms.DockStyle.Top;
+            this.buttonTeamCreate.Location = new System.Drawing.Point(3, 137);
+            this.buttonTeamCreate.Name = "buttonTeamCreate";
+            this.buttonTeamCreate.Size = new System.Drawing.Size(188, 23);
+            this.buttonTeamCreate.TabIndex = 1;
+            this.buttonTeamCreate.Text = "Create";
+            this.buttonTeamCreate.UseVisualStyleBackColor = true;
+            this.buttonTeamCreate.Click += new System.EventHandler(this.buttonTeamCreate_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.label15.Location = new System.Drawing.Point(3, 91);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(188, 13);
+            this.label15.TabIndex = 2;
+            this.label15.Text = "Name:";
+            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // buttonTeamCreateClose
+            // 
+            this.buttonTeamCreateClose.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonTeamCreateClose.Location = new System.Drawing.Point(146, 3);
+            this.buttonTeamCreateClose.Name = "buttonTeamCreateClose";
+            this.buttonTeamCreateClose.Size = new System.Drawing.Size(45, 24);
+            this.buttonTeamCreateClose.TabIndex = 3;
+            this.buttonTeamCreateClose.Text = "Close";
+            this.buttonTeamCreateClose.UseVisualStyleBackColor = true;
+            this.buttonTeamCreateClose.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBoxSelectTeams
+            // 
+            this.groupBoxSelectTeams.Controls.Add(this.tableLayoutPanel7);
+            this.groupBoxSelectTeams.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxSelectTeams.Location = new System.Drawing.Point(209, 3);
+            this.groupBoxSelectTeams.Name = "groupBoxSelectTeams";
+            this.groupBoxSelectTeams.Size = new System.Drawing.Size(656, 228);
+            this.groupBoxSelectTeams.TabIndex = 1;
+            this.groupBoxSelectTeams.TabStop = false;
+            this.groupBoxSelectTeams.Text = "Select Teams";
             // 
             // tableLayoutPanel7
             // 
@@ -648,34 +987,16 @@
             this.tableLayoutPanel7.Size = new System.Drawing.Size(650, 209);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
-            // textBoxTeamCreate
+            // buttonRemoveSelectedTeam
             // 
-            this.textBoxTeamCreate.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.textBoxTeamCreate.Location = new System.Drawing.Point(3, 111);
-            this.textBoxTeamCreate.Name = "textBoxTeamCreate";
-            this.textBoxTeamCreate.Size = new System.Drawing.Size(188, 20);
-            this.textBoxTeamCreate.TabIndex = 0;
-            // 
-            // buttonTeamCreate
-            // 
-            this.buttonTeamCreate.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonTeamCreate.Location = new System.Drawing.Point(3, 137);
-            this.buttonTeamCreate.Name = "buttonTeamCreate";
-            this.buttonTeamCreate.Size = new System.Drawing.Size(188, 23);
-            this.buttonTeamCreate.TabIndex = 1;
-            this.buttonTeamCreate.Text = "Create";
-            this.buttonTeamCreate.UseVisualStyleBackColor = true;
-            this.buttonTeamCreate.Click += new System.EventHandler(this.buttonTeamCreate_Click);
-            // 
-            // listBoxExistingTeams
-            // 
-            this.tableLayoutPanel7.SetColumnSpan(this.listBoxExistingTeams, 2);
-            this.listBoxExistingTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxExistingTeams.FormattingEnabled = true;
-            this.listBoxExistingTeams.Location = new System.Drawing.Point(3, 33);
-            this.listBoxExistingTeams.Name = "listBoxExistingTeams";
-            this.listBoxExistingTeams.Size = new System.Drawing.Size(286, 143);
-            this.listBoxExistingTeams.TabIndex = 0;
+            this.buttonRemoveSelectedTeam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonRemoveSelectedTeam.Location = new System.Drawing.Point(149, 182);
+            this.buttonRemoveSelectedTeam.Name = "buttonRemoveSelectedTeam";
+            this.buttonRemoveSelectedTeam.Size = new System.Drawing.Size(140, 24);
+            this.buttonRemoveSelectedTeam.TabIndex = 1;
+            this.buttonRemoveSelectedTeam.Text = "Remove Team";
+            this.buttonRemoveSelectedTeam.UseVisualStyleBackColor = true;
+            this.buttonRemoveSelectedTeam.Click += new System.EventHandler(this.buttonRemoveSelectedTeam_Click);
             // 
             // listBoxSelectedTeams
             // 
@@ -686,6 +1007,17 @@
             this.tableLayoutPanel7.SetRowSpan(this.listBoxSelectedTeams, 2);
             this.listBoxSelectedTeams.Size = new System.Drawing.Size(287, 173);
             this.listBoxSelectedTeams.TabIndex = 1;
+            // 
+            // buttonCreateTeamShow
+            // 
+            this.buttonCreateTeamShow.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCreateTeamShow.Location = new System.Drawing.Point(3, 182);
+            this.buttonCreateTeamShow.Name = "buttonCreateTeamShow";
+            this.buttonCreateTeamShow.Size = new System.Drawing.Size(140, 24);
+            this.buttonCreateTeamShow.TabIndex = 0;
+            this.buttonCreateTeamShow.Text = "Create Team";
+            this.buttonCreateTeamShow.UseVisualStyleBackColor = true;
+            this.buttonCreateTeamShow.Click += new System.EventHandler(this.buttonCreateTeamShow_Click);
             // 
             // tableLayoutPanel8
             // 
@@ -727,6 +1059,17 @@
             this.buttonTeamSelectedToExisting.UseVisualStyleBackColor = true;
             this.buttonTeamSelectedToExisting.Click += new System.EventHandler(this.buttonTeamSelectedToExisting_Click);
             // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label14.Location = new System.Drawing.Point(360, 0);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(287, 30);
+            this.label14.TabIndex = 4;
+            this.label14.Text = "Selected Teams";
+            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label13
             // 
             this.label13.AutoSize = true;
@@ -739,61 +1082,15 @@
             this.label13.Text = "Existing Teams";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label14
+            // listBoxExistingTeams
             // 
-            this.label14.AutoSize = true;
-            this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label14.Location = new System.Drawing.Point(360, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(287, 30);
-            this.label14.TabIndex = 4;
-            this.label14.Text = "Selected Teams";
-            this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonCreateTeamShow
-            // 
-            this.buttonCreateTeamShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCreateTeamShow.Location = new System.Drawing.Point(3, 182);
-            this.buttonCreateTeamShow.Name = "buttonCreateTeamShow";
-            this.buttonCreateTeamShow.Size = new System.Drawing.Size(140, 24);
-            this.buttonCreateTeamShow.TabIndex = 0;
-            this.buttonCreateTeamShow.Text = "Create Team";
-            this.buttonCreateTeamShow.UseVisualStyleBackColor = true;
-            this.buttonCreateTeamShow.Click += new System.EventHandler(this.buttonCreateTeamShow_Click);
-            // 
-            // buttonRemoveSelectedTeam
-            // 
-            this.buttonRemoveSelectedTeam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRemoveSelectedTeam.Location = new System.Drawing.Point(149, 182);
-            this.buttonRemoveSelectedTeam.Name = "buttonRemoveSelectedTeam";
-            this.buttonRemoveSelectedTeam.Size = new System.Drawing.Size(140, 24);
-            this.buttonRemoveSelectedTeam.TabIndex = 1;
-            this.buttonRemoveSelectedTeam.Text = "Remove Team";
-            this.buttonRemoveSelectedTeam.UseVisualStyleBackColor = true;
-            this.buttonRemoveSelectedTeam.Click += new System.EventHandler(this.buttonRemoveSelectedTeam_Click);
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.label15.Location = new System.Drawing.Point(3, 91);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(188, 13);
-            this.label15.TabIndex = 2;
-            this.label15.Text = "Name:";
-            this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // button1
-            // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(146, 3);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(45, 24);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Close";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.tableLayoutPanel7.SetColumnSpan(this.listBoxExistingTeams, 2);
+            this.listBoxExistingTeams.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listBoxExistingTeams.FormattingEnabled = true;
+            this.listBoxExistingTeams.Location = new System.Drawing.Point(3, 33);
+            this.listBoxExistingTeams.Name = "listBoxExistingTeams";
+            this.listBoxExistingTeams.Size = new System.Drawing.Size(286, 143);
+            this.listBoxExistingTeams.TabIndex = 0;
             // 
             // EventAccuracyOptions
             // 
@@ -815,12 +1112,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.tableLayoutPanel9.ResumeLayout(false);
+            this.groupBoxCreateCompetitor.ResumeLayout(false);
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
+            this.tableLayoutPanel12.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.groupBoxCreateTeam.ResumeLayout(false);
-            this.groupBoxSelectTeams.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.groupBoxSelectTeams.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
             this.tableLayoutPanel7.PerformLayout();
             this.tableLayoutPanel8.ResumeLayout(false);
@@ -860,7 +1164,6 @@
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.GroupBox groupBoxCreateTeam;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
@@ -878,6 +1181,28 @@
         private System.Windows.Forms.Button buttonCreateTeamShow;
         private System.Windows.Forms.Button buttonRemoveSelectedTeam;
         private System.Windows.Forms.Label label15;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonTeamCreateClose;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel9;
+        private System.Windows.Forms.GroupBox groupBoxCreateCompetitor;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.TextBox textBoxCompetitorName;
+        private System.Windows.Forms.Button buttonCompetitorCreate;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button buttonCompetitorCreateClose;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.Button buttonRemoveCompetitor;
+        private System.Windows.Forms.ListBox listBoxSelectedCompetitors;
+        private System.Windows.Forms.Button buttonCreateCompetitorShow;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
+        private System.Windows.Forms.Button buttonCompetitorExistingToSelected;
+        private System.Windows.Forms.Button buttonCompetitorSelectedToExisting;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
+        private System.Windows.Forms.ListBox listBoxExistingCompetitors;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox textBoxCompetitorNationality;
+        private System.Windows.Forms.ComboBox comboBoxCompetitorTeam;
     }
 }

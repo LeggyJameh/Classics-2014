@@ -29,10 +29,10 @@ namespace Classics_2014
 
     public struct TCompetitor
     {
-        public int ID;
-        public string name;
-        public string team;
-        public string nationality;
+        public int ID = -1;
+        public string name = "";
+        public string team = "";
+        public string nationality = "";
     }
 
     public struct TLanding

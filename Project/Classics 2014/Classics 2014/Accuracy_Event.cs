@@ -10,9 +10,11 @@ namespace Classics_2014
     {
         #region variables and the such like
         private Thread ListenThread;
-        SQL_Controller SQL_Controller;
-        IO_Controller IO_Controller;
+        public SQL_Controller SQL_Controller;
+        public IO_Controller IO_Controller;
         readonly AutoResetEvent Active_Signal;
+        Controls.EventAccuracy ActiveEventTab;
+        Controls.EventAccuracyOptions EventOptionsTab;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal)
         {

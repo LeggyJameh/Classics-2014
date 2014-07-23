@@ -24,7 +24,7 @@ namespace Classics_2014
         private readonly AutoResetEvent _signal;
         String portName;
         Action ReadOperation;
-        public bool IsActive { get { return port.IsOpen; } private set; }//ToDo Add a check to make sure that the format is correct
+        public bool IsActive { get { return port.IsOpen; } private set{} }//ToDo Add a check to make sure that the format is correct
         public Boolean WindDirection { get; private set; }
         public Boolean WindSpeed { get; private set; }
 

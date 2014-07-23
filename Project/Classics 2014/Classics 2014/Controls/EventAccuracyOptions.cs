@@ -9,20 +9,20 @@ using System.Windows.Forms;
 
 namespace Classics_2014.Controls
 {
-    public partial class EventAccuracyOptions : UserControl
+     partial class EventAccuracyOptions : UserControl
     {
+        Accuracy_Event Connected_Event;
         TabControl tabControl;
         List<TCompetitor> SelectedCompetitors = new List<TCompetitor>();
         List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
         List<string> SelectedTeams = new List<string>();
         List<string> ExistingTeams = new List<string>();
-        SQL_Controller MySQL_Controller;
 
-        public EventAccuracyOptions(TabControl Main, Serial_Controller Serial_Controller, SQL_Controller Sql_Controller)
+        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent)
         {
             InitializeComponent();
             tabControl = Main;
-            MySQL_Controller = Sql_Controller;
+            Connected_Event = aEvent;
             //TODO: Add MySQL Team list query here, to enter into existingteams list.
             #region KeyDown Functions
             this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);
@@ -152,14 +152,14 @@ namespace Classics_2014.Controls
         {
             for (int i = 0; i < ExistingTeams.Count; i++)
 			{
-                ExistingCompetitors = MySQL_Controller.GetCompetitorsByTeam(ExistingTeams[i], ExistingCompetitors);
+                ExistingCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByTeam(ExistingTeams[i], ExistingCompetitors);
 			}
         }
 
         private void PopulateExistingTeams()
         {
             ExistingTeams.Clear();
-            ExistingTeams = MySQL_Controller.GetTeams();
+            ExistingTeams = Connected_Event.SQL_Controller.GetTeams();
         }
 
         #region Events
@@ -211,7 +211,7 @@ namespace Classics_2014.Controls
                 {
                     listBoxExistingTeams.Items.Remove(listBoxExistingTeams.SelectedItem);
                     RemovedTeamUpdateCompetitors(TeamName);
-                    MySQL_Controller.RemoveTeam(TeamName);
+                    Connected_Event.SQL_Controller.RemoveTeam(TeamName);
                 }
             }
             catch
@@ -279,10 +279,10 @@ namespace Classics_2014.Controls
 
                         if (CheckCompetitorIsValid(CurrentCompetitor.name))
                         {
-                            if (MySQL_Controller.DoesCompetitorExist(CurrentCompetitor))
+                            if (Connected_Event.SQL_Controller.DoesCompetitorExist(CurrentCompetitor))
                             {
-                                MySQL_Controller.CreateCompetitor(CurrentCompetitor);
-                                CurrentCompetitor.ID = MySQL_Controller.GetLastInsertKey();
+                                Connected_Event.SQL_Controller.CreateCompetitor(CurrentCompetitor);
+                                CurrentCompetitor.ID = Connected_Event.SQL_Controller.GetLastInsertKey();
                                 listBoxExistingCompetitors.Items.Add(CurrentCompetitor.name);
                                 ExistingCompetitors.Add(CurrentCompetitor);
                                 textBoxCompetitorName.Text = "";

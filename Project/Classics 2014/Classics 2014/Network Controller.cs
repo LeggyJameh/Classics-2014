@@ -9,6 +9,6 @@ namespace Classics_2014
 {
     class Network_Controller
     {
-        public bool Active { get { return false; } private set; }//ToDo Setup
+        public bool Active { get { return false; } private set{} }//ToDo Setup
     }
 }

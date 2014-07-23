@@ -24,7 +24,10 @@ namespace Classics_2014
         public bool[] CheckIO()
         {
             Boolean[] replies = new bool[2];
-            replies[0] = Serial_Controller.
+            replies[0] = Serial_Controller.IsActive;
+            replies[1] = Camera_Controller.Active;
+            replies[2] = Network_Controller.Active;
+            return replies;
         }
     }
 }

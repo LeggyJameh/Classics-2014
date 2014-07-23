@@ -12,21 +12,17 @@ namespace Classics_2014.Controls
     public partial class EventAccuracyOptions : UserControl
     {
         TabControl tabControl;
-<<<<<<< HEAD
         List<TCompetitor> SelectedCompetitors = new List<TCompetitor>();
         List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
         List<string> SelectedTeams = new List<string>();
         List<string> ExistingTeams = new List<string>();
         SQL_Controller MySQL_Controller;
 
-        public EventAccuracyOptions(TabControl Main, SQL_Controller Controller)
-=======
         public EventAccuracyOptions(TabControl Main, Serial_Controller Serial_Controller, SQL_Controller Sql_Controller)
->>>>>>> origin/master
         {
             InitializeComponent();
             tabControl = Main;
-            MySQL_Controller = Controller;
+            MySQL_Controller = Sql_Controller;
             //TODO: Add MySQL Team list query here, to enter into existingteams list.
             #region KeyDown Functions
             this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);

@@ -12,6 +12,7 @@ namespace Classics_2014.Controls
     public partial class EventAccuracyOptions : UserControl
     {
         TabControl tabControl;
+<<<<<<< HEAD
         List<TCompetitor> SelectedCompetitors = new List<TCompetitor>();
         List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
         List<string> SelectedTeams = new List<string>();
@@ -19,6 +20,9 @@ namespace Classics_2014.Controls
         SQL_Controller MySQL_Controller;
 
         public EventAccuracyOptions(TabControl Main, SQL_Controller Controller)
+=======
+        public EventAccuracyOptions(TabControl Main, Serial_Controller Serial_Controller, SQL_Controller Sql_Controller)
+>>>>>>> origin/master
         {
             InitializeComponent();
             tabControl = Main;

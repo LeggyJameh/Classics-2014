@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accuracy_Event.cs" />
     <Compile Include="Camera Controller.cs" />
     <Compile Include="Controls\EventAccuracy.cs">
       <SubType>UserControl</SubType>

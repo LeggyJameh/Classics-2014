@@ -146,6 +146,20 @@ namespace Classics_2014.Controls
 
         private void MovedTeamFromSelectedToExisting(string TeamName)
         {
+            List<TCompetitor> NewCompetitorList = new List<TCompetitor>();
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
+            {
+                TCompetitor CurrentCompetitor = SelectedCompetitors[i];
+                if (CurrentCompetitor.team != TeamName)
+                {
+                    NewCompetitorList.Add(CurrentCompetitor);
+                }
+                else
+                {
+                    ExistingCompetitors.Add(CurrentCompetitor);
+                }
+            }
+            SelectedCompetitors = NewCompetitorList;
         }
 
         private void PopulateExistingCompetitors()

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014.Controls
+namespace Classics_2014.Accuracy
 {
      partial class EventAccuracyOptions : UserControl
     {
@@ -23,7 +23,7 @@ namespace Classics_2014.Controls
             InitializeComponent();
             tabControl = Main;
             Connected_Event = aEvent;
-            //TODO: Add MySQL Team list query here, to enter into existingteams list.
+            PopulateExistingTeams();
             #region KeyDown Functions
             this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);
             this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
@@ -31,8 +31,8 @@ namespace Classics_2014.Controls
             this.textBoxCompetitorNationality.KeyDown += new KeyEventHandler(textBoxCompetitorEntry_KeyDown);
             this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
             this.listBoxSelectedTeams.KeyDown += new KeyEventHandler(listBoxSelectedTeams_KeyDown);
-            this.listBoxExistingCompetitors.KeyDown += new KeyEventHandler(listBoxExistingCompetitors_KeyDown);
-            this.listBoxSelectedCompetitors.KeyDown +=new KeyEventHandler(listBoxSelectedCompetitors_KeyDown);
+            this.dataGridExistingCompetitors.KeyDown += new KeyEventHandler(dataGridExistingCompetitors_KeyDown);
+            this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
         }
 
         private void textBoxTeamCreate_KeyDown(object sender, KeyEventArgs e)
@@ -71,7 +71,7 @@ namespace Classics_2014.Controls
             }
         }
 
-        private void listBoxExistingCompetitors_KeyDown(object sender, KeyEventArgs e)
+        private void dataGridExistingCompetitors_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -79,7 +79,7 @@ namespace Classics_2014.Controls
             }
         }
 
-        private void listBoxSelectedCompetitors_KeyDown(object sender, KeyEventArgs e)
+        private void dataGridSelectedCompetitors_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -88,6 +88,8 @@ namespace Classics_2014.Controls
         }
 
         #endregion
+
+        #region Checks
 
         private bool CheckTeamIsValid(string TeamName)
         {
@@ -107,24 +109,36 @@ namespace Classics_2014.Controls
         private bool CheckCompetitorIsValid(string CompetitorFullName)
         {
             bool IsValid = true;
-            for (int i = 0; i < listBoxExistingCompetitors.Items.Count; i++)
+            for (int i = 0; i < ExistingCompetitors.Count; i++)
             {
-                if (listBoxExistingCompetitors.Items[i].ToString() == CompetitorFullName) { IsValid = false; }
+                if (ExistingCompetitors[i].ToString() == CompetitorFullName) { IsValid = false; }
             }
 
-            for (int i = 0; i < listBoxSelectedCompetitors.Items.Count; i++)
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
             {
-                if (listBoxSelectedCompetitors.Items[i].ToString() == CompetitorFullName) { IsValid = false; }
+                if (SelectedCompetitors[i].ToString() == CompetitorFullName) { IsValid = false; }
             }
             return IsValid;
         }
 
+        #endregion
+
         private void UpdateTeamSelection()
         {
             comboBoxCompetitorTeam.Items.Clear();
+            SelectedTeams.Clear();
+            ExistingTeams.Clear();
             for (int i = 0; i < listBoxSelectedTeams.Items.Count; i++)
             {
                 comboBoxCompetitorTeam.Items.Add(listBoxSelectedTeams.Items[i].ToString());
+            }
+            for (int i = 0; i < listBoxExistingTeams.Items.Count; i++)
+            {
+                ExistingTeams.Add(listBoxExistingTeams.Items[i].ToString());
+            }
+            for (int i = 0; i < listBoxSelectedTeams.Items.Count; i++)
+            {
+                SelectedTeams.Add(listBoxSelectedTeams.Items[i].ToString());
             }
         }
 
@@ -144,36 +158,68 @@ namespace Classics_2014.Controls
             ExistingCompetitors = NewCompetitorList;
         }
 
-        private void MovedTeamFromSelectedToExisting(string TeamName)
-        {
-            List<TCompetitor> NewCompetitorList = new List<TCompetitor>();
-            for (int i = 0; i < SelectedCompetitors.Count; i++)
-            {
-                TCompetitor CurrentCompetitor = SelectedCompetitors[i];
-                if (CurrentCompetitor.team != TeamName)
-                {
-                    NewCompetitorList.Add(CurrentCompetitor);
-                }
-                else
-                {
-                    ExistingCompetitors.Add(CurrentCompetitor);
-                }
-            }
-            SelectedCompetitors = NewCompetitorList;
-        }
-
         private void PopulateExistingCompetitors()
         {
-            for (int i = 0; i < ExistingTeams.Count; i++)
+            ExistingCompetitors.Clear();
+            for (int i = 0; i < SelectedTeams.Count; i++)
 			{
-                ExistingCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByTeam(ExistingTeams[i], ExistingCompetitors);
+                ExistingCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByTeam(SelectedTeams[i], ExistingCompetitors);
 			}
+            UpdateCompetitorGridsFromData();
         }
 
         private void PopulateExistingTeams()
         {
             ExistingTeams.Clear();
+            listBoxExistingTeams.Items.Clear();
             ExistingTeams = Connected_Event.SQL_Controller.GetTeams();
+            for (int i = 0; i < ExistingTeams.Count; i++)
+            {
+                listBoxExistingTeams.Items.Add(ExistingTeams[i]);
+            }
+        }
+
+        private void RefreshSelectedCompetitors(string Team)
+        {  
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
+            {
+                TCompetitor CurrentCompetitor = SelectedCompetitors[i];
+                if (CurrentCompetitor.team == Team)
+                {
+                    SelectedCompetitors.Remove(CurrentCompetitor);
+                    i--;
+                }
+            }
+            UpdateCompetitorGridsFromData();
+        }
+
+        private void UpdateCompetitorGridsFromData()
+        {
+            dataGridExistingCompetitors.Rows.Clear();
+            dataGridSelectedCompetitors.Rows.Clear();
+            for (int i = 0; i < ExistingCompetitors.Count; i++)
+            {
+                dataGridExistingCompetitors.Rows.Add(ExistingCompetitors[i].ID.ToString(), ExistingCompetitors[i].name, ExistingCompetitors[i].team, ExistingCompetitors[i].nationality);
+            }
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
+            {
+                dataGridSelectedCompetitors.Rows.Add(SelectedCompetitors[i].ID.ToString(), SelectedCompetitors[i].name, SelectedCompetitors[i].team, SelectedCompetitors[i].nationality);
+            }
+        }
+
+        private List<TCompetitor> GetSelectedCompetitors(DataGridView Datagrid)
+        {
+            List<TCompetitor> LocalSelectedCompetitors = new List<TCompetitor>();
+            for (int i = 0; i < Datagrid.SelectedRows.Count; i++)
+            {
+                TCompetitor CurrentCompetitor = new TCompetitor();
+                CurrentCompetitor.ID = Convert.ToInt16(Datagrid[0, i].Value);
+                CurrentCompetitor.name = Datagrid[1, i].Value.ToString();
+                CurrentCompetitor.team = Datagrid[2, i].Value.ToString();
+                CurrentCompetitor.nationality = Datagrid[3, i].Value.ToString();
+                LocalSelectedCompetitors.Add(CurrentCompetitor);
+            }
+            return LocalSelectedCompetitors;
         }
 
         #region Events
@@ -197,11 +243,10 @@ namespace Classics_2014.Controls
         private void buttonTeamCreate_Click(object sender, EventArgs e)
         {
             string TeamName = textBoxTeamCreate.Text;
-            if (TeamName != "")
+            if (TeamName != "" && TeamName.Length < 255)
             {
                 if (CheckTeamIsValid(TeamName))
                 {
-                    //TODO: Add MySQL addTeam query here.
                     listBoxExistingTeams.Items.Add(TeamName);
                     textBoxTeamCreate.Text = "";
                 }
@@ -221,7 +266,7 @@ namespace Classics_2014.Controls
             try
             {
                 string TeamName = listBoxExistingTeams.SelectedItem.ToString();
-                if (MessageBox.Show(("Are you sure you wish to remove the selected team " + TeamName + " and all the competitors associated with it?"), "Remove Team?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(("Are you sure you wish to permanently remove the selected team " + TeamName + " and all the competitors associated with it?"), "Remove Team?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     listBoxExistingTeams.Items.Remove(listBoxExistingTeams.SelectedItem);
                     RemovedTeamUpdateCompetitors(TeamName);
@@ -241,6 +286,7 @@ namespace Classics_2014.Controls
                 listBoxSelectedTeams.Items.Add(listBoxExistingTeams.SelectedItem);
                 listBoxExistingTeams.Items.Remove(listBoxExistingTeams.SelectedItem);
                 UpdateTeamSelection();
+                PopulateExistingCompetitors();
             }
         }
 
@@ -248,9 +294,12 @@ namespace Classics_2014.Controls
         {
             if (listBoxSelectedTeams.SelectedItem != null)
             {
+                string Team = listBoxSelectedTeams.SelectedItem.ToString();
                 listBoxExistingTeams.Items.Add(listBoxSelectedTeams.SelectedItem);
                 listBoxSelectedTeams.Items.Remove(listBoxSelectedTeams.SelectedItem);
                 UpdateTeamSelection();
+                RefreshSelectedCompetitors(Team);
+                PopulateExistingCompetitors();
             }
         }
 
@@ -280,9 +329,9 @@ namespace Classics_2014.Controls
 
         private void buttonCompetitorCreate_Click(object sender, EventArgs e)
         {
-            if (textBoxCompetitorName.Text != "")
+            if (textBoxCompetitorName.Text != "" && textBoxCompetitorName.Text.Length < 255)
             {
-                if (textBoxCompetitorNationality.Text != "")
+                if (textBoxCompetitorNationality.Text != "" && textBoxCompetitorNationality.Text.Length < 255)
                 {
                     if (comboBoxCompetitorTeam.SelectedItem != null)
                     {
@@ -293,16 +342,20 @@ namespace Classics_2014.Controls
 
                         if (CheckCompetitorIsValid(CurrentCompetitor.name))
                         {
-                            if (Connected_Event.SQL_Controller.DoesCompetitorExist(CurrentCompetitor))
+                            if (!Connected_Event.SQL_Controller.DoesCompetitorExist(CurrentCompetitor))
                             {
                                 Connected_Event.SQL_Controller.CreateCompetitor(CurrentCompetitor);
                                 CurrentCompetitor.ID = Connected_Event.SQL_Controller.GetLastInsertKey();
-                                listBoxExistingCompetitors.Items.Add(CurrentCompetitor.name);
                                 ExistingCompetitors.Add(CurrentCompetitor);
                                 textBoxCompetitorName.Text = "";
+                                UpdateCompetitorGridsFromData();
+                            }
+                            #region Error Messages
+                            else
+                            {
+                                MessageBox.Show("Duplicate Competitor already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        #region Error Messages
                         else
                         {
                             MessageBox.Show("Competitors must have unique names.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -327,19 +380,29 @@ namespace Classics_2014.Controls
                         
         private void buttonCompetitorExistingToSelected_Click(object sender, EventArgs e)
         {
-            if (listBoxExistingCompetitors.SelectedItem != null)
+            if (dataGridExistingCompetitors.SelectedCells != null)
             {
-                listBoxSelectedCompetitors.Items.Add(listBoxExistingCompetitors.SelectedItem);
-                listBoxExistingCompetitors.Items.Remove(listBoxExistingCompetitors.SelectedItem);
+                List<TCompetitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
+                for (int i = 0; i < LocalSelectedCompetitors.Count; i++)
+                {
+                    ExistingCompetitors.Remove(LocalSelectedCompetitors[i]);
+                    SelectedCompetitors.Add(LocalSelectedCompetitors[i]);
+                }
+                UpdateCompetitorGridsFromData();
             }
         }
 
         private void buttonCompetitorSelectedToExisting_Click(object sender, EventArgs e)
         {
-            if (listBoxSelectedCompetitors.SelectedItem != null)
+            if (dataGridSelectedCompetitors.SelectedCells != null)
             {
-                listBoxExistingCompetitors.Items.Add(listBoxSelectedCompetitors.SelectedItem);
-                listBoxSelectedCompetitors.Items.Remove(listBoxSelectedCompetitors.SelectedItem);
+                List<TCompetitor> LocalExistingCompetitors = GetSelectedCompetitors(dataGridSelectedCompetitors);
+                for (int i = 0; i < LocalExistingCompetitors.Count; i++)
+                {
+                    SelectedCompetitors.Remove(LocalExistingCompetitors[i]);
+                    ExistingCompetitors.Add(LocalExistingCompetitors[i]);
+                }
+                UpdateCompetitorGridsFromData();
             }
         }
 
@@ -355,11 +418,15 @@ namespace Classics_2014.Controls
         {
             try
             {
-                string CompetitorName = listBoxExistingCompetitors.SelectedItem.ToString();
-                if (MessageBox.Show(("Are you sure you wish to remove the selected competitor " + CompetitorName), "Remove Competitor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                List<TCompetitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
+                if (MessageBox.Show("Are you sure you wish to permanently remove the selected competitors?", "Remove Competitor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    listBoxExistingCompetitors.Items.Remove(listBoxExistingCompetitors.SelectedItem);
-                    //TODO: Add MySQL removeCompetitor query here.
+                    for (int i = 0; i < LocalSelectedCompetitors.Count; i++)
+                    {
+                        ExistingCompetitors.Remove(LocalSelectedCompetitors[i]);
+                        Connected_Event.SQL_Controller.RemoveCompetitor(LocalSelectedCompetitors[i].ID);
+                    }
+                    UpdateCompetitorGridsFromData();
                 }
             }
             catch
@@ -371,6 +438,17 @@ namespace Classics_2014.Controls
         private void buttonCompetitorCreateClose_Click(object sender, EventArgs e)
         {
             groupBoxCreateCompetitor.Visible = false;
+        }
+
+
+        private void buttonCompetitorModifyTeam_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void buttonCompetitorModifyNationality_Click(object sender, EventArgs e)
+        {
+
         }
 
         #endregion

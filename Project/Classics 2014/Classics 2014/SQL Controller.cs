@@ -21,12 +21,12 @@ namespace Classics_2014
 
         #region MainControls
 
-        public void MySQL_Controller(string Server, string Database, string User)
+        public SQL_Controller(string Server, string Database, string User)
         {
             this.server = Server;
             this.database = Database;
             this.user = User;
-            //SetupConnection();
+            SetupConnection();
             //StartDatabase();
         }
 
@@ -149,13 +149,13 @@ namespace Classics_2014
 
         public bool RemoveCompetitor(int UID)
         {
-            string query = "DELETE FROM competitors WHERE UID=`" + UID + "`;";
+            string query = "UPDATE competitors SET `Team`='' WHERE `UID`='" + UID + "';";
             return ExecuteNonQuery(query);
         }
 
         public bool RemoveTeam(string Team)
         {
-            string query = "UPDATE competitors SET Team='' WHERE Team='" + Team + "';";
+            string query = "UPDATE competitors SET `Team`='' WHERE `Team`='" + Team + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -217,7 +217,17 @@ namespace Classics_2014
                     {
                         for (int i = 0; i < DataReader.FieldCount; i++)
                         {
-                            Teams.Add(DataReader.GetString(i));
+                            bool TeamIsUnique = true;
+                            string CurrentTeam = DataReader.GetString(i);
+                            for (int i2 = 0; i2 < Teams.Count; i2++)
+                            {
+                                if (Teams[i2] == CurrentTeam)
+                                {
+                                    TeamIsUnique = false;
+                                }
+                            }
+                            if (TeamIsUnique == true)
+                            { Teams.Add(CurrentTeam); }
                         }
                     }
                     DataReader.Close();
@@ -263,7 +273,7 @@ namespace Classics_2014
 
         public bool DoesCompetitorExist(TCompetitor Competitor)
         {
-            string query = "SELECT ID FROM competitors WHERE NAME='" + Competitor.name + "' AND Team='" + Competitor.team + "' AND Nationality ='" + Competitor.nationality + "'";
+            string query = "SELECT UID FROM competitors WHERE NAME='" + Competitor.name + "' AND Team='" + Competitor.team + "' AND Nationality ='" + Competitor.nationality + "'";
             int ID = -2;
 
             if (this.OpenConnection() == true)

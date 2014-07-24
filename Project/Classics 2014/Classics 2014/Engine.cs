@@ -16,7 +16,7 @@ namespace Classics_2014
         public Engine()
         {
             IO_Controller = new IO_Controller();
-            SQL_Controller = new SQL_Controller();
+            SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
            //ToDo Delete this line to start receiving data ListenThread.Start();
         }
@@ -31,6 +31,12 @@ namespace Classics_2014
                 //ToDo data must now be cast into appropriate form but is ready to be used ( I chose not to do that here because I feel we should discuss this
             }
 
+        }
+
+        public Classics_2014.Accuracy.Accuracy_Event StartNewAccuracyEvent()
+        {
+            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Classics_2014.Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal);
+            return NewEvent;
         }
     }
 }

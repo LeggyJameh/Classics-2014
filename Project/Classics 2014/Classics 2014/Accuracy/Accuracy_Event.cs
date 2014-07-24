@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace Classics_2014
+namespace Classics_2014.Accuracy
 {
     class Accuracy_Event
     {
@@ -13,8 +13,8 @@ namespace Classics_2014
         public SQL_Controller SQL_Controller;
         public IO_Controller IO_Controller;
         readonly AutoResetEvent Active_Signal;
-        Controls.EventAccuracy ActiveEventTab;
-        Controls.EventAccuracyOptions EventOptionsTab;
+        EventAccuracy ActiveEventTab;
+        EventAccuracyOptions EventOptionsTab;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal)
         {

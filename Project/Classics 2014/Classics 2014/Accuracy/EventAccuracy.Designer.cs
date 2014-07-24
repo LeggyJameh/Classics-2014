@@ -1,4 +1,4 @@
-﻿namespace Classics_2014.Controls
+﻿namespace Classics_2014.Accuracy
 {
     partial class EventAccuracy
     {

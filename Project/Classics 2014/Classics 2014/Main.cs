@@ -11,9 +11,11 @@ namespace Classics_2014
 {
     public partial class Main : Form
     {
+        Engine MainEngine;
         public Main()
         {
             InitializeComponent();
+            MainEngine = new Engine();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -24,7 +26,8 @@ namespace Classics_2014
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
             TabPage NewPage = new TabPage();
-            Classics_2014.Controls.EventAccuracyOptions EventTab = new Classics_2014.Controls.EventAccuracyOptions(this.tabControl);
+            Classics_2014.Accuracy.Accuracy_Event NewEvent = MainEngine.StartNewAccuracyEvent();
+            Classics_2014.Accuracy.EventAccuracyOptions EventTab = new Classics_2014.Accuracy.EventAccuracyOptions(this.tabControl, NewEvent);
             NewPage.Controls.Add(EventTab);
             EventTab.Dock = DockStyle.Fill;
             NewPage.Text = "New Event";

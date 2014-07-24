@@ -1,4 +1,4 @@
-﻿namespace Classics_2014.Controls
+﻿namespace Classics_2014.Accuracy
 {
     partial class EventAccuracyOptions
     {
@@ -72,14 +72,22 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRemoveCompetitor = new System.Windows.Forms.Button();
-            this.listBoxSelectedCompetitors = new System.Windows.Forms.ListBox();
             this.buttonCreateCompetitorShow = new System.Windows.Forms.Button();
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCompetitorExistingToSelected = new System.Windows.Forms.Button();
             this.buttonCompetitorSelectedToExisting = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
-            this.listBoxExistingCompetitors = new System.Windows.Forms.ListBox();
+            this.dataGridExistingCompetitors = new System.Windows.Forms.DataGridView();
+            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridSelectedCompetitors = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxCreateTeam = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -98,6 +106,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listBoxExistingTeams = new System.Windows.Forms.ListBox();
+            this.buttonCompetitorModifyTeam = new System.Windows.Forms.Button();
+            this.buttonCompetitorModifyNationality = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).BeginInit();
@@ -115,6 +125,8 @@
             this.groupBox2.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
             this.tableLayoutPanel12.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExistingCompetitors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedCompetitors)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxCreateTeam.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
@@ -741,21 +753,23 @@
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.5F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45F));
-            this.tableLayoutPanel11.Controls.Add(this.buttonRemoveCompetitor, 1, 2);
-            this.tableLayoutPanel11.Controls.Add(this.listBoxSelectedCompetitors, 3, 1);
-            this.tableLayoutPanel11.Controls.Add(this.buttonCreateCompetitorShow, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.buttonRemoveCompetitor, 1, 3);
+            this.tableLayoutPanel11.Controls.Add(this.buttonCreateCompetitorShow, 0, 3);
             this.tableLayoutPanel11.Controls.Add(this.tableLayoutPanel12, 2, 1);
             this.tableLayoutPanel11.Controls.Add(this.label17, 3, 0);
             this.tableLayoutPanel11.Controls.Add(this.label18, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.listBoxExistingCompetitors, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.dataGridExistingCompetitors, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.dataGridSelectedCompetitors, 3, 1);
+            this.tableLayoutPanel11.Controls.Add(this.buttonCompetitorModifyTeam, 0, 2);
+            this.tableLayoutPanel11.Controls.Add(this.buttonCompetitorModifyNationality, 1, 2);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 16);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 3;
+            this.tableLayoutPanel11.RowCount = 4;
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(650, 531);
             this.tableLayoutPanel11.TabIndex = 0;
             // 
@@ -766,19 +780,9 @@
             this.buttonRemoveCompetitor.Name = "buttonRemoveCompetitor";
             this.buttonRemoveCompetitor.Size = new System.Drawing.Size(140, 24);
             this.buttonRemoveCompetitor.TabIndex = 1;
-            this.buttonRemoveCompetitor.Text = "Remove Competitor";
+            this.buttonRemoveCompetitor.Text = "Remove Competitors";
             this.buttonRemoveCompetitor.UseVisualStyleBackColor = true;
             this.buttonRemoveCompetitor.Click += new System.EventHandler(this.buttonRemoveCompetitor_Click);
-            // 
-            // listBoxSelectedCompetitors
-            // 
-            this.listBoxSelectedCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxSelectedCompetitors.FormattingEnabled = true;
-            this.listBoxSelectedCompetitors.Location = new System.Drawing.Point(360, 33);
-            this.listBoxSelectedCompetitors.Name = "listBoxSelectedCompetitors";
-            this.tableLayoutPanel11.SetRowSpan(this.listBoxSelectedCompetitors, 2);
-            this.listBoxSelectedCompetitors.Size = new System.Drawing.Size(287, 495);
-            this.listBoxSelectedCompetitors.TabIndex = 1;
             // 
             // buttonCreateCompetitorShow
             // 
@@ -806,15 +810,15 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 28.57143F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(59, 465);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(59, 435);
             this.tableLayoutPanel12.TabIndex = 2;
             // 
             // buttonCompetitorExistingToSelected
             // 
             this.buttonCompetitorExistingToSelected.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetitorExistingToSelected.Location = new System.Drawing.Point(3, 69);
+            this.buttonCompetitorExistingToSelected.Location = new System.Drawing.Point(3, 65);
             this.buttonCompetitorExistingToSelected.Name = "buttonCompetitorExistingToSelected";
-            this.buttonCompetitorExistingToSelected.Size = new System.Drawing.Size(53, 126);
+            this.buttonCompetitorExistingToSelected.Size = new System.Drawing.Size(53, 118);
             this.buttonCompetitorExistingToSelected.TabIndex = 0;
             this.buttonCompetitorExistingToSelected.Text = ">";
             this.buttonCompetitorExistingToSelected.UseVisualStyleBackColor = true;
@@ -823,9 +827,9 @@
             // buttonCompetitorSelectedToExisting
             // 
             this.buttonCompetitorSelectedToExisting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetitorSelectedToExisting.Location = new System.Drawing.Point(3, 267);
+            this.buttonCompetitorSelectedToExisting.Location = new System.Drawing.Point(3, 251);
             this.buttonCompetitorSelectedToExisting.Name = "buttonCompetitorSelectedToExisting";
-            this.buttonCompetitorSelectedToExisting.Size = new System.Drawing.Size(53, 126);
+            this.buttonCompetitorSelectedToExisting.Size = new System.Drawing.Size(53, 118);
             this.buttonCompetitorSelectedToExisting.TabIndex = 1;
             this.buttonCompetitorSelectedToExisting.Text = "<";
             this.buttonCompetitorSelectedToExisting.UseVisualStyleBackColor = true;
@@ -854,15 +858,90 @@
             this.label18.Text = "Existing Competitors";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // listBoxExistingCompetitors
+            // dataGridExistingCompetitors
             // 
-            this.tableLayoutPanel11.SetColumnSpan(this.listBoxExistingCompetitors, 2);
-            this.listBoxExistingCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxExistingCompetitors.FormattingEnabled = true;
-            this.listBoxExistingCompetitors.Location = new System.Drawing.Point(3, 33);
-            this.listBoxExistingCompetitors.Name = "listBoxExistingCompetitors";
-            this.listBoxExistingCompetitors.Size = new System.Drawing.Size(286, 465);
-            this.listBoxExistingCompetitors.TabIndex = 0;
+            this.dataGridExistingCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridExistingCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridExistingCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridExistingCompetitors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnID,
+            this.ColumnName,
+            this.ColumnTeam,
+            this.ColumnNationality});
+            this.tableLayoutPanel11.SetColumnSpan(this.dataGridExistingCompetitors, 2);
+            this.dataGridExistingCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridExistingCompetitors.Location = new System.Drawing.Point(3, 33);
+            this.dataGridExistingCompetitors.Name = "dataGridExistingCompetitors";
+            this.dataGridExistingCompetitors.ReadOnly = true;
+            this.dataGridExistingCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridExistingCompetitors.Size = new System.Drawing.Size(286, 435);
+            this.dataGridExistingCompetitors.TabIndex = 5;
+            // 
+            // ColumnID
+            // 
+            this.ColumnID.HeaderText = "ID";
+            this.ColumnID.Name = "ColumnID";
+            this.ColumnID.ReadOnly = true;
+            this.ColumnID.Visible = false;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnTeam
+            // 
+            this.ColumnTeam.HeaderText = "Team";
+            this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
+            // 
+            // ColumnNationality
+            // 
+            this.ColumnNationality.HeaderText = "Nationality";
+            this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
+            // 
+            // dataGridSelectedCompetitors
+            // 
+            this.dataGridSelectedCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridSelectedCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridSelectedCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridSelectedCompetitors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn2,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4});
+            this.dataGridSelectedCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridSelectedCompetitors.Location = new System.Drawing.Point(360, 33);
+            this.dataGridSelectedCompetitors.Name = "dataGridSelectedCompetitors";
+            this.dataGridSelectedCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridSelectedCompetitors.Size = new System.Drawing.Size(287, 435);
+            this.dataGridSelectedCompetitors.TabIndex = 6;
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "ID";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Name";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "Team";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Nationality";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
             // 
             // tableLayoutPanel5
             // 
@@ -1092,6 +1171,28 @@
             this.listBoxExistingTeams.Size = new System.Drawing.Size(286, 143);
             this.listBoxExistingTeams.TabIndex = 0;
             // 
+            // buttonCompetitorModifyTeam
+            // 
+            this.buttonCompetitorModifyTeam.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCompetitorModifyTeam.Location = new System.Drawing.Point(3, 474);
+            this.buttonCompetitorModifyTeam.Name = "buttonCompetitorModifyTeam";
+            this.buttonCompetitorModifyTeam.Size = new System.Drawing.Size(140, 24);
+            this.buttonCompetitorModifyTeam.TabIndex = 7;
+            this.buttonCompetitorModifyTeam.Text = "Change Team";
+            this.buttonCompetitorModifyTeam.UseVisualStyleBackColor = true;
+            this.buttonCompetitorModifyTeam.Click += new System.EventHandler(this.buttonCompetitorModifyTeam_Click);
+            // 
+            // buttonCompetitorModifyNationality
+            // 
+            this.buttonCompetitorModifyNationality.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonCompetitorModifyNationality.Location = new System.Drawing.Point(149, 474);
+            this.buttonCompetitorModifyNationality.Name = "buttonCompetitorModifyNationality";
+            this.buttonCompetitorModifyNationality.Size = new System.Drawing.Size(140, 24);
+            this.buttonCompetitorModifyNationality.TabIndex = 8;
+            this.buttonCompetitorModifyNationality.Text = "Change Nationality";
+            this.buttonCompetitorModifyNationality.UseVisualStyleBackColor = true;
+            this.buttonCompetitorModifyNationality.Click += new System.EventHandler(this.buttonCompetitorModifyNationality_Click);
+            // 
             // EventAccuracyOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1120,6 +1221,8 @@
             this.tableLayoutPanel11.ResumeLayout(false);
             this.tableLayoutPanel11.PerformLayout();
             this.tableLayoutPanel12.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridExistingCompetitors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridSelectedCompetitors)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.groupBoxCreateTeam.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
@@ -1192,17 +1295,27 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
         private System.Windows.Forms.Button buttonRemoveCompetitor;
-        private System.Windows.Forms.ListBox listBoxSelectedCompetitors;
         private System.Windows.Forms.Button buttonCreateCompetitorShow;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel12;
         private System.Windows.Forms.Button buttonCompetitorExistingToSelected;
         private System.Windows.Forms.Button buttonCompetitorSelectedToExisting;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private System.Windows.Forms.ListBox listBoxExistingCompetitors;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox textBoxCompetitorNationality;
         private System.Windows.Forms.ComboBox comboBoxCompetitorTeam;
+        private System.Windows.Forms.DataGridView dataGridExistingCompetitors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
+        private System.Windows.Forms.DataGridView dataGridSelectedCompetitors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.Button buttonCompetitorModifyTeam;
+        private System.Windows.Forms.Button buttonCompetitorModifyNationality;
     }
 }

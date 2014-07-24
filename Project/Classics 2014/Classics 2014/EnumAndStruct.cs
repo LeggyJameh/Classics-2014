@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Classics_2014
 {
-    enum ScoreInputs
+    enum EventType
     {
-        LandingPad,
+        Accuracy,
     }
 
     [Serializable]
@@ -20,7 +20,7 @@ namespace Classics_2014
         public float finalApproachTime;
     }
 
-    public struct Wind
+    public struct TWind
     {
         public string time;
         public float speed;
@@ -39,7 +39,7 @@ namespace Classics_2014
     {
         public int ID;
         public string dataGridCell;
-        public Wind[] windData;
+        public TWind[] windData;
         public int score;
     }
 }

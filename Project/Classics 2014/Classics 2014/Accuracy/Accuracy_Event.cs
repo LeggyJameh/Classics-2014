@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
-
+using System.Windows.Forms;
 namespace Classics_2014.Accuracy
 {
     class Accuracy_Event
@@ -14,13 +14,16 @@ namespace Classics_2014.Accuracy
         public IO_Controller IO_Controller;
         readonly AutoResetEvent Active_Signal;
         EventAccuracy ActiveEventTab;
-        EventAccuracyOptions EventOptionsTab;
+        public EventAccuracyOptions EventOptionsTab;
+        Engine engine;
         #endregion
-        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal)
+        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
             this.SQL_Controller = SQL_Controller;
             this.IO_Controller = IO_Controller;
             this.Active_Signal = Active_Signal;
+            this.engine = engine;
+            ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
         private void EventStart() //TODO Rule struct goes here
         {

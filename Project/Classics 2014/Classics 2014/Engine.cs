@@ -49,7 +49,6 @@ namespace Classics_2014
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
-            
             return NewEvent.EventOptionsTab;
         }
         public bool MakeActive(Event eventToBeActive)

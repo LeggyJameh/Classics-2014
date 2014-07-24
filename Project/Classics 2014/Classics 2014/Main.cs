@@ -16,6 +16,13 @@ namespace Classics_2014
         {
             InitializeComponent();
             MainEngine = new Engine(this, tabControl);
+            for (int i = 0; i < 60; i++)
+            {
+                ListViewItem NewItem = (ListViewItem)listBoxWindLog.Items[0].Clone();
+                listBoxWindLog.Items.Add(NewItem);
+            }
+            listBoxWindLog.Visible = true;
+
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -35,7 +42,35 @@ namespace Classics_2014
         }
         public void UpdateWind(TWind windData)
         {
-            
+            textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideSpeed.Text = windData.speed.ToString()));
+            textBoxSideDirection.Invoke((MethodInvoker)(() => textBoxSideDirection.Text = windData.direction.ToString()));
+        }
+        public void UpdatePreviousScore(String score, bool reset)
+        {
+            textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideScore.Text = score));
+            if (!reset)
+            {
+                timerScoreTimer.Start();
+            }
+        }
+        private void timerScoreTimer_Tick(object sender, EventArgs e)
+        {
+            timerScoreTimer.Stop();
+            textBoxSideScore.Text = "--";
+        }
+        public void UpdatelistBoxWindLog(TWind[] wind)
+        {
+            listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.BeginUpdate()));
+            for (int i = 1; i < wind.Length; i++)
+            {
+                string[] NewItem = new string[3];
+                NewItem[0] = wind[i].time;
+                NewItem[1] = wind[i].speed.ToString();
+                NewItem[2] = wind[i].direction.ToString();
+                ListViewItem NewListItem = new ListViewItem(NewItem);
+                listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.Items[i] = NewListItem));
+            }
+            listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.EndUpdate()));
         }
     }
 }

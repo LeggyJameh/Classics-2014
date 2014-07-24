@@ -33,5 +33,9 @@ namespace Classics_2014
             tabControl.TabPages.Add(NewPage);
             tabControl.SelectedTab = NewPage;
         }
+        public void UpdateWind(TWind windData)
+        {
+            
+        }
     }
 }

@@ -155,6 +155,7 @@ namespace Classics_2014.Accuracy
                 }
                 NewCompetitorList.Add(CurrentCompetitor); 
             }
+            Connected_Event.SQL_Controller.RemoveTeam(Team);
             ExistingCompetitors = NewCompetitorList;
         }
 
@@ -163,7 +164,7 @@ namespace Classics_2014.Accuracy
             ExistingCompetitors.Clear();
             for (int i = 0; i < SelectedTeams.Count; i++)
 			{
-                ExistingCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByTeam(SelectedTeams[i], ExistingCompetitors);
+                ExistingCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByTeam(SelectedTeams[i], ExistingCompetitors, SelectedCompetitors);
 			}
             UpdateCompetitorGridsFromData();
         }
@@ -227,9 +228,12 @@ namespace Classics_2014.Accuracy
         private void numericUpDownCompetitorsPerTeam_ValueChanged(object sender, EventArgs e)
         {
             comboBoxScoresUsed.Items.Clear();
+            comboBoxScoresUsed.Text = "";
             comboBoxScoresUsed.Items.Add("Top " + numericUpDownCompetitorsPerTeam.Value.ToString());
-            comboBoxScoresUsed.Items.Add("Top " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
-            comboBoxScoresUsed.SelectedItem = 0;
+            if (numericUpDownCompetitorsPerTeam.Value != 1)
+            {
+                comboBoxScoresUsed.Items.Add("Top " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
+            }
         }
 
         private void buttonCreateTeamShow_Click(object sender, EventArgs e)
@@ -266,7 +270,7 @@ namespace Classics_2014.Accuracy
             try
             {
                 string TeamName = listBoxExistingTeams.SelectedItem.ToString();
-                if (MessageBox.Show(("Are you sure you wish to permanently remove the selected team " + TeamName + " and all the competitors associated with it?"), "Remove Team?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show(("Are you sure you wish to permanently remove the selected team " + TeamName + " and unlink the competitors associated with it?"), "Remove Team?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     listBoxExistingTeams.Items.Remove(listBoxExistingTeams.SelectedItem);
                     RemovedTeamUpdateCompetitors(TeamName);

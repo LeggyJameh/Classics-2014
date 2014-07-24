@@ -155,7 +155,7 @@ namespace Classics_2014
 
         public bool RemoveTeam(string Team)
         {
-            string query = "UPDATE competitors SET `Team`='' WHERE `Team`='" + Team + "';";
+            string query = "UPDATE competitors SET `Team`='NO TEAM' WHERE `Team`='" + Team + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -167,7 +167,7 @@ namespace Classics_2014
         #endregion
         #region Get
 
-        public List<TCompetitor> GetCompetitorsByTeam(string Team, List<TCompetitor> CurrentCompetitors)
+        public List<TCompetitor> GetCompetitorsByTeam(string Team, List<TCompetitor> CurrentCompetitors, List<TCompetitor> Ignorelist)
         {
             string query = "SELECT * FROM competitors WHERE Team='" + Team + "'";
             if (this.OpenConnection() == true)
@@ -179,6 +179,7 @@ namespace Classics_2014
                     while (DataReader.Read())
                     {
                         TCompetitor CurrentCompetitor = new TCompetitor();
+                        bool CanAdd = true;
                         for (int i = 0; i < DataReader.FieldCount; i++)
                         {
                             switch (i)
@@ -188,7 +189,11 @@ namespace Classics_2014
                                 case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
                                 case 3: CurrentCompetitor.nationality = DataReader.GetString(i); break;
                             }
-                            if (i == 3) { CurrentCompetitors.Add(CurrentCompetitor); }
+                            for (int i2 = 0; i2 < Ignorelist.Count; i2++)
+                            {
+                                if (CurrentCompetitor.ID == Ignorelist[i2].ID) { CanAdd = false; }
+                            }
+                            if (i == 3 && CanAdd == true) { CurrentCompetitors.Add(CurrentCompetitor); }
                         }
                     }
                     DataReader.Close();
@@ -206,6 +211,7 @@ namespace Classics_2014
         {
             string query = "SELECT Team FROM competitors";
             List<string> Teams = new List<string>();
+            Teams.Add("NO TEAM");
 
             if (this.OpenConnection() == true)
             {
@@ -221,7 +227,7 @@ namespace Classics_2014
                             string CurrentTeam = DataReader.GetString(i);
                             for (int i2 = 0; i2 < Teams.Count; i2++)
                             {
-                                if (Teams[i2] == CurrentTeam)
+                                if (Teams[i2] == CurrentTeam || CurrentTeam == "")
                                 {
                                     TeamIsUnique = false;
                                 }

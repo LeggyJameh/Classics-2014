@@ -40,8 +40,9 @@
             this.buttonCompetition = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.buttonHelp = new System.Windows.Forms.Button();
+            this.buttonModifyCompetitorData = new System.Windows.Forms.Button();
             this.tabWind = new System.Windows.Forms.TabPage();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -70,6 +71,7 @@
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.labelError = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -119,30 +121,31 @@
             this.tableLayoutPanel9.Controls.Add(this.buttonCompetition, 1, 1);
             this.tableLayoutPanel9.Controls.Add(this.pictureBox1, 1, 0);
             this.tableLayoutPanel9.Controls.Add(this.buttonLoad, 1, 3);
-            this.tableLayoutPanel9.Controls.Add(this.buttonHelp, 1, 5);
-            this.tableLayoutPanel9.Controls.Add(this.buttonExit, 1, 7);
+            this.tableLayoutPanel9.Controls.Add(this.buttonExit, 1, 9);
+            this.tableLayoutPanel9.Controls.Add(this.buttonHelp, 1, 7);
+            this.tableLayoutPanel9.Controls.Add(this.buttonModifyCompetitorData, 1, 5);
             this.tableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
-            this.tableLayoutPanel9.RowCount = 9;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
+            this.tableLayoutPanel9.RowCount = 11;
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.81818F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 31.81818F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(1099, 599);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
             // buttonCompetition
             // 
             this.buttonCompetition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetition.Location = new System.Drawing.Point(369, 142);
+            this.buttonCompetition.Location = new System.Drawing.Point(369, 114);
             this.buttonCompetition.Name = "buttonCompetition";
             this.buttonCompetition.Size = new System.Drawing.Size(360, 44);
             this.buttonCompetition.TabIndex = 0;
@@ -157,7 +160,7 @@
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(369, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(360, 133);
+            this.pictureBox1.Size = new System.Drawing.Size(360, 105);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -165,33 +168,43 @@
             // buttonLoad
             // 
             this.buttonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonLoad.Location = new System.Drawing.Point(369, 231);
+            this.buttonLoad.Location = new System.Drawing.Point(369, 195);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(360, 44);
             this.buttonLoad.TabIndex = 1;
             this.buttonLoad.Text = "Load Previous Events";
             this.buttonLoad.UseVisualStyleBackColor = true;
             // 
-            // buttonHelp
-            // 
-            this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonHelp.Location = new System.Drawing.Point(369, 320);
-            this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(360, 44);
-            this.buttonHelp.TabIndex = 3;
-            this.buttonHelp.Text = "Help";
-            this.buttonHelp.UseVisualStyleBackColor = true;
-            // 
             // buttonExit
             // 
             this.buttonExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonExit.Location = new System.Drawing.Point(369, 409);
+            this.buttonExit.Location = new System.Drawing.Point(369, 438);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(360, 44);
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
+            // 
+            // buttonHelp
+            // 
+            this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonHelp.Location = new System.Drawing.Point(369, 357);
+            this.buttonHelp.Name = "buttonHelp";
+            this.buttonHelp.Size = new System.Drawing.Size(360, 44);
+            this.buttonHelp.TabIndex = 3;
+            this.buttonHelp.Text = "Help";
+            this.buttonHelp.UseVisualStyleBackColor = true;
+            // 
+            // buttonModifyCompetitorData
+            // 
+            this.buttonModifyCompetitorData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonModifyCompetitorData.Location = new System.Drawing.Point(369, 276);
+            this.buttonModifyCompetitorData.Name = "buttonModifyCompetitorData";
+            this.buttonModifyCompetitorData.Size = new System.Drawing.Size(360, 44);
+            this.buttonModifyCompetitorData.TabIndex = 6;
+            this.buttonModifyCompetitorData.Text = "Modify Competitors";
+            this.buttonModifyCompetitorData.UseVisualStyleBackColor = true;
             // 
             // tabWind
             // 
@@ -530,12 +543,21 @@
             this.Direction.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.Direction.Width = 30;
             // 
+            // labelError
+            // 
+            this.labelError.AutoSize = true;
+            this.labelError.Location = new System.Drawing.Point(4, 640);
+            this.labelError.Name = "labelError";
+            this.labelError.Size = new System.Drawing.Size(0, 13);
+            this.labelError.TabIndex = 3;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1244, 659);
+            this.Controls.Add(this.labelError);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.statusStrip1);
             this.DoubleBuffered = true;
@@ -604,6 +626,8 @@
         private System.Windows.Forms.ColumnHeader Speed;
         private System.Windows.Forms.ColumnHeader Direction;
         private System.Windows.Forms.ColumnHeader Time;
+        private System.Windows.Forms.Button buttonModifyCompetitorData;
+        private System.Windows.Forms.Label labelError;
 
     }
 }

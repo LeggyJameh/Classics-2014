@@ -779,7 +779,7 @@
             this.buttonRemoveCompetitor.Name = "buttonRemoveCompetitor";
             this.buttonRemoveCompetitor.Size = new System.Drawing.Size(156, 24);
             this.buttonRemoveCompetitor.TabIndex = 1;
-            this.buttonRemoveCompetitor.Text = "Remove Competitors";
+            this.buttonRemoveCompetitor.Text = "Delete Competitors";
             this.buttonRemoveCompetitor.UseVisualStyleBackColor = true;
             this.buttonRemoveCompetitor.Click += new System.EventHandler(this.buttonRemoveCompetitor_Click);
             // 
@@ -815,7 +815,7 @@
             // buttonCompetitorExistingToSelected
             // 
             this.buttonCompetitorExistingToSelected.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetitorExistingToSelected.Location = new System.Drawing.Point(3, 127);
+            this.buttonCompetitorExistingToSelected.Location = new System.Drawing.Point(3, 128);
             this.buttonCompetitorExistingToSelected.Name = "buttonCompetitorExistingToSelected";
             this.buttonCompetitorExistingToSelected.Size = new System.Drawing.Size(60, 24);
             this.buttonCompetitorExistingToSelected.TabIndex = 0;
@@ -826,7 +826,7 @@
             // buttonCompetitorSelectedToExisting
             // 
             this.buttonCompetitorSelectedToExisting.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetitorSelectedToExisting.Location = new System.Drawing.Point(3, 281);
+            this.buttonCompetitorSelectedToExisting.Location = new System.Drawing.Point(3, 283);
             this.buttonCompetitorSelectedToExisting.Name = "buttonCompetitorSelectedToExisting";
             this.buttonCompetitorSelectedToExisting.Size = new System.Drawing.Size(60, 24);
             this.buttonCompetitorSelectedToExisting.TabIndex = 1;

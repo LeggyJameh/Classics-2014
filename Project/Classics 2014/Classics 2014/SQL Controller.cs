@@ -138,6 +138,13 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
+        public bool CreateAccuracyEventTable(int ID)
+        {
+            string query = "CREATE TABLE `event " + ID + "` (`LandingID` INT(11) NOT NULL DEFAULT '-1',`UID` INT(11) NOT NULL DEFAULT '-1')";
+            return ExecuteNonQuery(query);
+        }
+
+
         #endregion
         #region Remove
 
@@ -308,8 +315,6 @@ namespace Classics_2014
         }
 
         #endregion
-        #endregion
-
         #region Other
         private bool ExecuteNonQuery(string query)
         {
@@ -332,6 +337,7 @@ namespace Classics_2014
             }
             return completed;
         }
+        #endregion
         #endregion
     }
 }

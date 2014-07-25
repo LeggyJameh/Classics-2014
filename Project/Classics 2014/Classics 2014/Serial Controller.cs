@@ -61,9 +61,17 @@ namespace Classics_2014
         }
         private int GetComPort()
         {
+            string Port;
             string Directory = @"HKEY_LOCAL_MACHINE\HARDWARE\DEVICEMAP\SERIALCOMM";
             string SubKey = "\\Device\\ProlificSerial0";
-            string Port = Registry.GetValue(Directory, SubKey, "COM5").ToString();
+            try
+            {
+                Port = Registry.GetValue(Directory, SubKey, "COM5").ToString();
+            }
+            catch
+            {
+                Port = "COM5";
+            }
             int ComNum = Convert.ToInt16(Port.Substring(3));
             return ComNum;
         }

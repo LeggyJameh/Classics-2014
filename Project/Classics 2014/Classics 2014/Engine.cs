@@ -40,7 +40,10 @@ namespace Classics_2014
                 //ToDo Make sure we cast to the correct fucking type in the future, the serial will know
                 Data_Accuracy Data = (data as Data_Accuracy);
                 WriteToMasterFile(Data);
-                mainForm.UpdateWind(new TWind() { direction = Data.Direction, speed = Data.Speed, time = Data.Time });
+                TWind wind = new TWind() {  direction = Data.Direction, speed = Data.Speed, time = Data.Time};
+                mainForm.UpdateWind(wind);
+              //  mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
+               // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
             }
 
         }

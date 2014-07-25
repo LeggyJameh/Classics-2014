@@ -5,9 +5,8 @@ namespace Classics_2014
     {
         Accuracy,
     }
-
     [Serializable]
-    public struct TAccuracyRuleSet
+    public struct TAccuracyRuleSet 
     {
         public string preset;
         public bool allScoresUsed;

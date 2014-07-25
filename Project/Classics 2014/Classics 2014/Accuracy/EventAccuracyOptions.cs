@@ -276,7 +276,7 @@ namespace Classics_2014.Accuracy
 
                     byte[] ByteRules = new byte[10]; // TEMP CODE
 
-                    Connected_Event.SQL_Controller.CreateEvent(EventName, "Accuracy", ByteRules);
+                    Connected_Event.SQL_Controller.CreateEvent(EventName, EventType.Accuracy, ByteRules);
 
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     tabControl.SelectedTab = tabControl.TabPages[0];

@@ -27,7 +27,7 @@ namespace Classics_2014
         public bool IsActive { get { return port.IsOpen; } private set{} }//ToDo Add a check to make sure that the format is correct
         public Boolean WindDirection { get; private set; }
         public Boolean WindSpeed { get; private set; }
-
+        ASCIIEncoding eEnconder = new ASCIIEncoding();
         #endregion
 
         public Serial_Controller(ref ConcurrentQueue<Data> _queue, ref AutoResetEvent _signal)
@@ -94,9 +94,6 @@ namespace Classics_2014
                     try
                     {
                         port.Read(buffer, 0, 19);
-
-
-                        ASCIIEncoding eEnconder = new ASCIIEncoding();
                         string asciiString;
                         asciiString = eEnconder.GetString(buffer);
                         Data = SplitStream(asciiString);

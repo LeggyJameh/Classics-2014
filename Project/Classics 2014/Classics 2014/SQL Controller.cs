@@ -138,17 +138,23 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
-        public bool CreateEvent(string Name, string EventType, byte[] Options)
+        public bool CreateEvent(string Name, EventType EventType, byte[] Options)
         {
             string Query1;
             string Query2;
             int EventID;
-            //TODO: Convert options into whatever format database needs it in.
+            //Robs Code to convert Byte array to Hexadecimal
+            string hexRuleset;
+            StringBuilder hex = new StringBuilder(Options.Length * 2);
+            foreach (byte b in Options)
+                hex.AppendFormat("{0:x2}", b);
+            hexRuleset = hex.ToString();
+            //Code ends here
             string ConvertedOptions = "";
 
             switch (EventType)
             {
-                case "Accuracy":
+                case EventType.Accuracy:
                     Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + DateTime.Now.Date + "', '" + Name + "', '" + EventType + "', '" + ConvertedOptions + "');";
                     if (ExecuteNonQuery(Query1))
                     {
@@ -160,7 +166,7 @@ namespace Classics_2014
                         }
                     }
                 break;
-                case default(string): return false; break;
+               //this line is no longer needed, we know what will be passed in case default: return false; break;
             }
             return false;
         }

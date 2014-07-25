@@ -138,10 +138,31 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
-        public bool CreateAccuracyEventTable(int ID)
+        public bool CreateEvent(string Name, string EventType, byte[] Options)
         {
-            string query = "CREATE TABLE `event " + ID + "` (`LandingID` INT(11) NOT NULL DEFAULT '-1',`UID` INT(11) NOT NULL DEFAULT '-1')";
-            return ExecuteNonQuery(query);
+            string Query1;
+            string Query2;
+            int EventID;
+            //TODO: Convert options into whatever format database needs it in.
+            string ConvertedOptions = "";
+
+            switch (EventType)
+            {
+                case "Accuracy":
+                    Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + DateTime.Now.Date + "', '" + Name + "', '" + EventType + "', '" + ConvertedOptions + "');";
+                    if (ExecuteNonQuery(Query1))
+                    {
+                        EventID = GetLastInsertKey();
+                        Query2 = "CREATE TABLE `event " + EventID + "` (`LandingID` INT(11) NOT NULL DEFAULT '-1',`UID` INT(11) NOT NULL DEFAULT '-1')";
+                        if (ExecuteNonQuery(Query2))
+                        {
+                            return true;
+                        }
+                    }
+                break;
+                case default(string): return false; break;
+            }
+            return false;
         }
 
 

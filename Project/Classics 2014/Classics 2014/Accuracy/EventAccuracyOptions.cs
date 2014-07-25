@@ -17,6 +17,8 @@ namespace Classics_2014.Accuracy
         List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
         List<string> SelectedTeams = new List<string>();
         List<string> ExistingTeams = new List<string>();
+        TAccuracyRuleSet Rules = new TAccuracyRuleSet();
+        string EventName = "";
 
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent)
         {
@@ -223,6 +225,77 @@ namespace Classics_2014.Accuracy
             return LocalSelectedCompetitors;
         }
 
+        private void SaveEvent()
+        {
+            bool ErrorShown = false;
+            try
+            {
+                EventName = textBoxEventName.Text;
+                Rules.preset = comboBoxRulePreset.SelectedItem.ToString();
+                Rules.noOfCompetitorsPerTeam = Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value);
+                Rules.compHalt = Convert.ToSingle(numericUpDownCompMaxWind.Value);
+                Rules.maxScored = Convert.ToInt16(numericUpDownMaxScore.Value);
+                Rules.windout = Convert.ToInt16(numericUpDownRejumpWindspeed.Value);
+                Rules.windSecondsPrior = Convert.ToInt16(numericUpDownTimeBeforeLanding.Value);
+                Rules.windSecondsAfter = Convert.ToInt16(numericUpDownTimeAfterLanding.Value);
+                Rules.finalApproachTime = Convert.ToSingle(numericUpDownFinalApproachTime.Value);
+                if (Convert.ToInt16(comboBoxScoresUsed.Text.Substring(4)) == Rules.noOfCompetitorsPerTeam)
+                {
+                    Rules.allScoresUsed = true;
+                }
+                else
+                {
+                    Rules.allScoresUsed = false;
+                }
+                char[] CharactersToTrim = new char[1];
+                CharactersToTrim[0] = '°';
+                Rules.directionOut = Convert.ToInt16(comboBoxRejumpAngleChange.Text.TrimEnd(CharactersToTrim));
+
+                if ( // Sorry about this godawful bit of code. Best way to do it :/
+                EventName != "" &&
+                EventName.Length < 255 &&
+                Rules.preset != "" &&
+                Rules.noOfCompetitorsPerTeam >= 1 &&
+                Rules.compHalt >= 1 &&
+                Rules.compHalt <= 100 &&
+                Rules.maxScored >= 1 &&
+                Rules.maxScored <= 100 &&
+                Rules.windout >= 1 &&
+                Rules.windout <= 100 &&
+                Rules.windSecondsPrior >= 1 &&
+                Rules.windSecondsPrior <= 300 &&
+                Rules.windSecondsAfter >= 1 &&
+                Rules.windSecondsAfter <= 300 &&
+                Rules.finalApproachTime >= 0.1 &&
+                Rules.finalApproachTime <= 100 &&
+                Rules.allScoresUsed != null &&
+                Rules.directionOut >= 10 &&
+                Rules.directionOut <= 180
+                )
+                {
+
+                    byte[] ByteRules = new byte[10]; // TEMP CODE
+
+                    Connected_Event.SQL_Controller.CreateEvent(EventName, "Accuracy", ByteRules);
+
+                    tabControl.TabPages.Remove(tabControl.SelectedTab);
+                    tabControl.SelectedTab = tabControl.TabPages[0];
+                }
+                else
+                {
+                    ErrorShown = true;
+                    MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch
+            {
+                if (ErrorShown == false)
+                {
+                    MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
         #region Events
 
         private void numericUpDownCompetitorsPerTeam_ValueChanged(object sender, EventArgs e)
@@ -323,12 +396,13 @@ namespace Classics_2014.Accuracy
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            //TODO: Save the bloody event..
+            SaveEvent();
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            //TODO: Start the event..
+            SaveEvent();
+            //TODO: Start and pass rules, etc into instance of EventAccuracy.
         }
 
         private void buttonCompetitorCreate_Click(object sender, EventArgs e)

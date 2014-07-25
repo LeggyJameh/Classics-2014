@@ -333,12 +333,15 @@
             // comboBoxRulePreset
             // 
             this.comboBoxRulePreset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxRulePreset.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRulePreset.FormattingEnabled = true;
+            this.comboBoxRulePreset.Items.AddRange(new object[] {
+            "Custom",
+            "F.A.I"});
             this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 77);
             this.comboBoxRulePreset.Name = "comboBoxRulePreset";
             this.comboBoxRulePreset.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRulePreset.TabIndex = 13;
-            this.comboBoxRulePreset.Text = "Custom";
             // 
             // numericUpDownCompetitorsPerTeam
             // 
@@ -362,6 +365,7 @@
             // comboBoxScoresUsed
             // 
             this.comboBoxScoresUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxScoresUsed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxScoresUsed.FormattingEnabled = true;
             this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 181);
             this.comboBoxScoresUsed.Name = "comboBoxScoresUsed";
@@ -378,6 +382,11 @@
             0,
             65536});
             this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 234);
+            this.numericUpDownCompMaxWind.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.numericUpDownCompMaxWind.Name = "numericUpDownCompMaxWind";
             this.numericUpDownCompMaxWind.Size = new System.Drawing.Size(216, 20);
             this.numericUpDownCompMaxWind.TabIndex = 16;
@@ -408,6 +417,7 @@
             // comboBoxRejumpAngleChange
             // 
             this.comboBoxRejumpAngleChange.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.comboBoxRejumpAngleChange.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxRejumpAngleChange.FormattingEnabled = true;
             this.comboBoxRejumpAngleChange.Items.AddRange(new object[] {
             "10°",
@@ -432,7 +442,6 @@
             this.comboBoxRejumpAngleChange.Name = "comboBoxRejumpAngleChange";
             this.comboBoxRejumpAngleChange.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRejumpAngleChange.TabIndex = 18;
-            this.comboBoxRejumpAngleChange.Text = "90°";
             // 
             // numericUpDownRejumpWindspeed
             // 

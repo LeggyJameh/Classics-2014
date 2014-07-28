@@ -225,6 +225,11 @@ namespace Classics_2014.Accuracy
             return LocalSelectedCompetitors;
         }
 
+        public DateTime ReturnDateTimePickerValue()
+        {
+            return dateTimePicker.Value;
+        }
+
         private void SaveEvent()
         {
             bool ErrorShown = false;
@@ -268,7 +273,6 @@ namespace Classics_2014.Accuracy
                 Rules.windSecondsAfter <= 300 &&
                 Rules.finalApproachTime >= 0.1 &&
                 Rules.finalApproachTime <= 100 &&
-                Rules.allScoresUsed != null &&
                 Rules.directionOut >= 10 &&
                 Rules.directionOut <= 180
                 )

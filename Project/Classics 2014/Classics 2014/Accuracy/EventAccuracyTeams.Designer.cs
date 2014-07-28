@@ -30,6 +30,9 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxTeams = new System.Windows.Forms.ListBox();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
@@ -39,6 +42,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewCompetitors = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,11 +53,6 @@
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxTeamSelection = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -113,6 +113,40 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(305, 806);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label7.Location = new System.Drawing.Point(3, 726);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(299, 30);
+            this.label7.TabIndex = 8;
+            this.label7.Text = "Teams filled";
+            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.SystemColors.Control;
+            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label6.Location = new System.Drawing.Point(3, 696);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(299, 30);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "0 / 5";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.Location = new System.Drawing.Point(3, 646);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(299, 30);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "Competitors Per Team";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -130,6 +164,7 @@
             this.listBoxTeams.FormattingEnabled = true;
             this.listBoxTeams.Location = new System.Drawing.Point(3, 53);
             this.listBoxTeams.Name = "listBoxTeams";
+            this.listBoxTeams.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBoxTeams.Size = new System.Drawing.Size(299, 490);
             this.listBoxTeams.TabIndex = 1;
             // 
@@ -218,6 +253,28 @@
             this.button3.Text = "Cancel";
             this.button3.UseVisualStyleBackColor = true;
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(3, 586);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(299, 30);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "You have selected";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Location = new System.Drawing.Point(3, 616);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(299, 30);
+            this.label4.TabIndex = 5;
+            this.label4.Text = "0";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // dataGridViewCompetitors
             // 
             this.dataGridViewCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -305,62 +362,6 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Set selected team to:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 586);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(299, 30);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "You have selected";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 616);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(299, 30);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "0";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 646);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(299, 30);
-            this.label5.TabIndex = 6;
-            this.label5.Text = "Competitors Per Team";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 696);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(299, 30);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "0 / 5";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 726);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(299, 30);
-            this.label7.TabIndex = 8;
-            this.label7.Text = "Teams filled";
-            this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelWarning
             // 

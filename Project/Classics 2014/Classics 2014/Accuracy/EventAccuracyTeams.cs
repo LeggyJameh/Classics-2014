@@ -22,6 +22,7 @@ namespace Classics_2014.Accuracy
             Competitors = PassCompetitors;
             InitializeComponent();
             NoOfIntermixTeams = 0;
+            AddCompetitorsToDataGrid();
         }
 
         private void AddCompetitorsToDataGrid()
@@ -36,6 +37,7 @@ namespace Classics_2014.Accuracy
         {
             NoOfIntermixTeams++;
             listBoxTeams.Items.Add("Intermix Team " + NoOfIntermixTeams);
+            UpdateTeamSelection(0);
         }
 
         private void buttonRemoveTeam_Click(object sender, EventArgs e)

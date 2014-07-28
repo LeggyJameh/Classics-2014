@@ -19,11 +19,13 @@ namespace Classics_2014
         public IO_Controller()
         {
              Serial_Controller = new Serial_Controller(ref Data_queue, ref _signal);
+             Serial_Input = true;
              Camera_Controller = new Camera_Controller();
+             Network_Controller = new Network_Controller();
         }
         public bool[] CheckIO()
         {
-            Boolean[] replies = new bool[2];
+            Boolean[] replies = new bool[3];
             replies[0] = Serial_Controller.IsActive;
             replies[1] = Camera_Controller.Active;
             replies[2] = Network_Controller.Active;

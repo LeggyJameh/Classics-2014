@@ -22,7 +22,7 @@ namespace Classics_2014
                 listBoxWindLog.Items.Add(NewItem);
             }
             listBoxWindLog.Visible = true;
-
+            tableLayoutPanel6.Visible = true;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)

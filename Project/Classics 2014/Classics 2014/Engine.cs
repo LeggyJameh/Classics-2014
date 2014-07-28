@@ -27,22 +27,29 @@ namespace Classics_2014
             IO_Controller = new IO_Controller();
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
-           //ToDo Delete this line to start receiving data ListenThread.Start();
+            
+            if (IO_Controller.Serial_Input) { ListenThread.Start(); }
         }
         private void ListenProcedure()
         {
+            while (IO_Controller.CheckIO()[2]) ;
             IO_Controller._signal.WaitOne();
             if ((activeEvent != null) && (activeEvent.RequiresSerial )) { Active_Signal.WaitOne(); }
             Data data;
 
             while (IO_Controller.Data_queue.TryDequeue(out data))
             {
-                //ToDo Make sure we cast to the correct fucking type in the future, the serial will know
-                Data_Accuracy Data = (data as Data_Accuracy);
-                WriteToMasterFile(Data);
-                TWind wind = new TWind() {  direction = Data.Direction, speed = Data.Speed, time = Data.Time};
-                mainForm.UpdateWind(wind);
-              //  mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
+                switch (data.dataType)
+                {
+                    case EventType.Accuracy: Data_Accuracy DatA = (data as Data_Accuracy);
+                        WriteToMasterFile(DatA);
+                        TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
+                        mainForm.UpdateWind(wind);
+                        //mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
+                        // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
+                        break;
+                }
+               //mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
                // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
             }
 

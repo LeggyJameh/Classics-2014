@@ -7,5 +7,6 @@ namespace Classics_2014
 {
     class Data
     {
+       public  EventType dataType;
     }
 }

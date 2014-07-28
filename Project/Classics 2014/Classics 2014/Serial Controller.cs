@@ -28,6 +28,8 @@ namespace Classics_2014
         public Boolean WindDirection { get; private set; }
         public Boolean WindSpeed { get; private set; }
         ASCIIEncoding eEnconder = new ASCIIEncoding();
+        EventType incomingType;
+
         #endregion
 
         public Serial_Controller(ref ConcurrentQueue<Data> _queue, ref AutoResetEvent _signal)
@@ -36,6 +38,7 @@ namespace Classics_2014
             this._signal = _signal;
             portName = "COM" + GetComPort();
             ListenThread = new Thread(new ThreadStart(ThreadLoop));
+            ListenThread.Start();
         }
         private void ThreadLoop()
         {
@@ -79,6 +82,10 @@ namespace Classics_2014
         {
             //ToDo Determine Connections
             ReadOperation = new System.Action(AccuracyReadAndSplit);
+            incomingType = EventType.Accuracy;
+            WindDirection = true;
+            WindSpeed = true;
+            
         }
 
         #region Read And Split Procedures

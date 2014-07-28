@@ -23,7 +23,7 @@ namespace Classics_2014.Accuracy
             this.engine = engine;
             RequiresSerial = true;
             EventType = EventType.Accuracy;
-            ListenThread = new Thread(new ThreadStart(ListenProcedure));
+             ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
         private void EventStart() //TODO Rule struct goes here
         {
@@ -35,10 +35,10 @@ namespace Classics_2014.Accuracy
             IO_Controller._signal.WaitOne();
             while (IO_Controller.Data_queue.TryPeek(out Data))
             {
+                Active_Signal.Set();
                 DataA = (Data as Data_Accuracy);
                 if (DataA != null)
                 {
-                    Active_Signal.Set();
                     //ToDo Data is received here DataA is the data and is ready to be used;
                 }
                 else
@@ -67,6 +67,13 @@ namespace Classics_2014.Accuracy
             stringToConvert += ruleSet.windSecondsPrior + "*";
             return ascii.GetBytes(stringToConvert);
 
+        }
+        private void makeActive()
+        {
+            if (IO_Controller.Serial_Input)
+            {
+                ListenThread.Start();
+            }
         }
     }
 }

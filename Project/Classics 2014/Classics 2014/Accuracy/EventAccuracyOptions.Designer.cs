@@ -57,6 +57,8 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label21 = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxCreateCompetitor = new System.Windows.Forms.GroupBox();
@@ -107,8 +109,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listBoxExistingTeams = new System.Windows.Forms.ListBox();
-            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.label21 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).BeginInit();
@@ -578,7 +578,7 @@
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(139, 47);
             this.buttonStart.TabIndex = 1;
-            this.buttonStart.Text = "Start Event";
+            this.buttonStart.Text = "Next";
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
@@ -592,6 +592,25 @@
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker.Location = new System.Drawing.Point(151, 72);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(216, 20);
+            this.dateTimePicker.TabIndex = 24;
+            this.dateTimePicker.Value = new System.DateTime(2014, 7, 28, 11, 42, 11, 0);
+            // 
+            // label21
+            // 
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Location = new System.Drawing.Point(3, 58);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(142, 48);
+            this.label21.TabIndex = 25;
+            this.label21.Text = "Date:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel4
             // 
@@ -1195,25 +1214,6 @@
             this.listBoxExistingTeams.Name = "listBoxExistingTeams";
             this.listBoxExistingTeams.Size = new System.Drawing.Size(318, 143);
             this.listBoxExistingTeams.TabIndex = 0;
-            // 
-            // dateTimePicker
-            // 
-            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker.Location = new System.Drawing.Point(151, 72);
-            this.dateTimePicker.Name = "dateTimePicker";
-            this.dateTimePicker.Size = new System.Drawing.Size(216, 20);
-            this.dateTimePicker.TabIndex = 24;
-            this.dateTimePicker.Value = new System.DateTime(2014, 7, 28, 11, 42, 11, 0);
-            // 
-            // label21
-            // 
-            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(3, 58);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(142, 48);
-            this.label21.TabIndex = 25;
-            this.label21.Text = "Date:";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EventAccuracyOptions
             // 

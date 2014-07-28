@@ -10,10 +10,14 @@ namespace Classics_2014.Accuracy
     {
         #region variables and the such like
         readonly AutoResetEvent Active_Signal;
-        EventAccuracy activeEventTab;
+        EventAccuracyTeams activeEventTab;
         public EventAccuracyOptions EventOptionsTab;
+        public EventAccuracyTeams EventTeamsTab;
+        public TabControl TabControl;
         Engine engine;
         TAccuracyRuleSet ruleSet;
+        int EventID;
+        List<TCompetitor> Competitors;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
@@ -51,6 +55,18 @@ namespace Classics_2014.Accuracy
         {
           //  SQL_Controller.CreateEvent(Name, EventType, ConvertRuleSetToString(), EventOptionsTab.ReturnDateTimePickerValue()); 
         }
+
+        public void ProceedToEventTeams()
+        {
+            EventTeamsTab = new EventAccuracyTeams(Competitors, EventID, ruleSet.noOfCompetitorsPerTeam);
+            TabPage NewPage = new TabPage();
+            NewPage.Controls.Add(EventTeamsTab);
+            EventTeamsTab.Dock = DockStyle.Fill;
+            NewPage.Text = Name + " Team Config";
+            TabControl.TabPages.Add(NewPage);
+            TabControl.SelectedTab = NewPage;
+        }
+
         protected override byte[] ConvertRuleSetToString()
         {
             ASCIIEncoding ascii = new ASCIIEncoding();
@@ -68,6 +84,17 @@ namespace Classics_2014.Accuracy
             return ascii.GetBytes(stringToConvert);
 
         }
+
+        public void SaveEvent(TAccuracyRuleSet Rules, string Name, DateTime Date, List<TCompetitor> SelectedCompetitors)
+        {
+            Competitors = SelectedCompetitors;
+            ruleSet = Rules;
+            byte[] ByteRules = ConvertRuleSetToString();
+            SQL_Controller.CreateEvent(Name, Classics_2014.EventType.Accuracy, ByteRules, Date);
+            EventID = SQL_Controller.GetLastInsertKey();
+            EventOptionsTab = null;
+        }
+
         private void makeActive()
         {
             if (IO_Controller.Serial_Input)

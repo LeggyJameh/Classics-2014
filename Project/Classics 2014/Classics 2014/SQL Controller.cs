@@ -150,12 +150,11 @@ namespace Classics_2014
                 hex.AppendFormat("{0:x2}", b);
             hexRuleset = hex.ToString();
             //Code ends here
-            string ConvertedOptions = "";
 
             switch (EventType)
             {
                 case EventType.Accuracy:
-                    Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + Date.ToShortDateString() + "', '" + Name + "', '" + EventType + "', '" + ConvertedOptions + "');";
+                    Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + Date.ToShortDateString() + "', '" + Name + "', '" + EventType + "', '" + hexRuleset + "');";
                     if (ExecuteNonQuery(Query1))
                     {
                         EventID = GetLastInsertKey();

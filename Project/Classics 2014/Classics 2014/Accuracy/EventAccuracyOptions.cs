@@ -19,6 +19,7 @@ namespace Classics_2014.Accuracy
         List<string> ExistingTeams = new List<string>();
         TAccuracyRuleSet Rules = new TAccuracyRuleSet();
         string EventName = "";
+        int EventID;
 
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent)
         {
@@ -277,11 +278,7 @@ namespace Classics_2014.Accuracy
                 Rules.directionOut <= 180
                 )
                 {
-
-                    byte[] ByteRules = new byte[10]; // TEMP CODE
-
-                    Connected_Event.SQL_Controller.CreateEvent(EventName, EventType.Accuracy, ByteRules, dateTimePicker.Value);
-
+                    Connected_Event.SaveEvent(Rules, EventName, dateTimePicker.Value, SelectedCompetitors);
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     tabControl.SelectedTab = tabControl.TabPages[0];
                 }
@@ -406,7 +403,7 @@ namespace Classics_2014.Accuracy
         private void buttonStart_Click(object sender, EventArgs e)
         {
             SaveEvent();
-            //TODO: Start and pass rules, etc into instance of EventAccuracy.
+            Connected_Event.ProceedToEventTeams();
         }
 
         private void buttonCompetitorCreate_Click(object sender, EventArgs e)

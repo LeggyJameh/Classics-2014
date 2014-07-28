@@ -138,7 +138,7 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
-        public bool CreateEvent(string Name, EventType EventType, byte[] Options)
+        public bool CreateEvent(string Name, EventType EventType, byte[] Options, DateTime Date)
         {
             string Query1;
             string Query2;
@@ -155,7 +155,7 @@ namespace Classics_2014
             switch (EventType)
             {
                 case EventType.Accuracy:
-                    Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + DateTime.Now.Date + "', '" + Name + "', '" + EventType + "', '" + ConvertedOptions + "');";
+                    Query1 = "INSERT INTO events (Date, Name, Type, Options) VALUES ('" + Date.ToShortDateString() + "', '" + Name + "', '" + EventType + "', '" + ConvertedOptions + "');";
                     if (ExecuteNonQuery(Query1))
                     {
                         EventID = GetLastInsertKey();

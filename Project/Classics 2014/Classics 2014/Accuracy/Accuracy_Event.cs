@@ -49,7 +49,7 @@ namespace Classics_2014.Accuracy
         }
         protected override void CreateEvent()
         {
-            SQL_Controller.CreateEvent(Name, EventType, ConvertRuleSetToString()); 
+            SQL_Controller.CreateEvent(Name, EventType, ConvertRuleSetToString(), EventOptionsTab.ReturnDateTimePickerValue()); 
         }
         protected override byte[] ConvertRuleSetToString()
         {

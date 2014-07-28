@@ -107,6 +107,8 @@
             this.label14 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.listBoxExistingTeams = new System.Windows.Forms.ListBox();
+            this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.label21 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).BeginInit();
@@ -155,47 +157,50 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 4);
-            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 5);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 6);
-            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 7);
-            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 9);
-            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 10);
-            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 11);
-            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 12);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 3);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 5);
+            this.tableLayoutPanel2.Controls.Add(this.label5, 0, 6);
+            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.label7, 0, 8);
+            this.tableLayoutPanel2.Controls.Add(this.label8, 0, 9);
+            this.tableLayoutPanel2.Controls.Add(this.label9, 0, 10);
+            this.tableLayoutPanel2.Controls.Add(this.label10, 0, 11);
+            this.tableLayoutPanel2.Controls.Add(this.label11, 0, 12);
+            this.tableLayoutPanel2.Controls.Add(this.label12, 0, 13);
             this.tableLayoutPanel2.Controls.Add(this.textBoxEventName, 1, 1);
-            this.tableLayoutPanel2.Controls.Add(this.comboBoxRulePreset, 1, 2);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownCompetitorsPerTeam, 1, 3);
-            this.tableLayoutPanel2.Controls.Add(this.comboBoxScoresUsed, 1, 4);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownCompMaxWind, 1, 5);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownMaxScore, 1, 6);
-            this.tableLayoutPanel2.Controls.Add(this.comboBoxRejumpAngleChange, 1, 8);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownRejumpWindspeed, 1, 9);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeBeforeLanding, 1, 10);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeAfterLanding, 1, 11);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownFinalApproachTime, 1, 12);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 14);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxRulePreset, 1, 3);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownCompetitorsPerTeam, 1, 4);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxScoresUsed, 1, 5);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownCompMaxWind, 1, 6);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownMaxScore, 1, 7);
+            this.tableLayoutPanel2.Controls.Add(this.comboBoxRejumpAngleChange, 1, 9);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownRejumpWindspeed, 1, 10);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeBeforeLanding, 1, 11);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeAfterLanding, 1, 12);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownFinalApproachTime, 1, 13);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 15);
+            this.tableLayoutPanel2.Controls.Add(this.dateTimePicker, 1, 2);
+            this.tableLayoutPanel2.Controls.Add(this.label21, 0, 2);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 15;
+            this.tableLayoutPanel2.RowCount = 16;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.070707F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.15152F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.554521F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.555069F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.78463F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(370, 802);
             this.tableLayoutPanel2.TabIndex = 0;
@@ -205,7 +210,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 52);
+            this.label1.Size = new System.Drawing.Size(142, 48);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name of Event:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,9 +218,9 @@
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 62);
+            this.label2.Location = new System.Drawing.Point(3, 106);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 52);
+            this.label2.Size = new System.Drawing.Size(142, 48);
             this.label2.TabIndex = 1;
             this.label2.Text = "Rule Presets:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -223,9 +228,9 @@
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 114);
+            this.label3.Location = new System.Drawing.Point(3, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 52);
+            this.label3.Size = new System.Drawing.Size(142, 48);
             this.label3.TabIndex = 2;
             this.label3.Text = "Competitors Per Team:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -233,9 +238,9 @@
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 166);
+            this.label4.Location = new System.Drawing.Point(3, 202);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(142, 52);
+            this.label4.Size = new System.Drawing.Size(142, 48);
             this.label4.TabIndex = 3;
             this.label4.Text = "Scores used:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -243,9 +248,9 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 218);
+            this.label5.Location = new System.Drawing.Point(3, 250);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 52);
+            this.label5.Size = new System.Drawing.Size(142, 48);
             this.label5.TabIndex = 4;
             this.label5.Text = "Max Safe Windspeed:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -253,9 +258,9 @@
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 270);
+            this.label6.Location = new System.Drawing.Point(3, 298);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(142, 52);
+            this.label6.Size = new System.Drawing.Size(142, 48);
             this.label6.TabIndex = 5;
             this.label6.Text = "Max Score Possible:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -264,9 +269,9 @@
             // 
             this.tableLayoutPanel2.SetColumnSpan(this.label7, 2);
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 322);
+            this.label7.Location = new System.Drawing.Point(3, 346);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(364, 52);
+            this.label7.Size = new System.Drawing.Size(364, 48);
             this.label7.TabIndex = 6;
             this.label7.Text = "Landing Settings:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -274,9 +279,9 @@
             // label8
             // 
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 374);
+            this.label8.Location = new System.Drawing.Point(3, 394);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(142, 52);
+            this.label8.Size = new System.Drawing.Size(142, 48);
             this.label8.TabIndex = 7;
             this.label8.Text = "Wind direction change in final approach to issue rejump:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -284,9 +289,9 @@
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(3, 426);
+            this.label9.Location = new System.Drawing.Point(3, 442);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(142, 52);
+            this.label9.Size = new System.Drawing.Size(142, 48);
             this.label9.TabIndex = 8;
             this.label9.Text = "Windspeed limit for rejump:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -294,9 +299,9 @@
             // label10
             // 
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(3, 478);
+            this.label10.Location = new System.Drawing.Point(3, 490);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(142, 52);
+            this.label10.Size = new System.Drawing.Size(142, 48);
             this.label10.TabIndex = 9;
             this.label10.Text = "Seconds of wind data to be stored before landing:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -304,9 +309,9 @@
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 530);
+            this.label11.Location = new System.Drawing.Point(3, 538);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(142, 52);
+            this.label11.Size = new System.Drawing.Size(142, 48);
             this.label11.TabIndex = 10;
             this.label11.Text = "Seconds of wind data to be stored after landing:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -314,9 +319,9 @@
             // label12
             // 
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(3, 582);
+            this.label12.Location = new System.Drawing.Point(3, 586);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(142, 52);
+            this.label12.Size = new System.Drawing.Size(142, 48);
             this.label12.TabIndex = 11;
             this.label12.Text = "Final approach time period:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -324,7 +329,7 @@
             // textBoxEventName
             // 
             this.textBoxEventName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxEventName.Location = new System.Drawing.Point(151, 15);
+            this.textBoxEventName.Location = new System.Drawing.Point(151, 13);
             this.textBoxEventName.Multiline = true;
             this.textBoxEventName.Name = "textBoxEventName";
             this.textBoxEventName.Size = new System.Drawing.Size(216, 42);
@@ -338,7 +343,7 @@
             this.comboBoxRulePreset.Items.AddRange(new object[] {
             "Custom",
             "F.A.I"});
-            this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 77);
+            this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 119);
             this.comboBoxRulePreset.Name = "comboBoxRulePreset";
             this.comboBoxRulePreset.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRulePreset.TabIndex = 13;
@@ -346,7 +351,7 @@
             // numericUpDownCompetitorsPerTeam
             // 
             this.numericUpDownCompetitorsPerTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownCompetitorsPerTeam.Location = new System.Drawing.Point(151, 130);
+            this.numericUpDownCompetitorsPerTeam.Location = new System.Drawing.Point(151, 168);
             this.numericUpDownCompetitorsPerTeam.Minimum = new decimal(new int[] {
             1,
             0,
@@ -367,7 +372,7 @@
             this.comboBoxScoresUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxScoresUsed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxScoresUsed.FormattingEnabled = true;
-            this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 181);
+            this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 215);
             this.comboBoxScoresUsed.Name = "comboBoxScoresUsed";
             this.comboBoxScoresUsed.Size = new System.Drawing.Size(216, 21);
             this.comboBoxScoresUsed.TabIndex = 15;
@@ -381,7 +386,7 @@
             0,
             0,
             65536});
-            this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 234);
+            this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 264);
             this.numericUpDownCompMaxWind.Minimum = new decimal(new int[] {
             1,
             0,
@@ -399,7 +404,7 @@
             // numericUpDownMaxScore
             // 
             this.numericUpDownMaxScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownMaxScore.Location = new System.Drawing.Point(151, 286);
+            this.numericUpDownMaxScore.Location = new System.Drawing.Point(151, 312);
             this.numericUpDownMaxScore.Minimum = new decimal(new int[] {
             1,
             0,
@@ -438,7 +443,7 @@
             "160°",
             "170°",
             "180°"});
-            this.comboBoxRejumpAngleChange.Location = new System.Drawing.Point(151, 389);
+            this.comboBoxRejumpAngleChange.Location = new System.Drawing.Point(151, 407);
             this.comboBoxRejumpAngleChange.Name = "comboBoxRejumpAngleChange";
             this.comboBoxRejumpAngleChange.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRejumpAngleChange.TabIndex = 18;
@@ -452,7 +457,7 @@
             0,
             0,
             65536});
-            this.numericUpDownRejumpWindspeed.Location = new System.Drawing.Point(151, 442);
+            this.numericUpDownRejumpWindspeed.Location = new System.Drawing.Point(151, 456);
             this.numericUpDownRejumpWindspeed.Minimum = new decimal(new int[] {
             1,
             0,
@@ -470,7 +475,7 @@
             // numericUpDownTimeBeforeLanding
             // 
             this.numericUpDownTimeBeforeLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownTimeBeforeLanding.Location = new System.Drawing.Point(151, 494);
+            this.numericUpDownTimeBeforeLanding.Location = new System.Drawing.Point(151, 504);
             this.numericUpDownTimeBeforeLanding.Maximum = new decimal(new int[] {
             300,
             0,
@@ -493,7 +498,7 @@
             // numericUpDownTimeAfterLanding
             // 
             this.numericUpDownTimeAfterLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownTimeAfterLanding.Location = new System.Drawing.Point(151, 546);
+            this.numericUpDownTimeAfterLanding.Location = new System.Drawing.Point(151, 552);
             this.numericUpDownTimeAfterLanding.Maximum = new decimal(new int[] {
             300,
             0,
@@ -522,7 +527,7 @@
             0,
             0,
             65536});
-            this.numericUpDownFinalApproachTime.Location = new System.Drawing.Point(151, 598);
+            this.numericUpDownFinalApproachTime.Location = new System.Drawing.Point(151, 600);
             this.numericUpDownFinalApproachTime.Minimum = new decimal(new int[] {
             1,
             0,
@@ -548,11 +553,11 @@
             this.tableLayoutPanel3.Controls.Add(this.buttonStart, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonCancel, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 749);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 746);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(364, 50);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(364, 53);
             this.tableLayoutPanel3.TabIndex = 23;
             // 
             // buttonSave
@@ -560,7 +565,7 @@
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSave.Location = new System.Drawing.Point(3, 3);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(103, 44);
+            this.buttonSave.Size = new System.Drawing.Size(103, 47);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save Event";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -571,7 +576,7 @@
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.Location = new System.Drawing.Point(112, 3);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(139, 44);
+            this.buttonStart.Size = new System.Drawing.Size(139, 47);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start Event";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -582,7 +587,7 @@
             this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCancel.Location = new System.Drawing.Point(257, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(104, 44);
+            this.buttonCancel.Size = new System.Drawing.Size(104, 47);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -1191,6 +1196,25 @@
             this.listBoxExistingTeams.Size = new System.Drawing.Size(318, 143);
             this.listBoxExistingTeams.TabIndex = 0;
             // 
+            // dateTimePicker
+            // 
+            this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.dateTimePicker.Location = new System.Drawing.Point(151, 72);
+            this.dateTimePicker.Name = "dateTimePicker";
+            this.dateTimePicker.Size = new System.Drawing.Size(216, 20);
+            this.dateTimePicker.TabIndex = 24;
+            this.dateTimePicker.Value = new System.DateTime(2014, 7, 28, 11, 42, 11, 0);
+            // 
+            // label21
+            // 
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Location = new System.Drawing.Point(3, 58);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(142, 48);
+            this.label21.TabIndex = 25;
+            this.label21.Text = "Date:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // EventAccuracyOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1314,5 +1338,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
         private System.Windows.Forms.Button buttonCompetitorModifyTeam;
+        private System.Windows.Forms.DateTimePicker dateTimePicker;
+        private System.Windows.Forms.Label label21;
     }
 }

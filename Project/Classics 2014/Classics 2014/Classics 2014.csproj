@@ -81,6 +81,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serial Controller.cs" />
     <Compile Include="SQL Controller.cs" />
+    <EmbeddedResource Include="Accuracy\EventAccuracy.resx">
+      <DependentUpon>EventAccuracy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\EventAccuracyOptions.resx">
       <DependentUpon>EventAccuracyOptions.cs</DependentUpon>
     </EmbeddedResource>

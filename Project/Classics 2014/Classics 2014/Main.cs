@@ -42,12 +42,12 @@ namespace Classics_2014
         }
         public void UpdateWind(TWind windData)
         {
-            textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideSpeed.Text = windData.speed.ToString()));
-            textBoxSideDirection.Invoke((MethodInvoker)(() => textBoxSideDirection.Text = windData.direction.ToString()));
+                textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideSpeed.Text = windData.speed.ToString()));
+                textBoxSideDirection.Invoke((MethodInvoker)(() => textBoxSideDirection.Text = windData.direction.ToString()));
         }
         public void UpdatePreviousScore(String score, bool reset)
         {
-            textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideScore.Text = score));
+            textBoxSideScore.Invoke((MethodInvoker)(() => textBoxSideScore.Text = score));
             if (!reset)
             {
                 timerScoreTimer.Start();

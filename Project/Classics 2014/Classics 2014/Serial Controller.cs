@@ -94,22 +94,21 @@ namespace Classics_2014
             buffer = new byte[19];
             do
             {
-
-                Data_Accuracy Data = new Data_Accuracy();
-                if (port.BytesToRead >= 19)
+                try
                 {
-                    try
+                    Data_Accuracy Data = new Data_Accuracy();
+                    if (port.BytesToRead >= 19)
                     {
                         port.Read(buffer, 0, 19);
                         string asciiString;
                         asciiString = eEnconder.GetString(buffer);
                         Data = SplitStream(asciiString);
+                        _queue.Enqueue(Data);
+                        _signal.Set();
                     }
-                    catch
-                    { //ToDo Stream Is Incorrect Format after Port set up}
-                    }
-                    _queue.Enqueue(Data);
-                    _signal.Set();
+                }
+                catch
+                { //ToDo Stream Is Incorrect Format after Port set up}
                 }
             } while (true);
         }
@@ -124,6 +123,7 @@ namespace Classics_2014
             Data.Time += asciiStream.Substring(12, 2);
             Data.Time += ':';
             Data.Time += asciiStream.Substring(14, 2);
+            Data.dataType = incomingType;
             return Data;
 
         }

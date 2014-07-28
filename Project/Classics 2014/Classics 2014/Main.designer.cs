@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -43,6 +43,7 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.buttonHelp = new System.Windows.Forms.Button();
             this.buttonModifyCompetitorData = new System.Windows.Forms.Button();
+            this.buttonMainSettings = new System.Windows.Forms.Button();
             this.tabWind = new System.Windows.Forms.TabPage();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -72,7 +73,6 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
-            this.buttonMainSettings = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -209,6 +209,16 @@
             this.buttonModifyCompetitorData.TabIndex = 6;
             this.buttonModifyCompetitorData.Text = "Modify Competitors";
             this.buttonModifyCompetitorData.UseVisualStyleBackColor = true;
+            // 
+            // buttonMainSettings
+            // 
+            this.buttonMainSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonMainSettings.Location = new System.Drawing.Point(369, 386);
+            this.buttonMainSettings.Name = "buttonMainSettings";
+            this.buttonMainSettings.Size = new System.Drawing.Size(360, 44);
+            this.buttonMainSettings.TabIndex = 7;
+            this.buttonMainSettings.Text = "Settings";
+            this.buttonMainSettings.UseVisualStyleBackColor = true;
             // 
             // tabWind
             // 
@@ -429,7 +439,7 @@
             this.textBoxSideDirection.AutoSize = true;
             this.textBoxSideDirection.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBoxSideDirection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxSideDirection.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSideDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSideDirection.ForeColor = System.Drawing.Color.White;
             this.textBoxSideDirection.Location = new System.Drawing.Point(3, 292);
             this.textBoxSideDirection.Name = "textBoxSideDirection";
@@ -456,7 +466,7 @@
             this.textBoxSideSpeed.AutoSize = true;
             this.textBoxSideSpeed.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBoxSideSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxSideSpeed.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSideSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSideSpeed.ForeColor = System.Drawing.Color.White;
             this.textBoxSideSpeed.Location = new System.Drawing.Point(3, 171);
             this.textBoxSideSpeed.Name = "textBoxSideSpeed";
@@ -483,7 +493,7 @@
             this.textBoxSideScore.AutoSize = true;
             this.textBoxSideScore.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.textBoxSideScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxSideScore.Font = new System.Drawing.Font("OCR A Extended", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSideScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSideScore.ForeColor = System.Drawing.Color.White;
             this.textBoxSideScore.Location = new System.Drawing.Point(3, 50);
             this.textBoxSideScore.Name = "textBoxSideScore";
@@ -517,9 +527,9 @@
             this.listBoxWindLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 386);
             this.listBoxWindLog.MultiSelect = false;
@@ -554,16 +564,6 @@
             this.labelError.Name = "labelError";
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
-            // 
-            // buttonMainSettings
-            // 
-            this.buttonMainSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonMainSettings.Location = new System.Drawing.Point(369, 386);
-            this.buttonMainSettings.Name = "buttonMainSettings";
-            this.buttonMainSettings.Size = new System.Drawing.Size(360, 44);
-            this.buttonMainSettings.TabIndex = 7;
-            this.buttonMainSettings.Text = "Settings";
-            this.buttonMainSettings.UseVisualStyleBackColor = true;
             // 
             // Main
             // 

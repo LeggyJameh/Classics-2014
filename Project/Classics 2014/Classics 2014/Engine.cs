@@ -17,6 +17,7 @@ namespace Classics_2014
         Event activeEvent;
         Main mainForm;
         TabControl tabControl;
+        TWind[] wind = new TWind[60];
         #endregion 
         private StreamWriter writer;
         public Engine(Main mainForm, TabControl tabControl)
@@ -26,39 +27,52 @@ namespace Classics_2014
             AquireMasterFile();
             IO_Controller = new IO_Controller();
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
-            ListenThread = new Thread(new ThreadStart(ListenProcedure));
-            
-            if (IO_Controller.Serial_Input) { ListenThread.Start(); }
+            ListenThread = new Thread(new ThreadStart(ListenProcedure));  
+            while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 
+            {
+                 ListenThread.Start();  
+            } 
         }
         private void ListenProcedure()
         {
-            while (IO_Controller.CheckIO()[2]) ;
-            IO_Controller._signal.WaitOne();
-            if ((activeEvent != null) && (activeEvent.RequiresSerial )) { Active_Signal.WaitOne(); }
-            Data data;
-
-            while (IO_Controller.Data_queue.TryDequeue(out data))
+            do
             {
-                switch (data.dataType)
+                if (mainForm.IsHandleCreated)
                 {
-                    case EventType.Accuracy: Data_Accuracy DatA = (data as Data_Accuracy);
-                        WriteToMasterFile(DatA);
-                        TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
-                        mainForm.UpdateWind(wind);
-                        //mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
-                        // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
-                        break;
+                    while (IO_Controller.CheckIO()[0])//If Serial is active
+                    {
+                        IO_Controller._signal.WaitOne();
+                        if ((activeEvent != null) && (activeEvent.RequiresSerial)) { Active_Signal.WaitOne(); }
+                        Data data;
+                        while (IO_Controller.Data_queue.TryDequeue(out data))
+                        {
+                            switch (data.dataType)
+                            {
+                                case EventType.Accuracy:
+                                    //Data_Accuracy DatA = (data as Data_Accuracy);
+                                    Data_Accuracy DatA = (Data_Accuracy)data;
+                                    WriteToMasterFile(DatA);
+                                    TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
+                                    mainForm.UpdateWind(wind);
+                                    ReOrderWindArray(wind);//Todo Modify to make this function
+                                    // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
+                                    break;
+                            }
+                        }
+
+                    }
                 }
-               //mainForm.UpdatelistBoxWindLog(wind);//Todo Modify to make this function
-               // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
-            }
+                Thread.Sleep(500);
+            } while (true);
 
         }
+        
 
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
+           //NewEvent.TabControl = tabControl;
             return NewEvent.EventOptionsTab;
         }
         public bool MakeActive(Event eventToBeActive)
@@ -97,6 +111,18 @@ namespace Classics_2014
             }
 
             //Confirm 
+        }
+        private void ReOrderWindArray(TWind newWind)
+        {
+            for (int i = 60 - 1; i >= 1; i--)
+            {
+
+                wind[i] = wind[i - 1];
+
+            }
+            wind[0] = newWind;
+            mainForm.UpdatelistBoxWindLog(wind);
+            //mainForm.UpdateWindChart(newWind);
         }
     }
 }

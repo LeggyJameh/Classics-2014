@@ -24,6 +24,14 @@ namespace Classics_2014.Accuracy
             NoOfIntermixTeams = 0;
         }
 
+        private void AddCompetitorsToDataGrid()
+        {
+            for (int i = 0; i < Competitors.Count; i++)
+            {
+                dataGridViewCompetitors.Rows.Add(Competitors[i].ID, Competitors[i].name, Competitors[i].team, Competitors[i].nationality);
+            }
+        }
+
         private void buttonAddTeam_Click(object sender, EventArgs e)
         {
             NoOfIntermixTeams++;

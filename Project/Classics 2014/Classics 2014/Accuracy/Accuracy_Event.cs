@@ -51,10 +51,6 @@ namespace Classics_2014.Accuracy
                 }
             }
         }
-        protected override void CreateEvent()
-        {
-          //  SQL_Controller.CreateEvent(Name, EventType, ConvertRuleSetToString(), EventOptionsTab.ReturnDateTimePickerValue()); 
-        }
 
         public void ProceedToEventTeams()
         {

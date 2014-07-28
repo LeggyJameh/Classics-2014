@@ -49,13 +49,8 @@ namespace Classics_2014
                             switch (data.dataType)
                             {
                                 case EventType.Accuracy:
-                                    //Data_Accuracy DatA = (data as Data_Accuracy);
                                     Data_Accuracy DatA = (Data_Accuracy)data;
                                     WriteToMasterFile(DatA);
-                                    TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
-                                    mainForm.UpdateWind(wind);
-                                    ReOrderWindArray(wind);//Todo Modify to make this function
-                                    // if (Data.IsLanding) { mainForm.UpdatePreviousScore(Data.LandingScore, false); } //Dont always know it will be an accuracy landing
                                     break;
                             }
                         }
@@ -66,8 +61,13 @@ namespace Classics_2014
             } while (true);
 
         }
-        
 
+        private void UpdateWindMetrics(Data DatA)
+        {
+            TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
+            mainForm.UpdateWind(wind);
+            ReOrderWindArray(wind);
+        }
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
@@ -81,13 +81,9 @@ namespace Classics_2014
             activeEvent = eventToBeActive;
             return true;
         }
-        private void WriteToMasterFile(Data_Accuracy data)
+        private void WriteToMasterFile(Data data)
         {
-            writer.WriteLine(data.Time + " : " + data.Speed.ToString() + " " + data.Direction.ToString());
-            if (data.IsLanding)
-            {
-                writer.Write(Convert.ToInt16(data.LandingScore).ToString());
-            }
+            writer.Write(data.ToString()); //ToDo Might need some upcasting
         }
         private void AquireMasterFile()
         {

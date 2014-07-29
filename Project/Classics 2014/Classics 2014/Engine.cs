@@ -19,6 +19,7 @@ namespace Classics_2014
         TabControl tabControl;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
+        List<Event> eventList = new List<Event>();
         private StreamWriter writer;
         #endregion 
 
@@ -70,6 +71,7 @@ namespace Classics_2014
         {
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
             mainForm.UpdateWind(wind);
+            mainForm.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
         }
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
@@ -77,6 +79,7 @@ namespace Classics_2014
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
            NewEvent.TabControl = tabControl;
+           eventList.Add(NewEvent);
             return NewEvent.EventOptionsTab;
         }
         public bool MakeActive(Event eventToBeActive)
@@ -122,7 +125,11 @@ namespace Classics_2014
             }
             wind[0] = newWind;
             mainForm.UpdatelistBoxWindLog(wind);
-            //mainForm.UpdateWindChart(newWind);
+        }
+        public void CloseThreads()
+        {
+            ListenThread.Abort();
+            IO_Controller.EndThreads();
         }
     }
 }

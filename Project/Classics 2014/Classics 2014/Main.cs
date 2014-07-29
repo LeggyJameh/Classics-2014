@@ -72,5 +72,22 @@ namespace Classics_2014
             }
             listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.EndUpdate()));
         }
+        public void UpdateWindGraph(TWind wind)
+        {
+            chartWind.Invoke((MethodInvoker)(()=> chartWind.Series[0].Points.AddXY(wind.time, wind.speed)));
+        }
+
+        private void trackBarWindZoom_Scroll(object sender, EventArgs e)
+        {
+            numericUpDownChartZoom.Value = trackBarWindZoom.Value;
+            chartWind.ChartAreas[0].AxisX.Interval = trackBarWindZoom.Value / 2;
+            chartWind.ChartAreas[0].AxisX.ScaleView.Size = trackBarWindZoom.Value * 60;
+        }
+        private void numericUpDownChartZoom_ValueChanged(object sender, EventArgs e)
+        {
+            trackBarWindZoom.Value = (int)numericUpDownChartZoom.Value;
+            chartWind.ChartAreas[0].AxisX.Interval = (int)numericUpDownChartZoom.Value / 2;
+            chartWind.ChartAreas[0].AxisX.ScaleView.Size =(int) numericUpDownChartZoom.Value * 60;
+        }
     }
 }

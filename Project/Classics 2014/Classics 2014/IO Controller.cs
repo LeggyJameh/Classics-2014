@@ -31,5 +31,9 @@ namespace Classics_2014
             replies[2] = Network_Controller.Active;
             return replies;
         }
+        public void EndThreads()
+        {
+            Serial_Controller.CloseThread();
+        }
     }
 }

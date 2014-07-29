@@ -1,6 +1,6 @@
-﻿namespace Classics_2014.Accuracy
+﻿namespace Classics_2014
 {
-    partial class EventAccuracyTeams
+    partial class EventTeams
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,7 +31,7 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.labelTeamsFilled = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.listBoxTeams = new System.Windows.Forms.ListBox();
@@ -43,7 +43,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.dataGridViewCompetitors = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -54,12 +53,14 @@
             this.comboBoxTeamSelection = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.numericUpDownCompetitorsPerTeam = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompetitors)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -86,14 +87,14 @@
             this.tableLayoutPanel2.ColumnCount = 1;
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.Controls.Add(this.label7, 0, 8);
-            this.tableLayoutPanel2.Controls.Add(this.label6, 0, 7);
+            this.tableLayoutPanel2.Controls.Add(this.labelTeamsFilled, 0, 7);
             this.tableLayoutPanel2.Controls.Add(this.label5, 0, 5);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.listBoxTeams, 0, 1);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 2);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel5, 0, 9);
             this.tableLayoutPanel2.Controls.Add(this.label3, 0, 3);
-            this.tableLayoutPanel2.Controls.Add(this.label4, 0, 4);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownCompetitorsPerTeam, 0, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -121,20 +122,20 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(299, 30);
             this.label7.TabIndex = 8;
-            this.label7.Text = "Teams filled";
+            this.label7.Text = "Teams filled or empty (Empty ones will be removed)";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label6
+            // labelTeamsFilled
             // 
-            this.label6.AutoSize = true;
-            this.label6.BackColor = System.Drawing.SystemColors.Control;
-            this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 696);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(299, 30);
-            this.label6.TabIndex = 7;
-            this.label6.Text = "0 / 5";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelTeamsFilled.AutoSize = true;
+            this.labelTeamsFilled.BackColor = System.Drawing.SystemColors.Control;
+            this.labelTeamsFilled.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTeamsFilled.Location = new System.Drawing.Point(3, 696);
+            this.labelTeamsFilled.Name = "labelTeamsFilled";
+            this.labelTeamsFilled.Size = new System.Drawing.Size(299, 30);
+            this.labelTeamsFilled.TabIndex = 7;
+            this.labelTeamsFilled.Text = "0 / 5";
+            this.labelTeamsFilled.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label5
             // 
@@ -250,7 +251,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(85, 38);
             this.button3.TabIndex = 2;
-            this.button3.Text = "Cancel";
+            this.button3.Text = "Back";
             this.button3.UseVisualStyleBackColor = true;
             // 
             // label3
@@ -263,17 +264,6 @@
             this.label3.TabIndex = 4;
             this.label3.Text = "You have selected";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 616);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(299, 30);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "0";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridViewCompetitors
             // 
@@ -337,7 +327,7 @@
             this.tableLayoutPanel4.RowCount = 4;
             this.tableLayoutPanel1.SetRowSpan(this.tableLayoutPanel4, 2);
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Size = new System.Drawing.Size(119, 806);
@@ -347,21 +337,21 @@
             // 
             this.comboBoxTeamSelection.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxTeamSelection.FormattingEnabled = true;
-            this.comboBoxTeamSelection.Location = new System.Drawing.Point(3, 407);
+            this.comboBoxTeamSelection.Location = new System.Drawing.Point(3, 417);
             this.comboBoxTeamSelection.Name = "comboBoxTeamSelection";
             this.comboBoxTeamSelection.Size = new System.Drawing.Size(113, 21);
             this.comboBoxTeamSelection.TabIndex = 0;
-            this.comboBoxTeamSelection.SelectedIndexChanged += new System.EventHandler(this.comboBoxTeamSelection_SelectedIndexChanged);
+            this.comboBoxTeamSelection.SelectionChangeCommitted += new System.EventHandler(this.comboBoxTeamSelection_SelectionChangeCommitted);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 373);
+            this.label2.Location = new System.Drawing.Point(3, 363);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(113, 30);
+            this.label2.Size = new System.Drawing.Size(113, 50);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Set selected team to:";
+            this.label2.Text = "Set selected competitors\' team to:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // labelWarning
@@ -374,12 +364,32 @@
             this.labelWarning.TabIndex = 3;
             this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // EventAccuracyTeams
+            // numericUpDownCompetitorsPerTeam
+            // 
+            this.numericUpDownCompetitorsPerTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownCompetitorsPerTeam.Location = new System.Drawing.Point(3, 621);
+            this.numericUpDownCompetitorsPerTeam.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownCompetitorsPerTeam.Name = "numericUpDownCompetitorsPerTeam";
+            this.numericUpDownCompetitorsPerTeam.Size = new System.Drawing.Size(299, 20);
+            this.numericUpDownCompetitorsPerTeam.TabIndex = 9;
+            this.numericUpDownCompetitorsPerTeam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownCompetitorsPerTeam.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownCompetitorsPerTeam.ValueChanged += new System.EventHandler(this.numericUpDownCompetitorsPerTeam_ValueChanged);
+            // 
+            // EventTeams
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "EventAccuracyTeams";
+            this.Name = "EventTeams";
             this.Size = new System.Drawing.Size(1244, 812);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
@@ -390,6 +400,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompetitors)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownCompetitorsPerTeam)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -417,10 +428,10 @@
         private System.Windows.Forms.ComboBox comboBoxTeamSelection;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelTeamsFilled;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.NumericUpDown numericUpDownCompetitorsPerTeam;
     }
 }

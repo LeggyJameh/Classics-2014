@@ -10,14 +10,15 @@ namespace Classics_2014.Accuracy
     {
         #region variables and the such like
         readonly AutoResetEvent Active_Signal;
-        EventAccuracyTeams activeEventTab;
+        EventTeams activeEventTab;
         public EventAccuracyOptions EventOptionsTab;
-        public EventAccuracyTeams EventTeamsTab;
+        public EventTeams EventTeamsTab;
         public TabControl TabControl;
         Engine engine;
         TAccuracyRuleSet ruleSet;
         int EventID;
         List<TCompetitor> Competitors;
+        List<string> ActiveTeams;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
@@ -54,7 +55,7 @@ namespace Classics_2014.Accuracy
 
         public void ProceedToEventTeams()
         {
-            EventTeamsTab = new EventAccuracyTeams(Competitors, EventID, ruleSet.noOfCompetitorsPerTeam);
+            EventTeamsTab = new EventTeams(Competitors, EventID, ruleSet.noOfCompetitorsPerTeam, ActiveTeams);
             TabPage NewPage = new TabPage();
             NewPage.Controls.Add(EventTeamsTab);
             EventTeamsTab.Dock = DockStyle.Fill;
@@ -81,10 +82,12 @@ namespace Classics_2014.Accuracy
 
         }
 
-        public void SaveEvent(TAccuracyRuleSet Rules, string Name, DateTime Date, List<TCompetitor> SelectedCompetitors)
+        public void SaveEvent(TAccuracyRuleSet Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
         {
             Competitors = SelectedCompetitors;
             ruleSet = Rules;
+            Name = EventName;
+            ActiveTeams = SelectedTeams;
             byte[] ByteRules = ConvertRuleSetToString();
             SQL_Controller.CreateEvent(Name, Classics_2014.EventType.Accuracy, ByteRules, Date);
             EventID = SQL_Controller.GetLastInsertKey();

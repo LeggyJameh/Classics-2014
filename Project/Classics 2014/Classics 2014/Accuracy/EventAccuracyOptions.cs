@@ -236,7 +236,7 @@ namespace Classics_2014.Accuracy
             return dateTimePicker.Value;
         }
 
-        private void SaveEvent()
+        private bool SaveEvent()
         {
             bool ErrorShown = false;
             try
@@ -283,14 +283,16 @@ namespace Classics_2014.Accuracy
                 Rules.directionOut <= 180
                 )
                 {
-                    Connected_Event.SaveEvent(Rules, EventName, dateTimePicker.Value, SelectedCompetitors);
+                    Connected_Event.SaveEvent(Rules, EventName, dateTimePicker.Value, SelectedCompetitors, SelectedTeams);
                     tabControl.TabPages.Remove(tabControl.SelectedTab);
                     tabControl.SelectedTab = tabControl.TabPages[0];
+                    return true;
                 }
                 else
                 {
                     ErrorShown = true;
                     MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
             catch
@@ -298,8 +300,10 @@ namespace Classics_2014.Accuracy
                 if (ErrorShown == false)
                 {
                     MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
+            return false;
         }
 
         #region Events
@@ -407,8 +411,14 @@ namespace Classics_2014.Accuracy
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            SaveEvent();
-            Connected_Event.ProceedToEventTeams();
+            if (SaveEvent() == true && Rules.noOfCompetitorsPerTeam > 1)
+            {
+                Connected_Event.ProceedToEventTeams();
+            }
+            else
+            {
+                //TODO: Go straight to event, all competitors are not in teams.
+            }
         }
 
         private void buttonCompetitorCreate_Click(object sender, EventArgs e)

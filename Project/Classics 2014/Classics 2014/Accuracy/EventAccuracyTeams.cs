@@ -63,5 +63,13 @@ namespace Classics_2014.Accuracy
                 }
             }
         }
+
+        private void comboBoxTeamSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < dataGridViewCompetitors.SelectedRows.Count; i++)
+            {
+                dataGridViewCompetitors.SelectedRows[i].Cells[4].Value = comboBoxTeamSelection.SelectedValue.ToString(); 
+            }
+        }
     }
 }

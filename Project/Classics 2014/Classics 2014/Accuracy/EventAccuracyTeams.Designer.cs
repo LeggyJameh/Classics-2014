@@ -351,6 +351,7 @@
             this.comboBoxTeamSelection.Name = "comboBoxTeamSelection";
             this.comboBoxTeamSelection.Size = new System.Drawing.Size(113, 21);
             this.comboBoxTeamSelection.TabIndex = 0;
+            this.comboBoxTeamSelection.SelectedIndexChanged += new System.EventHandler(this.comboBoxTeamSelection_SelectedIndexChanged);
             // 
             // label2
             // 

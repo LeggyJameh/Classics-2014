@@ -372,6 +372,8 @@
             this.comboBoxScoresUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBoxScoresUsed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxScoresUsed.FormattingEnabled = true;
+            this.comboBoxScoresUsed.Items.AddRange(new object[] {
+            "Best 1"});
             this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 215);
             this.comboBoxScoresUsed.Name = "comboBoxScoresUsed";
             this.comboBoxScoresUsed.Size = new System.Drawing.Size(216, 21);

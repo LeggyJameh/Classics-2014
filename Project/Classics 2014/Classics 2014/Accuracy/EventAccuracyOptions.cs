@@ -19,7 +19,6 @@ namespace Classics_2014.Accuracy
         List<string> ExistingTeams = new List<string>();
         TAccuracyRuleSet Rules = new TAccuracyRuleSet();
         string EventName = "";
-        int EventID;
 
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent)
         {
@@ -27,6 +26,9 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             Connected_Event = aEvent;
             PopulateExistingTeams();
+            comboBoxRulePreset.SelectedItem = comboBoxRulePreset.Items[0];
+            comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
+            comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[8];
             #region KeyDown Functions
             this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);
             this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
@@ -216,12 +218,15 @@ namespace Classics_2014.Accuracy
             List<TCompetitor> LocalSelectedCompetitors = new List<TCompetitor>();
             for (int i = 0; i < Datagrid.SelectedRows.Count; i++)
             {
-                TCompetitor CurrentCompetitor = new TCompetitor();
-                CurrentCompetitor.ID = Convert.ToInt16(Datagrid[0, i].Value);
-                CurrentCompetitor.name = Datagrid[1, i].Value.ToString();
-                CurrentCompetitor.team = Datagrid[2, i].Value.ToString();
-                CurrentCompetitor.nationality = Datagrid[3, i].Value.ToString();
-                LocalSelectedCompetitors.Add(CurrentCompetitor);
+                if (Datagrid.SelectedRows[i].Cells[0].Value != null)
+                {
+                    TCompetitor CurrentCompetitor = new TCompetitor();
+                    CurrentCompetitor.ID = Convert.ToInt16(Datagrid.SelectedRows[i].Cells[0].Value);
+                    CurrentCompetitor.name = Datagrid.SelectedRows[i].Cells[1].Value.ToString();
+                    CurrentCompetitor.team = Datagrid.SelectedRows[i].Cells[2].Value.ToString();
+                    CurrentCompetitor.nationality = Datagrid.SelectedRows[i].Cells[3].Value.ToString();
+                    LocalSelectedCompetitors.Add(CurrentCompetitor);
+                }
             }
             return LocalSelectedCompetitors;
         }
@@ -303,10 +308,10 @@ namespace Classics_2014.Accuracy
         {
             comboBoxScoresUsed.Items.Clear();
             comboBoxScoresUsed.Text = "";
-            comboBoxScoresUsed.Items.Add("Top " + numericUpDownCompetitorsPerTeam.Value.ToString());
+            comboBoxScoresUsed.Items.Add("Best " + numericUpDownCompetitorsPerTeam.Value.ToString());
             if (numericUpDownCompetitorsPerTeam.Value != 1)
             {
-                comboBoxScoresUsed.Items.Add("Top " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
+                comboBoxScoresUsed.Items.Add("Best " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
             }
         }
 

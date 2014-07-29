@@ -89,5 +89,10 @@ namespace Classics_2014
             chartWind.ChartAreas[0].AxisX.Interval = (int)numericUpDownChartZoom.Value / 2;
             chartWind.ChartAreas[0].AxisX.ScaleView.Size =(int) numericUpDownChartZoom.Value * 60;
         }
+
+        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MainEngine.CloseThreads();
+        }
     }
 }

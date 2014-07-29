@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
@@ -48,6 +48,11 @@
             this.buttonMainSettings = new System.Windows.Forms.Button();
             this.tabWind = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.chartWind = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
+            this.trackBarWindZoom = new System.Windows.Forms.TrackBar();
+            this.numericUpDownChartZoom = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -76,17 +81,16 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
-            this.chartWind = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.tableLayoutPanel8 = new System.Windows.Forms.TableLayoutPanel();
-            this.trackBarWindZoom = new System.Windows.Forms.TrackBar();
-            this.numericUpDownChartZoom = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabWind.SuspendLayout();
             this.tableLayoutPanel7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chartWind)).BeginInit();
+            this.tableLayoutPanel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
             this.tabEventLoad.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -95,10 +99,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartWind)).BeginInit();
-            this.tableLayoutPanel8.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -259,6 +259,97 @@
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(1105, 605);
             this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // chartWind
+            // 
+            chartArea1.AxisX.Interval = 30D;
+            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisX.ScaleView.Size = 3600D;
+            chartArea1.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisY.Interval = 0.5D;
+            chartArea1.AxisY.Maximum = 10D;
+            chartArea1.CursorX.AutoScroll = false;
+            chartArea1.CursorX.IsUserEnabled = true;
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.chartWind.ChartAreas.Add(chartArea1);
+            this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.chartWind.Location = new System.Drawing.Point(3, 210);
+            this.chartWind.Name = "chartWind";
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Name = "SeriesWindDirection";
+            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.chartWind.Series.Add(series1);
+            this.chartWind.Size = new System.Drawing.Size(1099, 360);
+            this.chartWind.TabIndex = 0;
+            this.chartWind.Text = "chart1";
+            // 
+            // tableLayoutPanel8
+            // 
+            this.tableLayoutPanel8.ColumnCount = 4;
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel8.Controls.Add(this.trackBarWindZoom, 0, 0);
+            this.tableLayoutPanel8.Controls.Add(this.numericUpDownChartZoom, 1, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label1, 2, 0);
+            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 576);
+            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
+            this.tableLayoutPanel8.RowCount = 1;
+            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1099, 26);
+            this.tableLayoutPanel8.TabIndex = 2;
+            // 
+            // trackBarWindZoom
+            // 
+            this.trackBarWindZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.trackBarWindZoom.Location = new System.Drawing.Point(3, 3);
+            this.trackBarWindZoom.Maximum = 120;
+            this.trackBarWindZoom.Minimum = 2;
+            this.trackBarWindZoom.Name = "trackBarWindZoom";
+            this.trackBarWindZoom.Size = new System.Drawing.Size(213, 20);
+            this.trackBarWindZoom.TabIndex = 2;
+            this.trackBarWindZoom.TickFrequency = 5;
+            this.trackBarWindZoom.Value = 60;
+            this.trackBarWindZoom.Scroll += new System.EventHandler(this.trackBarWindZoom_Scroll);
+            // 
+            // numericUpDownChartZoom
+            // 
+            this.numericUpDownChartZoom.Dock = System.Windows.Forms.DockStyle.Left;
+            this.numericUpDownChartZoom.Location = new System.Drawing.Point(222, 3);
+            this.numericUpDownChartZoom.Maximum = new decimal(new int[] {
+            120,
+            0,
+            0,
+            0});
+            this.numericUpDownChartZoom.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
+            this.numericUpDownChartZoom.Name = "numericUpDownChartZoom";
+            this.numericUpDownChartZoom.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownChartZoom.TabIndex = 3;
+            this.numericUpDownChartZoom.Value = new decimal(new int[] {
+            60,
+            0,
+            0,
+            0});
+            this.numericUpDownChartZoom.ValueChanged += new System.EventHandler(this.numericUpDownChartZoom_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.label1.Location = new System.Drawing.Point(331, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(83, 26);
+            this.label1.TabIndex = 4;
+            this.label1.Text = ":Minutes Shown";
             // 
             // tabEventLoad
             // 
@@ -596,97 +687,6 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
-            // chartWind
-            // 
-            chartArea1.AxisX.Interval = 30D;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea1.AxisX.ScaleView.Size = 3600D;
-            chartArea1.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea1.AxisY.Interval = 0.5D;
-            chartArea1.AxisY.Maximum = 10D;
-            chartArea1.CursorX.AutoScroll = false;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chartWind.ChartAreas.Add(chartArea1);
-            this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartWind.Location = new System.Drawing.Point(3, 210);
-            this.chartWind.Name = "chartWind";
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "SeriesWindDirection";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.chartWind.Series.Add(series1);
-            this.chartWind.Size = new System.Drawing.Size(1099, 360);
-            this.chartWind.TabIndex = 0;
-            this.chartWind.Text = "chart1";
-            // 
-            // tableLayoutPanel8
-            // 
-            this.tableLayoutPanel8.ColumnCount = 4;
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel8.Controls.Add(this.trackBarWindZoom, 0, 0);
-            this.tableLayoutPanel8.Controls.Add(this.numericUpDownChartZoom, 1, 0);
-            this.tableLayoutPanel8.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 576);
-            this.tableLayoutPanel8.Name = "tableLayoutPanel8";
-            this.tableLayoutPanel8.RowCount = 1;
-            this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1099, 26);
-            this.tableLayoutPanel8.TabIndex = 2;
-            // 
-            // trackBarWindZoom
-            // 
-            this.trackBarWindZoom.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.trackBarWindZoom.Location = new System.Drawing.Point(3, 3);
-            this.trackBarWindZoom.Maximum = 120;
-            this.trackBarWindZoom.Minimum = 2;
-            this.trackBarWindZoom.Name = "trackBarWindZoom";
-            this.trackBarWindZoom.Size = new System.Drawing.Size(213, 20);
-            this.trackBarWindZoom.TabIndex = 2;
-            this.trackBarWindZoom.TickFrequency = 5;
-            this.trackBarWindZoom.Value = 60;
-            this.trackBarWindZoom.Scroll += new System.EventHandler(this.trackBarWindZoom_Scroll);
-            // 
-            // numericUpDownChartZoom
-            // 
-            this.numericUpDownChartZoom.Dock = System.Windows.Forms.DockStyle.Left;
-            this.numericUpDownChartZoom.Location = new System.Drawing.Point(222, 3);
-            this.numericUpDownChartZoom.Maximum = new decimal(new int[] {
-            120,
-            0,
-            0,
-            0});
-            this.numericUpDownChartZoom.Minimum = new decimal(new int[] {
-            2,
-            0,
-            0,
-            0});
-            this.numericUpDownChartZoom.Name = "numericUpDownChartZoom";
-            this.numericUpDownChartZoom.Size = new System.Drawing.Size(103, 20);
-            this.numericUpDownChartZoom.TabIndex = 3;
-            this.numericUpDownChartZoom.Value = new decimal(new int[] {
-            60,
-            0,
-            0,
-            0});
-            this.numericUpDownChartZoom.ValueChanged += new System.EventHandler(this.numericUpDownChartZoom_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Location = new System.Drawing.Point(331, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 26);
-            this.label1.TabIndex = 4;
-            this.label1.Text = ":Minutes Shown";
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -705,12 +705,18 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Competition Manager System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Main_FormClosed);
             this.tabControl.ResumeLayout(false);
             this.tabMain.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabWind.ResumeLayout(false);
             this.tableLayoutPanel7.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chartWind)).EndInit();
+            this.tableLayoutPanel8.ResumeLayout(false);
+            this.tableLayoutPanel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
             this.tabEventLoad.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -721,11 +727,6 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chartWind)).EndInit();
-            this.tableLayoutPanel8.ResumeLayout(false);
-            this.tableLayoutPanel8.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

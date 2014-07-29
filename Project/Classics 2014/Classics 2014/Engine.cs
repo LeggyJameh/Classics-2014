@@ -130,6 +130,10 @@ namespace Classics_2014
         {
             ListenThread.Abort();
             IO_Controller.EndThreads();
+            foreach (Event e in eventList)
+            {
+                e.EndThread();
+            }
         }
     }
 }

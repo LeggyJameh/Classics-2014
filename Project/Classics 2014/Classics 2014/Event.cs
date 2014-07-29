@@ -23,5 +23,9 @@ namespace Classics_2014
         {
             throw new NotImplementedException();
         }
+        public void EndThread()
+        {
+            ListenThread.Abort();
+        }
     }
 }

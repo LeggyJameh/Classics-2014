@@ -42,9 +42,13 @@ namespace Classics_2014
         }
         private void ThreadLoop()
         {
-            ConnectPort();
-            DetermineConnection();
-            ReadOperation();
+            do
+            {
+                ConnectPort();
+                DetermineConnection();
+                ReadOperation();
+                
+            } while (true);
         }
         private void ConnectPort()
         {
@@ -89,6 +93,7 @@ namespace Classics_2014
         }
 
         #region Read And Split Procedures
+        #region Accuracy
         private void AccuracyReadAndSplit()
         {
             buffer = new byte[19];
@@ -109,6 +114,10 @@ namespace Classics_2014
                 }
                 catch
                 { //ToDo Stream Is Incorrect Format after Port set up}
+                    if (!port.IsOpen)
+                    {
+                        ConnectPort();
+                    }
                 }
             } while (true);
         }
@@ -127,7 +136,7 @@ namespace Classics_2014
             return Data;
 
         }
-
+        #endregion 
         #endregion
     }
 }

@@ -18,8 +18,10 @@ namespace Classics_2014
         Main mainForm;
         TabControl tabControl;
         TWind[] wind = new TWind[60];
-        #endregion 
+        List<TWind> windList = new List<TWind>();
         private StreamWriter writer;
+        #endregion 
+
         public Engine(Main mainForm, TabControl tabControl)
         {
             this.mainForm = mainForm;
@@ -51,6 +53,8 @@ namespace Classics_2014
                                 case EventType.Accuracy:
                                     Data_Accuracy DatA = (Data_Accuracy)data;
                                     WriteToMasterFile(DatA);
+                                    UpdateWindMetrics(DatA);
+
                                     break;
                             }
                         }
@@ -72,7 +76,7 @@ namespace Classics_2014
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
-           //NewEvent.TabControl = tabControl;
+           NewEvent.TabControl = tabControl;
             return NewEvent.EventOptionsTab;
         }
         public bool MakeActive(Event eventToBeActive)

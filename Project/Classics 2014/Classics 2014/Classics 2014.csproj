@@ -52,11 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accuracy\Accuracy_Event.cs" />
-    <Compile Include="Accuracy\EventAccuracyTeams.cs">
+    <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Accuracy\EventAccuracyTeams.Designer.cs">
-      <DependentUpon>EventAccuracyTeams.cs</DependentUpon>
+    <Compile Include="EventTeams.Designer.cs">
+      <DependentUpon>EventTeams.cs</DependentUpon>
     </Compile>
     <Compile Include="Camera Controller.cs" />
     <Compile Include="Accuracy\EventAccuracyOptions.cs">
@@ -85,8 +85,8 @@
     <EmbeddedResource Include="Accuracy\EventAccuracyOptions.resx">
       <DependentUpon>EventAccuracyOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Accuracy\EventAccuracyTeams.resx">
-      <DependentUpon>EventAccuracyTeams.cs</DependentUpon>
+    <EmbeddedResource Include="EventTeams.resx">
+      <DependentUpon>EventTeams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

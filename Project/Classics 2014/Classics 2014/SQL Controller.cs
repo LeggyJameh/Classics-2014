@@ -27,7 +27,7 @@ namespace Classics_2014
             this.database = Database;
             this.user = User;
             SetupConnection();
-            //StartDatabase();
+            StartDatabase();
         }
 
         public bool StartDatabase()

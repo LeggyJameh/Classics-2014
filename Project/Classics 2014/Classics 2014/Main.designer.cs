@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine1 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
@@ -74,13 +75,16 @@
             this.label13 = new System.Windows.Forms.Label();
             this.textBoxSideSpeed = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
-            this.textBoxSideScore = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
             this.listBoxWindLog = new System.Windows.Forms.ListView();
             this.Time = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
+            this.numericUpDownWindOverChartBar = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDirectionChangeGraphLimit = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonUseEventSettings = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -99,6 +103,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -268,6 +274,15 @@
             chartArea1.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
             chartArea1.AxisY.Interval = 0.5D;
             chartArea1.AxisY.Maximum = 10D;
+            stripLine1.BackColor = System.Drawing.Color.Red;
+            stripLine1.BorderColor = System.Drawing.Color.Red;
+            stripLine1.ForeColor = System.Drawing.Color.Red;
+            stripLine1.Interval = -1D;
+            stripLine1.IntervalOffset = 7D;
+            stripLine1.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            stripLine1.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            stripLine1.Text = "Wind Out";
+            chartArea1.AxisY.StripLines.Add(stripLine1);
             chartArea1.CursorX.AutoScroll = false;
             chartArea1.CursorX.IsUserEnabled = true;
             chartArea1.CursorX.IsUserSelectionEnabled = true;
@@ -288,14 +303,24 @@
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 4;
+            this.tableLayoutPanel8.ColumnCount = 9;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.Controls.Add(this.trackBarWindZoom, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.numericUpDownChartZoom, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.label1, 2, 0);
+            this.tableLayoutPanel8.Controls.Add(this.numericUpDownWindOverChartBar, 3, 0);
+            this.tableLayoutPanel8.Controls.Add(this.numericUpDownDirectionChangeGraphLimit, 5, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label2, 4, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label3, 6, 0);
+            this.tableLayoutPanel8.Controls.Add(this.buttonUseEventSettings, 7, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 576);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -537,8 +562,6 @@
             this.tableLayoutPanel6.Controls.Add(this.label13, 0, 5);
             this.tableLayoutPanel6.Controls.Add(this.textBoxSideSpeed, 0, 4);
             this.tableLayoutPanel6.Controls.Add(this.label11, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.textBoxSideScore, 0, 2);
-            this.tableLayoutPanel6.Controls.Add(this.label9, 0, 1);
             this.tableLayoutPanel6.Controls.Add(this.listBoxWindLog, 0, 7);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel6.Location = new System.Drawing.Point(1122, 3);
@@ -610,33 +633,6 @@
             this.label11.Text = "Wind Speed (m/s)";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // textBoxSideScore
-            // 
-            this.textBoxSideScore.AutoSize = true;
-            this.textBoxSideScore.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.textBoxSideScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBoxSideScore.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSideScore.ForeColor = System.Drawing.Color.White;
-            this.textBoxSideScore.Location = new System.Drawing.Point(3, 50);
-            this.textBoxSideScore.Name = "textBoxSideScore";
-            this.textBoxSideScore.Size = new System.Drawing.Size(113, 91);
-            this.textBoxSideScore.TabIndex = 4;
-            this.textBoxSideScore.Text = "--";
-            this.textBoxSideScore.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(3, 20);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(113, 30);
-            this.label9.TabIndex = 3;
-            this.label9.Text = "Score";
-            this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // listBoxWindLog
             // 
             this.listBoxWindLog.Alignment = System.Windows.Forms.ListViewAlignment.Left;
@@ -687,6 +683,66 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
+            // numericUpDownWindOverChartBar
+            // 
+            this.numericUpDownWindOverChartBar.DecimalPlaces = 1;
+            this.numericUpDownWindOverChartBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownWindOverChartBar.Location = new System.Drawing.Point(440, 3);
+            this.numericUpDownWindOverChartBar.Name = "numericUpDownWindOverChartBar";
+            this.numericUpDownWindOverChartBar.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownWindOverChartBar.TabIndex = 5;
+            // 
+            // numericUpDownDirectionChangeGraphLimit
+            // 
+            this.numericUpDownDirectionChangeGraphLimit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownDirectionChangeGraphLimit.Location = new System.Drawing.Point(658, 3);
+            this.numericUpDownDirectionChangeGraphLimit.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.numericUpDownDirectionChangeGraphLimit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownDirectionChangeGraphLimit.Name = "numericUpDownDirectionChangeGraphLimit";
+            this.numericUpDownDirectionChangeGraphLimit.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownDirectionChangeGraphLimit.TabIndex = 6;
+            this.numericUpDownDirectionChangeGraphLimit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(549, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 26);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Speed Over Bar Height";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(767, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 26);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Direction Change Indicator";
+            // 
+            // buttonUseEventSettings
+            // 
+            this.buttonUseEventSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUseEventSettings.Location = new System.Drawing.Point(876, 3);
+            this.buttonUseEventSettings.Name = "buttonUseEventSettings";
+            this.buttonUseEventSettings.Size = new System.Drawing.Size(103, 20);
+            this.buttonUseEventSettings.TabIndex = 9;
+            this.buttonUseEventSettings.Text = "Use Event Options";
+            this.buttonUseEventSettings.UseVisualStyleBackColor = true;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -727,6 +783,8 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -758,8 +816,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEventDate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label textBoxSideScore;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label textBoxSideSpeed;
         private System.Windows.Forms.Label label13;
@@ -779,6 +835,11 @@
         private System.Windows.Forms.TrackBar trackBarWindZoom;
         private System.Windows.Forms.NumericUpDown numericUpDownChartZoom;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDownWindOverChartBar;
+        private System.Windows.Forms.NumericUpDown numericUpDownDirectionChangeGraphLimit;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonUseEventSettings;
 
     }
 }

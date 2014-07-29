@@ -55,7 +55,6 @@ namespace Classics_2014
                                     Data_Accuracy DatA = (Data_Accuracy)data;
                                     WriteToMasterFile(DatA);
                                     UpdateWindMetrics(DatA);
-
                                     break;
                             }
                         }
@@ -88,16 +87,17 @@ namespace Classics_2014
             activeEvent = eventToBeActive;
             return true;
         }
-        private void WriteToMasterFile(Data data)
+        private void WriteToMasterFile(Data_Accuracy data)
         {
-            writer.Write(data.ToString()); //ToDo Might need some upcasting
+            writer.WriteLine(data.ToString()); //ToDo Might need some upcasting
+
         }
         private void AquireMasterFile()
         {
             try
             {
                 DateTime lastCreationTime = File.GetCreationTime(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt");
-                if (lastCreationTime.Date != DateTime.Now)
+                if (lastCreationTime.Date.DayOfYear != DateTime.Now.DayOfYear)
                 {
                     if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\OldMasterFiles\\")) { Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\OldMasterFiles"); }
                     File.Move(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", Directory.GetCurrentDirectory() + "\\OldMasterFiles\\" + File.GetCreationTime(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt"));
@@ -109,10 +109,8 @@ namespace Classics_2014
                 {
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\RecentMasterFile");
                 }
-                writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt");
-                return;
             }
-
+            writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", true);
             //Confirm 
         }
         private void ReOrderWindArray(TWind newWind)
@@ -134,6 +132,8 @@ namespace Classics_2014
             {
                 e.EndThread();
             }
+            SQL_Controller.StopDatabase();
+            writer.Close();
         }
     }
 }

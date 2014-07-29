@@ -45,18 +45,9 @@ namespace Classics_2014
                 textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideSpeed.Text = windData.speed.ToString()));
                 textBoxSideDirection.Invoke((MethodInvoker)(() => textBoxSideDirection.Text = windData.direction.ToString()));
         }
-        public void UpdatePreviousScore(String score, bool reset)
-        {
-            textBoxSideScore.Invoke((MethodInvoker)(() => textBoxSideScore.Text = score));
-            if (!reset)
-            {
-                timerScoreTimer.Start();
-            }
-        }
         private void timerScoreTimer_Tick(object sender, EventArgs e)
         {
             timerScoreTimer.Stop();
-            textBoxSideScore.Text = "--";
         }
         public void UpdatelistBoxWindLog(TWind[] wind)
         {

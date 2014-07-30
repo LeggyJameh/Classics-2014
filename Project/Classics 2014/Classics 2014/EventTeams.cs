@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Classics_2014
 {
-    public partial class EventTeams : UserControl
+    partial class EventTeams : UserControl
     {
         List<TCompetitor> Competitors;
         int EventID;
@@ -17,9 +17,12 @@ namespace Classics_2014
         List<List<TCompetitor>> Teams = new List<List<TCompetitor>>();
         List<string> TeamNames = new List<string>();
         int LastIntermixTeam = 0;
+        int LastFakeCompetitor = 0;
+        Event Connected_Event;
 
-        public EventTeams(List<TCompetitor> PassCompetitors, int PassEventID, int PassCompetitorsPerTeam, List<string> SelectedTeams)
+        public EventTeams(Event ConnectedEvent, List<TCompetitor> PassCompetitors, int PassEventID, int PassCompetitorsPerTeam, List<string> SelectedTeams)
         {
+            Connected_Event = ConnectedEvent;
             CompetitorsPerTeam = PassCompetitorsPerTeam;
             EventID = PassEventID;
             Competitors = PassCompetitors;
@@ -202,6 +205,67 @@ namespace Classics_2014
                 }
             }
             RefreshAll();
+        }
+
+        private void buttonAddFakeCompetitor_Click(object sender, EventArgs e)
+        {
+            LastFakeCompetitor++;
+            TCompetitor NewCompetitor = new TCompetitor();
+            NewCompetitor.ID = -1;
+            NewCompetitor.name = "Fake Competitor " + LastFakeCompetitor;
+            NewCompetitor.team = "N/A";
+            NewCompetitor.nationality = "N/A";
+
+            Teams[0].Add(NewCompetitor);
+            RefreshAll();
+        }
+
+        private void buttonRemoveFakeCompetitor_Click(object sender, EventArgs e)
+        {
+            bool RemovedMember = false;
+            if (LastFakeCompetitor > 0)
+            {
+                for (int i = 0; i < Teams.Count; i++)
+                {
+                    for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                    {
+                        if (Teams[i][i2].name == "Fake Competitor " + LastFakeCompetitor)
+                        {
+                            Teams[i].RemoveAt(i2);
+                            RemovedMember = true;
+                        }
+                    }
+                }
+            }
+
+            if (RemovedMember == true)
+            {
+                LastFakeCompetitor--;
+                RefreshAll();
+            }
+            else
+            {
+                labelWarning.Text = "Could not remove last competitor.";
+            }
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (GetTeamsFullOrEmpty() == Teams.Count - 1)
+            {
+                Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
+                Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
+                Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
+            }
+            else
+            {
+                MessageBox.Show("Not all teams full or empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonBack_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

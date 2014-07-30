@@ -29,7 +29,7 @@ namespace Classics_2014.Accuracy
             comboBoxRulePreset.SelectedItem = comboBoxRulePreset.Items[0];
             comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
             comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[8];
-            #region KeyDown Functions
+            dateTimePicker.Value = DateTime.Now;
             this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);
             this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
             this.textBoxCompetitorName.KeyDown += new KeyEventHandler(textBoxCompetitorEntry_KeyDown);
@@ -39,6 +39,30 @@ namespace Classics_2014.Accuracy
             this.dataGridExistingCompetitors.KeyDown += new KeyEventHandler(dataGridExistingCompetitors_KeyDown);
             this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
         }
+
+        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, TAccuracyRuleSet LoadRules, string LoadEventName, DateTime LoadDate, List<TCompetitor> LoadSelectedCompetitors)
+        {
+            InitializeComponent();
+            tabControl = Main;
+            Connected_Event = aEvent;
+            PopulateExistingTeams();
+
+            Rules = LoadRules;
+            EventName = LoadEventName;
+            SelectedCompetitors = LoadSelectedCompetitors;
+            LoadEvent(LoadDate, LoadRules);
+
+            this.textBoxTeamCreate.KeyDown += new KeyEventHandler(textBoxTeamCreate_KeyDown);
+            this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
+            this.textBoxCompetitorName.KeyDown += new KeyEventHandler(textBoxCompetitorEntry_KeyDown);
+            this.textBoxCompetitorNationality.KeyDown += new KeyEventHandler(textBoxCompetitorEntry_KeyDown);
+            this.listBoxExistingTeams.KeyDown += new KeyEventHandler(listBoxExistingTeams_KeyDown);
+            this.listBoxSelectedTeams.KeyDown += new KeyEventHandler(listBoxSelectedTeams_KeyDown);
+            this.dataGridExistingCompetitors.KeyDown += new KeyEventHandler(dataGridExistingCompetitors_KeyDown);
+            this.dataGridSelectedCompetitors.KeyDown += new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
+        }
+
+        #region KeyDown functions
 
         private void textBoxTeamCreate_KeyDown(object sender, KeyEventArgs e)
         {
@@ -128,6 +152,46 @@ namespace Classics_2014.Accuracy
 
         #endregion
 
+
+        private void LoadEvent(DateTime LoadedDate, TAccuracyRuleSet LoadedRules)
+        {
+            dateTimePicker.Value = LoadedDate;
+            textBoxEventName.Text = EventName;
+            comboBoxRulePreset.SelectedValue = LoadedRules.preset;
+            numericUpDownCompetitorsPerTeam.Value = LoadedRules.noOfCompetitorsPerTeam;
+            numericUpDownCompMaxWind.Value = Convert.ToDecimal(LoadedRules.compHalt);
+            numericUpDownMaxScore.Value = LoadedRules.maxScored;
+            numericUpDownRejumpWindspeed.Value = Convert.ToDecimal(LoadedRules.windout);
+            numericUpDownTimeBeforeLanding.Value = LoadedRules.windSecondsPrior;
+            numericUpDownTimeAfterLanding.Value = LoadedRules.windSecondsAfter;
+            numericUpDownFinalApproachTime.Value = Convert.ToDecimal(LoadedRules.finalApproachTime);
+
+            if (LoadedRules.allScoresUsed == true)
+            {
+                comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
+            }
+            else
+            {
+                comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[1];
+            }
+
+            comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[(LoadedRules.directionOut / 10) - 1];
+
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
+            {
+                try
+                {
+                    ExistingTeams.Remove(SelectedCompetitors[i].team);
+                    SelectedTeams.Add(SelectedCompetitors[i].team);
+                }
+                catch
+                {
+                }
+            }
+            UpdateTeamSelection();
+            UpdateCompetitorGridsFromData();
+        }
+
         private void UpdateTeamSelection()
         {
             comboBoxCompetitorTeam.Items.Clear();
@@ -210,6 +274,16 @@ namespace Classics_2014.Accuracy
             for (int i = 0; i < SelectedCompetitors.Count; i++)
             {
                 dataGridSelectedCompetitors.Rows.Add(SelectedCompetitors[i].ID.ToString(), SelectedCompetitors[i].name, SelectedCompetitors[i].team, SelectedCompetitors[i].nationality);
+            }
+            int ModOfCompetitors;
+            Math.DivRem(dataGridSelectedCompetitors.Rows.Count - 1, Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value), out ModOfCompetitors);
+            if (ModOfCompetitors != 0)
+            {
+                labelWarning.Visible = true;
+            }
+            else
+            {
+                labelWarning.Visible = false;
             }
         }
 
@@ -317,6 +391,8 @@ namespace Classics_2014.Accuracy
             {
                 comboBoxScoresUsed.Items.Add("Best " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
             }
+            UpdateCompetitorGridsFromData();
+            comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
         }
 
         private void buttonCreateTeamShow_Click(object sender, EventArgs e)
@@ -417,6 +493,7 @@ namespace Classics_2014.Accuracy
             }
             else
             {
+                Connected_Event.TeamsSetup = true;
                 //TODO: Go straight to event, all competitors are not in teams.
             }
         }
@@ -532,17 +609,6 @@ namespace Classics_2014.Accuracy
         private void buttonCompetitorCreateClose_Click(object sender, EventArgs e)
         {
             groupBoxCreateCompetitor.Visible = false;
-        }
-
-
-        private void buttonCompetitorModifyTeam_Click(object sender, EventArgs e)
-        {
-           
-        }
-
-        private void buttonCompetitorModifyNationality_Click(object sender, EventArgs e)
-        {
-
         }
 
         #endregion

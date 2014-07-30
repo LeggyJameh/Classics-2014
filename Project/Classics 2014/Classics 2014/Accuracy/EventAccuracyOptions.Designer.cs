@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -59,6 +61,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
+            this.labelWarning = new System.Windows.Forms.Label();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxCreateCompetitor = new System.Windows.Forms.GroupBox();
@@ -182,6 +185,7 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 15);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.labelWarning, 1, 14);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -614,6 +618,19 @@
             this.label21.Text = "Date:";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // labelWarning
+            // 
+            this.labelWarning.AutoSize = true;
+            this.labelWarning.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelWarning.Location = new System.Drawing.Point(151, 634);
+            this.labelWarning.Name = "labelWarning";
+            this.labelWarning.Size = new System.Drawing.Size(216, 109);
+            this.labelWarning.TabIndex = 26;
+            this.labelWarning.Text = "Warning: Competitors selected is not a multiple of competitors per team, fake com" +
+                "petitors will have to be made.";
+            this.labelWarning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelWarning.Visible = false;
+            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 1;
@@ -894,6 +911,8 @@
             // 
             // dataGridExistingCompetitors
             // 
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            this.dataGridExistingCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridExistingCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridExistingCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridExistingCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -938,6 +957,8 @@
             // 
             // dataGridSelectedCompetitors
             // 
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
+            this.dataGridSelectedCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridSelectedCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridSelectedCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridSelectedCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -987,7 +1008,6 @@
             this.buttonCompetitorModifyTeam.TabIndex = 7;
             this.buttonCompetitorModifyTeam.Text = "Modify Competitors";
             this.buttonCompetitorModifyTeam.UseVisualStyleBackColor = true;
-            this.buttonCompetitorModifyTeam.Click += new System.EventHandler(this.buttonCompetitorModifyTeam_Click);
             // 
             // tableLayoutPanel5
             // 
@@ -1342,5 +1362,6 @@
         private System.Windows.Forms.Button buttonCompetitorModifyTeam;
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label labelWarning;
     }
 }

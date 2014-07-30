@@ -13,12 +13,13 @@ namespace Classics_2014.Accuracy
         EventTeams activeEventTab;
         public EventAccuracyOptions EventOptionsTab;
         public EventTeams EventTeamsTab;
-        public TabControl TabControl;
+        public EventAccuracy EventTab; 
         Engine engine;
         TAccuracyRuleSet ruleSet;
-        int EventID;
         List<TCompetitor> Competitors;
         List<string> ActiveTeams;
+        Data_Accuracy[] IncomingData;
+        
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
@@ -35,6 +36,7 @@ namespace Classics_2014.Accuracy
         }
         private void ListenProcedure()
         {
+            IncomingData = new Data_Accuracy[ruleSet.windSecondsPrior + ruleSet.windSecondsAfter + 1];
             Data Data;
             Data_Accuracy DataA = new Data_Accuracy();
             IO_Controller._signal.WaitOne();
@@ -44,7 +46,19 @@ namespace Classics_2014.Accuracy
                 DataA = (Data as Data_Accuracy);
                 if (DataA != null)
                 {
-                    //ToDo Data is received here DataA is the data and is ready to be used;
+                    for (int i = IncomingData.Length; i > 0 ; i--)
+                    {
+                        if (i != IncomingData.Length && i >= 1)
+                        {
+                            IncomingData[i] = IncomingData[i - 1];
+                        }
+                    }
+                    IncomingData[0] = DataA;
+
+                    if (IncomingData[ruleSet.windSecondsPrior + 1].IsLanding == true)
+                    {
+
+                    }
                 }
                 else
                 {
@@ -55,7 +69,7 @@ namespace Classics_2014.Accuracy
 
         public void ProceedToEventTeams()
         {
-            EventTeamsTab = new EventTeams(Competitors, EventID, ruleSet.noOfCompetitorsPerTeam, ActiveTeams);
+            EventTeamsTab = new EventTeams(this, Competitors, EventID, ruleSet.noOfCompetitorsPerTeam, ActiveTeams);
             TabPage NewPage = new TabPage();
             NewPage.Controls.Add(EventTeamsTab);
             EventTeamsTab.Dock = DockStyle.Fill;
@@ -64,10 +78,27 @@ namespace Classics_2014.Accuracy
             TabControl.SelectedTab = NewPage;
         }
 
+        public void LoadEventOptions()
+        {
+
+        }
+
+        public void ProceedToEvent()
+        {
+            EventTab = new EventAccuracy(this, TabControl);
+            TabPage NewPage = new TabPage();
+            NewPage.Controls.Add(EventTab);
+            EventTab.Dock = DockStyle.Fill;
+            NewPage.Text = Name;
+            TabControl.TabPages.Add(NewPage);
+            TabControl.SelectedTab = NewPage;
+        }
+
         protected override byte[] ConvertRuleSetToString()
         {
             ASCIIEncoding ascii = new ASCIIEncoding();
             string stringToConvert = "";
+            stringToConvert += TeamsSetup + "*";
             stringToConvert += ruleSet.allScoresUsed + "*";
             stringToConvert += ruleSet.compHalt+ "*";
             stringToConvert += ruleSet.directionOut + "*";
@@ -82,6 +113,10 @@ namespace Classics_2014.Accuracy
 
         }
 
+        //protected override TAccuracyRuleSet ConvertStringToRuleset(string Input)
+        //{
+        //}
+
         public void SaveEvent(TAccuracyRuleSet Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
         {
             Competitors = SelectedCompetitors;
@@ -93,6 +128,17 @@ namespace Classics_2014.Accuracy
             EventID = SQL_Controller.GetLastInsertKey();
             EventOptionsTab = null;
         }
+
+        public override void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
+        {
+            ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
+            Teams = TeamInput;
+            TeamNames = TeamNamesInput;
+            //TODO: Create Teams table in DB
+            EventTeamsTab = null;
+            ProceedToEvent();
+        }
+        
 
         private void makeActive()
         {

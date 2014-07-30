@@ -41,5 +41,7 @@ namespace Classics_2014
         public string dataGridCell;
         public TWind[] windData;
         public int score;
+        public int Index;
+        public int WindInputs;
     }
 }

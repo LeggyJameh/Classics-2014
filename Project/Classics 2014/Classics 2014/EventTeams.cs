@@ -256,6 +256,13 @@ namespace Classics_2014
                 Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
                 Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
                 Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
+                switch (Connected_Event.EventType)
+                {
+                    case EventType.Accuracy:
+                        Accuracy.Accuracy_Event accEvent = (Connected_Event as Accuracy.Accuracy_Event);
+                        accEvent.EventStart();
+                        break;
+                }
             }
             else
             {

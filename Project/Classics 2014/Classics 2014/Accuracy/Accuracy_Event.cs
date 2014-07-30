@@ -18,8 +18,11 @@ namespace Classics_2014.Accuracy
         TAccuracyRuleSet ruleSet;
         List<TCompetitor> Competitors;
         List<string> ActiveTeams;
-        Data_Accuracy[] IncomingData;
-        
+        TWind[] IncomingData;
+        List<TLanding> LandingInProgress = new List<TLanding>();
+        List<TLanding> CompletedLandings = new List<TLanding>();
+        List<TLanding> LandingsToRemove = new List<TLanding>();
+        DateTime recentScore;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
@@ -29,43 +32,70 @@ namespace Classics_2014.Accuracy
             this.engine = engine;
             RequiresSerial = true;
             EventType = EventType.Accuracy;
-             ListenThread = new Thread(new ThreadStart(ListenProcedure));
+            ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
-        private void EventStart() //TODO Rule struct goes here
+        public void EventStart() //TODO Rule struct goes here
         {
+           
         }
         private void ListenProcedure()
         {
-            IncomingData = new Data_Accuracy[ruleSet.windSecondsPrior + ruleSet.windSecondsAfter + 1];
+            IncomingData = new TWind[ruleSet.windSecondsPrior];
+            do
+            {
             Data Data;
             Data_Accuracy DataA = new Data_Accuracy();
             IO_Controller._signal.WaitOne();
             while (IO_Controller.Data_queue.TryPeek(out Data))
             {
+                
                 Active_Signal.Set();
                 DataA = (Data as Data_Accuracy);
+                if (DataA.IsLanding)
+                {
+                    Console.WriteLine("test");
+                }
                 if (DataA != null)
                 {
-                    for (int i = IncomingData.Length; i > 0 ; i--)
+                    for (int i = IncomingData.Length; i > 0; i--)
                     {
                         if (i != IncomingData.Length && i >= 1)
                         {
                             IncomingData[i] = IncomingData[i - 1];
                         }
                     }
-                    IncomingData[0] = DataA;
-
-                    if (IncomingData[ruleSet.windSecondsPrior + 1].IsLanding == true)
+                    IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; ;
+                    if (DataA.IsLanding)
                     {
-
+                        TLanding newLanding = new TLanding { score = DataA.LandingScore, windData = IncomingData, WindInputs = 0 };
+                        LandingInProgress.Add(newLanding);
+                        newLanding.Index = EventTab.MethodAddLanding(newLanding);
+                        EventTab.ScoreEdit(DataA.LandingScore.ToString());
                     }
+                    for (int i = 0; i < LandingInProgress.Count - 1; i++)
+                    {
+                        TLanding currentLanding = LandingInProgress[i];
+                        if (currentLanding.WindInputs == currentLanding.windData.Length) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }
+                        else
+                        {
+                            currentLanding.windData[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
+                            currentLanding.WindInputs++;
+                            
+                            //ToDo Check that wind hasnt gone over here
+                        }
+                    }
+                    foreach (TLanding l in LandingsToRemove)
+                    {
+                        LandingInProgress.Remove(l);
+                    }
+                    LandingsToRemove.Clear();
                 }
-                else
-                {
-                    //Downcast Failed, what the fuck!
-                }
+                IO_Controller._signal.WaitOne();
             }
+            }while(true);
+
         }
+        
 
         public void ProceedToEventTeams()
         {
@@ -140,10 +170,11 @@ namespace Classics_2014.Accuracy
         }
         
 
-        private void makeActive()
+        public void makeActive()
         {
             if (IO_Controller.Serial_Input)
             {
+                //ToDo Checks to make sure can be done
                 ListenThread.Start();
             }
         }

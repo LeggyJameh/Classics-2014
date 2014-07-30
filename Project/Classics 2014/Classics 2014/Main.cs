@@ -69,7 +69,6 @@ namespace Classics_2014
 
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points.AddXY(wind.time, wind.speed)));
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = wind.direction.ToString()));
-          //  labelChartDirection.Invoke((MethodInvoker)(() => labelChartDirection.Text = chartWind.ChartAreas[0].AxisX.ScaleView.Position.ToString()));
             if (checkBoxAutoScroll.Checked)
             {
                 chartWind.Invoke((MethodInvoker)(() => chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1));

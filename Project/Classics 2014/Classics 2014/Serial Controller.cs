@@ -127,20 +127,14 @@ namespace Classics_2014
         private Data_Accuracy SplitStream(string asciiStream)
         {
             Data_Accuracy Data = new Data_Accuracy();
-            if (asciiStream[17] == '*') { Data.IsLanding = true; Data.LandingScore = Convert.ToByte(asciiStream.Substring(1, 2)); }
+            if (asciiStream[17] == '*')
+            { 
+                Data.IsLanding = true; Data.LandingScore = Convert.ToByte(asciiStream.Substring(1, 2));
+            }
             Data.Speed = float.Parse(asciiStream.Substring(3, 2) + '.' + asciiStream[5]);
             Data.Direction = Convert.ToUInt16(asciiStream.Substring(6, 3));
-            //Data.Time = asciiStream.Substring(10, 2);
-            //Data.Time += ':';
-            //Data.Time += asciiStream.Substring(12, 2);
-            //Data.Time += ':';
-            //Data.Time += asciiStream.Substring(14, 2);
-            Data.Time = "";
-            Data.Time += DateTime.Now.Hour;
-            Data.Time += ':';
-            Data.Time += DateTime.Now.Minute;
-            Data.Time += ':';
-            Data.Time += DateTime.Now.Second;
+
+            Data.Time = DateTime.Now.TimeOfDay.ToString();
             Data.dataType = incomingType;
             return Data;
 

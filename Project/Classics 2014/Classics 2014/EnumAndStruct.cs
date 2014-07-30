@@ -1,7 +1,7 @@
 ﻿using System;
 namespace Classics_2014
 {
-    enum EventType
+    public enum EventType
     {
         Accuracy,
     }
@@ -43,5 +43,14 @@ namespace Classics_2014
         public int score;
         public int Index;
         public int WindInputs;
+    }
+
+    public struct TMySQLEventReturn
+    {
+        public int ID;
+        public DateTime Date;
+        public string Name;
+        public EventType Type;
+        public byte[] Options;
     }
 }

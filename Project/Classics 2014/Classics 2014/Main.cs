@@ -69,9 +69,17 @@ namespace Classics_2014
 
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points.AddXY(wind.time, wind.speed)));
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = wind.direction.ToString()));
+<<<<<<< HEAD
             if (checkBoxAutoScroll.Checked)
+=======
+          //  labelChartDirection.Invoke((MethodInvoker)(() => labelChartDirection.Text = chartWind.ChartAreas[0].AxisX.ScaleView.Position.ToString()));
+            if (chartWind.ChartAreas[0].AxisX.ScrollBar.IsVisible == true)
+>>>>>>> 4c326032d7161916197896e70e0682ad2871ab29
             {
-                chartWind.Invoke((MethodInvoker)(() => chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1));
+                if (checkBoxAutoScroll.Checked)
+                {
+                    chartWind.Invoke((MethodInvoker)(() => chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1));
+                }
             }
             
 
@@ -108,7 +116,7 @@ namespace Classics_2014
             chartWind.ChartAreas[0].CursorX.SetCursorPixelPosition(mousePoint, true);
             if ((int)chartWind.ChartAreas[0].CursorX.Position < chartWind.Series[0].Points.Count)
             {
-
+                if (chartWind.ChartAreas[0].CursorX.Position < 0) { chartWind.ChartAreas[0].CursorX.Position = 0; }
                 dataPoint = chartWind.Series[0].Points[(int)chartWind.ChartAreas[0].CursorX.Position];
                 if (dataPoint != null)
                 {

@@ -59,7 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonUseEventSettings = new System.Windows.Forms.Button();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.checkBoxAutoScroll = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.labelChartDirection = new System.Windows.Forms.Label();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
@@ -88,7 +88,7 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
-            this.checkBoxAutoScroll = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -101,10 +101,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
             this.tabEventLoad.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -113,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -126,7 +123,7 @@
             this.tabControl.Location = new System.Drawing.Point(3, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1113, 631);
+            this.tabControl.Size = new System.Drawing.Size(1140, 744);
             this.tabControl.TabIndex = 0;
             // 
             // tabMain
@@ -253,7 +250,7 @@
             this.tabWind.Controls.Add(this.tableLayoutPanel7);
             this.tabWind.Location = new System.Drawing.Point(4, 22);
             this.tabWind.Name = "tabWind";
-            this.tabWind.Size = new System.Drawing.Size(1105, 605);
+            this.tabWind.Size = new System.Drawing.Size(1132, 718);
             this.tabWind.TabIndex = 1;
             this.tabWind.Text = "Anemometer Control";
             this.tabWind.UseVisualStyleBackColor = true;
@@ -261,18 +258,19 @@
             // tableLayoutPanel7
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
-            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 2);
-            this.tableLayoutPanel7.Controls.Add(this.splitContainer1, 0, 0);
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 2);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 3);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel10, 0, 1);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 3;
+            this.tableLayoutPanel7.RowCount = 4;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 36.13014F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 63.86986F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(1105, 605);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(1132, 718);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // chartWind
@@ -300,7 +298,7 @@
             chartArea1.Name = "ChartArea1";
             this.chartWind.ChartAreas.Add(chartArea1);
             this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartWind.Location = new System.Drawing.Point(3, 210);
+            this.chartWind.Location = new System.Drawing.Point(3, 270);
             this.chartWind.Name = "chartWind";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
@@ -309,38 +307,42 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.chartWind.Series.Add(series1);
-            this.chartWind.Size = new System.Drawing.Size(1099, 360);
+            this.chartWind.Size = new System.Drawing.Size(1126, 413);
             this.chartWind.TabIndex = 0;
             this.chartWind.Text = "chart1";
             this.chartWind.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chartWind_MouseMove);
             // 
             // tableLayoutPanel8
             // 
-            this.tableLayoutPanel8.ColumnCount = 9;
+            this.tableLayoutPanel8.ColumnCount = 12;
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanel8.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel8.Controls.Add(this.trackBarWindZoom, 0, 0);
             this.tableLayoutPanel8.Controls.Add(this.numericUpDownChartZoom, 1, 0);
             this.tableLayoutPanel8.Controls.Add(this.label1, 2, 0);
-            this.tableLayoutPanel8.Controls.Add(this.numericUpDownWindOverChartBar, 3, 0);
-            this.tableLayoutPanel8.Controls.Add(this.numericUpDownDirectionChangeGraphLimit, 5, 0);
-            this.tableLayoutPanel8.Controls.Add(this.label2, 4, 0);
-            this.tableLayoutPanel8.Controls.Add(this.label3, 6, 0);
-            this.tableLayoutPanel8.Controls.Add(this.buttonUseEventSettings, 7, 0);
-            this.tableLayoutPanel8.Controls.Add(this.checkBoxAutoScroll, 8, 0);
+            this.tableLayoutPanel8.Controls.Add(this.numericUpDownWindOverChartBar, 4, 0);
+            this.tableLayoutPanel8.Controls.Add(this.numericUpDownDirectionChangeGraphLimit, 7, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label2, 5, 0);
+            this.tableLayoutPanel8.Controls.Add(this.label3, 8, 0);
+            this.tableLayoutPanel8.Controls.Add(this.buttonUseEventSettings, 10, 0);
+            this.tableLayoutPanel8.Controls.Add(this.checkBoxAutoScroll, 11, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 576);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 689);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1099, 26);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1126, 26);
             this.tableLayoutPanel8.TabIndex = 2;
             // 
             // trackBarWindZoom
@@ -350,7 +352,7 @@
             this.trackBarWindZoom.Maximum = 120;
             this.trackBarWindZoom.Minimum = 2;
             this.trackBarWindZoom.Name = "trackBarWindZoom";
-            this.trackBarWindZoom.Size = new System.Drawing.Size(213, 20);
+            this.trackBarWindZoom.Size = new System.Drawing.Size(159, 20);
             this.trackBarWindZoom.TabIndex = 2;
             this.trackBarWindZoom.TickFrequency = 5;
             this.trackBarWindZoom.Value = 60;
@@ -358,8 +360,8 @@
             // 
             // numericUpDownChartZoom
             // 
-            this.numericUpDownChartZoom.Dock = System.Windows.Forms.DockStyle.Left;
-            this.numericUpDownChartZoom.Location = new System.Drawing.Point(222, 3);
+            this.numericUpDownChartZoom.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownChartZoom.Location = new System.Drawing.Point(168, 3);
             this.numericUpDownChartZoom.Maximum = new decimal(new int[] {
             120,
             0,
@@ -371,8 +373,9 @@
             0,
             0});
             this.numericUpDownChartZoom.Name = "numericUpDownChartZoom";
-            this.numericUpDownChartZoom.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownChartZoom.Size = new System.Drawing.Size(76, 20);
             this.numericUpDownChartZoom.TabIndex = 3;
+            this.numericUpDownChartZoom.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownChartZoom.Value = new decimal(new int[] {
             60,
             0,
@@ -383,26 +386,28 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.label1.Location = new System.Drawing.Point(331, 0);
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(250, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 26);
+            this.label1.Size = new System.Drawing.Size(76, 26);
             this.label1.TabIndex = 4;
-            this.label1.Text = ":Minutes Shown";
+            this.label1.Text = "Minutes Shown";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // numericUpDownWindOverChartBar
             // 
             this.numericUpDownWindOverChartBar.DecimalPlaces = 1;
             this.numericUpDownWindOverChartBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDownWindOverChartBar.Location = new System.Drawing.Point(440, 3);
+            this.numericUpDownWindOverChartBar.Location = new System.Drawing.Point(432, 3);
             this.numericUpDownWindOverChartBar.Maximum = new decimal(new int[] {
             10,
             0,
             0,
             0});
             this.numericUpDownWindOverChartBar.Name = "numericUpDownWindOverChartBar";
-            this.numericUpDownWindOverChartBar.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownWindOverChartBar.Size = new System.Drawing.Size(76, 20);
             this.numericUpDownWindOverChartBar.TabIndex = 5;
+            this.numericUpDownWindOverChartBar.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownWindOverChartBar.Value = new decimal(new int[] {
             7,
             0,
@@ -413,7 +418,7 @@
             // numericUpDownDirectionChangeGraphLimit
             // 
             this.numericUpDownDirectionChangeGraphLimit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDownDirectionChangeGraphLimit.Location = new System.Drawing.Point(658, 3);
+            this.numericUpDownDirectionChangeGraphLimit.Location = new System.Drawing.Point(696, 3);
             this.numericUpDownDirectionChangeGraphLimit.Maximum = new decimal(new int[] {
             180,
             0,
@@ -425,8 +430,9 @@
             0,
             0});
             this.numericUpDownDirectionChangeGraphLimit.Name = "numericUpDownDirectionChangeGraphLimit";
-            this.numericUpDownDirectionChangeGraphLimit.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownDirectionChangeGraphLimit.Size = new System.Drawing.Size(76, 20);
             this.numericUpDownDirectionChangeGraphLimit.TabIndex = 6;
+            this.numericUpDownDirectionChangeGraphLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownDirectionChangeGraphLimit.Value = new decimal(new int[] {
             1,
             0,
@@ -436,74 +442,73 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(549, 0);
+            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label2.Location = new System.Drawing.Point(514, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 26);
+            this.label2.Size = new System.Drawing.Size(76, 26);
             this.label2.TabIndex = 7;
             this.label2.Text = "Speed Over Bar Height";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(767, 0);
+            this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label3.Location = new System.Drawing.Point(778, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 26);
+            this.label3.Size = new System.Drawing.Size(76, 26);
             this.label3.TabIndex = 8;
             this.label3.Text = "Direction Change Indicator";
+            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // buttonUseEventSettings
             // 
             this.buttonUseEventSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUseEventSettings.Location = new System.Drawing.Point(876, 3);
+            this.buttonUseEventSettings.Location = new System.Drawing.Point(960, 3);
             this.buttonUseEventSettings.Name = "buttonUseEventSettings";
-            this.buttonUseEventSettings.Size = new System.Drawing.Size(103, 20);
+            this.buttonUseEventSettings.Size = new System.Drawing.Size(76, 20);
             this.buttonUseEventSettings.TabIndex = 9;
             this.buttonUseEventSettings.Text = "Use Event Options";
             this.buttonUseEventSettings.UseVisualStyleBackColor = true;
             // 
-            // splitContainer1
+            // checkBoxAutoScroll
             // 
-            this.splitContainer1.BackColor = System.Drawing.Color.Black;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.splitContainer1.Location = new System.Drawing.Point(698, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.labelChartDirection);
-            this.splitContainer1.Size = new System.Drawing.Size(404, 201);
-            this.splitContainer1.SplitterDistance = 47;
-            this.splitContainer1.TabIndex = 3;
+            this.checkBoxAutoScroll.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.checkBoxAutoScroll.AutoSize = true;
+            this.checkBoxAutoScroll.Checked = true;
+            this.checkBoxAutoScroll.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxAutoScroll.Location = new System.Drawing.Point(1046, 4);
+            this.checkBoxAutoScroll.Name = "checkBoxAutoScroll";
+            this.checkBoxAutoScroll.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxAutoScroll.TabIndex = 10;
+            this.checkBoxAutoScroll.Text = "Auto Scroll";
+            this.checkBoxAutoScroll.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
-            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(366, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(404, 47);
+            this.label4.Size = new System.Drawing.Size(194, 24);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Wind Direction (°)";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label4.Text = "Wind Direction (°) :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
             // labelChartDirection
             // 
-            this.labelChartDirection.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelChartDirection.BackColor = System.Drawing.Color.Transparent;
             this.labelChartDirection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelChartDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelChartDirection.ForeColor = System.Drawing.Color.White;
-            this.labelChartDirection.Location = new System.Drawing.Point(0, 0);
+            this.labelChartDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChartDirection.ForeColor = System.Drawing.Color.Black;
+            this.labelChartDirection.Location = new System.Drawing.Point(566, 0);
             this.labelChartDirection.Name = "labelChartDirection";
-            this.labelChartDirection.Size = new System.Drawing.Size(404, 150);
+            this.labelChartDirection.Size = new System.Drawing.Size(194, 24);
             this.labelChartDirection.TabIndex = 9;
-            this.labelChartDirection.Text = "000";
-            this.labelChartDirection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.labelChartDirection.Text = "No Data";
+            this.labelChartDirection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabEventLoad
             // 
@@ -657,9 +662,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 637);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 750);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1244, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1274, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -680,31 +685,31 @@
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(1244, 637);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(1274, 750);
             this.tableLayoutPanel5.TabIndex = 2;
             // 
             // tableLayoutPanel6
             // 
             this.tableLayoutPanel6.ColumnCount = 1;
             this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel6.Controls.Add(this.textBoxSideDirection, 0, 6);
-            this.tableLayoutPanel6.Controls.Add(this.label13, 0, 5);
-            this.tableLayoutPanel6.Controls.Add(this.textBoxSideSpeed, 0, 4);
-            this.tableLayoutPanel6.Controls.Add(this.label11, 0, 3);
-            this.tableLayoutPanel6.Controls.Add(this.listBoxWindLog, 0, 7);
+            this.tableLayoutPanel6.Controls.Add(this.textBoxSideDirection, 0, 3);
+            this.tableLayoutPanel6.Controls.Add(this.label13, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.textBoxSideSpeed, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.label11, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.listBoxWindLog, 0, 4);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(1122, 3);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(1149, 3);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
-            this.tableLayoutPanel6.RowCount = 8;
+            this.tableLayoutPanel6.RowCount = 5;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(119, 631);
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(122, 744);
             this.tableLayoutPanel6.TabIndex = 1;
             this.tableLayoutPanel6.Visible = false;
             // 
@@ -715,9 +720,9 @@
             this.textBoxSideDirection.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxSideDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSideDirection.ForeColor = System.Drawing.Color.White;
-            this.textBoxSideDirection.Location = new System.Drawing.Point(3, 292);
+            this.textBoxSideDirection.Location = new System.Drawing.Point(3, 185);
             this.textBoxSideDirection.Name = "textBoxSideDirection";
-            this.textBoxSideDirection.Size = new System.Drawing.Size(113, 91);
+            this.textBoxSideDirection.Size = new System.Drawing.Size(116, 111);
             this.textBoxSideDirection.TabIndex = 8;
             this.textBoxSideDirection.Text = "000";
             this.textBoxSideDirection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -728,9 +733,9 @@
             this.label13.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(3, 262);
+            this.label13.Location = new System.Drawing.Point(3, 148);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(113, 30);
+            this.label13.Size = new System.Drawing.Size(116, 37);
             this.label13.TabIndex = 7;
             this.label13.Text = "Wind Direction (°)";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -742,9 +747,9 @@
             this.textBoxSideSpeed.Dock = System.Windows.Forms.DockStyle.Fill;
             this.textBoxSideSpeed.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSideSpeed.ForeColor = System.Drawing.Color.White;
-            this.textBoxSideSpeed.Location = new System.Drawing.Point(3, 171);
+            this.textBoxSideSpeed.Location = new System.Drawing.Point(3, 37);
             this.textBoxSideSpeed.Name = "textBoxSideSpeed";
-            this.textBoxSideSpeed.Size = new System.Drawing.Size(113, 91);
+            this.textBoxSideSpeed.Size = new System.Drawing.Size(116, 111);
             this.textBoxSideSpeed.TabIndex = 6;
             this.textBoxSideSpeed.Text = "000";
             this.textBoxSideSpeed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -755,9 +760,9 @@
             this.label11.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.ForeColor = System.Drawing.Color.White;
-            this.label11.Location = new System.Drawing.Point(3, 141);
+            this.label11.Location = new System.Drawing.Point(3, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(113, 30);
+            this.label11.Size = new System.Drawing.Size(116, 37);
             this.label11.TabIndex = 5;
             this.label11.Text = "Wind Speed (m/s)";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -778,10 +783,10 @@
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
             listViewItem1});
             this.listBoxWindLog.LabelWrap = false;
-            this.listBoxWindLog.Location = new System.Drawing.Point(3, 386);
+            this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;
             this.listBoxWindLog.Name = "listBoxWindLog";
-            this.listBoxWindLog.Size = new System.Drawing.Size(113, 242);
+            this.listBoxWindLog.Size = new System.Drawing.Size(116, 442);
             this.listBoxWindLog.TabIndex = 9;
             this.listBoxWindLog.UseCompatibleStateImageBehavior = false;
             this.listBoxWindLog.View = System.Windows.Forms.View.Details;
@@ -812,22 +817,30 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
-            // checkBoxAutoScroll
+            // tableLayoutPanel10
             // 
-            this.checkBoxAutoScroll.AutoSize = true;
-            this.checkBoxAutoScroll.Location = new System.Drawing.Point(985, 3);
-            this.checkBoxAutoScroll.Name = "checkBoxAutoScroll";
-            this.checkBoxAutoScroll.Size = new System.Drawing.Size(77, 17);
-            this.checkBoxAutoScroll.TabIndex = 10;
-            this.checkBoxAutoScroll.Text = "Auto Scroll";
-            this.checkBoxAutoScroll.UseVisualStyleBackColor = true;
+            this.tableLayoutPanel10.ColumnCount = 4;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 240);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1126, 24);
+            this.tableLayoutPanel10.TabIndex = 4;
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.ClientSize = new System.Drawing.Size(1244, 659);
+            this.ClientSize = new System.Drawing.Size(1274, 772);
             this.Controls.Add(this.labelError);
             this.Controls.Add(this.tableLayoutPanel5);
             this.Controls.Add(this.statusStrip1);
@@ -854,10 +867,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
             this.tabEventLoad.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -868,6 +877,7 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -923,10 +933,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonUseEventSettings;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label labelChartDirection;
         private System.Windows.Forms.CheckBox checkBoxAutoScroll;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
 
     }
 }

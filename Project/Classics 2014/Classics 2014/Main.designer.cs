@@ -54,6 +54,14 @@
             this.trackBarWindZoom = new System.Windows.Forms.TrackBar();
             this.numericUpDownChartZoom = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownWindOverChartBar = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDirectionChangeGraphLimit = new System.Windows.Forms.NumericUpDown();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonUseEventSettings = new System.Windows.Forms.Button();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label4 = new System.Windows.Forms.Label();
+            this.labelChartDirection = new System.Windows.Forms.Label();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -80,11 +88,7 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
-            this.numericUpDownWindOverChartBar = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownDirectionChangeGraphLimit = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.buttonUseEventSettings = new System.Windows.Forms.Button();
+            this.checkBoxAutoScroll = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -95,6 +99,12 @@
             this.tableLayoutPanel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
             this.tabEventLoad.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -103,8 +113,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl
@@ -256,6 +264,7 @@
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 1);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 2);
+            this.tableLayoutPanel7.Controls.Add(this.splitContainer1, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -270,9 +279,12 @@
             // 
             chartArea1.AxisX.Interval = 30D;
             chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
             chartArea1.AxisX.ScaleView.Size = 3600D;
             chartArea1.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea1.AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
             chartArea1.AxisY.Interval = 0.5D;
+            chartArea1.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
             chartArea1.AxisY.Maximum = 10D;
             stripLine1.BackColor = System.Drawing.Color.Red;
             stripLine1.BorderColor = System.Drawing.Color.Red;
@@ -285,12 +297,12 @@
             chartArea1.AxisY.StripLines.Add(stripLine1);
             chartArea1.CursorX.AutoScroll = false;
             chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.CursorX.IsUserSelectionEnabled = true;
             chartArea1.Name = "ChartArea1";
             this.chartWind.ChartAreas.Add(chartArea1);
             this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartWind.Location = new System.Drawing.Point(3, 210);
             this.chartWind.Name = "chartWind";
+            series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             series1.Name = "SeriesWindDirection";
@@ -300,6 +312,7 @@
             this.chartWind.Size = new System.Drawing.Size(1099, 360);
             this.chartWind.TabIndex = 0;
             this.chartWind.Text = "chart1";
+            this.chartWind.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chartWind_MouseMove);
             // 
             // tableLayoutPanel8
             // 
@@ -321,6 +334,7 @@
             this.tableLayoutPanel8.Controls.Add(this.label2, 4, 0);
             this.tableLayoutPanel8.Controls.Add(this.label3, 6, 0);
             this.tableLayoutPanel8.Controls.Add(this.buttonUseEventSettings, 7, 0);
+            this.tableLayoutPanel8.Controls.Add(this.checkBoxAutoScroll, 8, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 576);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
@@ -375,6 +389,121 @@
             this.label1.Size = new System.Drawing.Size(83, 26);
             this.label1.TabIndex = 4;
             this.label1.Text = ":Minutes Shown";
+            // 
+            // numericUpDownWindOverChartBar
+            // 
+            this.numericUpDownWindOverChartBar.DecimalPlaces = 1;
+            this.numericUpDownWindOverChartBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownWindOverChartBar.Location = new System.Drawing.Point(440, 3);
+            this.numericUpDownWindOverChartBar.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDownWindOverChartBar.Name = "numericUpDownWindOverChartBar";
+            this.numericUpDownWindOverChartBar.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownWindOverChartBar.TabIndex = 5;
+            this.numericUpDownWindOverChartBar.Value = new decimal(new int[] {
+            7,
+            0,
+            0,
+            0});
+            this.numericUpDownWindOverChartBar.ValueChanged += new System.EventHandler(this.numericUpDownWindOverChartBar_ValueChanged);
+            // 
+            // numericUpDownDirectionChangeGraphLimit
+            // 
+            this.numericUpDownDirectionChangeGraphLimit.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.numericUpDownDirectionChangeGraphLimit.Location = new System.Drawing.Point(658, 3);
+            this.numericUpDownDirectionChangeGraphLimit.Maximum = new decimal(new int[] {
+            180,
+            0,
+            0,
+            0});
+            this.numericUpDownDirectionChangeGraphLimit.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownDirectionChangeGraphLimit.Name = "numericUpDownDirectionChangeGraphLimit";
+            this.numericUpDownDirectionChangeGraphLimit.Size = new System.Drawing.Size(103, 20);
+            this.numericUpDownDirectionChangeGraphLimit.TabIndex = 6;
+            this.numericUpDownDirectionChangeGraphLimit.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(549, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(86, 26);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "Speed Over Bar Height";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(767, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(92, 26);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Direction Change Indicator";
+            // 
+            // buttonUseEventSettings
+            // 
+            this.buttonUseEventSettings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUseEventSettings.Location = new System.Drawing.Point(876, 3);
+            this.buttonUseEventSettings.Name = "buttonUseEventSettings";
+            this.buttonUseEventSettings.Size = new System.Drawing.Size(103, 20);
+            this.buttonUseEventSettings.TabIndex = 9;
+            this.buttonUseEventSettings.Text = "Use Event Options";
+            this.buttonUseEventSettings.UseVisualStyleBackColor = true;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.BackColor = System.Drawing.Color.Black;
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.splitContainer1.Location = new System.Drawing.Point(698, 3);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.label4);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.labelChartDirection);
+            this.splitContainer1.Size = new System.Drawing.Size(404, 201);
+            this.splitContainer1.SplitterDistance = 47;
+            this.splitContainer1.TabIndex = 3;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.ForeColor = System.Drawing.Color.White;
+            this.label4.Location = new System.Drawing.Point(0, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(404, 47);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Wind Direction (°)";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            // 
+            // labelChartDirection
+            // 
+            this.labelChartDirection.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.labelChartDirection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelChartDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChartDirection.ForeColor = System.Drawing.Color.White;
+            this.labelChartDirection.Location = new System.Drawing.Point(0, 0);
+            this.labelChartDirection.Name = "labelChartDirection";
+            this.labelChartDirection.Size = new System.Drawing.Size(404, 150);
+            this.labelChartDirection.TabIndex = 9;
+            this.labelChartDirection.Text = "000";
+            this.labelChartDirection.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tabEventLoad
             // 
@@ -683,65 +812,15 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
-            // numericUpDownWindOverChartBar
+            // checkBoxAutoScroll
             // 
-            this.numericUpDownWindOverChartBar.DecimalPlaces = 1;
-            this.numericUpDownWindOverChartBar.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDownWindOverChartBar.Location = new System.Drawing.Point(440, 3);
-            this.numericUpDownWindOverChartBar.Name = "numericUpDownWindOverChartBar";
-            this.numericUpDownWindOverChartBar.Size = new System.Drawing.Size(103, 20);
-            this.numericUpDownWindOverChartBar.TabIndex = 5;
-            // 
-            // numericUpDownDirectionChangeGraphLimit
-            // 
-            this.numericUpDownDirectionChangeGraphLimit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.numericUpDownDirectionChangeGraphLimit.Location = new System.Drawing.Point(658, 3);
-            this.numericUpDownDirectionChangeGraphLimit.Maximum = new decimal(new int[] {
-            180,
-            0,
-            0,
-            0});
-            this.numericUpDownDirectionChangeGraphLimit.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDownDirectionChangeGraphLimit.Name = "numericUpDownDirectionChangeGraphLimit";
-            this.numericUpDownDirectionChangeGraphLimit.Size = new System.Drawing.Size(103, 20);
-            this.numericUpDownDirectionChangeGraphLimit.TabIndex = 6;
-            this.numericUpDownDirectionChangeGraphLimit.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(549, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(86, 26);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Speed Over Bar Height";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(767, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(92, 26);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Direction Change Indicator";
-            // 
-            // buttonUseEventSettings
-            // 
-            this.buttonUseEventSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUseEventSettings.Location = new System.Drawing.Point(876, 3);
-            this.buttonUseEventSettings.Name = "buttonUseEventSettings";
-            this.buttonUseEventSettings.Size = new System.Drawing.Size(103, 20);
-            this.buttonUseEventSettings.TabIndex = 9;
-            this.buttonUseEventSettings.Text = "Use Event Options";
-            this.buttonUseEventSettings.UseVisualStyleBackColor = true;
+            this.checkBoxAutoScroll.AutoSize = true;
+            this.checkBoxAutoScroll.Location = new System.Drawing.Point(985, 3);
+            this.checkBoxAutoScroll.Name = "checkBoxAutoScroll";
+            this.checkBoxAutoScroll.Size = new System.Drawing.Size(77, 17);
+            this.checkBoxAutoScroll.TabIndex = 10;
+            this.checkBoxAutoScroll.Text = "Auto Scroll";
+            this.checkBoxAutoScroll.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -773,6 +852,12 @@
             this.tableLayoutPanel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarWindZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
             this.tabEventLoad.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -783,8 +868,6 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -840,6 +923,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonUseEventSettings;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelChartDirection;
+        private System.Windows.Forms.CheckBox checkBoxAutoScroll;
 
     }
 }

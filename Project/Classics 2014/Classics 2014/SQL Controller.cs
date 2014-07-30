@@ -170,6 +170,34 @@ namespace Classics_2014
             return false;
         }
 
+        public bool SaveTeams(int EventID, List<List<TCompetitor>> Teams, List<string> TeamNames)
+        {
+            bool completed = false;
+            string query;
+            if (this.OpenConnection() == true)
+            {
+                for (int i = 0; i < Teams.Count; i++)
+                {
+                    for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                    {
+                        query = "INSERT INTO `event teams` (EventID, UID, Team) VALUES ('" + EventID + "', '" + Teams[i][i2].ID + "', '" + TeamNames[i] + "');";
+                        MySqlCommand cmd = new MySqlCommand(query, connection);
+                        try
+                        {       
+                            cmd.ExecuteNonQuery();
+                            completed = true;
+                        }
+                        catch (MySqlException ex)
+                        {
+                            error = ex.Message;
+                            completed = false;
+                        }
+                    }
+                }
+                this.CloseConnection();
+            }
+            return completed;
+        }
 
         #endregion
         #region Remove
@@ -340,6 +368,50 @@ namespace Classics_2014
             else { return true; }
         }
 
+        public TMySQLEventReturn GetEvent(int EventID)
+        {
+            string query = "SELECT * FROM `events` WHERE ID='" + EventID + "'";
+            TMySQLEventReturn CurrentEvent = new TMySQLEventReturn();
+            CurrentEvent.ID = -1;
+            CurrentEvent.Name = "";
+            CurrentEvent.Options = new byte[5];
+            CurrentEvent.Type = EventType.Accuracy;
+            CurrentEvent.Date = DateTime.Now;
+            string CurrentOptions = "";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0: CurrentEvent.ID = DataReader.GetInt16(i); break;
+                                case 1: CurrentEvent.Date = DataReader.GetDateTime(i); break;
+                                case 2: CurrentEvent.Name = DataReader.GetString(i); break;
+                                case 3: CurrentEvent.Type = (EventType)Enum.Parse(typeof(EventType), DataReader.GetString(i)); break;
+                                case 4: CurrentOptions = DataReader.GetString(i); break;
+                            }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+
+                CurrentEvent.Options = StringToByteArray(CurrentOptions);
+            }
+            return CurrentEvent;
+        }
+
         #endregion
         #region Other
         private bool ExecuteNonQuery(string query)
@@ -362,6 +434,14 @@ namespace Classics_2014
                 this.CloseConnection();
             }
             return completed;
+        }
+
+        private static byte[] StringToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
         }
         #endregion
         #endregion

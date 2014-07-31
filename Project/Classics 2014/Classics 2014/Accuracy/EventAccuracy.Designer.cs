@@ -29,14 +29,19 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlEvent = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelLatestScore = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
-            this.listBoxScores = new System.Windows.Forms.ListBox();
             this.dataGridViewScore = new System.Windows.Forms.DataGridView();
+            this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRemoveLanding = new System.Windows.Forms.Button();
@@ -48,17 +53,16 @@
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewLandings = new System.Windows.Forms.DataGridView();
+            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlEvent.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlEvent
@@ -92,10 +96,10 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.labelLatestScore, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.listBoxScores, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridViewScore, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 3);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridViewLandings, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -133,20 +137,10 @@
             this.labelName.Text = "Accuracy Event --";
             this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // listBoxScores
-            // 
-            this.listBoxScores.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listBoxScores.FormattingEnabled = true;
-            this.listBoxScores.Location = new System.Drawing.Point(1015, 153);
-            this.listBoxScores.Name = "listBoxScores";
-            this.tableLayoutPanel1.SetRowSpan(this.listBoxScores, 2);
-            this.listBoxScores.Size = new System.Drawing.Size(248, 612);
-            this.listBoxScores.TabIndex = 2;
-            // 
             // dataGridViewScore
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
+            this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewScore.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -161,6 +155,7 @@
             this.dataGridViewScore.Location = new System.Drawing.Point(3, 53);
             this.dataGridViewScore.MultiSelect = false;
             this.dataGridViewScore.Name = "dataGridViewScore";
+            this.dataGridViewScore.RowHeadersVisible = false;
             this.tableLayoutPanel1.SetRowSpan(this.dataGridViewScore, 2);
             this.dataGridViewScore.RowTemplate.Height = 20;
             this.dataGridViewScore.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
@@ -168,6 +163,46 @@
             this.dataGridViewScore.Size = new System.Drawing.Size(1006, 662);
             this.dataGridViewScore.TabIndex = 1;
             this.dataGridViewScore.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewScore_CellMouseClick);
+            // 
+            // ColumnUID
+            // 
+            this.ColumnUID.HeaderText = "ID";
+            this.ColumnUID.Name = "ColumnUID";
+            this.ColumnUID.ReadOnly = true;
+            this.ColumnUID.Visible = false;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Competitor Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnTeam
+            // 
+            this.ColumnTeam.HeaderText = "Team";
+            this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
+            this.ColumnTeam.Visible = false;
+            // 
+            // ColumnNationality
+            // 
+            this.ColumnNationality.HeaderText = "Nationality";
+            this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
+            // 
+            // ColumnIntermixTeam
+            // 
+            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
+            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
+            this.ColumnIntermixTeam.ReadOnly = true;
+            // 
+            // ColumnRound1
+            // 
+            this.ColumnRound1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnRound1.HeaderText = "Round 1";
+            this.ColumnRound1.Name = "ColumnRound1";
+            this.ColumnRound1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnRound1.Width = 68;
             // 
             // label1
             // 
@@ -294,45 +329,43 @@
             this.timer1.Interval = 1500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // ColumnUID
+            // dataGridViewLandings
             // 
-            this.ColumnUID.HeaderText = "ID";
-            this.ColumnUID.Name = "ColumnUID";
-            this.ColumnUID.ReadOnly = true;
-            this.ColumnUID.Visible = false;
+            this.dataGridViewLandings.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewLandings.BackgroundColor = System.Drawing.Color.White;
+            this.dataGridViewLandings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewLandings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnID,
+            this.ColumnTime,
+            this.ColumnScore});
+            this.dataGridViewLandings.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridViewLandings.Location = new System.Drawing.Point(1015, 153);
+            this.dataGridViewLandings.MultiSelect = false;
+            this.dataGridViewLandings.Name = "dataGridViewLandings";
+            this.dataGridViewLandings.RowHeadersVisible = false;
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridViewLandings, 2);
+            this.dataGridViewLandings.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewLandings.Size = new System.Drawing.Size(248, 612);
+            this.dataGridViewLandings.TabIndex = 6;
             // 
-            // ColumnName
+            // ColumnID
             // 
-            this.ColumnName.HeaderText = "Competitor Name";
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
+            this.ColumnID.HeaderText = "ID";
+            this.ColumnID.Name = "ColumnID";
+            this.ColumnID.ReadOnly = true;
+            this.ColumnID.Visible = false;
             // 
-            // ColumnTeam
+            // ColumnTime
             // 
-            this.ColumnTeam.HeaderText = "Team";
-            this.ColumnTeam.Name = "ColumnTeam";
-            this.ColumnTeam.ReadOnly = true;
-            this.ColumnTeam.Visible = false;
+            this.ColumnTime.HeaderText = "Time";
+            this.ColumnTime.Name = "ColumnTime";
+            this.ColumnTime.ReadOnly = true;
             // 
-            // ColumnNationality
+            // ColumnScore
             // 
-            this.ColumnNationality.HeaderText = "Nationality";
-            this.ColumnNationality.Name = "ColumnNationality";
-            this.ColumnNationality.ReadOnly = true;
-            // 
-            // ColumnIntermixTeam
-            // 
-            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
-            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
-            this.ColumnIntermixTeam.ReadOnly = true;
-            // 
-            // ColumnRound1
-            // 
-            this.ColumnRound1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnRound1.HeaderText = "Round 1";
-            this.ColumnRound1.Name = "ColumnRound1";
-            this.ColumnRound1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnRound1.Width = 73;
+            this.ColumnScore.HeaderText = "Score";
+            this.ColumnScore.Name = "ColumnScore";
+            this.ColumnScore.ReadOnly = true;
             // 
             // EventAccuracy
             // 
@@ -347,6 +380,7 @@
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -358,7 +392,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.DataGridView dataGridViewScore;
-        private System.Windows.Forms.ListBox listBoxScores;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label labelLatestScore;
@@ -377,5 +410,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRound1;
+        private System.Windows.Forms.DataGridView dataGridViewLandings;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTime;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
     }
 }

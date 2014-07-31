@@ -18,6 +18,7 @@ namespace Classics_2014.Accuracy
         List<TCompetitor> Competitors;
         List<string> ActiveTeams;
         TWind[] IncomingData;
+        public int NumberOfLandings = -1;
         List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
         List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
         List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
@@ -174,10 +175,20 @@ namespace Classics_2014.Accuracy
 
         public Accuracy.AccuracyLanding AssignLanding(int Index, DataGridViewCell Cell)
         {
-            AccuracyLanding CurrentLanding = CompletedLandings[Index];
-            CurrentLanding.dataGridCell = Cell;
-            CompletedLandings[Index] = CurrentLanding;
-            return CompletedLandings[Index];
+            AccuracyLanding CurrentLanding = new AccuracyLanding();
+            CurrentLanding.ID = -1;
+            if (CompletedLandings.Count -1 >= Index)
+            {
+                CurrentLanding = CompletedLandings[Index];
+                CurrentLanding.dataGridCell = Cell;
+                CompletedLandings[Index] = CurrentLanding;
+            }
+            return CurrentLanding;
+        }
+
+        public void RemoveCompletedLanding(AccuracyLanding Landing)
+        {
+            CompletedLandings.Remove(Landing);
         }
 
         public void makeActive()

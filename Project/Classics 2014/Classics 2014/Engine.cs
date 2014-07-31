@@ -13,7 +13,7 @@ namespace Classics_2014
         IO_Controller IO_Controller;
         SQL_Controller SQL_Controller;
         private Thread ListenThread;
-        Event activeEvent;
+        public Event activeEvent;
         Main mainForm;
         TabControl tabControl;
         TWind[] wind = new TWind[60];

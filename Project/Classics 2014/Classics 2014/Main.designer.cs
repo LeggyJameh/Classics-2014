@@ -30,10 +30,10 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine1 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.StripLine stripLine2 = new System.Windows.Forms.DataVisualization.Charting.StripLine();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -60,9 +60,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonUseEventSettings = new System.Windows.Forms.Button();
             this.checkBoxAutoScroll = new System.Windows.Forms.CheckBox();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelChartDirection = new System.Windows.Forms.Label();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -89,6 +86,16 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
+            this.labelChartDirection = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
+            this.label5 = new System.Windows.Forms.Label();
+            this.labelChartTime = new System.Windows.Forms.Label();
+            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
+            this.comboBoxNormalColour = new System.Windows.Forms.ComboBox();
+            this.comboBoxWindOut = new System.Windows.Forms.ComboBox();
+            this.comboBoxDirectionOut = new System.Windows.Forms.ComboBox();
+            this.comboBoxBothOut = new System.Windows.Forms.ComboBox();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -101,7 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
-            this.tableLayoutPanel10.SuspendLayout();
             this.tabEventLoad.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -110,6 +116,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel10.SuspendLayout();
+            this.tableLayoutPanel11.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -262,6 +270,7 @@
             this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 2);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 3);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel10, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel11, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -275,38 +284,38 @@
             // 
             // chartWind
             // 
-            chartArea1.AxisX.Interval = 30D;
-            chartArea1.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea1.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
-            chartArea1.AxisX.ScaleView.Size = 3600D;
-            chartArea1.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            chartArea1.AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
-            chartArea1.AxisY.Interval = 0.5D;
-            chartArea1.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
-            chartArea1.AxisY.Maximum = 10D;
-            stripLine1.BackColor = System.Drawing.Color.Red;
-            stripLine1.BorderColor = System.Drawing.Color.Red;
-            stripLine1.ForeColor = System.Drawing.Color.Red;
-            stripLine1.Interval = -1D;
-            stripLine1.IntervalOffset = 7D;
-            stripLine1.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            stripLine1.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
-            stripLine1.Text = "Wind Out";
-            chartArea1.AxisY.StripLines.Add(stripLine1);
-            chartArea1.CursorX.AutoScroll = false;
-            chartArea1.CursorX.IsUserEnabled = true;
-            chartArea1.Name = "ChartArea1";
-            this.chartWind.ChartAreas.Add(chartArea1);
+            chartArea2.AxisX.Interval = 30D;
+            chartArea2.AxisX.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea2.AxisX.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+            chartArea2.AxisX.ScaleView.Size = 3600D;
+            chartArea2.AxisX.ScaleView.SizeType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            chartArea2.AxisX.ScrollBar.ButtonStyle = System.Windows.Forms.DataVisualization.Charting.ScrollBarButtonStyles.SmallScroll;
+            chartArea2.AxisY.Interval = 0.5D;
+            chartArea2.AxisY.MajorGrid.LineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.DashDot;
+            chartArea2.AxisY.Maximum = 10D;
+            stripLine2.BackColor = System.Drawing.Color.Red;
+            stripLine2.BorderColor = System.Drawing.Color.Red;
+            stripLine2.ForeColor = System.Drawing.Color.Red;
+            stripLine2.Interval = -1D;
+            stripLine2.IntervalOffset = 7D;
+            stripLine2.IntervalOffsetType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            stripLine2.IntervalType = System.Windows.Forms.DataVisualization.Charting.DateTimeIntervalType.Number;
+            stripLine2.Text = "Wind Out";
+            chartArea2.AxisY.StripLines.Add(stripLine2);
+            chartArea2.CursorX.AutoScroll = false;
+            chartArea2.CursorX.IsUserEnabled = true;
+            chartArea2.Name = "ChartArea1";
+            this.chartWind.ChartAreas.Add(chartArea2);
             this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
             this.chartWind.Location = new System.Drawing.Point(3, 270);
             this.chartWind.Name = "chartWind";
-            series1.BorderWidth = 3;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series1.Name = "SeriesWindDirection";
-            series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
-            series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
-            this.chartWind.Series.Add(series1);
+            series2.BorderWidth = 3;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Name = "SeriesWindDirection";
+            series2.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
+            series2.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
+            this.chartWind.Series.Add(series2);
             this.chartWind.Size = new System.Drawing.Size(1126, 413);
             this.chartWind.TabIndex = 0;
             this.chartWind.Text = "chart1";
@@ -434,7 +443,7 @@
             this.numericUpDownDirectionChangeGraphLimit.TabIndex = 6;
             this.numericUpDownDirectionChangeGraphLimit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownDirectionChangeGraphLimit.Value = new decimal(new int[] {
-            1,
+            90,
             0,
             0,
             0});
@@ -471,6 +480,7 @@
             this.buttonUseEventSettings.TabIndex = 9;
             this.buttonUseEventSettings.Text = "Use Event Options";
             this.buttonUseEventSettings.UseVisualStyleBackColor = true;
+            this.buttonUseEventSettings.Click += new System.EventHandler(this.buttonUseEventSettings_Click);
             // 
             // checkBoxAutoScroll
             // 
@@ -484,50 +494,6 @@
             this.checkBoxAutoScroll.TabIndex = 10;
             this.checkBoxAutoScroll.Text = "Auto Scroll";
             this.checkBoxAutoScroll.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 4;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 240);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(1126, 24);
-            this.tableLayoutPanel10.TabIndex = 4;
-            // 
-            // label4
-            // 
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(366, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(194, 24);
-            this.label4.TabIndex = 8;
-            this.label4.Text = "Wind Direction (°) :";
-            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // labelChartDirection
-            // 
-            this.labelChartDirection.BackColor = System.Drawing.Color.Transparent;
-            this.labelChartDirection.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelChartDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelChartDirection.ForeColor = System.Drawing.Color.Black;
-            this.labelChartDirection.Location = new System.Drawing.Point(566, 0);
-            this.labelChartDirection.Name = "labelChartDirection";
-            this.labelChartDirection.Size = new System.Drawing.Size(194, 24);
-            this.labelChartDirection.TabIndex = 9;
-            this.labelChartDirection.Text = "No Data";
-            this.labelChartDirection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tabEventLoad
             // 
@@ -798,9 +764,9 @@
             this.listBoxWindLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;
@@ -836,6 +802,701 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
+            // labelChartDirection
+            // 
+            this.labelChartDirection.BackColor = System.Drawing.Color.Transparent;
+            this.labelChartDirection.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelChartDirection.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChartDirection.ForeColor = System.Drawing.Color.Black;
+            this.labelChartDirection.Location = new System.Drawing.Point(366, 0);
+            this.labelChartDirection.Name = "labelChartDirection";
+            this.labelChartDirection.Size = new System.Drawing.Size(194, 24);
+            this.labelChartDirection.TabIndex = 9;
+            this.labelChartDirection.Text = "No Data";
+            this.labelChartDirection.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label4
+            // 
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(166, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(194, 24);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Wind Direction (°) :";
+            this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 6;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
+            this.tableLayoutPanel10.Controls.Add(this.label5, 3, 0);
+            this.tableLayoutPanel10.Controls.Add(this.labelChartTime, 4, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 240);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1126, 24);
+            this.tableLayoutPanel10.TabIndex = 4;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label5.ForeColor = System.Drawing.Color.Black;
+            this.label5.Location = new System.Drawing.Point(566, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(194, 24);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Time:";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // labelChartTime
+            // 
+            this.labelChartTime.AutoSize = true;
+            this.labelChartTime.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelChartTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelChartTime.ForeColor = System.Drawing.Color.Black;
+            this.labelChartTime.Location = new System.Drawing.Point(766, 0);
+            this.labelChartTime.Name = "labelChartTime";
+            this.labelChartTime.Size = new System.Drawing.Size(194, 24);
+            this.labelChartTime.TabIndex = 11;
+            this.labelChartTime.Text = "Time";
+            this.labelChartTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tableLayoutPanel11
+            // 
+            this.tableLayoutPanel11.ColumnCount = 3;
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxBothOut, 0, 1);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxDirectionOut, 2, 0);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxWindOut, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxNormalColour, 0, 0);
+            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
+            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.Size = new System.Drawing.Size(1126, 231);
+            this.tableLayoutPanel11.TabIndex = 5;
+            // 
+            // comboBoxNormalColour
+            // 
+            this.comboBoxNormalColour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNormalColour.FormattingEnabled = true;
+            this.comboBoxNormalColour.Items.AddRange(new object[] {
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"});
+            this.comboBoxNormalColour.Location = new System.Drawing.Point(3, 3);
+            this.comboBoxNormalColour.Name = "comboBoxNormalColour";
+            this.comboBoxNormalColour.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxNormalColour.TabIndex = 0;
+            this.comboBoxNormalColour.SelectedIndexChanged += new System.EventHandler(this.comboBoxNormalColour_SelectedIndexChanged);
+            // 
+            // comboBoxWindOut
+            // 
+            this.comboBoxWindOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWindOut.FormattingEnabled = true;
+            this.comboBoxWindOut.Items.AddRange(new object[] {
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"});
+            this.comboBoxWindOut.Location = new System.Drawing.Point(228, 3);
+            this.comboBoxWindOut.Name = "comboBoxWindOut";
+            this.comboBoxWindOut.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxWindOut.TabIndex = 1;
+            this.comboBoxWindOut.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            // 
+            // comboBoxDirectionOut
+            // 
+            this.comboBoxDirectionOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDirectionOut.FormattingEnabled = true;
+            this.comboBoxDirectionOut.Items.AddRange(new object[] {
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"});
+            this.comboBoxDirectionOut.Location = new System.Drawing.Point(453, 3);
+            this.comboBoxDirectionOut.Name = "comboBoxDirectionOut";
+            this.comboBoxDirectionOut.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxDirectionOut.TabIndex = 2;
+            this.comboBoxDirectionOut.SelectedIndexChanged += new System.EventHandler(this.comboBox2_SelectedIndexChanged);
+            // 
+            // comboBoxBothOut
+            // 
+            this.comboBoxBothOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxBothOut.FormattingEnabled = true;
+            this.comboBoxBothOut.Items.AddRange(new object[] {
+            "AliceBlue",
+            "AntiqueWhite",
+            "Aqua",
+            "Aquamarine",
+            "Azure",
+            "Beige",
+            "Bisque",
+            "Black",
+            "BlanchedAlmond",
+            "Blue",
+            "BlueViolet",
+            "Brown",
+            "BurlyWood",
+            "CadetBlue",
+            "Chartreuse",
+            "Chocolate",
+            "Coral",
+            "CornflowerBlue",
+            "Cornsilk",
+            "Crimson",
+            "Cyan",
+            "DarkBlue",
+            "DarkCyan",
+            "DarkGoldenrod",
+            "DarkGray",
+            "DarkGreen",
+            "DarkKhaki",
+            "DarkMagenta",
+            "DarkOliveGreen",
+            "DarkOrange",
+            "DarkOrchid",
+            "DarkRed",
+            "DarkSalmon",
+            "DarkSeaGreen",
+            "DarkSlateBlue",
+            "DarkSlateGray",
+            "DarkTurquoise",
+            "DarkViolet",
+            "DeepPink",
+            "DeepSkyBlue",
+            "DimGray",
+            "DodgerBlue",
+            "Firebrick",
+            "FloralWhite",
+            "ForestGreen",
+            "Fuchsia",
+            "Gainsboro",
+            "GhostWhite",
+            "Gold",
+            "Goldenrod",
+            "Gray",
+            "Green",
+            "GreenYellow",
+            "Honeydew",
+            "HotPink",
+            "IndianRed",
+            "Indigo",
+            "Ivory",
+            "Khaki",
+            "Lavender",
+            "LavenderBlush",
+            "LawnGreen",
+            "LemonChiffon",
+            "LightBlue",
+            "LightCoral",
+            "LightCyan",
+            "LightGoldenrodYellow",
+            "LightGreen",
+            "LightGray",
+            "LightPink",
+            "LightSalmon",
+            "LightSeaGreen",
+            "LightSkyBlue",
+            "LightSlateGray",
+            "LightSteelBlue",
+            "LightYellow",
+            "Lime",
+            "LimeGreen",
+            "Linen",
+            "Magenta",
+            "Maroon",
+            "MediumAquamarine",
+            "MediumBlue",
+            "MediumOrchid",
+            "MediumPurple",
+            "MediumSeaGreen",
+            "MediumSlateBlue",
+            "MediumSpringGreen",
+            "MediumTurquoise",
+            "MediumVioletRed",
+            "MidnightBlue",
+            "MintCream",
+            "MistyRose",
+            "Moccasin",
+            "NavajoWhite",
+            "Navy",
+            "OldLace",
+            "Olive",
+            "OliveDrab",
+            "Orange",
+            "OrangeRed",
+            "Orchid",
+            "PaleGoldenrod",
+            "PaleGreen",
+            "PaleTurquoise",
+            "PaleVioletRed",
+            "PapayaWhip",
+            "PeachPuff",
+            "Peru",
+            "Pink",
+            "Plum",
+            "PowderBlue",
+            "Purple",
+            "Red",
+            "RosyBrown",
+            "RoyalBlue",
+            "SaddleBrown",
+            "Salmon",
+            "SandyBrown",
+            "SeaGreen",
+            "SeaShell",
+            "Sienna",
+            "Silver",
+            "SkyBlue",
+            "SlateBlue",
+            "SlateGray",
+            "Snow",
+            "SpringGreen",
+            "SteelBlue",
+            "Tan",
+            "Teal",
+            "Thistle",
+            "Tomato",
+            "Turquoise",
+            "Violet",
+            "Wheat",
+            "White",
+            "WhiteSmoke",
+            "Yellow",
+            "YellowGreen"});
+            this.comboBoxBothOut.Location = new System.Drawing.Point(3, 118);
+            this.comboBoxBothOut.Name = "comboBoxBothOut";
+            this.comboBoxBothOut.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxBothOut.TabIndex = 3;
+            this.comboBoxBothOut.SelectedIndexChanged += new System.EventHandler(this.comboBox3_SelectedIndexChanged);
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -868,7 +1529,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
-            this.tableLayoutPanel10.ResumeLayout(false);
             this.tabEventLoad.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -879,6 +1539,9 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel10.ResumeLayout(false);
+            this.tableLayoutPanel10.PerformLayout();
+            this.tableLayoutPanel11.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -934,10 +1597,17 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button buttonUseEventSettings;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelChartDirection;
         private System.Windows.Forms.CheckBox checkBoxAutoScroll;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel10;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelChartDirection;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelChartTime;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
+        private System.Windows.Forms.ComboBox comboBoxNormalColour;
+        private System.Windows.Forms.ComboBox comboBoxBothOut;
+        private System.Windows.Forms.ComboBox comboBoxDirectionOut;
+        private System.Windows.Forms.ComboBox comboBoxWindOut;
 
     }
 }

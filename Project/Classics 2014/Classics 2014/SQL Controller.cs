@@ -199,6 +199,26 @@ namespace Classics_2014
             return completed;
         }
 
+        public int CreateAccuracyLanding(int EventID, int Score, byte[] LandingData)
+        {
+            int LandingID = -1;
+            string hexLanding;
+            StringBuilder hex = new StringBuilder(LandingData.Length * 2);
+            foreach (byte b in LandingData)
+                hex.AppendFormat("{0:x2}", b);
+            hexLanding = hex.ToString();
+
+            string query = "INSERT INTO `accuracy landings` (Score, WindData) VALUES ('" + Score + "', '" + hexLanding + "');";
+
+            ExecuteNonQuery(query);
+            LandingID = GetLastInsertKey();
+
+            query = "INSERT INTO `event " + EventID + "` (LandingID) VALUES ('" + LandingID + "');";
+            ExecuteNonQuery(query);
+
+            return LandingID;
+        }
+
         #endregion
         #region Remove
 
@@ -223,7 +243,11 @@ namespace Classics_2014
         #endregion
         #region Modify
 
-
+        public bool AssignCompetitorToLanding(int CompetitorID, int RoundNum, int LandingID, int EventID)
+        {
+            string query = "UPDATE `event " + EventID + "` SET `Round`='" + RoundNum + "', `UID`='" + CompetitorID + "'  WHERE `LandingID`='" + LandingID + "';";
+            return ExecuteNonQuery(query);
+        }
 
         #endregion
         #region Get

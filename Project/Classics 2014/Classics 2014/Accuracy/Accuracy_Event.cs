@@ -73,7 +73,7 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count - 1; i++)
                     {
                         TLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length-1) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }//ToDo Save to DataBase
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1) { LandingsToRemove.Add(currentLanding); currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding)); CompletedLandings.Add(currentLanding); }
                         else
                         {
                             currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
@@ -122,7 +122,7 @@ namespace Classics_2014.Accuracy
             TabControl.SelectedTab = NewPage;
         }
 
-        protected override byte[] ConvertRuleSetToString()
+        protected override byte[] ConvertRuleSetToByteArray()
         {
             ASCIIEncoding ascii = new ASCIIEncoding();
             string stringToConvert = "";
@@ -138,7 +138,17 @@ namespace Classics_2014.Accuracy
             stringToConvert += ruleSet.windSecondsAfter + "*";
             stringToConvert += ruleSet.windSecondsPrior + "*";
             return ascii.GetBytes(stringToConvert);
+        }
 
+        private byte[] ConvertLandingToByteArray(TLanding Landing)
+        {
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            string stringToConvert = "";
+            stringToConvert += Landing.LandingWind + "*";
+            stringToConvert += Landing.TimeOfLanding + "*";
+            stringToConvert += Landing.WindDataAfter + "*";
+            stringToConvert += Landing.windDataPrior + "*";
+            return ascii.GetBytes(stringToConvert);
         }
 
         //protected override TAccuracyRuleSet ConvertStringToRuleset(string Input)
@@ -151,7 +161,7 @@ namespace Classics_2014.Accuracy
             ruleSet = Rules;
             Name = EventName;
             ActiveTeams = SelectedTeams;
-            byte[] ByteRules = ConvertRuleSetToString();
+            byte[] ByteRules = ConvertRuleSetToByteArray();
             SQL_Controller.CreateEvent(Name, Classics_2014.EventType.Accuracy, ByteRules, Date);
             EventID = SQL_Controller.GetLastInsertKey();
             EventOptionsTab = null;
@@ -167,6 +177,13 @@ namespace Classics_2014.Accuracy
             ProceedToEvent();
         }
         
+        public TLanding AssignLanding(int Index, DataGridViewCell Cell)
+        {
+            TLanding CurrentLanding = CompletedLandings[Index];
+            CurrentLanding.dataGridCell = Cell;
+            CompletedLandings[Index] = CurrentLanding;
+            return CompletedLandings[Index];
+        }
 
         public void makeActive()
         {

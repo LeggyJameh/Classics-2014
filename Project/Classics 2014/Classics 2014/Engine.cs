@@ -44,16 +44,7 @@ namespace Classics_2014
                 {
                     while (IO_Controller.CheckIO()[0])//If Serial is active
                     {
-                        if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                        {
-                            Active_Signal.WaitOne();
-                        }
-                        IO_Controller._signal.WaitOne();
                         Data data;
-                        if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                        {
-                            Active_Signal.WaitOne();
-                        }
                         while (IO_Controller.Data_queue.TryDequeue(out data))
                         {
                             switch (data.dataType)

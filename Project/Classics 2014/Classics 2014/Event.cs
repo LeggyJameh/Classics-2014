@@ -31,11 +31,11 @@ namespace Classics_2014
         {
             throw new NotImplementedException();
         }
-        protected virtual byte[] ConvertRuleSetToString()
+        protected virtual byte[] ConvertRuleSetToByteArray()
         {
             throw new NotImplementedException();
         }
-        protected virtual void ConvertStringToRuleset()
+        protected virtual void ConvertByteArrayToRuleset()
         {
             throw new NotImplementedException();
         }

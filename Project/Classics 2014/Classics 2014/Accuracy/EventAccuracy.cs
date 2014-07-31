@@ -56,5 +56,34 @@ namespace Classics_2014.Accuracy
             labelLatestScore.Text = "--";
             timer1.Stop();
         }
+
+        private void dataGridViewScore_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e != null)
+            {
+                if (e.ColumnIndex > 3)
+                {
+                    switch (e.Button)
+                    {
+                        case (System.Windows.Forms.MouseButtons.Left):
+                            if (dataGridViewScore[e.ColumnIndex, e.RowIndex].Value != "")
+                            {
+                                if (listBoxScores.SelectedItem != null)
+                                {
+                                    TLanding CurrentLanding;
+                                    CurrentLanding = Connected_Event.AssignLanding(listBoxScores.SelectedIndex, (DataGridViewCell)dataGridViewScore[e.ColumnIndex, e.RowIndex]);
+                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
+                                    Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
+                                        Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
+                                        CurrentLanding.ID, Connected_Event.EventID);
+                                }
+                            }
+                            break;
+                        case (System.Windows.Forms.MouseButtons.Right):
+                            break;
+                    }
+                }
+            }
+        }
     }
 }

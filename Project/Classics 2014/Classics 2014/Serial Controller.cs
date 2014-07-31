@@ -134,7 +134,12 @@ namespace Classics_2014
             Data.Speed = float.Parse(asciiStream.Substring(3, 2) + '.' + asciiStream[5]);
             Data.Direction = Convert.ToUInt16(asciiStream.Substring(6, 3));
 
-            Data.Time = DateTime.Now.TimeOfDay.ToString();
+            Data.Time = "";
+            Data.Time = DateTime.Now.Hour.ToString();
+            Data.Time = ":";
+            Data.Time = DateTime.Now.Minute.ToString();
+            Data.Time = ":";
+            Data.Time = DateTime.Now.Second.ToString();
             Data.dataType = incomingType;
             return Data;
 

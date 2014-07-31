@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows.Forms;
 namespace Classics_2014
 {
     public enum EventType
@@ -38,11 +39,15 @@ namespace Classics_2014
     public struct TLanding
     {
         public int ID;
-        public string dataGridCell;
-        public TWind[] windData;
+        public DataGridViewCell dataGridCell;
+        public TWind[] windDataPrior;
         public int score;
         public int Index;
         public int WindInputs;
+        public String TimeOfLanding;
+        public TWind LandingWind;
+        public TWind[] WindDataAfter;
+
     }
 
     public struct TMySQLEventReturn

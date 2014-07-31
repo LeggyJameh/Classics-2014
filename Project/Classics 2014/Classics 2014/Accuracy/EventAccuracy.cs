@@ -24,7 +24,7 @@ namespace Classics_2014.Accuracy
         }
         public int MethodAddLanding(TLanding Landing)
         {
-            listBoxScores.Invoke((MethodInvoker)(() => listBoxScores.Items.Add(Landing.windData[Landing.windData.Length-1].time + " : " + Landing.score)));
+            listBoxScores.Invoke((MethodInvoker)(() => listBoxScores.Items.Add(Landing.TimeOfLanding + " : " + Landing.score)));
             return listBoxScores.Items.Count - 1;
                 //ToDo Checks to make sure its under wind and the like
         }

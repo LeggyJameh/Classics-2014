@@ -44,11 +44,13 @@ namespace Classics_2014
                 {
                     while (IO_Controller.CheckIO()[0])//If Serial is active
                     {
-                        IO_Controller._signal.WaitOne();
-                        if ((activeEvent != null) && (activeEvent.RequiresSerial)) { Active_Signal.WaitOne(); }
                         Data data;
                         while (IO_Controller.Data_queue.TryDequeue(out data))
                         {
+                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
+                            {
+                                Active_Signal.WaitOne();
+                            }
                             switch (data.dataType)
                             {
                                 case EventType.Accuracy:
@@ -58,7 +60,11 @@ namespace Classics_2014
                                     break;
                             }
                         }
-
+                        if ((activeEvent != null) && (activeEvent.RequiresSerial))
+                        {
+                            Active_Signal.WaitOne();
+                        }
+                        IO_Controller._signal.WaitOne();
                     }
                 }
                 Thread.Sleep(500);

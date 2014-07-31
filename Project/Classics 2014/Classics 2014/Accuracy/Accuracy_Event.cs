@@ -48,7 +48,6 @@ namespace Classics_2014.Accuracy
             IO_Controller._signal.WaitOne();
             while (IO_Controller.Data_queue.TryPeek(out Data))
             {
-                
                 Active_Signal.Set();
                 DataA = (Data as Data_Accuracy);
                 if (DataA.IsLanding)
@@ -67,7 +66,7 @@ namespace Classics_2014.Accuracy
                     IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; ;
                     if (DataA.IsLanding)
                     {
-                        TLanding newLanding = new TLanding { score = DataA.LandingScore, windData = IncomingData, WindInputs = 0 };
+                        TLanding newLanding = new TLanding { score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
                         LandingInProgress.Add(newLanding);
                         newLanding.Index = EventTab.MethodAddLanding(newLanding);
                         EventTab.ScoreEdit(DataA.LandingScore.ToString());
@@ -75,10 +74,10 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count - 1; i++)
                     {
                         TLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.windData.Length) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length-1) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }
                         else
                         {
-                            currentLanding.windData[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
+                            currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
                             currentLanding.WindInputs++;
                             
                             //ToDo Check that wind hasnt gone over here
@@ -89,8 +88,8 @@ namespace Classics_2014.Accuracy
                         LandingInProgress.Remove(l);
                     }
                     LandingsToRemove.Clear();
+                    IO_Controller._signal.WaitOne();
                 }
-                IO_Controller._signal.WaitOne();
             }
             }while(true);
 
@@ -174,7 +173,7 @@ namespace Classics_2014.Accuracy
         {
             if (IO_Controller.Serial_Input)
             {
-                //ToDo Checks to make sure can be done
+                engine.MakeActive(this);
                 ListenThread.Start();
             }
         }

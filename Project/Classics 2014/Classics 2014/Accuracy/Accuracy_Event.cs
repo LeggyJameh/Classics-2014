@@ -22,7 +22,6 @@ namespace Classics_2014.Accuracy
         List<TLanding> LandingInProgress = new List<TLanding>();
         List<TLanding> CompletedLandings = new List<TLanding>();
         List<TLanding> LandingsToRemove = new List<TLanding>();
-        DateTime recentScore;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
         {
@@ -74,7 +73,7 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count - 1; i++)
                     {
                         TLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length-1) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length-1) { LandingsToRemove.Add(currentLanding); CompletedLandings.Add(currentLanding); }//ToDo Save to DataBase
                         else
                         {
                             currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };

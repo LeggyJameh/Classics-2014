@@ -45,12 +45,12 @@ namespace Classics_2014
                     while (IO_Controller.CheckIO()[0])//If Serial is active
                     {
                         Data data;
+                        if ((activeEvent != null) && (activeEvent.RequiresSerial))
+                        {
+                            Active_Signal.WaitOne();
+                        }
                         while (IO_Controller.Data_queue.TryDequeue(out data))
                         {
-                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                            {
-                                Active_Signal.WaitOne();
-                            }
                             switch (data.dataType)
                             {
                                 case EventType.Accuracy:

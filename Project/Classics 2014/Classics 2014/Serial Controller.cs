@@ -135,11 +135,11 @@ namespace Classics_2014
             Data.Direction = Convert.ToUInt16(asciiStream.Substring(6, 3));
 
             Data.Time = "";
-            Data.Time = DateTime.Now.Hour.ToString();
-            Data.Time = ":";
-            Data.Time = DateTime.Now.Minute.ToString();
-            Data.Time = ":";
-            Data.Time = DateTime.Now.Second.ToString();
+            Data.Time += DateTime.Now.Hour.ToString();
+            Data.Time += ":";
+            Data.Time += DateTime.Now.Minute.ToString();
+            Data.Time += ":";
+            Data.Time += DateTime.Now.Second.ToString("00");
             Data.dataType = incomingType;
             return Data;
 

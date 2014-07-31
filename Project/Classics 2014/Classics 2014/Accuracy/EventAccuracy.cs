@@ -24,8 +24,9 @@ namespace Classics_2014.Accuracy
         }
         public int MethodAddLanding(Accuracy.AccuracyLanding Landing)
         {
-            listBoxScores.Invoke((MethodInvoker)(() => listBoxScores.Items.Add(Landing.TimeOfLanding + " : " + Landing.score)));
-            return listBoxScores.Items.Count - 1;
+            Connected_Event.NumberOfLandings++;
+            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Connected_Event.NumberOfLandings, Landing.TimeOfLanding, Landing.score)));
+            return Connected_Event.NumberOfLandings;
                 //ToDo Checks to make sure its under wind and the like
         }
         
@@ -66,16 +67,28 @@ namespace Classics_2014.Accuracy
                     switch (e.Button)
                     {
                         case (System.Windows.Forms.MouseButtons.Left):
-                            if ((string)dataGridViewScore[e.ColumnIndex, e.RowIndex].Value != "")
+                            if (dataGridViewScore[e.ColumnIndex, e.RowIndex].Value == null)
                             {
-                                if (listBoxScores.SelectedItem != null)
+                                if (dataGridViewLandings.SelectedRows[0] != null)
                                 {
                                     AccuracyLanding CurrentLanding;
-                                    CurrentLanding = Connected_Event.AssignLanding(listBoxScores.SelectedIndex, (DataGridViewCell)dataGridViewScore[e.ColumnIndex, e.RowIndex]);
-                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
-                                    Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
-                                        Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
-                                        CurrentLanding.ID, Connected_Event.EventID);
+                                    CurrentLanding = Connected_Event.AssignLanding(Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value), (DataGridViewCell)dataGridViewScore[e.ColumnIndex, e.RowIndex]);
+
+                                    if (CurrentLanding.ID != -1)
+                                    {
+                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
+
+                                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
+                                            Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
+                                            CurrentLanding.ID, Connected_Event.EventID);
+
+                                        dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
+                                        Connected_Event.RemoveCompletedLanding(CurrentLanding);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Please wait for wind data of landing to be saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
                                 }
                             }
                             break;

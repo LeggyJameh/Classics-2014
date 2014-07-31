@@ -13,7 +13,6 @@ namespace Classics_2014
     public partial class Main : Form
     {
         Engine MainEngine;
-        Boolean SpeedOut;
         DataPoint prevData;
         public Main()
         {
@@ -78,7 +77,7 @@ namespace Classics_2014
             if (2 < (chartWind.Series[0].Points.Count))
             {
                 prevData = chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 2];
-                PointColorCheckSet(wind, chartWind.Series[0].Points.Count - 1);
+                chartWind.Invoke((MethodInvoker)(() => PointColorCheckSet(wind, chartWind.Series[0].Points.Count - 1)));
                     if (checkBoxAutoScroll.Checked)
                     {
                         if (chartWind.ChartAreas[0].AxisX.ScrollBar.IsVisible == true)
@@ -94,20 +93,16 @@ namespace Classics_2014
 
         private void PointColorCheckSet(TWind wind, int index)
         {
-            bool both = false;
-            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.OrangeRed)); both = true; } //If wind out
-            else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.Blue)); }
-
-            if (IsDirectionOut(wind, Convert.ToInt16(prevData.Tag.ToString())))
+            bool Speed = false;
+            bool directionOut;
+            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.OrangeRed)); Speed = true; } //If wind out
+            else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.CadetBlue)); }
+            directionOut =IsDirectionOut(wind, Convert.ToInt16(prevData.Tag.ToString()));
+            if (directionOut)
             {
                 chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.Yellow));
-                if (SpeedOut)
-                {
-                    chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.DarkRed));
-                } //If Direction out
 
-                else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.Blue)); }
-                if (both)
+                if (Speed)
                 {
                     chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = Color.Purple));
                 }
@@ -119,11 +114,11 @@ namespace Classics_2014
                  int minimum, maximum,minOverFlow, maxOverFlow;
                  bool OutMin = false;
                 //Min Checks
-                 if (prevData > numericUpDownDirectionChangeGraphLimit.Value)
+                 if (prevData < numericUpDownDirectionChangeGraphLimit.Value)
                  {
                      minimum = 0;
                      minOverFlow = (360 - ((int)numericUpDownDirectionChangeGraphLimit.Value -prevData)); 
-                     if((wind.direction < prevData)||(wind.direction > minOverFlow)) {  return false; }
+                     if((wind.direction < prevData)||(wind.direction > minOverFlow)) { return false; }
                  }
                  else
                      {
@@ -167,8 +162,9 @@ namespace Classics_2014
         {
             if ((double)numericUpDownWindOverChartBar.Value > chartWind.ChartAreas[0].AxisY.Maximum) { numericUpDownWindOverChartBar.Value = (decimal)chartWind.ChartAreas[0].AxisY.Maximum; }
             chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset = (double)numericUpDownWindOverChartBar.Value;
-            for (int i = 0; i < chartWind.Series[0].Points.Count; i++)
+            for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
 			{
+                prevData = chartWind.Series[0].Points[i - 1];
 			 PointColorCheckSet(new TWind{speed = (float) chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString())}, i);
 			}
             
@@ -203,8 +199,9 @@ namespace Classics_2014
 
         private void numericUpDownDirectionChangeGraphLimit_ValueChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < chartWind.Series[0].Points.Count; i++)
+            for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
             {
+                prevData = chartWind.Series[0].Points[i - 1];
                 PointColorCheckSet(new TWind { speed = (float)chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString()) }, i);
             }
         }

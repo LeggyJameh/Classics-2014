@@ -60,6 +60,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.buttonUseEventSettings = new System.Windows.Forms.Button();
             this.checkBoxAutoScroll = new System.Windows.Forms.CheckBox();
+            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
             this.labelChartDirection = new System.Windows.Forms.Label();
             this.tabEventLoad = new System.Windows.Forms.TabPage();
@@ -88,7 +89,6 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.labelError = new System.Windows.Forms.Label();
-            this.tableLayoutPanel10 = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
@@ -101,6 +101,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
+            this.tableLayoutPanel10.SuspendLayout();
             this.tabEventLoad.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -109,7 +110,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
-            this.tableLayoutPanel10.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -133,7 +133,7 @@
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(1105, 605);
+            this.tabMain.Size = new System.Drawing.Size(1132, 718);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main Menu";
             this.tabMain.UseVisualStyleBackColor = true;
@@ -168,15 +168,15 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.33257F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.16691F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(1099, 599);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(1126, 712);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
             // buttonCompetition
             // 
             this.buttonCompetition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetition.Location = new System.Drawing.Point(369, 90);
+            this.buttonCompetition.Location = new System.Drawing.Point(378, 123);
             this.buttonCompetition.Name = "buttonCompetition";
-            this.buttonCompetition.Size = new System.Drawing.Size(360, 44);
+            this.buttonCompetition.Size = new System.Drawing.Size(369, 44);
             this.buttonCompetition.TabIndex = 0;
             this.buttonCompetition.Text = "Start New Event";
             this.buttonCompetition.UseVisualStyleBackColor = true;
@@ -187,9 +187,9 @@
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(369, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(378, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(360, 81);
+            this.pictureBox1.Size = new System.Drawing.Size(369, 114);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -197,9 +197,9 @@
             // buttonLoad
             // 
             this.buttonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonLoad.Location = new System.Drawing.Point(369, 164);
+            this.buttonLoad.Location = new System.Drawing.Point(378, 207);
             this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(360, 44);
+            this.buttonLoad.Size = new System.Drawing.Size(369, 44);
             this.buttonLoad.TabIndex = 1;
             this.buttonLoad.Text = "Load Previous Events";
             this.buttonLoad.UseVisualStyleBackColor = true;
@@ -207,9 +207,9 @@
             // buttonExit
             // 
             this.buttonExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonExit.Location = new System.Drawing.Point(369, 460);
+            this.buttonExit.Location = new System.Drawing.Point(378, 543);
             this.buttonExit.Name = "buttonExit";
-            this.buttonExit.Size = new System.Drawing.Size(360, 44);
+            this.buttonExit.Size = new System.Drawing.Size(369, 44);
             this.buttonExit.TabIndex = 2;
             this.buttonExit.Text = "Exit";
             this.buttonExit.UseVisualStyleBackColor = true;
@@ -218,9 +218,9 @@
             // buttonHelp
             // 
             this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonHelp.Location = new System.Drawing.Point(369, 312);
+            this.buttonHelp.Location = new System.Drawing.Point(378, 375);
             this.buttonHelp.Name = "buttonHelp";
-            this.buttonHelp.Size = new System.Drawing.Size(360, 44);
+            this.buttonHelp.Size = new System.Drawing.Size(369, 44);
             this.buttonHelp.TabIndex = 3;
             this.buttonHelp.Text = "Help";
             this.buttonHelp.UseVisualStyleBackColor = true;
@@ -228,9 +228,9 @@
             // buttonModifyCompetitorData
             // 
             this.buttonModifyCompetitorData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonModifyCompetitorData.Location = new System.Drawing.Point(369, 238);
+            this.buttonModifyCompetitorData.Location = new System.Drawing.Point(378, 291);
             this.buttonModifyCompetitorData.Name = "buttonModifyCompetitorData";
-            this.buttonModifyCompetitorData.Size = new System.Drawing.Size(360, 44);
+            this.buttonModifyCompetitorData.Size = new System.Drawing.Size(369, 44);
             this.buttonModifyCompetitorData.TabIndex = 6;
             this.buttonModifyCompetitorData.Text = "Modify Competitors";
             this.buttonModifyCompetitorData.UseVisualStyleBackColor = true;
@@ -238,9 +238,9 @@
             // buttonMainSettings
             // 
             this.buttonMainSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonMainSettings.Location = new System.Drawing.Point(369, 386);
+            this.buttonMainSettings.Location = new System.Drawing.Point(378, 459);
             this.buttonMainSettings.Name = "buttonMainSettings";
-            this.buttonMainSettings.Size = new System.Drawing.Size(360, 44);
+            this.buttonMainSettings.Size = new System.Drawing.Size(369, 44);
             this.buttonMainSettings.TabIndex = 7;
             this.buttonMainSettings.Text = "Settings";
             this.buttonMainSettings.UseVisualStyleBackColor = true;
@@ -438,6 +438,7 @@
             0,
             0,
             0});
+            this.numericUpDownDirectionChangeGraphLimit.ValueChanged += new System.EventHandler(this.numericUpDownDirectionChangeGraphLimit_ValueChanged);
             // 
             // label2
             // 
@@ -484,6 +485,24 @@
             this.checkBoxAutoScroll.Text = "Auto Scroll";
             this.checkBoxAutoScroll.UseVisualStyleBackColor = true;
             // 
+            // tableLayoutPanel10
+            // 
+            this.tableLayoutPanel10.ColumnCount = 4;
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel10.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
+            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 240);
+            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
+            this.tableLayoutPanel10.RowCount = 1;
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
+            this.tableLayoutPanel10.Size = new System.Drawing.Size(1126, 24);
+            this.tableLayoutPanel10.TabIndex = 4;
+            // 
             // label4
             // 
             this.label4.BackColor = System.Drawing.Color.Transparent;
@@ -515,7 +534,7 @@
             this.tabEventLoad.Controls.Add(this.tableLayoutPanel1);
             this.tabEventLoad.Location = new System.Drawing.Point(4, 22);
             this.tabEventLoad.Name = "tabEventLoad";
-            this.tabEventLoad.Size = new System.Drawing.Size(1105, 605);
+            this.tabEventLoad.Size = new System.Drawing.Size(1132, 718);
             this.tabEventLoad.TabIndex = 3;
             this.tabEventLoad.Text = "Event Browser";
             this.tabEventLoad.UseVisualStyleBackColor = true;
@@ -532,7 +551,7 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1105, 605);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1132, 718);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
@@ -543,12 +562,12 @@
             this.tableLayoutPanel2.Controls.Add(this.EventBrowserButtonLoad, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.EventBrowserButtonCancel, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 558);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 671);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1099, 44);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(1126, 44);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // EventBrowserButtonLoad
@@ -556,7 +575,7 @@
             this.EventBrowserButtonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EventBrowserButtonLoad.Location = new System.Drawing.Point(3, 3);
             this.EventBrowserButtonLoad.Name = "EventBrowserButtonLoad";
-            this.EventBrowserButtonLoad.Size = new System.Drawing.Size(543, 38);
+            this.EventBrowserButtonLoad.Size = new System.Drawing.Size(557, 38);
             this.EventBrowserButtonLoad.TabIndex = 0;
             this.EventBrowserButtonLoad.Text = "Load Event";
             this.EventBrowserButtonLoad.UseVisualStyleBackColor = true;
@@ -564,9 +583,9 @@
             // EventBrowserButtonCancel
             // 
             this.EventBrowserButtonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserButtonCancel.Location = new System.Drawing.Point(552, 3);
+            this.EventBrowserButtonCancel.Location = new System.Drawing.Point(566, 3);
             this.EventBrowserButtonCancel.Name = "EventBrowserButtonCancel";
-            this.EventBrowserButtonCancel.Size = new System.Drawing.Size(544, 38);
+            this.EventBrowserButtonCancel.Size = new System.Drawing.Size(557, 38);
             this.EventBrowserButtonCancel.TabIndex = 1;
             this.EventBrowserButtonCancel.Text = "Cancel";
             this.EventBrowserButtonCancel.UseVisualStyleBackColor = true;
@@ -583,7 +602,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1099, 549);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(1126, 662);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
             // tableLayoutPanel4
@@ -593,23 +612,23 @@
             this.tableLayoutPanel4.Controls.Add(this.EventBrowserListBoxCompetitors, 0, 1);
             this.tableLayoutPanel4.Controls.Add(this.EventBrowserLabelCompetitors, 0, 0);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(882, 3);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(903, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(214, 543);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(220, 656);
             this.tableLayoutPanel4.TabIndex = 1;
             // 
             // EventBrowserListBoxCompetitors
             // 
             this.EventBrowserListBoxCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EventBrowserListBoxCompetitors.FormattingEnabled = true;
-            this.EventBrowserListBoxCompetitors.Location = new System.Drawing.Point(3, 30);
+            this.EventBrowserListBoxCompetitors.Location = new System.Drawing.Point(3, 35);
             this.EventBrowserListBoxCompetitors.Name = "EventBrowserListBoxCompetitors";
             this.EventBrowserListBoxCompetitors.ScrollAlwaysVisible = true;
             this.EventBrowserListBoxCompetitors.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.EventBrowserListBoxCompetitors.Size = new System.Drawing.Size(208, 510);
+            this.EventBrowserListBoxCompetitors.Size = new System.Drawing.Size(214, 618);
             this.EventBrowserListBoxCompetitors.TabIndex = 0;
             // 
             // EventBrowserLabelCompetitors
@@ -618,7 +637,7 @@
             this.EventBrowserLabelCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.EventBrowserLabelCompetitors.Location = new System.Drawing.Point(3, 0);
             this.EventBrowserLabelCompetitors.Name = "EventBrowserLabelCompetitors";
-            this.EventBrowserLabelCompetitors.Size = new System.Drawing.Size(208, 27);
+            this.EventBrowserLabelCompetitors.Size = new System.Drawing.Size(214, 32);
             this.EventBrowserLabelCompetitors.TabIndex = 1;
             this.EventBrowserLabelCompetitors.Text = "Competitors";
             this.EventBrowserLabelCompetitors.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -638,7 +657,7 @@
             this.EventBrowserEventGrid.MultiSelect = false;
             this.EventBrowserEventGrid.Name = "EventBrowserEventGrid";
             this.EventBrowserEventGrid.ReadOnly = true;
-            this.EventBrowserEventGrid.Size = new System.Drawing.Size(873, 543);
+            this.EventBrowserEventGrid.Size = new System.Drawing.Size(894, 656);
             this.EventBrowserEventGrid.TabIndex = 2;
             // 
             // ColumnEventID
@@ -817,24 +836,6 @@
             this.labelError.Size = new System.Drawing.Size(0, 13);
             this.labelError.TabIndex = 3;
             // 
-            // tableLayoutPanel10
-            // 
-            this.tableLayoutPanel10.ColumnCount = 4;
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
-            this.tableLayoutPanel10.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel10.Controls.Add(this.label4, 1, 0);
-            this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
-            this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 240);
-            this.tableLayoutPanel10.Name = "tableLayoutPanel10";
-            this.tableLayoutPanel10.RowCount = 1;
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel10.Size = new System.Drawing.Size(1126, 24);
-            this.tableLayoutPanel10.TabIndex = 4;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -867,6 +868,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownChartZoom)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
+            this.tableLayoutPanel10.ResumeLayout(false);
             this.tabEventLoad.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
@@ -877,7 +879,6 @@
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
-            this.tableLayoutPanel10.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

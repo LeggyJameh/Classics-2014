@@ -9,7 +9,6 @@ namespace Classics_2014.Accuracy
     class Accuracy_Event :Event 
     {
         #region variables and the such like
-        readonly AutoResetEvent Active_Signal;
         EventTeams activeEventTab;
         public EventAccuracyOptions EventOptionsTab;
         public EventTeams EventTeamsTab;
@@ -23,11 +22,10 @@ namespace Classics_2014.Accuracy
         List<TLanding> CompletedLandings = new List<TLanding>();
         List<TLanding> LandingsToRemove = new List<TLanding>();
         #endregion
-        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, AutoResetEvent Active_Signal, Engine engine)
+        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
         {
             this.SQL_Controller = SQL_Controller;
             this.IO_Controller = IO_Controller;
-            this.Active_Signal = Active_Signal;
             this.engine = engine;
             RequiresSerial = true;
             EventType = EventType.Accuracy;
@@ -45,14 +43,9 @@ namespace Classics_2014.Accuracy
             Data Data;
             Data_Accuracy DataA = new Data_Accuracy();
             IO_Controller._signal.WaitOne();
-            while (IO_Controller.Data_queue.TryPeek(out Data))
+            while (Data_queueEvent.TryDequeue(out Data))
             {
-                Active_Signal.Set();
                 DataA = (Data as Data_Accuracy);
-                if (DataA.IsLanding)
-                {
-                    Console.WriteLine("test");
-                }
                 if (DataA != null)
                 {
                     for (int i = IncomingData.Length; i > 0; i--)
@@ -87,7 +80,6 @@ namespace Classics_2014.Accuracy
                         LandingInProgress.Remove(l);
                     }
                     LandingsToRemove.Clear();
-                    IO_Controller._signal.WaitOne();
                 }
             }
             }while(true);

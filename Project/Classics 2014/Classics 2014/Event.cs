@@ -6,6 +6,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using System.Collections.Concurrent;
 namespace Classics_2014
 {
     abstract class Event
@@ -21,6 +22,7 @@ namespace Classics_2014
         public List<string> TeamNames;
         public int EventID;
         public TabControl TabControl;
+        public readonly ConcurrentQueue<Data> Data_queueEvent = new ConcurrentQueue<Data>();
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
         {

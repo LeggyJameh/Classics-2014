@@ -12,7 +12,6 @@ namespace Classics_2014
         #region variables and shit
         IO_Controller IO_Controller;
         SQL_Controller SQL_Controller;
-        readonly AutoResetEvent Active_Signal = new AutoResetEvent(false);//ANYTIME AN EVENT BECOMES ACTIVE IT REQUIRES A "ref Active_Signal" TO BE PASSED IN!
         private Thread ListenThread;
         Event activeEvent;
         Main mainForm;
@@ -42,6 +41,7 @@ namespace Classics_2014
             {
                 if (mainForm.IsHandleCreated)
                 {
+                    IO_Controller._signal.WaitOne();
                     while (IO_Controller.CheckIO()[0])//If Serial is active
                     {
                         Data data;
@@ -55,12 +55,12 @@ namespace Classics_2014
                                     UpdateWindMetrics(DatA);
                                     break;
                             }
+
+                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
+                            {
+                                activeEvent.Data_queueEvent.Enqueue(data);
+                            }
                         }
-                        if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                        {
-                            Active_Signal.WaitOne();
-                        }
-                        IO_Controller._signal.WaitOne();
                     }
                 }
                 Thread.Sleep(500);
@@ -77,7 +77,7 @@ namespace Classics_2014
         }
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
         {
-            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, Active_Signal, this);
+            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
            NewEvent.TabControl = tabControl;
            eventList.Add(NewEvent);

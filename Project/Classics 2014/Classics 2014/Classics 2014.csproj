@@ -51,6 +51,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accuracy\AccuracyLanding.cs" />
     <Compile Include="Accuracy\Accuracy_Event.cs" />
     <Compile Include="Accuracy\EventAccuracy.cs">
       <SubType>UserControl</SubType>

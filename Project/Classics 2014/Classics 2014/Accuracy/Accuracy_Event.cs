@@ -18,9 +18,9 @@ namespace Classics_2014.Accuracy
         List<TCompetitor> Competitors;
         List<string> ActiveTeams;
         TWind[] IncomingData;
-        List<TLanding> LandingInProgress = new List<TLanding>();
-        List<TLanding> CompletedLandings = new List<TLanding>();
-        List<TLanding> LandingsToRemove = new List<TLanding>();
+        List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
+        List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
+        List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
         {
@@ -58,26 +58,28 @@ namespace Classics_2014.Accuracy
                     IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; ;
                     if (DataA.IsLanding)
                     {
-                        TLanding newLanding = new TLanding { score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
+                        AccuracyLanding newLanding = new AccuracyLanding { score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
                         LandingInProgress.Add(newLanding);
                         newLanding.Index = EventTab.MethodAddLanding(newLanding);
                         EventTab.ScoreEdit(DataA.LandingScore.ToString());
                     }
-                    for (int i = 0; i < LandingInProgress.Count - 1; i++)
+                    for (int i = 0; i < LandingInProgress.Count; i++)
                     {
-                        TLanding currentLanding = LandingInProgress[i];
+                        AccuracyLanding currentLanding = LandingInProgress[i];
                         if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1) { LandingsToRemove.Add(currentLanding); currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding)); CompletedLandings.Add(currentLanding); }
                         else
                         {
+                            //ToDo Classify Landing, so we can do pro leet tricks
                             currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
                             currentLanding.WindInputs++;
+                            LandingInProgress[i] = currentLanding;
                             
                             //ToDo Check that wind hasnt gone over here
                         }
                     }
-                    foreach (TLanding l in LandingsToRemove)
+                    foreach (AccuracyLanding l in LandingsToRemove)
                     {
-                        LandingInProgress.Remove(l);
+                         LandingInProgress.Remove(l);
                     }
                     LandingsToRemove.Clear();
                 }
@@ -132,8 +134,9 @@ namespace Classics_2014.Accuracy
             return ascii.GetBytes(stringToConvert);
         }
 
-        private byte[] ConvertLandingToByteArray(TLanding Landing)
+        private byte[] ConvertLandingToByteArray(Accuracy.AccuracyLanding Landing)
         {
+            //ToDo Override To String
             ASCIIEncoding ascii = new ASCIIEncoding();
             string stringToConvert = "";
             stringToConvert += Landing.LandingWind + "*";
@@ -168,10 +171,10 @@ namespace Classics_2014.Accuracy
             EventTeamsTab = null;
             ProceedToEvent();
         }
-        
-        public TLanding AssignLanding(int Index, DataGridViewCell Cell)
+
+        public Accuracy.AccuracyLanding AssignLanding(int Index, DataGridViewCell Cell)
         {
-            TLanding CurrentLanding = CompletedLandings[Index];
+            AccuracyLanding CurrentLanding = CompletedLandings[Index];
             CurrentLanding.dataGridCell = Cell;
             CompletedLandings[Index] = CurrentLanding;
             return CompletedLandings[Index];

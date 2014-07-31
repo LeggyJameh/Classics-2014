@@ -36,20 +36,6 @@ namespace Classics_2014
         public string nationality;
     }
 
-    public struct TLanding
-    {
-        public int ID;
-        public DataGridViewCell dataGridCell;
-        public TWind[] windDataPrior;
-        public int score;
-        public int Index;
-        public int WindInputs;
-        public String TimeOfLanding;
-        public TWind LandingWind;
-        public TWind[] WindDataAfter;
-
-    }
-
     public struct TMySQLEventReturn
     {
         public int ID;

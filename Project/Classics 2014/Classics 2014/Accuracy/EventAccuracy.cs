@@ -22,7 +22,7 @@ namespace Classics_2014.Accuracy
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
         }
-        public int MethodAddLanding(TLanding Landing)
+        public int MethodAddLanding(Accuracy.AccuracyLanding Landing)
         {
             listBoxScores.Invoke((MethodInvoker)(() => listBoxScores.Items.Add(Landing.TimeOfLanding + " : " + Landing.score)));
             return listBoxScores.Items.Count - 1;
@@ -66,11 +66,11 @@ namespace Classics_2014.Accuracy
                     switch (e.Button)
                     {
                         case (System.Windows.Forms.MouseButtons.Left):
-                            if (dataGridViewScore[e.ColumnIndex, e.RowIndex].Value != "")
+                            if ((string)dataGridViewScore[e.ColumnIndex, e.RowIndex].Value != "")
                             {
                                 if (listBoxScores.SelectedItem != null)
                                 {
-                                    TLanding CurrentLanding;
+                                    AccuracyLanding CurrentLanding;
                                     CurrentLanding = Connected_Event.AssignLanding(listBoxScores.SelectedIndex, (DataGridViewCell)dataGridViewScore[e.ColumnIndex, e.RowIndex]);
                                     dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
                                     Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),

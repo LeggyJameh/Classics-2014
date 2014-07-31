@@ -13,6 +13,7 @@ namespace Classics_2014
     public partial class Main : Form
     {
         Engine MainEngine;
+        Boolean SpeedOut;
         public Main()
         {
             InitializeComponent();
@@ -52,6 +53,7 @@ namespace Classics_2014
         }
         public void UpdatelistBoxWindLog(TWind[] wind)
         {
+            
             listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.BeginUpdate()));
             for (int i = 1; i < wind.Length; i++)
             {
@@ -67,8 +69,20 @@ namespace Classics_2014
         public void UpdateWindGraph(TWind wind)
         {
 
+            //DataPoint prevData =chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 2];
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points.AddXY(wind.time, wind.speed)));
             chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = wind.direction.ToString()));
+            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset){ chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Color = Color.OrangeRed));  } //If wind out
+            else {chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].BorderColor = Color.Blue)); }
+
+            //if (IsDirectionOut(wind,Convert.ToInt16(prevData.Tag.ToString())))
+            //{ 
+            //    chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Color = Color.Yellow));
+            //    if (SpeedOut) {chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].BorderColor = Color.DarkRed));
+            //} //If Direction out
+                    
+            //else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].BorderColor = Color.Blue)); }
+
             if (checkBoxAutoScroll.Checked)
             if (chartWind.ChartAreas[0].AxisX.ScrollBar.IsVisible == true)
             {
@@ -78,8 +92,37 @@ namespace Classics_2014
                 }
             }
             
-
         }
+            //private bool IsDirectionOut(TWind wind, int prevData)
+            //{
+            //     int minimum, maximum,minOverFlow, maxOverFlow;
+            //    bool OutMin;
+            //    //Min Checks
+            //     if (prevData > numericUpDownDirectionChangeGraphLimit.Value)
+            //     {
+            //         minimum = 0;
+            //         minOverFlow = (360 - ((int)numericUpDownDirectionChangeGraphLimit.Value -prevData)); 
+            //         if((wind.direction < minimum(wind.direction < minOverFlow)) {  OutMin = true; }
+            //     }
+            //     else
+            //         {
+            //         minimum = prevData-(int) numericUpDownDirectionChangeGraphLimit.Value;
+            //         if (wind.direction < minimum) {OutMin = true;}
+            //         }
+            //    //Max checks
+            //    if ((prevData + (int)numericUpDownDirectionChangeGraphLimit.Value)>360)
+            //    {
+            //        maximum = 360;
+            //        maxOverFlow = 0+ ((prevData + (int)numericUpDownDirectionChangeGraphLimit.Value)-360);
+            //        if ( 
+            //    }
+            //    else
+            //    {
+            //       maximum = prevData + (int)numericUpDownDirectionChangeGraphLimit.Value;
+            //    }
+              
+            //    return false;
+            //}
         private void trackBarWindZoom_Scroll(object sender, EventArgs e)
         {
             numericUpDownChartZoom.Value = trackBarWindZoom.Value;

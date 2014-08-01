@@ -42,7 +42,7 @@ namespace Classics_2014
                 if (mainForm.IsHandleCreated)
                 {
                     IO_Controller._signal.WaitOne();
-                    while (IO_Controller.CheckIO()[0])//If Serial is active
+                    while ((IO_Controller.CheckIO()[0]) && (mainForm.IsHandleCreated))//If Serial is active
                     {
                         Data data;
                         while (IO_Controller.Data_queue.TryDequeue(out data))
@@ -64,6 +64,7 @@ namespace Classics_2014
                     }
                 }
                 Thread.Sleep(500);
+
             } while (true);
 
         }
@@ -112,7 +113,7 @@ namespace Classics_2014
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\RecentMasterFile");
                 }
             }
-            writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", true);
+            writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", true);//ToDo Move this file
             //Confirm 
         }
         private void ReOrderWindArray(TWind newWind)

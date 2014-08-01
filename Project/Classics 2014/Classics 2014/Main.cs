@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 namespace Classics_2014
 {
     public partial class Main : Form
@@ -30,11 +32,50 @@ namespace Classics_2014
             comboBoxWindOut.SelectedItem = WindoutChartColour.Name;
             comboBoxDirectionOut.SelectedItem = DirectionoutChartColour.Name;
             comboBoxBothOut.SelectedItem = BothOutChartColour.Name;
-        }
+            AquireGraph();
 
+        }
+        public void DeSerializeGraph()
+        {
+            StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
+            string input;
+            string[] args;
+            while (!reader.EndOfStream)
+            {
+                input = reader.ReadLine();
+                args = input.Split('*');
+                chartWind.Series[0].Points.AddXY(args[0], decimal.Parse(args[1]));
+                chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = args[2];
+            }
+            reader.BaseStream.Close();
+            reader.Dispose();
+            for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
+            {
+                prevData = chartWind.Series[0].Points[i - 1];
+                PointColorCheckSetNonInvokable(new TWind { speed = (float)chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString()) }, i);
+                trackBarWindZoom_Scroll(this, new EventArgs());
+            }
+
+        }
+        private void AquireGraph()
+        {
+            if (File.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx"))
+            {
+                DateTime lastCreationTime = File.GetCreationTime(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
+                if (lastCreationTime.Date.DayOfYear == DateTime.Now.DayOfYear)
+                {
+                    DeSerializeGraph();
+                    return;
+                }
+            }
+            File.Create(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
+            
+        }
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            SaveGraph();
+            MainEngine.CloseThreads();
+            this.Close();
         }
 
         private void buttonCompetition_Click(object sender, EventArgs e)
@@ -106,18 +147,32 @@ namespace Classics_2014
             if (directionOut)
             {
                 chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = DirectionoutChartColour));
-
+                chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index-1].Color = DirectionoutChartColour));
                 if (Speed)
                 {
                     chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = BothOutChartColour));
                 }
             }
         }
+        private void PointColorCheckSetNonInvokable(TWind wind, int index)
+        {
+            bool Speed = false;
+            bool directionOut;
+            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) {  chartWind.Series[0].Points[index].Color = WindoutChartColour; Speed = true; } //If wind out
+            else { chartWind.Series[0].Points[index].Color = NormalChartColour; }
+            directionOut = IsDirectionOut(wind, Convert.ToInt16(prevData.Tag.ToString()));
+            if (directionOut)
+            {
+                chartWind.Series[0].Points[index].Color = DirectionoutChartColour;
+                chartWind.Series[0].Points[index - 1].Color = DirectionoutChartColour;
+                if (Speed)
+                {chartWind.Series[0].Points[index].Color = BothOutChartColour;
+                }
+            }
+        }
         private bool IsDirectionOut(TWind wind, int prevData)
         {
-            //ToDo Check you checks Mofo
             int minimum, maximum, minOverFlow, maxOverFlow;
-            //Min Checks 300 292 5
             if (prevData < numericUpDownDirectionChangeGraphLimit.Value)
             {
                 minimum = 0;
@@ -150,17 +205,37 @@ namespace Classics_2014
             numericUpDownChartZoom.Value = trackBarWindZoom.Value;
             chartWind.ChartAreas[0].AxisX.Interval = trackBarWindZoom.Value / 2;
             chartWind.ChartAreas[0].AxisX.ScaleView.Size = trackBarWindZoom.Value * 60;
+            chartWind.ChartAreas[0].AxisX.LabelStyle.Interval = (int)numericUpDownChartZoom.Value * 2;
         }
         private void numericUpDownChartZoom_ValueChanged(object sender, EventArgs e)
         {
             trackBarWindZoom.Value = (int)numericUpDownChartZoom.Value;
             chartWind.ChartAreas[0].AxisX.Interval = (int)numericUpDownChartZoom.Value / 2;
             chartWind.ChartAreas[0].AxisX.ScaleView.Size = (int)numericUpDownChartZoom.Value * 60;
+            chartWind.ChartAreas[0].AxisX.LabelStyle.Interval = (int)numericUpDownChartZoom.Value *2;
         }
 
-        private void Main_FormClosed(object sender, FormClosedEventArgs e)
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             MainEngine.CloseThreads();
+            SaveGraph();
+        }
+        private void SaveGraph()
+        {
+            if (!File.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx"))
+            {
+                File.Create(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
+            }
+            GC.Collect();
+            using (StreamWriter s = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx",true))
+            {
+                
+                for (int i = 0; i < chartWind.Series[0].Points.Count; i++)
+                {
+                    DataPoint p = chartWind.Series[0].Points[i];
+                    s.WriteLine(p.AxisLabel + "*" + p.YValues[0] + "*" + p.Tag.ToString());
+                }
+            }
         }
         private void ResetGraphColours()
         {
@@ -186,7 +261,7 @@ namespace Classics_2014
             {
                 if (chartWind.ChartAreas[0].CursorX.Position < 0) { chartWind.ChartAreas[0].CursorX.Position = 0; }
                 dataPoint = chartWind.Series[0].Points[(int)chartWind.ChartAreas[0].CursorX.Position];
-                if (dataPoint != null)
+                if ((dataPoint != null)&&(dataPoint.Tag!= null))
                 {
                     labelChartDirection.Text = dataPoint.Tag.ToString();
                     labelChartTime.Text = dataPoint.AxisLabel;
@@ -218,19 +293,19 @@ namespace Classics_2014
             ResetGraphColours();
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxWindout_SelectedIndexChanged(object sender, EventArgs e)
         {
             WindoutChartColour = Color.FromName(comboBoxWindOut.SelectedItem.ToString());
             ResetGraphColours();
         }
 
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxDirectionOut_SelectedIndexChanged(object sender, EventArgs e)
         {
             DirectionoutChartColour = Color.FromName(comboBoxDirectionOut.SelectedItem.ToString());
             ResetGraphColours();
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxBothOut_SelectedIndexChanged(object sender, EventArgs e)
         {
             BothOutChartColour = Color.FromName(comboBoxBothOut.SelectedItem.ToString());
             ResetGraphColours();
@@ -238,10 +313,32 @@ namespace Classics_2014
 
         private void buttonUseEventSettings_Click(object sender, EventArgs e)
         {
-            if (MainEngine.activeEvent != null)
+            if (MainEngine.activeEvent is Accuracy.Accuracy_Event)
             {
-                MainEngine.activeEvent.rules
+                Accuracy.Accuracy_Event Event = (MainEngine.activeEvent as Accuracy.Accuracy_Event);
+                chartWind.ChartAreas[0].AxisY.StripLines[0].Interval = Event.ruleSet.windout;
+                numericUpDownWindOverChartBar.Value = (decimal)(Event.ruleSet.windout);
+                numericUpDownDirectionChangeGraphLimit.Value = Event.ruleSet.directionOut;
+                ResetGraphColours();
             }
+            else { MessageBox.Show("No event suitable for transplanting rules.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+            
+            
+        }
+
+        private void dateTimePickerChartTimeFinder_ValueChanged(object sender, EventArgs e)
+        {
+            
+            foreach (DataPoint dP in chartWind.Series[0].Points)
+            {
+                int hour = Convert.ToInt16(dP.AxisLabel.Substring(0, 2));
+                if (hour == numericUpDownHourSearch.Value)
+                {
+                    chartWind.ChartAreas[0].AxisX.ScaleView.Position = dP.XValue;
+                    return;
+                }
+            }
+            MessageBox.Show("Hour not on record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
         }
     }
 }

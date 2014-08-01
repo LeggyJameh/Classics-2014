@@ -30,6 +30,11 @@ namespace Classics_2014
             throw new NotImplementedException();
         }
 
+        public virtual void ReturnToOptions()
+        {
+            throw new NotImplementedException();
+        }
+
         protected virtual void  CreateEvent ()
         {
             throw new NotImplementedException();

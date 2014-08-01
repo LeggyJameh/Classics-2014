@@ -46,6 +46,7 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             Connected_Event = aEvent;
             PopulateExistingTeams();
+            
 
             Rules = LoadRules;
             EventName = LoadEventName;
@@ -152,12 +153,15 @@ namespace Classics_2014.Accuracy
 
         #endregion
 
+        #region Load Specific
+
+
 
         private void LoadEvent(DateTime LoadedDate, TAccuracyRuleSet LoadedRules)
         {
             dateTimePicker.Value = LoadedDate;
             textBoxEventName.Text = EventName;
-            comboBoxRulePreset.SelectedValue = LoadedRules.preset;
+            comboBoxRulePreset.SelectedItem = LoadedRules.preset;
             numericUpDownCompetitorsPerTeam.Value = LoadedRules.noOfCompetitorsPerTeam;
             numericUpDownCompMaxWind.Value = Convert.ToDecimal(LoadedRules.compHalt);
             numericUpDownMaxScore.Value = LoadedRules.maxScored;
@@ -179,18 +183,41 @@ namespace Classics_2014.Accuracy
 
             for (int i = 0; i < SelectedCompetitors.Count; i++)
             {
-                try
+                if (ExistingTeams.Remove(SelectedCompetitors[i].team))
                 {
-                    ExistingTeams.Remove(SelectedCompetitors[i].team);
                     SelectedTeams.Add(SelectedCompetitors[i].team);
                 }
-                catch
-                {
-                }
+                
             }
-            UpdateTeamSelection();
+
+            PopulateExistingCompetitors();
+
+            for (int i = 0; i < SelectedCompetitors.Count; i++)
+            {
+                ExistingCompetitors.Remove(SelectedCompetitors[i]);
+            }
+
+            UpdateTeamsFromLists();
             UpdateCompetitorGridsFromData();
         }
+
+        private void UpdateTeamsFromLists()
+        {
+            listBoxSelectedTeams.Items.Clear();
+            listBoxExistingTeams.Items.Clear();
+            for (int i = 0; i < ExistingTeams.Count; i++)
+            {
+                listBoxExistingTeams.Items.Add(ExistingTeams[i]);
+            }
+            for (int i = 0; i < SelectedTeams.Count; i++)
+            {
+                listBoxSelectedTeams.Items.Add(SelectedTeams[i]);
+            }
+        }
+
+        #endregion
+
+        
 
         private void UpdateTeamSelection()
         {

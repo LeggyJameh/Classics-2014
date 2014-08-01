@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Windows.Forms;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 namespace Classics_2014.Accuracy
 {
     class Accuracy_Event :Event 
@@ -107,6 +109,7 @@ namespace Classics_2014.Accuracy
 
         public void LoadEventOptions()
         {
+            
 
         }
 
@@ -142,18 +145,40 @@ namespace Classics_2014.Accuracy
         private byte[] ConvertLandingToByteArray(Accuracy.AccuracyLanding Landing)
         {
             //ToDo Override To String
-            ASCIIEncoding ascii = new ASCIIEncoding();
-            string stringToConvert = "";
-            stringToConvert += Landing.LandingWind + "*";
-            stringToConvert += Landing.TimeOfLanding + "*";
-            stringToConvert += Landing.WindDataAfter + "*";
-            stringToConvert += Landing.windDataPrior + "*";
-            return ascii.GetBytes(stringToConvert);
+            BinaryFormatter f = new BinaryFormatter();
+            MemoryStream m = new MemoryStream();
+            f.Serialize(m,Landing);
+            return m.ToArray();
         }
-
-        //protected override TAccuracyRuleSet ConvertStringToRuleset(string Input)
-        //{
-        //}
+        private AccuracyLanding ConvertByteArrayToLanding(byte[] Landing)
+        {
+            MemoryStream m = new MemoryStream();
+            BinaryFormatter f = new BinaryFormatter();
+            m.Write(Landing, 0, Landing.Length);
+            m.Seek(0, SeekOrigin.Begin);
+            AccuracyLanding deSerializedLanding = (AccuracyLanding)f.Deserialize(m);
+            return deSerializedLanding;
+        }
+        private TAccuracyRuleSet ConvertByteArrayToRuleSet(byte[] ruleset)
+        {
+            ASCIIEncoding ascii = new ASCIIEncoding();
+            string[] args = ascii.GetString(ruleset).Split('*');
+            return (new TAccuracyRuleSet
+            {
+                TeamsSetup = Convert.ToBoolean(args[0]),
+                allScoresUsed = Convert.ToBoolean(args[1]),
+                compHalt = Convert.ToSByte(args[2]),
+                directionOut = Convert.ToUInt16(args[3]),
+                finalApproachTime = Convert.ToSingle(args[4]),
+                maxScored = Convert.ToInt16(args[4]),
+                noOfCompetitorsPerTeam = Convert.ToInt16(args[5]),
+                preset = args[6],
+                windout = Convert.ToSingle(args[6]),
+                windSecondsPrior = Convert.ToInt16(args[7]),
+                windSecondsAfter = Convert.ToInt16(args[8])
+            }
+            );
+        }
 
         public void SaveEvent(TAccuracyRuleSet Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
         {
@@ -204,6 +229,19 @@ namespace Classics_2014.Accuracy
                 }
 			}
             return -1;
+        }
+
+        public override void ReturnToOptions()
+        {
+            TabControl.TabPages.Remove(TabControl.SelectedTab);
+            EventTeamsTab = null;
+            EventOptionsTab = new EventAccuracyOptions(TabControl, this, ruleSet, Name, DateTime.Today, Competitors);
+            TabPage NewPage = new TabPage();
+            NewPage.Controls.Add(EventOptionsTab);
+            EventOptionsTab.Dock = DockStyle.Fill;
+            NewPage.Text = "New Event";
+            TabControl.TabPages.Add(NewPage);
+            TabControl.SelectedTab = NewPage;
         }
 
 

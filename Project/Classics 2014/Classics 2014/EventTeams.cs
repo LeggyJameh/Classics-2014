@@ -272,7 +272,8 @@ namespace Classics_2014
 
         private void buttonBack_Click(object sender, EventArgs e)
         {
-
+            Connected_Event.SQL_Controller.RemoveEvent(EventID);
+            Connected_Event.ReturnToOptions();
         }
 
     }

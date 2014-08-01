@@ -217,7 +217,17 @@ namespace Classics_2014
         public bool RemoveEvent(int EventID)
         {
             string query = "DROP TABLE `event " + EventID + "`;";
-            return ExecuteNonQuery(query);
+            if (ExecuteNonQuery(query))
+            {
+                string query2 = "DELETE FROM `events` WHERE `EventID`='" + EventID + "';";
+                if (ExecuteNonQuery(query2))
+                {
+                    string query3 = "DELETE FROM `event teams` WHERE `EventID`='" + EventID + "';";
+                    return ExecuteNonQuery(query3);
+                }
+            }
+            return false;
+
         }
 
         public bool RemoveCompetitor(int UID)

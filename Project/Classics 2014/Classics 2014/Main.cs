@@ -240,7 +240,7 @@ namespace Classics_2014
         {
             if (MainEngine.activeEvent != null)
             {
-                MainEngine.activeEvent.rules
+                //MainEngine.activeEvent.rules
             }
         }
     }

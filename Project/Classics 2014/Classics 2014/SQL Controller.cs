@@ -144,11 +144,7 @@ namespace Classics_2014
             string Query2;
             int EventID;
             //Robs Code to convert Byte array to Hexadecimal
-            string hexRuleset;
-            StringBuilder hex = new StringBuilder(Options.Length * 2);
-            foreach (byte b in Options)
-                hex.AppendFormat("{0:x2}", b);
-            hexRuleset = hex.ToString();
+            string hexRuleset = ByteArrayToHex(Options);
             //Code ends here
 
             switch (EventType)
@@ -158,7 +154,7 @@ namespace Classics_2014
                     if (ExecuteNonQuery(Query1))
                     {
                         EventID = GetLastInsertKey();
-                        Query2 = "CREATE TABLE `event " + EventID + "` (`LandingID` INT(11) NOT NULL DEFAULT '-1',`UID` INT(11) NOT NULL DEFAULT '-1')";
+                        Query2 = "CREATE TABLE `event " + EventID + "` (`LandingID` INT(11) NOT NULL DEFAULT '-1',`Round` INT(11) NOT NULL DEFAULT '1',`UID` INT(11) NOT NULL DEFAULT '-1')";
                         if (ExecuteNonQuery(Query2))
                         {
                             return true;
@@ -202,11 +198,7 @@ namespace Classics_2014
         public int CreateAccuracyLanding(int EventID, int Score, byte[] LandingData)
         {
             int LandingID = -1;
-            string hexLanding;
-            StringBuilder hex = new StringBuilder(LandingData.Length * 2);
-            foreach (byte b in LandingData)
-                hex.AppendFormat("{0:x2}", b);
-            hexLanding = hex.ToString();
+            string hexLanding = ByteArrayToHex(LandingData);
 
             string query = "INSERT INTO `accuracy landings` (Score, WindData) VALUES ('" + Score + "', '" + hexLanding + "');";
 
@@ -246,6 +238,12 @@ namespace Classics_2014
         public bool AssignCompetitorToLanding(int CompetitorID, int RoundNum, int LandingID, int EventID)
         {
             string query = "UPDATE `event " + EventID + "` SET `Round`='" + RoundNum + "', `UID`='" + CompetitorID + "'  WHERE `LandingID`='" + LandingID + "';";
+            return ExecuteNonQuery(query);
+        }
+
+        public bool ModifyLanding(int LandingID, int Score)
+        {
+            string query = "UPDATE `accuracy landings` SET `Score`='" + Score + "', `Modified`='1' WHERE `LandingID`='" + LandingID + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -467,6 +465,15 @@ namespace Classics_2014
                              .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                              .ToArray();
         }
+
+        private static string ByteArrayToHex(byte[] Input)
+        {
+            StringBuilder hex = new StringBuilder(Input.Length * 2);
+            foreach (byte b in Input)
+                hex.AppendFormat("{0:x2}", b);
+            return hex.ToString();
+        }
+
         #endregion
         #endregion
     }

@@ -22,6 +22,7 @@ namespace Classics_2014
         public List<string> TeamNames;
         public int EventID;
         public TabControl TabControl;
+        public bool IsActive;
         public readonly ConcurrentQueue<Data> Data_queueEvent = new ConcurrentQueue<Data>();
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)

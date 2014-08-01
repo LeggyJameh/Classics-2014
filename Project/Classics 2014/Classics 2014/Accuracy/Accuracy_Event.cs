@@ -9,12 +9,11 @@ namespace Classics_2014.Accuracy
     class Accuracy_Event :Event 
     {
         #region variables and the such like
-        EventTeams activeEventTab;
         public EventAccuracyOptions EventOptionsTab;
         public EventTeams EventTeamsTab;
-        public EventAccuracy EventTab; 
+        public EventAccuracy EventTab;
         Engine engine;
-        TAccuracyRuleSet ruleSet;
+        public TAccuracyRuleSet ruleSet;
         List<TCompetitor> Competitors;
         List<string> ActiveTeams;
         TWind[] IncomingData;
@@ -67,7 +66,12 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count; i++)
                     {
                         AccuracyLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1) { LandingsToRemove.Add(currentLanding); currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding)); CompletedLandings.Add(currentLanding); }
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1)
+                        {
+                            LandingsToRemove.Add(currentLanding);
+                            currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding));
+                            CompletedLandings.Add(currentLanding);
+                        }
                         else
                         {
                             //ToDo Classify Landing, so we can do pro leet tricks
@@ -168,7 +172,7 @@ namespace Classics_2014.Accuracy
             ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
             Teams = TeamInput;
             TeamNames = TeamNamesInput;
-            //TODO: Create Teams table in DB
+            SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
             EventTeamsTab = null;
             ProceedToEvent();
         }
@@ -177,7 +181,7 @@ namespace Classics_2014.Accuracy
         {
             AccuracyLanding CurrentLanding = new AccuracyLanding();
             CurrentLanding.ID = -1;
-            if (CompletedLandings.Count -1 >= Index)
+            if (CompletedLandings.Count - 1 >= Index)
             {
                 CurrentLanding = CompletedLandings[Index];
                 CurrentLanding.dataGridCell = Cell;
@@ -186,18 +190,38 @@ namespace Classics_2014.Accuracy
             return CurrentLanding;
         }
 
-        public void RemoveCompletedLanding(AccuracyLanding Landing)
+        public int GetLandingIDFromCell(DataGridViewCell Cell)
         {
-            CompletedLandings.Remove(Landing);
+            for (int i = 0; i < CompletedLandings.Count; i++)
+			{
+                if (CompletedLandings[i].dataGridCell == Cell)
+                {
+                    return CompletedLandings[i].ID;
+                }
+                else
+                {
+                    return -1;
+                }
+			}
+            return -1;
         }
+
 
         public void makeActive()
         {
             if (IO_Controller.Serial_Input)
             {
+                IsActive = true;
                 engine.MakeActive(this);
                 ListenThread.Start();
             }
+        }
+
+        public void makeInactive()
+        {
+            engine.activeEvent = null;
+            IsActive = false;
+            //TODO: Gracefully end event thread.
         }
     }
 }

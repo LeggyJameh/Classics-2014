@@ -59,6 +59,12 @@
     <Compile Include="Accuracy\EventAccuracy.Designer.cs">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accuracy\ModifyLanding.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Accuracy\ModifyLanding.Designer.cs">
+      <DependentUpon>ModifyLanding.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -94,6 +100,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\EventAccuracyOptions.resx">
       <DependentUpon>EventAccuracyOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accuracy\ModifyLanding.resx">
+      <DependentUpon>ModifyLanding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventTeams.resx">
       <DependentUpon>EventTeams.cs</DependentUpon>

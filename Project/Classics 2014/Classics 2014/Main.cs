@@ -331,22 +331,12 @@ namespace Classics_2014
             
             foreach (DataPoint dP in chartWind.Series[0].Points)
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-                //MainEngine.activeEvent.rules
-=======
-=======
->>>>>>> origin/master
                 int hour = Convert.ToInt16(dP.AxisLabel.Substring(0, 2));
                 if (hour == numericUpDownHourSearch.Value)
                 {
                     chartWind.ChartAreas[0].AxisX.ScaleView.Position = dP.XValue;
                     return;
                 }
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
             }
             MessageBox.Show("Hour not on record.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
         }

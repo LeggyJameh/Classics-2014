@@ -20,6 +20,8 @@ namespace Classics_2014
         List<TWind> windList = new List<TWind>();
         List<Event> eventList = new List<Event>();
         private StreamWriter writer;
+        public FileStream fileStream;
+        private StreamReader reader;
         #endregion 
 
         public Engine(Main mainForm, TabControl tabControl)
@@ -29,6 +31,7 @@ namespace Classics_2014
             AquireMasterFile();
             IO_Controller = new IO_Controller();
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
+           
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 
             {
@@ -37,6 +40,7 @@ namespace Classics_2014
         }
         private void ListenProcedure()
         {
+            Thread.Sleep(100);
             do
             {
                 if (mainForm.IsHandleCreated)
@@ -68,7 +72,9 @@ namespace Classics_2014
             } while (true);
 
         }
-
+        private void InitialiseChart()
+        {
+        }
         private void UpdateWindMetrics(Data DatA)
         {
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
@@ -113,8 +119,23 @@ namespace Classics_2014
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\RecentMasterFile");
                 }
             }
-            writer = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", true);//ToDo Move this file
+            fileStream = new FileStream(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);//ToDo Move this file
+            writer = new StreamWriter(fileStream);
+            reader = new StreamReader(fileStream);
+            DeSerializeGraph();
             //Confirm 
+        }
+        public void DeSerializeGraph()
+        {
+
+            string input;
+            string[] args;
+            while (!reader.EndOfStream)
+            {
+                input = reader.ReadLine();
+                args = input.Split(':');
+                mainForm.UpdateWindGraphNonInvokable(new TWind { time = (args[0] + args[1] + (args[2].Substring(0,2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
+            }
         }
         private void ReOrderWindArray(TWind newWind)
         {
@@ -130,13 +151,13 @@ namespace Classics_2014
         public void CloseThreads()
         {
             ListenThread.Abort();
+            writer.Flush();
             IO_Controller.EndThreads();
             foreach (Event e in eventList)
             {
                 e.EndThread();
             }
             SQL_Controller.StopDatabase();
-            writer.Close();
         }
     }
 }

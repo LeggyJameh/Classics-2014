@@ -32,48 +32,10 @@ namespace Classics_2014
             comboBoxWindOut.SelectedItem = WindoutChartColour.Name;
             comboBoxDirectionOut.SelectedItem = DirectionoutChartColour.Name;
             comboBoxBothOut.SelectedItem = BothOutChartColour.Name;
-            AquireGraph();
 
-        }
-        public void DeSerializeGraph()
-        {
-            StreamReader reader = new StreamReader(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
-            string input;
-            string[] args;
-            while (!reader.EndOfStream)
-            {
-                input = reader.ReadLine();
-                args = input.Split('*');
-                chartWind.Series[0].Points.AddXY(args[0], decimal.Parse(args[1]));
-                chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = args[2];
-            }
-            reader.BaseStream.Close();
-            reader.Dispose();
-            for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
-            {
-                prevData = chartWind.Series[0].Points[i - 1];
-                PointColorCheckSetNonInvokable(new TWind { speed = (float)chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString()) }, i);
-                trackBarWindZoom_Scroll(this, new EventArgs());
-            }
-
-        }
-        private void AquireGraph()
-        {
-            if (File.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx"))
-            {
-                DateTime lastCreationTime = File.GetCreationTime(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
-                if (lastCreationTime.Date.DayOfYear == DateTime.Now.DayOfYear)
-                {
-                    DeSerializeGraph();
-                    return;
-                }
-            }
-            File.Create(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
-            
         }
         private void buttonExit_Click(object sender, EventArgs e)
         {
-            SaveGraph();
             MainEngine.CloseThreads();
             this.Close();
         }
@@ -131,6 +93,30 @@ namespace Classics_2014
                         if (checkBoxAutoScroll.Checked)
                         {
                             chartWind.Invoke((MethodInvoker)(() => chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1));
+                        }
+                    }
+                }
+            }
+        }
+        public void UpdateWindGraphNonInvokable(TWind wind)
+        {
+            if (2 < (chartWind.Series[0].Points.Count))
+            {
+                prevData = chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 2];
+            }
+            chartWind.Series[0].Points.AddXY(wind.time, wind.speed);
+            chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 1].Tag = wind.direction.ToString();
+            if (2 < (chartWind.Series[0].Points.Count))
+            {
+                prevData = chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 2];
+                PointColorCheckSetNonInvokable(wind, chartWind.Series[0].Points.Count - 1);
+                if (checkBoxAutoScroll.Checked)
+                {
+                    if (chartWind.ChartAreas[0].AxisX.ScrollBar.IsVisible == true)
+                    {
+                        if (checkBoxAutoScroll.Checked)
+                        {
+                         chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1;
                         }
                     }
                 }
@@ -218,31 +204,14 @@ namespace Classics_2014
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             MainEngine.CloseThreads();
-            SaveGraph();
         }
-        private void SaveGraph()
-        {
-            if (!File.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx"))
-            {
-                File.Create(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx");
-            }
-            GC.Collect();
-            using (StreamWriter s = new StreamWriter(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentGraph.Tx",true))
-            {
-                
-                for (int i = 0; i < chartWind.Series[0].Points.Count; i++)
-                {
-                    DataPoint p = chartWind.Series[0].Points[i];
-                    s.WriteLine(p.AxisLabel + "*" + p.YValues[0] + "*" + p.Tag.ToString());
-                }
-            }
-        }
+
         private void ResetGraphColours()
         {
             for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
             {
                 prevData = chartWind.Series[0].Points[i - 1];
-                PointColorCheckSet(new TWind { speed = (float)chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString()) }, i);
+                PointColorCheckSetNonInvokable(new TWind { speed = (float)chartWind.Series[0].Points[i].YValues[0], direction = (ushort)Convert.ToInt16(chartWind.Series[0].Points[i].Tag.ToString()) }, i);
             }
         }
         private void numericUpDownWindOverChartBar_ValueChanged(object sender, EventArgs e)

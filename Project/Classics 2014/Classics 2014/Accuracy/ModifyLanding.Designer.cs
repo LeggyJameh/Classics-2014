@@ -30,10 +30,10 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonOk = new System.Windows.Forms.Button();
             this.numericUpDownScore = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScore)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
@@ -56,7 +56,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(284, 112);
-            this.tableLayoutPanel1.TabIndex = 0;
+            this.tableLayoutPanel1.TabIndex = 4;
             // 
             // label1
             // 
@@ -65,20 +65,9 @@
             this.label1.Location = new System.Drawing.Point(70, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 37);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 3;
             this.label1.Text = "What score would you like to set the landing to?";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // buttonOk
-            // 
-            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonOk.Location = new System.Drawing.Point(75, 4);
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(66, 23);
-            this.buttonOk.TabIndex = 2;
-            this.buttonOk.Text = "Ok";
-            this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // numericUpDownScore
             // 
@@ -91,7 +80,7 @@
             0});
             this.numericUpDownScore.Name = "numericUpDownScore";
             this.numericUpDownScore.Size = new System.Drawing.Size(144, 20);
-            this.numericUpDownScore.TabIndex = 3;
+            this.numericUpDownScore.TabIndex = 0;
             this.numericUpDownScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.numericUpDownScore.Value = new decimal(new int[] {
             16,
@@ -121,9 +110,20 @@
             this.buttonCancel.Location = new System.Drawing.Point(3, 4);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(66, 23);
-            this.buttonCancel.TabIndex = 3;
+            this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            // 
+            // buttonOk
+            // 
+            this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonOk.Location = new System.Drawing.Point(75, 4);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(66, 23);
+            this.buttonOk.TabIndex = 1;
+            this.buttonOk.Text = "Ok";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
             // ModifyLanding
             // 
@@ -135,6 +135,7 @@
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "ModifyLanding";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TopMost = true;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();

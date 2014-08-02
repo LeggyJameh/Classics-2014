@@ -257,6 +257,17 @@ namespace Classics_2014
 
         }
 
+        public bool RemoveAccuracyLanding(int LandingID, int EventID)
+        {
+            string query = "DELETE FROM `accuracy landings` WHERE `LandingID`='" + LandingID + "';";
+            if (ExecuteNonQuery(query))
+            {
+                string query2 = "DELETE FROM `event " + EventID + "` WHERE `LandingID`='" + LandingID + "';";
+                return ExecuteNonQuery(query2);
+            }
+            return false;
+        }
+
         public bool RemoveCompetitor(int UID)
         {
             string query = "UPDATE competitors SET `Team`='' WHERE `UID`='" + UID + "';";

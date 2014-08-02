@@ -10,6 +10,7 @@ namespace Classics_2014.Accuracy
     class AccuracyLanding
     {
         public int ID;
+        [NonSerialized]
         public DataGridViewCell dataGridCell;
         public TWind[] windDataPrior;
         public int score;
@@ -18,6 +19,5 @@ namespace Classics_2014.Accuracy
         public String TimeOfLanding;
         public TWind LandingWind;
         public TWind[] WindDataAfter;
-        public bool IsModified;
     }
 }

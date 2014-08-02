@@ -66,6 +66,12 @@
       <DependentUpon>ModifyLanding.cs</DependentUpon>
     </Compile>
     <Compile Include="Accuracy\MySqlReturnLanding.cs" />
+    <Compile Include="Accuracy\TeamLeaderboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\TeamLeaderboard.Designer.cs">
+      <DependentUpon>TeamLeaderboard.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\ModifyLanding.resx">
       <DependentUpon>ModifyLanding.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accuracy\TeamLeaderboard.resx">
+      <DependentUpon>TeamLeaderboard.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventTeams.resx">
       <DependentUpon>EventTeams.cs</DependentUpon>

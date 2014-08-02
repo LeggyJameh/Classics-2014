@@ -22,6 +22,7 @@ namespace Classics_2014
         public float finalApproachTime;
     }
 
+    [Serializable]
     public struct TWind
     {
         public string time;
@@ -29,6 +30,7 @@ namespace Classics_2014
         public ushort direction;
     }
 
+    [Serializable]
     public struct TCompetitor
     {
         public int ID;
@@ -37,6 +39,7 @@ namespace Classics_2014
         public string nationality;
     }
 
+    [Serializable]
     public struct TMySQLEventReturn
     {
         public int ID;

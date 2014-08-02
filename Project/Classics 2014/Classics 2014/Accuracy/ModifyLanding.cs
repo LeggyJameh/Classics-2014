@@ -22,12 +22,22 @@ namespace Classics_2014.Accuracy
             InitializeComponent();
             numericUpDownScore.Maximum = MaxScore;
             numericUpDownScore.Value = MaxScore;
+            numericUpDownScore.Focus();
+            this.numericUpDownScore.KeyDown += new KeyEventHandler(numericUpDownScore_KeyDown);
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
             NewScore = Convert.ToInt16(numericUpDownScore.Value);
             this.Close();
+        }
+
+        private void numericUpDownScore_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                buttonOk.PerformClick();
+            }
         }
 
     }

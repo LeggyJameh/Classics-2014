@@ -220,6 +220,19 @@ namespace Classics_2014.Accuracy
             return CurrentLanding;
         }
 
+        public void UnassignLanding(DataGridViewCell Cell)
+        {
+            for (int i = 0; i < CompletedLandings.Count; i++)
+            {
+                if (CompletedLandings[i].dataGridCell == Cell)
+                {
+                    CompletedLandings[i].dataGridCell = null;
+                    EventTab.MethodAddLanding(CompletedLandings[i]);
+                    NumberOfLandings--;
+                }
+            }
+        }
+
         public int GetLandingIDFromCell(DataGridViewCell Cell)
         {
             for (int i = 0; i < CompletedLandings.Count; i++)

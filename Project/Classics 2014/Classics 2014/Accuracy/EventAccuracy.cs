@@ -15,6 +15,7 @@ namespace Classics_2014.Accuracy
         TabControl tabControl;
         int CurrentCellValue;
         bool TeamedEvent;
+        int RoundNumber = 1;
 
         public EventAccuracy(Accuracy_Event Event, TabControl Main)
         {
@@ -31,7 +32,6 @@ namespace Classics_2014.Accuracy
             {
                 LoadCompetitorsIntoGrid();
             }
-            
         }
         public int MethodAddLanding(Accuracy.AccuracyLanding Landing)
         {
@@ -103,12 +103,10 @@ namespace Classics_2014.Accuracy
 
                                     if (CurrentLanding.ID != -1)
                                     {
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].Tag = "Edit";
                                         dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
                                         dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].ReadOnly = false;
+                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].ReadOnly = true;
                                         dataGridViewScore[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.LightGreen;
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].Tag = "";
 
                                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
                                             Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
@@ -143,26 +141,59 @@ namespace Classics_2014.Accuracy
         {
             if (dataGridViewScore.SelectedCells.Count != 0)
             {
-                if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                if (dataGridViewScore.SelectedCells[0].Value != null)
                 {
-                    int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-                    dataGridViewScore.SelectedCells[0].Value = NewScore;
-                    dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
-                    dataGridViewScore[0, 0].Selected = true;
-                    Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                    {
+                        int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                        dataGridViewScore.SelectedCells[0].Value = NewScore;
+                        dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
+                        Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                    }
                 }
             }
         }
 
-        private void UpdateTeamLeaderboard()
+        private void buttonManualLanding_Click(object sender, EventArgs e)
         {
-            dataGridViewTeamLeaderboard.Rows.Clear();
-            List<MySqlReturnLanding> Landings = Connected_Event.SQL_Controller.GetLandingsForAccuracyEvent(Connected_Event.EventID, Connected_Event);
+            if (dataGridViewScore.SelectedCells.Count != 0)
+            {
+                if (dataGridViewScore.SelectedCells[0].Value == null)
+                {
+                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                    {
+                        int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                        dataGridViewScore.SelectedCells[0].Value = NewScore;
+                        dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
+
+                        int LandingID;
+                        LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore, new Byte[1]);
+
+                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
+                        Convert.ToInt16(dataGridViewScore.Columns[dataGridViewScore.SelectedCells[0].ColumnIndex].Name.Substring(11)),
+                        LandingID, Connected_Event.EventID);
+                    }
+                }
+            }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonNextRound_Click(object sender, EventArgs e)
         {
-            UpdateTeamLeaderboard();
+            RoundNumber++;
+            DataGridViewColumn NewColumn = (DataGridViewColumn)dataGridViewScore.Columns[4].Clone();
+            NewColumn.Name = "ColumnRound" + RoundNumber;
+            NewColumn.HeaderText = "Round " + RoundNumber;
+            dataGridViewScore.Columns.Add(NewColumn);
+        }
+
+        private void buttonUnassignLanding_Click(object sender, EventArgs e)
+        {
+            int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]);
+            dataGridViewScore.SelectedCells[0].Value = null;
+
+            Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+
+            Connected_Event.UnassignLanding(dataGridViewScore.SelectedCells[0]);
         }
 
     }

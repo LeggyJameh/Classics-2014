@@ -31,17 +31,11 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlEvent = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPageScores = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.labelLatestScore = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.dataGridViewScore = new System.Windows.Forms.DataGridView();
-            this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonManualLanding = new System.Windows.Forms.Button();
@@ -57,33 +51,32 @@
             this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRemoveLanding = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridViewTeamLeaderboard = new System.Windows.Forms.DataGridView();
-            this.ColumnRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTeamRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tabPageTeamLeaderboard = new System.Windows.Forms.TabPage();
+            this.tabPageSinglesLeaderBoard = new System.Windows.Forms.TabPage();
+            this.tabPageReports = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
+            this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControlEvent.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.tabPageScores.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeamLeaderboard)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControlEvent
             // 
             this.tabControlEvent.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControlEvent.Controls.Add(this.tabPage1);
-            this.tabControlEvent.Controls.Add(this.tabPage2);
-            this.tabControlEvent.Controls.Add(this.tabPage3);
+            this.tabControlEvent.Controls.Add(this.tabPageScores);
+            this.tabControlEvent.Controls.Add(this.tabPageTeamLeaderboard);
+            this.tabControlEvent.Controls.Add(this.tabPageSinglesLeaderBoard);
+            this.tabControlEvent.Controls.Add(this.tabPageReports);
             this.tabControlEvent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlEvent.Location = new System.Drawing.Point(0, 0);
             this.tabControlEvent.Name = "tabControlEvent";
@@ -91,16 +84,16 @@
             this.tabControlEvent.Size = new System.Drawing.Size(1280, 800);
             this.tabControlEvent.TabIndex = 0;
             // 
-            // tabPage1
+            // tabPageScores
             // 
-            this.tabPage1.Controls.Add(this.tableLayoutPanel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 4);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1272, 774);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Scores";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPageScores.Controls.Add(this.tableLayoutPanel1);
+            this.tabPageScores.Location = new System.Drawing.Point(4, 4);
+            this.tabPageScores.Name = "tabPageScores";
+            this.tabPageScores.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageScores.Size = new System.Drawing.Size(1272, 774);
+            this.tabPageScores.TabIndex = 0;
+            this.tabPageScores.Text = "Scores";
+            this.tabPageScores.UseVisualStyleBackColor = true;
             // 
             // tableLayoutPanel1
             // 
@@ -155,7 +148,7 @@
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewScore.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewScore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -177,47 +170,6 @@
             this.dataGridViewScore.Size = new System.Drawing.Size(1006, 662);
             this.dataGridViewScore.TabIndex = 1;
             this.dataGridViewScore.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dataGridViewScore_CellMouseClick);
-            // 
-            // ColumnUID
-            // 
-            this.ColumnUID.HeaderText = "ID";
-            this.ColumnUID.Name = "ColumnUID";
-            this.ColumnUID.ReadOnly = true;
-            this.ColumnUID.Visible = false;
-            // 
-            // ColumnName
-            // 
-            this.ColumnName.HeaderText = "Competitor Name";
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            // 
-            // ColumnTeam
-            // 
-            this.ColumnTeam.HeaderText = "Team";
-            this.ColumnTeam.Name = "ColumnTeam";
-            this.ColumnTeam.ReadOnly = true;
-            this.ColumnTeam.Visible = false;
-            // 
-            // ColumnNationality
-            // 
-            this.ColumnNationality.HeaderText = "Nationality";
-            this.ColumnNationality.Name = "ColumnNationality";
-            this.ColumnNationality.ReadOnly = true;
-            // 
-            // ColumnIntermixTeam
-            // 
-            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
-            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
-            this.ColumnIntermixTeam.ReadOnly = true;
-            // 
-            // ColumnRound1
-            // 
-            this.ColumnRound1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnRound1.HeaderText = "Round 1";
-            this.ColumnRound1.Name = "ColumnRound1";
-            this.ColumnRound1.ReadOnly = true;
-            this.ColumnRound1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnRound1.Width = 68;
             // 
             // label1
             // 
@@ -245,13 +197,13 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.buttonManualLanding, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonNextRound, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonMakeActive, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonEditLanding, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonRenameCompetitor, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonClose, 7, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonUnassignLanding, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonMakeActive, 7, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonNextRound, 6, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonRenameCompetitor, 5, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonUnassignLanding, 4, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonEditLanding, 3, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonManualLanding, 2, 0);
+            this.tableLayoutPanel2.Controls.Add(this.buttonClose, 1, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 721);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -263,28 +215,30 @@
             // buttonManualLanding
             // 
             this.buttonManualLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonManualLanding.Location = new System.Drawing.Point(156, 3);
+            this.buttonManualLanding.Location = new System.Drawing.Point(256, 3);
             this.buttonManualLanding.Name = "buttonManualLanding";
             this.buttonManualLanding.Size = new System.Drawing.Size(94, 38);
             this.buttonManualLanding.TabIndex = 7;
             this.buttonManualLanding.Text = "Manual Landing";
             this.buttonManualLanding.UseVisualStyleBackColor = true;
+            this.buttonManualLanding.Click += new System.EventHandler(this.buttonManualLanding_Click);
             // 
             // buttonNextRound
             // 
             this.buttonNextRound.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonNextRound.Location = new System.Drawing.Point(356, 3);
+            this.buttonNextRound.Location = new System.Drawing.Point(656, 3);
             this.buttonNextRound.Name = "buttonNextRound";
             this.buttonNextRound.Size = new System.Drawing.Size(94, 38);
             this.buttonNextRound.TabIndex = 1;
             this.buttonNextRound.Text = "Next Round";
             this.buttonNextRound.UseVisualStyleBackColor = true;
+            this.buttonNextRound.Click += new System.EventHandler(this.buttonNextRound_Click);
             // 
             // buttonMakeActive
             // 
             this.buttonMakeActive.BackColor = System.Drawing.Color.Red;
             this.buttonMakeActive.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonMakeActive.Location = new System.Drawing.Point(456, 3);
+            this.buttonMakeActive.Location = new System.Drawing.Point(756, 3);
             this.buttonMakeActive.Name = "buttonMakeActive";
             this.buttonMakeActive.Size = new System.Drawing.Size(94, 38);
             this.buttonMakeActive.TabIndex = 2;
@@ -295,18 +249,18 @@
             // buttonEditLanding
             // 
             this.buttonEditLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonEditLanding.Location = new System.Drawing.Point(556, 3);
+            this.buttonEditLanding.Location = new System.Drawing.Point(356, 3);
             this.buttonEditLanding.Name = "buttonEditLanding";
             this.buttonEditLanding.Size = new System.Drawing.Size(94, 38);
             this.buttonEditLanding.TabIndex = 3;
-            this.buttonEditLanding.Text = "Edit Landing";
+            this.buttonEditLanding.Text = "Edit Score";
             this.buttonEditLanding.UseVisualStyleBackColor = true;
             this.buttonEditLanding.Click += new System.EventHandler(this.buttonEditLanding_Click);
             // 
             // buttonRenameCompetitor
             // 
             this.buttonRenameCompetitor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRenameCompetitor.Location = new System.Drawing.Point(656, 3);
+            this.buttonRenameCompetitor.Location = new System.Drawing.Point(556, 3);
             this.buttonRenameCompetitor.Name = "buttonRenameCompetitor";
             this.buttonRenameCompetitor.Size = new System.Drawing.Size(94, 38);
             this.buttonRenameCompetitor.TabIndex = 4;
@@ -316,7 +270,7 @@
             // buttonClose
             // 
             this.buttonClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonClose.Location = new System.Drawing.Point(756, 3);
+            this.buttonClose.Location = new System.Drawing.Point(156, 3);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(94, 38);
             this.buttonClose.TabIndex = 5;
@@ -327,12 +281,13 @@
             // buttonUnassignLanding
             // 
             this.buttonUnassignLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUnassignLanding.Location = new System.Drawing.Point(256, 3);
+            this.buttonUnassignLanding.Location = new System.Drawing.Point(456, 3);
             this.buttonUnassignLanding.Name = "buttonUnassignLanding";
             this.buttonUnassignLanding.Size = new System.Drawing.Size(94, 38);
             this.buttonUnassignLanding.TabIndex = 6;
             this.buttonUnassignLanding.Text = "Unassign Landing";
             this.buttonUnassignLanding.UseVisualStyleBackColor = true;
+            this.buttonUnassignLanding.Click += new System.EventHandler(this.buttonUnassignLanding_Click);
             // 
             // dataGridViewLandings
             // 
@@ -395,76 +350,33 @@
             this.buttonRemoveLanding.Text = "Remove Landing";
             this.buttonRemoveLanding.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabPageTeamLeaderboard
             // 
-            this.tabPage2.Controls.Add(this.tableLayoutPanel4);
-            this.tabPage2.Location = new System.Drawing.Point(4, 4);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1272, 774);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Teams";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPageTeamLeaderboard.Location = new System.Drawing.Point(4, 4);
+            this.tabPageTeamLeaderboard.Name = "tabPageTeamLeaderboard";
+            this.tabPageTeamLeaderboard.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTeamLeaderboard.Size = new System.Drawing.Size(1272, 774);
+            this.tabPageTeamLeaderboard.TabIndex = 1;
+            this.tabPageTeamLeaderboard.Text = "Teams";
+            this.tabPageTeamLeaderboard.UseVisualStyleBackColor = true;
             // 
-            // tableLayoutPanel4
+            // tabPageSinglesLeaderBoard
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Controls.Add(this.dataGridViewTeamLeaderboard, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.button1, 1, 1);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(1266, 768);
-            this.tableLayoutPanel4.TabIndex = 0;
+            this.tabPageSinglesLeaderBoard.Location = new System.Drawing.Point(4, 4);
+            this.tabPageSinglesLeaderBoard.Name = "tabPageSinglesLeaderBoard";
+            this.tabPageSinglesLeaderBoard.Size = new System.Drawing.Size(1272, 774);
+            this.tabPageSinglesLeaderBoard.TabIndex = 3;
+            this.tabPageSinglesLeaderBoard.Text = "Leaderboard";
+            this.tabPageSinglesLeaderBoard.UseVisualStyleBackColor = true;
             // 
-            // dataGridViewTeamLeaderboard
+            // tabPageReports
             // 
-            this.dataGridViewTeamLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridViewTeamLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewTeamLeaderboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnRank,
-            this.ColumnTeamName,
-            this.ColumnTeamRound1});
-            this.dataGridViewTeamLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewTeamLeaderboard.Location = new System.Drawing.Point(3, 3);
-            this.dataGridViewTeamLeaderboard.Name = "dataGridViewTeamLeaderboard";
-            this.dataGridViewTeamLeaderboard.RowHeadersVisible = false;
-            this.dataGridViewTeamLeaderboard.Size = new System.Drawing.Size(1006, 608);
-            this.dataGridViewTeamLeaderboard.TabIndex = 0;
-            // 
-            // ColumnRank
-            // 
-            this.ColumnRank.HeaderText = "Rank";
-            this.ColumnRank.Name = "ColumnRank";
-            this.ColumnRank.ReadOnly = true;
-            // 
-            // ColumnTeamName
-            // 
-            this.ColumnTeamName.HeaderText = "Team Name";
-            this.ColumnTeamName.Name = "ColumnTeamName";
-            this.ColumnTeamName.ReadOnly = true;
-            // 
-            // ColumnTeamRound1
-            // 
-            this.ColumnTeamRound1.FillWeight = 40F;
-            this.ColumnTeamRound1.HeaderText = "Round 1 Total";
-            this.ColumnTeamRound1.MinimumWidth = 50;
-            this.ColumnTeamRound1.Name = "ColumnTeamRound1";
-            this.ColumnTeamRound1.ReadOnly = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1272, 774);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Reports";
-            this.tabPage3.UseVisualStyleBackColor = true;
+            this.tabPageReports.Location = new System.Drawing.Point(4, 4);
+            this.tabPageReports.Name = "tabPageReports";
+            this.tabPageReports.Size = new System.Drawing.Size(1272, 774);
+            this.tabPageReports.TabIndex = 2;
+            this.tabPageReports.Text = "Reports";
+            this.tabPageReports.UseVisualStyleBackColor = true;
             // 
             // timer1
             // 
@@ -472,15 +384,52 @@
             this.timer1.Interval = 1500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // button1
+            // ColumnUID
             // 
-            this.button1.Location = new System.Drawing.Point(1015, 617);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.ColumnUID.HeaderText = "ID";
+            this.ColumnUID.Name = "ColumnUID";
+            this.ColumnUID.ReadOnly = true;
+            this.ColumnUID.Visible = false;
+            this.ColumnUID.Width = 24;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Competitor Name";
+            this.ColumnName.MinimumWidth = 50;
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            this.ColumnName.Width = 104;
+            // 
+            // ColumnTeam
+            // 
+            this.ColumnTeam.HeaderText = "Team";
+            this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
+            this.ColumnTeam.Visible = false;
+            this.ColumnTeam.Width = 59;
+            // 
+            // ColumnNationality
+            // 
+            this.ColumnNationality.HeaderText = "Nationality";
+            this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
+            this.ColumnNationality.Width = 81;
+            // 
+            // ColumnIntermixTeam
+            // 
+            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
+            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
+            this.ColumnIntermixTeam.ReadOnly = true;
+            this.ColumnIntermixTeam.Width = 90;
+            // 
+            // ColumnRound1
+            // 
+            this.ColumnRound1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
+            this.ColumnRound1.HeaderText = "Round 1";
+            this.ColumnRound1.Name = "ColumnRound1";
+            this.ColumnRound1.ReadOnly = true;
+            this.ColumnRound1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.ColumnRound1.Width = 68;
             // 
             // EventAccuracy
             // 
@@ -490,16 +439,13 @@
             this.Name = "EventAccuracy";
             this.Size = new System.Drawing.Size(1280, 800);
             this.tabControlEvent.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
+            this.tabPageScores.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewTeamLeaderboard)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -507,12 +453,12 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControlEvent;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPageScores;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.DataGridView dataGridViewScore;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TabPage tabPageTeamLeaderboard;
+        private System.Windows.Forms.TabPage tabPageReports;
         private System.Windows.Forms.Label labelLatestScore;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
@@ -527,20 +473,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
+        private System.Windows.Forms.Button buttonUnassignLanding;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.Button buttonManualLanding;
+        private System.Windows.Forms.TabPage tabPageSinglesLeaderBoard;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRound1;
-        private System.Windows.Forms.Button buttonUnassignLanding;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button buttonManualLanding;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridView dataGridViewTeamLeaderboard;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRank;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamRound1;
-        private System.Windows.Forms.Button button1;
     }
 }

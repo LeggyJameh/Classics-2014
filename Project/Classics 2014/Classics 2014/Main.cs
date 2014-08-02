@@ -14,6 +14,7 @@ namespace Classics_2014
 {
     public partial class Main : Form
     {
+        int flopsToMaintainColourDirection, flopsToMaintainColourSpeed;
         Engine MainEngine;
         public Main()
         {
@@ -49,8 +50,18 @@ namespace Classics_2014
         }
         public void UpdateWind(TWind windData)
         {
-            textBoxSideSpeed.Invoke((MethodInvoker)(() => textBoxSideSpeed.Text = windData.speed.ToString()));
-            textBoxSideDirection.Invoke((MethodInvoker)(() => textBoxSideDirection.Text = windData.direction.ToString()));
+            textBoxSideSpeed.Text = windData.speed.ToString();
+            textBoxSideDirection.Text = windData.direction.ToString();
+            if (flopsToMaintainColourSpeed == 0)
+            {
+                textBoxSideSpeed.ForeColor = Color.White;
+            }
+            else { flopsToMaintainColourSpeed--; }
+            if (flopsToMaintainColourDirection == 0)
+            {
+                textBoxSideSpeed.ForeColor = Color.White;
+            }
+            else { flopsToMaintainColourDirection--; }
         }
         private void timerScoreTimer_Tick(object sender, EventArgs e)
         {
@@ -75,41 +86,57 @@ namespace Classics_2014
         {
             MainEngine.CloseThreads();
             UserSettings.Default.Save();
+            Thread.Sleep(100);
+            
         }
-        //private bool IsDirectionOut(TWind wind, int directionLimit, float speedLimit)
-        //{
-        //    int minimum, maximum, minOverFlow, maxOverFlow;
-            //if (prevData < numericUpDownDirectionChangeGraphLimit.Value)
-            //{
-            //    minimum = 0;
-            //    minOverFlow = (360 - ((int)numericUpDownDirectionChangeGraphLimit.Value - prevData));
-            //    if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
-            //}
-            //else
-            //{
-            //    minimum = prevData - (int)numericUpDownDirectionChangeGraphLimit.Value;
-            //    if (wind.direction < minimum) { return true; }
-            //    else if (prevData > wind.direction) { return false; }
-            //}
-            ////Max checks
-            //if ((prevData + (int)numericUpDownDirectionChangeGraphLimit.Value) > 360)
-            //{
-            //    maximum = 360;
-            //    maxOverFlow = 0 + ((prevData + (int)numericUpDownDirectionChangeGraphLimit.Value) - 360);
-            //    if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
-            //}
-            //else
-            //{
-            //    maximum = prevData + (int)numericUpDownDirectionChangeGraphLimit.Value;
-            //    if (wind.direction > maximum) { return true; }
-            //}
+        private bool IsDirectionOut(TWind wind, int directionLimit)
+        {
+            int prevData = Convert.ToInt16(textBoxSideDirection.Text);
+            int minimum, maximum, minOverFlow, maxOverFlow;
+            if (Convert.ToInt16(textBoxSideDirection.Text) < directionLimit)
+            {
+                minimum = 0;
+                minOverFlow = (360 - ((directionLimit - prevData)));
+                if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
+            }
+            else
+            {
+                minimum = prevData - directionLimit;
+                if (wind.direction < minimum) { return true; }
+                else if (prevData > wind.direction) { return false; }
+            }
+            //Max checks
+            if (prevData + directionLimit > 360)
+            {
+                maximum = 360;
+                maxOverFlow = 0 + ((prevData + directionLimit) - 360);
+                if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
+            }
+            else
+            {
+                maximum = prevData + directionLimit;
+                if (wind.direction > maximum) { return true; }
+            }
 
-            //return false;
-        //}
+            return false;
+        }
 
         public void SetColoursForText(TWind wind, int directionLimit, float speedLimit)
         {
-            textBoxSideDirection.Text = "Holy Crap it works!";
+            if (IsDirectionOut(wind, directionLimit))
+            {
+                flopsToMaintainColourDirection = UserSettings.Default.flopsToMaintainColourDirection;
+                textBoxSideDirection.ForeColor = Color.Red;
+            }
+            else
+            {
+                if (wind.speed > speedLimit)
+                {
+
+                    flopsToMaintainColourSpeed = UserSettings.Default.flopsToMaintainColourSpeed;
+                    textBoxSideSpeed.ForeColor = Color.Red;
+                }
+            }
         }
     }
 }

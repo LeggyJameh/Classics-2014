@@ -263,7 +263,7 @@ namespace Classics_2014.Accuracy
             //TODO: Gracefully end event thread.
         }
 
-        public TWind ReturnWindLimits()
+        public override TWind ReturnWindLimits()
         {
             TWind CurrentWind = new TWind();
             CurrentWind.direction = Convert.ToUInt16(ruleSet.directionOut);

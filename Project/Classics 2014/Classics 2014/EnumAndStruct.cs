@@ -9,7 +9,7 @@ namespace Classics_2014
     [Serializable]
     public struct TAccuracyRuleSet 
     {
-        public bool TeamsSetup;
+        public int Stage;
         public string preset;
         public bool allScoresUsed;
         public int noOfCompetitorsPerTeam;

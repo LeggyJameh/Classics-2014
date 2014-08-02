@@ -100,7 +100,7 @@ namespace Classics_2014
         {
             int TeamsFull = 0;
             labelWarning.Text = "";
-            for (int i = 1; i < Teams.Count; i++)
+            for (int i = 1; i < Teams.Count; i++) 
             {
                 if (Teams[i].Count == CompetitorsPerTeam || Teams[i].Count == 0)
                 {
@@ -207,7 +207,7 @@ namespace Classics_2014
             RefreshAll();
         }
 
-        private void buttonAddFakeCompetitor_Click(object sender, EventArgs e)
+        private void AddFakeCompetitor(int TeamIndex)
         {
             LastFakeCompetitor++;
             TCompetitor NewCompetitor = new TCompetitor();
@@ -215,8 +215,12 @@ namespace Classics_2014
             NewCompetitor.name = "Fake Competitor " + LastFakeCompetitor;
             NewCompetitor.team = "N/A";
             NewCompetitor.nationality = "N/A";
+            Teams[TeamIndex].Add(NewCompetitor);
+        }
 
-            Teams[0].Add(NewCompetitor);
+        private void buttonAddFakeCompetitor_Click(object sender, EventArgs e)
+        {
+            AddFakeCompetitor(0);
             RefreshAll();
         }
 
@@ -249,24 +253,65 @@ namespace Classics_2014
             }
         }
 
-        private void buttonStart_Click(object sender, EventArgs e)
+        private bool NoTeamCheck()
         {
-            if (GetTeamsFullOrEmpty() == Teams.Count - 1)
+            if (Teams[0].Count > 0)
             {
-                Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
-                Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
-                Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
-                switch (Connected_Event.EventType)
+                if (MessageBox.Show("There are still competitors with no team, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    case EventType.Accuracy:
-                        Accuracy.Accuracy_Event accEvent = (Connected_Event as Accuracy.Accuracy_Event);
-                        accEvent.EventStart();
-                        break;
+                    return true;
+                }
+                else
+                {
+                    return false;
                 }
             }
             else
             {
-                MessageBox.Show("Not all teams full or empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return true;
+            }
+        }
+
+        private bool CheckCompetitorCount()
+        {
+            int Competitors = 0;
+            for (int i = 1; i < Teams.Count; i++)
+            {
+                for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                {
+                    Competitors++;
+                }
+            }
+            return (Competitors > 0);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+            if (CheckCompetitorCount())
+            {
+                if (NoTeamCheck())
+                {
+                    if (GetTeamsFullOrEmpty() == Teams.Count - 1)
+                    {
+                        Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
+                        Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
+                        Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
+                        switch (Connected_Event.EventType)
+                        {
+                            case EventType.Accuracy:
+                                Accuracy.Accuracy_Event accEvent = (Connected_Event as Accuracy.Accuracy_Event);
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not all teams full or empty.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please organise competitors into teams.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
         }
 
@@ -274,6 +319,22 @@ namespace Classics_2014
         {
             Connected_Event.SQL_Controller.RemoveEvent(EventID);
             Connected_Event.ReturnToOptions();
+        }
+
+        private void buttonFillTeams_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < Teams.Count; i++)
+            {
+                if (Teams[i].Count < CompetitorsPerTeam && Teams[i].Count != 0 && TeamNames[i] != "NO TEAM")
+                {
+                    int StartCount = Teams[i].Count;
+                    for (int i2 = 0; i2 < CompetitorsPerTeam - StartCount; i2++)
+                    {
+                        AddFakeCompetitor(i);
+                    }
+                }
+            }
+            RefreshAll();
         }
 
     }

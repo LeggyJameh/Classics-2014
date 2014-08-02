@@ -14,6 +14,7 @@ namespace Classics_2014.Accuracy
         Accuracy_Event Connected_Event;
         TabControl tabControl;
         int CurrentCellValue;
+        bool TeamedEvent;
 
         public EventAccuracy(Accuracy_Event Event, TabControl Main)
         {
@@ -21,7 +22,16 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             InitializeComponent();
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
-            LoadTeamsIntoGrid();
+            if (Connected_Event.Teams.Count > 0)
+            {
+                TeamedEvent = true;
+                LoadTeamsIntoGrid();
+            }
+            else
+            {
+                LoadCompetitorsIntoGrid();
+            }
+            
         }
         public int MethodAddLanding(Accuracy.AccuracyLanding Landing)
         {
@@ -30,7 +40,14 @@ namespace Classics_2014.Accuracy
             return Connected_Event.NumberOfLandings;
                 //ToDo Checks to make sure its under wind and the like
         }
-        
+
+        private void LoadCompetitorsIntoGrid()
+        {
+            for (int i = 0; i < Connected_Event.Competitors.Count; i++)
+            {
+                dataGridViewScore.Rows.Add(Connected_Event.Competitors[i].ID, Connected_Event.Competitors[i].name, Connected_Event.Competitors[i].team, Connected_Event.Competitors[i].nationality, "N/A");
+            }
+        }
 
         private void LoadTeamsIntoGrid()
         {

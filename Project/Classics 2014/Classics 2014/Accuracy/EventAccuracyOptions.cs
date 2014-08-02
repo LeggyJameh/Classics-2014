@@ -26,6 +26,8 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             Connected_Event = aEvent;
             PopulateExistingTeams();
+            int NoOfPreviousEvents = Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.Accuracy);
+            textBoxEventName.Text = "Accuracy Event " + (NoOfPreviousEvents + 1).ToString() + " " + DateTime.Today.ToShortDateString();
             comboBoxRulePreset.SelectedItem = comboBoxRulePreset.Items[0];
             comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
             comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[8];
@@ -46,8 +48,6 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             Connected_Event = aEvent;
             PopulateExistingTeams();
-            
-
             Rules = LoadRules;
             EventName = LoadEventName;
             SelectedCompetitors = LoadSelectedCompetitors;
@@ -337,7 +337,23 @@ namespace Classics_2014.Accuracy
             return dateTimePicker.Value;
         }
 
-        private bool SaveEvent()
+        private bool CheckOneCompetitorPerTeam()
+        {
+            if (numericUpDownCompetitorsPerTeam.Value == 1)
+            {
+                if (MessageBox.Show("Are you sure you wish to start a singles event?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool SaveEvent(int Stage)
         {
             bool ErrorShown = false;
             if (SelectedCompetitors.Count >= 1)
@@ -353,6 +369,7 @@ namespace Classics_2014.Accuracy
                     Rules.windSecondsPrior = Convert.ToInt16(numericUpDownTimeBeforeLanding.Value);
                     Rules.windSecondsAfter = Convert.ToInt16(numericUpDownTimeAfterLanding.Value);
                     Rules.finalApproachTime = Convert.ToSingle(numericUpDownFinalApproachTime.Value);
+                    Rules.Stage = Stage;
                     if (Convert.ToInt16(comboBoxScoresUsed.Text.Substring(4)) == Rules.noOfCompetitorsPerTeam)
                     {
                         Rules.allScoresUsed = true;
@@ -516,21 +533,26 @@ namespace Classics_2014.Accuracy
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            SaveEvent();
+            SaveEvent(0);
         }
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (SaveEvent() == true)
+            if (CheckOneCompetitorPerTeam())
             {
-                if (Rules.noOfCompetitorsPerTeam > 1)
+                if (SaveEvent(1) == true)
                 {
-                    Connected_Event.ProceedToEventTeams();
-                }
-                else
-                {
-                    Connected_Event.TeamsSetup = true;
-                    //TODO: Go straight to event, all competitors are not in teams.
+                    if (Rules.noOfCompetitorsPerTeam > 1)
+                    {
+                        Connected_Event.ProceedToEventTeams();
+                    }
+                    else
+                    {
+                        Connected_Event.Teams = new List<List<TCompetitor>>();
+                        Connected_Event.TeamNames = new List<string>();
+                        Connected_Event.ruleSet.Stage = 1;
+                        Connected_Event.ProceedToEvent();
+                    }
                 }
             }
         }
@@ -646,6 +668,11 @@ namespace Classics_2014.Accuracy
         private void buttonCompetitorCreateClose_Click(object sender, EventArgs e)
         {
             groupBoxCreateCompetitor.Visible = false;
+        }
+
+        private void numericUpDownRejumpWindspeed_ValueChanged(object sender, EventArgs e)
+        {
+            numericUpDownCompMaxWind.Minimum = (numericUpDownRejumpWindspeed.Value + Convert.ToDecimal(0.5));
         }
 
         #endregion

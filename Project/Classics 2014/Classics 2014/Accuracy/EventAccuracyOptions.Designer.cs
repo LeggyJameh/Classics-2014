@@ -185,7 +185,7 @@
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 15);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.labelWarning, 1, 14);
+            this.tableLayoutPanel2.Controls.Add(this.labelWarning, 0, 14);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
@@ -394,10 +394,10 @@
             65536});
             this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 264);
             this.numericUpDownCompMaxWind.Minimum = new decimal(new int[] {
-            1,
+            45,
             0,
             0,
-            0});
+            65536});
             this.numericUpDownCompMaxWind.Name = "numericUpDownCompMaxWind";
             this.numericUpDownCompMaxWind.Size = new System.Drawing.Size(216, 20);
             this.numericUpDownCompMaxWind.TabIndex = 16;
@@ -420,7 +420,7 @@
             this.numericUpDownMaxScore.Size = new System.Drawing.Size(216, 20);
             this.numericUpDownMaxScore.TabIndex = 17;
             this.numericUpDownMaxScore.Value = new decimal(new int[] {
-            1,
+            16,
             0,
             0,
             0});
@@ -473,10 +473,11 @@
             this.numericUpDownRejumpWindspeed.Size = new System.Drawing.Size(216, 20);
             this.numericUpDownRejumpWindspeed.TabIndex = 19;
             this.numericUpDownRejumpWindspeed.Value = new decimal(new int[] {
-            5,
+            4,
             0,
             0,
             0});
+            this.numericUpDownRejumpWindspeed.ValueChanged += new System.EventHandler(this.numericUpDownRejumpWindspeed_ValueChanged);
             // 
             // numericUpDownTimeBeforeLanding
             // 
@@ -621,14 +622,16 @@
             // labelWarning
             // 
             this.labelWarning.AutoSize = true;
+            this.tableLayoutPanel2.SetColumnSpan(this.labelWarning, 2);
             this.labelWarning.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelWarning.Location = new System.Drawing.Point(151, 634);
+            this.labelWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelWarning.Location = new System.Drawing.Point(3, 634);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(216, 109);
+            this.labelWarning.Size = new System.Drawing.Size(364, 109);
             this.labelWarning.TabIndex = 26;
             this.labelWarning.Text = "Warning: Competitors selected is not a multiple of competitors per team, fake com" +
                 "petitors will have to be made.";
-            this.labelWarning.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelWarning.Visible = false;
             // 
             // tableLayoutPanel4
@@ -911,7 +914,8 @@
             // 
             // dataGridExistingCompetitors
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.Silver;
+            this.dataGridExistingCompetitors.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridExistingCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridExistingCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridExistingCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
@@ -926,6 +930,8 @@
             this.dataGridExistingCompetitors.Location = new System.Drawing.Point(3, 33);
             this.dataGridExistingCompetitors.Name = "dataGridExistingCompetitors";
             this.dataGridExistingCompetitors.ReadOnly = true;
+            this.dataGridExistingCompetitors.RowHeadersVisible = false;
+            this.dataGridExistingCompetitors.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridExistingCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridExistingCompetitors.Size = new System.Drawing.Size(318, 435);
             this.dataGridExistingCompetitors.TabIndex = 5;
@@ -957,7 +963,8 @@
             // 
             // dataGridSelectedCompetitors
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.Silver;
+            this.dataGridSelectedCompetitors.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             this.dataGridSelectedCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridSelectedCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridSelectedCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
@@ -970,6 +977,8 @@
             this.dataGridSelectedCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridSelectedCompetitors.Location = new System.Drawing.Point(399, 33);
             this.dataGridSelectedCompetitors.Name = "dataGridSelectedCompetitors";
+            this.dataGridSelectedCompetitors.RowHeadersVisible = false;
+            this.dataGridSelectedCompetitors.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.dataGridSelectedCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridSelectedCompetitors.Size = new System.Drawing.Size(318, 435);
             this.dataGridSelectedCompetitors.TabIndex = 6;

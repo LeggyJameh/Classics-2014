@@ -17,7 +17,6 @@ namespace Classics_2014
         public IO_Controller IO_Controller;
         public bool RequiresSerial { get; protected set; } // This is checked to see if Engine can Read the data without waiting (Psuedo Const)
         public EventType EventType { get; protected set; }
-        public bool TeamsSetup;
         public List<List<TCompetitor>> Teams;
         public List<string> TeamNames;
         public int EventID;

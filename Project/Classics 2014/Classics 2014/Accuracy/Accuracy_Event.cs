@@ -16,7 +16,7 @@ namespace Classics_2014.Accuracy
         public EventAccuracy EventTab;
         Engine engine;
         public TAccuracyRuleSet ruleSet;
-        List<TCompetitor> Competitors;
+        public List<TCompetitor> Competitors;
         List<string> ActiveTeams;
         TWind[] IncomingData;
         public int NumberOfLandings = -1;
@@ -33,10 +33,7 @@ namespace Classics_2014.Accuracy
             EventType = EventType.Accuracy;
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
-        public void EventStart() //TODO Rule struct goes here
-        {
-           
-        }
+
         private void ListenProcedure()
         {
             IncomingData = new TWind[ruleSet.windSecondsPrior];
@@ -128,7 +125,7 @@ namespace Classics_2014.Accuracy
         {
             ASCIIEncoding ascii = new ASCIIEncoding();
             string stringToConvert = "";
-            stringToConvert += TeamsSetup + "*";
+            stringToConvert += ruleSet.Stage + "*";
             stringToConvert += ruleSet.allScoresUsed + "*";
             stringToConvert += ruleSet.compHalt+ "*";
             stringToConvert += ruleSet.directionOut + "*";
@@ -165,7 +162,7 @@ namespace Classics_2014.Accuracy
             string[] args = ascii.GetString(ruleset).Split('*');
             return (new TAccuracyRuleSet
             {
-                TeamsSetup = Convert.ToBoolean(args[0]),
+                Stage = Convert.ToInt16(args[0]),
                 allScoresUsed = Convert.ToBoolean(args[1]),
                 compHalt = Convert.ToSByte(args[2]),
                 directionOut = Convert.ToUInt16(args[3]),
@@ -195,8 +192,16 @@ namespace Classics_2014.Accuracy
         public override void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
         {
             ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
-            Teams = TeamInput;
-            TeamNames = TeamNamesInput;
+            ruleSet.Stage = 2;
+            Teams = new List<List<TCompetitor>>();
+            TeamNames = new List<string>();
+
+            for (int i = 1; i < TeamInput.Count; i++)
+            {
+                Teams.Add(TeamInput[i]);
+                TeamNames.Add(TeamNamesInput[i]);
+            }
+
             SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
             EventTeamsTab = null;
             ProceedToEvent();
@@ -256,6 +261,14 @@ namespace Classics_2014.Accuracy
             engine.activeEvent = null;
             IsActive = false;
             //TODO: Gracefully end event thread.
+        }
+
+        public TWind ReturnWindLimits()
+        {
+            TWind CurrentWind = new TWind();
+            CurrentWind.direction = Convert.ToUInt16(ruleSet.directionOut);
+            CurrentWind.speed = ruleSet.windout;
+            return CurrentWind;
         }
     }
 }

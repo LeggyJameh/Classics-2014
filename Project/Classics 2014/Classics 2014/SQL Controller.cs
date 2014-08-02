@@ -561,6 +561,35 @@ namespace Classics_2014
             return Landings;
         }
 
+        public int GetNoOfEventsByTypeOnDay(DateTime Date, EventType EventType)
+        {
+            string query = "SELECT EventID FROM `events` WHERE `Date`='" + Date.ToShortDateString() + "' AND `Type`='" + EventType.ToString() + "'";
+            int Number = 0;
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            if (i == 0) { Number++; }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+            }
+            return Number;
+        }
+
         #endregion
         #region Other
         private bool ExecuteNonQuery(string query)

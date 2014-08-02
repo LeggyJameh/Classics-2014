@@ -150,7 +150,7 @@ namespace Classics_2014.Accuracy
             f.Serialize(m,Landing);
             return m.ToArray();
         }
-        private AccuracyLanding ConvertByteArrayToLanding(byte[] Landing)
+        public AccuracyLanding ConvertByteArrayToLanding(byte[] Landing)
         {
             MemoryStream m = new MemoryStream();
             BinaryFormatter f = new BinaryFormatter();
@@ -222,10 +222,6 @@ namespace Classics_2014.Accuracy
                 if (CompletedLandings[i].dataGridCell == Cell)
                 {
                     return CompletedLandings[i].ID;
-                }
-                else
-                {
-                    return -1;
                 }
 			}
             return -1;

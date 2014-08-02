@@ -65,6 +65,7 @@
     <Compile Include="Accuracy\ModifyLanding.Designer.cs">
       <DependentUpon>ModifyLanding.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accuracy\MySqlReturnLanding.cs" />
     <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>

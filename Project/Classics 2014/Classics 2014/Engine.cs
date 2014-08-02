@@ -77,9 +77,11 @@ namespace Classics_2014
         }
         private void UpdateWindMetrics(Data DatA)
         {
+            TWind windDirection;
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
             if (activeEvent != null)
             {
+                windDirection = activeEvent.
                // mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, activeEvent., 2.0F)));
             }
             mainForm.UpdateWind(wind);

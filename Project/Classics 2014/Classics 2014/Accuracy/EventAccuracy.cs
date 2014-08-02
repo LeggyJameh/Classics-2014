@@ -33,12 +33,27 @@ namespace Classics_2014.Accuracy
                 LoadCompetitorsIntoGrid();
             }
         }
-        public int MethodAddLanding(Accuracy.AccuracyLanding Landing)
+        public void MethodAddLanding(AccuracyLanding Landing)
         {
-            Connected_Event.NumberOfLandings++;
-            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Connected_Event.NumberOfLandings, Landing.TimeOfLanding, Landing.score)));
-            return Connected_Event.NumberOfLandings;
-                //ToDo Checks to make sure its under wind and the like
+            dataGridViewIncomingLandings.Invoke((MethodInvoker)(() => dataGridViewIncomingLandings.Rows.Add(Landing.ID, Landing.Index, Landing.TimeOfLanding, Landing.score)));
+        }
+
+        public bool MethodRemoveLanding(int Index)
+        {
+            for (int i = 0; i < dataGridViewIncomingLandings.RowCount; i++)
+            {
+                if (Convert.ToInt16(dataGridViewIncomingLandings[1, i].Value) == Index)
+                {
+                    dataGridViewIncomingLandings.Rows.RemoveAt(i);
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public void AddLandingToReady(AccuracyLanding Landing)
+        {
+            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.Index, Landing.ID, Landing.TimeOfLanding, Landing.score)));
         }
 
         private void LoadCompetitorsIntoGrid()
@@ -93,34 +108,42 @@ namespace Classics_2014.Accuracy
                 {
                     switch (e.Button)
                     {
+                        #region LeftClick
                         case (System.Windows.Forms.MouseButtons.Left):
                             if (dataGridViewScore[e.ColumnIndex, e.RowIndex].Value == null)
                             {
                                 if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[2].Value != null)
                                 {
-                                    AccuracyLanding CurrentLanding;
-                                    CurrentLanding = Connected_Event.AssignLanding(Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value), (DataGridViewCell)dataGridViewScore[e.ColumnIndex, e.RowIndex]);
+                                    int IndexInList = 0;
+                                    for (int i = 0; i < Connected_Event.CompletedLandings.Count; i++)
+			                        {
+                                        if (Connected_Event.CompletedLandings[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
+                                        {
+                                            IndexInList = i;
+                                        }
+			                        }
 
-                                    if (CurrentLanding.ID != -1)
-                                    {
-                                        dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].ReadOnly = true;
-                                        dataGridViewScore[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.LightGreen;
+                                    AccuracyLanding CurrentLanding = Connected_Event.CompletedLandings[IndexInList];
 
-                                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
-                                            Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
-                                            CurrentLanding.ID, Connected_Event.EventID);
-                                    }
-                                    else
-                                    {
-                                        MessageBox.Show("Please wait for wind data of landing to be saved.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                    }
+                                    CurrentLanding.dataGridCell = dataGridViewScore[e.ColumnIndex, e.RowIndex];
+                                    dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
+                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
+                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].ReadOnly = true;
+                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.LightGreen;
+
+                                    Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
+                                    Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
+                                    CurrentLanding.ID, Connected_Event.EventID);
+
+                                    Connected_Event.CompletedLandings[IndexInList] = CurrentLanding;
                                 }
                             }
                             break;
+                        #endregion
+                        #region RightClick
                         case (System.Windows.Forms.MouseButtons.Right):
                             break;
+                        #endregion
                     }
                 }
             }
@@ -188,12 +211,10 @@ namespace Classics_2014.Accuracy
 
         private void buttonUnassignLanding_Click(object sender, EventArgs e)
         {
-            int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]);
-            dataGridViewScore.SelectedCells[0].Value = null;
+            //int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]);
+            //dataGridViewScore.SelectedCells[0].Value = null;
 
-            Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
-
-            Connected_Event.UnassignLanding(dataGridViewScore.SelectedCells[0]);
+            //Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
         }
 
     }

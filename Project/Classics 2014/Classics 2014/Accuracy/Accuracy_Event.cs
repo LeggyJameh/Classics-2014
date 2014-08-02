@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.Concurrent;
 namespace Classics_2014.Accuracy
 {
     class Accuracy_Event :Event 
@@ -19,9 +20,9 @@ namespace Classics_2014.Accuracy
         public List<TCompetitor> Competitors;
         List<string> ActiveTeams;
         TWind[] IncomingData;
-        public int NumberOfLandings = -1;
+        int NumberOfLandings = 0;
         List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
-        List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
+        public List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
         List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
@@ -57,9 +58,10 @@ namespace Classics_2014.Accuracy
                     IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; ;
                     if (DataA.IsLanding)
                     {
-                        AccuracyLanding newLanding = new AccuracyLanding { score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
+                        NumberOfLandings++;
+                        AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
                         LandingInProgress.Add(newLanding);
-                        newLanding.Index = EventTab.MethodAddLanding(newLanding);
+                        EventTab.MethodAddLanding(newLanding);
                         EventTab.ScoreEdit(DataA.LandingScore.ToString());
                     }
                     for (int i = 0; i < LandingInProgress.Count; i++)
@@ -68,8 +70,10 @@ namespace Classics_2014.Accuracy
                         if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1)
                         {
                             LandingsToRemove.Add(currentLanding);
+                            EventTab.Invoke((MethodInvoker)(() => EventTab.MethodRemoveLanding(currentLanding.Index)));
                             currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding));
                             CompletedLandings.Add(currentLanding);
+                            EventTab.AddLandingToReady(currentLanding);
                         }
                         else
                         {
@@ -207,31 +211,6 @@ namespace Classics_2014.Accuracy
             ProceedToEvent();
         }
 
-        public Accuracy.AccuracyLanding AssignLanding(int Index, DataGridViewCell Cell)
-        {
-            AccuracyLanding CurrentLanding = new AccuracyLanding();
-            CurrentLanding.ID = -1;
-            if (CompletedLandings.Count - 1 >= Index)
-            {
-                CurrentLanding = CompletedLandings[Index];
-                CurrentLanding.dataGridCell = Cell;
-                CompletedLandings[Index] = CurrentLanding;
-            }
-            return CurrentLanding;
-        }
-
-        public void UnassignLanding(DataGridViewCell Cell)
-        {
-            for (int i = 0; i < CompletedLandings.Count; i++)
-            {
-                if (CompletedLandings[i].dataGridCell == Cell)
-                {
-                    CompletedLandings[i].dataGridCell = null;
-                    EventTab.MethodAddLanding(CompletedLandings[i]);
-                    NumberOfLandings--;
-                }
-            }
-        }
 
         public int GetLandingIDFromCell(DataGridViewCell Cell)
         {
@@ -273,6 +252,7 @@ namespace Classics_2014.Accuracy
         {
             engine.activeEvent = null;
             IsActive = false;
+            ListenThread.Abort();
             //TODO: Gracefully end event thread.
         }
 

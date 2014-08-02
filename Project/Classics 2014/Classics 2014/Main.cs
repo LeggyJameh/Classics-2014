@@ -16,7 +16,6 @@ namespace Classics_2014
     {
         Engine MainEngine;
         DataPoint prevData;
-        Color NormalChartColour = Color.CadetBlue, WindoutChartColour = Color.OrangeRed, DirectionoutChartColour = Color.Yellow, BothOutChartColour = Color.Purple;
         public Main()
         {
             InitializeComponent();
@@ -28,18 +27,18 @@ namespace Classics_2014
             }
             listBoxWindLog.Visible = true;
             tableLayoutPanel6.Visible = true;
-            comboBoxNormalColour.SelectedItem = NormalChartColour.Name;
-            comboBoxWindOut.SelectedItem = WindoutChartColour.Name;
-            comboBoxDirectionOut.SelectedItem = DirectionoutChartColour.Name;
-            comboBoxBothOut.SelectedItem = BothOutChartColour.Name;
+              comboBoxNormalColour.SelectedItem = UserSettings.Default.graphNormal.Name; 
+            comboBoxWindOut.SelectedItem = UserSettings.Default.graphWindOut.Name;
+            comboBoxDirectionOut.SelectedItem = UserSettings.Default.graphDirectionOut.Name;
+            comboBoxBothOut.SelectedItem = UserSettings.Default.graphBothOut.Name;
 
         }
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            UserSettings.Default.Save();
             MainEngine.CloseThreads();
             this.Close();
         }
-
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
             TabPage NewPage = new TabPage();
@@ -127,16 +126,16 @@ namespace Classics_2014
         {
             bool Speed = false;
             bool directionOut;
-            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = WindoutChartColour)); Speed = true; } //If wind out
-            else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = NormalChartColour)); }
+            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = UserSettings.Default.graphWindOut)); Speed = true; } //If wind out
+            else { chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = UserSettings.Default.graphNormal)); }
             directionOut = IsDirectionOut(wind, Convert.ToInt16(prevData.Tag.ToString()));
             if (directionOut)
             {
-                chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = DirectionoutChartColour));
-                chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index-1].Color = DirectionoutChartColour));
+                chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = UserSettings.Default.graphDirectionOut));
+                chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index - 1].Color = UserSettings.Default.graphDirectionOut));
                 if (Speed)
                 {
-                    chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = BothOutChartColour));
+                    chartWind.Invoke((MethodInvoker)(() => chartWind.Series[0].Points[index].Color = UserSettings.Default.graphBothOut));
                 }
             }
         }
@@ -144,15 +143,16 @@ namespace Classics_2014
         {
             bool Speed = false;
             bool directionOut;
-            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) {  chartWind.Series[0].Points[index].Color = WindoutChartColour; Speed = true; } //If wind out
-            else { chartWind.Series[0].Points[index].Color = NormalChartColour; }
+            if (wind.speed > chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset) { chartWind.Series[0].Points[index].Color = UserSettings.Default.graphWindOut; Speed = true; } //If wind out
+            else { chartWind.Series[0].Points[index].Color = UserSettings.Default.graphNormal; }
             directionOut = IsDirectionOut(wind, Convert.ToInt16(prevData.Tag.ToString()));
             if (directionOut)
             {
-                chartWind.Series[0].Points[index].Color = DirectionoutChartColour;
-                chartWind.Series[0].Points[index - 1].Color = DirectionoutChartColour;
+                chartWind.Series[0].Points[index].Color = UserSettings.Default.graphDirectionOut;
+                chartWind.Series[0].Points[index - 1].Color = UserSettings.Default.graphDirectionOut;
                 if (Speed)
-                {chartWind.Series[0].Points[index].Color = BothOutChartColour;
+                {
+                    chartWind.Series[0].Points[index].Color = UserSettings.Default.graphBothOut;
                 }
             }
         }
@@ -203,6 +203,7 @@ namespace Classics_2014
 
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
+            UserSettings.Default.Save();
             MainEngine.CloseThreads();
         }
 
@@ -258,25 +259,29 @@ namespace Classics_2014
 
         private void comboBoxNormalColour_SelectedIndexChanged(object sender, EventArgs e)
         {
-            NormalChartColour = Color.FromName(comboBoxNormalColour.SelectedItem.ToString());
+            string colourName = comboBoxNormalColour.SelectedItem.ToString().Replace(" ", string.Empty);
+            UserSettings.Default.graphNormal = Color.FromName(colourName);
             ResetGraphColours();
         }
 
         private void comboBoxWindout_SelectedIndexChanged(object sender, EventArgs e)
         {
-            WindoutChartColour = Color.FromName(comboBoxWindOut.SelectedItem.ToString());
+            string colourName = comboBoxWindOut.SelectedItem.ToString().Replace(" ", string.Empty);
+            UserSettings.Default.graphWindOut = Color.FromName(colourName);
             ResetGraphColours();
         }
 
         private void comboBoxDirectionOut_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DirectionoutChartColour = Color.FromName(comboBoxDirectionOut.SelectedItem.ToString());
+            string colourName = comboBoxDirectionOut.SelectedItem.ToString().Replace(" ", string.Empty);
+            UserSettings.Default.graphDirectionOut = Color.FromName(colourName);
             ResetGraphColours();
         }
 
         private void comboBoxBothOut_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BothOutChartColour = Color.FromName(comboBoxBothOut.SelectedItem.ToString());
+            string colourName = comboBoxBothOut.SelectedItem.ToString().Replace(" ", string.Empty);
+            UserSettings.Default.graphBothOut = Color.FromName(colourName);
             ResetGraphColours();
         }
 
@@ -297,13 +302,14 @@ namespace Classics_2014
 
         private void dateTimePickerChartTimeFinder_ValueChanged(object sender, EventArgs e)
         {
-            
-            foreach (DataPoint dP in chartWind.Series[0].Points)
+
+            for (int i = 0; i < chartWind.Series[0].Points.Count; i++)
             {
+                DataPoint dP = chartWind.Series[0].Points[i];
                 int hour = Convert.ToInt16(dP.AxisLabel.Substring(0, 2));
                 if (hour == numericUpDownHourSearch.Value)
                 {
-                    chartWind.ChartAreas[0].AxisX.ScaleView.Position = dP.XValue;
+                    chartWind.ChartAreas[0].AxisX.ScaleView.Position = i;
                     return;
                 }
             }

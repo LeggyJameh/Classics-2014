@@ -99,7 +99,7 @@ namespace Classics_2014
         private void WriteToMasterFile(Data_Accuracy data)
         {
             writer.WriteLine(data.ToString()); //ToDo Might need some upcasting
-
+            //ToDo Fix Master
         }
         private void AquireMasterFile()
         {

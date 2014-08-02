@@ -58,13 +58,14 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRemoveLanding = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.dataGridViewTeamLeaderboard = new System.Windows.Forms.DataGridView();
             this.ColumnRank = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTeamRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControlEvent.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
@@ -405,27 +406,13 @@
             this.tabPage2.Text = "Teams";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 4);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(1272, 774);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Reports";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
             // tableLayoutPanel4
             // 
             this.tableLayoutPanel4.ColumnCount = 2;
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel4.Controls.Add(this.dataGridViewTeamLeaderboard, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.button1, 1, 1);
             this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel4.Name = "tableLayoutPanel4";
@@ -469,6 +456,31 @@
             this.ColumnTeamRound1.MinimumWidth = 50;
             this.ColumnTeamRound1.Name = "ColumnTeamRound1";
             this.ColumnTeamRound1.ReadOnly = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Location = new System.Drawing.Point(4, 4);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(1272, 774);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Reports";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1500;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(1015, 617);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 1;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // EventAccuracy
             // 
@@ -529,5 +541,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRank;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamRound1;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -137,6 +137,16 @@ namespace Classics_2014.Accuracy
             }
         }
 
+        private void UpdateTeamLeaderboard()
+        {
+            dataGridViewTeamLeaderboard.Rows.Clear();
+            List<MySqlReturnLanding> Landings = Connected_Event.SQL_Controller.GetLandingsForAccuracyEvent(Connected_Event.EventID, Connected_Event);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            UpdateTeamLeaderboard();
+        }
 
     }
 }

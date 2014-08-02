@@ -6,6 +6,7 @@ using System.IO;
 using System.Diagnostics;
 using MySql.Data.MySqlClient;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 namespace Classics_2014
 {
@@ -20,6 +21,15 @@ namespace Classics_2014
         private string CurrentDirectory = Directory.GetCurrentDirectory();
 
         #region MainControls
+
+        public SQL_Controller(string Server, string Database, string User, string Password)
+        {
+            this.server = Server;
+            this.database = Database;
+            this.user = User;
+            SetupConnection(Password);
+            StartDatabase();
+        }
 
         public SQL_Controller(string Server, string Database, string User)
         {
@@ -114,6 +124,23 @@ namespace Classics_2014
         {
             string connectionString;
             connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user;
+
+            try
+            {
+                connection = new MySqlConnection(connectionString);
+                return true;
+            }
+            catch
+            {
+                error = "Could not connect to the database";
+            }
+            return false;
+        }
+
+        public bool SetupConnection(string Password)
+        {
+            string connectionString;
+            connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user +";PASSWORD=" + Password + ";";
 
             try
             {
@@ -442,6 +469,96 @@ namespace Classics_2014
                 CurrentEvent.Options = StringToByteArray(CurrentOptions);
             }
             return CurrentEvent;
+        }
+
+        public List<Accuracy.MySqlReturnLanding> GetLandingsForAccuracyEvent(int EventID, Accuracy.Accuracy_Event Connected_Event)
+        {
+            List<Accuracy.MySqlReturnLanding> Landings = new List<Accuracy.MySqlReturnLanding>();
+
+            string query = "SELECT * FROM `event " + EventID + "`";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                #region Query1
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        Accuracy.MySqlReturnLanding CurrentLanding = new Accuracy.MySqlReturnLanding();
+
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0: CurrentLanding.ID = DataReader.GetInt16(i); break;
+                                case 1: CurrentLanding.Round = DataReader.GetInt16(i); break;
+                                case 2: CurrentLanding.UID = DataReader.GetInt16(i); break;
+                            }
+                            if (i == 2)
+                            {
+                                Landings.Add(CurrentLanding);
+                            }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                #endregion
+                #region Query2
+                for (int i = 0; i < Landings.Count; i++)
+                {
+                    string query2 = "SELECT * FROM `accuracy landings` WHERE `LandingID`='" + Landings[i].ID + "'";
+                    cmd = new MySqlCommand(query2, connection);
+                    try
+                    {
+                        MySqlDataReader DataReader = cmd.ExecuteReader();
+                        while (DataReader.Read())
+                        {
+                            Accuracy.MySqlReturnLanding CurrentLanding = Landings[i];
+                            //CurrentLanding.ID = Landings[i].Landing.ID;
+                            //CurrentLanding.dataGridCell = null;
+                            //CurrentLanding.Index = 0;
+                            //CurrentLanding.LandingWind = new TWind();
+                            //CurrentLanding.TimeOfLanding = "";
+                            //CurrentLanding.WindDataAfter = new TWind[1];
+                            //CurrentLanding.windDataPrior = new TWind[1];
+                            //CurrentLanding.WindInputs = 1;
+                            string HexedWindData = "";
+
+                            for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
+                            {
+                                switch (i2)
+                                {
+                                    case 2: HexedWindData = DataReader.GetString(i2); break;
+                                }
+                                if (i2 == 3)
+                                {
+                                    Byte[] WindData = StringToByteArray(HexedWindData);
+                                    int Round = CurrentLanding.Round;
+                                    int UID = CurrentLanding.UID;
+                                    CurrentLanding = (Accuracy.MySqlReturnLanding)Connected_Event.ConvertByteArrayToLanding(WindData);
+                                    CurrentLanding.UID = UID;
+                                    CurrentLanding.Round = Round;
+                                    Landings[i] = CurrentLanding;
+                                }
+                            }
+                        }
+                        DataReader.Close();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
+                #endregion
+                this.CloseConnection();
+            }
+            return Landings;
         }
 
         #endregion

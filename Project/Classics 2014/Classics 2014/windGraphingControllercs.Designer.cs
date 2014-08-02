@@ -55,6 +55,12 @@
             this.comboBoxWindOut = new System.Windows.Forms.ComboBox();
             this.comboBoxNormalColour = new System.Windows.Forms.ComboBox();
             this.numericUpDownHourSearch = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartWind)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
@@ -385,21 +391,31 @@
             // 
             // tableLayoutPanel11
             // 
-            this.tableLayoutPanel11.ColumnCount = 3;
+            this.tableLayoutPanel11.ColumnCount = 5;
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxSelectSeries, 2, 1);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxBothOut, 0, 1);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxDirectionOut, 2, 0);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxWindOut, 1, 0);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxNormalColour, 0, 0);
-            this.tableLayoutPanel11.Controls.Add(this.numericUpDownHourSearch, 1, 1);
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel11.Controls.Add(this.label11, 3, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label10, 2, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label9, 1, 2);
+            this.tableLayoutPanel11.Controls.Add(this.label8, 3, 0);
+            this.tableLayoutPanel11.Controls.Add(this.label7, 1, 0);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxSelectSeries, 3, 3);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxBothOut, 1, 3);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxDirectionOut, 3, 1);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxWindOut, 2, 1);
+            this.tableLayoutPanel11.Controls.Add(this.comboBoxNormalColour, 1, 1);
+            this.tableLayoutPanel11.Controls.Add(this.numericUpDownHourSearch, 2, 3);
+            this.tableLayoutPanel11.Controls.Add(this.label6, 2, 0);
             this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 2;
+            this.tableLayoutPanel11.RowCount = 4;
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel11.Size = new System.Drawing.Size(1126, 125);
             this.tableLayoutPanel11.TabIndex = 5;
@@ -408,7 +424,7 @@
             // 
             this.comboBoxSelectSeries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectSeries.FormattingEnabled = true;
-            this.comboBoxSelectSeries.Location = new System.Drawing.Point(453, 65);
+            this.comboBoxSelectSeries.Location = new System.Drawing.Point(678, 85);
             this.comboBoxSelectSeries.Name = "comboBoxSelectSeries";
             this.comboBoxSelectSeries.Size = new System.Drawing.Size(121, 21);
             this.comboBoxSelectSeries.TabIndex = 5;
@@ -528,7 +544,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxBothOut.Location = new System.Drawing.Point(3, 65);
+            this.comboBoxBothOut.Location = new System.Drawing.Point(228, 85);
             this.comboBoxBothOut.Name = "comboBoxBothOut";
             this.comboBoxBothOut.Size = new System.Drawing.Size(121, 21);
             this.comboBoxBothOut.TabIndex = 3;
@@ -648,7 +664,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxDirectionOut.Location = new System.Drawing.Point(453, 3);
+            this.comboBoxDirectionOut.Location = new System.Drawing.Point(678, 23);
             this.comboBoxDirectionOut.Name = "comboBoxDirectionOut";
             this.comboBoxDirectionOut.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDirectionOut.TabIndex = 2;
@@ -768,7 +784,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxWindOut.Location = new System.Drawing.Point(228, 3);
+            this.comboBoxWindOut.Location = new System.Drawing.Point(453, 23);
             this.comboBoxWindOut.Name = "comboBoxWindOut";
             this.comboBoxWindOut.Size = new System.Drawing.Size(121, 21);
             this.comboBoxWindOut.TabIndex = 1;
@@ -888,7 +904,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxNormalColour.Location = new System.Drawing.Point(3, 3);
+            this.comboBoxNormalColour.Location = new System.Drawing.Point(228, 23);
             this.comboBoxNormalColour.Name = "comboBoxNormalColour";
             this.comboBoxNormalColour.Size = new System.Drawing.Size(121, 21);
             this.comboBoxNormalColour.TabIndex = 0;
@@ -897,7 +913,7 @@
             // numericUpDownHourSearch
             // 
             this.numericUpDownHourSearch.InterceptArrowKeys = false;
-            this.numericUpDownHourSearch.Location = new System.Drawing.Point(228, 65);
+            this.numericUpDownHourSearch.Location = new System.Drawing.Point(453, 85);
             this.numericUpDownHourSearch.Maximum = new decimal(new int[] {
             24,
             0,
@@ -907,6 +923,60 @@
             this.numericUpDownHourSearch.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownHourSearch.TabIndex = 4;
             this.numericUpDownHourSearch.ValueChanged += new System.EventHandler(this.dateTimePickerChartTimeFinder_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(453, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(157, 13);
+            this.label6.TabIndex = 6;
+            this.label6.Text = "Graph Colour Wind Speed Over";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(228, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(117, 13);
+            this.label7.TabIndex = 7;
+            this.label7.Text = "Graph Colour All is Well";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(678, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(205, 13);
+            this.label8.TabIndex = 8;
+            this.label8.Text = "Graph Colour Direction Change Exceeded";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(228, 62);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(200, 13);
+            this.label9.TabIndex = 9;
+            this.label9.Text = "Graph Colour Wind and Direction Breach";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(453, 62);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(63, 13);
+            this.label10.TabIndex = 10;
+            this.label10.Text = "Go To Hour";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(678, 62);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(87, 13);
+            this.label11.TabIndex = 11;
+            this.label11.Text = "Open Master File";
             // 
             // windGraphingControllercs
             // 
@@ -927,6 +997,7 @@
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.tableLayoutPanel11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHourSearch)).EndInit();
             this.ResumeLayout(false);
 
@@ -958,6 +1029,12 @@
         private System.Windows.Forms.ComboBox comboBoxNormalColour;
         private System.Windows.Forms.NumericUpDown numericUpDownHourSearch;
         private System.Windows.Forms.ComboBox comboBoxSelectSeries;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
 
     }
 }

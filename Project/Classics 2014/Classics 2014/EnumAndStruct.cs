@@ -21,7 +21,9 @@ namespace Classics_2014
         public int windSecondsAfter;
         public float finalApproachTime;
     }
+    #region Accuracy Variations
 
+    #endregion 
     [Serializable]
     public struct TWind
     {

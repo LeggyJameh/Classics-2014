@@ -32,6 +32,7 @@ namespace Classics_2014
             tableLayoutPanel6.Visible = true;
 
         }
+
         private void buttonExit_Click(object sender, EventArgs e)
         {
             UserSettings.Default.Save();

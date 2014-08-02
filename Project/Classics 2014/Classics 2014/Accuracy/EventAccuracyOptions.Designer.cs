@@ -346,11 +346,19 @@
             this.comboBoxRulePreset.FormattingEnabled = true;
             this.comboBoxRulePreset.Items.AddRange(new object[] {
             "Custom",
-            "F.A.I"});
+            "FAI",
+            "C.I.S.M Senior",
+            "C.I.S.M Junior",
+            "National Senior",
+            "National Pops",
+            "National Intermediate ",
+            "National Junior",
+            "Paragliding"});
             this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 119);
             this.comboBoxRulePreset.Name = "comboBoxRulePreset";
             this.comboBoxRulePreset.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRulePreset.TabIndex = 13;
+            this.comboBoxRulePreset.SelectedIndexChanged += new System.EventHandler(this.comboBoxRulePreset_SelectedIndexChanged);
             // 
             // numericUpDownCompetitorsPerTeam
             // 
@@ -411,6 +419,11 @@
             // 
             this.numericUpDownMaxScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.numericUpDownMaxScore.Location = new System.Drawing.Point(151, 312);
+            this.numericUpDownMaxScore.Maximum = new decimal(new int[] {
+            2500,
+            0,
+            0,
+            0});
             this.numericUpDownMaxScore.Minimum = new decimal(new int[] {
             1,
             0,
@@ -419,6 +432,7 @@
             this.numericUpDownMaxScore.Name = "numericUpDownMaxScore";
             this.numericUpDownMaxScore.Size = new System.Drawing.Size(216, 20);
             this.numericUpDownMaxScore.TabIndex = 17;
+            this.numericUpDownMaxScore.ThousandsSeparator = true;
             this.numericUpDownMaxScore.Value = new decimal(new int[] {
             16,
             0,

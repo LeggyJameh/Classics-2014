@@ -19,7 +19,53 @@ namespace Classics_2014.Accuracy
         List<string> ExistingTeams = new List<string>();
         TAccuracyRuleSet Rules = new TAccuracyRuleSet();
         string EventName = "";
-
+        #region Structs
+        TAccuracyRuleSet Fai = new TAccuracyRuleSet
+        {
+            maxScored = 16,
+            noOfCompetitorsPerTeam = 5,
+            preset = "FAI",
+        };
+        TAccuracyRuleSet CISM = new TAccuracyRuleSet
+        {
+            maxScored = 20,
+            noOfCompetitorsPerTeam = 5,
+            preset = "C.I.S.M",
+        };
+        TAccuracyRuleSet CISMJunior = new TAccuracyRuleSet
+        {
+            maxScored = 20,
+            noOfCompetitorsPerTeam = 1,
+            preset = "C.I.S.M Junior",
+        };
+        TAccuracyRuleSet NationalSeniors = new TAccuracyRuleSet
+        {
+            maxScored = 20,
+            preset = "National Seniors",
+        };
+        TAccuracyRuleSet NationalPOPS = new TAccuracyRuleSet
+        {
+            maxScored = 100,
+            preset = "National POPS",
+        };
+        TAccuracyRuleSet NationalIntermediates = new TAccuracyRuleSet
+        {
+            maxScored = 500,
+            noOfCompetitorsPerTeam = 1,
+            preset = "National Intermediates",
+        };
+        TAccuracyRuleSet NationalJuniors = new TAccuracyRuleSet
+        {
+            maxScored = 2500,
+            noOfCompetitorsPerTeam = 1,
+            preset = "National Juniors",
+        };
+        TAccuracyRuleSet Paragliding = new TAccuracyRuleSet
+        {
+            maxScored = 2500,
+            preset = "Paragliding",
+        };
+        #endregion
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent)
         {
             InitializeComponent();
@@ -676,5 +722,61 @@ namespace Classics_2014.Accuracy
         }
 
         #endregion
+
+        private void comboBoxRulePreset_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (comboBoxRulePreset.SelectedItem.ToString())
+            {
+                case"Custom":
+                    numericUpDownMaxScore.Enabled = true;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+                case"FAI":
+                    numericUpDownMaxScore.Value = Fai.maxScored;
+                    numericUpDownCompetitorsPerTeam.Value = Fai.noOfCompetitorsPerTeam;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = false;
+                    break;
+                case "C.I.S.M Senior":
+                    numericUpDownMaxScore.Value = CISM.maxScored;
+                    numericUpDownCompetitorsPerTeam.Value = CISM.noOfCompetitorsPerTeam;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = false;
+                    break;
+                case "C.I.S.M Junior":
+                    numericUpDownMaxScore.Value = CISMJunior.maxScored;
+                    numericUpDownCompetitorsPerTeam.Value = CISMJunior.noOfCompetitorsPerTeam;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = false;
+                    break;
+                case "National Senior":
+                    numericUpDownMaxScore.Value = CISMJunior.maxScored;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+                case "National Pops":
+                    numericUpDownMaxScore.Value = NationalPOPS.maxScored;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+                case "National Intermediate ":
+                    numericUpDownMaxScore.Value = NationalIntermediates.maxScored;
+                    numericUpDownCompetitorsPerTeam.Value = NationalIntermediates.noOfCompetitorsPerTeam;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+                case "National Junior":
+                    numericUpDownMaxScore.Value = NationalJuniors.maxScored;
+                    numericUpDownCompetitorsPerTeam.Value = NationalJuniors.noOfCompetitorsPerTeam;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+                case "Paragliding":
+                     numericUpDownMaxScore.Value = Paragliding.maxScored;
+                    numericUpDownMaxScore.Enabled = false;
+                    numericUpDownCompetitorsPerTeam.Enabled = true;
+                    break;
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace Classics_2014
     class Engine
     {
         #region variables and shit
-        IO_Controller IO_Controller;
+        public IO_Controller IO_Controller;
         SQL_Controller SQL_Controller;
         private Thread ListenThread;
         public Event activeEvent;
@@ -22,12 +22,15 @@ namespace Classics_2014
         private StreamWriter writer;
         public FileStream fileStream;
         private StreamReader reader;
+        private windGraphingControllercs windGraph;
         #endregion 
 
-        public Engine(Main mainForm, TabControl tabControl)
+        public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)
         {
             this.mainForm = mainForm;
             this.tabControl = tabControl;
+            this.windGraph = windGraph;
+            windGraph.MainEngine = this;
             AquireMasterFile();
             IO_Controller = new IO_Controller();
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
@@ -72,14 +75,15 @@ namespace Classics_2014
             } while (true);
 
         }
-        private void InitialiseChart()
-        {
-        }
         private void UpdateWindMetrics(Data DatA)
         {
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
+            if (activeEvent != null)
+            {
+               // mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, activeEvent., 2.0F)));
+            }
             mainForm.UpdateWind(wind);
-            mainForm.UpdateWindGraph(wind);
+            windGraph.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
         }
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
@@ -109,7 +113,8 @@ namespace Classics_2014
                 if (lastCreationTime.Date.DayOfYear != DateTime.Now.DayOfYear)
                 {
                     if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\OldMasterFiles\\")) { Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\OldMasterFiles"); }
-                    File.Move(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", Directory.GetCurrentDirectory() + "\\OldMasterFiles\\" + File.GetCreationTime(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt"));
+                    File.Move(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", Directory.GetCurrentDirectory() +"\\OldMasterFiles\\" + (lastCreationTime.ToShortDateString().Replace(':','-'))+".txt");
+                    
                 }
             }
             catch
@@ -122,19 +127,23 @@ namespace Classics_2014
             fileStream = new FileStream(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);//ToDo Move this file
             writer = new StreamWriter(fileStream);
             reader = new StreamReader(fileStream);
-            DeSerializeGraph();
+            DeSerializeGraph(reader);
             //Confirm 
         }
-        public void DeSerializeGraph()
+        public void DeSerializeGraph(StreamReader reader)
         {
 
             string input;
             string[] args;
+            reader.BaseStream.Position = 0;
             while (!reader.EndOfStream)
             {
                 input = reader.ReadLine();
                 args = input.Split(':');
-                mainForm.UpdateWindGraphNonInvokable(new TWind { time = (args[0] + args[1] + (args[2].Substring(0,2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
+                if (args.Length >= 5)
+                {
+                    windGraph.UpdateWindGraphNonInvokable(new TWind { time = (args[0] + args[1] + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
+                }
             }
         }
         private void ReOrderWindArray(TWind newWind)

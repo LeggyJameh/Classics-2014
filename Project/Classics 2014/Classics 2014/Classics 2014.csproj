@@ -101,6 +101,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>UserSettings.settings</DependentUpon>
     </Compile>
+    <Compile Include="windGraphingControllercs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="windGraphingControllercs.Designer.cs">
+      <DependentUpon>windGraphingControllercs.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Accuracy\EventAccuracy.resx">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,6 +131,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="windGraphingControllercs.resx">
+      <DependentUpon>windGraphingControllercs.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

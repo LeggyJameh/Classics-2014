@@ -34,7 +34,6 @@ namespace Classics_2014
             AquireMasterFile();
             IO_Controller = new IO_Controller();
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
-           
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 
             {
@@ -81,10 +80,10 @@ namespace Classics_2014
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
             if (activeEvent != null)
             {
-                windDirection = activeEvent.
-               // mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, activeEvent., 2.0F)));
+                windDirection = activeEvent.ReturnWindLimits();
+                mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, wind.direction, wind.speed)));
             }
-            mainForm.UpdateWind(wind);
+             mainForm.Invoke((MethodInvoker)(()=>mainForm.UpdateWind(wind)));
             windGraph.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
         }
@@ -104,7 +103,8 @@ namespace Classics_2014
         }
         private void WriteToMasterFile(Data_Accuracy data)
         {
-            writer.WriteLine(data.ToString()); //ToDo Might need some upcasting
+            writer.WriteLine(data.ToString()); 
+            //ToDo Might need some upcasting
             //ToDo Fix Master
         }
         private void AquireMasterFile()
@@ -134,9 +134,19 @@ namespace Classics_2014
         }
         public void DeSerializeGraph(StreamReader reader)
         {
-
+            Thread th = new Thread(new ThreadStart(DesiralizeGraphThreadProcedure));
+            th.Start();
+        }
+        private void DesiralizeGraphThreadProcedure()
+        {
+            do
+            {
+                Thread.Sleep(100);
+            } while (!mainForm.IsHandleCreated);
             string input;
             string[] args;
+            DateTime previousData = new DateTime();
+            bool loopTwo = false;
             reader.BaseStream.Position = 0;
             while (!reader.EndOfStream)
             {
@@ -144,10 +154,25 @@ namespace Classics_2014
                 args = input.Split(':');
                 if (args.Length >= 5)
                 {
-                    windGraph.UpdateWindGraphNonInvokable(new TWind { time = (args[0] + args[1] + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
+                    DateTime pointTime = Convert.ToDateTime(args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2)));
+                    if ((loopTwo) && (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString())&&(previousData.AddSeconds(1)< pointTime))
+                    {
+                        do
+                        {
+                            previousData.AddSeconds(1);
+                            windGraph.UpdateWindGraph(new TWind {time = (previousData.Hour +":"+previousData.Minute+":" + previousData.Second), speed = 0, direction = 0 });
+                            previousData.AddSeconds(1);
+                            previousData = previousData.AddSeconds(1);
+                        } while (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString());
+                    }
+                    previousData = pointTime;
+                    loopTwo = true;
+                    windGraph.UpdateWindGraph(new TWind { time = (args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
                 }
             }
+            Thread.CurrentThread.Abort();
         }
+        
         private void ReOrderWindArray(TWind newWind)
         {
             for (int i = 60 - 1; i >= 1; i--)
@@ -162,7 +187,6 @@ namespace Classics_2014
         public void CloseThreads()
         {
             ListenThread.Abort();
-            writer.Flush();
             IO_Controller.EndThreads();
             foreach (Event e in eventList)
             {

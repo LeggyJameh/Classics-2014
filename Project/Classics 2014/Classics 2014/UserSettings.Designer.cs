@@ -154,5 +154,29 @@ namespace Classics_2014 {
                 this["userLockPassword"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public int flopsToMaintainColourDirection {
+            get {
+                return ((int)(this["flopsToMaintainColourDirection"]));
+            }
+            set {
+                this["flopsToMaintainColourDirection"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int flopsToMaintainColourSpeed {
+            get {
+                return ((int)(this["flopsToMaintainColourSpeed"]));
+            }
+            set {
+                this["flopsToMaintainColourSpeed"] = value;
+            }
+        }
     }
 }

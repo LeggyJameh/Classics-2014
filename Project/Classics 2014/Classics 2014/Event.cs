@@ -50,5 +50,9 @@ namespace Classics_2014
         {
             ListenThread.Abort();
         }
+        public virtual TWind ReturnWindLimits()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

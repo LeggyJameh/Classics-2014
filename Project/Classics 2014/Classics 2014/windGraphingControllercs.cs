@@ -264,7 +264,7 @@ namespace Classics_2014
             if (MainEngine.activeEvent is Accuracy.Accuracy_Event)
             {
                 Accuracy.Accuracy_Event Event = (MainEngine.activeEvent as Accuracy.Accuracy_Event);
-                chartWind.ChartAreas[0].AxisY.StripLines[0].Interval = Event.ruleSet.windout;
+                chartWind.ChartAreas[0].AxisY.StripLines[0].IntervalOffset = Event.ruleSet.windout;
                 numericUpDownWindOverChartBar.Value = (decimal)(Event.ruleSet.windout);
                 numericUpDownDirectionChangeGraphLimit.Value = Event.ruleSet.directionOut;
                 ResetGraphColours();
@@ -292,6 +292,7 @@ namespace Classics_2014
 
         private void comboBoxSelectSeries_SelectedIndexChanged(object sender, EventArgs e)
         {
+            chartWind.ChartAreas.SuspendUpdates();
             try
             {
                 if ((string)comboBoxSelectSeries.SelectedItem != "")
@@ -309,8 +310,8 @@ namespace Classics_2014
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
             }
+            chartWind.ChartAreas.ResumeUpdates();
         }
     }
 }

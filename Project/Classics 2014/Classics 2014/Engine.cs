@@ -22,7 +22,7 @@ namespace Classics_2014
         private StreamWriter writer;
         public FileStream fileStream;
         private StreamReader reader;
-        private windGraphingControllercs windGraph;
+        public windGraphingControllercs windGraph;
         #endregion 
 
         public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)

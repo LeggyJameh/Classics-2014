@@ -52,6 +52,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accuracy\AccuracyLanding.cs" />
+    <Compile Include="Accuracy\AccuracyOptionsMenu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\AccuracyOptionsMenu.Designer.cs">
+      <DependentUpon>AccuracyOptionsMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accuracy\AccuracySpecificSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>AccuracySpecificSettings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Accuracy\Accuracy_Event.cs" />
     <Compile Include="Accuracy\EventAccuracy.cs">
       <SubType>UserControl</SubType>
@@ -72,6 +83,12 @@
     <Compile Include="Accuracy\TeamLeaderboard.Designer.cs">
       <DependentUpon>TeamLeaderboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="CommonDisplayOptions.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CommonDisplayOptions.Designer.cs">
+      <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -91,6 +108,9 @@
     <Compile Include="EnumAndStruct.cs" />
     <Compile Include="Event.cs" />
     <Compile Include="IO Controller.cs" />
+    <Compile Include="LockScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +122,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Serial Controller.cs" />
     <Compile Include="SQL Controller.cs" />
+    <Compile Include="StandardOptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StandardOptionsPage.Designer.cs">
+      <DependentUpon>StandardOptionsPage.cs</DependentUpon>
+    </Compile>
     <Compile Include="UserSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -113,6 +139,9 @@
     <Compile Include="windGraphingControllercs.Designer.cs">
       <DependentUpon>windGraphingControllercs.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Accuracy\AccuracyOptionsMenu.resx">
+      <DependentUpon>AccuracyOptionsMenu.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\EventAccuracy.resx">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,8 +154,14 @@
     <EmbeddedResource Include="Accuracy\TeamLeaderboard.resx">
       <DependentUpon>TeamLeaderboard.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="CommonDisplayOptions.resx">
+      <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EventTeams.resx">
       <DependentUpon>EventTeams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LockScreen.resx">
+      <DependentUpon>LockScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -140,9 +175,16 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="StandardOptionsPage.resx">
+      <DependentUpon>StandardOptionsPage.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="windGraphingControllercs.resx">
       <DependentUpon>windGraphingControllercs.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Accuracy\AccuracySpecificSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>AccuracySpecificSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

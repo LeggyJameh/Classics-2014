@@ -48,19 +48,8 @@
             this.labelChartDirection = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.labelChartTime = new System.Windows.Forms.Label();
-            this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxSelectSeries = new System.Windows.Forms.ComboBox();
-            this.comboBoxBothOut = new System.Windows.Forms.ComboBox();
-            this.comboBoxDirectionOut = new System.Windows.Forms.ComboBox();
-            this.comboBoxWindOut = new System.Windows.Forms.ComboBox();
-            this.comboBoxNormalColour = new System.Windows.Forms.ComboBox();
             this.numericUpDownHourSearch = new System.Windows.Forms.NumericUpDown();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartWind)).BeginInit();
             this.tableLayoutPanel8.SuspendLayout();
@@ -69,7 +58,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindOverChartBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).BeginInit();
             this.tableLayoutPanel10.SuspendLayout();
-            this.tableLayoutPanel11.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHourSearch)).BeginInit();
             this.SuspendLayout();
             // 
@@ -80,7 +68,6 @@
             this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 2);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 3);
             this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel10, 0, 1);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel11, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
@@ -330,6 +317,8 @@
             this.tableLayoutPanel10.Controls.Add(this.labelChartDirection, 2, 0);
             this.tableLayoutPanel10.Controls.Add(this.label5, 3, 0);
             this.tableLayoutPanel10.Controls.Add(this.labelChartTime, 4, 0);
+            this.tableLayoutPanel10.Controls.Add(this.comboBoxSelectSeries, 5, 0);
+            this.tableLayoutPanel10.Controls.Add(this.numericUpDownHourSearch, 0, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 134);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
@@ -389,594 +378,27 @@
             this.labelChartTime.Text = "Time";
             this.labelChartTime.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // tableLayoutPanel11
-            // 
-            this.tableLayoutPanel11.ColumnCount = 5;
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel11.Controls.Add(this.label11, 3, 2);
-            this.tableLayoutPanel11.Controls.Add(this.label10, 2, 2);
-            this.tableLayoutPanel11.Controls.Add(this.label9, 1, 2);
-            this.tableLayoutPanel11.Controls.Add(this.label8, 3, 0);
-            this.tableLayoutPanel11.Controls.Add(this.label7, 1, 0);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxSelectSeries, 3, 3);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxBothOut, 1, 3);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxDirectionOut, 3, 1);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxWindOut, 2, 1);
-            this.tableLayoutPanel11.Controls.Add(this.comboBoxNormalColour, 1, 1);
-            this.tableLayoutPanel11.Controls.Add(this.numericUpDownHourSearch, 2, 3);
-            this.tableLayoutPanel11.Controls.Add(this.label6, 2, 0);
-            this.tableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel11.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel11.Name = "tableLayoutPanel11";
-            this.tableLayoutPanel11.RowCount = 4;
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel11.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel11.Size = new System.Drawing.Size(1126, 125);
-            this.tableLayoutPanel11.TabIndex = 5;
-            // 
             // comboBoxSelectSeries
             // 
-            this.comboBoxSelectSeries.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxSelectSeries.FormattingEnabled = true;
-            this.comboBoxSelectSeries.Location = new System.Drawing.Point(678, 85);
+            this.comboBoxSelectSeries.Location = new System.Drawing.Point(966, 3);
             this.comboBoxSelectSeries.Name = "comboBoxSelectSeries";
             this.comboBoxSelectSeries.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxSelectSeries.TabIndex = 5;
+            this.comboBoxSelectSeries.TabIndex = 12;
             this.comboBoxSelectSeries.SelectedIndexChanged += new System.EventHandler(this.comboBoxSelectSeries_SelectedIndexChanged);
-            // 
-            // comboBoxBothOut
-            // 
-            this.comboBoxBothOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxBothOut.FormattingEnabled = true;
-            this.comboBoxBothOut.Items.AddRange(new object[] {
-            "Aqua",
-            "Aquamarine",
-            "Bisque",
-            "Black",
-            "Blue",
-            "Blue Violet",
-            "Brown",
-            "Burly Wood",
-            "Cadet Blue",
-            "Chartreuse",
-            "Chocolate",
-            "Coral",
-            "Cornflower Blue",
-            "Crimson",
-            "Cyan",
-            "Dark Blue",
-            "Dark Cyan",
-            "Dark Goldenrod",
-            "Dark Gray",
-            "Dark Green",
-            "Dark Khaki",
-            "Dark Magenta",
-            "Dark Olive Green",
-            "Dark Orange",
-            "Dark Orchid",
-            "Dark Red",
-            "Dark Salmon",
-            "Dark Sea Green",
-            "Dark Slate Blue",
-            "Dark SlateGray",
-            "Dark Turquoise",
-            "Dark Violet",
-            "Deep Pink",
-            "Deep Sky Blue",
-            "Dim Gray",
-            "Dodger Blue",
-            "Firebrick",
-            "Forest Green",
-            "Gold",
-            "Goldenrod",
-            "Gray",
-            "Green",
-            "Green Yellow",
-            "Hot Pink",
-            "Indian Red",
-            "Indigo",
-            "Khaki",
-            "Lawn Green",
-            "Light Blue",
-            "Light Coral",
-            "Light Green",
-            "Light Gray",
-            "Light Pink",
-            "Light Salmon",
-            "Light Sea Green",
-            "Light Sky Blue",
-            "Light Slate Gray",
-            "Light Steel Blue",
-            "Lime",
-            "Lime Green",
-            "Magenta",
-            "Maroon",
-            "Medium Aquamarine",
-            "Medium Blue",
-            "Medium Orchid",
-            "Medium Purple",
-            "Medium Sea Green",
-            "Medium Slate Blue",
-            "Medium Spring Green",
-            "Medium Turquoise",
-            "Medium Violet Red",
-            "Midnight Blue",
-            "Navy",
-            "Olive",
-            "Olive Drab",
-            "Orange",
-            "Orange Red",
-            "Orchid",
-            "Pale Green",
-            "Pale Turquoise",
-            "Pale Violet Red",
-            "Peach Puff",
-            "Peru",
-            "Pink",
-            "Plum",
-            "Powder Blue",
-            "Purple",
-            "Red",
-            "Rosy Brown",
-            "Royal Blue",
-            "Saddle Brown",
-            "Salmon",
-            "Sandy Brown",
-            "Sea Green",
-            "Sienna",
-            "Sky Blue",
-            "Slate Blue",
-            "Slate Gray",
-            "Spring Green",
-            "Steel Blue",
-            "Tan",
-            "Teal",
-            "Thistle",
-            "Tomato",
-            "Turquoise",
-            "Violet",
-            "Wheat",
-            "Yellow",
-            "Yellow Green"});
-            this.comboBoxBothOut.Location = new System.Drawing.Point(228, 85);
-            this.comboBoxBothOut.Name = "comboBoxBothOut";
-            this.comboBoxBothOut.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxBothOut.TabIndex = 3;
-            this.comboBoxBothOut.SelectedIndexChanged += new System.EventHandler(this.comboBoxBothOut_SelectedIndexChanged);
-            // 
-            // comboBoxDirectionOut
-            // 
-            this.comboBoxDirectionOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDirectionOut.FormattingEnabled = true;
-            this.comboBoxDirectionOut.Items.AddRange(new object[] {
-            "Aqua",
-            "Aquamarine",
-            "Bisque",
-            "Black",
-            "Blue",
-            "Blue Violet",
-            "Brown",
-            "Burly Wood",
-            "Cadet Blue",
-            "Chartreuse",
-            "Chocolate",
-            "Coral",
-            "Cornflower Blue",
-            "Crimson",
-            "Cyan",
-            "Dark Blue",
-            "Dark Cyan",
-            "Dark Goldenrod",
-            "Dark Gray",
-            "Dark Green",
-            "Dark Khaki",
-            "Dark Magenta",
-            "Dark Olive Green",
-            "Dark Orange",
-            "Dark Orchid",
-            "Dark Red",
-            "Dark Salmon",
-            "Dark Sea Green",
-            "Dark Slate Blue",
-            "Dark SlateGray",
-            "Dark Turquoise",
-            "Dark Violet",
-            "Deep Pink",
-            "Deep Sky Blue",
-            "Dim Gray",
-            "Dodger Blue",
-            "Firebrick",
-            "Forest Green",
-            "Gold",
-            "Goldenrod",
-            "Gray",
-            "Green",
-            "Green Yellow",
-            "Hot Pink",
-            "Indian Red",
-            "Indigo",
-            "Khaki",
-            "Lawn Green",
-            "Light Blue",
-            "Light Coral",
-            "Light Green",
-            "Light Gray",
-            "Light Pink",
-            "Light Salmon",
-            "Light Sea Green",
-            "Light Sky Blue",
-            "Light Slate Gray",
-            "Light Steel Blue",
-            "Lime",
-            "Lime Green",
-            "Magenta",
-            "Maroon",
-            "Medium Aquamarine",
-            "Medium Blue",
-            "Medium Orchid",
-            "Medium Purple",
-            "Medium Sea Green",
-            "Medium Slate Blue",
-            "Medium Spring Green",
-            "Medium Turquoise",
-            "Medium Violet Red",
-            "Midnight Blue",
-            "Navy",
-            "Olive",
-            "Olive Drab",
-            "Orange",
-            "Orange Red",
-            "Orchid",
-            "Pale Green",
-            "Pale Turquoise",
-            "Pale Violet Red",
-            "Peach Puff",
-            "Peru",
-            "Pink",
-            "Plum",
-            "Powder Blue",
-            "Purple",
-            "Red",
-            "Rosy Brown",
-            "Royal Blue",
-            "Saddle Brown",
-            "Salmon",
-            "Sandy Brown",
-            "Sea Green",
-            "Sienna",
-            "Sky Blue",
-            "Slate Blue",
-            "Slate Gray",
-            "Spring Green",
-            "Steel Blue",
-            "Tan",
-            "Teal",
-            "Thistle",
-            "Tomato",
-            "Turquoise",
-            "Violet",
-            "Wheat",
-            "Yellow",
-            "Yellow Green"});
-            this.comboBoxDirectionOut.Location = new System.Drawing.Point(678, 23);
-            this.comboBoxDirectionOut.Name = "comboBoxDirectionOut";
-            this.comboBoxDirectionOut.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxDirectionOut.TabIndex = 2;
-            this.comboBoxDirectionOut.SelectedIndexChanged += new System.EventHandler(this.comboBoxDirectionOut_SelectedIndexChanged);
-            // 
-            // comboBoxWindOut
-            // 
-            this.comboBoxWindOut.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxWindOut.FormattingEnabled = true;
-            this.comboBoxWindOut.Items.AddRange(new object[] {
-            "Aqua",
-            "Aquamarine",
-            "Bisque",
-            "Black",
-            "Blue",
-            "Blue Violet",
-            "Brown",
-            "Burly Wood",
-            "Cadet Blue",
-            "Chartreuse",
-            "Chocolate",
-            "Coral",
-            "Cornflower Blue",
-            "Crimson",
-            "Cyan",
-            "Dark Blue",
-            "Dark Cyan",
-            "Dark Goldenrod",
-            "Dark Gray",
-            "Dark Green",
-            "Dark Khaki",
-            "Dark Magenta",
-            "Dark Olive Green",
-            "Dark Orange",
-            "Dark Orchid",
-            "Dark Red",
-            "Dark Salmon",
-            "Dark Sea Green",
-            "Dark Slate Blue",
-            "Dark SlateGray",
-            "Dark Turquoise",
-            "Dark Violet",
-            "Deep Pink",
-            "Deep Sky Blue",
-            "Dim Gray",
-            "Dodger Blue",
-            "Firebrick",
-            "Forest Green",
-            "Gold",
-            "Goldenrod",
-            "Gray",
-            "Green",
-            "Green Yellow",
-            "Hot Pink",
-            "Indian Red",
-            "Indigo",
-            "Khaki",
-            "Lawn Green",
-            "Light Blue",
-            "Light Coral",
-            "Light Green",
-            "Light Gray",
-            "Light Pink",
-            "Light Salmon",
-            "Light Sea Green",
-            "Light Sky Blue",
-            "Light Slate Gray",
-            "Light Steel Blue",
-            "Lime",
-            "Lime Green",
-            "Magenta",
-            "Maroon",
-            "Medium Aquamarine",
-            "Medium Blue",
-            "Medium Orchid",
-            "Medium Purple",
-            "Medium Sea Green",
-            "Medium Slate Blue",
-            "Medium Spring Green",
-            "Medium Turquoise",
-            "Medium Violet Red",
-            "Midnight Blue",
-            "Navy",
-            "Olive",
-            "Olive Drab",
-            "Orange",
-            "Orange Red",
-            "Orchid",
-            "Pale Green",
-            "Pale Turquoise",
-            "Pale Violet Red",
-            "Peach Puff",
-            "Peru",
-            "Pink",
-            "Plum",
-            "Powder Blue",
-            "Purple",
-            "Red",
-            "Rosy Brown",
-            "Royal Blue",
-            "Saddle Brown",
-            "Salmon",
-            "Sandy Brown",
-            "Sea Green",
-            "Sienna",
-            "Sky Blue",
-            "Slate Blue",
-            "Slate Gray",
-            "Spring Green",
-            "Steel Blue",
-            "Tan",
-            "Teal",
-            "Thistle",
-            "Tomato",
-            "Turquoise",
-            "Violet",
-            "Wheat",
-            "Yellow",
-            "Yellow Green"});
-            this.comboBoxWindOut.Location = new System.Drawing.Point(453, 23);
-            this.comboBoxWindOut.Name = "comboBoxWindOut";
-            this.comboBoxWindOut.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxWindOut.TabIndex = 1;
-            this.comboBoxWindOut.SelectedIndexChanged += new System.EventHandler(this.comboBoxWindout_SelectedIndexChanged);
-            // 
-            // comboBoxNormalColour
-            // 
-            this.comboBoxNormalColour.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxNormalColour.FormattingEnabled = true;
-            this.comboBoxNormalColour.Items.AddRange(new object[] {
-            "Aqua",
-            "Aquamarine",
-            "Bisque",
-            "Black",
-            "Blue",
-            "Blue Violet",
-            "Brown",
-            "Burly Wood",
-            "Cadet Blue",
-            "Chartreuse",
-            "Chocolate",
-            "Coral",
-            "Cornflower Blue",
-            "Crimson",
-            "Cyan",
-            "Dark Blue",
-            "Dark Cyan",
-            "Dark Goldenrod",
-            "Dark Gray",
-            "Dark Green",
-            "Dark Khaki",
-            "Dark Magenta",
-            "Dark Olive Green",
-            "Dark Orange",
-            "Dark Orchid",
-            "Dark Red",
-            "Dark Salmon",
-            "Dark Sea Green",
-            "Dark Slate Blue",
-            "Dark SlateGray",
-            "Dark Turquoise",
-            "Dark Violet",
-            "Deep Pink",
-            "Deep Sky Blue",
-            "Dim Gray",
-            "Dodger Blue",
-            "Firebrick",
-            "Forest Green",
-            "Gold",
-            "Goldenrod",
-            "Gray",
-            "Green",
-            "Green Yellow",
-            "Hot Pink",
-            "Indian Red",
-            "Indigo",
-            "Khaki",
-            "Lawn Green",
-            "Light Blue",
-            "Light Coral",
-            "Light Green",
-            "Light Gray",
-            "Light Pink",
-            "Light Salmon",
-            "Light Sea Green",
-            "Light Sky Blue",
-            "Light Slate Gray",
-            "Light Steel Blue",
-            "Lime",
-            "Lime Green",
-            "Magenta",
-            "Maroon",
-            "Medium Aquamarine",
-            "Medium Blue",
-            "Medium Orchid",
-            "Medium Purple",
-            "Medium Sea Green",
-            "Medium Slate Blue",
-            "Medium Spring Green",
-            "Medium Turquoise",
-            "Medium Violet Red",
-            "Midnight Blue",
-            "Navy",
-            "Olive",
-            "Olive Drab",
-            "Orange",
-            "Orange Red",
-            "Orchid",
-            "Pale Green",
-            "Pale Turquoise",
-            "Pale Violet Red",
-            "Peach Puff",
-            "Peru",
-            "Pink",
-            "Plum",
-            "Powder Blue",
-            "Purple",
-            "Red",
-            "Rosy Brown",
-            "Royal Blue",
-            "Saddle Brown",
-            "Salmon",
-            "Sandy Brown",
-            "Sea Green",
-            "Sienna",
-            "Sky Blue",
-            "Slate Blue",
-            "Slate Gray",
-            "Spring Green",
-            "Steel Blue",
-            "Tan",
-            "Teal",
-            "Thistle",
-            "Tomato",
-            "Turquoise",
-            "Violet",
-            "Wheat",
-            "Yellow",
-            "Yellow Green"});
-            this.comboBoxNormalColour.Location = new System.Drawing.Point(228, 23);
-            this.comboBoxNormalColour.Name = "comboBoxNormalColour";
-            this.comboBoxNormalColour.Size = new System.Drawing.Size(121, 21);
-            this.comboBoxNormalColour.TabIndex = 0;
-            this.comboBoxNormalColour.SelectedIndexChanged += new System.EventHandler(this.comboBoxNormalColour_SelectedIndexChanged);
             // 
             // numericUpDownHourSearch
             // 
-            this.numericUpDownHourSearch.InterceptArrowKeys = false;
-            this.numericUpDownHourSearch.Location = new System.Drawing.Point(453, 85);
+            this.numericUpDownHourSearch.Location = new System.Drawing.Point(3, 3);
             this.numericUpDownHourSearch.Maximum = new decimal(new int[] {
-            24,
+            23,
             0,
             0,
             0});
             this.numericUpDownHourSearch.Name = "numericUpDownHourSearch";
             this.numericUpDownHourSearch.Size = new System.Drawing.Size(120, 20);
-            this.numericUpDownHourSearch.TabIndex = 4;
+            this.numericUpDownHourSearch.TabIndex = 13;
             this.numericUpDownHourSearch.ValueChanged += new System.EventHandler(this.dateTimePickerChartTimeFinder_ValueChanged);
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(453, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(157, 13);
-            this.label6.TabIndex = 6;
-            this.label6.Text = "Graph Colour Wind Speed Over";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(228, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 13);
-            this.label7.TabIndex = 7;
-            this.label7.Text = "Graph Colour All is Well";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(678, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(205, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Graph Colour Direction Change Exceeded";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(228, 62);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(200, 13);
-            this.label9.TabIndex = 9;
-            this.label9.Text = "Graph Colour Wind and Direction Breach";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(453, 62);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(63, 13);
-            this.label10.TabIndex = 10;
-            this.label10.Text = "Go To Hour";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(678, 62);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(87, 13);
-            this.label11.TabIndex = 11;
-            this.label11.Text = "Open Master File";
             // 
             // windGraphingControllercs
             // 
@@ -996,8 +418,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeGraphLimit)).EndInit();
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
-            this.tableLayoutPanel11.ResumeLayout(false);
-            this.tableLayoutPanel11.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHourSearch)).EndInit();
             this.ResumeLayout(false);
 
@@ -1022,19 +442,8 @@
         private System.Windows.Forms.Label labelChartDirection;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label labelChartTime;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel11;
-        private System.Windows.Forms.ComboBox comboBoxBothOut;
-        private System.Windows.Forms.ComboBox comboBoxDirectionOut;
-        private System.Windows.Forms.ComboBox comboBoxWindOut;
-        private System.Windows.Forms.ComboBox comboBoxNormalColour;
-        private System.Windows.Forms.NumericUpDown numericUpDownHourSearch;
         private System.Windows.Forms.ComboBox comboBoxSelectSeries;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDownHourSearch;
 
     }
 }

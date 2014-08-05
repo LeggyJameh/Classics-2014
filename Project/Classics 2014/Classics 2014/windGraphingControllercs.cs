@@ -23,10 +23,6 @@ namespace Classics_2014
         }
         public void InitializeSelf()
         {
-            comboBoxNormalColour.SelectedItem = UserSettings.Default.graphNormal.Name;
-            comboBoxWindOut.SelectedItem = UserSettings.Default.graphWindOut.Name;
-            comboBoxDirectionOut.SelectedItem = UserSettings.Default.graphDirectionOut.Name;
-            comboBoxBothOut.SelectedItem = UserSettings.Default.graphBothOut.Name;
             PopulateSeriesList();
             comboBoxSelectSeries.SelectedItem = "Recent";
         }
@@ -181,7 +177,7 @@ namespace Classics_2014
             MainEngine.CloseThreads();
         }
 
-        private void ResetGraphColours()
+        public void ResetGraphColours()
         {
             for (int i = 2; i < chartWind.Series[0].Points.Count; i++)
             {
@@ -228,34 +224,6 @@ namespace Classics_2014
 
         private void numericUpDownDirectionChangeGraphLimit_ValueChanged(object sender, EventArgs e)
         {
-            ResetGraphColours();
-        }
-
-        private void comboBoxNormalColour_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string colourName = comboBoxNormalColour.SelectedItem.ToString().Replace(" ", string.Empty);
-            UserSettings.Default.graphNormal = Color.FromName(colourName);
-            ResetGraphColours();
-        }
-
-        private void comboBoxWindout_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string colourName = comboBoxWindOut.SelectedItem.ToString().Replace(" ", string.Empty);
-            UserSettings.Default.graphWindOut = Color.FromName(colourName);
-            ResetGraphColours();
-        }
-
-        private void comboBoxDirectionOut_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string colourName = comboBoxDirectionOut.SelectedItem.ToString().Replace(" ", string.Empty);
-            UserSettings.Default.graphDirectionOut = Color.FromName(colourName);
-            ResetGraphColours();
-        }
-
-        private void comboBoxBothOut_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            string colourName = comboBoxBothOut.SelectedItem.ToString().Replace(" ", string.Empty);
-            UserSettings.Default.graphBothOut = Color.FromName(colourName);
             ResetGraphColours();
         }
 

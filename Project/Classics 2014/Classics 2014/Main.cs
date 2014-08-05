@@ -15,10 +15,16 @@ namespace Classics_2014
     public partial class Main : Form
     {
         int flopsToMaintainColourDirection, flopsToMaintainColourSpeed;
+        public Boolean Locked=false;
         Engine MainEngine;
+        
         public Main()
         {
+            this.KeyPreview = true;
             InitializeComponent();
+            System.Media.SoundPlayer audioPlayer = new System.Media.SoundPlayer();
+            textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextStandarColour;
+            textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
             windGraphingControllercs windGraphingControllercs2 = new windGraphingControllercs();
             windGraphingControllercs2.Dock = DockStyle.Fill;
             tabControl.TabPages[1].Controls.Add(windGraphingControllercs2);
@@ -55,18 +61,24 @@ namespace Classics_2014
             textBoxSideDirection.Text = windData.direction.ToString();
             if (flopsToMaintainColourSpeed == 0)
             {
-                textBoxSideSpeed.ForeColor = Color.White;
+                textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextStandarColour;
             }
-            else { flopsToMaintainColourSpeed--; }
+            else 
+            { 
+                flopsToMaintainColourSpeed--;
+                if (UserSettings.Default.AudioAlarmsEnabled) { System.Media.SystemSounds.Asterisk.Play(); }
+                
+            }
             if (flopsToMaintainColourDirection == 0)
             {
-                textBoxSideSpeed.ForeColor = Color.White;
+                textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextStandarColour;
             }
-            else { flopsToMaintainColourDirection--; }
-        }
-        private void timerScoreTimer_Tick(object sender, EventArgs e)
-        {
-            timerScoreTimer.Stop();
+            else 
+            { 
+                flopsToMaintainColourDirection--;
+                if (UserSettings.Default.AudioAlarmsEnabled) { System.Media.SystemSounds.Beep.Play(); }
+                
+            }
         }
         public void UpdatelistBoxWindLog(TWind[] wind)
         {
@@ -127,7 +139,7 @@ namespace Classics_2014
             if (IsDirectionOut(wind, directionLimit))
             {
                 flopsToMaintainColourDirection = UserSettings.Default.flopsToMaintainColourDirection;
-                textBoxSideDirection.ForeColor = Color.Red;
+                textBoxSideDirection.ForeColor = UserSettings.Default.sideTextDirectionOutColour;
             }
             else
             {
@@ -135,9 +147,25 @@ namespace Classics_2014
                 {
 
                     flopsToMaintainColourSpeed = UserSettings.Default.flopsToMaintainColourSpeed;
-                    textBoxSideSpeed.ForeColor = Color.Red;
+                    textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextWindOutColour;
                 }
             }
+        }
+
+        private void buttonMainSettings_Click(object sender, EventArgs e)
+        {
+            tabControl.TabPages.Add(new TabPage("Options"));
+            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(new StandardOptionsPage(MainEngine.windGraph, tabControl));
+            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+        }
+
+        private void Main_KeyDown(object sender, KeyEventArgs e)
+        {
+           if (e.KeyData == (Keys.Control|Keys.Shift|Keys.L))
+           {
+               if (!Locked) { LockScreen lockScreen = new LockScreen(this); Locked = true; this.Enabled = false; }
+     
+           }
         }
     }
 }

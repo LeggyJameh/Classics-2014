@@ -28,9 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -59,7 +58,6 @@
             this.ColumnEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnEventDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.timerScoreTimer = new System.Windows.Forms.Timer(this.components);
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
             this.textBoxSideDirection = new System.Windows.Forms.Label();
@@ -217,6 +215,7 @@
             this.buttonMainSettings.TabIndex = 7;
             this.buttonMainSettings.Text = "Settings";
             this.buttonMainSettings.UseVisualStyleBackColor = true;
+            this.buttonMainSettings.Click += new System.EventHandler(this.buttonMainSettings_Click);
             // 
             // tabWind
             // 
@@ -385,11 +384,6 @@
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // timerScoreTimer
-            // 
-            this.timerScoreTimer.Enabled = true;
-            this.timerScoreTimer.Interval = 15000;
-            // 
             // tableLayoutPanel5
             // 
             this.tableLayoutPanel5.ColumnCount = 2;
@@ -496,9 +490,9 @@
             this.listBoxWindLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem2.StateImageIndex = 0;
+            listViewItem4.StateImageIndex = 0;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem4});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;
@@ -553,6 +547,7 @@
             this.Text = "Competition Manager System";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Main_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Main_KeyDown);
             this.tabControl.ResumeLayout(false);
             this.tabMain.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
@@ -582,7 +577,6 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonCompetition;
-        private System.Windows.Forms.Timer timerScoreTimer;
         private System.Windows.Forms.TabPage tabEventLoad;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;

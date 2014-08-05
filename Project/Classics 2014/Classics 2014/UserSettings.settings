@@ -41,5 +41,20 @@
     <Setting Name="flopsToMaintainColourSpeed" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">10</Value>
     </Setting>
+    <Setting Name="compHaltLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">9</Value>
+    </Setting>
+    <Setting Name="sideTextStandarColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">White</Value>
+    </Setting>
+    <Setting Name="sideTextWindOutColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="sideTextDirectionOutColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Navy</Value>
+    </Setting>
+    <Setting Name="AudioAlarmsEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

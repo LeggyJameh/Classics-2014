@@ -178,5 +178,65 @@ namespace Classics_2014 {
                 this["flopsToMaintainColourSpeed"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("9")]
+        public int compHaltLength {
+            get {
+                return ((int)(this["compHaltLength"]));
+            }
+            set {
+                this["compHaltLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("White")]
+        public global::System.Drawing.Color sideTextStandarColour {
+            get {
+                return ((global::System.Drawing.Color)(this["sideTextStandarColour"]));
+            }
+            set {
+                this["sideTextStandarColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Red")]
+        public global::System.Drawing.Color sideTextWindOutColour {
+            get {
+                return ((global::System.Drawing.Color)(this["sideTextWindOutColour"]));
+            }
+            set {
+                this["sideTextWindOutColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Navy")]
+        public global::System.Drawing.Color sideTextDirectionOutColour {
+            get {
+                return ((global::System.Drawing.Color)(this["sideTextDirectionOutColour"]));
+            }
+            set {
+                this["sideTextDirectionOutColour"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AudioAlarmsEnabled {
+            get {
+                return ((bool)(this["AudioAlarmsEnabled"]));
+            }
+            set {
+                this["AudioAlarmsEnabled"] = value;
+            }
+        }
     }
 }

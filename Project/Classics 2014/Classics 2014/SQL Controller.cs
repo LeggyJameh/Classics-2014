@@ -222,12 +222,14 @@ namespace Classics_2014
             return completed;
         }
 
-        public int CreateAccuracyLanding(int EventID, int Score, byte[] LandingData)
+        #region StagedAccuracyLandingProcess
+
+        //Stage 1
+        public int CreateAccuracyLanding(int EventID, int Score)
         {
             int LandingID = -1;
-            string hexLanding = ByteArrayToHex(LandingData);
 
-            string query = "INSERT INTO `accuracy landings` (Score, WindData) VALUES ('" + Score + "', '" + hexLanding + "');";
+            string query = "INSERT INTO `accuracy landings` (Score) VALUES ('" + Score + "');";
 
             ExecuteNonQuery(query);
             LandingID = GetLastInsertKey();
@@ -238,6 +240,23 @@ namespace Classics_2014
             return LandingID;
         }
 
+        //Stage 2
+        public bool AssignCompetitorToLanding(int CompetitorID, int RoundNum, int LandingID, int EventID)
+        {
+            string query = "UPDATE `event " + EventID + "` SET `Round`='" + RoundNum + "', `UID`='" + CompetitorID + "'  WHERE `LandingID`='" + LandingID + "';";
+            return ExecuteNonQuery(query);
+        }
+
+        //Stage 3
+        public bool AssignWindDataToAccuracyLanding(byte[] LandingData, int LandingID)
+        {
+            string hexLanding = ByteArrayToHex(LandingData);
+            string query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "' WHERE `LandingID`='" + LandingID + "';";
+            return ExecuteNonQuery(query);
+        }
+
+
+        #endregion
         #endregion
         #region Remove
 
@@ -282,12 +301,6 @@ namespace Classics_2014
 
         #endregion
         #region Modify
-
-        public bool AssignCompetitorToLanding(int CompetitorID, int RoundNum, int LandingID, int EventID)
-        {
-            string query = "UPDATE `event " + EventID + "` SET `Round`='" + RoundNum + "', `UID`='" + CompetitorID + "'  WHERE `LandingID`='" + LandingID + "';";
-            return ExecuteNonQuery(query);
-        }
 
         public bool ModifyLanding(int LandingID, int Score)
         {

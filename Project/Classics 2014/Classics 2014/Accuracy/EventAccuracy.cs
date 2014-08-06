@@ -35,25 +35,18 @@ namespace Classics_2014.Accuracy
         }
         public void MethodAddLanding(AccuracyLanding Landing)
         {
-            dataGridViewIncomingLandings.Invoke((MethodInvoker)(() => dataGridViewIncomingLandings.Rows.Add(Landing.ID, Landing.Index, Landing.TimeOfLanding, Landing.score)));
+            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.ID, Landing.Index, Landing.TimeOfLanding, Landing.score, "No")));
         }
 
-        public bool MethodRemoveLanding(int Index)
+        public void MakeLandingComplete(int LandingID)
         {
-            for (int i = 0; i < dataGridViewIncomingLandings.RowCount; i++)
+            for (int i = 0; i < dataGridViewLandings.RowCount - 1; i++)
             {
-                if (Convert.ToInt16(dataGridViewIncomingLandings[1, i].Value) == Index)
+                if (Convert.ToInt16(dataGridViewLandings[0, i].Value) == LandingID)
                 {
-                    dataGridViewIncomingLandings.Rows.RemoveAt(i);
-                    return true;
+                    dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings[4, i].Value = "Yes"));
                 }
             }
-            return false;
-        }
-
-        public void AddLandingToReady(AccuracyLanding Landing)
-        {
-            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.Index, Landing.ID, Landing.TimeOfLanding, Landing.score)));
         }
 
         private void LoadCompetitorsIntoGrid()
@@ -100,55 +93,6 @@ namespace Classics_2014.Accuracy
             timer1.Stop();
         }
 
-        private void dataGridViewScore_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e != null)
-            {
-                if (e.ColumnIndex >= 4)
-                {
-                    switch (e.Button)
-                    {
-                        #region LeftClick
-                        case (System.Windows.Forms.MouseButtons.Left):
-                            if (dataGridViewScore[e.ColumnIndex, e.RowIndex].Value == null)
-                            {
-                                if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[2].Value != null)
-                                {
-                                    int IndexInList = 0;
-                                    for (int i = 0; i < Connected_Event.CompletedLandings.Count; i++)
-			                        {
-                                        if (Connected_Event.CompletedLandings[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
-                                        {
-                                            IndexInList = i;
-                                        }
-			                        }
-
-                                    AccuracyLanding CurrentLanding = Connected_Event.CompletedLandings[IndexInList];
-
-                                    CurrentLanding.dataGridCell = dataGridViewScore[e.ColumnIndex, e.RowIndex];
-                                    dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
-                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Value = CurrentLanding.score;
-                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].ReadOnly = true;
-                                    dataGridViewScore[e.ColumnIndex, e.RowIndex].Style.BackColor = Color.LightGreen;
-
-                                    Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore[0, e.RowIndex].Value),
-                                    Convert.ToInt16(dataGridViewScore.Columns[e.ColumnIndex].Name.Substring(11)),
-                                    CurrentLanding.ID, Connected_Event.EventID);
-
-                                    Connected_Event.CompletedLandings[IndexInList] = CurrentLanding;
-                                }
-                            }
-                            break;
-                        #endregion
-                        #region RightClick
-                        case (System.Windows.Forms.MouseButtons.Right):
-                            break;
-                        #endregion
-                    }
-                }
-            }
-        }
-
         private void buttonClose_Click(object sender, EventArgs e)
         {
             if (Connected_Event.IsActive == false)
@@ -179,25 +123,25 @@ namespace Classics_2014.Accuracy
 
         private void buttonManualLanding_Click(object sender, EventArgs e)
         {
-            if (dataGridViewScore.SelectedCells.Count != 0)
-            {
-                if (dataGridViewScore.SelectedCells[0].Value == null)
-                {
-                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
-                    {
-                        int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-                        dataGridViewScore.SelectedCells[0].Value = NewScore;
-                        dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
+            //if (dataGridViewScore.SelectedCells.Count != 0)
+            //{
+            //    if (dataGridViewScore.SelectedCells[0].Value == null)
+            //    {
+            //        if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+            //        {
+            //            int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+            //            dataGridViewScore.SelectedCells[0].Value = NewScore;
+            //            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
 
-                        int LandingID;
-                        LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore, new Byte[1]);
+            //            int LandingID;
+            //            LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore, new Byte[1]);
 
-                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
-                        Convert.ToInt16(dataGridViewScore.Columns[dataGridViewScore.SelectedCells[0].ColumnIndex].Name.Substring(11)),
-                        LandingID, Connected_Event.EventID);
-                    }
-                }
-            }
+            //            Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
+            //            Convert.ToInt16(dataGridViewScore.Columns[dataGridViewScore.SelectedCells[0].ColumnIndex].Name.Substring(11)),
+            //            LandingID, Connected_Event.EventID);
+            //        }
+            //    }
+            //}
         }
 
         private void buttonNextRound_Click(object sender, EventArgs e)
@@ -215,6 +159,63 @@ namespace Classics_2014.Accuracy
             //dataGridViewScore.SelectedCells[0].Value = null;
 
             //Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+        }
+
+        private void buttonConfirm_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewScore.SelectedRows[0].Cells[4+RoundNumber].Value == null)
+            {
+                if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[2].Value != null)
+                {
+                    int IndexInList = 0;
+                    string SelectedLandingIsComplete = dataGridViewLandings.SelectedRows[0].Cells[4].Value.ToString();
+                    AccuracyLanding CurrentLanding = new AccuracyLanding();
+                    switch (SelectedLandingIsComplete)
+                    {
+                        case "Yes":
+                            for (int i = 0; i < Connected_Event.CompletedLandings.Count; i++)
+                            {
+                                if (Connected_Event.CompletedLandings[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
+                                {
+                                    IndexInList = i;
+                                }
+                            }
+                            CurrentLanding = Connected_Event.CompletedLandings[IndexInList];
+                            break;
+
+                        case "No":
+                            for (int i = 0; i < Connected_Event.LandingInProgress.Count; i++)
+                            {
+                                if (Connected_Event.LandingInProgress[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
+                                {
+                                    IndexInList = i;
+                                }
+                            }
+                            CurrentLanding = Connected_Event.LandingInProgress[IndexInList];
+                            break;
+                    }
+
+                    CurrentLanding.dataGridCell = dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber];
+                    dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
+                    dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = CurrentLanding.score;
+                    dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].ReadOnly = true;
+                    dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.LightGreen;
+
+                    Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber,
+                    CurrentLanding.ID, Connected_Event.EventID);
+
+                    switch (SelectedLandingIsComplete)
+                    {
+                        case "Yes":
+                            Connected_Event.CompletedLandings[IndexInList] = CurrentLanding;
+                            break;
+
+                        case "No":
+                            Connected_Event.LandingInProgress[IndexInList] = CurrentLanding;
+                            break;
+                    }
+                }
+            }
         }
 
     }

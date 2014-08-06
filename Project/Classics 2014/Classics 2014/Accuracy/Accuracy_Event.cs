@@ -21,7 +21,7 @@ namespace Classics_2014.Accuracy
         List<string> ActiveTeams;
         TWind[] IncomingData;
         int NumberOfLandings = 0;
-        List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
+        public List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
         public List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
         List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
         #endregion
@@ -60,6 +60,7 @@ namespace Classics_2014.Accuracy
                     {
                         NumberOfLandings++;
                         AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
+                        newLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, newLanding.score);
                         LandingInProgress.Add(newLanding);
                         EventTab.MethodAddLanding(newLanding);
                         EventTab.ScoreEdit(DataA.LandingScore.ToString());
@@ -69,11 +70,10 @@ namespace Classics_2014.Accuracy
                         AccuracyLanding currentLanding = LandingInProgress[i];
                         if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1)
                         {
+                            EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);
-                            EventTab.Invoke((MethodInvoker)(() => EventTab.MethodRemoveLanding(currentLanding.Index)));
-                            currentLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, currentLanding.score, ConvertLandingToByteArray(currentLanding));
                             CompletedLandings.Add(currentLanding);
-                            EventTab.AddLandingToReady(currentLanding);
+                            SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding), currentLanding.ID);
                         }
                         else
                         {

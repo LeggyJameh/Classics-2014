@@ -449,6 +449,7 @@
             this.buttonRemoveLanding.TabIndex = 0;
             this.buttonRemoveLanding.Text = "Remove Landing";
             this.buttonRemoveLanding.UseVisualStyleBackColor = true;
+            this.buttonRemoveLanding.Click += new System.EventHandler(this.buttonRemoveLanding_Click);
             // 
             // tabPageTeamLeaderboard
             // 

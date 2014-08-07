@@ -121,6 +121,9 @@ namespace Classics_2014.Accuracy
         {
             if (Connected_Event.IsActive == false)
             {
+                tabControl.TabPages.Remove(tabControl.SelectedTab);
+                tabControl.SelectedTab = tabControl.TabPages[0];
+                Connected_Event.EventTab = null;
             }
             else
             {
@@ -289,6 +292,11 @@ namespace Classics_2014.Accuracy
                     dataGridViewLandings.Rows[1].Selected = true;
                 }
             }
+        }
+
+        private void buttonRemoveLanding_Click(object sender, EventArgs e)
+        {
+
         }
 
     }

@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -44,19 +44,6 @@
             this.buttonModifyCompetitorData = new System.Windows.Forms.Button();
             this.buttonMainSettings = new System.Windows.Forms.Button();
             this.tabWind = new System.Windows.Forms.TabPage();
-            this.tabEventLoad = new System.Windows.Forms.TabPage();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.EventBrowserButtonLoad = new System.Windows.Forms.Button();
-            this.EventBrowserButtonCancel = new System.Windows.Forms.Button();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.EventBrowserListBoxCompetitors = new System.Windows.Forms.ListBox();
-            this.EventBrowserLabelCompetitors = new System.Windows.Forms.Label();
-            this.EventBrowserEventGrid = new System.Windows.Forms.DataGridView();
-            this.ColumnEventID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnEventName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnEventDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -73,12 +60,6 @@
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabEventLoad.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).BeginInit();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +71,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabMain);
             this.tabControl.Controls.Add(this.tabWind);
-            this.tabControl.Controls.Add(this.tabEventLoad);
             this.tabControl.Location = new System.Drawing.Point(3, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -226,156 +206,6 @@
             this.tabWind.Text = "Anemometer Control";
             this.tabWind.UseVisualStyleBackColor = true;
             // 
-            // tabEventLoad
-            // 
-            this.tabEventLoad.Controls.Add(this.tableLayoutPanel1);
-            this.tabEventLoad.Location = new System.Drawing.Point(4, 22);
-            this.tabEventLoad.Name = "tabEventLoad";
-            this.tabEventLoad.Size = new System.Drawing.Size(1132, 718);
-            this.tabEventLoad.TabIndex = 3;
-            this.tabEventLoad.Text = "Event Browser";
-            this.tabEventLoad.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel3, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1132, 718);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // tableLayoutPanel2
-            // 
-            this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.EventBrowserButtonLoad, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.EventBrowserButtonCancel, 1, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 671);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1126, 44);
-            this.tableLayoutPanel2.TabIndex = 0;
-            // 
-            // EventBrowserButtonLoad
-            // 
-            this.EventBrowserButtonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserButtonLoad.Location = new System.Drawing.Point(3, 3);
-            this.EventBrowserButtonLoad.Name = "EventBrowserButtonLoad";
-            this.EventBrowserButtonLoad.Size = new System.Drawing.Size(557, 38);
-            this.EventBrowserButtonLoad.TabIndex = 0;
-            this.EventBrowserButtonLoad.Text = "Load Event";
-            this.EventBrowserButtonLoad.UseVisualStyleBackColor = true;
-            // 
-            // EventBrowserButtonCancel
-            // 
-            this.EventBrowserButtonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserButtonCancel.Location = new System.Drawing.Point(566, 3);
-            this.EventBrowserButtonCancel.Name = "EventBrowserButtonCancel";
-            this.EventBrowserButtonCancel.Size = new System.Drawing.Size(557, 38);
-            this.EventBrowserButtonCancel.TabIndex = 1;
-            this.EventBrowserButtonCancel.Text = "Cancel";
-            this.EventBrowserButtonCancel.UseVisualStyleBackColor = true;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 2;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel4, 1, 0);
-            this.tableLayoutPanel3.Controls.Add(this.EventBrowserEventGrid, 0, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(1126, 662);
-            this.tableLayoutPanel3.TabIndex = 1;
-            // 
-            // tableLayoutPanel4
-            // 
-            this.tableLayoutPanel4.ColumnCount = 1;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel4.Controls.Add(this.EventBrowserListBoxCompetitors, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.EventBrowserLabelCompetitors, 0, 0);
-            this.tableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(903, 3);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 2;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(220, 656);
-            this.tableLayoutPanel4.TabIndex = 1;
-            // 
-            // EventBrowserListBoxCompetitors
-            // 
-            this.EventBrowserListBoxCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserListBoxCompetitors.FormattingEnabled = true;
-            this.EventBrowserListBoxCompetitors.Location = new System.Drawing.Point(3, 35);
-            this.EventBrowserListBoxCompetitors.Name = "EventBrowserListBoxCompetitors";
-            this.EventBrowserListBoxCompetitors.ScrollAlwaysVisible = true;
-            this.EventBrowserListBoxCompetitors.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.EventBrowserListBoxCompetitors.Size = new System.Drawing.Size(214, 618);
-            this.EventBrowserListBoxCompetitors.TabIndex = 0;
-            // 
-            // EventBrowserLabelCompetitors
-            // 
-            this.EventBrowserLabelCompetitors.AutoSize = true;
-            this.EventBrowserLabelCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserLabelCompetitors.Location = new System.Drawing.Point(3, 0);
-            this.EventBrowserLabelCompetitors.Name = "EventBrowserLabelCompetitors";
-            this.EventBrowserLabelCompetitors.Size = new System.Drawing.Size(214, 32);
-            this.EventBrowserLabelCompetitors.TabIndex = 1;
-            this.EventBrowserLabelCompetitors.Text = "Competitors";
-            this.EventBrowserLabelCompetitors.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // EventBrowserEventGrid
-            // 
-            this.EventBrowserEventGrid.AllowUserToAddRows = false;
-            this.EventBrowserEventGrid.AllowUserToDeleteRows = false;
-            this.EventBrowserEventGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.EventBrowserEventGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.EventBrowserEventGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnEventID,
-            this.ColumnEventName,
-            this.ColumnEventDate});
-            this.EventBrowserEventGrid.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.EventBrowserEventGrid.Location = new System.Drawing.Point(3, 3);
-            this.EventBrowserEventGrid.MultiSelect = false;
-            this.EventBrowserEventGrid.Name = "EventBrowserEventGrid";
-            this.EventBrowserEventGrid.ReadOnly = true;
-            this.EventBrowserEventGrid.Size = new System.Drawing.Size(894, 656);
-            this.EventBrowserEventGrid.TabIndex = 2;
-            // 
-            // ColumnEventID
-            // 
-            this.ColumnEventID.HeaderText = "ID";
-            this.ColumnEventID.Name = "ColumnEventID";
-            this.ColumnEventID.ReadOnly = true;
-            this.ColumnEventID.Visible = false;
-            // 
-            // ColumnEventName
-            // 
-            this.ColumnEventName.HeaderText = "Name";
-            this.ColumnEventName.Name = "ColumnEventName";
-            this.ColumnEventName.ReadOnly = true;
-            // 
-            // ColumnEventDate
-            // 
-            this.ColumnEventDate.HeaderText = "Date";
-            this.ColumnEventDate.Name = "ColumnEventDate";
-            this.ColumnEventDate.ReadOnly = true;
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Location = new System.Drawing.Point(0, 750);
@@ -490,9 +320,9 @@
             this.listBoxWindLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem4.StateImageIndex = 0;
+            listViewItem1.StateImageIndex = 0;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem4});
+            listViewItem1});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;
@@ -552,13 +382,6 @@
             this.tabMain.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabEventLoad.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel2.ResumeLayout(false);
-            this.tableLayoutPanel3.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.EventBrowserEventGrid)).EndInit();
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
@@ -577,19 +400,6 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.Button buttonLoad;
         private System.Windows.Forms.Button buttonCompetition;
-        private System.Windows.Forms.TabPage tabEventLoad;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button EventBrowserButtonLoad;
-        private System.Windows.Forms.Button EventBrowserButtonCancel;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.ListBox EventBrowserListBoxCompetitors;
-        private System.Windows.Forms.Label EventBrowserLabelCompetitors;
-        private System.Windows.Forms.DataGridView EventBrowserEventGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEventID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEventName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEventDate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
         private System.Windows.Forms.Label label11;

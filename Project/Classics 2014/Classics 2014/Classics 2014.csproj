@@ -89,6 +89,12 @@
     <Compile Include="CommonDisplayOptions.Designer.cs">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="EventLoader.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="EventLoader.Designer.cs">
+      <DependentUpon>EventLoader.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventTeams.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -156,6 +162,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EventLoader.resx">
+      <DependentUpon>EventLoader.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventTeams.resx">
       <DependentUpon>EventTeams.cs</DependentUpon>

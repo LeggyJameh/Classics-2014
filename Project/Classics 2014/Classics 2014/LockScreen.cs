@@ -44,6 +44,7 @@ namespace Classics_2014
             // Restore owner
             Main form =(Main) this.Owner;
             form.Locked = false;
+            form.Enabled = true;
             this.Owner.LocationChanged -= Cover_LocationChanged;
             this.Owner.ClientSizeChanged -= Cover_ClientSizeChanged;
             if (!this.Owner.IsDisposed && Environment.OSVersion.Version.Major >= 6)
@@ -104,6 +105,7 @@ namespace Classics_2014
         {
             if (textBoxPassWordInput.Text == UserSettings.Default.userLockPassword)
             {
+                
                 this.Close();
             }
         }

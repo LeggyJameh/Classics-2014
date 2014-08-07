@@ -83,7 +83,13 @@
             this.listBoxOptionsMenu.FormattingEnabled = true;
             this.listBoxOptionsMenu.Items.AddRange(new object[] {
             "Common Display",
-            "Accuracy"});
+            "Accuracy",
+            "Style",
+            "Paraski",
+            "Speed",
+            "Formation",
+            "Canopy Piloting",
+            "Canopy Formation"});
             this.listBoxOptionsMenu.Location = new System.Drawing.Point(3, 3);
             this.listBoxOptionsMenu.Name = "listBoxOptionsMenu";
             this.listBoxOptionsMenu.Size = new System.Drawing.Size(83, 455);

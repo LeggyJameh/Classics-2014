@@ -40,6 +40,7 @@ namespace Classics_2014
                  ListenThread.Start();  
             } 
         }
+        
         private void ListenProcedure()
         {
             Thread.Sleep(100);
@@ -116,11 +117,11 @@ namespace Classics_2014
                 {
                     if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\OldMasterFiles\\")) { Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\OldMasterFiles"); }
                     File.Move(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", Directory.GetCurrentDirectory() +"\\OldMasterFiles\\" + (lastCreationTime.ToShortDateString().Replace(':','-'))+".txt");
-                    
                 }
             }
-            catch
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.ToString());
                 if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\"))
                 {
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\RecentMasterFile");

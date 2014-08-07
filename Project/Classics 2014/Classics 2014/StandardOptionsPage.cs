@@ -38,7 +38,6 @@ namespace Classics_2014
                     Accuracy.AccuracyOptionsMenu aOptionsMenu = new Accuracy.AccuracyOptionsMenu();
                     aOptionsMenu.Dock = DockStyle.Fill;
                     splitContainerOptions.Panel2.Controls.Add(aOptionsMenu);
-                    
                     break;
             }
         }

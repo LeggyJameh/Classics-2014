@@ -221,6 +221,13 @@ namespace Classics_2014.Accuracy
                     return CompletedLandings[i].ID;
                 }
 			}
+            for (int i = 0; i < LandingInProgress.Count; i++)
+            {
+                if (LandingInProgress[i].dataGridCell == Cell)
+                {
+                    return LandingInProgress[i].ID;
+                }
+            }
             return -1;
         }
 

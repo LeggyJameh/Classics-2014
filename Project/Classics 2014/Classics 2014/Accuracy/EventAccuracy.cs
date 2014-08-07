@@ -16,6 +16,7 @@ namespace Classics_2014.Accuracy
         int CurrentCellValue;
         bool TeamedEvent;
         int RoundNumber = 1;
+        bool Admin = false;
 
         public EventAccuracy(Accuracy_Event Event, TabControl Main)
         {
@@ -33,9 +34,32 @@ namespace Classics_2014.Accuracy
                 LoadCompetitorsIntoGrid();
             }
         }
+
+        public EventAccuracy(Accuracy_Event Event, TabControl Main, bool Admin)
+        {
+            this.Admin = Admin;
+            if (Admin)
+            {
+                dataGridViewScore.SelectionMode = DataGridViewSelectionMode.CellSelect;
+            }
+            Connected_Event = Event;
+            tabControl = Main;
+            InitializeComponent();
+            labelName.Text = "Accuracy Event " + Connected_Event.Name;
+            if (Connected_Event.Teams.Count > 0)
+            {
+                TeamedEvent = true;
+                LoadTeamsIntoGrid();
+            }
+            else
+            {
+                LoadCompetitorsIntoGrid();
+            }
+        }
+
         public void MethodAddLanding(AccuracyLanding Landing)
         {
-            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.ID, Landing.Index, Landing.TimeOfLanding, Landing.score, "No")));
+            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.ID, Landing.TimeOfLanding, Landing.score, "No")));
         }
 
         public void MakeLandingComplete(int LandingID)
@@ -44,7 +68,7 @@ namespace Classics_2014.Accuracy
             {
                 if (Convert.ToInt16(dataGridViewLandings[0, i].Value) == LandingID)
                 {
-                    dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings[4, i].Value = "Yes"));
+                    dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings[3, i].Value = "Yes"));
                 }
             }
         }
@@ -106,16 +130,35 @@ namespace Classics_2014.Accuracy
 
         private void buttonEditLanding_Click(object sender, EventArgs e)
         {
-            if (dataGridViewScore.SelectedCells.Count != 0)
+            if (Admin)
             {
-                if (dataGridViewScore.SelectedCells[0].Value != null)
+                if (dataGridViewScore.SelectedCells.Count != 0)
                 {
-                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                    if (dataGridViewScore.SelectedCells[0].Value != null)
                     {
-                        int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-                        dataGridViewScore.SelectedCells[0].Value = NewScore;
-                        dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
-                        Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                        if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                        {
+                            int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                            dataGridViewScore.SelectedCells[0].Value = NewScore;
+                            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
+                            Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (dataGridViewScore.SelectedRows.Count != 0)
+                {
+                    if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value != null)
+                    {
+                        if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor != Color.LightBlue)
+                        {
+                            int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = NewScore;
+                            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.Yellow;
+                            Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]), NewScore);
+                        }
                     }
                 }
             }
@@ -123,25 +166,45 @@ namespace Classics_2014.Accuracy
 
         private void buttonManualLanding_Click(object sender, EventArgs e)
         {
-            //if (dataGridViewScore.SelectedCells.Count != 0)
-            //{
-            //    if (dataGridViewScore.SelectedCells[0].Value == null)
-            //    {
-            //        if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
-            //        {
-            //            int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-            //            dataGridViewScore.SelectedCells[0].Value = NewScore;
-            //            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
+            if (Admin)
+            {
+                if (dataGridViewScore.SelectedCells.Count != 0)
+                {
+                    if (dataGridViewScore.SelectedCells[0].Value == null)
+                    {
+                        if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
+                        {
+                            int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                            dataGridViewScore.SelectedCells[0].Value = NewScore;
+                            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
 
-            //            int LandingID;
-            //            LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore, new Byte[1]);
+                            int LandingID;
+                            LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore);
 
-            //            Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
-            //            Convert.ToInt16(dataGridViewScore.Columns[dataGridViewScore.SelectedCells[0].ColumnIndex].Name.Substring(11)),
-            //            LandingID, Connected_Event.EventID);
-            //        }
-            //    }
-            //}
+                            Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
+                            RoundNumber, LandingID, Connected_Event.EventID);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (dataGridViewScore.SelectedRows.Count != 0)
+                {
+                    if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value == null)
+                    {
+                        int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
+                        dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = NewScore;
+                        dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.LightBlue;
+
+                        int LandingID;
+                        LandingID = Connected_Event.SQL_Controller.CreateAccuracyLanding(Connected_Event.EventID, NewScore);
+
+                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value),
+                        RoundNumber, LandingID, Connected_Event.EventID);
+                    }
+                }
+            }
         }
 
         private void buttonNextRound_Click(object sender, EventArgs e)
@@ -155,27 +218,35 @@ namespace Classics_2014.Accuracy
 
         private void buttonUnassignLanding_Click(object sender, EventArgs e)
         {
-            //int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]);
-            //dataGridViewScore.SelectedCells[0].Value = null;
+            int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = null;
+            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
 
-            //Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+            Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+            for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
+            {
+                if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
+                {
+                    dataGridViewLandings.Rows[i].Visible = true;
+                }
+            }
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if (dataGridViewScore.SelectedRows[0].Cells[4+RoundNumber].Value == null)
             {
-                if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[2].Value != null)
+                if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[1].Value != null)
                 {
                     int IndexInList = 0;
-                    string SelectedLandingIsComplete = dataGridViewLandings.SelectedRows[0].Cells[4].Value.ToString();
+                    string SelectedLandingIsComplete = dataGridViewLandings.SelectedRows[0].Cells[3].Value.ToString();
                     AccuracyLanding CurrentLanding = new AccuracyLanding();
                     switch (SelectedLandingIsComplete)
                     {
                         case "Yes":
                             for (int i = 0; i < Connected_Event.CompletedLandings.Count; i++)
                             {
-                                if (Connected_Event.CompletedLandings[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
+                                if (Connected_Event.CompletedLandings[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value))
                                 {
                                     IndexInList = i;
                                 }
@@ -186,7 +257,7 @@ namespace Classics_2014.Accuracy
                         case "No":
                             for (int i = 0; i < Connected_Event.LandingInProgress.Count; i++)
                             {
-                                if (Connected_Event.LandingInProgress[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[1].Value))
+                                if (Connected_Event.LandingInProgress[i].ID == Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value))
                                 {
                                     IndexInList = i;
                                 }
@@ -196,7 +267,7 @@ namespace Classics_2014.Accuracy
                     }
 
                     CurrentLanding.dataGridCell = dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber];
-                    dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
+                    dataGridViewLandings.SelectedRows[0].Visible = false;
                     dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = CurrentLanding.score;
                     dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].ReadOnly = true;
                     dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.LightGreen;
@@ -214,6 +285,8 @@ namespace Classics_2014.Accuracy
                             Connected_Event.LandingInProgress[IndexInList] = CurrentLanding;
                             break;
                     }
+
+                    dataGridViewLandings.Rows[1].Selected = true;
                 }
             }
         }

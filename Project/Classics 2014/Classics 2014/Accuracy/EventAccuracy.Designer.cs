@@ -46,7 +46,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridViewLandings = new System.Windows.Forms.DataGridView();
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIndex = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnIsCompleted = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -166,7 +165,7 @@
             // 
             // dataGridViewScore
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewScore.BackgroundColor = System.Drawing.Color.White;
@@ -260,7 +259,6 @@
             this.dataGridViewLandings.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLandings.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
-            this.ColumnIndex,
             this.ColumnTime,
             this.ColumnScore,
             this.ColumnIsCompleted});
@@ -279,13 +277,6 @@
             this.ColumnID.Name = "ColumnID";
             this.ColumnID.ReadOnly = true;
             this.ColumnID.Visible = false;
-            // 
-            // ColumnIndex
-            // 
-            this.ColumnIndex.HeaderText = "Index";
-            this.ColumnIndex.Name = "ColumnIndex";
-            this.ColumnIndex.ReadOnly = true;
-            this.ColumnIndex.Visible = false;
             // 
             // ColumnTime
             // 
@@ -543,12 +534,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRound1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonConfirm;
+        private System.Windows.Forms.Button buttonRejump;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIndex;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIsCompleted;
-        private System.Windows.Forms.Button buttonConfirm;
-        private System.Windows.Forms.Button buttonRejump;
     }
 }

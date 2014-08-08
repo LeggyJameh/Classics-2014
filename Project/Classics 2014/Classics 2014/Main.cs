@@ -27,6 +27,7 @@ namespace Classics_2014
             textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
             windGraphingControllercs windGraphingControllercs2 = new windGraphingControllercs();
             windGraphingControllercs2.Dock = DockStyle.Fill;
+            tabControl.TabPages.Remove(tabPageEventSelect);
             tabControl.TabPages[1].Controls.Add(windGraphingControllercs2);
             MainEngine = new Engine(this, tabControl, windGraphingControllercs2);
             for (int i = 0; i < 60; i++)
@@ -47,13 +48,8 @@ namespace Classics_2014
         }
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
-            TabPage NewPage = new TabPage();
-            Classics_2014.Accuracy.EventAccuracyOptions EventTab = MainEngine.StartNewAccuracyEvent();
-            NewPage.Controls.Add(EventTab);
-            EventTab.Dock = DockStyle.Fill;
-            NewPage.Text = "New Event";
-            tabControl.TabPages.Add(NewPage);
-            tabControl.SelectedTab = NewPage;
+            tabControl.TabPages.Add(tabPageEventSelect);
+            tabControl.SelectedTab = tabPageEventSelect;
         }
         public void UpdateWind(TWind windData)
         {
@@ -167,6 +163,42 @@ namespace Classics_2014
      
            }
         }
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (e.Node != null)
+            {
+                if (e.Node.Tag == null) { buttonStartEvent.Text = "Start New " + e.Node.Text + " Event"; }
+                else { buttonStartEvent.Text = "Select an event on the left"; }
+            }
+        }
+
+        private void buttonStartEvent_Click(object sender, EventArgs e)
+        {
+            string nodeName;
+            if ((treeView1.SelectedNode != null)&&(treeView1.SelectedNode.Tag == null)){ nodeName = treeView1.SelectedNode.Text;  }
+            else if ((treeView2.SelectedNode != null)&&(treeView2.SelectedNode.Tag == null)) { nodeName = treeView2.SelectedNode.Text; }
+            else { return; }
+            switch (nodeName)
+            {
+                case "Accuracy":
+                    TabPage NewPage = new TabPage();
+                    Classics_2014.Accuracy.EventAccuracyOptions EventTab = MainEngine.StartNewAccuracyEvent();
+                    NewPage.Controls.Add(EventTab);
+                    EventTab.Dock = DockStyle.Fill;
+                    NewPage.Text = "New Event";
+                    tabControl.TabPages.Add(NewPage);
+                    tabControl.SelectedTab = NewPage;
+                    tabControl.TabPages.Remove(tabPageEventSelect);
+                    break;
+            }
+        }
+
+        private void treeView1_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            buttonStartEvent_Click(new object(), new EventArgs());
+        }
+        
     }
 }
 

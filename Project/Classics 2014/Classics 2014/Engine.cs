@@ -23,6 +23,7 @@ namespace Classics_2014
         public FileStream fileStream;
         private StreamReader reader;
         public windGraphingControllercs windGraph;
+        TabPage createNewEventTab;
         #endregion 
 
         public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)

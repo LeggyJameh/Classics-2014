@@ -17,50 +17,50 @@ namespace Classics_2014.Accuracy
         List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
         List<string> SelectedTeams = new List<string>();
         List<string> ExistingTeams = new List<string>();
-        TAccuracyRuleSet Rules = new TAccuracyRuleSet();
+        Rulesets.AccuracyRuleset Rules = new Rulesets.AccuracyRuleset();
         string EventName = "";
         #region Structs
-        TAccuracyRuleSet Fai = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset Fai = new Rulesets.AccuracyRuleset
         {
             maxScored = 16,
             noOfCompetitorsPerTeam = 5,
             preset = "FAI",
         };
-        TAccuracyRuleSet CISM = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset CISM = new Rulesets.AccuracyRuleset
         {
             maxScored = 20,
             noOfCompetitorsPerTeam = 5,
             preset = "C.I.S.M",
         };
-        TAccuracyRuleSet CISMJunior = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset CISMJunior = new Rulesets.AccuracyRuleset
         {
             maxScored = 20,
             noOfCompetitorsPerTeam = 1,
             preset = "C.I.S.M Junior",
         };
-        TAccuracyRuleSet NationalSeniors = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset NationalSeniors = new Rulesets.AccuracyRuleset
         {
             maxScored = 20,
             preset = "National Seniors",
         };
-        TAccuracyRuleSet NationalPOPS = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset NationalPOPS = new Rulesets.AccuracyRuleset
         {
             maxScored = 100,
             preset = "National POPS",
         };
-        TAccuracyRuleSet NationalIntermediates = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset NationalIntermediates = new Rulesets.AccuracyRuleset
         {
             maxScored = 500,
             noOfCompetitorsPerTeam = 1,
             preset = "National Intermediates",
         };
-        TAccuracyRuleSet NationalJuniors = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset NationalJuniors = new Rulesets.AccuracyRuleset
         {
             maxScored = 2500,
             noOfCompetitorsPerTeam = 1,
             preset = "National Juniors",
         };
-        TAccuracyRuleSet Paragliding = new TAccuracyRuleSet
+        Rulesets.AccuracyRuleset Paragliding = new Rulesets.AccuracyRuleset
         {
             maxScored = 2500,
             preset = "Paragliding",
@@ -88,7 +88,7 @@ namespace Classics_2014.Accuracy
             this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
         }
 
-        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, TAccuracyRuleSet LoadRules, string LoadEventName, DateTime LoadDate, List<TCompetitor> LoadSelectedCompetitors)
+        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, Rulesets.AccuracyRuleset LoadRules, string LoadEventName, DateTime LoadDate, List<TCompetitor> LoadSelectedCompetitors)
         {
             InitializeComponent();
             tabControl = Main;
@@ -203,7 +203,7 @@ namespace Classics_2014.Accuracy
 
 
 
-        private void LoadEvent(DateTime LoadedDate, TAccuracyRuleSet LoadedRules)
+        private void LoadEvent(DateTime LoadedDate, Rulesets.AccuracyRuleset LoadedRules)
         {
             dateTimePicker.Value = LoadedDate;
             textBoxEventName.Text = EventName;
@@ -215,15 +215,7 @@ namespace Classics_2014.Accuracy
             numericUpDownTimeBeforeLanding.Value = LoadedRules.windSecondsPrior;
             numericUpDownTimeAfterLanding.Value = LoadedRules.windSecondsAfter;
             numericUpDownFinalApproachTime.Value = Convert.ToDecimal(LoadedRules.finalApproachTime);
-
-            if (LoadedRules.allScoresUsed == true)
-            {
-                comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
-            }
-            else
-            {
-                comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[1];
-            }
+            comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.SelectedValue = LoadedRules.ScoresUsed;
 
             comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[(LoadedRules.directionOut / 10) - 1];
 
@@ -402,77 +394,64 @@ namespace Classics_2014.Accuracy
         private bool SaveEvent(int Stage)
         {
             bool ErrorShown = false;
-            if (SelectedCompetitors.Count >= 1)
+            try
             {
-                try
-                {
-                    EventName = textBoxEventName.Text;
-                    Rules.preset = comboBoxRulePreset.SelectedItem.ToString();
-                    Rules.noOfCompetitorsPerTeam = Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value);
-                    Rules.compHalt = Convert.ToSingle(numericUpDownCompMaxWind.Value);
-                    Rules.maxScored = Convert.ToInt16(numericUpDownMaxScore.Value);
-                    Rules.windout = Convert.ToInt16(numericUpDownRejumpWindspeed.Value);
-                    Rules.windSecondsPrior = Convert.ToInt16(numericUpDownTimeBeforeLanding.Value);
-                    Rules.windSecondsAfter = Convert.ToInt16(numericUpDownTimeAfterLanding.Value);
-                    Rules.finalApproachTime = Convert.ToSingle(numericUpDownFinalApproachTime.Value);
-                    Rules.Stage = Stage;
-                    if (Convert.ToInt16(comboBoxScoresUsed.Text.Substring(4)) == Rules.noOfCompetitorsPerTeam)
-                    {
-                        Rules.allScoresUsed = true;
-                    }
-                    else
-                    {
-                        Rules.allScoresUsed = false;
-                    }
-                    char[] CharactersToTrim = new char[1];
-                    CharactersToTrim[0] = '°';
-                    Rules.directionOut = Convert.ToInt16(comboBoxRejumpAngleChange.Text.TrimEnd(CharactersToTrim));
+                EventName = textBoxEventName.Text;
+                Rules.preset = comboBoxRulePreset.SelectedItem.ToString();
+                Rules.noOfCompetitorsPerTeam = Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value);
+                Rules.compHalt = Convert.ToSingle(numericUpDownCompMaxWind.Value);
+                Rules.maxScored = Convert.ToInt16(numericUpDownMaxScore.Value);
+                Rules.windout = Convert.ToInt16(numericUpDownRejumpWindspeed.Value);
+                Rules.windSecondsPrior = Convert.ToInt16(numericUpDownTimeBeforeLanding.Value);
+                Rules.windSecondsAfter = Convert.ToInt16(numericUpDownTimeAfterLanding.Value);
+                Rules.finalApproachTime = Convert.ToSingle(numericUpDownFinalApproachTime.Value);
+                Rules.Stage = Stage;
+                Rules.ScoresUsed = comboBoxScoresUsed.Text;
 
-                    if ( // Sorry about this godawful bit of code. Best way to do it :/
-                    EventName != "" &&
-                    EventName.Length < 255 &&
-                    Rules.preset != "" &&
-                    Rules.noOfCompetitorsPerTeam >= 1 &&
-                    Rules.compHalt >= 1 &&
-                    Rules.compHalt <= 100 &&
-                    Rules.maxScored >= 1 &&
-                    Rules.maxScored <= 100 &&
-                    Rules.windout >= 1 &&
-                    Rules.windout <= 100 &&
-                    Rules.windSecondsPrior >= 1 &&
-                    Rules.windSecondsPrior <= 300 &&
-                    Rules.windSecondsAfter >= 1 &&
-                    Rules.windSecondsAfter <= 300 &&
-                    Rules.finalApproachTime >= 0.1 &&
-                    Rules.finalApproachTime <= 100 &&
-                    Rules.directionOut >= 10 &&
-                    Rules.directionOut <= 180
-                    )
-                    {
-                        Connected_Event.SaveEvent(Rules, EventName, dateTimePicker.Value, SelectedCompetitors, SelectedTeams);
-                        tabControl.TabPages.Remove(tabControl.SelectedTab);
-                        tabControl.SelectedTab = tabControl.TabPages[0];
-                        return true;
-                    }
-                    else
-                    {
-                        ErrorShown = true;
-                        MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
-                }
-                catch
+                char[] CharactersToTrim = new char[1];
+                CharactersToTrim[0] = '°';
+                Rules.directionOut = Convert.ToInt16(comboBoxRejumpAngleChange.Text.TrimEnd(CharactersToTrim));
+
+                if ( // Sorry about this godawful bit of code. Best way to do it :/
+                EventName != "" &&
+                EventName.Length < 255 &&
+                Rules.preset != "" &&
+                Rules.noOfCompetitorsPerTeam >= 1 &&
+                Rules.compHalt >= 1 &&
+                Rules.compHalt <= 100 &&
+                Rules.maxScored >= 1 &&
+                Rules.maxScored <= 100 &&
+                Rules.windout >= 1 &&
+                Rules.windout <= 100 &&
+                Rules.windSecondsPrior >= 1 &&
+                Rules.windSecondsPrior <= 300 &&
+                Rules.windSecondsAfter >= 1 &&
+                Rules.windSecondsAfter <= 300 &&
+                Rules.finalApproachTime >= 0.1 &&
+                Rules.finalApproachTime <= 100 &&
+                Rules.directionOut >= 10 &&
+                Rules.directionOut <= 180
+                )
                 {
-                    if (ErrorShown == false)
-                    {
-                        MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return false;
-                    }
+                    Connected_Event.SaveEvent(Rules, EventName, dateTimePicker.Value, SelectedCompetitors, SelectedTeams);
+                    tabControl.TabPages.Remove(tabControl.SelectedTab);
+                    tabControl.SelectedTab = tabControl.TabPages[0];
+                    return true;
+                }
+                else
+                {
+                    ErrorShown = true;
+                    MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
                 }
             }
-            else
+            catch
             {
-                MessageBox.Show("No competitors selected.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (ErrorShown == false)
+                {
+                    MessageBox.Show("Rules are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
             }
             return false;
         }
@@ -584,22 +563,29 @@ namespace Classics_2014.Accuracy
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (CheckOneCompetitorPerTeam())
+            if (SelectedCompetitors.Count >= 1)
             {
-                if (SaveEvent(1) == true)
+                if (CheckOneCompetitorPerTeam())
                 {
-                    if (Rules.noOfCompetitorsPerTeam > 1)
+                    if (SaveEvent(1) == true)
                     {
-                        Connected_Event.ProceedToEventTeams();
-                    }
-                    else
-                    {
-                        Connected_Event.Teams = new List<List<TCompetitor>>();
-                        Connected_Event.TeamNames = new List<string>();
-                        Connected_Event.ruleSet.Stage = 1;
-                        Connected_Event.ProceedToEvent();
+                        if (Rules.noOfCompetitorsPerTeam > 1)
+                        {
+                            Connected_Event.ProceedToEventTeams();
+                        }
+                        else
+                        {
+                            Connected_Event.Teams = new List<List<TCompetitor>>();
+                            Connected_Event.TeamNames = new List<string>();
+                            Connected_Event.ruleSet.Stage = 1;
+                            Connected_Event.ProceedToEvent();
+                        }
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show("Please select competitors.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

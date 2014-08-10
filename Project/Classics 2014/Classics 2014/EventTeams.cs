@@ -296,6 +296,7 @@ namespace Classics_2014
                         Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
                         Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
                         Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
+                        Connected_Event.ProceedToEvent();
                         switch (Connected_Event.EventType)
                         {
                             case EventType.Accuracy:
@@ -335,6 +336,13 @@ namespace Classics_2014
                 }
             }
             RefreshAll();
+        }
+
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
+            Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
+            Connected_Event.SaveEventTeamsIncludeNOTEAM(CompetitorsPerTeam, Teams, TeamNames);
         }
 
     }

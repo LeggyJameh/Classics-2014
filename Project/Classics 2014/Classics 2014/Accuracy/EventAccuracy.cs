@@ -75,6 +75,7 @@ namespace Classics_2014.Accuracy
 
         private void LoadCompetitorsIntoGrid()
         {
+            // TODO: Get rid of this, make singles event handlers, use teams array, but have checks for teams.count = 1 ^.^
             for (int i = 0; i < Connected_Event.Competitors.Count; i++)
             {
                 dataGridViewScore.Rows.Add(Connected_Event.Competitors[i].ID, Connected_Event.Competitors[i].name, Connected_Event.Competitors[i].team, Connected_Event.Competitors[i].nationality, "N/A");

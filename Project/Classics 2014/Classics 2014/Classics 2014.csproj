@@ -113,6 +113,7 @@
     <Compile Include="Engine.cs" />
     <Compile Include="EnumAndStruct.cs" />
     <Compile Include="Event.cs" />
+    <Compile Include="GlobalFunctions.cs" />
     <Compile Include="IO Controller.cs" />
     <Compile Include="LockScreen.cs">
       <SubType>Form</SubType>
@@ -126,6 +127,8 @@
     <Compile Include="Network Controller.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Rulesets\AccuracyRuleset.cs" />
+    <Compile Include="Rulesets\Ruleset.cs" />
     <Compile Include="Serial Controller.cs" />
     <Compile Include="SQL Controller.cs" />
     <Compile Include="StandardOptionsPage.cs">

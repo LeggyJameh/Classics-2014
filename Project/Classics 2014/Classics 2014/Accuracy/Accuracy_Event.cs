@@ -16,9 +16,9 @@ namespace Classics_2014.Accuracy
         public EventTeams EventTeamsTab;
         public EventAccuracy EventTab;
         Engine engine;
-        public TAccuracyRuleSet ruleSet;
+        public Rulesets.AccuracyRuleset ruleSet;
         public List<TCompetitor> Competitors;
-        List<string> ActiveTeams;
+        public List<string> ActiveTeams;
         TWind[] IncomingData;
         int NumberOfLandings = 0;
         public List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
@@ -108,14 +108,10 @@ namespace Classics_2014.Accuracy
             TabControl.SelectedTab = NewPage;
         }
 
-        public void LoadEventOptions()
+        public override void ProceedToEvent()
         {
-            
-
-        }
-
-        public void ProceedToEvent()
-        {
+            ruleSet.Stage = 2;
+            SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);
             EventTab = new EventAccuracy(this, TabControl);
             TabPage NewPage = new TabPage();
             NewPage.Controls.Add(EventTab);
@@ -130,7 +126,7 @@ namespace Classics_2014.Accuracy
             ASCIIEncoding ascii = new ASCIIEncoding();
             string stringToConvert = "";
             stringToConvert += ruleSet.Stage + "*";
-            stringToConvert += ruleSet.allScoresUsed + "*";
+            stringToConvert += ruleSet.ScoresUsed + "*";
             stringToConvert += ruleSet.compHalt+ "*";
             stringToConvert += ruleSet.directionOut + "*";
             stringToConvert += ruleSet.finalApproachTime + "*";
@@ -160,28 +156,8 @@ namespace Classics_2014.Accuracy
             AccuracyLanding deSerializedLanding = (AccuracyLanding)f.Deserialize(m);
             return deSerializedLanding;
         }
-        private TAccuracyRuleSet ConvertByteArrayToRuleSet(byte[] ruleset)
-        {
-            ASCIIEncoding ascii = new ASCIIEncoding();
-            string[] args = ascii.GetString(ruleset).Split('*');
-            return (new TAccuracyRuleSet
-            {
-                Stage = Convert.ToInt16(args[0]),
-                allScoresUsed = Convert.ToBoolean(args[1]),
-                compHalt = Convert.ToSByte(args[2]),
-                directionOut = Convert.ToUInt16(args[3]),
-                finalApproachTime = Convert.ToSingle(args[4]),
-                maxScored = Convert.ToInt16(args[4]),
-                noOfCompetitorsPerTeam = Convert.ToInt16(args[5]),
-                preset = args[6],
-                windout = Convert.ToSingle(args[6]),
-                windSecondsPrior = Convert.ToInt16(args[7]),
-                windSecondsAfter = Convert.ToInt16(args[8])
-            }
-            );
-        }
 
-        public void SaveEvent(TAccuracyRuleSet Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
+        public void SaveEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
         {
             Competitors = SelectedCompetitors;
             ruleSet = Rules;
@@ -196,7 +172,7 @@ namespace Classics_2014.Accuracy
         public override void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
         {
             ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
-            ruleSet.Stage = 2;
+            
             Teams = new List<List<TCompetitor>>();
             TeamNames = new List<string>();
 
@@ -205,12 +181,27 @@ namespace Classics_2014.Accuracy
                 Teams.Add(TeamInput[i]);
                 TeamNames.Add(TeamNamesInput[i]);
             }
-
             SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
+            SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);
             EventTeamsTab = null;
-            ProceedToEvent();
         }
 
+        public override void SaveEventTeamsIncludeNOTEAM(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
+        {
+            ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
+
+            Teams = new List<List<TCompetitor>>();
+            TeamNames = new List<string>();
+
+            for (int i = 0; i < TeamInput.Count; i++)
+            {
+                Teams.Add(TeamInput[i]);
+                TeamNames.Add(TeamNamesInput[i]);
+            }
+            SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
+            SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);
+            EventTeamsTab = null;
+        }
 
         public int GetLandingIDFromCell(DataGridViewCell Cell)
         {

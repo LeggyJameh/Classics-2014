@@ -308,6 +308,13 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
+        public bool ModifyAccuracyRules(byte[] Rules, int EventID)
+        {
+            string hexRules = ByteArrayToHex(Rules);
+            string query = "UPDATE `events` SET `Options`='" + hexRules + "' WHERE `EventID`='" + EventID + "';";
+            return ExecuteNonQuery(query);
+        }
+
         #endregion
         #region Get
 
@@ -612,6 +619,247 @@ namespace Classics_2014
                 this.CloseConnection();
             }
             return Number;
+        }
+
+        public List<TMySQLEventReturn> GetEvents()
+        {
+            List<TMySQLEventReturn> Events = new List<TMySQLEventReturn>();
+
+            string query = "SELECT * FROM `events`";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        TMySQLEventReturn CurrentEvent;
+                        CurrentEvent.ID = -1;
+                        CurrentEvent.Date = DateTime.Now;
+                        CurrentEvent.Name = "";
+                        CurrentEvent.Options = new Byte[1];
+                        CurrentEvent.Type = EventType.Accuracy;
+                        string CurrentOptions = "";
+
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0: CurrentEvent.ID = DataReader.GetInt16(i); break;
+                                case 1: CurrentEvent.Date = Convert.ToDateTime(DataReader.GetString(i)); break;
+                                case 2: CurrentEvent.Name = DataReader.GetString(i); break;
+                                case 3: CurrentEvent.Type = (EventType)Enum.Parse(typeof(EventType), DataReader.GetString(i)); break;
+                                case 4: CurrentOptions = DataReader.GetString(i); break;
+                            }
+                            if (i == 4)
+                            {
+                                CurrentEvent.Options = StringToByteArray(CurrentOptions);
+                                Events.Add(CurrentEvent);
+                            }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+                this.CloseConnection();
+            }
+            return Events;
+        }
+
+        public List<TCompetitor> GetCompetitorsForEvent(int EventID)
+        {
+            List<TCompetitor> Competitors = new List<TCompetitor>();
+            List<int> CompetitorIDs = new List<int>();
+            string query = "SELECT UID FROM `event teams` WHERE `EventID`='" + EventID + "';";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            CompetitorIDs.Add(DataReader.GetInt16(i));
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+
+                for (int i = 0; i < CompetitorIDs.Count; i++)
+                {
+                    string query2 = "SELECT * FROM `competitors` WHERE `UID`='" + CompetitorIDs[i] + "';";
+                    MySqlCommand cmd2 = new MySqlCommand(query2, connection);
+                    try
+                    {
+                        MySqlDataReader DataReader = cmd2.ExecuteReader();
+                        while (DataReader.Read())
+                        {
+                            TCompetitor CurrentCompetitor = new TCompetitor();
+                            CurrentCompetitor.ID = CompetitorIDs[i];
+                            for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
+                            {
+                                switch (i2)
+                                {
+                                    case 1: CurrentCompetitor.name = (DataReader.GetString(i2)); break;
+                                    case 2: CurrentCompetitor.team = (DataReader.GetString(i2)); break;
+                                    case 3: CurrentCompetitor.nationality = (DataReader.GetString(i2)); break;
+                                }
+                                if (i2 == 3) { Competitors.Add(CurrentCompetitor); }
+                            }
+                        }
+                        DataReader.Close();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
+                this.CloseConnection();
+            }
+            return Competitors;
+        }
+
+        public MySqlTeamsReturn GetTeamsForEvent(int EventID)
+        {
+            List<MySqlCompetitorTeamReturn> Competitors = new List<MySqlCompetitorTeamReturn>();
+            MySqlTeamsReturn Teams = new MySqlTeamsReturn();
+            Teams.Teams = new List<List<TCompetitor>>();
+            Teams.TeamNames = new List<string>();
+            string query = "SELECT * FROM `event teams` WHERE `EventID`='" + EventID + "';";
+
+            if (this.OpenConnection() == true)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        MySqlCompetitorTeamReturn CurrentCompetitor = new MySqlCompetitorTeamReturn();
+                        CurrentCompetitor.Team = "";
+                        CurrentCompetitor.UID = -1;
+
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 1: CurrentCompetitor.UID = DataReader.GetInt16(i); break;
+                                case 2: CurrentCompetitor.Team = DataReader.GetString(i); break;
+                            }
+                            if (i == 2) { Competitors.Add(CurrentCompetitor); }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+
+                for (int i = 0; i < Competitors.Count; i++) // For each competitor
+                {
+                    string CurrentTeam = Competitors[i].Team;
+                    bool IsUnique = true;
+                    int TeamIndex = 0;
+
+                    for (int i2 = 0; i2 < Teams.TeamNames.Count; i2++) // Check if the team is unique
+                    {
+                        if (CurrentTeam == Teams.TeamNames[i2]) { IsUnique = false; TeamIndex = i2; }
+                    }
+
+                    if (IsUnique == true) // If it is, add the team, and create the list.
+                    #region IsUnique
+                    {
+                        Teams.TeamNames.Add(CurrentTeam);
+                        Teams.Teams.Add(new List<TCompetitor>());
+
+                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[i].UID + "';";
+
+                        cmd = new MySqlCommand(query, connection);
+                        try
+                        {
+                            MySqlDataReader DataReader = cmd.ExecuteReader();
+                            while (DataReader.Read())
+                            {
+                                TCompetitor CurrentCompetitor = new TCompetitor();
+                                CurrentCompetitor.ID = -1;
+                                CurrentCompetitor.name = "";
+                                CurrentCompetitor.nationality = "";
+                                CurrentCompetitor.team = "";
+
+                                for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
+                                {
+                                    switch (i2)
+                                    {
+                                        case 0: CurrentCompetitor.ID = DataReader.GetInt16(i2); break;
+                                        case 1: CurrentCompetitor.name = DataReader.GetString(i2); break;
+                                        case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
+                                        case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
+                                    }
+                                    if (i2 == 3) { Teams.Teams[Teams.Teams.Count - 1].Add(CurrentCompetitor); }
+                                }
+                            }
+                            DataReader.Close();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            error = ex.Message;
+                        }
+                    }
+                    #endregion
+                    else
+                    #region NotUnique
+                    {
+                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[i].UID + "';";
+
+                        cmd = new MySqlCommand(query, connection);
+                        try
+                        {
+                            MySqlDataReader DataReader = cmd.ExecuteReader();
+                            while (DataReader.Read())
+                            {
+                                TCompetitor CurrentCompetitor = new TCompetitor();
+                                CurrentCompetitor.ID = -1;
+                                CurrentCompetitor.name = "";
+                                CurrentCompetitor.nationality = "";
+                                CurrentCompetitor.team = "";
+
+                                for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
+                                {
+                                    switch (i2)
+                                    {
+                                        case 0: CurrentCompetitor.ID = DataReader.GetInt16(i2); break;
+                                        case 1: CurrentCompetitor.name = DataReader.GetString(i2); break;
+                                        case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
+                                        case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
+                                    }
+                                    if (i2 == 3) { Teams.Teams[TeamIndex].Add(CurrentCompetitor); }
+                                }
+                            }
+                            DataReader.Close();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            error = ex.Message;
+                        }
+                    }
+                    #endregion
+                }
+            }
+            this.CloseConnection();
+            return Teams;
         }
 
         #endregion

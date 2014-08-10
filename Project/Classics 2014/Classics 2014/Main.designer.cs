@@ -110,10 +110,10 @@
             this.tabWind = new System.Windows.Forms.TabPage();
             this.tabPageEventSelect = new System.Windows.Forms.TabPage();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.buttonStartEvent = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.treeView2 = new System.Windows.Forms.TreeView();
             this.treeView1 = new System.Windows.Forms.TreeView();
-            this.buttonStartEvent = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -230,6 +230,7 @@
             this.buttonLoad.TabIndex = 1;
             this.buttonLoad.Text = "Load Previous Events";
             this.buttonLoad.UseVisualStyleBackColor = true;
+            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
             // 
             // buttonExit
             // 
@@ -310,6 +311,17 @@
             this.splitContainer1.Size = new System.Drawing.Size(1126, 712);
             this.splitContainer1.SplitterDistance = 375;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // buttonStartEvent
+            // 
+            this.buttonStartEvent.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.buttonStartEvent.Location = new System.Drawing.Point(0, 581);
+            this.buttonStartEvent.Name = "buttonStartEvent";
+            this.buttonStartEvent.Size = new System.Drawing.Size(375, 131);
+            this.buttonStartEvent.TabIndex = 0;
+            this.buttonStartEvent.Text = "Select an event on the left";
+            this.buttonStartEvent.UseVisualStyleBackColor = true;
+            this.buttonStartEvent.Click += new System.EventHandler(this.buttonStartEvent_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -461,17 +473,6 @@
             this.treeView1.TabIndex = 1;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
-            // 
-            // buttonStartEvent
-            // 
-            this.buttonStartEvent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartEvent.Location = new System.Drawing.Point(0, 581);
-            this.buttonStartEvent.Name = "buttonStartEvent";
-            this.buttonStartEvent.Size = new System.Drawing.Size(375, 131);
-            this.buttonStartEvent.TabIndex = 0;
-            this.buttonStartEvent.Text = "Select an event on the left";
-            this.buttonStartEvent.UseVisualStyleBackColor = true;
-            this.buttonStartEvent.Click += new System.EventHandler(this.buttonStartEvent_Click);
             // 
             // statusStrip1
             // 

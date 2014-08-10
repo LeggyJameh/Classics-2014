@@ -11,7 +11,7 @@ namespace Classics_2014
     {
         #region variables and shit
         public IO_Controller IO_Controller;
-        SQL_Controller SQL_Controller;
+        public SQL_Controller SQL_Controller;
         private Thread ListenThread;
         public Event activeEvent;
         Main mainForm;
@@ -89,14 +89,32 @@ namespace Classics_2014
             windGraph.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
         }
+
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
-           NewEvent.TabControl = tabControl;
-           eventList.Add(NewEvent);
+            NewEvent.TabControl = tabControl;
+            eventList.Add(NewEvent);
             return NewEvent.EventOptionsTab;
         }
+
+        public Classics_2014.Accuracy.EventAccuracyOptions LoadExistingAccuracyEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors)
+        {
+            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
+            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
+            NewEvent.TabControl = tabControl;
+            eventList.Add(NewEvent);
+            return NewEvent.EventOptionsTab;
+        }
+
+        public Classics_2014.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
+        {
+            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
+            return NewEvent;
+        }
+
+
         public bool MakeActive(Event eventToBeActive)
         {
             //ToDo Add switch to check serial here MOFO's!

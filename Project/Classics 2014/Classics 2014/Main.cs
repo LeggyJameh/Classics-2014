@@ -198,6 +198,15 @@ namespace Classics_2014
         {
             buttonStartEvent_Click(new object(), new EventArgs());
         }
+
+        private void buttonLoad_Click(object sender, EventArgs e)
+        {
+            EventLoader CurrentEventLoader = new EventLoader(MainEngine, tabControl);
+            CurrentEventLoader.Dock = DockStyle.Fill;
+            tabControl.TabPages.Add(new TabPage("Load Event"));
+            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(CurrentEventLoader);
+            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+        }
         
     }
 }

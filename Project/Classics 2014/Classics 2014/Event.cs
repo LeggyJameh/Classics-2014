@@ -29,6 +29,16 @@ namespace Classics_2014
             throw new NotImplementedException();
         }
 
+        public virtual void SaveEventTeamsIncludeNOTEAM(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void ProceedToEvent()
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void ReturnToOptions()
         {
             throw new NotImplementedException();

@@ -1,26 +1,13 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 namespace Classics_2014
 {
     public enum EventType
     {
         Accuracy,
     }
-    [Serializable]
-    public struct TAccuracyRuleSet 
-    {
-        public int Stage;
-        public string preset;
-        public bool allScoresUsed;
-        public int noOfCompetitorsPerTeam;
-        public float windout;
-        public int directionOut;
-        public float compHalt;
-        public int maxScored;
-        public int windSecondsPrior;
-        public int windSecondsAfter;
-        public float finalApproachTime;
-    }
+
     #region Accuracy Variations
 
     #endregion 
@@ -49,5 +36,17 @@ namespace Classics_2014
         public string Name;
         public EventType Type;
         public byte[] Options;
+    }
+
+    public struct MySqlCompetitorTeamReturn
+    {
+        public int UID;
+        public string Team;
+    }
+
+    public struct MySqlTeamsReturn
+    {
+        public List<List<TCompetitor>> Teams;
+        public List<string> TeamNames;
     }
 }

@@ -24,15 +24,7 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             InitializeComponent();
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
-            if (Connected_Event.Teams.Count > 0)
-            {
-                TeamedEvent = true;
-                LoadTeamsIntoGrid();
-            }
-            else
-            {
-                LoadCompetitorsIntoGrid();
-            }
+            LoadTeamsIntoGrid();
         }
 
         public EventAccuracy(Accuracy_Event Event, TabControl Main, bool Admin)
@@ -46,15 +38,7 @@ namespace Classics_2014.Accuracy
             tabControl = Main;
             InitializeComponent();
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
-            if (Connected_Event.Teams.Count > 0)
-            {
-                TeamedEvent = true;
-                LoadTeamsIntoGrid();
-            }
-            else
-            {
-                LoadCompetitorsIntoGrid();
-            }
+            LoadTeamsIntoGrid();
         }
 
         public void MethodAddLanding(AccuracyLanding Landing)
@@ -73,22 +57,27 @@ namespace Classics_2014.Accuracy
             }
         }
 
-        private void LoadCompetitorsIntoGrid()
-        {
-            // TODO: Get rid of this, make singles event handlers, use teams array, but have checks for teams.count = 1 ^.^
-            for (int i = 0; i < Connected_Event.Competitors.Count; i++)
-            {
-                dataGridViewScore.Rows.Add(Connected_Event.Competitors[i].ID, Connected_Event.Competitors[i].name, Connected_Event.Competitors[i].team, Connected_Event.Competitors[i].nationality, "N/A");
-            }
-        }
-
         private void LoadTeamsIntoGrid()
         {
-            for (int i = 0; i < Connected_Event.Teams.Count; i++)
+            if (Connected_Event.Teams.Count > 1) // If teams, not singles.
             {
-                for (int i2 = 0; i2 < Connected_Event.Teams[i].Count; i2++)
+                TeamedEvent = true;
+                for (int i = 0; i < Connected_Event.Teams.Count; i++)
                 {
-                    dataGridViewScore.Rows.Add(Connected_Event.Teams[i][i2].ID, Connected_Event.Teams[i][i2].name, Connected_Event.Teams[i][i2].team, Connected_Event.Teams[i][i2].nationality, Connected_Event.TeamNames[i]);
+                    for (int i2 = 0; i2 < Connected_Event.Teams[i].Count; i2++)
+                    {
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[i][i2].ID, Connected_Event.Teams[i][i2].name, Connected_Event.Teams[i][i2].team, Connected_Event.Teams[i][i2].nationality, Connected_Event.TeamNames[i]);
+                    }
+                }
+            }
+            else // If singles
+            {
+                for (int i = 0; i < Connected_Event.Teams.Count; i++)
+                {
+                    for (int i2 = 0; i2 < Connected_Event.Teams[i].Count; i2++)
+                    {
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[i][i2].ID, Connected_Event.Teams[i][i2].name, Connected_Event.Teams[i][i2].team, Connected_Event.Teams[i][i2].nationality, "N/A");
+                    }
                 }
             }
         }

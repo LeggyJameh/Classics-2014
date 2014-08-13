@@ -159,6 +159,7 @@ namespace Classics_2014
 
                                     CurrentEvent.ActiveTeams = SelectedTeams;
                                     CurrentEvent.ProceedToEventTeams();
+                                    NewPage.Text = Events[EventIndex].Name + " Team Config";
                                     TabControl.TabPages.Add(NewPage);
                                     TabControl.SelectedTab = NewPage;
                                     break;
@@ -168,6 +169,7 @@ namespace Classics_2014
                                     MySqlTeamsReturn Teams = Engine.SQL_Controller.GetTeamsForEvent(Events[EventIndex].ID);
                                     CurrentEvent.TeamNames = Teams.TeamNames;
                                     CurrentEvent.Teams = Teams.Teams;
+                                    CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.ruleSet = (Rulesets.AccuracyRuleset)EventRules[EventIndex];
                                     NewPage = null;
                                     CurrentEvent.TabControl = TabControl;

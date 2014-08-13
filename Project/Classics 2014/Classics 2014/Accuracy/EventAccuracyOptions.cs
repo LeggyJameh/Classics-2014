@@ -575,8 +575,20 @@ namespace Classics_2014.Accuracy
                         }
                         else
                         {
-                            Connected_Event.Teams = new List<List<TCompetitor>>();
-                            Connected_Event.TeamNames = new List<string>();
+                            List<List<TCompetitor>> SinglesTeam = new List<List<TCompetitor>>();
+                            SinglesTeam.Add(new List<TCompetitor>());
+
+                            List<string> SinglesTeamNames = new List<string>();
+                            SinglesTeamNames.Add("N/A");
+
+                            for (int i = 0; i < SelectedCompetitors.Count; i++)
+                            {
+                                SinglesTeam[0].Add(SelectedCompetitors[i]);
+                            }
+
+                            Connected_Event.Teams = SinglesTeam;
+                            Connected_Event.TeamNames = SinglesTeamNames;
+                            Connected_Event.SQL_Controller.SaveTeams(Connected_Event.EventID, Connected_Event.Teams, Connected_Event.TeamNames);
                             Connected_Event.ruleSet.Stage = 1;
                             Connected_Event.ProceedToEvent();
                         }

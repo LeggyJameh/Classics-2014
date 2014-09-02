@@ -5,8 +5,9 @@ using System.Text;
 
 namespace Classics_2014.Accuracy
 {
-    class MySqlReturnLanding : AccuracyLanding
+    public class MySqlReturnLanding : AccuracyLanding
     {
+        public bool Modified;
         public int Round;
         public int UID;
     }

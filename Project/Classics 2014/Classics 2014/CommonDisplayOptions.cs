@@ -16,13 +16,13 @@ namespace Classics_2014
         {
             this.windGraph = windGraph;
             InitializeComponent();
-            comboBoxNormalColourGraph.SelectedItem = UserSettings.Default.graphNormal.Name;
-            comboBoxWindOutGraph.SelectedItem = UserSettings.Default.graphWindOut.Name;
-            comboBoxDirectionOutGraph.SelectedItem = UserSettings.Default.graphDirectionOut.Name;
-            comboBoxBothOutGraph.SelectedItem = UserSettings.Default.graphBothOut.Name;
-            comboBoxDirectionOutSide.SelectedItem = UserSettings.Default.sideTextDirectionOutColour.Name;
-            comboBoxNormalColourSide.SelectedItem = UserSettings.Default.sideTextStandarColour.Name;
-            comboBoxWindOutColourSide.SelectedItem = UserSettings.Default.sideTextWindOutColour.Name;
+            comboBoxNormalColourGraph.SelectedItem = spaceSolvedName(UserSettings.Default.graphNormal.Name);
+            comboBoxWindOutGraph.SelectedItem =spaceSolvedName( UserSettings.Default.graphWindOut.Name);
+            comboBoxDirectionOutGraph.SelectedItem =spaceSolvedName( UserSettings.Default.graphDirectionOut.Name);
+            comboBoxBothOutGraph.SelectedItem = spaceSolvedName(UserSettings.Default.graphBothOut.Name);
+            comboBoxDirectionOutSide.SelectedItem =spaceSolvedName( UserSettings.Default.sideTextDirectionOutColour.Name);
+            comboBoxNormalColourSide.SelectedItem = spaceSolvedName(UserSettings.Default.sideTextStandarColour.Name);
+            comboBoxWindOutColourSide.SelectedItem = spaceSolvedName(UserSettings.Default.sideTextWindOutColour.Name);
             numericUpDownDirectionWarningLength.Value = UserSettings.Default.flopsToMaintainColourDirection;
             numericUpDownWindWarningLength.Value = UserSettings.Default.flopsToMaintainColourSpeed;
             numericUpDownStandDownWarningLength.Value = UserSettings.Default.compHaltLength;
@@ -33,7 +33,20 @@ namespace Classics_2014
             UserSettings.Default.Save();
             windGraph.ResetGraphColours();
         }
-
+        private string spaceSolvedName(string colourName)
+        {
+            string newName = "";
+            char[] colourCharArray = colourName.ToCharArray();
+            foreach (char c in colourCharArray)
+            {
+                if (char.IsUpper(c)&&(newName != ""))
+                {
+                    newName += " ";
+                }
+                newName += c;
+            }
+            return newName;
+        }
         private void comboBoxNormalColourGraph_SelectedIndexChanged(object sender, EventArgs e)
         {
             UserSettings.Default.graphNormal = Color.FromName(comboBoxNormalColourGraph.SelectedItem.ToString().Replace(" ", ""));

@@ -36,63 +36,61 @@
             System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("FS 4 Way-Rookie");
             System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("FS 4 Way", new System.Windows.Forms.TreeNode[] {
             treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("FS 8 Way Rookie");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("FS 8 Way", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Free Style Varients", new System.Windows.Forms.TreeNode[] {
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("FS 8 Way");
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Speed");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Formation Skydive", new System.Windows.Forms.TreeNode[] {
             treeNode6,
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("CF 2 Way");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("CF 4 Way");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Canopy Formation Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12});
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Artistic Event");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Wingsuit");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("VFS");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("National", new System.Windows.Forms.TreeNode[] {
+            treeNode7,
+            treeNode8});
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("CF 2 Way");
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("CF 4 Way");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Canopy Formation", new System.Windows.Forms.TreeNode[] {
+            treeNode10,
+            treeNode11});
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Artistic Event");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Speed");
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Wingsuit");
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("VFS");
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("National", new System.Windows.Forms.TreeNode[] {
             treeNode1,
             treeNode2,
             treeNode3,
             treeNode4,
-            treeNode10,
+            treeNode9,
+            treeNode12,
             treeNode13,
             treeNode14,
             treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Style and Accuracy");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Paraski");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Canopy Piloting");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("F.S 4 Way");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("F.S 8 Way");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Freestyle Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23});
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("C.F 2 Way");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("C.F 4 Way");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("C.F 8 Way");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Canopy Formation Varients", new System.Windows.Forms.TreeNode[] {
+            treeNode16});
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Style and Accuracy");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Paraski");
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Canopy Piloting");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("F.S 4 Way");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("F.S 8 Way");
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Formation Skydive", new System.Windows.Forms.TreeNode[] {
+            treeNode21,
+            treeNode22});
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("C.F 2 Way");
+            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("C.F 4 Way");
+            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("C.F 8 Way");
+            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Canopy Formation ", new System.Windows.Forms.TreeNode[] {
+            treeNode24,
             treeNode25,
-            treeNode26,
-            treeNode27});
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Artistic Event");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Wingsuit");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("VFS");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("FAI Events", new System.Windows.Forms.TreeNode[] {
+            treeNode26});
+            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Artistic Event");
+            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Speed");
+            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Wingsuit");
+            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("VFS");
+            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("FAI Events", new System.Windows.Forms.TreeNode[] {
+            treeNode18,
             treeNode19,
             treeNode20,
-            treeNode21,
-            treeNode24,
+            treeNode23,
+            treeNode27,
             treeNode28,
             treeNode29,
             treeNode30,
-            treeNode31,
-            treeNode32});
+            treeNode31});
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
@@ -364,48 +362,45 @@
             treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             treeNode6.Tag = "1";
             treeNode6.Text = "FS 4 Way";
-            treeNode7.Name = "NodeFs8WayN";
+            treeNode7.Name = "nodeFS8WayN";
             treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode7.Text = "FS 8 Way Rookie";
-            treeNode8.Name = "nodeFS8WayN";
+            treeNode7.Tag = "1";
+            treeNode7.Text = "FS 8 Way";
+            treeNode8.Name = "NodeFS8WaySpeedN";
             treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode8.Tag = "1";
-            treeNode8.Text = "FS 8 Way";
-            treeNode9.Name = "NodeFS8WaySpeedN";
+            treeNode8.Text = "Speed";
+            treeNode9.Name = "NodeFSN";
             treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode9.Text = "Speed";
-            treeNode10.Name = "NodeFSN";
+            treeNode9.Tag = "1";
+            treeNode9.Text = "Formation Skydive";
+            treeNode10.Name = "NodeCF2WayN";
             treeNode10.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode10.Tag = "1";
-            treeNode10.Text = "Free Style Varients";
-            treeNode11.Name = "NodeCF2WayN";
+            treeNode10.Text = "CF 2 Way";
+            treeNode11.Name = "NodeCF4Way";
             treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode11.Text = "CF 2 Way";
-            treeNode12.Name = "NodeCF4Way";
+            treeNode11.Text = "CF 4 Way";
+            treeNode12.Name = "NodeCFN";
             treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode12.Text = "CF 4 Way";
-            treeNode13.Name = "NodeCFN";
+            treeNode12.Tag = "1";
+            treeNode12.Text = "Canopy Formation";
+            treeNode13.Name = "NodeAEN";
             treeNode13.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode13.Tag = "1";
-            treeNode13.Text = "Canopy Formation Varients";
-            treeNode14.Name = "NodeAEN";
+            treeNode13.Text = "Artistic Event";
+            treeNode14.Name = "Node16SpeedN";
             treeNode14.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode14.Text = "Artistic Event";
-            treeNode15.Name = "Node16SpeedN";
+            treeNode14.Text = "Speed";
+            treeNode15.Name = "NodeWingsuitN";
             treeNode15.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode15.Text = "Speed";
-            treeNode16.Name = "NodeWingsuitN";
+            treeNode15.Text = "Wingsuit";
+            treeNode16.Name = "NodeVFSN";
             treeNode16.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode16.Text = "Wingsuit";
-            treeNode17.Name = "NodeVFSN";
-            treeNode17.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode17.Text = "VFS";
-            treeNode18.Name = "NodeNational";
-            treeNode18.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode18.Tag = "1";
-            treeNode18.Text = "National";
+            treeNode16.Text = "VFS";
+            treeNode17.Name = "NodeNational";
+            treeNode17.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode17.Tag = "1";
+            treeNode17.Text = "National";
             this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18});
+            treeNode17});
             this.treeView2.Size = new System.Drawing.Size(191, 706);
             this.treeView2.TabIndex = 2;
             this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -418,57 +413,57 @@
             this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.treeView1.Location = new System.Drawing.Point(3, 3);
             this.treeView1.Name = "treeView1";
-            treeNode19.Name = "NodeStyleAndAccuracy";
+            treeNode18.Name = "NodeStyleAndAccuracy";
+            treeNode18.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode18.Text = "Style and Accuracy";
+            treeNode19.Name = "NodeParaski";
             treeNode19.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode19.Text = "Style and Accuracy";
-            treeNode20.Name = "NodeParaski";
+            treeNode19.Text = "Paraski";
+            treeNode20.Name = "NodeCanopyPiloting";
             treeNode20.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode20.Text = "Paraski";
-            treeNode21.Name = "NodeCanopyPiloting";
+            treeNode20.Text = "Canopy Piloting";
+            treeNode21.Name = "NodeFs4Way";
             treeNode21.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode21.Text = "Canopy Piloting";
-            treeNode22.Name = "NodeFs4Way";
+            treeNode21.Text = "F.S 4 Way";
+            treeNode22.Name = "NodeFs8Way";
             treeNode22.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode22.Text = "F.S 4 Way";
-            treeNode23.Name = "NodeFs8Way";
+            treeNode22.Text = "F.S 8 Way";
+            treeNode23.Name = "NodeFreeStyleVarients";
             treeNode23.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode23.Text = "F.S 8 Way";
-            treeNode24.Name = "NodeFreeStyleVarients";
+            treeNode23.Tag = "1";
+            treeNode23.Text = "Formation Skydive";
+            treeNode24.Name = "NodeCF2Way";
             treeNode24.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode24.Tag = "1";
-            treeNode24.Text = "Freestyle Varients";
-            treeNode25.Name = "NodeCF2Way";
+            treeNode24.Text = "C.F 2 Way";
+            treeNode25.Name = "NodeCF4Way";
             treeNode25.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode25.Text = "C.F 2 Way";
-            treeNode26.Name = "NodeCF4Way";
+            treeNode25.Text = "C.F 4 Way";
+            treeNode26.Name = "NodeCF8Way";
             treeNode26.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode26.Text = "C.F 4 Way";
-            treeNode27.Name = "NodeCF8Way";
+            treeNode26.Text = "C.F 8 Way";
+            treeNode27.Name = "NodeCanopyFormationVarients";
             treeNode27.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode27.Text = "C.F 8 Way";
-            treeNode28.Name = "NodeCanopyFormationVarients";
+            treeNode27.Tag = "1";
+            treeNode27.Text = "Canopy Formation ";
+            treeNode28.Name = "NodeAE";
             treeNode28.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode28.Tag = "1";
-            treeNode28.Text = "Canopy Formation Varients";
-            treeNode29.Name = "NodeAE";
+            treeNode28.Text = "Artistic Event";
+            treeNode29.Name = "NodeSpeed";
             treeNode29.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode29.Text = "Artistic Event";
-            treeNode30.Name = "NodeSpeed";
+            treeNode29.Text = "Speed";
+            treeNode30.Name = "NodeWingsuit";
             treeNode30.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode30.Text = "Speed";
-            treeNode31.Name = "NodeWingsuit";
+            treeNode30.Text = "Wingsuit";
+            treeNode31.Name = "NodeVFS";
             treeNode31.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode31.Text = "Wingsuit";
-            treeNode32.Name = "NodeVFS";
-            treeNode32.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode32.Text = "VFS";
-            treeNode33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            treeNode33.Name = "NodeFAI";
-            treeNode33.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode33.Tag = "1";
-            treeNode33.Text = "FAI Events";
+            treeNode31.Text = "VFS";
+            treeNode32.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            treeNode32.Name = "NodeFAI";
+            treeNode32.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            treeNode32.Tag = "1";
+            treeNode32.Text = "FAI Events";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode33});
+            treeNode32});
             this.treeView1.Size = new System.Drawing.Size(172, 706);
             this.treeView1.TabIndex = 1;
             this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);

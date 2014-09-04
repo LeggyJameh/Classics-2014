@@ -26,5 +26,26 @@ namespace Classics_2014
 
             return Rules;
         }
+
+        public static Accuracy.MySqlReturnLanding CastAccLandingToMySqlReturnLanding(Accuracy.AccuracyLanding Landing)
+        {
+            Accuracy.MySqlReturnLanding NewLanding = new Accuracy.MySqlReturnLanding();
+
+            NewLanding.dataGridCell = Landing.dataGridCell;
+            NewLanding.ID = Landing.ID;
+            NewLanding.Index = Landing.Index;
+            NewLanding.LandingWind = Landing.LandingWind;
+            NewLanding.score = Landing.score;
+            NewLanding.TimeOfLanding = Landing.TimeOfLanding;
+            NewLanding.WindDataAfter = Landing.WindDataAfter;
+            NewLanding.windDataPrior = Landing.windDataPrior;
+            NewLanding.WindInputs = Landing.WindInputs;
+
+            NewLanding.Round = 0;
+            NewLanding.UID = 0;
+            NewLanding.Modified = false;
+
+            return NewLanding;
+        }
     }
 }

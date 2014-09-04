@@ -170,12 +170,10 @@ namespace Classics_2014
                                     CurrentEvent.TeamNames = Teams.TeamNames;
                                     CurrentEvent.Teams = Teams.Teams;
                                     CurrentEvent.Name = Events[EventIndex].Name;
-                                    CurrentEvent.EventID = Events[EventIndex].ID;
                                     CurrentEvent.ruleSet = (Rulesets.AccuracyRuleset)EventRules[EventIndex];
                                     NewPage = null;
                                     CurrentEvent.TabControl = TabControl;
                                     CurrentEvent.ProceedToEvent();
-                                    CurrentEvent.EventTab.LoadExistingEventLandings();
                                     break;
                             }
 

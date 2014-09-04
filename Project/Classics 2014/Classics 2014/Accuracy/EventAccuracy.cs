@@ -81,39 +81,6 @@ namespace Classics_2014.Accuracy
                 }
             }
         }
-
-        public void LoadExistingEventLandings()
-        {
-            List<Accuracy.MySqlReturnLanding> Landings = Connected_Event.SQL_Controller.GetLandingsForAccuracyEvent(Connected_Event.EventID, Connected_Event);
-
-            for (int i = 0; i < Landings.Count; i++)
-            {
-                for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
-                {
-                    if (Convert.ToInt16(dataGridViewScore.Rows[i2].Cells[0].Value) == Landings[i].UID)
-                    {
-                        int Column = Landings[i].Round + 4;
-                        dataGridViewScore.Rows[i2].Cells[Column].Value = Landings[i].score;
-                        dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightGreen;
-
-                        if (Landings[i].Modified == true) // If score has been manually reset
-                        {
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.Yellow;
-                        }
-
-                        if (Landings[i].windDataPrior == null) // If there is no wind data and therefore a manual entry.
-                        {
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightBlue;
-                        }
-
-                        Landings[i].dataGridCell = dataGridViewScore.Rows[i2].Cells[Column];
-                    }
-                }
-
-                Connected_Event.CompletedLandings.Add((AccuracyLanding)Landings[i]);
-            }
-        }
-
         public void ScoreEdit(String Score)
         {
             labelLatestScore.Invoke((MethodInvoker)(() => labelLatestScore.Text = Score));
@@ -242,43 +209,19 @@ namespace Classics_2014.Accuracy
             dataGridViewScore.Columns.Add(NewColumn);
         }
 
-        private bool SelectFirstVisibleRowOnDataGrid(DataGridView dataGrid)
-        {
-            dataGrid.ClearSelection();
-            for (int i = 0; i < dataGrid.Rows.Count; i++)
-            {
-                if (dataGrid.Rows[i].Visible == true)
-                {
-                    dataGrid.Rows[i].Selected = true;
-                    return true;
-                }
-            }
-            return false;
-        }
-
         private void buttonUnassignLanding_Click(object sender, EventArgs e)
         {
-            bool LandingNew = false;
             int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = null;
+            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
 
+            Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
             for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
             {
                 if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
                 {
-                    LandingNew = true;
                     dataGridViewLandings.Rows[i].Visible = true;
                 }
-            }
-            if (LandingNew == true)
-            {
-                dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = null;
-                dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
-
-                Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
-            }
-            else
-            {
-                MessageBox.Show("Landing is old. Can only reassign landings from current session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -336,42 +279,14 @@ namespace Classics_2014.Accuracy
                             break;
                     }
 
-                    CurrentLanding = null;
-                    SelectFirstVisibleRowOnDataGrid(dataGridViewLandings); // Selects the first landing on the list for convenience.
-                    dataGridViewScore.Rows[dataGridViewScore.SelectedRows[0].Index + 1].Selected = true;
+                    dataGridViewLandings.Rows[1].Selected = true;
                 }
             }
         }
 
         private void buttonRemoveLanding_Click(object sender, EventArgs e)
         {
-            int LandingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
-            // Add check if uncommitted row
-            dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
-            Connected_Event.SQL_Controller.RemoveAccuracyLanding(LandingID, Connected_Event.EventID);
-            SelectFirstVisibleRowOnDataGrid(dataGridViewLandings);
-        }
 
-        private void buttonRenameCompetitor_Click(object sender, EventArgs e)
-        {
-            string NewName = CustomMessageBox.Show();
-            int UID = Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value);
-
-            if (Connected_Event.SQL_Controller.ModifyCompetitorName(UID, NewName))
-            {
-                dataGridViewScore.SelectedRows[0].Cells[1].Value = NewName;
-            }
-        }
-
-        private void buttonRejump_Click(object sender, EventArgs e)
-        {
-            int LandingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
-            // Add check if uncommitted row
-            // Rethink what Rejump actually means, a Out of range rejump is possible. Just skip to next competitor?
-            dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
-            Connected_Event.SQL_Controller.RemoveAccuracyLanding(LandingID, Connected_Event.EventID);
-            SelectFirstVisibleRowOnDataGrid(dataGridViewLandings);
-            dataGridViewScore.Rows[dataGridViewScore.SelectedRows[0].Index + 1].Selected = true;
         }
 
     }

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace Classics_2014.Accuracy
 {
     [Serializable]
-    public class AccuracyLanding
+    class AccuracyLanding
     {
         public int ID;
         [NonSerialized]

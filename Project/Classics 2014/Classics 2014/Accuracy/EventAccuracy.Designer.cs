@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tabControlEvent = new System.Windows.Forms.TabControl();
             this.tabPageScores = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
@@ -165,8 +165,8 @@
             // 
             // dataGridViewScore
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
+            this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewScore.BackgroundColor = System.Drawing.Color.White;
             this.dataGridViewScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -360,7 +360,6 @@
             this.buttonRenameCompetitor.TabIndex = 4;
             this.buttonRenameCompetitor.Text = "Rename Competitor";
             this.buttonRenameCompetitor.UseVisualStyleBackColor = true;
-            this.buttonRenameCompetitor.Click += new System.EventHandler(this.buttonRenameCompetitor_Click);
             // 
             // buttonUnassignLanding
             // 
@@ -426,7 +425,6 @@
             this.buttonRejump.TabIndex = 9;
             this.buttonRejump.Text = "Rejump";
             this.buttonRejump.UseVisualStyleBackColor = true;
-            this.buttonRejump.Click += new System.EventHandler(this.buttonRejump_Click);
             // 
             // tableLayoutPanel3
             // 

@@ -315,12 +315,6 @@ namespace Classics_2014
             return ExecuteNonQuery(query);
         }
 
-        public bool ModifyCompetitorName(int UID, string NewName)
-        {
-            string query = "UPDATE `competitors` SET `Name`='" + NewName + "' WHERE `UID`='" + UID + "';";
-            return ExecuteNonQuery(query);
-        }
-
         #endregion
         #region Get
 
@@ -556,40 +550,31 @@ namespace Classics_2014
                         MySqlDataReader DataReader = cmd.ExecuteReader();
                         while (DataReader.Read())
                         {
+                            Accuracy.MySqlReturnLanding CurrentLanding = Landings[i];
+                            //CurrentLanding.ID = Landings[i].Landing.ID;
+                            //CurrentLanding.dataGridCell = null;
+                            //CurrentLanding.Index = 0;
+                            //CurrentLanding.LandingWind = new TWind();
+                            //CurrentLanding.TimeOfLanding = "";
+                            //CurrentLanding.WindDataAfter = new TWind[1];
+                            //CurrentLanding.windDataPrior = new TWind[1];
+                            //CurrentLanding.WindInputs = 1;
                             string HexedWindData = "";
-                            int CurrentScore = 100;
-                            bool CurrentIsModified = false;
 
                             for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
                             {
                                 switch (i2)
                                 {
-                                    case 1: CurrentScore = DataReader.GetInt16(i2); break;
                                     case 2: HexedWindData = DataReader.GetString(i2); break;
-                                    case 3: CurrentIsModified = DataReader.GetBoolean(i2); break;
                                 }
                                 if (i2 == 3)
                                 {
-                                    Accuracy.MySqlReturnLanding CurrentLanding = new Accuracy.MySqlReturnLanding();
-
-                                    if (HexedWindData.Length > 2)
-                                    {
-                                        Byte[] WindData = StringToByteArray(HexedWindData);
-                                        int Round = Landings[i].Round;
-                                        int UID = Landings[i].UID;
-                                        CurrentLanding = GlobalFunctions.CastAccLandingToMySqlReturnLanding(Connected_Event.ConvertByteArrayToLanding(WindData));
-                                        CurrentLanding.UID = UID;
-                                        CurrentLanding.Round = Round;
-                                    }
-                                    else
-                                    {
-                                        CurrentLanding.ID = Landings[i].ID;
-                                        CurrentLanding.UID = Landings[i].UID;
-                                        CurrentLanding.Round = Landings[i].Round;
-                                    }
-                                    
-                                    CurrentLanding.score = CurrentScore;
-                                    CurrentLanding.Modified = CurrentIsModified;
+                                    Byte[] WindData = StringToByteArray(HexedWindData);
+                                    int Round = CurrentLanding.Round;
+                                    int UID = CurrentLanding.UID;
+                                    CurrentLanding = (Accuracy.MySqlReturnLanding)Connected_Event.ConvertByteArrayToLanding(WindData);
+                                    CurrentLanding.UID = UID;
+                                    CurrentLanding.Round = Round;
                                     Landings[i] = CurrentLanding;
                                 }
                             }

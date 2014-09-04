@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014
+namespace Classics_2014.Accuracy
 {
     internal partial class ModifyLanding : Form
     {
@@ -42,7 +42,7 @@ namespace Classics_2014
 
     }
 
-    public partial class CustomMessageBox
+    public static class CustomMessageBox
     {
         public static int Show(int MaxScore)
         {

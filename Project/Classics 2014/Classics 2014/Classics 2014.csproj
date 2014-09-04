@@ -64,6 +64,12 @@
       <DependentUpon>AccuracySpecificSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Accuracy\Accuracy_Event.cs" />
+    <Compile Include="EventPicker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EventPicker.Designer.cs">
+      <DependentUpon>EventPicker.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +163,9 @@
     <EmbeddedResource Include="Accuracy\AccuracyOptionsMenu.resx">
       <DependentUpon>AccuracyOptionsMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="EventPicker.resx">
+      <DependentUpon>EventPicker.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModifyName.resx">
       <DependentUpon>ModifyName.cs</DependentUpon>
     </EmbeddedResource>
@@ -223,6 +232,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FAI LOGO.png" />
+    <Content Include="SplitterBar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

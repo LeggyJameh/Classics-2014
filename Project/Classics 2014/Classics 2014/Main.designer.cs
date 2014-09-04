@@ -29,71 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Accuracy");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Style and Accuracy");
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Paraski");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Canopy Piloting");
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("FS 4 Way-Rookie");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("FS 4 Way", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("FS 8 Way Rookie");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("FS 8 Way", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Free Style Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode6,
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("CF 2 Way");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("CF 4 Way");
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Canopy Formation Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode11,
-            treeNode12});
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Artistic Event");
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Wingsuit");
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("VFS");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("National", new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode2,
-            treeNode3,
-            treeNode4,
-            treeNode10,
-            treeNode13,
-            treeNode14,
-            treeNode15,
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Style and Accuracy");
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Paraski");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Canopy Piloting");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("F.S 4 Way");
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("F.S 8 Way");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Freestyle Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode22,
-            treeNode23});
-            System.Windows.Forms.TreeNode treeNode25 = new System.Windows.Forms.TreeNode("C.F 2 Way");
-            System.Windows.Forms.TreeNode treeNode26 = new System.Windows.Forms.TreeNode("C.F 4 Way");
-            System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("C.F 8 Way");
-            System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Canopy Formation Varients", new System.Windows.Forms.TreeNode[] {
-            treeNode25,
-            treeNode26,
-            treeNode27});
-            System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Artistic Event");
-            System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Speed");
-            System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Wingsuit");
-            System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("VFS");
-            System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("FAI Events", new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20,
-            treeNode21,
-            treeNode24,
-            treeNode28,
-            treeNode29,
-            treeNode30,
-            treeNode31,
-            treeNode32});
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -108,12 +44,6 @@
             this.buttonModifyCompetitorData = new System.Windows.Forms.Button();
             this.buttonMainSettings = new System.Windows.Forms.Button();
             this.tabWind = new System.Windows.Forms.TabPage();
-            this.tabPageEventSelect = new System.Windows.Forms.TabPage();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.buttonStartEvent = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.treeView2 = new System.Windows.Forms.TreeView();
-            this.treeView1 = new System.Windows.Forms.TreeView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
@@ -130,11 +60,6 @@
             this.tabMain.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.tabPageEventSelect.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel5.SuspendLayout();
             this.tableLayoutPanel6.SuspendLayout();
             this.SuspendLayout();
@@ -146,7 +71,6 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabMain);
             this.tabControl.Controls.Add(this.tabWind);
-            this.tabControl.Controls.Add(this.tabPageEventSelect);
             this.tabControl.Location = new System.Drawing.Point(3, 3);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -182,26 +106,26 @@
             this.tableLayoutPanel9.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel9.Name = "tableLayoutPanel9";
             this.tableLayoutPanel9.RowCount = 13;
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.16691F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333403F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76484F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333403F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76484F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333403F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76484F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.333403F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76484F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 8.33257F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.76367F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.16691F));
+            this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.17696F));
             this.tableLayoutPanel9.Size = new System.Drawing.Size(1126, 712);
             this.tableLayoutPanel9.TabIndex = 5;
             // 
             // buttonCompetition
             // 
             this.buttonCompetition.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonCompetition.Location = new System.Drawing.Point(378, 123);
+            this.buttonCompetition.Location = new System.Drawing.Point(378, 203);
             this.buttonCompetition.Name = "buttonCompetition";
             this.buttonCompetition.Size = new System.Drawing.Size(369, 44);
             this.buttonCompetition.TabIndex = 0;
@@ -216,7 +140,7 @@
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(378, 3);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(369, 114);
+            this.pictureBox1.Size = new System.Drawing.Size(369, 194);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox1.TabIndex = 5;
             this.pictureBox1.TabStop = false;
@@ -224,7 +148,7 @@
             // buttonLoad
             // 
             this.buttonLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonLoad.Location = new System.Drawing.Point(378, 207);
+            this.buttonLoad.Location = new System.Drawing.Point(378, 277);
             this.buttonLoad.Name = "buttonLoad";
             this.buttonLoad.Size = new System.Drawing.Size(369, 44);
             this.buttonLoad.TabIndex = 1;
@@ -235,7 +159,7 @@
             // buttonExit
             // 
             this.buttonExit.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonExit.Location = new System.Drawing.Point(378, 543);
+            this.buttonExit.Location = new System.Drawing.Point(378, 573);
             this.buttonExit.Name = "buttonExit";
             this.buttonExit.Size = new System.Drawing.Size(369, 44);
             this.buttonExit.TabIndex = 2;
@@ -246,7 +170,7 @@
             // buttonHelp
             // 
             this.buttonHelp.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonHelp.Location = new System.Drawing.Point(378, 375);
+            this.buttonHelp.Location = new System.Drawing.Point(378, 425);
             this.buttonHelp.Name = "buttonHelp";
             this.buttonHelp.Size = new System.Drawing.Size(369, 44);
             this.buttonHelp.TabIndex = 3;
@@ -256,7 +180,7 @@
             // buttonModifyCompetitorData
             // 
             this.buttonModifyCompetitorData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonModifyCompetitorData.Location = new System.Drawing.Point(378, 291);
+            this.buttonModifyCompetitorData.Location = new System.Drawing.Point(378, 351);
             this.buttonModifyCompetitorData.Name = "buttonModifyCompetitorData";
             this.buttonModifyCompetitorData.Size = new System.Drawing.Size(369, 44);
             this.buttonModifyCompetitorData.TabIndex = 6;
@@ -266,7 +190,7 @@
             // buttonMainSettings
             // 
             this.buttonMainSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonMainSettings.Location = new System.Drawing.Point(378, 459);
+            this.buttonMainSettings.Location = new System.Drawing.Point(378, 499);
             this.buttonMainSettings.Name = "buttonMainSettings";
             this.buttonMainSettings.Size = new System.Drawing.Size(369, 44);
             this.buttonMainSettings.TabIndex = 7;
@@ -282,197 +206,6 @@
             this.tabWind.TabIndex = 1;
             this.tabWind.Text = "Anemometer Control";
             this.tabWind.UseVisualStyleBackColor = true;
-            // 
-            // tabPageEventSelect
-            // 
-            this.tabPageEventSelect.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.tabPageEventSelect.Controls.Add(this.splitContainer1);
-            this.tabPageEventSelect.Location = new System.Drawing.Point(4, 22);
-            this.tabPageEventSelect.Name = "tabPageEventSelect";
-            this.tabPageEventSelect.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageEventSelect.Size = new System.Drawing.Size(1132, 718);
-            this.tabPageEventSelect.TabIndex = 2;
-            this.tabPageEventSelect.Text = "New Event Select";
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.buttonStartEvent);
-            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.splitContainer1.Size = new System.Drawing.Size(1126, 712);
-            this.splitContainer1.SplitterDistance = 375;
-            this.splitContainer1.TabIndex = 2;
-            // 
-            // buttonStartEvent
-            // 
-            this.buttonStartEvent.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.buttonStartEvent.Location = new System.Drawing.Point(0, 581);
-            this.buttonStartEvent.Name = "buttonStartEvent";
-            this.buttonStartEvent.Size = new System.Drawing.Size(375, 131);
-            this.buttonStartEvent.TabIndex = 0;
-            this.buttonStartEvent.Text = "Select an event on the left";
-            this.buttonStartEvent.UseVisualStyleBackColor = true;
-            this.buttonStartEvent.Click += new System.EventHandler(this.buttonStartEvent_Click);
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.5F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.5F));
-            this.tableLayoutPanel1.Controls.Add(this.treeView2, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.treeView1, 0, 0);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 1;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(375, 712);
-            this.tableLayoutPanel1.TabIndex = 2;
-            // 
-            // treeView2
-            // 
-            this.treeView2.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.treeView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView2.Location = new System.Drawing.Point(181, 3);
-            this.treeView2.Name = "treeView2";
-            treeNode1.Name = "NodeAccuracy";
-            treeNode1.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode1.Text = "Accuracy";
-            treeNode2.Name = "NodeStyleAndAccuracyN";
-            treeNode2.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode2.Text = "Style and Accuracy";
-            treeNode3.Name = "NodeParaSkiN";
-            treeNode3.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode3.Text = "Paraski";
-            treeNode4.Name = "NodeCanopyPilotingN";
-            treeNode4.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode4.Text = "Canopy Piloting";
-            treeNode5.Name = "NodeFS4RookieN";
-            treeNode5.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode5.Text = "FS 4 Way-Rookie";
-            treeNode6.Name = "NodeFS4WayN";
-            treeNode6.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode6.Tag = "1";
-            treeNode6.Text = "FS 4 Way";
-            treeNode7.Name = "NodeFs8WayN";
-            treeNode7.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode7.Text = "FS 8 Way Rookie";
-            treeNode8.Name = "nodeFS8WayN";
-            treeNode8.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode8.Tag = "1";
-            treeNode8.Text = "FS 8 Way";
-            treeNode9.Name = "NodeFS8WaySpeedN";
-            treeNode9.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode9.Text = "Speed";
-            treeNode10.Name = "NodeFSN";
-            treeNode10.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode10.Tag = "1";
-            treeNode10.Text = "Free Style Varients";
-            treeNode11.Name = "NodeCF2WayN";
-            treeNode11.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode11.Text = "CF 2 Way";
-            treeNode12.Name = "NodeCF4Way";
-            treeNode12.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode12.Text = "CF 4 Way";
-            treeNode13.Name = "NodeCFN";
-            treeNode13.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode13.Tag = "1";
-            treeNode13.Text = "Canopy Formation Varients";
-            treeNode14.Name = "NodeAEN";
-            treeNode14.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode14.Text = "Artistic Event";
-            treeNode15.Name = "Node16SpeedN";
-            treeNode15.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode15.Text = "Speed";
-            treeNode16.Name = "NodeWingsuitN";
-            treeNode16.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode16.Text = "Wingsuit";
-            treeNode17.Name = "NodeVFSN";
-            treeNode17.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode17.Text = "VFS";
-            treeNode18.Name = "NodeNational";
-            treeNode18.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode18.Tag = "1";
-            treeNode18.Text = "National";
-            this.treeView2.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode18});
-            this.treeView2.Size = new System.Drawing.Size(191, 706);
-            this.treeView2.TabIndex = 2;
-            this.treeView2.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView2.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
-            // 
-            // treeView1
-            // 
-            this.treeView1.BackColor = System.Drawing.Color.LightSteelBlue;
-            this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.treeView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.treeView1.Location = new System.Drawing.Point(3, 3);
-            this.treeView1.Name = "treeView1";
-            treeNode19.Name = "NodeStyleAndAccuracy";
-            treeNode19.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode19.Text = "Style and Accuracy";
-            treeNode20.Name = "NodeParaski";
-            treeNode20.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode20.Text = "Paraski";
-            treeNode21.Name = "NodeCanopyPiloting";
-            treeNode21.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode21.Text = "Canopy Piloting";
-            treeNode22.Name = "NodeFs4Way";
-            treeNode22.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode22.Text = "F.S 4 Way";
-            treeNode23.Name = "NodeFs8Way";
-            treeNode23.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode23.Text = "F.S 8 Way";
-            treeNode24.Name = "NodeFreeStyleVarients";
-            treeNode24.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode24.Tag = "1";
-            treeNode24.Text = "Freestyle Varients";
-            treeNode25.Name = "NodeCF2Way";
-            treeNode25.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode25.Text = "C.F 2 Way";
-            treeNode26.Name = "NodeCF4Way";
-            treeNode26.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode26.Text = "C.F 4 Way";
-            treeNode27.Name = "NodeCF8Way";
-            treeNode27.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode27.Text = "C.F 8 Way";
-            treeNode28.Name = "NodeCanopyFormationVarients";
-            treeNode28.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode28.Tag = "1";
-            treeNode28.Text = "Canopy Formation Varients";
-            treeNode29.Name = "NodeAE";
-            treeNode29.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode29.Text = "Artistic Event";
-            treeNode30.Name = "NodeSpeed";
-            treeNode30.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode30.Text = "Speed";
-            treeNode31.Name = "NodeWingsuit";
-            treeNode31.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode31.Text = "Wingsuit";
-            treeNode32.Name = "NodeVFS";
-            treeNode32.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode32.Text = "VFS";
-            treeNode33.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
-            treeNode33.Name = "NodeFAI";
-            treeNode33.NodeFont = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            treeNode33.Tag = "1";
-            treeNode33.Text = "FAI Events";
-            this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode33});
-            this.treeView1.Size = new System.Drawing.Size(172, 706);
-            this.treeView1.TabIndex = 1;
-            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
-            this.treeView1.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseDoubleClick);
             // 
             // statusStrip1
             // 
@@ -588,9 +321,9 @@
             this.listBoxWindLog.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
-            listViewItem1.StateImageIndex = 0;
+            listViewItem2.StateImageIndex = 0;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1});
+            listViewItem2});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;
@@ -650,11 +383,6 @@
             this.tabMain.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.tabPageEventSelect.ResumeLayout(false);
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
-            this.splitContainer1.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel5.ResumeLayout(false);
             this.tableLayoutPanel6.ResumeLayout(false);
             this.tableLayoutPanel6.PerformLayout();
@@ -688,12 +416,6 @@
         private System.Windows.Forms.Button buttonModifyCompetitorData;
         private System.Windows.Forms.Label labelError;
         private System.Windows.Forms.Button buttonMainSettings;
-        private System.Windows.Forms.TabPage tabPageEventSelect;
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.Button buttonStartEvent;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.TreeView treeView2;
 
     }
 }

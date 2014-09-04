@@ -65,17 +65,17 @@
             // 
             this.tableLayoutPanel7.ColumnCount = 1;
             this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 2);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 3);
-            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel10, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.chartWind, 0, 1);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel8, 0, 2);
+            this.tableLayoutPanel7.Controls.Add(this.tableLayoutPanel10, 0, 0);
             this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel7.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
-            this.tableLayoutPanel7.RowCount = 4;
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.97603F));
+            this.tableLayoutPanel7.RowCount = 3;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.02397F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel7.Size = new System.Drawing.Size(1132, 718);
             this.tableLayoutPanel7.TabIndex = 1;
             // 
@@ -116,7 +116,7 @@
             chartArea1.Position.Y = 3F;
             this.chartWind.ChartAreas.Add(chartArea1);
             this.chartWind.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.chartWind.Location = new System.Drawing.Point(3, 164);
+            this.chartWind.Location = new System.Drawing.Point(3, 33);
             this.chartWind.Name = "chartWind";
             series1.BorderWidth = 3;
             series1.ChartArea = "ChartArea1";
@@ -125,7 +125,7 @@
             series1.XValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.String;
             series1.YValueType = System.Windows.Forms.DataVisualization.Charting.ChartValueType.Double;
             this.chartWind.Series.Add(series1);
-            this.chartWind.Size = new System.Drawing.Size(1126, 519);
+            this.chartWind.Size = new System.Drawing.Size(1126, 651);
             this.chartWind.TabIndex = 0;
             this.chartWind.Text = "chart1";
             this.chartWind.MouseMove += new System.Windows.Forms.MouseEventHandler(this.chartWind_MouseMove);
@@ -156,11 +156,11 @@
             this.tableLayoutPanel8.Controls.Add(this.buttonUseEventSettings, 10, 0);
             this.tableLayoutPanel8.Controls.Add(this.checkBoxAutoScroll, 11, 0);
             this.tableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 689);
+            this.tableLayoutPanel8.Location = new System.Drawing.Point(3, 690);
             this.tableLayoutPanel8.Name = "tableLayoutPanel8";
             this.tableLayoutPanel8.RowCount = 1;
             this.tableLayoutPanel8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel8.Size = new System.Drawing.Size(1126, 26);
+            this.tableLayoutPanel8.Size = new System.Drawing.Size(1126, 25);
             this.tableLayoutPanel8.TabIndex = 2;
             // 
             // trackBarWindZoom
@@ -170,7 +170,7 @@
             this.trackBarWindZoom.Maximum = 120;
             this.trackBarWindZoom.Minimum = 2;
             this.trackBarWindZoom.Name = "trackBarWindZoom";
-            this.trackBarWindZoom.Size = new System.Drawing.Size(159, 20);
+            this.trackBarWindZoom.Size = new System.Drawing.Size(159, 19);
             this.trackBarWindZoom.TabIndex = 2;
             this.trackBarWindZoom.TickFrequency = 5;
             this.trackBarWindZoom.Value = 60;
@@ -207,7 +207,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(250, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 26);
+            this.label1.Size = new System.Drawing.Size(76, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Minutes Shown";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,7 +264,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(514, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 26);
+            this.label2.Size = new System.Drawing.Size(76, 25);
             this.label2.TabIndex = 7;
             this.label2.Text = "Speed Over Bar Height";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -275,7 +275,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(778, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 26);
+            this.label3.Size = new System.Drawing.Size(76, 25);
             this.label3.TabIndex = 8;
             this.label3.Text = "Direction Change Indicator";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -285,7 +285,7 @@
             this.buttonUseEventSettings.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonUseEventSettings.Location = new System.Drawing.Point(960, 3);
             this.buttonUseEventSettings.Name = "buttonUseEventSettings";
-            this.buttonUseEventSettings.Size = new System.Drawing.Size(76, 20);
+            this.buttonUseEventSettings.Size = new System.Drawing.Size(76, 19);
             this.buttonUseEventSettings.TabIndex = 9;
             this.buttonUseEventSettings.Text = "Use Event Options";
             this.buttonUseEventSettings.UseVisualStyleBackColor = true;
@@ -320,7 +320,7 @@
             this.tableLayoutPanel10.Controls.Add(this.comboBoxSelectSeries, 5, 0);
             this.tableLayoutPanel10.Controls.Add(this.numericUpDownHourSearch, 0, 0);
             this.tableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 134);
+            this.tableLayoutPanel10.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel10.Name = "tableLayoutPanel10";
             this.tableLayoutPanel10.RowCount = 1;
             this.tableLayoutPanel10.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));

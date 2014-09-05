@@ -467,6 +467,10 @@ namespace Classics_2014.Accuracy
             {
                 comboBoxScoresUsed.Items.Add("Best " + (numericUpDownCompetitorsPerTeam.Value - 1).ToString());
             }
+            if (numericUpDownCompetitorsPerTeam.Value > 6)
+            {
+                comboBoxScoresUsed.Items.Add("Best 5");
+            }
             UpdateCompetitorGridsFromData();
             comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.Items[0];
         }

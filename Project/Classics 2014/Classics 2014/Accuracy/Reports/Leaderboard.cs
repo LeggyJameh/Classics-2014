@@ -24,25 +24,25 @@ namespace Classics_2014.Accuracy.Reports
             this.eventId = eventID;
             this.sqlController = sqlController;
             this.connectedEvent = connectedEvent;
-            Update();
+            Populate();
         }
-        public void Update()
+        public void Populate()
         {
             List<TCompetitor> competitors = sqlController.GetCompetitorsForEvent(eventId);
             List<MySqlReturnLanding> landings = sqlController.GetLandingsForAccuracyEvent(eventId, connectedEvent);
             DataGridViewCell cellToEdit;
             foreach (TCompetitor c in competitors)
             {
-                dataGridViewLockedLeaderboard.Rows.Add(c.name, c.nationality, c.team);
+                dataGridViewLockedLeaderboard.Rows.Add(c.ID, c.name, c.nationality, c.team);
                 foreach (MySqlReturnLanding l in landings)
                 {
                     if (l.UID == c.ID)
                     {
-                        while (l.Round > dataGridViewLockedLeaderboard.ColumnCount - 2)
+                        while (l.Round > dataGridViewLockedLeaderboard.ColumnCount - 3)
                         {
-                            dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (dataGridViewLockedLeaderboard.ColumnCount - 1), "Round " + (dataGridViewLockedLeaderboard.ColumnCount - 1));
+                            dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (dataGridViewLockedLeaderboard.ColumnCount - 2), "Round " + (dataGridViewLockedLeaderboard.ColumnCount - 2));
                         }
-                        cellToEdit = dataGridViewLockedLeaderboard[l.Round + 2, dataGridViewLockedLeaderboard.Rows.Count - 1];
+                        cellToEdit = dataGridViewLockedLeaderboard[l.Round + 3, dataGridViewLockedLeaderboard.Rows.Count - 1];
                         cellToEdit.Style.BackColor = Color.LightGreen;
                         if (l.Modified == true)
                         {

@@ -93,6 +93,7 @@
     </Compile>
     <Compile Include="Accuracy\Reports\CompetitorReport.Designer.cs">
       <DependentUpon>CompetitorReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventPicker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,73 +198,74 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\Reports\ReportCreation.resx">
       <DependentUpon>ReportCreation.cs</DependentUpon>
-    <EmbeddedResource Include="EventPicker.resx">
-      <DependentUpon>EventPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ModifyName.resx">
-      <DependentUpon>ModifyName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Accuracy\EventAccuracy.resx">
-      <DependentUpon>EventAccuracy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Accuracy\EventAccuracyOptions.resx">
-      <DependentUpon>EventAccuracyOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Accuracy\ModifyLanding.resx">
-      <DependentUpon>ModifyLanding.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Accuracy\TeamLeaderboard.resx">
-      <DependentUpon>TeamLeaderboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CommonDisplayOptions.resx">
-      <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EventLoader.resx">
-      <DependentUpon>EventLoader.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="EventTeams.resx">
-      <DependentUpon>EventTeams.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LockScreen.resx">
-      <DependentUpon>LockScreen.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Main.resx">
-      <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="StandardOptionsPage.resx">
-      <DependentUpon>StandardOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="windGraphingControllercs.resx">
-      <DependentUpon>windGraphingControllercs.cs</DependentUpon>
-    </EmbeddedResource>
-    <None Include="Accuracy\AccuracySpecificSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>AccuracySpecificSettings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="app.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <None Include="UserSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
+      <EmbeddedResource Include="EventPicker.resx">
+        <DependentUpon>EventPicker.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="ModifyName.resx">
+        <DependentUpon>ModifyName.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Accuracy\EventAccuracy.resx">
+        <DependentUpon>EventAccuracy.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Accuracy\EventAccuracyOptions.resx">
+        <DependentUpon>EventAccuracyOptions.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Accuracy\ModifyLanding.resx">
+        <DependentUpon>ModifyLanding.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Accuracy\TeamLeaderboard.resx">
+        <DependentUpon>TeamLeaderboard.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="CommonDisplayOptions.resx">
+        <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="EventLoader.resx">
+        <DependentUpon>EventLoader.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="EventTeams.resx">
+        <DependentUpon>EventTeams.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="LockScreen.resx">
+        <DependentUpon>LockScreen.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Main.resx">
+        <DependentUpon>Main.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="Properties\Resources.resx">
+        <Generator>ResXFileCodeGenerator</Generator>
+        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        <SubType>Designer</SubType>
+      </EmbeddedResource>
+      <Compile Include="Properties\Resources.Designer.cs">
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Resources.resx</DependentUpon>
+      </Compile>
+      <EmbeddedResource Include="StandardOptionsPage.resx">
+        <DependentUpon>StandardOptionsPage.cs</DependentUpon>
+      </EmbeddedResource>
+      <EmbeddedResource Include="windGraphingControllercs.resx">
+        <DependentUpon>windGraphingControllercs.cs</DependentUpon>
+      </EmbeddedResource>
+      <None Include="Accuracy\AccuracySpecificSettings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>AccuracySpecificSettings.Designer.cs</LastGenOutput>
+      </None>
+      <None Include="app.config" />
+      <None Include="Properties\Settings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      </None>
+      <Compile Include="Properties\Settings.Designer.cs">
+        <AutoGen>True</AutoGen>
+        <DependentUpon>Settings.settings</DependentUpon>
+        <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      </Compile>
+      <None Include="UserSettings.settings">
+        <Generator>SettingsSingleFileGenerator</Generator>
+        <LastGenOutput>UserSettings.Designer.cs</LastGenOutput>
+      </None>
+    </ItemGroup>
   <ItemGroup>
     <Content Include="FAI LOGO.png" />
     <Content Include="SplitterBar.png" />

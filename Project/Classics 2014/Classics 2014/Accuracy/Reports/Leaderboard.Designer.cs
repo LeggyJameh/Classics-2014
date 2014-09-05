@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridViewLockedLeaderboard = new System.Windows.Forms.DataGridView();
-            this.ColumnCompetitorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerLeaderboard = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonAutoUpdate = new System.Windows.Forms.Button();
@@ -39,6 +36,10 @@
             this.buttonUndock = new System.Windows.Forms.Button();
             this.groupBoxPrint = new System.Windows.Forms.GroupBox();
             this.buttonPrint = new System.Windows.Forms.Button();
+            this.ColumnHiddenUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCompetitorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLockedLeaderboard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).BeginInit();
             this.splitContainerLeaderboard.Panel1.SuspendLayout();
@@ -55,6 +56,7 @@
             this.dataGridViewLockedLeaderboard.AllowUserToDeleteRows = false;
             this.dataGridViewLockedLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLockedLeaderboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnHiddenUID,
             this.ColumnCompetitorName,
             this.columnCompetitorNationality,
             this.ColumnCompetitorTeam});
@@ -65,24 +67,6 @@
             this.dataGridViewLockedLeaderboard.ReadOnly = true;
             this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(783, 524);
             this.dataGridViewLockedLeaderboard.TabIndex = 1;
-            // 
-            // ColumnCompetitorName
-            // 
-            this.ColumnCompetitorName.HeaderText = "Competitor Name";
-            this.ColumnCompetitorName.Name = "ColumnCompetitorName";
-            this.ColumnCompetitorName.ReadOnly = true;
-            // 
-            // columnCompetitorNationality
-            // 
-            this.columnCompetitorNationality.HeaderText = "Competitor Nationality";
-            this.columnCompetitorNationality.Name = "columnCompetitorNationality";
-            this.columnCompetitorNationality.ReadOnly = true;
-            // 
-            // ColumnCompetitorTeam
-            // 
-            this.ColumnCompetitorTeam.HeaderText = "Competitor Team";
-            this.ColumnCompetitorTeam.Name = "ColumnCompetitorTeam";
-            this.ColumnCompetitorTeam.ReadOnly = true;
             // 
             // splitContainerLeaderboard
             // 
@@ -161,6 +145,31 @@
             this.buttonPrint.Text = "Print";
             this.buttonPrint.UseVisualStyleBackColor = true;
             // 
+            // ColumnHiddenUID
+            // 
+            this.ColumnHiddenUID.HeaderText = "This should be invisible";
+            this.ColumnHiddenUID.Name = "ColumnHiddenUID";
+            this.ColumnHiddenUID.ReadOnly = true;
+            this.ColumnHiddenUID.Visible = false;
+            // 
+            // ColumnCompetitorName
+            // 
+            this.ColumnCompetitorName.HeaderText = "Competitor Name";
+            this.ColumnCompetitorName.Name = "ColumnCompetitorName";
+            this.ColumnCompetitorName.ReadOnly = true;
+            // 
+            // columnCompetitorNationality
+            // 
+            this.columnCompetitorNationality.HeaderText = "Competitor Nationality";
+            this.columnCompetitorNationality.Name = "columnCompetitorNationality";
+            this.columnCompetitorNationality.ReadOnly = true;
+            // 
+            // ColumnCompetitorTeam
+            // 
+            this.ColumnCompetitorTeam.HeaderText = "Competitor Team";
+            this.ColumnCompetitorTeam.Name = "ColumnCompetitorTeam";
+            this.ColumnCompetitorTeam.ReadOnly = true;
+            // 
             // Leaderboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,6 +199,7 @@
         private System.Windows.Forms.Button buttonUndock;
         private System.Windows.Forms.GroupBox groupBoxPrint;
         private System.Windows.Forms.Button buttonPrint;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHiddenUID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCompetitorNationality;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorTeam;

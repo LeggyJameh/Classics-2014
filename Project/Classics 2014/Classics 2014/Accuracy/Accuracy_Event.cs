@@ -251,6 +251,7 @@ namespace Classics_2014.Accuracy
             engine.activeEvent = null;
             IsActive = false;
             ListenThread.Abort();
+
             //TODO: Gracefully end event thread.
         }
 

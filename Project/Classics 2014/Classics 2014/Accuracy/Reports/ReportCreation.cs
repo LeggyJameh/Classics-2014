@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Classics_2014.Accuracy.Reports
 {
-    public partial class ReportCreation : UserControl
+    partial class ReportCreation : UserControl
     {
         List<Leaderboard> LeaderboardReports = new List<Leaderboard>();
         List<TeamReport> TeamReports = new List<TeamReport>();
@@ -20,7 +20,7 @@ namespace Classics_2014.Accuracy.Reports
         Control ActiveReport;
         int eventId;
         bool selectEntireTeam;
-         ReportCreation(SQL_Controller sqlController, Accuracy_Event connectedEvent, int eventId)
+        public ReportCreation(SQL_Controller sqlController, Accuracy_Event connectedEvent, int eventId)
         {
             InitializeComponent();
             this.sqlController = sqlController;
@@ -176,7 +176,7 @@ namespace Classics_2014.Accuracy.Reports
                         {
                             dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (dataGridViewLockedLeaderboard.ColumnCount - 2), "Round " + (dataGridViewLockedLeaderboard.ColumnCount - 2));
                         }
-                        cellToEdit = dataGridViewLockedLeaderboard[l.Round + 3, dataGridViewLockedLeaderboard.Rows.Count - 1];
+                        cellToEdit = dataGridViewLockedLeaderboard[l.Round + 2, dataGridViewLockedLeaderboard.Rows.Count - 1];
                         cellToEdit.Style.BackColor = Color.LightGreen;
                         if (l.Modified == true)
                         {

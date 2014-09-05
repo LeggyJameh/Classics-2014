@@ -37,6 +37,8 @@ namespace Classics_2014.Accuracy
             InitializeComponent();
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
+            Reports.ReportCreation CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
+            tabControlEvent.TabPages[3].Controls.Add(CurrentReportForm);
         }
 
         public EventAccuracy(Accuracy_Event Event, TabControl Main, bool Admin)
@@ -419,6 +421,5 @@ namespace Classics_2014.Accuracy
                 }
             }
         }
-
     }
 }

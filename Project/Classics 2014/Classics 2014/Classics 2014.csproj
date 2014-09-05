@@ -64,6 +64,36 @@
       <DependentUpon>AccuracySpecificSettings.settings</DependentUpon>
     </Compile>
     <Compile Include="Accuracy\Accuracy_Event.cs" />
+    <Compile Include="Accuracy\Reports\LandingReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\Reports\LandingReport.Designer.cs">
+      <DependentUpon>LandingReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accuracy\Reports\Leaderboard.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\Reports\Leaderboard.Designer.cs">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accuracy\Reports\ReportCreation.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\Reports\ReportCreation.Designer.cs">
+      <DependentUpon>ReportCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accuracy\Reports\TeamReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\Reports\TeamReport.Designer.cs">
+      <DependentUpon>TeamReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Accuracy\Reports\CompetitorReport.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\Reports\CompetitorReport.Designer.cs">
+      <DependentUpon>CompetitorReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="ModifyName.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +187,12 @@
     <EmbeddedResource Include="Accuracy\AccuracyOptionsMenu.resx">
       <DependentUpon>AccuracyOptionsMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Accuracy\Reports\Leaderboard.resx">
+      <DependentUpon>Leaderboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accuracy\Reports\ReportCreation.resx">
+      <DependentUpon>ReportCreation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ModifyName.resx">
       <DependentUpon>ModifyName.cs</DependentUpon>
     </EmbeddedResource>
@@ -224,9 +260,7 @@
   <ItemGroup>
     <Content Include="FAI LOGO.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Accuracy\Reports\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

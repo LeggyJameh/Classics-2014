@@ -302,6 +302,7 @@ namespace Classics_2014.Accuracy
                                 }
                             }
                             CurrentLanding = Connected_Event.CompletedLandings[IndexInList];
+
                             break;
 
                         case "No":

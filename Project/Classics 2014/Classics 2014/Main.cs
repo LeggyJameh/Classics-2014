@@ -147,14 +147,19 @@ namespace Classics_2014
                 flopsToMaintainColourDirection = UserSettings.Default.flopsToMaintainColourDirection;
                 textBoxSideDirection.ForeColor = UserSettings.Default.sideTextDirectionOutColour;
             }
-            else
+            if (wind.speed > speedLimit)
             {
-                if (wind.speed > speedLimit)
-                {
 
-                    flopsToMaintainColourSpeed = UserSettings.Default.flopsToMaintainColourSpeed;
-                    textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextWindOutColour;
-                }
+                flopsToMaintainColourSpeed = UserSettings.Default.flopsToMaintainColourSpeed;
+                textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextWindOutColour;
+            }
+            if (flopsToMaintainColourDirection == 0)
+            {
+                textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
+            }
+            if (flopsToMaintainColourSpeed == 0)
+            {
+                textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
             }
         }
 

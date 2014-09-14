@@ -116,6 +116,7 @@
             this.buttonCreateReport.TabIndex = 0;
             this.buttonCreateReport.Text = "Create Report";
             this.buttonCreateReport.UseVisualStyleBackColor = true;
+            this.buttonCreateReport.Click += new System.EventHandler(this.buttonCreateReport_Click);
             // 
             // groupBox1
             // 
@@ -217,6 +218,7 @@
             this.dataGridViewLockedLeaderboard.ReadOnly = true;
             this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(699, 561);
             this.dataGridViewLockedLeaderboard.TabIndex = 2;
+            this.dataGridViewLockedLeaderboard.SelectionChanged += new System.EventHandler(this.dataGridViewLockedLeaderboard_SelectionChanged);
             // 
             // ColumnUID
             // 

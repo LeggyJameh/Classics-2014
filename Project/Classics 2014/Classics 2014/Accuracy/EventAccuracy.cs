@@ -38,6 +38,7 @@ namespace Classics_2014.Accuracy
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
             Reports.ReportCreation CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
+            CurrentReportForm.Dock = DockStyle.Fill;
             tabControlEvent.TabPages[3].Controls.Add(CurrentReportForm);
         }
 

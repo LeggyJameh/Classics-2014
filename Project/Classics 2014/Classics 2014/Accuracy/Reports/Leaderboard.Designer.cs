@@ -37,6 +37,7 @@
             this.groupBoxPrint = new System.Windows.Forms.GroupBox();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.ColumnHiddenUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCompetitorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -57,6 +58,7 @@
             this.dataGridViewLockedLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewLockedLeaderboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnHiddenUID,
+            this.ColumnPosition,
             this.ColumnCompetitorName,
             this.columnCompetitorNationality,
             this.ColumnCompetitorTeam});
@@ -99,13 +101,14 @@
             // 
             // buttonAutoUpdate
             // 
-            this.buttonAutoUpdate.ForeColor = System.Drawing.Color.Green;
+            this.buttonAutoUpdate.ForeColor = System.Drawing.Color.Crimson;
             this.buttonAutoUpdate.Location = new System.Drawing.Point(1, 5);
             this.buttonAutoUpdate.Name = "buttonAutoUpdate";
             this.buttonAutoUpdate.Size = new System.Drawing.Size(86, 51);
             this.buttonAutoUpdate.TabIndex = 1;
             this.buttonAutoUpdate.Text = "AutoUpdate";
             this.buttonAutoUpdate.UseVisualStyleBackColor = true;
+            this.buttonAutoUpdate.Click += new System.EventHandler(this.buttonAutoUpdate_Click);
             // 
             // groupBox1
             // 
@@ -125,6 +128,7 @@
             this.buttonUndock.TabIndex = 1;
             this.buttonUndock.Text = "Undock";
             this.buttonUndock.UseVisualStyleBackColor = true;
+            this.buttonUndock.Click += new System.EventHandler(this.buttonUndock_Click);
             // 
             // groupBoxPrint
             // 
@@ -151,6 +155,12 @@
             this.ColumnHiddenUID.Name = "ColumnHiddenUID";
             this.ColumnHiddenUID.ReadOnly = true;
             this.ColumnHiddenUID.Visible = false;
+            // 
+            // ColumnPosition
+            // 
+            this.ColumnPosition.HeaderText = "Position";
+            this.ColumnPosition.Name = "ColumnPosition";
+            this.ColumnPosition.ReadOnly = true;
             // 
             // ColumnCompetitorName
             // 
@@ -200,6 +210,7 @@
         private System.Windows.Forms.GroupBox groupBoxPrint;
         private System.Windows.Forms.Button buttonPrint;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHiddenUID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPosition;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnCompetitorNationality;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorTeam;

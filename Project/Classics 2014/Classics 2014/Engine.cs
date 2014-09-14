@@ -140,7 +140,6 @@ namespace Classics_2014
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.ToString());
                 if (!Directory.Exists(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\"))
                 {
                     Directory.CreateDirectory(Directory.GetCurrentDirectory() + "\\RecentMasterFile");

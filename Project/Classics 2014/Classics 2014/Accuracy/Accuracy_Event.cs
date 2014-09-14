@@ -68,7 +68,7 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count; i++)
                     {
                         AccuracyLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length - 1)
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length) //ToDo Made an edit that was messing with us
                         {
                             EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);

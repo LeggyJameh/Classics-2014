@@ -39,6 +39,8 @@
             this.buttonPrint = new System.Windows.Forms.Button();
             this.groupBoxClose = new System.Windows.Forms.GroupBox();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -140,6 +142,7 @@
             this.buttonPrint.TabIndex = 2;
             this.buttonPrint.Text = "Print";
             this.buttonPrint.UseVisualStyleBackColor = true;
+            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
             // 
             // groupBoxClose
             // 
@@ -161,6 +164,15 @@
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            // 
+            // printDialog
+            // 
+            this.printDialog.AllowPrintToFile = false;
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // LandingReport
             // 
@@ -193,5 +205,7 @@
         private System.Windows.Forms.ColumnHeader Speed;
         private System.Windows.Forms.ColumnHeader Direction;
         private System.Windows.Forms.ColumnHeader columnScore;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

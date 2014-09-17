@@ -15,12 +15,16 @@ namespace Classics_2014.Accuracy.Reports
         public string NameOfReport;
         ushort previousWindData;
         bool started = false;
-        public LandingReport(AccuracyLanding landingToDisplay, String Name, Accuracy_Event ConnectedEvent)
+        Action<LandingReport> Close;
+        Bitmap display;
+
+        public LandingReport(AccuracyLanding landingToDisplay, String Name, Accuracy_Event ConnectedEvent, Action<LandingReport> Close)
         {
             InitializeComponent();
             this.NameOfReport = Name;
             connectedEvent = ConnectedEvent;
             groupBoxReport.Text = NameOfReport;
+            this.Close = Close;
             for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 0; i--)
             {
                 DisplayWind(landingToDisplay.windDataPrior[i]);
@@ -30,7 +34,7 @@ namespace Classics_2014.Accuracy.Reports
             listBoxWindLog.Items.Add(LandingTime);
             for (int i = 1; i < landingToDisplay.WindDataAfter.Length; i++)
             {
-                
+                DisplayWind(landingToDisplay.WindDataAfter[i]);
             }
         }
         private void DisplayWind(TWind windData)
@@ -93,7 +97,25 @@ namespace Classics_2014.Accuracy.Reports
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            
+            Close(this);
         }
+
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            display = new Bitmap(groupBoxReport.DisplayRectangle.Height, groupBoxReport.DisplayRectangle.Width);
+            groupBoxReport.DrawToBitmap(display, groupBoxReport.DisplayRectangle);
+            DialogResult result = printDialog.ShowDialog();
+            printDialog.Document = printDocument1;
+            if (result == DialogResult.OK)
+            {
+                 printDocument1.Print();
+            }             
+            display.Save("Test.BMP");
+        }
+         
+         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+         {
+             e.Graphics.DrawImage(display, 0, 0);
+         }
     }
 }

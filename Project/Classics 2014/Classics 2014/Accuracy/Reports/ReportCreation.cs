@@ -207,34 +207,35 @@ namespace Classics_2014.Accuracy.Reports
         }
         public void Populate()
         {
-            List<TCompetitor> competitors = sqlController.GetCompetitorsForEvent(eventId);
+            MySqlTeamsReturn competitors = sqlController.GetTeamsForEvent(connectedEvent.EventID);
             landings = sqlController.GetLandingsForAccuracyEvent(eventId, connectedEvent);
             DataGridViewCell cellToEdit;
-            foreach (TCompetitor c in competitors)
+            for (int iT = 0; iT < competitors.Teams.Count; iT++)
             {
-                dataGridViewLockedLeaderboard.Rows.Add(c.ID, c.name, c.nationality, c.team);
-                foreach (MySqlReturnLanding l in landings)
+                for (int iC = 0; iC < competitors.Teams[iT].Count; iC++)
                 {
-                    if (l.UID == c.ID)
+                    dataGridViewLockedLeaderboard.Rows.Add(competitors.Teams[iT][iC].ID, competitors.Teams[iT][iC].name, competitors.Teams[iT][iC].nationality, competitors.TeamNames[iT]);
+                    foreach (MySqlReturnLanding l in landings)
                     {
-                        while (l.Round > dataGridViewLockedLeaderboard.ColumnCount - 4)
+                        if (l.UID == competitors.Teams[iT][iC].ID)
                         {
-                            dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (l.Round), "Round " + (l.Round));
+                            while (l.Round > dataGridViewLockedLeaderboard.ColumnCount - 4)
+                            {
+                                dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (l.Round), "Round " + (l.Round));
+                            }
+                            cellToEdit = dataGridViewLockedLeaderboard[l.Round + 3, dataGridViewLockedLeaderboard.Rows.Count - 1];
+                            cellToEdit.Value = l.score;
+                            cellToEdit.Style.BackColor = Color.LightGreen;
+                            if (l.Modified == true)
+                            {
+                                cellToEdit.Style.BackColor = Color.Yellow;
+                                if (l.windDataPrior == null) { cellToEdit.Style.BackColor = Color.LightBlue; }
+                            }
+                            if (l.windDataPrior == null)
+                            {
+                                cellToEdit.Style.BackColor = Color.LightBlue;
+                            }
                         }
-
-                        cellToEdit = dataGridViewLockedLeaderboard[l.Round + 3, dataGridViewLockedLeaderboard.Rows.Count - 1];
-                        cellToEdit.Value = l.score;
-                        cellToEdit.Style.BackColor = Color.LightGreen;
-                        if (l.Modified == true)
-                        {
-                            cellToEdit.Style.BackColor = Color.Yellow;
-                            if (l.windDataPrior == null) { cellToEdit.Style.BackColor = Color.LightBlue; }
-                        }
-                        if (l.windDataPrior == null)
-                        {
-                            cellToEdit.Style.BackColor = Color.LightBlue;
-                        }
-
                     }
                 }
 
@@ -270,7 +271,17 @@ namespace Classics_2014.Accuracy.Reports
                 switch (listBoxEventList.SelectedItem.ToString())
                 {
                     case "Leaderboard":
-                        break;
+                        Leaderboard newLeaderBoard = new Leaderboard(connectedEvent.EventID, reportName, sqlController, connectedEvent);
+                        splitContainer1.Panel2.Controls.Add(newLeaderBoard);
+                        newLeaderBoard.Dock = DockStyle.Fill;
+                        LeaderboardReports.Add(newLeaderBoard);
+                        ActiveReport.Visible = false;
+                        ActiveReport.Enabled = false;
+                        newLeaderBoard.Visible = true;
+                        newLeaderBoard.Enabled = true;
+                        ActiveReport = newLeaderBoard;
+                        radioButtonExist.Checked = true;
+                            break;
                     case "Team":
                         break;
                     case "Competitor":
@@ -282,7 +293,7 @@ namespace Classics_2014.Accuracy.Reports
                             {
                                 if (l.UID == Convert.ToInt16(dataGridViewLockedLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value))
                                 {
-                                    LandingReport newReport = new LandingReport(l, reportName, connectedEvent);
+                                    LandingReport newReport = new LandingReport(l, reportName, connectedEvent, new Action<LandingReport>(RemoveReport));
                                     splitContainer1.Panel2.Controls.Add(newReport);
                                     newReport.Dock = DockStyle.Fill;
                                     LandingReports.Add(newReport);
@@ -298,6 +309,23 @@ namespace Classics_2014.Accuracy.Reports
                         break;
                 }
             }
+        }
+        public void RemoveReport(LandingReport l)
+        {
+            LandingReports.Remove(l);
+            radioButtonNew.Checked = true;
+        }
+                public void RemoveReport(TeamReport l)
+        {
+            TeamReports.Remove(l);
+        }
+                public void RemoveReport(Leaderboard l)
+        {
+            LeaderboardReports.Remove(l);
+        }
+                public void RemoveReport(CompetitorReport l)
+        {
+            CompetitorReports.Remove(l);
         }
         private bool GetReportName(ref string strToInsert)
         {

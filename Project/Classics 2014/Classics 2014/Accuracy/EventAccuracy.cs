@@ -15,6 +15,7 @@ namespace Classics_2014.Accuracy
         TabControl tabControl;
         int CurrentCellValue;
         bool TeamedEvent;
+        Reports.ReportCreation CurrentReportForm;
         int RoundNumber = 1;
         bool Admin = false;
 
@@ -37,7 +38,7 @@ namespace Classics_2014.Accuracy
             InitializeComponent();
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
-            Reports.ReportCreation CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
+             CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
             CurrentReportForm.Dock = DockStyle.Fill;
             tabControlEvent.TabPages[3].Controls.Add(CurrentReportForm);
         }
@@ -101,13 +102,23 @@ namespace Classics_2014.Accuracy
         {
             List<Accuracy.MySqlReturnLanding> Landings = Connected_Event.SQL_Controller.GetLandingsForAccuracyEvent(Connected_Event.EventID, Connected_Event);
 
+
             for (int i = 0; i < Landings.Count; i++)
             {
                 for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
                 {
+                    while (Landings[i].Round + 4 >= dataGridViewScore.Columns.Count)
+                    {
+                        RoundNumber++;
+                        DataGridViewColumn NewColumn = (DataGridViewColumn)dataGridViewScore.Columns[4].Clone();
+                        NewColumn.Name = "ColumnRound" + RoundNumber;
+                        NewColumn.HeaderText = "Round " + RoundNumber;
+                        dataGridViewScore.Columns.Add(NewColumn);
+                    }
                     if (Convert.ToInt16(dataGridViewScore.Rows[i2].Cells[0].Value) == Landings[i].UID)
                     {
                         int Column = Landings[i].Round + 4;
+
                         dataGridViewScore.Rows[i2].Cells[Column].Value = Landings[i].score;
                         dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightGreen;
 
@@ -197,6 +208,7 @@ namespace Classics_2014.Accuracy
                             dataGridViewScore.SelectedCells[0].Value = NewScore;
                             dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
                             Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore[0,dataGridViewScore.SelectedCells[0].RowIndex].Value), dataGridViewScore.SelectedCells[0].ColumnIndex-4, dataGridViewScore.SelectedCells[0]);
                         }
                     }
                 }
@@ -213,6 +225,7 @@ namespace Classics_2014.Accuracy
                             dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = NewScore;
                             dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.Yellow;
                             Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]), NewScore);
+                            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                         }
                     }
                 }
@@ -238,6 +251,8 @@ namespace Classics_2014.Accuracy
 
                             Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0].Value),
                             RoundNumber, LandingID, Connected_Event.EventID);
+
+                            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore[0, dataGridViewScore.SelectedCells[0].RowIndex].Value), dataGridViewScore.SelectedCells[0].ColumnIndex - 4, dataGridViewScore.SelectedCells[0]);
                         }
                     }
                 }
@@ -257,6 +272,7 @@ namespace Classics_2014.Accuracy
 
                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value),
                         RoundNumber, LandingID, Connected_Event.EventID);
+                        CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                     }
                 }
             }
@@ -308,6 +324,7 @@ namespace Classics_2014.Accuracy
                         dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
 
                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+                        CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                     }
                     else
                     {
@@ -371,7 +388,7 @@ namespace Classics_2014.Accuracy
                             Connected_Event.LandingInProgress[IndexInList] = CurrentLanding;
                             break;
                     }
-
+                    CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                     CurrentLanding = null;
                     SelectFirstVisibleRowOnDataGrid(dataGridViewLandings); // Selects the first landing on the list for convenience.
                     dataGridViewScore.Rows[dataGridViewScore.SelectedRows[0].Index + 1].Selected = true;
@@ -390,6 +407,7 @@ namespace Classics_2014.Accuracy
                         int LandingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
                         dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
                         Connected_Event.SQL_Controller.RemoveAccuracyLanding(LandingID, Connected_Event.EventID);
+                        CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                         SelectFirstVisibleRowOnDataGrid(dataGridViewLandings);
                     }
                 }
@@ -405,6 +423,7 @@ namespace Classics_2014.Accuracy
             {
                 dataGridViewScore.SelectedRows[0].Cells[1].Value = NewName;
             }
+            CurrentReportForm.Update();
         }
 
         private void buttonRejump_Click(object sender, EventArgs e)
@@ -418,6 +437,7 @@ namespace Classics_2014.Accuracy
                         int LandingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
                         buttonUnassignLanding.PerformClick();
                         dataGridViewScore.Rows[dataGridViewScore.SelectedRows[0].Index + 1].Selected = true;
+
                     }
                 }
             }

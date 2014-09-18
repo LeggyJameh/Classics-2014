@@ -37,7 +37,8 @@ namespace Classics_2014.Accuracy.Reports
             {
                 if (r.Cells[0].Value.ToString() == UserID.ToString())
                 {
-                    r.Cells[Round + 3] = newCell;
+                    r.Cells[Round + 3] = (DataGridViewCell)newCell.Clone();
+                    r.Cells[Round + 3].Value = newCell.Value;
                 }
             }
             foreach (Leaderboard l in LeaderboardReports)
@@ -92,7 +93,7 @@ namespace Classics_2014.Accuracy.Reports
                 listBoxEventList.Items.Clear();
                 foreach (Leaderboard L in LeaderboardReports)
                 {
-                    listBoxEventList.Items.Add(L.Name);
+                    listBoxEventList.Items.Add(L.reportName);
 
                 }
                 foreach (TeamReport t in TeamReports)
@@ -245,19 +246,22 @@ namespace Classics_2014.Accuracy.Reports
         private void dataGridViewLockedLeaderboard_SelectionChanged(object sender, EventArgs e)
         {
             string teamName;
-            if (selectEntireTeam)
+            if (listBoxEventList.SelectedItem != null)
             {
-                teamName = dataGridViewLockedLeaderboard.SelectedRows[0].Cells["ColumnCompetitorTeam"].Value.ToString();
-                foreach (DataGridViewRow c in dataGridViewLockedLeaderboard.Rows)
+                if (selectEntireTeam)
                 {
-                    if(c.Cells["ColumnCompetitorTeam"].Value.ToString() == teamName) {c.Selected = true;}
+                    teamName = dataGridViewLockedLeaderboard.SelectedRows[0].Cells["ColumnCompetitorTeam"].Value.ToString();
+                    foreach (DataGridViewRow c in dataGridViewLockedLeaderboard.Rows)
+                    {
+                        if (c.Cells["ColumnCompetitorTeam"].Value.ToString() == teamName) { c.Selected = true; }
+                    }
                 }
-            }
-            else if (listBoxEventList.SelectedItem.ToString() == "Landing")
-            {
-                if ((dataGridViewLockedLeaderboard.SelectedCells.Count == 0) || (dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 3))
+                else if (listBoxEventList.SelectedItem.ToString() == "Landing")
                 {
-                    dataGridViewLockedLeaderboard.ClearSelection();
+                    if ((dataGridViewLockedLeaderboard.SelectedCells.Count == 0) || (dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 3))
+                    {
+                        dataGridViewLockedLeaderboard.ClearSelection();
+                    }
                 }
             }
         }
@@ -271,7 +275,7 @@ namespace Classics_2014.Accuracy.Reports
                 switch (listBoxEventList.SelectedItem.ToString())
                 {
                     case "Leaderboard":
-                        Leaderboard newLeaderBoard = new Leaderboard(connectedEvent.EventID, reportName, sqlController, connectedEvent);
+                        Leaderboard newLeaderBoard = new Leaderboard(connectedEvent.EventID, reportName, sqlController, connectedEvent, new Action<Leaderboard>(RemoveReport));
                         splitContainer1.Panel2.Controls.Add(newLeaderBoard);
                         newLeaderBoard.Dock = DockStyle.Fill;
                         LeaderboardReports.Add(newLeaderBoard);
@@ -287,11 +291,11 @@ namespace Classics_2014.Accuracy.Reports
                     case "Competitor":
                         break;
                     case "Landing":
-                        if (!(dataGridViewLockedLeaderboard.SelectedCells.Count == 0) && !(dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 3)&& (dataGridViewLockedLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
+                        if (!(dataGridViewLockedLeaderboard.SelectedCells.Count == 0) && !(dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 4)&& (dataGridViewLockedLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
                         {
                             foreach (MySqlReturnLanding l in landings)
                             {
-                                if (l.UID == Convert.ToInt16(dataGridViewLockedLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value))
+                                if ((l.UID == Convert.ToInt16(dataGridViewLockedLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value)) && (l.Round == dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex - 3)) 
                                 {
                                     LandingReport newReport = new LandingReport(l, reportName, connectedEvent, new Action<LandingReport>(RemoveReport));
                                     splitContainer1.Panel2.Controls.Add(newReport);
@@ -318,14 +322,17 @@ namespace Classics_2014.Accuracy.Reports
                 public void RemoveReport(TeamReport l)
         {
             TeamReports.Remove(l);
+            radioButtonNew.Checked = true;
         }
                 public void RemoveReport(Leaderboard l)
         {
             LeaderboardReports.Remove(l);
+            radioButtonNew.Checked = true;
         }
                 public void RemoveReport(CompetitorReport l)
         {
             CompetitorReports.Remove(l);
+            radioButtonNew.Checked = true;
         }
         private bool GetReportName(ref string strToInsert)
         {

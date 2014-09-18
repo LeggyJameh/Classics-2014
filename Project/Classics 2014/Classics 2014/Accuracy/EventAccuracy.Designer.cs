@@ -61,8 +61,6 @@
             this.buttonRejump = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonRemoveLanding = new System.Windows.Forms.Button();
-            this.tabPageTeamLeaderboard = new System.Windows.Forms.TabPage();
-            this.tabPageSinglesLeaderBoard = new System.Windows.Forms.TabPage();
             this.tabPageReports = new System.Windows.Forms.TabPage();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControlEvent.SuspendLayout();
@@ -78,8 +76,6 @@
             // 
             this.tabControlEvent.Alignment = System.Windows.Forms.TabAlignment.Bottom;
             this.tabControlEvent.Controls.Add(this.tabPageScores);
-            this.tabControlEvent.Controls.Add(this.tabPageTeamLeaderboard);
-            this.tabControlEvent.Controls.Add(this.tabPageSinglesLeaderBoard);
             this.tabControlEvent.Controls.Add(this.tabPageReports);
             this.tabControlEvent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlEvent.Location = new System.Drawing.Point(0, 0);
@@ -165,6 +161,8 @@
             // 
             // dataGridViewScore
             // 
+            this.dataGridViewScore.AllowUserToAddRows = false;
+            this.dataGridViewScore.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
             this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -188,6 +186,7 @@
             this.dataGridViewScore.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewScore.Size = new System.Drawing.Size(1006, 662);
             this.dataGridViewScore.TabIndex = 1;
+            this.dataGridViewScore.SelectionChanged += new System.EventHandler(this.dataGridViewScore_SelectionChanged);
             // 
             // ColumnUID
             // 
@@ -453,25 +452,6 @@
             this.buttonRemoveLanding.UseVisualStyleBackColor = true;
             this.buttonRemoveLanding.Click += new System.EventHandler(this.buttonRemoveLanding_Click);
             // 
-            // tabPageTeamLeaderboard
-            // 
-            this.tabPageTeamLeaderboard.Location = new System.Drawing.Point(4, 4);
-            this.tabPageTeamLeaderboard.Name = "tabPageTeamLeaderboard";
-            this.tabPageTeamLeaderboard.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTeamLeaderboard.Size = new System.Drawing.Size(1272, 774);
-            this.tabPageTeamLeaderboard.TabIndex = 1;
-            this.tabPageTeamLeaderboard.Text = "Teams";
-            this.tabPageTeamLeaderboard.UseVisualStyleBackColor = true;
-            // 
-            // tabPageSinglesLeaderBoard
-            // 
-            this.tabPageSinglesLeaderBoard.Location = new System.Drawing.Point(4, 4);
-            this.tabPageSinglesLeaderBoard.Name = "tabPageSinglesLeaderBoard";
-            this.tabPageSinglesLeaderBoard.Size = new System.Drawing.Size(1272, 774);
-            this.tabPageSinglesLeaderBoard.TabIndex = 3;
-            this.tabPageSinglesLeaderBoard.Text = "Leaderboard";
-            this.tabPageSinglesLeaderBoard.UseVisualStyleBackColor = true;
-            // 
             // tabPageReports
             // 
             this.tabPageReports.Location = new System.Drawing.Point(4, 4);
@@ -513,7 +493,6 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.DataGridView dataGridViewScore;
-        private System.Windows.Forms.TabPage tabPageTeamLeaderboard;
         private System.Windows.Forms.TabPage tabPageReports;
         private System.Windows.Forms.Label labelLatestScore;
         private System.Windows.Forms.Label label1;
@@ -529,7 +508,6 @@
         private System.Windows.Forms.Button buttonUnassignLanding;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button buttonManualLanding;
-        private System.Windows.Forms.TabPage tabPageSinglesLeaderBoard;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;

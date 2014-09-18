@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Classics_2014.Accuracy.Reports
 {
@@ -26,7 +27,7 @@ namespace Classics_2014.Accuracy.Reports
             groupBoxReport.Text = NameOfReport;
             this.Close = Close;
             for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 0; i--)
-            {
+           {
                 DisplayWind(landingToDisplay.windDataPrior[i]);
             }
             ListViewItem LandingTime = new ListViewItem(new string[]{ landingToDisplay.LandingWind.time, landingToDisplay.LandingWind.speed.ToString(), landingToDisplay.LandingWind.direction.ToString(),landingToDisplay.score.ToString()});
@@ -40,6 +41,10 @@ namespace Classics_2014.Accuracy.Reports
         private void DisplayWind(TWind windData)
         {
             ListViewItem itemToAdd = new ListViewItem(new string[]{windData.time, windData.speed.ToString(), windData.direction.ToString()});
+            if (windData.time == null)
+            {
+                return;
+            }
             if (started)
             {
                 if (IsDirectionOut(windData, previousWindData))
@@ -116,6 +121,20 @@ namespace Classics_2014.Accuracy.Reports
          private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
          {
              e.Graphics.DrawImage(display, 0, 0);
+         }
+
+         private void buttonSave_Click(object sender, EventArgs e)
+         {
+             SaveFileDialog saveFileDialogue = new SaveFileDialog();
+             saveFileDialogue.DefaultExt = "BMP";
+             saveFileDialogue.InitialDirectory = Directory.GetCurrentDirectory();
+             display = new Bitmap(groupBoxReport.Width, groupBoxReport.Height);
+             groupBoxReport.DrawToBitmap(display, groupBoxReport.ClientRectangle);
+             DialogResult result = saveFileDialogue.ShowDialog();
+             if (result == DialogResult.OK)
+             {
+                 display.Save(saveFileDialogue.FileName);
+             }
          }
     }
 }

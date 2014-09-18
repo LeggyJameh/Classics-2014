@@ -40,6 +40,12 @@ namespace Classics_2014
             }
         }
 
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            NewScore = -1;
+            this.Close();
+        }
+
     }
 
     public partial class CustomMessageBox

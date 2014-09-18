@@ -33,6 +33,10 @@ namespace Classics_2014.Accuracy.Reports
         }
         public void Update(int UserID, int Round, DataGridViewCell newCell)
         {
+            while (Round >= dataGridViewLockedLeaderboard.Columns.Count -3)
+            {
+                dataGridViewLockedLeaderboard.Columns.Add("Round" + (dataGridViewLockedLeaderboard.Columns.Count - 3), "Round" + (dataGridViewLockedLeaderboard.Columns.Count - 3));
+            }
             foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
             {
                 if (r.Cells[0].Value.ToString() == UserID.ToString())
@@ -44,10 +48,6 @@ namespace Classics_2014.Accuracy.Reports
             foreach (Leaderboard l in LeaderboardReports)
             {
                 l.Update(UserID, Round, newCell);
-            }
-            foreach (TeamReport t in TeamReports)
-            {
-                //ToDo Update Method
             }
             foreach (CompetitorReport c in CompetitorReports)
             {
@@ -98,7 +98,7 @@ namespace Classics_2014.Accuracy.Reports
                 }
                 foreach (TeamReport t in TeamReports)
                 {
-                    listBoxEventList.Items.Add(t.Name);
+                    listBoxEventList.Items.Add(t.NameOfReport);
                 }
                 foreach (CompetitorReport c in CompetitorReports)
                 {
@@ -287,6 +287,19 @@ namespace Classics_2014.Accuracy.Reports
                         radioButtonExist.Checked = true;
                             break;
                     case "Team":
+                            if (dataGridViewLockedLeaderboard.SelectedRows.Count > 0)
+                            {
+                                TeamReport report = new TeamReport(dataGridViewLockedLeaderboard.SelectedRows, dataGridViewLockedLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
+                                splitContainer1.Panel2.Controls.Add(report);
+                                report.Dock = DockStyle.Fill;
+                                TeamReports.Add(report);
+                                ActiveReport.Visible = false;
+                                ActiveReport.Enabled = false;
+                                report.Visible = true;
+                                report.Enabled = true;
+                                ActiveReport = report;
+                                radioButtonExist.Checked = true;
+                            }
                         break;
                     case "Competitor":
                         break;

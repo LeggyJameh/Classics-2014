@@ -243,6 +243,7 @@ namespace Classics_2014.Accuracy
                 IsActive = true;
                 engine.MakeActive(this);
                 ListenThread.Start();
+                
             }
         }
 
@@ -251,7 +252,7 @@ namespace Classics_2014.Accuracy
             engine.activeEvent = null;
             IsActive = false;
             ListenThread.Abort();
-
+            ListenThread = new Thread(new ThreadStart(ListenProcedure));
             //TODO: Gracefully end event thread.
         }
 

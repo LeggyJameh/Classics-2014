@@ -191,6 +191,7 @@ namespace Classics_2014
             {
                 MessageBox.Show("Please select an event to load.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
+            TabControl.TabPages.Remove((TabPage)this.Parent);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

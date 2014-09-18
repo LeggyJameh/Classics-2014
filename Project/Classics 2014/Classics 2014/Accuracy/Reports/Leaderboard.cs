@@ -513,7 +513,7 @@ namespace Classics_2014.Accuracy.Reports
 
         private void buttonPrint_Click(object sender, EventArgs e)
         {
-            {
+            
                 PrintDialog printDialog = new PrintDialog();
                 PrintDocument printDocument1 = new PrintDocument();
                 display = new Bitmap(dataGridViewLockedLeaderboard.Width, dataGridViewLockedLeaderboard.Height);
@@ -524,7 +524,7 @@ namespace Classics_2014.Accuracy.Reports
                 {
                     printDocument1.Print();
                 }
-            }
+            
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

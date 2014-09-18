@@ -30,13 +30,13 @@
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDownScore = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
-            this.numericUpDownScore = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScore)).BeginInit();
+            this.tableLayoutPanel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -69,6 +69,25 @@
             this.label1.Text = "What score would you like to set the landing to?";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // numericUpDownScore
+            // 
+            this.numericUpDownScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownScore.Location = new System.Drawing.Point(70, 45);
+            this.numericUpDownScore.Maximum = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            this.numericUpDownScore.Name = "numericUpDownScore";
+            this.numericUpDownScore.Size = new System.Drawing.Size(144, 20);
+            this.numericUpDownScore.TabIndex = 0;
+            this.numericUpDownScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.numericUpDownScore.Value = new decimal(new int[] {
+            16,
+            0,
+            0,
+            0});
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -94,6 +113,7 @@
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonOk
             // 
@@ -105,25 +125,6 @@
             this.buttonOk.Text = "Ok";
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
-            // numericUpDownScore
-            // 
-            this.numericUpDownScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownScore.Location = new System.Drawing.Point(70, 45);
-            this.numericUpDownScore.Maximum = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
-            this.numericUpDownScore.Name = "numericUpDownScore";
-            this.numericUpDownScore.Size = new System.Drawing.Size(144, 20);
-            this.numericUpDownScore.TabIndex = 0;
-            this.numericUpDownScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.numericUpDownScore.Value = new decimal(new int[] {
-            16,
-            0,
-            0,
-            0});
             // 
             // ModifyLanding
             // 
@@ -139,8 +140,8 @@
             this.TopMost = true;
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownScore)).EndInit();
+            this.tableLayoutPanel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

@@ -34,23 +34,26 @@
             this.competitorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ScoringTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.buttonDock = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonPrint = new System.Windows.Forms.Button();
             this.groupBoxPrint = new System.Windows.Forms.GroupBox();
             this.buttonClose = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonDock = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.buttonDeselct = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBoxPrint.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -65,6 +68,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox4);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
@@ -115,6 +119,27 @@
             this.ScoringTeam.HeaderText = "Scoring Team";
             this.ScoringTeam.Name = "ScoringTeam";
             this.ScoringTeam.ReadOnly = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.buttonDock);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(0, 141);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(94, 47);
+            this.groupBox3.TabIndex = 3;
+            this.groupBox3.TabStop = false;
+            // 
+            // buttonDock
+            // 
+            this.buttonDock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDock.Location = new System.Drawing.Point(3, 16);
+            this.buttonDock.Name = "buttonDock";
+            this.buttonDock.Size = new System.Drawing.Size(88, 28);
+            this.buttonDock.TabIndex = 0;
+            this.buttonDock.Text = "Undock";
+            this.buttonDock.UseVisualStyleBackColor = true;
+            this.buttonDock.Click += new System.EventHandler(this.buttonUndock_Click);
             // 
             // groupBox2
             // 
@@ -179,26 +204,26 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
-            // groupBox3
+            // groupBox4
             // 
-            this.groupBox3.Controls.Add(this.buttonDock);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(0, 141);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(94, 47);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
+            this.groupBox4.Controls.Add(this.buttonDeselct);
+            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox4.Location = new System.Drawing.Point(0, 188);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(94, 47);
+            this.groupBox4.TabIndex = 4;
+            this.groupBox4.TabStop = false;
             // 
-            // buttonDock
+            // buttonDeselct
             // 
-            this.buttonDock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonDock.Location = new System.Drawing.Point(3, 16);
-            this.buttonDock.Name = "buttonDock";
-            this.buttonDock.Size = new System.Drawing.Size(88, 28);
-            this.buttonDock.TabIndex = 0;
-            this.buttonDock.Text = "Undock";
-            this.buttonDock.UseVisualStyleBackColor = true;
-            this.buttonDock.Click += new System.EventHandler(this.buttonUndock_Click);
+            this.buttonDeselct.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDeselct.Location = new System.Drawing.Point(3, 16);
+            this.buttonDeselct.Name = "buttonDeselct";
+            this.buttonDeselct.Size = new System.Drawing.Size(88, 28);
+            this.buttonDeselct.TabIndex = 0;
+            this.buttonDeselct.Text = "Deselect";
+            this.buttonDeselct.UseVisualStyleBackColor = true;
+            this.buttonDeselct.Click += new System.EventHandler(this.buttonDeselct_Click);
             // 
             // TeamReport
             // 
@@ -212,10 +237,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox3.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBoxPrint.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -236,6 +262,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ScoringTeam;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Button buttonDock;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button buttonDeselct;
 
     }
 }

@@ -87,6 +87,7 @@
             0,
             0,
             0});
+            this.numericUpDownScore.Enter += new System.EventHandler(this.numericUpDownScore_Enter);
             // 
             // tableLayoutPanel2
             // 

@@ -46,6 +46,11 @@ namespace Classics_2014
             this.Close();
         }
 
+        private void numericUpDownScore_Enter(object sender, EventArgs e)
+        {
+            numericUpDownScore.Value = 0;
+        }
+
     }
 
     public partial class CustomMessageBox

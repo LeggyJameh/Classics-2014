@@ -18,7 +18,7 @@ namespace Classics_2014.Accuracy.Reports
         bool started = false;
         Action<LandingReport> Close;
         Bitmap display;
-
+        Form undockedForm;
         public LandingReport(AccuracyLanding landingToDisplay, String Name, Accuracy_Event ConnectedEvent, Action<LandingReport> Close)
         {
             InitializeComponent();
@@ -135,6 +135,34 @@ namespace Classics_2014.Accuracy.Reports
              {
                  display.Save(saveFileDialogue.FileName);
              }
+         }
+
+         private void buttonDeselect_Click(object sender, EventArgs e)
+         {
+             listBoxWindLog.SelectedItems.Clear();
+         }
+         private void buttonUndock_Click(object sender, EventArgs e)
+         {
+             if (undockedForm == null)
+             {
+                 undockedForm = new Form();
+                 undockedForm.Controls.Add(groupBoxReport);
+                 undockedForm.FormClosed += new FormClosedEventHandler(undockedForm_FormClosed);
+                 undockedForm.Show();
+                 buttonUndock.Text = "Dock";
+             }
+             else
+             {
+                 undockedForm.Close();
+                 undockedForm = null;
+                 buttonUndock.Text = "Undock";
+             }
+         }
+         void undockedForm_FormClosed(object sender, FormClosedEventArgs e)
+         {
+             splitContainer1.Panel1.Controls.Add(groupBoxReport);
+             undockedForm = null;
+             buttonUndock.Text = "Undock";
          }
     }
 }

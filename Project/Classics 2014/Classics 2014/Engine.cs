@@ -151,8 +151,9 @@ namespace Classics_2014
             DeSerializeGraph(reader);
             //Confirm 
         }
-        public void DeSerializeGraph(StreamReader reader)
+        public void DeSerializeGraph(StreamReader newReader)
         {
+            this.reader = newReader;
             Thread th = new Thread(new ThreadStart(DesiralizeGraphThreadProcedure));
             th.Start();
         }

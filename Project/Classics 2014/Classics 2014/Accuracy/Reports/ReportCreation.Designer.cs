@@ -96,6 +96,8 @@
             this.textBoxReportName.Size = new System.Drawing.Size(148, 20);
             this.textBoxReportName.TabIndex = 0;
             this.textBoxReportName.Text = "Insert Report Name";
+            this.textBoxReportName.Enter += new System.EventHandler(this.textBoxReportName_Enter);
+            this.textBoxReportName.Leave += new System.EventHandler(this.textBoxReportName_Leave);
             // 
             // groupBox2
             // 
@@ -132,11 +134,6 @@
             // 
             this.listBoxEventList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listBoxEventList.FormattingEnabled = true;
-            this.listBoxEventList.Items.AddRange(new object[] {
-            "Leaderboard",
-            "Team",
-            "Competitor",
-            "Landing"});
             this.listBoxEventList.Location = new System.Drawing.Point(3, 16);
             this.listBoxEventList.Name = "listBoxEventList";
             this.listBoxEventList.Size = new System.Drawing.Size(148, 477);

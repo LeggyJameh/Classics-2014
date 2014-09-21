@@ -39,8 +39,6 @@ namespace Classics_2014
         }
         public void UpdateWindGraph(TWind wind)
         {
-            if (seriesSelectedValue == "Recent")
-            {
                 if (2 < (chartWind.Series[0].Points.Count))
                 {
                     prevData = chartWind.Series[0].Points[chartWind.Series[0].Points.Count - 2];
@@ -60,7 +58,7 @@ namespace Classics_2014
                                 chartWind.Invoke((MethodInvoker)(() => chartWind.ChartAreas[0].AxisX.ScaleView.Position += 1));
                             }
                         }
-                    }
+                    
                 }
             }
         }

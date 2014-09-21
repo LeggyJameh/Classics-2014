@@ -36,6 +36,8 @@
             this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerLeaderboard = new System.Windows.Forms.SplitContainer();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.buttonDeselect = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
@@ -55,6 +57,7 @@
             this.splitContainerLeaderboard.Panel1.SuspendLayout();
             this.splitContainerLeaderboard.Panel2.SuspendLayout();
             this.splitContainerLeaderboard.SuspendLayout();
+            this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -81,6 +84,7 @@
             this.ColumnCompetitorTeam});
             this.dataGridViewLockedLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewLockedLeaderboard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewLockedLeaderboard.Enabled = false;
             this.dataGridViewLockedLeaderboard.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewLockedLeaderboard.Name = "dataGridViewLockedLeaderboard";
             this.dataGridViewLockedLeaderboard.ReadOnly = true;
@@ -134,6 +138,7 @@
             // 
             // splitContainerLeaderboard.Panel2
             // 
+            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox7);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox6);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox5);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox4);
@@ -144,6 +149,27 @@
             this.splitContainerLeaderboard.Size = new System.Drawing.Size(875, 524);
             this.splitContainerLeaderboard.SplitterDistance = 783;
             this.splitContainerLeaderboard.TabIndex = 2;
+            // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.buttonDeselect);
+            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox7.Location = new System.Drawing.Point(0, 464);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Size = new System.Drawing.Size(88, 71);
+            this.groupBox7.TabIndex = 7;
+            this.groupBox7.TabStop = false;
+            // 
+            // buttonDeselect
+            // 
+            this.buttonDeselect.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonDeselect.Location = new System.Drawing.Point(3, 16);
+            this.buttonDeselect.Name = "buttonDeselect";
+            this.buttonDeselect.Size = new System.Drawing.Size(82, 52);
+            this.buttonDeselect.TabIndex = 1;
+            this.buttonDeselect.Text = "Deselect Grid";
+            this.buttonDeselect.UseVisualStyleBackColor = true;
+            this.buttonDeselect.Click += new System.EventHandler(this.buttonDeselect_Click);
             // 
             // groupBox6
             // 
@@ -308,6 +334,7 @@
             this.splitContainerLeaderboard.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).EndInit();
             this.splitContainerLeaderboard.ResumeLayout(false);
+            this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
@@ -342,5 +369,7 @@
         private System.Windows.Forms.Button buttonSortAsTeam;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Button buttonDeselect;
     }
 }

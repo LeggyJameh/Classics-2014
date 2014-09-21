@@ -22,6 +22,7 @@ namespace Classics_2014.Accuracy.Reports
         List<MySqlReturnLanding> landings;
         Action<Leaderboard> Close;
         Bitmap display;
+        public bool CloseOnStart = false;
         public Leaderboard(int eventID, String reportName, SQL_Controller sqlController, Accuracy_Event connectedEvent,Action<Leaderboard> Close)
         {
             InitializeComponent();
@@ -157,6 +158,7 @@ namespace Classics_2014.Accuracy.Reports
         }
         private void TeamSort()
         {
+            complexSingleSort();
             int[,] uidInfo; //= new int[dataGridViewLockedLeaderboard.RowCount, 5]; // Uids, Position, Score, maxRound scored, Final Position
             List<string> teams = new List<string>();
             int CurrentMaxPosition;
@@ -186,7 +188,7 @@ namespace Classics_2014.Accuracy.Reports
                     uidInfo[i, 2] = 0;
                     uidInfo[i, 3] = GetTeamMaxIndex(r.Cells[4].ToString());
                     uidInfo[i, 4] = i;
-                    if (uidInfo[i, 3] < 5) { MessageBox.Show("Cannot order Leaderboard Prior to atleast 1 finished round, if required please insert and later remove manual landings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); Close(this); return; } // If we returned 4 it means that it cut the moment it hit 5, I.E When we started and so no round is ready
+                    if (uidInfo[i, 3] < 5) { MessageBox.Show("Cannot order Leaderboard Prior to atleast 1 finished round, if required please insert and later remove manual landings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); CloseOnStart = true; return; } // If we returned 4 it means that it cut the moment it hit 5, I.E When we started and so no round is ready
                     i++;
                 }
             }
@@ -236,7 +238,9 @@ namespace Classics_2014.Accuracy.Reports
                             {
                                 for (int z = 5; z <= CurrentRoundIndex; z++)//Checking all the items
                                 {
-                                    if ((TeamScoresAdd(teams[uidInfo[x,1]],z) < (TeamScoresAdd(teams[uidInfo[x-1,1]],z))))//If the value for the Swapper is lower
+                                    int TeamScoreA = TeamScoresAdd(teams[uidInfo[x, 1]], z), TeamScoreB = TeamScoresAdd(teams[uidInfo[x - 1, 1]], z);
+                                    Console.WriteLine(z);
+                                    if (TeamScoreA < TeamScoreB)//If the value for the Swapper is lower
                                     {
                                         for (int y = 0; y < 5; y++)
                                         {
@@ -247,7 +251,8 @@ namespace Classics_2014.Accuracy.Reports
                                         }
                                         x--;//X is decremented by one, to allow the round another chance to be moved up as otherwise it would only ever increase once
                                     }
-                                    else if ((Convert.ToInt16(dataGridViewLockedLeaderboard[z, uidInfo[x, 1]].Value)) != (Convert.ToInt16(dataGridViewLockedLeaderboard[z, uidInfo[x - 1, 1]].Value)))
+
+                                    else if ((TeamScoreA != TeamScoreB))
                                     {
                                         blocked = true;
                                         break;//Checker loses first of the cliff
@@ -393,7 +398,7 @@ namespace Classics_2014.Accuracy.Reports
                                             blocked = true;
                                             break;//Checker loses first of the cliff
                                         }
-                                        else if (z == CurrentRoundIndex - 1)// if we are at the last iteration at there has been no differentiation
+                                        else if (z == CurrentRoundIndex)// if we are at the last iteration at there has been no differentiation
                                         {
                                             uidInfo[x, 4] = uidInfo[x - 1, 4]; // this makes the Final Position variable identical, which is used later
                                             Tie = true;
@@ -539,6 +544,11 @@ namespace Classics_2014.Accuracy.Reports
             {
                 display.Save(saveFileDialogue.FileName);
             }
+        }
+
+        private void buttonDeselect_Click(object sender, EventArgs e)
+        {
+            dataGridViewLockedLeaderboard.ClearSelection();
         }
     }
 }

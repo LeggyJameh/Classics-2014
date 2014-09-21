@@ -25,7 +25,7 @@ namespace Classics_2014.Accuracy.Reports
             {
                 dataGridView1.Columns.Add("Round" + (dataGridView1.Columns.Count - 3), "Round " + (dataGridView1.Columns.Count - 3));
             }
-            int i,ii;
+            int i;
             DataGridViewRow newRow;
             foreach (DataGridViewRow r in competitors)
             {
@@ -101,6 +101,11 @@ namespace Classics_2014.Accuracy.Reports
            splitContainer1.Panel1.Controls.Add(dataGridView1);
             undockedForm = null;
             buttonDock.Text = "Undock";
+        }
+
+        private void buttonDeselct_Click(object sender, EventArgs e)
+        {
+            dataGridView1.ClearSelection();
         }
     }
 }

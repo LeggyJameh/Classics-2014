@@ -13,7 +13,6 @@ namespace Classics_2014.Accuracy.Reports
     {
         List<Leaderboard> LeaderboardReports = new List<Leaderboard>();
         List<TeamReport> TeamReports = new List<TeamReport>();
-        List<CompetitorReport> CompetitorReports = new List<CompetitorReport>();
         List<LandingReport> LandingReports = new List<LandingReport>();
         SQL_Controller sqlController;
         Accuracy_Event connectedEvent;
@@ -24,6 +23,11 @@ namespace Classics_2014.Accuracy.Reports
         public ReportCreation(SQL_Controller sqlController, Accuracy_Event connectedEvent, int eventId)
         {
             InitializeComponent();
+            listBoxEventList.Items.AddRange(new String[]{"Leaderboard", "Competitor", "Landing"});
+            if (connectedEvent.ruleSet.noOfCompetitorsPerTeam != 1)
+            {
+                listBoxEventList.Items.Add("Team");
+            }
             this.sqlController = sqlController;
             this.connectedEvent = connectedEvent;
             this.eventId = eventId;
@@ -49,10 +53,6 @@ namespace Classics_2014.Accuracy.Reports
             {
                 l.Update(UserID, Round, newCell);
             }
-            foreach (CompetitorReport c in CompetitorReports)
-            {
-                //ToDo Update Method
-            }
         }
         /// <summary>
         /// If a non Landing change has occured to the Event Leaderboard
@@ -69,10 +69,11 @@ namespace Classics_2014.Accuracy.Reports
             {
                 radioButtonExist.Checked = false;
                 listBoxEventList.Items.Clear();
-                listBoxEventList.Items.Add("Leaderboard");
-                listBoxEventList.Items.Add("Team");
-                listBoxEventList.Items.Add("Competitor");
-                listBoxEventList.Items.Add("Landing");
+                listBoxEventList.Items.AddRange(new String[] { "Leaderboard", "Competitor", "Landing" });
+                if (connectedEvent.ruleSet.noOfCompetitorsPerTeam != 1)
+                {
+                    listBoxEventList.Items.Add("Team");
+                }
                 textBoxReportName.Text = "Insert Report Name";
                 textBoxReportName.Enabled = true;
                 buttonCreateReport.Enabled = true;
@@ -100,10 +101,6 @@ namespace Classics_2014.Accuracy.Reports
                 {
                     listBoxEventList.Items.Add(t.NameOfReport);
                 }
-                foreach (CompetitorReport c in CompetitorReports)
-                {
-                    listBoxEventList.Items.Add(c.Name);
-                }
                 foreach (LandingReport l in LandingReports)
                 {
                     listBoxEventList.Items.Add(l.NameOfReport); //Make sure to use UserSelectedName
@@ -125,7 +122,7 @@ namespace Classics_2014.Accuracy.Reports
                 {
                         foreach (Leaderboard L in LeaderboardReports)
                         {
-                            if (listBoxEventList.SelectedItem.ToString() == L.Name)
+                            if (listBoxEventList.SelectedItem.ToString() == L.reportName) 
                             {
                                 ActiveReport.Visible = false;
                                 ActiveReport.Enabled = false;
@@ -137,7 +134,7 @@ namespace Classics_2014.Accuracy.Reports
                         }
                         foreach (TeamReport t in TeamReports)
                         {
-                            if (listBoxEventList.SelectedItem.ToString() == t.Name)
+                            if (listBoxEventList.SelectedItem.ToString() == t.NameOfReport)
                             {
                                 ActiveReport.Visible = false;
                                 ActiveReport.Enabled = false;
@@ -148,17 +145,6 @@ namespace Classics_2014.Accuracy.Reports
                                 dataGridViewLockedLeaderboard.ClearSelection();
                                 dataGridViewLockedLeaderboard.Enabled = true;
                                 dataGridViewLockedLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-                            }
-                        }
-                        foreach (CompetitorReport c in CompetitorReports)
-                        {
-                            if (listBoxEventList.SelectedItem.ToString() == c.Name)
-                            {
-                                ActiveReport.Visible = false;
-                                ActiveReport.Enabled = false;
-                                c.Visible = true;
-                                c.Enabled = true;
-                                ActiveReport = c;
                             }
                         }
                         foreach (LandingReport l in LandingReports)
@@ -248,7 +234,7 @@ namespace Classics_2014.Accuracy.Reports
             string teamName;
             if (listBoxEventList.SelectedItem != null)
             {
-                if (selectEntireTeam)
+                if ((selectEntireTeam)&&(dataGridViewLockedLeaderboard.SelectedRows.Count != 0))
                 {
                     teamName = dataGridViewLockedLeaderboard.SelectedRows[0].Cells["ColumnCompetitorTeam"].Value.ToString();
                     foreach (DataGridViewRow c in dataGridViewLockedLeaderboard.Rows)
@@ -276,6 +262,8 @@ namespace Classics_2014.Accuracy.Reports
                 {
                     case "Leaderboard":
                         Leaderboard newLeaderBoard = new Leaderboard(connectedEvent.EventID, reportName, sqlController, connectedEvent, new Action<Leaderboard>(RemoveReport));
+                        if (!newLeaderBoard.CloseOnStart)
+                          {
                         splitContainer1.Panel2.Controls.Add(newLeaderBoard);
                         newLeaderBoard.Dock = DockStyle.Fill;
                         LeaderboardReports.Add(newLeaderBoard);
@@ -285,6 +273,7 @@ namespace Classics_2014.Accuracy.Reports
                         newLeaderBoard.Enabled = true;
                         ActiveReport = newLeaderBoard;
                         radioButtonExist.Checked = true;
+                        }
                             break;
                     case "Team":
                             if (dataGridViewLockedLeaderboard.SelectedRows.Count > 0)
@@ -302,6 +291,19 @@ namespace Classics_2014.Accuracy.Reports
                             }
                         break;
                     case "Competitor":
+                        if (dataGridViewLockedLeaderboard.SelectedRows.Count > 0)
+                        {
+                            TeamReport report = new TeamReport(dataGridViewLockedLeaderboard.SelectedRows, dataGridViewLockedLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
+                            splitContainer1.Panel2.Controls.Add(report);
+                            report.Dock = DockStyle.Fill;
+                            TeamReports.Add(report);
+                            ActiveReport.Visible = false;
+                            ActiveReport.Enabled = false;
+                            report.Visible = true;
+                            report.Enabled = true;
+                            ActiveReport = report;
+                            radioButtonExist.Checked = true;
+                        }
                         break;
                     case "Landing":
                         if (!(dataGridViewLockedLeaderboard.SelectedCells.Count == 0) && !(dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 4)&& (dataGridViewLockedLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
@@ -342,11 +344,6 @@ namespace Classics_2014.Accuracy.Reports
             LeaderboardReports.Remove(l);
             radioButtonNew.Checked = true;
         }
-                public void RemoveReport(CompetitorReport l)
-        {
-            CompetitorReports.Remove(l);
-            radioButtonNew.Checked = true;
-        }
         private bool GetReportName(ref string strToInsert)
         {
              strToInsert = textBoxReportName.Text;
@@ -366,7 +363,7 @@ namespace Classics_2014.Accuracy.Reports
                 case "Team":
                     foreach (TeamReport t in TeamReports)
                     {
-                        if (t.Name == strToInsert + " Team Report")
+                        if (t.NameOfReport == strToInsert + " Team Report")
                         {
                             { MessageBox.Show("Please choose a Name not already in use"); return false; }
                         }
@@ -374,9 +371,9 @@ namespace Classics_2014.Accuracy.Reports
                     strToInsert += " Team Report";
                     break;
                 case "Competitor":
-                    foreach (CompetitorReport c in CompetitorReports)
+                    foreach (TeamReport t in TeamReports)
                     {
-                        if (c.Name == strToInsert + " Competitor Report")
+                        if (t.NameOfReport == strToInsert + " Competitor Report")
                         {
                             { MessageBox.Show("Please choose a Name not already in use"); return false; }
                         }
@@ -386,7 +383,7 @@ namespace Classics_2014.Accuracy.Reports
                 case "Landing":
                     foreach (LandingReport l in LandingReports)
                     {
-                        if (l.Name == strToInsert + " Landing Report")
+                        if (l.NameOfReport == strToInsert + " Landing Report")
                         {
                             { MessageBox.Show("Please choose a Name not already in use"); return false; }
                         }
@@ -395,6 +392,22 @@ namespace Classics_2014.Accuracy.Reports
                     break;
             }
             return true;
+        } 
+
+        private void textBoxReportName_Enter(object sender, EventArgs e)
+        {
+            if (textBoxReportName.Text == "Insert Report Name")
+            {
+                textBoxReportName.Text = "";
+            }
+        }
+
+        private void textBoxReportName_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxReportName.Text)) 
+            {
+                textBoxReportName.Text = "Insert Report Name";
+            }
         }
     }
 }

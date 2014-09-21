@@ -13,8 +13,8 @@ namespace Classics_2014.Accuracy
     {
         Accuracy_Event Connected_Event;
         TabControl tabControl;
-        List<TCompetitor> SelectedCompetitors = new List<TCompetitor>();
-        List<TCompetitor> ExistingCompetitors = new List<TCompetitor>();
+        List<Competitor> SelectedCompetitors = new List<Competitor>();
+        List<Competitor> ExistingCompetitors = new List<Competitor>();
         List<string> SelectedTeams = new List<string>();
         List<string> ExistingTeams = new List<string>();
         Rulesets.AccuracyRuleset Rules = new Rulesets.AccuracyRuleset();
@@ -88,7 +88,7 @@ namespace Classics_2014.Accuracy
             this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
         }
 
-        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, Rulesets.AccuracyRuleset LoadRules, string LoadEventName, DateTime LoadDate, List<TCompetitor> LoadSelectedCompetitors)
+        public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, Rulesets.AccuracyRuleset LoadRules, string LoadEventName, DateTime LoadDate, List<Competitor> LoadSelectedCompetitors)
         {
             InitializeComponent();
             tabControl = Main;
@@ -278,11 +278,11 @@ namespace Classics_2014.Accuracy
 
         private void RemovedTeamUpdateCompetitors(string Team)
         {
-            List<TCompetitor> NewCompetitorList = new List<TCompetitor>();
+            List<Competitor> NewCompetitorList = new List<Competitor>();
 
             for (int i = 0; i < ExistingCompetitors.Count; i++)
             {
-                TCompetitor CurrentCompetitor = ExistingCompetitors[i];
+                Competitor CurrentCompetitor = ExistingCompetitors[i];
                 if (CurrentCompetitor.team == Team)
                 {
                     CurrentCompetitor.team = "NO TEAM";
@@ -318,7 +318,7 @@ namespace Classics_2014.Accuracy
         {  
             for (int i = 0; i < SelectedCompetitors.Count; i++)
             {
-                TCompetitor CurrentCompetitor = SelectedCompetitors[i];
+                Competitor CurrentCompetitor = SelectedCompetitors[i];
                 if (CurrentCompetitor.team == Team)
                 {
                     SelectedCompetitors.Remove(CurrentCompetitor);
@@ -352,14 +352,14 @@ namespace Classics_2014.Accuracy
             }
         }
 
-        private List<TCompetitor> GetSelectedCompetitors(DataGridView Datagrid)
+        private List<Competitor> GetSelectedCompetitors(DataGridView Datagrid)
         {
-            List<TCompetitor> LocalSelectedCompetitors = new List<TCompetitor>();
+            List<Competitor> LocalSelectedCompetitors = new List<Competitor>();
             for (int i = 0; i < Datagrid.SelectedRows.Count; i++)
             {
                 if (Datagrid.SelectedRows[i].Cells[0].Value != null)
                 {
-                    TCompetitor CurrentCompetitor = new TCompetitor();
+                    Competitor CurrentCompetitor = new Competitor();
                     CurrentCompetitor.ID = Convert.ToInt16(Datagrid.SelectedRows[i].Cells[0].Value);
                     CurrentCompetitor.name = Datagrid.SelectedRows[i].Cells[1].Value.ToString();
                     CurrentCompetitor.team = Datagrid.SelectedRows[i].Cells[2].Value.ToString();
@@ -579,20 +579,18 @@ namespace Classics_2014.Accuracy
                         }
                         else
                         {
-                            List<List<TCompetitor>> SinglesTeam = new List<List<TCompetitor>>();
-                            SinglesTeam.Add(new List<TCompetitor>());
-
-                            List<string> SinglesTeamNames = new List<string>();
-                            SinglesTeamNames.Add("N/A");
-
-                            for (int i = 0; i < SelectedCompetitors.Count; i++)
+                            List<Team> SinglesTeam = new List<Team>();
+                            Team newTeam = new Team();
+                            newTeam.Name = "N/A";
+                            SinglesTeam.Add(newTeam);
+                            List<EventCompetitor> ConvertedCompetitors = GlobalFunctions.ConvertCompetitorsForEvent(SelectedCompetitors);
+                            for (int i = 0; i < ConvertedCompetitors.Count; i++)
                             {
-                                SinglesTeam[0].Add(SelectedCompetitors[i]);
+                                SinglesTeam[0].Competitors.Add(ConvertedCompetitors[i]);   
                             }
 
                             Connected_Event.Teams = SinglesTeam;
-                            Connected_Event.TeamNames = SinglesTeamNames;
-                            Connected_Event.SQL_Controller.SaveTeams(Connected_Event.EventID, Connected_Event.Teams, Connected_Event.TeamNames);
+                            Connected_Event.SQL_Controller.SaveTeams(Connected_Event.EventID, Connected_Event.Teams);
                             Connected_Event.ruleSet.Stage = 1;
                             Connected_Event.ProceedToEvent();
                         }
@@ -613,7 +611,7 @@ namespace Classics_2014.Accuracy
                 {
                     if (comboBoxCompetitorTeam.SelectedItem != null)
                     {
-                        TCompetitor CurrentCompetitor = new TCompetitor();
+                        Competitor CurrentCompetitor = new Competitor();
                         CurrentCompetitor.name = textBoxCompetitorName.Text;
                         CurrentCompetitor.nationality = textBoxCompetitorNationality.Text;
                         CurrentCompetitor.team = comboBoxCompetitorTeam.Text;
@@ -660,7 +658,7 @@ namespace Classics_2014.Accuracy
         {
             if (dataGridExistingCompetitors.SelectedCells != null)
             {
-                List<TCompetitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
+                List<Competitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
                 for (int i = 0; i < LocalSelectedCompetitors.Count; i++)
                 {
                     ExistingCompetitors.Remove(LocalSelectedCompetitors[i]);
@@ -674,7 +672,7 @@ namespace Classics_2014.Accuracy
         {
             if (dataGridSelectedCompetitors.SelectedCells != null)
             {
-                List<TCompetitor> LocalExistingCompetitors = GetSelectedCompetitors(dataGridSelectedCompetitors);
+                List<Competitor> LocalExistingCompetitors = GetSelectedCompetitors(dataGridSelectedCompetitors);
                 for (int i = 0; i < LocalExistingCompetitors.Count; i++)
                 {
                     SelectedCompetitors.Remove(LocalExistingCompetitors[i]);
@@ -696,7 +694,7 @@ namespace Classics_2014.Accuracy
         {
             try
             {
-                List<TCompetitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
+                List<Competitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
                 if (MessageBox.Show("Are you sure you wish to permanently remove the selected competitors?", "Remove Competitor?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     for (int i = 0; i < LocalSelectedCompetitors.Count; i++)

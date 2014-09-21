@@ -83,21 +83,21 @@ namespace Classics_2014.Accuracy
             if (Connected_Event.Teams.Count > 1) // If teams, not singles.
             {
                 TeamedEvent = true;
-                for (int i = 0; i < Connected_Event.Teams.Count; i++)
+                for (int Ti = 0; Ti < Connected_Event.Teams.Count; Ti++)
                 {
-                    for (int i2 = 0; i2 < Connected_Event.Teams[i].Count; i2++)
+                    for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
                     {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[i][i2].ID, Connected_Event.Teams[i][i2].name, Connected_Event.Teams[i][i2].team, Connected_Event.Teams[i][i2].nationality, Connected_Event.TeamNames[i]);
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].team, Connected_Event.Teams[Ti].Competitors[Ci].nationality, Connected_Event.Teams[Ti].Name);
                     }
                 }
             }
             else // If singles
             {
-                for (int i = 0; i < Connected_Event.Teams.Count; i++)
+                for (int Ti = 0; Ti < Connected_Event.Teams.Count; Ti++)
                 {
-                    for (int i2 = 0; i2 < Connected_Event.Teams[i].Count; i2++)
+                    for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
                     {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[i][i2].ID, Connected_Event.Teams[i][i2].name, Connected_Event.Teams[i][i2].team, Connected_Event.Teams[i][i2].nationality, "N/A");
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].team, Connected_Event.Teams[Ti].Competitors[Ci].nationality, "N/A");
                     }
                 }
             }
@@ -540,7 +540,7 @@ namespace Classics_2014.Accuracy
 
         private void buttonRenameCompetitor_Click(object sender, EventArgs e)
         {
-            string NewName = CustomMessageBox.Show();
+            string NewName = CustomMessageBox.Show(ModifyNameTypes.Competitor);
             int UID = Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value);
 
             if (Connected_Event.SQL_Controller.ModifyCompetitorName(UID, NewName))

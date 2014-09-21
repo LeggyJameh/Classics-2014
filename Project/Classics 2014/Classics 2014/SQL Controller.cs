@@ -159,7 +159,7 @@ namespace Classics_2014
         #region Queries
         #region Create
 
-        public bool CreateCompetitor(TCompetitor Competitor)
+        public bool CreateCompetitor(Competitor Competitor)
         {
             string query = "INSERT INTO competitors (Name, Team, Nationality) VALUES ('" + Competitor.name + "', '" + Competitor.team + "', '" + Competitor.nationality + "');";
             return ExecuteNonQuery(query);
@@ -193,17 +193,17 @@ namespace Classics_2014
             return false;
         }
 
-        public bool SaveTeams(int EventID, List<List<TCompetitor>> Teams, List<string> TeamNames)
+        public bool SaveTeams(int EventID, List<Team> Teams)
         {
             bool completed = false;
             string query;
             if (this.OpenConnection() == true)
             {
-                for (int i = 0; i < Teams.Count; i++)
+                for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
-                    for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                    for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                     {
-                        query = "INSERT INTO `event teams` (EventID, UID, Team) VALUES ('" + EventID + "', '" + Teams[i][i2].ID + "', '" + TeamNames[i] + "');";
+                        query = "INSERT INTO `event teams` (EventID, UID, Team) VALUES ('" + EventID + "', '" + Teams[Ti].Competitors[Ci].ID + "', '" + Teams[Ti].Name + "');";
                         MySqlCommand cmd = new MySqlCommand(query, connection);
                         try
                         {       
@@ -248,10 +248,10 @@ namespace Classics_2014
         }
 
         //Stage 3
-        public bool AssignWindDataToAccuracyLanding(byte[] LandingData, int LandingID)
+        public bool AssignWindDataToAccuracyLanding(byte[] LandingData, bool isRejumpable, int LandingID)
         {
             string hexLanding = ByteArrayToHex(LandingData);
-            string query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "' WHERE `LandingID`='" + LandingID + "';";
+            string query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "', `IsRejumpable`='" + isRejumpable + "' WHERE `LandingID`='" + LandingID + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -324,7 +324,7 @@ namespace Classics_2014
         #endregion
         #region Get
 
-        public List<TCompetitor> GetCompetitorsByTeam(string Team, List<TCompetitor> CurrentCompetitors, List<TCompetitor> Ignorelist)
+        public List<Competitor> GetCompetitorsByTeam(string Team, List<Competitor> CurrentCompetitors, List<Competitor> Ignorelist)
         {
             string query = "SELECT * FROM competitors WHERE Team='" + Team + "'";
             if (this.OpenConnection() == true)
@@ -335,7 +335,7 @@ namespace Classics_2014
                     MySqlDataReader DataReader = cmd.ExecuteReader();
                     while (DataReader.Read())
                     {
-                        TCompetitor CurrentCompetitor = new TCompetitor();
+                        Competitor CurrentCompetitor = new Competitor();
                         bool CanAdd = true;
                         for (int i = 0; i < DataReader.FieldCount; i++)
                         {
@@ -434,7 +434,7 @@ namespace Classics_2014
             return ID;
         }
 
-        public bool DoesCompetitorExist(TCompetitor Competitor)
+        public bool DoesCompetitorExist(Competitor Competitor)
         {
             string query = "SELECT UID FROM competitors WHERE NAME='" + Competitor.name + "' AND Team='" + Competitor.team + "' AND Nationality ='" + Competitor.nationality + "'";
             int ID = -2;
@@ -559,6 +559,7 @@ namespace Classics_2014
                             string HexedWindData = "";
                             int CurrentScore = 100;
                             bool CurrentIsModified = false;
+                            bool CurrentisRejumpable = false;
 
                             for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
                             {
@@ -567,8 +568,9 @@ namespace Classics_2014
                                     case 1: CurrentScore = DataReader.GetInt16(i2); break;
                                     case 2: HexedWindData = DataReader.GetString(i2); break;
                                     case 3: CurrentIsModified = DataReader.GetBoolean(i2); break;
+                                    case 4: CurrentisRejumpable = DataReader.GetBoolean(i2); break;
                                 }
-                                if (i2 == 3)
+                                if (i2 == 4)
                                 {
                                     Accuracy.MySqlReturnLanding CurrentLanding = new Accuracy.MySqlReturnLanding();
 
@@ -686,9 +688,9 @@ namespace Classics_2014
             return Events;
         }
 
-        public List<TCompetitor> GetCompetitorsForEvent(int EventID)
+        public List<Competitor> GetCompetitorsForEvent(int EventID)
         {
-            List<TCompetitor> Competitors = new List<TCompetitor>();
+            List<Competitor> Competitors = new List<Competitor>();
             List<int> CompetitorIDs = new List<int>();
             string query = "SELECT UID FROM `event teams` WHERE `EventID`='" + EventID + "';";
 
@@ -721,7 +723,7 @@ namespace Classics_2014
                         MySqlDataReader DataReader = cmd2.ExecuteReader();
                         while (DataReader.Read())
                         {
-                            TCompetitor CurrentCompetitor = new TCompetitor();
+                            Competitor CurrentCompetitor = new Competitor();
                             CurrentCompetitor.ID = CompetitorIDs[i];
                             for (int i2 = 0; i2 < DataReader.FieldCount; i2++)
                             {
@@ -746,12 +748,10 @@ namespace Classics_2014
             return Competitors;
         }
 
-        public MySqlTeamsReturn GetTeamsForEvent(int EventID)
+        public List<Team> GetTeamsForEvent(int EventID)
         {
             List<MySqlCompetitorTeamReturn> Competitors = new List<MySqlCompetitorTeamReturn>();
-            MySqlTeamsReturn Teams = new MySqlTeamsReturn();
-            Teams.Teams = new List<List<TCompetitor>>();
-            Teams.TeamNames = new List<string>();
+            List<Team> Teams = new List<Team>();
             string query = "SELECT * FROM `event teams` WHERE `EventID`='" + EventID + "';";
 
             if (this.OpenConnection() == true)
@@ -783,24 +783,25 @@ namespace Classics_2014
                     error = ex.Message;
                 }
 
-                for (int i = 0; i < Competitors.Count; i++) // For each competitor
+                for (int Ci = 0; Ci < Competitors.Count; Ci++) // For each competitor
                 {
-                    string CurrentTeam = Competitors[i].Team;
+                    string CurrentTeam = Competitors[Ci].Team;
                     bool IsUnique = true;
                     int TeamIndex = 0;
 
-                    for (int i2 = 0; i2 < Teams.TeamNames.Count; i2++) // Check if the team is unique
+                    for (int Ti = 0; Ti < Teams.Count; Ti++) // Check if the team is unique
                     {
-                        if (CurrentTeam == Teams.TeamNames[i2]) { IsUnique = false; TeamIndex = i2; }
+                        if (CurrentTeam == Teams[Ti].Name) { IsUnique = false; TeamIndex = Ti; }
                     }
 
                     if (IsUnique == true) // If it is, add the team, and create the list.
                     #region IsUnique
                     {
-                        Teams.TeamNames.Add(CurrentTeam);
-                        Teams.Teams.Add(new List<TCompetitor>());
+                        Team newTeam = new Team();
+                        newTeam.Name = CurrentTeam;
+                        Teams.Add(newTeam);
 
-                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[i].UID + "';";
+                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[Ci].UID + "';";
 
                         cmd = new MySqlCommand(query, connection);
                         try
@@ -808,7 +809,7 @@ namespace Classics_2014
                             MySqlDataReader DataReader = cmd.ExecuteReader();
                             while (DataReader.Read())
                             {
-                                TCompetitor CurrentCompetitor = new TCompetitor();
+                                EventCompetitor CurrentCompetitor = new EventCompetitor();
                                 CurrentCompetitor.ID = -1;
                                 CurrentCompetitor.name = "";
                                 CurrentCompetitor.nationality = "";
@@ -823,7 +824,7 @@ namespace Classics_2014
                                         case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
                                         case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
                                     }
-                                    if (i2 == 3) { Teams.Teams[Teams.Teams.Count - 1].Add(CurrentCompetitor); }
+                                    if (i2 == 3) { Teams[Teams.Count - 1].Competitors.Add(CurrentCompetitor); }
                                 }
                             }
                             DataReader.Close();
@@ -837,7 +838,7 @@ namespace Classics_2014
                     else
                     #region NotUnique
                     {
-                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[i].UID + "';";
+                        query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[Ci].UID + "';";
 
                         cmd = new MySqlCommand(query, connection);
                         try
@@ -845,7 +846,7 @@ namespace Classics_2014
                             MySqlDataReader DataReader = cmd.ExecuteReader();
                             while (DataReader.Read())
                             {
-                                TCompetitor CurrentCompetitor = new TCompetitor();
+                                EventCompetitor CurrentCompetitor = new EventCompetitor();
                                 CurrentCompetitor.ID = -1;
                                 CurrentCompetitor.name = "";
                                 CurrentCompetitor.nationality = "";
@@ -860,7 +861,7 @@ namespace Classics_2014
                                         case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
                                         case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
                                     }
-                                    if (i2 == 3) { Teams.Teams[TeamIndex].Add(CurrentCompetitor); }
+                                    if (i2 == 3) { Teams[TeamIndex].Competitors.Add(CurrentCompetitor); }
                                 }
                             }
                             DataReader.Close();

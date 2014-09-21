@@ -15,7 +15,7 @@ namespace Classics_2014
         List<TMySQLEventReturn> Events = new List<TMySQLEventReturn>();
         List<Rulesets.Ruleset> EventRules = new List<Rulesets.Ruleset>();
         TabControl TabControl;
-        List<TCompetitor> CurrentCompetitors;
+        List<Competitor> CurrentCompetitors;
 
         public EventLoader(Engine Engine, TabControl TabControl)
         {
@@ -166,9 +166,8 @@ namespace Classics_2014
 
                                 case 2: // Ready Event
                                     CurrentEvent = Engine.LoadExistingAccuracyEvent();
-                                    MySqlTeamsReturn Teams = Engine.SQL_Controller.GetTeamsForEvent(Events[EventIndex].ID);
-                                    CurrentEvent.TeamNames = Teams.TeamNames;
-                                    CurrentEvent.Teams = Teams.Teams;
+                                    List<Team> Teams = Engine.SQL_Controller.GetTeamsForEvent(Events[EventIndex].ID);
+                                    CurrentEvent.Teams = Teams;
                                     CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.EventID = Events[EventIndex].ID;
                                     CurrentEvent.ruleSet = (Rulesets.AccuracyRuleset)EventRules[EventIndex];

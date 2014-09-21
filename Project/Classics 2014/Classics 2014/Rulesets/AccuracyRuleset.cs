@@ -17,5 +17,7 @@ namespace Classics_2014.Rulesets
         public int windSecondsPrior;
         public int windSecondsAfter;
         public float finalApproachTime;
+        public int timeCheckAngleChangePrior;
+        public int timeCheckAngleChangeAfter;
     }
 }

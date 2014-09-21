@@ -12,9 +12,11 @@ namespace Classics_2014
     internal partial class ModifyName : Form
     {
         public string NewName;
+        public Label MainLabel;
         public ModifyName()
         {
             InitializeComponent();
+            MainLabel = label1;
             textBoxName.Focus();
             this.textBoxName.KeyDown += new KeyEventHandler(numericUpDownScore_KeyDown);
         }
@@ -37,11 +39,16 @@ namespace Classics_2014
 
     public partial class CustomMessageBox
     {
-        public static string Show()
+        public static string Show(ModifyNameTypes Type)
         {
-            // using construct ensures the resources are freed when form is closed
             using (var form = new ModifyName())
             {
+                switch (Type)
+                {
+                    case ModifyNameTypes.Competitor: form.MainLabel.Text = "What would you like to set the competitor's name to?"; break;
+                    case ModifyNameTypes.Scoring_Team: form.MainLabel.Text = "What would you like to set the scoring team's name to?"; break;
+                    case ModifyNameTypes.Team: form.MainLabel.Text = "What would you like to set the team's name to?"; break;
+                }
                 form.ShowDialog();
                 {
                     return form.NewName;

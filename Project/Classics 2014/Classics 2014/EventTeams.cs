@@ -11,52 +11,58 @@ namespace Classics_2014
 {
     partial class EventTeams : UserControl
     {
-        List<TCompetitor> Competitors;
+        List<EventCompetitor> Competitors;
         int EventID;
         int CompetitorsPerTeam;
-        List<List<TCompetitor>> Teams = new List<List<TCompetitor>>();
-        List<string> TeamNames = new List<string>();
-        int LastIntermixTeam = 0;
+        List<Team> Teams;
         int LastFakeCompetitor = 0;
         Event Connected_Event;
 
-        public EventTeams(Event ConnectedEvent, List<TCompetitor> PassCompetitors, int PassEventID, int PassCompetitorsPerTeam, List<string> SelectedTeams)
+        public EventTeams(Event Connected_Event, List<Competitor> Competitors, int EventID, int CompetitorsPerTeam, List<string> SelectedTeams)
         {
-            Connected_Event = ConnectedEvent;
-            CompetitorsPerTeam = PassCompetitorsPerTeam;
-            EventID = PassEventID;
-            Competitors = PassCompetitors;
-            TeamNames.Add("NO TEAM");
-            List<TCompetitor> NOTEAMTeam = new List<TCompetitor>();
-            Teams.Add(NOTEAMTeam);
+            this.Connected_Event = Connected_Event;
+            this.CompetitorsPerTeam = CompetitorsPerTeam;
+            this.EventID = EventID;
+            this.Competitors = GlobalFunctions.ConvertCompetitorsForEvent(Competitors);
 
+            Team newTeam = new Team();
+            newTeam.Name = "NO TEAM";
+            Teams.Add(newTeam);
             for (int i = 0; i < SelectedTeams.Count; i++)
             {
                 string Name = SelectedTeams[i];
                 if (Name != "NO TEAM")
                 {
-                    TeamNames.Add(Name);
-                    List<TCompetitor> CurrentTeam = new List<TCompetitor>();
+                    Team CurrentTeam = new Team();
+                    CurrentTeam.Name = Name;
                     Teams.Add(CurrentTeam);
                 }
             }
+
             InitializeComponent();
             numericUpDownCompetitorsPerTeam.Value = CompetitorsPerTeam;
             PlaceCompetitorsInDefaultTeams();
             RefreshAll();
         }
 
+        
+
         private void PlaceCompetitorsInDefaultTeams()
         {
             for (int i = 0; i < Teams.Count; i++)
             {
-                Teams[i].Clear();
+                Teams[i].Competitors.Clear();
             }
 
-            for (int i = 0; i < Competitors.Count; i++)
+            for (int Ci = 0; Ci < Competitors.Count; Ci++)
             {
-                int CurrentTeamIndex = TeamNames.IndexOf(Competitors[i].team);
-                Teams[CurrentTeamIndex].Add(Competitors[i]);
+                for (int Ti = 0; Ti < Teams.Count; Ti++)
+                {
+                    if (Competitors[Ci].team == Teams[Ti].Name)
+                    {
+                        Teams[Ti].Competitors.Add(Competitors[Ci]);
+                    }
+                }
             }
         }
 
@@ -67,29 +73,24 @@ namespace Classics_2014
             dataGridViewCompetitors.Rows.Clear();
             comboBoxTeamSelection.Items.Add("NO TEAM");
 
-            for (int i = 0; i < TeamNames.Count; i++)
+            for (int Ti = 0; Ti < Teams.Count; Ti++)
             {
-                if (TeamNames[i] != "NO TEAM")
+                if (Teams[Ti].Name != "NO TEAM")
                 {
-                    comboBoxTeamSelection.Items.Add(TeamNames[i]);
-                    listBoxTeams.Items.Add(TeamNames[i]);
+                    comboBoxTeamSelection.Items.Add(Teams[Ti].Name);
+                    listBoxTeams.Items.Add(Teams[Ti].Name);
                 }
-            }
-
-            for (int i = 0; i < Teams.Count; i++)
-            {
-                for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                 {
-                    if (TeamNames[i] != "NO TEAM")
+                    if (Teams[Ti].Name == "NO TEAM") // If no team, add blank Scoring Team Column.
                     {
-                        dataGridViewCompetitors.Rows.Add(Teams[i][i2].ID, Teams[i][i2].name, Teams[i][i2].team, Teams[i][i2].nationality, TeamNames[i]);
+                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].team, Teams[Ti].Competitors[Ci].nationality, "");
                     }
-                    else
+                    else // Otherwise, use scoring team xD
                     {
-                        dataGridViewCompetitors.Rows.Add(Teams[i][i2].ID, Teams[i][i2].name, Teams[i][i2].team, Teams[i][i2].nationality, "");
+                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].team, Teams[Ti].Competitors[Ci].nationality, Teams[Ti].Name);
                     }
                 }
-                
             }
 
             labelTeamsFilled.Text = GetTeamsFullOrEmpty() + " / " + (Teams.Count -1) ;
@@ -102,13 +103,13 @@ namespace Classics_2014
             labelWarning.Text = "";
             for (int i = 1; i < Teams.Count; i++) 
             {
-                if (Teams[i].Count == CompetitorsPerTeam || Teams[i].Count == 0)
+                if (Teams[i].Competitors.Count == CompetitorsPerTeam || Teams[i].Competitors.Count == 0)
                 {
                     TeamsFull++;
                 }
-                if (Teams[i].Count > CompetitorsPerTeam)
+                if (Teams[i].Competitors.Count > CompetitorsPerTeam)
                 {
-                    labelWarning.Text = "Team " + TeamNames[i] + " is overfilled, please redistribute competitors or change the number of competitors per team.";
+                    labelWarning.Text = "Team " + Teams[i].Name + " is overfilled, please redistribute competitors or change the number of competitors per team.";
                 }
             }
             return TeamsFull;
@@ -116,30 +117,28 @@ namespace Classics_2014
 
         private void buttonAddTeam_Click(object sender, EventArgs e)
         {
-            LastIntermixTeam++;
-            TeamNames.Add("Intermix " + LastIntermixTeam);
-            List<TCompetitor> NewTeam = new List<TCompetitor>();
-            Teams.Add(NewTeam);
+            Team NewTeam = new Team();
+            NewTeam.Name = CustomMessageBox.Show(ModifyNameTypes.Scoring_Team);
+            Teams.Add(NewTeam); // Add check if team exists, error if does.
             RefreshAll();
         }
 
         private void buttonRemoveTeam_Click(object sender, EventArgs e)
         {
-            if (LastIntermixTeam != 0)
+            if (listBoxTeams.SelectedItem != null) // Add error
             {
-                int TeamIndex = TeamNames.IndexOf("Intermix " + LastIntermixTeam);
-                for (int i = 0; i < Teams[TeamIndex].Count; i++)
+                string TeamName = listBoxTeams.SelectedItem.ToString();
+                for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
-                    TCompetitor CurrentCompetitor = Teams[TeamIndex][i];
-                    Teams[TeamIndex].Remove(CurrentCompetitor);
-                    Teams[0].Add(CurrentCompetitor);
-                    i--;
+                    if (Teams[Ti].Name == TeamName)
+                    {
+                        for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++) // Copy the team contents over to "NO TEAM"
+                        {
+                            Teams[0].Competitors.Add(Teams[Ti].Competitors[Ci]);
+                        }
+                        Teams.Remove(Teams[Ti]);
+                    }
                 }
-
-                TeamNames.RemoveAt(TeamIndex);
-                Teams.RemoveAt(TeamIndex);
-                
-                LastIntermixTeam--;
                 RefreshAll();
             }
         }
@@ -152,54 +151,38 @@ namespace Classics_2014
 
         private void comboBoxTeamSelection_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            int NewTeamIndex;
+            string DestinationTeam = e.ToString();
+            int DestinationTeamID = 0;
+
+            for (int i = 0; i < Teams.Count; i++)
+            {
+                if (Teams[i].Name == DestinationTeam)
+                {
+                    DestinationTeamID = i;
+                }
+            }
+
             if (dataGridViewCompetitors.SelectedRows != null && comboBoxTeamSelection.SelectedItem.ToString() != "")
             {
-                try
-                {
-                    NewTeamIndex = TeamNames.IndexOf(comboBoxTeamSelection.SelectedItem.ToString());
-                }
-                catch
-                {
-                    NewTeamIndex = 0;
-                }
-
+                List<int> UIDToMove = new List<int>();
                 for (int i = 0; i < dataGridViewCompetitors.SelectedRows.Count; i++)
                 {
-                    if (dataGridViewCompetitors.SelectedRows[i].Cells[0].Value != null && NewTeamIndex != 0)
+                    if (dataGridViewCompetitors.SelectedRows[i].Cells[0].Value != null)
                     {
-                        int TeamIndex;
-                        
-                        try
-                        {
-                            if (dataGridViewCompetitors.SelectedRows[i].Cells[4].Value.ToString() != "")
-                            {
-                                TeamIndex = TeamNames.IndexOf(dataGridViewCompetitors.SelectedRows[i].Cells[4].Value.ToString());
-                            }
-                            else
-                            {
-                                TeamIndex = 0;
-                            }
-                        }
-                        catch
-                        {
-                            TeamIndex = 0;
-                        }
+                        UIDToMove.Add(Convert.ToInt16(dataGridViewCompetitors.SelectedRows[i].Cells[0].Value));
+                    }
+                }
 
-                        TCompetitor CurrentCompetitor;
-                        CurrentCompetitor.ID = Convert.ToInt16(dataGridViewCompetitors.SelectedRows[i].Cells[0].Value);
-                        CurrentCompetitor.name = dataGridViewCompetitors.SelectedRows[i].Cells[1].Value.ToString();
-                        CurrentCompetitor.team = dataGridViewCompetitors.SelectedRows[i].Cells[2].Value.ToString();
-                        CurrentCompetitor.nationality = dataGridViewCompetitors.SelectedRows[i].Cells[3].Value.ToString();
-
-                        try
+                for (int Ti = 0; Ti < Teams.Count; Ti++)
+                {
+                    for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
+                    {
+                        for (int i = 0; i < UIDToMove.Count; i++)
                         {
-                            Teams[TeamIndex].Remove(CurrentCompetitor);
-                            Teams[NewTeamIndex].Add(CurrentCompetitor);
-                        }
-                        catch
-                        {
-                            return;
+                            if (Teams[Ti].Competitors[Ci].ID == UIDToMove[i])
+                            {
+                                Teams[DestinationTeamID].Competitors.Add(Teams[Ti].Competitors[Ci]);
+                            }
                         }
                     }
                 }
@@ -210,12 +193,13 @@ namespace Classics_2014
         private void AddFakeCompetitor(int TeamIndex)
         {
             LastFakeCompetitor++;
-            TCompetitor NewCompetitor = new TCompetitor();
+            EventCompetitor NewCompetitor = new EventCompetitor();
             NewCompetitor.ID = -1;
             NewCompetitor.name = "Fake Competitor " + LastFakeCompetitor;
             NewCompetitor.team = "N/A";
             NewCompetitor.nationality = "N/A";
-            Teams[TeamIndex].Add(NewCompetitor);
+            NewCompetitor.EID = "";
+            Teams[TeamIndex].Competitors.Add(NewCompetitor);
         }
 
         private void buttonAddFakeCompetitor_Click(object sender, EventArgs e)
@@ -229,13 +213,13 @@ namespace Classics_2014
             bool RemovedMember = false;
             if (LastFakeCompetitor > 0)
             {
-                for (int i = 0; i < Teams.Count; i++)
+                for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
-                    for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                    for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                     {
-                        if (Teams[i][i2].name == "Fake Competitor " + LastFakeCompetitor)
+                        if (Teams[Ti].Competitors[Ci].name == "Fake Competitor " + LastFakeCompetitor)
                         {
-                            Teams[i].RemoveAt(i2);
+                            Teams[Ti].Competitors.RemoveAt(Ci);
                             RemovedMember = true;
                         }
                     }
@@ -255,7 +239,7 @@ namespace Classics_2014
 
         private bool NoTeamCheck()
         {
-            if (Teams[0].Count > 0)
+            if (Teams[0].Competitors.Count > 0)
             {
                 if (MessageBox.Show("There are still competitors with no team, continue?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
@@ -277,7 +261,7 @@ namespace Classics_2014
             int Competitors = 0;
             for (int i = 1; i < Teams.Count; i++)
             {
-                for (int i2 = 0; i2 < Teams[i].Count; i2++)
+                for (int i2 = 0; i2 < Teams[i].Competitors.Count; i2++)
                 {
                     Competitors++;
                 }
@@ -295,7 +279,7 @@ namespace Classics_2014
                     {
                         Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
                         Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
-                        Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams, TeamNames);
+                        Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams);
                         Connected_Event.ProceedToEvent();
                         switch (Connected_Event.EventType)
                         {
@@ -324,14 +308,14 @@ namespace Classics_2014
 
         private void buttonFillTeams_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < Teams.Count; i++)
+            for (int Ti = 0; Ti < Teams.Count; Ti++)
             {
-                if (Teams[i].Count < CompetitorsPerTeam && Teams[i].Count != 0 && TeamNames[i] != "NO TEAM")
+                if (Teams[Ti].Competitors.Count < CompetitorsPerTeam && Teams[Ti].Competitors.Count != 0 && Teams[Ti].Name != "NO TEAM")
                 {
-                    int StartCount = Teams[i].Count;
+                    int StartCount = Teams[Ti].Competitors.Count;
                     for (int i2 = 0; i2 < CompetitorsPerTeam - StartCount; i2++)
                     {
-                        AddFakeCompetitor(i);
+                        AddFakeCompetitor(Ti);
                     }
                 }
             }
@@ -342,7 +326,7 @@ namespace Classics_2014
         {
             Connected_Event.TabControl.TabPages.Remove(Connected_Event.TabControl.SelectedTab);
             Connected_Event.TabControl.SelectedTab = Connected_Event.TabControl.TabPages[0];
-            Connected_Event.SaveEventTeamsIncludeNOTEAM(CompetitorsPerTeam, Teams, TeamNames);
+            Connected_Event.SaveEventTeams(CompetitorsPerTeam, Teams);
         }
 
     }

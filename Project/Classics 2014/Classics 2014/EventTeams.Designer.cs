@@ -46,11 +46,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.numericUpDownCompetitorsPerTeam = new System.Windows.Forms.NumericUpDown();
             this.dataGridViewCompetitors = new System.Windows.Forms.DataGridView();
-            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.comboBoxTeamSelection = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -59,6 +54,12 @@
             this.buttonRemoveFakeCompetitor = new System.Windows.Forms.Button();
             this.buttonFillTeams = new System.Windows.Forms.Button();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
@@ -161,7 +162,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(299, 50);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Intermix Teams Configuration";
+            this.label1.Text = "Scoring Teams Configuration";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // listBoxTeams
@@ -170,7 +171,6 @@
             this.listBoxTeams.FormattingEnabled = true;
             this.listBoxTeams.Location = new System.Drawing.Point(3, 53);
             this.listBoxTeams.Name = "listBoxTeams";
-            this.listBoxTeams.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.listBoxTeams.Size = new System.Drawing.Size(299, 490);
             this.listBoxTeams.TabIndex = 1;
             // 
@@ -295,6 +295,9 @@
             // 
             // dataGridViewCompetitors
             // 
+            this.dataGridViewCompetitors.AllowUserToAddRows = false;
+            this.dataGridViewCompetitors.AllowUserToDeleteRows = false;
+            this.dataGridViewCompetitors.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridViewCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
@@ -305,7 +308,8 @@
             this.ColumnName,
             this.ColumnTeam,
             this.ColumnNationality,
-            this.ColumnIntermixTeam});
+            this.ColumnIntermixTeam,
+            this.ColumnEID});
             this.dataGridViewCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCompetitors.Location = new System.Drawing.Point(314, 3);
             this.dataGridViewCompetitors.Name = "dataGridViewCompetitors";
@@ -314,37 +318,6 @@
             this.dataGridViewCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCompetitors.Size = new System.Drawing.Size(802, 776);
             this.dataGridViewCompetitors.TabIndex = 1;
-            // 
-            // ColumnID
-            // 
-            this.ColumnID.HeaderText = "UID";
-            this.ColumnID.Name = "ColumnID";
-            this.ColumnID.ReadOnly = true;
-            this.ColumnID.Visible = false;
-            // 
-            // ColumnName
-            // 
-            this.ColumnName.HeaderText = "Name";
-            this.ColumnName.Name = "ColumnName";
-            this.ColumnName.ReadOnly = true;
-            // 
-            // ColumnTeam
-            // 
-            this.ColumnTeam.HeaderText = "Competitor Team";
-            this.ColumnTeam.Name = "ColumnTeam";
-            this.ColumnTeam.ReadOnly = true;
-            // 
-            // ColumnNationality
-            // 
-            this.ColumnNationality.HeaderText = "Nationality";
-            this.ColumnNationality.Name = "ColumnNationality";
-            this.ColumnNationality.ReadOnly = true;
-            // 
-            // ColumnIntermixTeam
-            // 
-            this.ColumnIntermixTeam.HeaderText = "Intermix Team";
-            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
-            this.ColumnIntermixTeam.ReadOnly = true;
             // 
             // tableLayoutPanel4
             // 
@@ -449,6 +422,43 @@
             this.labelWarning.TabIndex = 3;
             this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // ColumnID
+            // 
+            this.ColumnID.HeaderText = "UID";
+            this.ColumnID.Name = "ColumnID";
+            this.ColumnID.ReadOnly = true;
+            this.ColumnID.Visible = false;
+            // 
+            // ColumnName
+            // 
+            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
+            // 
+            // ColumnTeam
+            // 
+            this.ColumnTeam.HeaderText = "Competitor Team";
+            this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
+            // 
+            // ColumnNationality
+            // 
+            this.ColumnNationality.HeaderText = "Nationality";
+            this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
+            // 
+            // ColumnIntermixTeam
+            // 
+            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
+            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
+            this.ColumnIntermixTeam.ReadOnly = true;
+            // 
+            // ColumnEID
+            // 
+            this.ColumnEID.HeaderText = "Competitor ID";
+            this.ColumnEID.Name = "ColumnEID";
+            this.ColumnEID.ReadOnly = true;
+            // 
             // EventTeams
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -485,11 +495,6 @@
         private System.Windows.Forms.Button buttonBack;
         private System.Windows.Forms.DataGridView dataGridViewCompetitors;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
         private System.Windows.Forms.ComboBox comboBoxTeamSelection;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label7;
@@ -502,5 +507,11 @@
         private System.Windows.Forms.Button buttonAddFakeCompetitor;
         private System.Windows.Forms.Button buttonRemoveFakeCompetitor;
         private System.Windows.Forms.Button buttonFillTeams;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEID;
     }
 }

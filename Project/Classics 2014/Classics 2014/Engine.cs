@@ -99,7 +99,7 @@ namespace Classics_2014
             return NewEvent.EventOptionsTab;
         }
 
-        public Classics_2014.Accuracy.EventAccuracyOptions LoadExistingAccuracyEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors)
+        public Classics_2014.Accuracy.EventAccuracyOptions LoadExistingAccuracyEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);

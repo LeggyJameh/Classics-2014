@@ -17,19 +17,13 @@ namespace Classics_2014
         public IO_Controller IO_Controller;
         public bool RequiresSerial { get; protected set; } // This is checked to see if Engine can Read the data without waiting (Psuedo Const)
         public EventType EventType { get; protected set; }
-        public List<List<TCompetitor>> Teams;
-        public List<string> TeamNames;
+        public List<Team> Teams;
         public int EventID;
         public TabControl TabControl;
         public bool IsActive;
         public readonly ConcurrentQueue<Data> Data_queueEvent = new ConcurrentQueue<Data>();
 
-        public virtual void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
-        {
-            throw new NotImplementedException();
-        }
-
-        public virtual void SaveEventTeamsIncludeNOTEAM(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
+        public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
             throw new NotImplementedException();
         }

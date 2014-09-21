@@ -5,8 +5,24 @@ using System.Text;
 
 namespace Classics_2014
 {
-    public static class GlobalFunctions
+    static class GlobalFunctions
     {
+        public static List<EventCompetitor> ConvertCompetitorsForEvent(List<Competitor> Competitors)
+        {
+            List<EventCompetitor> EventCompetitors = new List<EventCompetitor>();
+            for (int i = 0; i < Competitors.Count; i++)
+            {
+                EventCompetitor CurrentCompetitor = new EventCompetitor();
+                CurrentCompetitor.ID = Competitors[i].ID;
+                CurrentCompetitor.name = Competitors[i].name;
+                CurrentCompetitor.nationality = Competitors[i].nationality;
+                CurrentCompetitor.team = Competitors[i].team;
+                CurrentCompetitor.EID = "";
+                EventCompetitors.Add(CurrentCompetitor);
+            }
+            return EventCompetitors;
+        }
+
         public static Rulesets.AccuracyRuleset ConvertByteArrayToAccuracyRuleSet(byte[] ruleset)
         {
             Rulesets.AccuracyRuleset Rules = new Rulesets.AccuracyRuleset();
@@ -23,7 +39,8 @@ namespace Classics_2014
             Rules.windout = Convert.ToSingle(args[8]);
             Rules.windSecondsPrior = Convert.ToInt16(args[9]);
             Rules.windSecondsAfter = Convert.ToInt16(args[10]);
-
+            Rules.timeCheckAngleChangePrior = Convert.ToInt16(args[11]);
+            Rules.timeCheckAngleChangeAfter = Convert.ToInt16(args[12]);
             return Rules;
         }
 

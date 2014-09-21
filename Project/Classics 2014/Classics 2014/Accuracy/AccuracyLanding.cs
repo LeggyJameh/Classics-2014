@@ -19,5 +19,6 @@ namespace Classics_2014.Accuracy
         public String TimeOfLanding;
         public TWind LandingWind;
         public TWind[] WindDataAfter;
+        public bool isRejumpable;
     }
 }

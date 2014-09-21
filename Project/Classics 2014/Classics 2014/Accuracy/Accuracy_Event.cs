@@ -17,7 +17,7 @@ namespace Classics_2014.Accuracy
         public EventAccuracy EventTab;
         Engine engine;
         public Rulesets.AccuracyRuleset ruleSet;
-        public List<TCompetitor> Competitors;
+        public List<Competitor> Competitors;
         public List<string> ActiveTeams;
         TWind[] IncomingData;
         int NumberOfLandings = 0;
@@ -73,7 +73,7 @@ namespace Classics_2014.Accuracy
                             EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);
                             CompletedLandings.Add(currentLanding);
-                            SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding), currentLanding.ID);
+                            SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding),currentLanding.isRejumpable ,currentLanding.ID);
                         }
                         else
                         {
@@ -136,6 +136,8 @@ namespace Classics_2014.Accuracy
             stringToConvert += ruleSet.windout + "*";
             stringToConvert += ruleSet.windSecondsAfter + "*";
             stringToConvert += ruleSet.windSecondsPrior + "*";
+            stringToConvert += ruleSet.timeCheckAngleChangePrior + "*";
+            stringToConvert += ruleSet.timeCheckAngleChangeAfter + "*";
             return ascii.GetBytes(stringToConvert);
         }
 
@@ -157,7 +159,7 @@ namespace Classics_2014.Accuracy
             return deSerializedLanding;
         }
 
-        public void SaveEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<TCompetitor> SelectedCompetitors, List<string> SelectedTeams)
+        public void SaveEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors, List<string> SelectedTeams)
         {
             Competitors = SelectedCompetitors;
             ruleSet = Rules;
@@ -169,36 +171,10 @@ namespace Classics_2014.Accuracy
             EventOptionsTab = null;
         }
 
-        public override void SaveEventTeams(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
+        public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
             ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
-            
-            Teams = new List<List<TCompetitor>>();
-            TeamNames = new List<string>();
-
-            for (int i = 1; i < TeamInput.Count; i++)
-            {
-                Teams.Add(TeamInput[i]);
-                TeamNames.Add(TeamNamesInput[i]);
-            }
-            SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
-            SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);
-            EventTeamsTab = null;
-        }
-
-        public override void SaveEventTeamsIncludeNOTEAM(int CompetitorsPerTeam, List<List<TCompetitor>> TeamInput, List<string> TeamNamesInput)
-        {
-            ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
-
-            Teams = new List<List<TCompetitor>>();
-            TeamNames = new List<string>();
-
-            for (int i = 0; i < TeamInput.Count; i++)
-            {
-                Teams.Add(TeamInput[i]);
-                TeamNames.Add(TeamNamesInput[i]);
-            }
-            SQL_Controller.SaveTeams(EventID, Teams, TeamNames);
+            SQL_Controller.SaveTeams(EventID, Teams);
             SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);
             EventTeamsTab = null;
         }

@@ -65,7 +65,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 37);
             this.label1.TabIndex = 3;
-            this.label1.Text = "What would you like to set the competitor\'s name to?";
+            this.label1.Text = "NULL (Question not set)";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // tableLayoutPanel2

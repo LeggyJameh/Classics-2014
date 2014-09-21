@@ -8,6 +8,13 @@ namespace Classics_2014
         Accuracy,
     }
 
+    public enum ModifyNameTypes
+    {
+        Competitor,
+        Team,
+        Scoring_Team
+    }
+
     #region Accuracy Variations
 
     #endregion 
@@ -17,15 +24,6 @@ namespace Classics_2014
         public string time;
         public float speed;
         public ushort direction;
-    }
-
-    [Serializable]
-    public struct TCompetitor
-    {
-        public int ID;
-        public string name;
-        public string team;
-        public string nationality;
     }
 
     [Serializable]
@@ -42,11 +40,5 @@ namespace Classics_2014
     {
         public int UID;
         public string Team;
-    }
-
-    public struct MySqlTeamsReturn
-    {
-        public List<List<TCompetitor>> Teams;
-        public List<string> TeamNames;
     }
 }

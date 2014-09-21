@@ -25,8 +25,10 @@ namespace Classics_2014
             this.EventID = EventID;
             this.Competitors = GlobalFunctions.ConvertCompetitorsForEvent(Competitors);
 
+            Teams = new List<Team>();
             Team newTeam = new Team();
             newTeam.Name = "NO TEAM";
+            newTeam.Competitors = new List<EventCompetitor>();
             Teams.Add(newTeam);
             for (int i = 0; i < SelectedTeams.Count; i++)
             {
@@ -35,6 +37,7 @@ namespace Classics_2014
                 {
                     Team CurrentTeam = new Team();
                     CurrentTeam.Name = Name;
+                    CurrentTeam.Competitors = new List<EventCompetitor>();
                     Teams.Add(CurrentTeam);
                 }
             }
@@ -117,10 +120,27 @@ namespace Classics_2014
 
         private void buttonAddTeam_Click(object sender, EventArgs e)
         {
-            Team NewTeam = new Team();
-            NewTeam.Name = CustomMessageBox.Show(ModifyNameTypes.Scoring_Team);
-            Teams.Add(NewTeam); // Add check if team exists, error if does.
-            RefreshAll();
+            string NewTeamName = CustomMessageBox.Show(ModifyNameTypes.Scoring_Team);
+            bool isUnique = true;
+            for (int Ti = 0; Ti < Teams.Count; Ti++)
+            {
+                if (Teams[Ti].Name == NewTeamName)
+                {
+                    isUnique = false;
+                }
+            }
+            if (isUnique == true)
+            {
+                Team NewTeam = new Team();
+                NewTeam.Name = NewTeamName;
+                NewTeam.Competitors = new List<EventCompetitor>();
+                Teams.Add(NewTeam);
+                RefreshAll();
+            }
+            else
+            {
+                MessageBox.Show("A team with that name already exists!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void buttonRemoveTeam_Click(object sender, EventArgs e)
@@ -151,7 +171,7 @@ namespace Classics_2014
 
         private void comboBoxTeamSelection_SelectionChangeCommitted(object sender, EventArgs e)
         {
-            string DestinationTeam = e.ToString();
+            string DestinationTeam = comboBoxTeamSelection.SelectedItem.ToString();
             int DestinationTeamID = 0;
 
             for (int i = 0; i < Teams.Count; i++)
@@ -175,13 +195,23 @@ namespace Classics_2014
 
                 for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
-                    for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
+                    if (Teams[Ti].Name != DestinationTeam)
                     {
-                        for (int i = 0; i < UIDToMove.Count; i++)
+                        for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                         {
-                            if (Teams[Ti].Competitors[Ci].ID == UIDToMove[i])
+                            bool hasBeenMoved = false;
+                            for (int i = 0; i < UIDToMove.Count; i++)
                             {
-                                Teams[DestinationTeamID].Competitors.Add(Teams[Ti].Competitors[Ci]);
+                                if (hasBeenMoved == false)
+                                {
+                                    if (Teams[Ti].Competitors[Ci].ID == UIDToMove[i])
+                                    {
+                                        Teams[DestinationTeamID].Competitors.Add(Teams[Ti].Competitors[Ci]);
+                                        Teams[Ti].Competitors.RemoveAt(Ci);
+                                        hasBeenMoved = true;
+                                        Ci--;
+                                    }
+                                }
                             }
                         }
                     }

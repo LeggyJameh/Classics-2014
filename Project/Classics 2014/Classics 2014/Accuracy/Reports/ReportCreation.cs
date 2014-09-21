@@ -194,17 +194,17 @@ namespace Classics_2014.Accuracy.Reports
         }
         public void Populate()
         {
-            MySqlTeamsReturn competitors = sqlController.GetTeamsForEvent(connectedEvent.EventID);
+            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
             landings = sqlController.GetLandingsForAccuracyEvent(eventId, connectedEvent);
             DataGridViewCell cellToEdit;
-            for (int iT = 0; iT < competitors.Teams.Count; iT++)
+            for (int Ti = 0; Ti < Teams.Count; Ti++)
             {
-                for (int iC = 0; iC < competitors.Teams[iT].Count; iC++)
+                for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                 {
-                    dataGridViewLockedLeaderboard.Rows.Add(competitors.Teams[iT][iC].ID, competitors.Teams[iT][iC].name, competitors.Teams[iT][iC].nationality, competitors.TeamNames[iT]);
+                    dataGridViewLockedLeaderboard.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].nationality, Teams[Ti].Name);
                     foreach (MySqlReturnLanding l in landings)
                     {
-                        if (l.UID == competitors.Teams[iT][iC].ID)
+                        if (l.UID == Teams[Ti].Competitors[Ci].ID)
                         {
                             while (l.Round > dataGridViewLockedLeaderboard.ColumnCount - 4)
                             {

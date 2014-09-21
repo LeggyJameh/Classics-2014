@@ -928,6 +928,8 @@
             // 
             // dataGridExistingCompetitors
             // 
+            this.dataGridExistingCompetitors.AllowUserToAddRows = false;
+            this.dataGridExistingCompetitors.AllowUserToDeleteRows = false;
             this.dataGridExistingCompetitors.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
             this.dataGridExistingCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
@@ -977,6 +979,8 @@
             // 
             // dataGridSelectedCompetitors
             // 
+            this.dataGridSelectedCompetitors.AllowUserToAddRows = false;
+            this.dataGridSelectedCompetitors.AllowUserToDeleteRows = false;
             this.dataGridSelectedCompetitors.AllowUserToResizeRows = false;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
             this.dataGridSelectedCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;

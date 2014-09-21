@@ -173,6 +173,7 @@ namespace Classics_2014.Accuracy
 
         public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
+            this.Teams = Teams;
             ruleSet.noOfCompetitorsPerTeam = CompetitorsPerTeam;
             SQL_Controller.SaveTeams(EventID, Teams);
             SQL_Controller.ModifyAccuracyRules(ConvertRuleSetToByteArray(), EventID);

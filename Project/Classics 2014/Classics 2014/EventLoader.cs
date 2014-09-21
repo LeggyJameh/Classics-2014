@@ -141,6 +141,7 @@ namespace Classics_2014
                                     CurrentEvent.ruleSet = (Rulesets.AccuracyRuleset)EventRules[EventIndex];
                                     CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.EventID = Events[EventIndex].ID;
+                                    CurrentEvent.TabControl = TabControl;
 
                                     List<string> SelectedTeams = new List<string>();
 
@@ -159,9 +160,6 @@ namespace Classics_2014
 
                                     CurrentEvent.ActiveTeams = SelectedTeams;
                                     CurrentEvent.ProceedToEventTeams();
-                                    NewPage.Text = Events[EventIndex].Name + " Team Config";
-                                    TabControl.TabPages.Add(NewPage);
-                                    TabControl.SelectedTab = NewPage;
                                     break;
 
                                 case 2: // Ready Event

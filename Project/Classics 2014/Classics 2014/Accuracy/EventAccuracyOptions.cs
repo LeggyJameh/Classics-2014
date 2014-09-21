@@ -661,7 +661,13 @@ namespace Classics_2014.Accuracy
                 List<Competitor> LocalSelectedCompetitors = GetSelectedCompetitors(dataGridExistingCompetitors);
                 for (int i = 0; i < LocalSelectedCompetitors.Count; i++)
                 {
-                    ExistingCompetitors.Remove(LocalSelectedCompetitors[i]);
+                    for (int i2 = 0; i2 < ExistingCompetitors.Count; i2++)
+                    {
+                        if (ExistingCompetitors[i2].ID == LocalSelectedCompetitors[i].ID)
+                        {
+                            ExistingCompetitors.RemoveAt(i2);
+                        }
+                    }
                     SelectedCompetitors.Add(LocalSelectedCompetitors[i]);
                 }
                 UpdateCompetitorGridsFromData();
@@ -675,7 +681,13 @@ namespace Classics_2014.Accuracy
                 List<Competitor> LocalExistingCompetitors = GetSelectedCompetitors(dataGridSelectedCompetitors);
                 for (int i = 0; i < LocalExistingCompetitors.Count; i++)
                 {
-                    SelectedCompetitors.Remove(LocalExistingCompetitors[i]);
+                    for (int i2 = 0; i2 < SelectedCompetitors.Count; i2++)
+                    {
+                        if (SelectedCompetitors[i2].ID == LocalExistingCompetitors[i].ID)
+                        {
+                            SelectedCompetitors.RemoveAt(i2);
+                        }
+                    }
                     ExistingCompetitors.Add(LocalExistingCompetitors[i]);
                 }
                 UpdateCompetitorGridsFromData();

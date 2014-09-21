@@ -799,6 +799,7 @@ namespace Classics_2014
                     {
                         Team newTeam = new Team();
                         newTeam.Name = CurrentTeam;
+                        newTeam.Competitors = new List<EventCompetitor>();
                         Teams.Add(newTeam);
 
                         query = "SELECT * FROM `competitors` WHERE `UID`='" + Competitors[Ci].UID + "';";

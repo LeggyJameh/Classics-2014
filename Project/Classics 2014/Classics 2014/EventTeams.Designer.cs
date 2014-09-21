@@ -313,7 +313,6 @@
             this.dataGridViewCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridViewCompetitors.Location = new System.Drawing.Point(314, 3);
             this.dataGridViewCompetitors.Name = "dataGridViewCompetitors";
-            this.dataGridViewCompetitors.ReadOnly = true;
             this.dataGridViewCompetitors.RowHeadersVisible = false;
             this.dataGridViewCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewCompetitors.Size = new System.Drawing.Size(802, 776);
@@ -457,7 +456,6 @@
             // 
             this.ColumnEID.HeaderText = "Competitor ID";
             this.ColumnEID.Name = "ColumnEID";
-            this.ColumnEID.ReadOnly = true;
             // 
             // EventTeams
             // 

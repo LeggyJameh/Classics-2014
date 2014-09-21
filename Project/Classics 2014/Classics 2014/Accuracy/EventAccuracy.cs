@@ -210,10 +210,13 @@ namespace Classics_2014.Accuracy
                         if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
                         {
                             int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-                            dataGridViewScore.SelectedCells[0].Value = NewScore;
-                            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
-                            Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
-                            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore[0,dataGridViewScore.SelectedCells[0].RowIndex].Value), dataGridViewScore.SelectedCells[0].ColumnIndex-4, dataGridViewScore.SelectedCells[0]);
+                            if (NewScore != -1)
+                            {
+                                dataGridViewScore.SelectedCells[0].Value = NewScore;
+                                dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
+                                Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]), NewScore);
+                                CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore[0, dataGridViewScore.SelectedCells[0].RowIndex].Value), dataGridViewScore.SelectedCells[0].ColumnIndex - 4, dataGridViewScore.SelectedCells[0]);
+                            }
                         }
                     }
                 }
@@ -227,10 +230,13 @@ namespace Classics_2014.Accuracy
                         if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor != Color.LightBlue)
                         {
                             int NewScore = CustomMessageBox.Show(Connected_Event.ruleSet.maxScored);
-                            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = NewScore;
-                            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.Yellow;
-                            Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]), NewScore);
-                            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+                            if (NewScore != -1)
+                            {
+                                dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = NewScore;
+                                dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.Yellow;
+                                Connected_Event.SQL_Controller.ModifyLanding(Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]), NewScore);
+                                CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+                            }
                         }
                     }
                 }
@@ -303,11 +309,13 @@ namespace Classics_2014.Accuracy
             {
                 for (int i = 0; i < dataGrid.Rows.Count; i++)
                 {
-                    if ((dataGridViewScore.SelectedCells.Count > 0)&&(dataGrid.Rows[i].Visible == true) && (dataGrid[dataGrid.SelectedCells[0].ColumnIndex, dataGrid.SelectedCells[0].RowIndex + 1].Value == null))
+                    if (dataGridViewScore.Rows[i].Visible == true)
                     {
-                        dataGrid.ClearSelection();
-                        dataGrid[dataGrid.SelectedCells[0].ColumnIndex, dataGrid.SelectedCells[0].RowIndex + 1].Selected = true;
-                        return true;
+                        if (dataGridViewScore.Rows[i].Cells[4 + RoundNumber].Value == null)
+                        {
+                            dataGridViewScore.ClearSelection();
+                            dataGridViewScore.Rows[i].Cells[4 + RoundNumber].Selected = true;
+                        }
                     }
                 }
                 return false;
@@ -400,7 +408,7 @@ namespace Classics_2014.Accuracy
         {
             if ((dataGridViewScore.SelectedCells.Count > 0)&&(Admin))
             {
-                if (dataGridViewScore.SelectedCells[0].Value != null)
+                if (dataGridViewScore.SelectedCells[0].Value == null)
                 {
                     if (dataGridViewLandings.SelectedRows.Count != 0 && dataGridViewLandings.SelectedRows[0].Cells[1].Value != null)
                     {
@@ -453,6 +461,7 @@ namespace Classics_2014.Accuracy
                         }
                         CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedCells[0].OwningRow.Cells[0].Value), RoundNumber, dataGridViewScore.SelectedCells[0]);
                         CurrentLanding = null;
+
                         SelectFirstVisibleRowOnDataGrid(dataGridViewLandings); // Selects the first landing on the list for convenience.
                     }
                 }
@@ -552,16 +561,7 @@ namespace Classics_2014.Accuracy
 
         private void buttonRejump_Click(object sender, EventArgs e)
         {
-            //if (Admin)
-            //{
-            //    if (dataGridViewScore.SelectedCells[0].Style.BackColor == Color.LightBlue)
-            //    {
-
-            //    }
-            //}
-            //else
-            //{
-            //}
+            //TODO: Remove landing from both grids. Get ID from cell, remove from landing list as well as score table.
         }
 
         private void dataGridViewScore_SelectionChanged(object sender, EventArgs e)

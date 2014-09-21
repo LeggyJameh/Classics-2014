@@ -15,11 +15,10 @@ namespace Classics_2014
         public readonly ConcurrentQueue<Data> Data_queue = new ConcurrentQueue<Data>();
         public readonly AutoResetEvent _signal = new AutoResetEvent(false);
         public Boolean Cameras_Active;
-        public Boolean Serial_Input;
-        public IO_Controller()
+        public Boolean Serial_Input { get { return Serial_Controller.IsActive; } }
+        public IO_Controller(Action LostSerialInput)
         {
-             Serial_Controller = new Serial_Controller(ref Data_queue, ref _signal);
-             Serial_Input = true;
+             Serial_Controller = new Serial_Controller(ref Data_queue, ref _signal,LostSerialInput);
              Camera_Controller = new Camera_Controller();
              Network_Controller = new Network_Controller();
         }

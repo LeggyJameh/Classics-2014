@@ -165,7 +165,7 @@ namespace Classics_2014.Accuracy
 
         private void buttonMakeActive_Click(object sender, EventArgs e)
         {
-            if (Connected_Event.IsActive == false)
+            if ((Connected_Event.IsActive == false)&&((Connected_Event.makeActive())))
             {
                 Connected_Event.makeActive();
                 buttonMakeActive.BackColor = Color.Green;

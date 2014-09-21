@@ -21,7 +21,6 @@ namespace Classics_2014
         {
             InitializeComponent();
             numericUpDownScore.Maximum = MaxScore;
-            numericUpDownScore.Value = MaxScore;
             numericUpDownScore.Focus();
             this.numericUpDownScore.KeyDown += new KeyEventHandler(numericUpDownScore_KeyDown);
         }
@@ -44,11 +43,6 @@ namespace Classics_2014
         {
             NewScore = -1;
             this.Close();
-        }
-
-        private void numericUpDownScore_Enter(object sender, EventArgs e)
-        {
-            numericUpDownScore.Value = 0;
         }
 
     }

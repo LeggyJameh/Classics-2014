@@ -212,15 +212,16 @@ namespace Classics_2014.Accuracy
         }
 
 
-        public void makeActive()
+        public bool makeActive()
         {
             if (IO_Controller.Serial_Input)
             {
                 IsActive = true;
-                engine.MakeActive(this);
+                engine.MakeActive(this, new Action(makeInactive));
                 ListenThread.Start();
-                
+                return true;
             }
+            return false;
         }
 
         public void makeInactive()

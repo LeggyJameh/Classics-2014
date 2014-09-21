@@ -29,10 +29,10 @@ namespace Classics_2014
         public Boolean WindSpeed { get; private set; }
         ASCIIEncoding eEnconder = new ASCIIEncoding();
         EventType incomingType;
-
+        Action CloseSerialInputs;
         #endregion
 
-        public Serial_Controller(ref ConcurrentQueue<Data> _queue, ref AutoResetEvent _signal)
+        public Serial_Controller(ref ConcurrentQueue<Data> _queue, ref AutoResetEvent _signal, Action LostSerialInput)
         {
             this._queue = _queue;
             this._signal = _signal;

@@ -24,6 +24,7 @@ namespace Classics_2014
         private StreamReader reader;
         public windGraphingControllercs windGraph;
         TabPage createNewEventTab;
+        Action LostSerialConnection;
         #endregion 
 
         public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)
@@ -33,7 +34,7 @@ namespace Classics_2014
             this.windGraph = windGraph;
             windGraph.MainEngine = this;
             AquireMasterFile();
-            IO_Controller = new IO_Controller();
+            IO_Controller = new IO_Controller(new Action(LostSerialConnection));
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 
@@ -115,9 +116,9 @@ namespace Classics_2014
         }
 
 
-        public bool MakeActive(Event eventToBeActive)
+        public bool MakeActive(Event eventToBeActive, Action lostSerialConnection)
         {
-            //ToDo Add switch to check serial here MOFO's!
+            LostSerialConnection = lostSerialConnection;
             activeEvent = eventToBeActive;
             return true;
         }
@@ -213,6 +214,10 @@ namespace Classics_2014
                 e.EndThread();
             }
             SQL_Controller.StopDatabase();
+        }
+        private void CloseSerialInputs()
+        {
+            LostSerialConnection(); //ToDo Make work For Multiple Events;
         }
     }
 }

@@ -182,7 +182,7 @@ namespace Classics_2014.Accuracy
                 }
                 else
                 {
-
+                    MessageBox.Show("Event is active, please make event inactive and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

@@ -24,7 +24,7 @@ namespace Classics_2014
         private StreamReader reader;
         public windGraphingControllercs windGraph;
         TabPage createNewEventTab;
-        Action LostSerialConnection;
+        bool LostSerialConnection;
         #endregion 
 
         public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)
@@ -116,11 +116,19 @@ namespace Classics_2014
         }
 
 
-        public bool MakeActive(Event eventToBeActive, Action lostSerialConnection)
+        public bool MakeActive(Event eventToBeActive, ref bool lostSerial)
         {
-            LostSerialConnection = lostSerialConnection;
-            activeEvent = eventToBeActive;
-            return true;
+            if (IO_Controller.Serial_Input)
+            {
+                LostSerialConnection = lostSerial;
+                activeEvent = eventToBeActive;
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("No Serial input detected, check USB and COM ports .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
         }
         private void WriteToMasterFile(Data_Accuracy data)
         {
@@ -217,7 +225,7 @@ namespace Classics_2014
         }
         private void CloseSerialInputs()
         {
-            LostSerialConnection(); //ToDo Make work For Multiple Events;
+            LostSerialConnection = true; //ToDo Make work For Multiple Events;
         }
     }
 }

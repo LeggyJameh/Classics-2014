@@ -49,6 +49,11 @@ namespace Classics_2014.Accuracy
                 DataA = (Data as Data_Accuracy);
                 if (DataA != null)
                 {
+                   if (lostSerial)
+                {
+                    lostSerial = false;
+                    LostSerial(new TWind { time = DataA.Time, speed = Data.Speed, direction = DataA.Direction });
+                }
                     for (int i = IncomingData.Length; i > 0; i--)
                     {
                         if (i != IncomingData.Length && i >= 1)
@@ -56,7 +61,7 @@ namespace Classics_2014.Accuracy
                             IncomingData[i] = IncomingData[i - 1];
                         }
                     }
-                    IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; ;
+                    IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; 
                     if (DataA.IsLanding)
                     {
                         NumberOfLandings++;
@@ -214,10 +219,9 @@ namespace Classics_2014.Accuracy
 
         public bool makeActive()
         {
-            if (IO_Controller.Serial_Input)
+            if (engine.MakeActive(this, ref lostSerial))
             {
                 IsActive = true;
-                engine.MakeActive(this, new Action(makeInactive));
                 ListenThread.Start();
                 return true;
             }
@@ -233,8 +237,20 @@ namespace Classics_2014.Accuracy
             
             //TODO: Gracefully end event thread.
         }
-        private void LostSerial()
+        private void LostSerial(TWind incomingData)
         {
+            if (LandingInProgress.Count != 0)
+            {
+                foreach (AccuracyLanding aL in LandingInProgress)
+                {
+                        for (int i = aL.WindInputs; i < ruleSet.windSecondsAfter; i++)
+                        {
+                            aL.WindDataAfter[i] = new TWind { speed = 0, direction = 0, time = "0" };
+                            aL.WindInputs++;
+                        }
+                    }
+                
+            }
         }
         public override TWind ReturnWindLimits()
         {

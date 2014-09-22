@@ -71,6 +71,7 @@
             // 
             this.dataGridViewLockedLeaderboard.AllowUserToAddRows = false;
             this.dataGridViewLockedLeaderboard.AllowUserToDeleteRows = false;
+            this.dataGridViewLockedLeaderboard.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
             this.dataGridViewLockedLeaderboard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewLockedLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
@@ -88,6 +89,7 @@
             this.dataGridViewLockedLeaderboard.Location = new System.Drawing.Point(0, 0);
             this.dataGridViewLockedLeaderboard.Name = "dataGridViewLockedLeaderboard";
             this.dataGridViewLockedLeaderboard.ReadOnly = true;
+            this.dataGridViewLockedLeaderboard.RowHeadersVisible = false;
             this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(783, 524);
             this.dataGridViewLockedLeaderboard.TabIndex = 1;
             // 

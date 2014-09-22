@@ -110,6 +110,7 @@ namespace Classics_2014.Accuracy
 
             for (int i = 0; i < Landings.Count; i++)
             {
+                Connected_Event.CompletedLandings.Add(Landings[i]);
                 for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
                 {
                     while (Landings[i].Round + 4 >= dataGridViewScore.Columns.Count)
@@ -174,8 +175,15 @@ namespace Classics_2014.Accuracy
             }
             else
             {
-                Connected_Event.makeInactive();
-                buttonMakeActive.BackColor = Color.Red;
+                if (Connected_Event.LandingInProgress.Count != 0)
+                {
+                    Connected_Event.makeInactive();
+                    buttonMakeActive.BackColor = Color.Red;
+                }
+                else
+                {
+
+                }
             }
         }
 
@@ -540,7 +548,6 @@ namespace Classics_2014.Accuracy
                         int LandingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
                         dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
                         Connected_Event.SQL_Controller.RemoveAccuracyLanding(LandingID, Connected_Event.EventID);
-                        CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
                         SelectFirstVisibleRowOnDataGrid(dataGridViewLandings);
                     }
                 }
@@ -561,7 +568,55 @@ namespace Classics_2014.Accuracy
 
         private void buttonRejump_Click(object sender, EventArgs e)
         {
-            //TODO: Remove landing from both grids. Get ID from cell, remove from landing list as well as score table.
+            if (dataGridViewScore.SelectedCells.Count > 0)
+            {
+                if (dataGridViewScore.SelectedCells[0].ColumnIndex > 4)
+                {
+                    if (dataGridViewScore.SelectedCells[0].Value != null)
+                    {
+                        string BackColorOfSelectedCell = dataGridViewScore.SelectedCells[0].Style.BackColor.ToString();
+                        int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedCells[0]);
+                        switch (BackColorOfSelectedCell)
+                        {
+                            case "Color [LightBlue]": // Manual Landing
+                                dataGridViewScore.SelectedCells[0].Style = dataGridViewScore.DefaultCellStyle;
+                                dataGridViewScore.SelectedCells[0].Value = null;
+                                break;
+                            case "Color [Yellow]": // Modified Landing
+                                for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
+                                {
+                                    if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
+                                    {
+                                        dataGridViewLandings.Rows.Remove(dataGridViewLandings.Rows[i]);
+                                    }
+                                    dataGridViewScore.SelectedCells[0].Style = dataGridViewScore.DefaultCellStyle;
+                                    dataGridViewScore.SelectedCells[0].Value = null;
+                                }
+                                break;
+                            case "Color [LightGreen]": // Confirmed Landing
+                                for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
+                                {
+                                    if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
+                                    {
+                                        dataGridViewLandings.Rows.Remove(dataGridViewLandings.Rows[i]);
+                                    }
+                                    dataGridViewScore.SelectedCells[0].Style = dataGridViewScore.DefaultCellStyle;
+                                    dataGridViewScore.SelectedCells[0].Value = null;
+                                }
+                                break;
+                        }
+                        Connected_Event.SQL_Controller.RemoveAccuracyLanding(LandingID, Connected_Event.EventID);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a landing to rejump and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please select a landing to rejump and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void dataGridViewScore_SelectionChanged(object sender, EventArgs e)

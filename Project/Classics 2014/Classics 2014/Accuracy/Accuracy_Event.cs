@@ -24,6 +24,7 @@ namespace Classics_2014.Accuracy
         public List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
         public List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
         List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
+        Boolean lostSerial = false;
         #endregion
         public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
         {
@@ -68,7 +69,7 @@ namespace Classics_2014.Accuracy
                     for (int i = 0; i < LandingInProgress.Count; i++)
                     {
                         AccuracyLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length) //ToDo Made an edit that was messing with us
+                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length) 
                         {
                             EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);
@@ -77,12 +78,10 @@ namespace Classics_2014.Accuracy
                         }
                         else
                         {
-                            //ToDo Classify Landing, so we can do pro leet tricks
                             currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
                             currentLanding.WindInputs++;
                             LandingInProgress[i] = currentLanding;
                             
-                            //ToDo Check that wind hasnt gone over here
                         }
                     }
                     foreach (AccuracyLanding l in LandingsToRemove)
@@ -231,9 +230,12 @@ namespace Classics_2014.Accuracy
             IsActive = false;
             ListenThread.Abort();
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
+            
             //TODO: Gracefully end event thread.
         }
-
+        private void LostSerial()
+        {
+        }
         public override TWind ReturnWindLimits()
         {
             TWind CurrentWind = new TWind();

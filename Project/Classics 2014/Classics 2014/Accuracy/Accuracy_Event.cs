@@ -79,6 +79,11 @@ namespace Classics_2014.Accuracy
                             EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);
                             CompletedLandings.Add(currentLanding);
+                            if (Rejumpable(currentLanding))
+                            {
+                                currentLanding.isRejumpable = true;
+                                EventTab.FormatLandingToRejumpable(currentLanding);
+                            }
                             SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding),currentLanding.isRejumpable ,currentLanding.ID);
                         }
                         else
@@ -259,44 +264,49 @@ namespace Classics_2014.Accuracy
             CurrentWind.speed = ruleSet.windout;
             return CurrentWind;
         }
-        private bool Rejumpable(AccuracyLanding L)
+
+        public bool Rejumpable(AccuracyLanding L)
         {
-            #region SpeedChecks
-            for (int i = 0; i < L.windDataPrior.Length; i++)
+            if (L.windDataPrior != null)
             {
-                if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
-            }
-            for (int ii = 0; ii < L.WindDataAfter.Length; ii++)
-            {
-                 if (L.windDataPrior[ii].speed > ruleSet.windout) { return true; } //If wind out  
-            }
-            #endregion
-            #region DirectionChecks
-            List<int> AnglesBefore = new List<int>();
-            List<int> AnglesAfter = new List<int>();
-            for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
-            {
-                TWind currentWind = L.windDataPrior[i];
-                for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
+                #region SpeedChecks
+                for (int i = 0; i < L.windDataPrior.Length; i++)
                 {
-                    if (IsDirectionOut(currentWind, AnglesBefore[i2])) { return true; }
-                    else
-                    { AnglesBefore.Add(currentWind.direction); }
+                    if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
                 }
+                for (int ii = 0; ii < L.WindDataAfter.Length; ii++)
+                {
+                    if (L.windDataPrior[ii].speed > ruleSet.windout) { return true; } //If wind out  
+                }
+                #endregion
+                #region DirectionChecks
+                List<int> AnglesBefore = new List<int>();
+                List<int> AnglesAfter = new List<int>();
+                for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
+                {
+                    TWind currentWind = L.windDataPrior[i];
+                    for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
+                    {
+                        if (IsDirectionOut(currentWind, AnglesBefore[i2])) { return true; }
+                        else
+                        { AnglesBefore.Add(currentWind.direction); }
+                    }
+                }
+                for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
+                {
+                    TWind currentWind = L.WindDataAfter[i];
+                    for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
+                    {
+                        if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
+                        else
+                        { AnglesAfter.Add(currentWind.direction); }
+                    }
+                }
+                #endregion
             }
-            for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
-            {
-                TWind currentWind = L.WindDataAfter[i];
-                for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
-			    {
-			        if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
-                    else
-                    { AnglesAfter.Add(currentWind.direction); }
-			    }
-            }
-            #endregion
             return false;
         }
+
         private bool IsDirectionOut(TWind wind, int prevData)
         {
             int minimum, maximum, minOverFlow, maxOverFlow;

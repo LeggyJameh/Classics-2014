@@ -592,6 +592,7 @@ namespace Classics_2014
                                     
                                     CurrentLanding.score = CurrentScore;
                                     CurrentLanding.Modified = CurrentIsModified;
+                                    CurrentLanding.isRejumpable = CurrentisRejumpable;
                                     Landings[i] = CurrentLanding;
                                 }
                             }

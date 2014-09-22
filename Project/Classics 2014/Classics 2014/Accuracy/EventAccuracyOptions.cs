@@ -344,7 +344,7 @@ namespace Classics_2014.Accuracy
                 dataGridSelectedCompetitors.Rows.Add(SelectedCompetitors[i].ID.ToString(), SelectedCompetitors[i].name, SelectedCompetitors[i].team, SelectedCompetitors[i].nationality);
             }
             int ModOfCompetitors;
-            Math.DivRem(dataGridSelectedCompetitors.Rows.Count - 1, Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value), out ModOfCompetitors);
+            Math.DivRem(dataGridSelectedCompetitors.Rows.Count, Convert.ToInt16(numericUpDownCompetitorsPerTeam.Value), out ModOfCompetitors);
             if (ModOfCompetitors != 0)
             {
                 labelWarning.Visible = true;
@@ -410,8 +410,8 @@ namespace Classics_2014.Accuracy
                 Rules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(numericUpDownWindSpeedNeededForDirectionRule.Value);
                 Rules.Stage = Stage;
                 Rules.ScoresUsed = comboBoxScoresUsed.Text;
-                Rules.timeCheckAngleChangePrior = Convert.ToInt16(numericUpDownDirectionChangePrior);
-                Rules.timeCheckAngleChangeAfter = Convert.ToInt16(numericUpDownDirectionChangeAfter);
+                Rules.timeCheckAngleChangePrior = Convert.ToInt16(numericUpDownDirectionChangePrior.Value);
+                Rules.timeCheckAngleChangeAfter = Convert.ToInt16(numericUpDownDirectionChangeAfter.Value);
 
                 char[] CharactersToTrim = new char[1];
                 CharactersToTrim[0] = '°';
@@ -432,8 +432,6 @@ namespace Classics_2014.Accuracy
                 Rules.windSecondsPrior <= 300 &&
                 Rules.windSecondsAfter >= 1 &&
                 Rules.windSecondsAfter <= 300 &&
-                Rules.windSpeedNeededForDirectionChangeRujumps >= 0.1 &&
-                Rules.windSpeedNeededForDirectionChangeRujumps <= 100 &&
                 Rules.directionOut >= 10 &&
                 Rules.directionOut <= 180
                 )

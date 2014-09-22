@@ -138,6 +138,12 @@ namespace Classics_2014.Accuracy
                             dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightBlue;
                         }
 
+                        if (Landings[i].isRejumpable == true)
+                        {
+                            dataGridViewScore.Rows[i2].Cells[Column].Style.ForeColor = Color.Red;
+                            dataGridViewScore.Rows[i2].Cells[Column].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+                        }
+
                         Landings[i].dataGridCell = dataGridViewScore.Rows[i2].Cells[Column];
                     }
                 }
@@ -150,6 +156,12 @@ namespace Classics_2014.Accuracy
         {
             labelLatestScore.Invoke((MethodInvoker)(() => labelLatestScore.Text = Score));
             timer1.Start();
+        }
+
+        public void FormatLandingToRejumpable(AccuracyLanding L)
+        {
+            dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.ForeColor = Color.Red;
+            dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.Font = new Font(DefaultFont, FontStyle.Bold);
         }
 
         private void SelectFirstUncompletedCompetitorScore()
@@ -453,6 +465,12 @@ namespace Classics_2014.Accuracy
                         dataGridViewScore.SelectedCells[0].Value = CurrentLanding.score;
                         dataGridViewScore.SelectedCells[0].ReadOnly = true;
                         dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightGreen;
+
+                        if (Connected_Event.Rejumpable(CurrentLanding))
+                        {
+                            dataGridViewScore.SelectedCells[0].Style.ForeColor = Color.Red;
+                            dataGridViewScore.SelectedCells[0].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+                        }
 
                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.SelectedCells[0].OwningRow.Cells[0].Value), RoundNumber,
                         CurrentLanding.ID, Connected_Event.EventID);

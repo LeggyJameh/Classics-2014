@@ -59,7 +59,7 @@ namespace Classics_2014.Accuracy
                     if (DataA.IsLanding)
                     {
                         NumberOfLandings++;
-                        AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = IncomingData, WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
+                        AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior =(TWind[])IncomingData.Clone(), WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
                         newLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, newLanding.score);
                         LandingInProgress.Add(newLanding);
                         EventTab.MethodAddLanding(newLanding);

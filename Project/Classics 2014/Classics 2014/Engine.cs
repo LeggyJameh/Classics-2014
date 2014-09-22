@@ -34,7 +34,7 @@ namespace Classics_2014
             this.windGraph = windGraph;
             windGraph.MainEngine = this;
             AquireMasterFile();
-            IO_Controller = new IO_Controller(new Action(LostSerialConnection));
+            IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 

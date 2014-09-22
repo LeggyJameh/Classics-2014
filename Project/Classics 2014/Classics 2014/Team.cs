@@ -7,7 +7,7 @@ namespace Classics_2014
 {
     class Team
     {
-        public List<EventCompetitor> Competitors;
+        public List<EventCompetitor> Competitors = new List<EventCompetitor>();
         public string Name;
         public int TeamID;
     }

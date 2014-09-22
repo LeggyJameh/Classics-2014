@@ -86,6 +86,8 @@ namespace Classics_2014.Accuracy
             this.listBoxSelectedTeams.KeyDown += new KeyEventHandler(listBoxSelectedTeams_KeyDown);
             this.dataGridExistingCompetitors.KeyDown += new KeyEventHandler(dataGridExistingCompetitors_KeyDown);
             this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
+            numericUpDownDirectionChangePrior.Maximum = numericUpDownTimeBeforeLanding.Value;
+            numericUpDownDirectionChangeAfter.Maximum = numericUpDownTimeAfterLanding.Value;
         }
 
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, Rulesets.AccuracyRuleset LoadRules, string LoadEventName, DateTime LoadDate, List<Competitor> LoadSelectedCompetitors)
@@ -790,5 +792,24 @@ namespace Classics_2014.Accuracy
                     break;
             }
         }
+
+        private void numericUpDownTimeBeforeLanding_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownTimeBeforeLanding.Value < numericUpDownDirectionChangePrior.Value)
+            {
+                numericUpDownDirectionChangePrior.Value = numericUpDownTimeBeforeLanding.Value;
+            }
+            numericUpDownDirectionChangePrior.Maximum = numericUpDownTimeBeforeLanding.Value;
+        }
+
+        private void numericUpDownTimeAfterLanding_ValueChanged(object sender, EventArgs e)
+        {
+            if (numericUpDownTimeAfterLanding.Value < numericUpDownDirectionChangeAfter.Value)
+            {
+                numericUpDownDirectionChangeAfter.Value = numericUpDownTimeAfterLanding.Value;
+            }
+            numericUpDownDirectionChangeAfter.Maximum = numericUpDownTimeAfterLanding.Value;
+        }
+
     }
 }

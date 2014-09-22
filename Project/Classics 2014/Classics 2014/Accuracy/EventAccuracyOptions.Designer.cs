@@ -62,6 +62,10 @@
             this.dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.label21 = new System.Windows.Forms.Label();
             this.labelWarning = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.numericUpDownDirectionChangePrior = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownDirectionChangeAfter = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel9 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxCreateCompetitor = new System.Windows.Forms.GroupBox();
@@ -122,6 +126,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeAfterLanding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangePrior)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeAfter)).BeginInit();
             this.tableLayoutPanel4.SuspendLayout();
             this.tableLayoutPanel9.SuspendLayout();
             this.groupBoxCreateCompetitor.SuspendLayout();
@@ -182,30 +188,37 @@
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeBeforeLanding, 1, 11);
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeAfterLanding, 1, 12);
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownFinalApproachTime, 1, 13);
-            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 15);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 17);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 2);
-            this.tableLayoutPanel2.Controls.Add(this.labelWarning, 0, 14);
+            this.tableLayoutPanel2.Controls.Add(this.labelWarning, 0, 16);
+            this.tableLayoutPanel2.Controls.Add(this.label22, 0, 14);
+            this.tableLayoutPanel2.Controls.Add(this.label23, 0, 15);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownDirectionChangePrior, 1, 14);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownDirectionChangeAfter, 1, 15);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 16;
+            this.tableLayoutPanel2.RowCount = 18;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.554523F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 6.55507F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.78463F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794311F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.794794F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.799152F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.799152F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.06987F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.Size = new System.Drawing.Size(370, 802);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
@@ -214,7 +227,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 48);
+            this.label1.Size = new System.Drawing.Size(142, 42);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name of Event:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -222,9 +235,9 @@
             // label2
             // 
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 106);
+            this.label2.Location = new System.Drawing.Point(3, 94);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(142, 48);
+            this.label2.Size = new System.Drawing.Size(142, 42);
             this.label2.TabIndex = 1;
             this.label2.Text = "Rule Presets:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -232,9 +245,9 @@
             // label3
             // 
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label3.Location = new System.Drawing.Point(3, 154);
+            this.label3.Location = new System.Drawing.Point(3, 136);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(142, 48);
+            this.label3.Size = new System.Drawing.Size(142, 42);
             this.label3.TabIndex = 2;
             this.label3.Text = "Competitors Per Team:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -242,9 +255,9 @@
             // label4
             // 
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label4.Location = new System.Drawing.Point(3, 202);
+            this.label4.Location = new System.Drawing.Point(3, 178);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(142, 48);
+            this.label4.Size = new System.Drawing.Size(142, 42);
             this.label4.TabIndex = 3;
             this.label4.Text = "Scores used:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -252,9 +265,9 @@
             // label5
             // 
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label5.Location = new System.Drawing.Point(3, 250);
+            this.label5.Location = new System.Drawing.Point(3, 220);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 48);
+            this.label5.Size = new System.Drawing.Size(142, 42);
             this.label5.TabIndex = 4;
             this.label5.Text = "Max Safe Windspeed:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -262,9 +275,9 @@
             // label6
             // 
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label6.Location = new System.Drawing.Point(3, 298);
+            this.label6.Location = new System.Drawing.Point(3, 262);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(142, 48);
+            this.label6.Size = new System.Drawing.Size(142, 42);
             this.label6.TabIndex = 5;
             this.label6.Text = "Max Score Possible:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -273,9 +286,9 @@
             // 
             this.tableLayoutPanel2.SetColumnSpan(this.label7, 2);
             this.label7.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label7.Location = new System.Drawing.Point(3, 346);
+            this.label7.Location = new System.Drawing.Point(3, 304);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(364, 48);
+            this.label7.Size = new System.Drawing.Size(364, 42);
             this.label7.TabIndex = 6;
             this.label7.Text = "Landing Settings:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -283,9 +296,9 @@
             // label8
             // 
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label8.Location = new System.Drawing.Point(3, 394);
+            this.label8.Location = new System.Drawing.Point(3, 346);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(142, 48);
+            this.label8.Size = new System.Drawing.Size(142, 42);
             this.label8.TabIndex = 7;
             this.label8.Text = "Wind direction change in final approach to issue rejump:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -293,9 +306,9 @@
             // label9
             // 
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label9.Location = new System.Drawing.Point(3, 442);
+            this.label9.Location = new System.Drawing.Point(3, 388);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(142, 48);
+            this.label9.Size = new System.Drawing.Size(142, 42);
             this.label9.TabIndex = 8;
             this.label9.Text = "Windspeed limit for rejump:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -303,9 +316,9 @@
             // label10
             // 
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label10.Location = new System.Drawing.Point(3, 490);
+            this.label10.Location = new System.Drawing.Point(3, 430);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(142, 48);
+            this.label10.Size = new System.Drawing.Size(142, 42);
             this.label10.TabIndex = 9;
             this.label10.Text = "Seconds of wind data to be stored before landing:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -313,9 +326,9 @@
             // label11
             // 
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label11.Location = new System.Drawing.Point(3, 538);
+            this.label11.Location = new System.Drawing.Point(3, 472);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(142, 48);
+            this.label11.Size = new System.Drawing.Size(142, 42);
             this.label11.TabIndex = 10;
             this.label11.Text = "Seconds of wind data to be stored after landing:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -323,9 +336,9 @@
             // label12
             // 
             this.label12.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label12.Location = new System.Drawing.Point(3, 586);
+            this.label12.Location = new System.Drawing.Point(3, 514);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(142, 48);
+            this.label12.Size = new System.Drawing.Size(142, 42);
             this.label12.TabIndex = 11;
             this.label12.Text = "Final approach time period:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -336,7 +349,7 @@
             this.textBoxEventName.Location = new System.Drawing.Point(151, 13);
             this.textBoxEventName.Multiline = true;
             this.textBoxEventName.Name = "textBoxEventName";
-            this.textBoxEventName.Size = new System.Drawing.Size(216, 42);
+            this.textBoxEventName.Size = new System.Drawing.Size(216, 36);
             this.textBoxEventName.TabIndex = 12;
             // 
             // comboBoxRulePreset
@@ -354,7 +367,7 @@
             "National Intermediate ",
             "National Junior",
             "Paragliding"});
-            this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 119);
+            this.comboBoxRulePreset.Location = new System.Drawing.Point(151, 104);
             this.comboBoxRulePreset.Name = "comboBoxRulePreset";
             this.comboBoxRulePreset.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRulePreset.TabIndex = 13;
@@ -363,7 +376,7 @@
             // numericUpDownCompetitorsPerTeam
             // 
             this.numericUpDownCompetitorsPerTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownCompetitorsPerTeam.Location = new System.Drawing.Point(151, 168);
+            this.numericUpDownCompetitorsPerTeam.Location = new System.Drawing.Point(151, 147);
             this.numericUpDownCompetitorsPerTeam.Minimum = new decimal(new int[] {
             1,
             0,
@@ -386,7 +399,7 @@
             this.comboBoxScoresUsed.FormattingEnabled = true;
             this.comboBoxScoresUsed.Items.AddRange(new object[] {
             "Best 1"});
-            this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 215);
+            this.comboBoxScoresUsed.Location = new System.Drawing.Point(151, 188);
             this.comboBoxScoresUsed.Name = "comboBoxScoresUsed";
             this.comboBoxScoresUsed.Size = new System.Drawing.Size(216, 21);
             this.comboBoxScoresUsed.TabIndex = 15;
@@ -400,7 +413,7 @@
             0,
             0,
             65536});
-            this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 264);
+            this.numericUpDownCompMaxWind.Location = new System.Drawing.Point(151, 231);
             this.numericUpDownCompMaxWind.Minimum = new decimal(new int[] {
             45,
             0,
@@ -418,7 +431,7 @@
             // numericUpDownMaxScore
             // 
             this.numericUpDownMaxScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownMaxScore.Location = new System.Drawing.Point(151, 312);
+            this.numericUpDownMaxScore.Location = new System.Drawing.Point(151, 273);
             this.numericUpDownMaxScore.Maximum = new decimal(new int[] {
             2500,
             0,
@@ -463,7 +476,7 @@
             "160°",
             "170°",
             "180°"});
-            this.comboBoxRejumpAngleChange.Location = new System.Drawing.Point(151, 407);
+            this.comboBoxRejumpAngleChange.Location = new System.Drawing.Point(151, 356);
             this.comboBoxRejumpAngleChange.Name = "comboBoxRejumpAngleChange";
             this.comboBoxRejumpAngleChange.Size = new System.Drawing.Size(216, 21);
             this.comboBoxRejumpAngleChange.TabIndex = 18;
@@ -477,7 +490,7 @@
             0,
             0,
             65536});
-            this.numericUpDownRejumpWindspeed.Location = new System.Drawing.Point(151, 456);
+            this.numericUpDownRejumpWindspeed.Location = new System.Drawing.Point(151, 399);
             this.numericUpDownRejumpWindspeed.Minimum = new decimal(new int[] {
             1,
             0,
@@ -496,7 +509,7 @@
             // numericUpDownTimeBeforeLanding
             // 
             this.numericUpDownTimeBeforeLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownTimeBeforeLanding.Location = new System.Drawing.Point(151, 504);
+            this.numericUpDownTimeBeforeLanding.Location = new System.Drawing.Point(151, 441);
             this.numericUpDownTimeBeforeLanding.Maximum = new decimal(new int[] {
             300,
             0,
@@ -515,11 +528,12 @@
             0,
             0,
             0});
+            this.numericUpDownTimeBeforeLanding.ValueChanged += new System.EventHandler(this.numericUpDownTimeBeforeLanding_ValueChanged);
             // 
             // numericUpDownTimeAfterLanding
             // 
             this.numericUpDownTimeAfterLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownTimeAfterLanding.Location = new System.Drawing.Point(151, 552);
+            this.numericUpDownTimeAfterLanding.Location = new System.Drawing.Point(151, 483);
             this.numericUpDownTimeAfterLanding.Maximum = new decimal(new int[] {
             300,
             0,
@@ -538,6 +552,7 @@
             0,
             0,
             0});
+            this.numericUpDownTimeAfterLanding.ValueChanged += new System.EventHandler(this.numericUpDownTimeAfterLanding_ValueChanged);
             // 
             // numericUpDownFinalApproachTime
             // 
@@ -548,7 +563,7 @@
             0,
             0,
             65536});
-            this.numericUpDownFinalApproachTime.Location = new System.Drawing.Point(151, 600);
+            this.numericUpDownFinalApproachTime.Location = new System.Drawing.Point(151, 525);
             this.numericUpDownFinalApproachTime.Minimum = new decimal(new int[] {
             1,
             0,
@@ -574,11 +589,11 @@
             this.tableLayoutPanel3.Controls.Add(this.buttonStart, 1, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonCancel, 2, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 746);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 741);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(364, 53);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(364, 58);
             this.tableLayoutPanel3.TabIndex = 23;
             // 
             // buttonSave
@@ -586,7 +601,7 @@
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSave.Location = new System.Drawing.Point(3, 3);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(103, 47);
+            this.buttonSave.Size = new System.Drawing.Size(103, 52);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save Event";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -597,7 +612,7 @@
             this.buttonStart.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonStart.Location = new System.Drawing.Point(112, 3);
             this.buttonStart.Name = "buttonStart";
-            this.buttonStart.Size = new System.Drawing.Size(139, 47);
+            this.buttonStart.Size = new System.Drawing.Size(139, 52);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Next";
             this.buttonStart.UseVisualStyleBackColor = true;
@@ -608,7 +623,7 @@
             this.buttonCancel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCancel.Location = new System.Drawing.Point(257, 3);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(104, 47);
+            this.buttonCancel.Size = new System.Drawing.Size(104, 52);
             this.buttonCancel.TabIndex = 2;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -617,7 +632,7 @@
             // dateTimePicker
             // 
             this.dateTimePicker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.dateTimePicker.Location = new System.Drawing.Point(151, 72);
+            this.dateTimePicker.Location = new System.Drawing.Point(151, 63);
             this.dateTimePicker.Name = "dateTimePicker";
             this.dateTimePicker.Size = new System.Drawing.Size(216, 20);
             this.dateTimePicker.TabIndex = 24;
@@ -626,9 +641,9 @@
             // label21
             // 
             this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(3, 58);
+            this.label21.Location = new System.Drawing.Point(3, 52);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(142, 48);
+            this.label21.Size = new System.Drawing.Size(142, 42);
             this.label21.TabIndex = 25;
             this.label21.Text = "Date:";
             this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -639,14 +654,52 @@
             this.tableLayoutPanel2.SetColumnSpan(this.labelWarning, 2);
             this.labelWarning.Dock = System.Windows.Forms.DockStyle.Fill;
             this.labelWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelWarning.Location = new System.Drawing.Point(3, 634);
+            this.labelWarning.Location = new System.Drawing.Point(3, 642);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(364, 109);
+            this.labelWarning.Size = new System.Drawing.Size(364, 96);
             this.labelWarning.TabIndex = 26;
             this.labelWarning.Text = "Warning: Competitors selected is not a multiple of competitors per team, fake com" +
                 "petitors will have to be made.";
             this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.labelWarning.Visible = false;
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label22.Location = new System.Drawing.Point(3, 556);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(142, 43);
+            this.label22.TabIndex = 27;
+            this.label22.Text = "Time Checked For Direction Change Before Landing";
+            this.label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label23.Location = new System.Drawing.Point(3, 599);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(142, 43);
+            this.label23.TabIndex = 28;
+            this.label23.Text = "Time Checked For Direction Change after Landing";
+            this.label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // numericUpDownDirectionChangePrior
+            // 
+            this.numericUpDownDirectionChangePrior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownDirectionChangePrior.Location = new System.Drawing.Point(151, 567);
+            this.numericUpDownDirectionChangePrior.Name = "numericUpDownDirectionChangePrior";
+            this.numericUpDownDirectionChangePrior.Size = new System.Drawing.Size(216, 20);
+            this.numericUpDownDirectionChangePrior.TabIndex = 29;
+            // 
+            // numericUpDownDirectionChangeAfter
+            // 
+            this.numericUpDownDirectionChangeAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownDirectionChangeAfter.Location = new System.Drawing.Point(151, 610);
+            this.numericUpDownDirectionChangeAfter.Name = "numericUpDownDirectionChangeAfter";
+            this.numericUpDownDirectionChangeAfter.Size = new System.Drawing.Size(216, 20);
+            this.numericUpDownDirectionChangeAfter.TabIndex = 30;
             // 
             // tableLayoutPanel4
             // 
@@ -1283,6 +1336,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeAfterLanding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangePrior)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeAfter)).EndInit();
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel9.ResumeLayout(false);
             this.groupBoxCreateCompetitor.ResumeLayout(false);
@@ -1390,5 +1445,9 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.Label labelWarning;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown numericUpDownDirectionChangePrior;
+        private System.Windows.Forms.NumericUpDown numericUpDownDirectionChangeAfter;
     }
 }

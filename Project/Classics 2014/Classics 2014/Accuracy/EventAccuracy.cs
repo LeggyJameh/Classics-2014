@@ -110,6 +110,7 @@ namespace Classics_2014.Accuracy
 
             for (int i = 0; i < Landings.Count; i++)
             {
+                Connected_Event.CompletedLandings.Add(Landings[i]);
                 for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
                 {
                     while (Landings[i].Round + 4 >= dataGridViewScore.Columns.Count)
@@ -174,8 +175,15 @@ namespace Classics_2014.Accuracy
             }
             else
             {
-                Connected_Event.makeInactive();
-                buttonMakeActive.BackColor = Color.Red;
+                if (Connected_Event.LandingInProgress.Count != 0)
+                {
+                    Connected_Event.makeInactive();
+                    buttonMakeActive.BackColor = Color.Red;
+                }
+                else
+                {
+
+                }
             }
         }
 

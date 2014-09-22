@@ -32,7 +32,7 @@ namespace Classics_2014
             Rules.ScoresUsed = Convert.ToString(args[1]);
             Rules.compHalt = Convert.ToSingle(args[2]);
             Rules.directionOut = Convert.ToUInt16(args[3]);
-            Rules.finalApproachTime = Convert.ToSingle(args[4]);
+            Rules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(args[4]);
             Rules.maxScored = Convert.ToInt16(args[5]);
             Rules.noOfCompetitorsPerTeam = Convert.ToInt16(args[6]);
             Rules.preset = args[7];

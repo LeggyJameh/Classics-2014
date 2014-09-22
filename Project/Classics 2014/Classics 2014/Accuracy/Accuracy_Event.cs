@@ -129,7 +129,7 @@ namespace Classics_2014.Accuracy
             stringToConvert += ruleSet.ScoresUsed + "*";
             stringToConvert += ruleSet.compHalt+ "*";
             stringToConvert += ruleSet.directionOut + "*";
-            stringToConvert += ruleSet.finalApproachTime + "*";
+            stringToConvert += ruleSet.windSpeedNeededForDirectionChangeRujumps + "*";
             stringToConvert += ruleSet.maxScored + "*";
             stringToConvert += ruleSet.noOfCompetitorsPerTeam + "*";
             stringToConvert += ruleSet.preset + "*";
@@ -240,6 +240,74 @@ namespace Classics_2014.Accuracy
             CurrentWind.direction = Convert.ToUInt16(ruleSet.directionOut);
             CurrentWind.speed = ruleSet.windout;
             return CurrentWind;
+        }
+        private bool Rejumpable(AccuracyLanding L)
+        {
+            #region SpeedChecks
+            for (int i = 0; i < L.windDataPrior.Length; i++)
+            {
+                if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
+            }
+            for (int ii = 0; ii < L.WindDataAfter.Length; ii++)
+            {
+                 if (L.windDataPrior[ii].speed > ruleSet.windout) { return true; } //If wind out  
+            }
+            #endregion
+            #region DirectionChecks
+            List<int> AnglesBefore = new List<int>();
+            List<int> AnglesAfter = new List<int>();
+            for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
+            {
+                TWind currentWind = L.windDataPrior[i];
+                for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
+                {
+                    if (IsDirectionOut(currentWind, AnglesBefore[i2])) { return true; }
+                    else
+                    { AnglesBefore.Add(currentWind.direction); }
+                }
+            }
+            for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
+            {
+                TWind currentWind = L.WindDataAfter[i];
+                for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
+			    {
+			        if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
+                    else
+                    { AnglesAfter.Add(currentWind.direction); }
+			    }
+            }
+            #endregion
+            return false;
+        }
+        private bool IsDirectionOut(TWind wind, int prevData)
+        {
+            int minimum, maximum, minOverFlow, maxOverFlow;
+            if (prevData < ruleSet.directionOut )
+            {
+                minimum = 0;
+                minOverFlow = (360 - (ruleSet.directionOut - prevData));
+                if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
+            }
+            else
+            {
+                minimum = prevData - ruleSet.directionOut;
+                if (wind.direction < minimum) { return true; }
+                else if (prevData > wind.direction) { return false; }
+            }
+            //Max checks
+            if ((prevData + ruleSet.directionOut) > 360)
+            {
+                maximum = 360;
+                maxOverFlow = 0 + ((prevData + ruleSet.directionOut) - 360);
+                if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
+            }
+            else
+            {
+                maximum = prevData + ruleSet.directionOut;
+                if (wind.direction > maximum) { return true; }
+            }
+
+            return false;
         }
     }
 }

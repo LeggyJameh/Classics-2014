@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,7 +54,7 @@
             this.numericUpDownRejumpWindspeed = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownTimeBeforeLanding = new System.Windows.Forms.NumericUpDown();
             this.numericUpDownTimeAfterLanding = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDownFinalApproachTime = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownWindSpeedNeededForDirectionRule = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonStart = new System.Windows.Forms.Button();
@@ -124,7 +124,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRejumpWindspeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeBeforeLanding)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeAfterLanding)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindSpeedNeededForDirectionRule)).BeginInit();
             this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangePrior)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeAfter)).BeginInit();
@@ -187,7 +187,7 @@
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownRejumpWindspeed, 1, 10);
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeBeforeLanding, 1, 11);
             this.tableLayoutPanel2.Controls.Add(this.numericUpDownTimeAfterLanding, 1, 12);
-            this.tableLayoutPanel2.Controls.Add(this.numericUpDownFinalApproachTime, 1, 13);
+            this.tableLayoutPanel2.Controls.Add(this.numericUpDownWindSpeedNeededForDirectionRule, 1, 13);
             this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 17);
             this.tableLayoutPanel2.Controls.Add(this.dateTimePicker, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.label21, 0, 2);
@@ -340,7 +340,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(142, 42);
             this.label12.TabIndex = 11;
-            this.label12.Text = "Final approach time period:";
+            this.label12.Text = "Wind Speed Needed To Check Direction Change";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBoxEventName
@@ -554,25 +554,20 @@
             0});
             this.numericUpDownTimeAfterLanding.ValueChanged += new System.EventHandler(this.numericUpDownTimeAfterLanding_ValueChanged);
             // 
-            // numericUpDownFinalApproachTime
+            // numericUpDownWindSpeedNeededForDirectionRule
             // 
-            this.numericUpDownFinalApproachTime.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.numericUpDownFinalApproachTime.DecimalPlaces = 1;
-            this.numericUpDownFinalApproachTime.Increment = new decimal(new int[] {
+            this.numericUpDownWindSpeedNeededForDirectionRule.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.numericUpDownWindSpeedNeededForDirectionRule.DecimalPlaces = 1;
+            this.numericUpDownWindSpeedNeededForDirectionRule.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.numericUpDownFinalApproachTime.Location = new System.Drawing.Point(151, 525);
-            this.numericUpDownFinalApproachTime.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.numericUpDownFinalApproachTime.Name = "numericUpDownFinalApproachTime";
-            this.numericUpDownFinalApproachTime.Size = new System.Drawing.Size(216, 20);
-            this.numericUpDownFinalApproachTime.TabIndex = 22;
-            this.numericUpDownFinalApproachTime.Value = new decimal(new int[] {
+            this.numericUpDownWindSpeedNeededForDirectionRule.Location = new System.Drawing.Point(151, 525);
+            this.numericUpDownWindSpeedNeededForDirectionRule.Name = "numericUpDownWindSpeedNeededForDirectionRule";
+            this.numericUpDownWindSpeedNeededForDirectionRule.Size = new System.Drawing.Size(216, 20);
+            this.numericUpDownWindSpeedNeededForDirectionRule.TabIndex = 22;
+            this.numericUpDownWindSpeedNeededForDirectionRule.Value = new decimal(new int[] {
             5,
             0,
             0,
@@ -984,8 +979,8 @@
             this.dataGridExistingCompetitors.AllowUserToAddRows = false;
             this.dataGridExistingCompetitors.AllowUserToDeleteRows = false;
             this.dataGridExistingCompetitors.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridExistingCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.LightGray;
+            this.dataGridExistingCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridExistingCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridExistingCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridExistingCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1035,8 +1030,8 @@
             this.dataGridSelectedCompetitors.AllowUserToAddRows = false;
             this.dataGridSelectedCompetitors.AllowUserToDeleteRows = false;
             this.dataGridSelectedCompetitors.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightGray;
-            this.dataGridSelectedCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightGray;
+            this.dataGridSelectedCompetitors.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridSelectedCompetitors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridSelectedCompetitors.BackgroundColor = System.Drawing.SystemColors.Control;
             this.dataGridSelectedCompetitors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1334,7 +1329,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownRejumpWindspeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeBeforeLanding)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeAfterLanding)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownFinalApproachTime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindSpeedNeededForDirectionRule)).EndInit();
             this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangePrior)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownDirectionChangeAfter)).EndInit();
@@ -1387,7 +1382,7 @@
         private System.Windows.Forms.NumericUpDown numericUpDownRejumpWindspeed;
         private System.Windows.Forms.NumericUpDown numericUpDownTimeBeforeLanding;
         private System.Windows.Forms.NumericUpDown numericUpDownTimeAfterLanding;
-        private System.Windows.Forms.NumericUpDown numericUpDownFinalApproachTime;
+        private System.Windows.Forms.NumericUpDown numericUpDownWindSpeedNeededForDirectionRule;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonStart;

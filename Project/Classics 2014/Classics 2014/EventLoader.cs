@@ -87,7 +87,7 @@ namespace Classics_2014
                     dataGridViewEventProperties.Rows.Add("Rejump Speed Over", CurrentRules.windout);
                     dataGridViewEventProperties.Rows.Add("Wind data before", CurrentRules.windSecondsPrior);
                     dataGridViewEventProperties.Rows.Add("Wind data After", CurrentRules.windSecondsAfter);
-                    dataGridViewEventProperties.Rows.Add("Final approach period", CurrentRules.finalApproachTime);
+                    dataGridViewEventProperties.Rows.Add("Wind Speed for Direction Rejumps", CurrentRules.windSpeedNeededForDirectionChangeRujumps);
                     break;
             }
 

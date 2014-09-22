@@ -88,6 +88,7 @@ namespace Classics_2014.Accuracy
             this.dataGridSelectedCompetitors.KeyDown +=new KeyEventHandler(dataGridSelectedCompetitors_KeyDown);
             numericUpDownDirectionChangePrior.Maximum = numericUpDownTimeBeforeLanding.Value;
             numericUpDownDirectionChangeAfter.Maximum = numericUpDownTimeAfterLanding.Value;
+            numericUpDownWindSpeedNeededForDirectionRule.Maximum = numericUpDownRejumpWindspeed.Value;
         }
 
         public EventAccuracyOptions(TabControl Main, Accuracy_Event aEvent, Rulesets.AccuracyRuleset LoadRules, string LoadEventName, DateTime LoadDate, List<Competitor> LoadSelectedCompetitors)
@@ -216,7 +217,7 @@ namespace Classics_2014.Accuracy
             numericUpDownRejumpWindspeed.Value = Convert.ToDecimal(LoadedRules.windout);
             numericUpDownTimeBeforeLanding.Value = LoadedRules.windSecondsPrior;
             numericUpDownTimeAfterLanding.Value = LoadedRules.windSecondsAfter;
-            numericUpDownFinalApproachTime.Value = Convert.ToDecimal(LoadedRules.finalApproachTime);
+            numericUpDownWindSpeedNeededForDirectionRule.Value = Convert.ToDecimal(LoadedRules.windSpeedNeededForDirectionChangeRujumps);
             comboBoxScoresUsed.SelectedItem = comboBoxScoresUsed.SelectedValue = LoadedRules.ScoresUsed;
 
             comboBoxRejumpAngleChange.SelectedItem = comboBoxRejumpAngleChange.Items[(LoadedRules.directionOut / 10) - 1];
@@ -406,9 +407,11 @@ namespace Classics_2014.Accuracy
                 Rules.windout = Convert.ToInt16(numericUpDownRejumpWindspeed.Value);
                 Rules.windSecondsPrior = Convert.ToInt16(numericUpDownTimeBeforeLanding.Value);
                 Rules.windSecondsAfter = Convert.ToInt16(numericUpDownTimeAfterLanding.Value);
-                Rules.finalApproachTime = Convert.ToSingle(numericUpDownFinalApproachTime.Value);
+                Rules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(numericUpDownWindSpeedNeededForDirectionRule.Value);
                 Rules.Stage = Stage;
                 Rules.ScoresUsed = comboBoxScoresUsed.Text;
+                Rules.timeCheckAngleChangePrior = Convert.ToInt16(numericUpDownDirectionChangePrior);
+                Rules.timeCheckAngleChangeAfter = Convert.ToInt16(numericUpDownDirectionChangeAfter);
 
                 char[] CharactersToTrim = new char[1];
                 CharactersToTrim[0] = '°';
@@ -429,8 +432,8 @@ namespace Classics_2014.Accuracy
                 Rules.windSecondsPrior <= 300 &&
                 Rules.windSecondsAfter >= 1 &&
                 Rules.windSecondsAfter <= 300 &&
-                Rules.finalApproachTime >= 0.1 &&
-                Rules.finalApproachTime <= 100 &&
+                Rules.windSpeedNeededForDirectionChangeRujumps >= 0.1 &&
+                Rules.windSpeedNeededForDirectionChangeRujumps <= 100 &&
                 Rules.directionOut >= 10 &&
                 Rules.directionOut <= 180
                 )
@@ -733,6 +736,7 @@ namespace Classics_2014.Accuracy
         private void numericUpDownRejumpWindspeed_ValueChanged(object sender, EventArgs e)
         {
             numericUpDownCompMaxWind.Minimum = (numericUpDownRejumpWindspeed.Value + Convert.ToDecimal(0.5));
+            numericUpDownWindSpeedNeededForDirectionRule.Maximum = numericUpDownRejumpWindspeed.Value;
         }
 
         #endregion

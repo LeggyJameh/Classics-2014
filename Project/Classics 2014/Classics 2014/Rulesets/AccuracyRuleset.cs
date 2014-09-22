@@ -16,7 +16,7 @@ namespace Classics_2014.Rulesets
         public int maxScored;
         public int windSecondsPrior;
         public int windSecondsAfter;
-        public float finalApproachTime;
+        public float windSpeedNeededForDirectionChangeRujumps;
         public int timeCheckAngleChangePrior;
         public int timeCheckAngleChangeAfter;
     }

@@ -224,8 +224,12 @@ namespace Classics_2014.Accuracy
 
         public bool makeActive()
         {
+            if (ListenThread.IsAlive) { ListenThread.Abort(); }
             if (engine.MakeActive(this, ref lostSerial))
             {
+
+                ListenThread = new Thread(new ThreadStart(ListenProcedure));
+                ListenThread.Name = "Test";
                 IsActive = true;
                 ListenThread.Start();
                 return true;
@@ -237,8 +241,7 @@ namespace Classics_2014.Accuracy
         {
             engine.activeEvent = null;
             IsActive = false;
-            ListenThread.Abort();
-            ListenThread = new Thread(new ThreadStart(ListenProcedure));
+            ListenThread = null;
             
             //TODO: Gracefully end event thread.
         }
@@ -267,39 +270,51 @@ namespace Classics_2014.Accuracy
 
         public bool Rejumpable(AccuracyLanding L)
         {
-            if (L.windDataPrior != null)
+            if (L.windDataPrior != null && L.WindDataAfter != null)
             {
                 #region SpeedChecks
-                for (int i = 0; i < L.windDataPrior.Length; i++)
+                for (int i = 0; i < L.windDataPrior.Length-1; i++)
                 {
                     if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
                 }
-                for (int ii = 0; ii < L.WindDataAfter.Length; ii++)
+                for (int ii = 0; ii < L.WindDataAfter.Length-1; ii++)
                 {
-                    if (L.windDataPrior[ii].speed > ruleSet.windout) { return true; } //If wind out  
+                    if (L.WindDataAfter[ii].speed > ruleSet.windout) { return true; } //If wind out  
                 }
                 #endregion
                 #region DirectionChecks
-                List<int> AnglesBefore = new List<int>();
-                List<int> AnglesAfter = new List<int>();
+                bool WindSpeedOverInTimePeriod = false;
                 for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
                 {
-                    TWind currentWind = L.windDataPrior[i];
-                    for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
-                    {
-                        if (IsDirectionOut(currentWind, AnglesBefore[i2])) { return true; }
-                        else
-                        { AnglesBefore.Add(currentWind.direction); }
-                    }
+                    if (L.windDataPrior[i].speed > ruleSet.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
                 }
                 for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
                 {
-                    TWind currentWind = L.WindDataAfter[i];
-                    for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
+                    if (L.WindDataAfter[i].speed > ruleSet.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
+                }
+                if (WindSpeedOverInTimePeriod == true)
+                {
+                    List<int> AnglesBefore = new List<int>();
+                    List<int> AnglesAfter = new List<int>();
+                    for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
                     {
-                        if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
-                        else
-                        { AnglesAfter.Add(currentWind.direction); }
+                        TWind currentWind = L.windDataPrior[i];
+                        for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
+                        {
+                            if (IsDirectionOut(currentWind, AnglesBefore[i2])) { return true; }
+                            else
+                            { AnglesBefore.Add(currentWind.direction); }
+                        }
+                    }
+                    for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
+                    {
+                        TWind currentWind = L.WindDataAfter[i];
+                        for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
+                        {
+                            if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
+                            else
+                            { AnglesAfter.Add(currentWind.direction); }
+                        }
                     }
                 }
                 #endregion

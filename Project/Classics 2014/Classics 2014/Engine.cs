@@ -37,7 +37,7 @@ namespace Classics_2014
             IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
-            while ((IO_Controller.Serial_Input)&&(!ListenThread.IsAlive)) 
+            while ((!ListenThread.IsAlive)) 
             {
                  ListenThread.Start();  
             } 
@@ -96,7 +96,7 @@ namespace Classics_2014
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
             NewEvent.TabControl = tabControl;
-            eventList.Add(NewEvent);
+            eventList.Add((Event)NewEvent);
             return NewEvent.EventOptionsTab;
         }
 
@@ -105,13 +105,14 @@ namespace Classics_2014
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
             NewEvent.TabControl = tabControl;
-            eventList.Add(NewEvent);
+            eventList.Add((Event)NewEvent);
             return NewEvent.EventOptionsTab;
         }
 
         public Classics_2014.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
         {
             Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
+            eventList.Add((Event)NewEvent);
             return NewEvent;
         }
 

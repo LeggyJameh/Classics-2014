@@ -238,5 +238,29 @@ namespace Classics_2014 {
                 this["AudioAlarmsEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public float DangerWindSpeed {
+            get {
+                return ((float)(this["DangerWindSpeed"]));
+            }
+            set {
+                this["DangerWindSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
+        public int DangerDirectionChange {
+            get {
+                return ((int)(this["DangerDirectionChange"]));
+            }
+            set {
+                this["DangerDirectionChange"] = value;
+            }
+        }
     }
 }

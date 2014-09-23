@@ -118,6 +118,10 @@ namespace Classics_2014.Accuracy.Reports
                             {
                                 cellToEdit.Style.BackColor = Color.LightBlue;
                             }
+                            if (l.isRejumpable)
+                            {
+                                cellToEdit.Style.ForeColor = Color.Red;
+                            }
                         }
                     }
                 }

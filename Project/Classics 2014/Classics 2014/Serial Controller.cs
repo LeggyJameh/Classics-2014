@@ -94,6 +94,7 @@ namespace Classics_2014
         public void CloseThread()
         {
             ListenThread.Abort();
+            port.Close();
         }
         #region Read And Split Procedures
         #region Accuracy

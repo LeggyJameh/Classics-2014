@@ -364,6 +364,7 @@
             // buttonUnassignLanding
             // 
             this.buttonUnassignLanding.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUnassignLanding.Enabled = false;
             this.buttonUnassignLanding.Location = new System.Drawing.Point(356, 3);
             this.buttonUnassignLanding.Name = "buttonUnassignLanding";
             this.buttonUnassignLanding.Size = new System.Drawing.Size(94, 38);

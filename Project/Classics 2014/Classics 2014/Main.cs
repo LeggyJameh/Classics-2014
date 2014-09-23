@@ -63,6 +63,10 @@ namespace Classics_2014
         }
         public void UpdateWind(TWind windData)
         {
+            if (textBoxSideSpeed.Text != "000") 
+            {
+            SetColoursForText(windData, UserSettings.Default.DangerDirectionChange, UserSettings.Default.DangerWindSpeed);
+            }
             textBoxSideSpeed.Text = windData.speed.ToString();
             textBoxSideDirection.Text = windData.direction.ToString();
             if (flopsToMaintainColourSpeed == 0)
@@ -85,6 +89,7 @@ namespace Classics_2014
                 if (UserSettings.Default.AudioAlarmsEnabled) { System.Media.SystemSounds.Beep.Play(); }
                 
             }
+                
         }
         public void UpdatelistBoxWindLog(TWind[] wind)
         {

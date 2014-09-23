@@ -149,6 +149,15 @@ namespace Classics_2014.Accuracy
                 }
 
                 Connected_Event.CompletedLandings.Add((AccuracyLanding)Landings[i]);
+                if (Landings[i].UID == -1)
+                {
+                    dataGridViewLandings.Rows.Add(Landings[i].ID, "N/A", Landings[i].score, true);
+                }
+                else
+                {
+                    dataGridViewLandings.Rows.Add(Landings[i].ID, "N/A", Landings[i].score, true);
+                    dataGridViewLandings.Rows[dataGridViewLandings.Rows.Count - 2].Visible = false;
+                }
             }
         }
 
@@ -160,8 +169,11 @@ namespace Classics_2014.Accuracy
 
         public void FormatLandingToRejumpable(AccuracyLanding L)
         {
-            dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.ForeColor = Color.Red;
-            dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+            if (L.dataGridCell != null)
+            {
+                dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.ForeColor = Color.Red;
+                dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+            }
         }
 
         private void SelectFirstUncompletedCompetitorScore()
@@ -187,7 +199,7 @@ namespace Classics_2014.Accuracy
             }
             else
             {
-                if (Connected_Event.LandingInProgress.Count != 0)
+                if (Connected_Event.LandingInProgress.Count == 0)
                 {
                     Connected_Event.makeInactive();
                     buttonMakeActive.BackColor = Color.Red;
@@ -329,13 +341,10 @@ namespace Classics_2014.Accuracy
             {
                 for (int i = 0; i < dataGrid.Rows.Count; i++)
                 {
-                    if (dataGridViewScore.Rows[i].Visible == true)
+                    if (dataGrid.Rows[i].Visible == true)
                     {
-                        if (dataGridViewScore.Rows[i].Cells[4 + RoundNumber].Value == null)
-                        {
-                            dataGridViewScore.ClearSelection();
-                            dataGridViewScore.Rows[i].Cells[4 + RoundNumber].Selected = true;
-                        }
+                            dataGrid.ClearSelection();
+                            dataGrid.Rows[i].Selected = true;
                     }
                 }
                 return false;
@@ -370,58 +379,59 @@ namespace Classics_2014.Accuracy
                     if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
                     {
                         LandingNew = true;
+                        dataGridViewLandings.Rows[i].Visible = true;
                     }
-
+                }
                     if ((LandingNew == true)||(dataGridViewScore.SelectedCells[0].Style.BackColor == Color.Blue))
                     {
                         dataGridViewScore.SelectedCells[0].Value = null;
                         dataGridViewScore.SelectedCells[0].Style.BackColor = Color.White;
 
                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+
                         CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), RoundNumber, dataGridViewScore.SelectedCells[0]);
                     }
                     else
                     {
                         MessageBox.Show("Landing is old. Can only reassign landings from current session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                }
             }
-            else if (dataGridViewScore.SelectedRows.Count > 0)
-            {
-                if (dataGridViewScore.SelectedRows[0].Cells[0].Value != null)
-                {
-                    bool LandingNew = false;
-                    int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+            //else
+            //{
+            //    if (dataGridViewScore.SelectedRows[0].Cells[0].Value != null)
+            //    {
+            //        bool LandingNew = false;
+            //        int LandingID = Connected_Event.GetLandingIDFromCell(dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
 
-                    if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor != Color.LightBlue)
-                    {
-                        for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
-                        {
-                            if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
-                            {
-                                LandingNew = true;
-                                dataGridViewLandings.Rows[i].Visible = true;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        LandingNew = true;
-                    }
-                    if (LandingNew == true)
-                    {
-                        dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = null;
-                        dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
+            //        if (dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor != Color.LightBlue)
+            //        {
+            //            for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
+            //            {
+            //                if (Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value) == LandingID)
+            //                {
+            //                    LandingNew = true;
+            //                    dataGridViewLandings.Rows[i].Visible = true;
+            //                }
+            //            }
+            //        }
+            //        else
+            //        {
+            //            LandingNew = true;
+            //        }
+            //        if (LandingNew == true)
+            //        {
+            //            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Value = null;
+            //            dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber].Style.BackColor = Color.White;
 
-                        Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
-                        CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Landing is old. Can only reassign landings from current session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
+            //            Connected_Event.SQL_Controller.AssignCompetitorToLanding(-1, 1, LandingID, Connected_Event.EventID);
+            //            CurrentReportForm.Update(Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value), RoundNumber, dataGridViewScore.SelectedRows[0].Cells[4 + RoundNumber]);
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Landing is old. Can only reassign landings from current session.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //        }
+            //    }
+            //}
         }
 
         private void buttonConfirm_Click(object sender, EventArgs e)//Should now work
@@ -462,6 +472,7 @@ namespace Classics_2014.Accuracy
                         }
 
                         CurrentLanding.dataGridCell = dataGridViewScore.SelectedCells[0];
+                        dataGridViewLandings.SelectedRows[0].Visible = false;
                         dataGridViewScore.SelectedCells[0].Value = CurrentLanding.score;
                         dataGridViewScore.SelectedCells[0].ReadOnly = true;
                         dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightGreen;

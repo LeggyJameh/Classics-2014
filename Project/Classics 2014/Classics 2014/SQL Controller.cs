@@ -251,7 +251,15 @@ namespace Classics_2014
         public bool AssignWindDataToAccuracyLanding(byte[] LandingData, bool isRejumpable, int LandingID)
         {
             string hexLanding = ByteArrayToHex(LandingData);
-            string query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "', `IsRejumpable`='" + isRejumpable + "' WHERE `LandingID`='" + LandingID + "';";
+            string query = "";
+            if (isRejumpable)
+            {
+                query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "', `IsRejumpable`='" + Convert.ToInt16(isRejumpable) + "' WHERE `LandingID`='" + LandingID + "';";
+            }
+            else
+            {
+                query = "UPDATE `accuracy landings` SET `WindData`='" + hexLanding + "' WHERE `LandingID`='" + LandingID + "';";
+            }
             return ExecuteNonQuery(query);
         }
 
@@ -826,10 +834,22 @@ namespace Classics_2014
                                         case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
                                         case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
                                     }
-                                    if (i2 == 3) { Teams[Teams.Count - 1].Competitors.Add(CurrentCompetitor); }
+                                    if (i2 == 3)
+                                    { 
+                                        Teams[Teams.Count - 1].Competitors.Add(CurrentCompetitor);
+                                    }
                                 }
                             }
                             DataReader.Close();
+                            if (Competitors[Ci].UID == -1)
+                            {
+                                EventCompetitor CurrentCompetitor = new EventCompetitor();
+                                CurrentCompetitor.ID = -1;
+                                CurrentCompetitor.name = "False Competitor";
+                                CurrentCompetitor.team = "N/A";
+                                CurrentCompetitor.nationality = "N/A";
+                                Teams[Teams.Count - 1].Competitors.Add(CurrentCompetitor);
+                            }
                         }
                         catch (MySqlException ex)
                         {
@@ -863,10 +883,22 @@ namespace Classics_2014
                                         case 2: CurrentCompetitor.team = DataReader.GetString(i2); break;
                                         case 3: CurrentCompetitor.nationality = DataReader.GetString(i2); break;
                                     }
-                                    if (i2 == 3) { Teams[TeamIndex].Competitors.Add(CurrentCompetitor); }
+                                    if (i2 == 3)
+                                    {
+                                        Teams[TeamIndex].Competitors.Add(CurrentCompetitor);
+                                    }
                                 }
                             }
                             DataReader.Close();
+                            if (Competitors[Ci].UID == -1)
+                            {
+                                EventCompetitor CurrentCompetitor = new EventCompetitor();
+                                CurrentCompetitor.ID = -1;
+                                CurrentCompetitor.name = "False Competitor";
+                                CurrentCompetitor.team = "N/A";
+                                CurrentCompetitor.nationality = "N/A";
+                                Teams[TeamIndex].Competitors.Add(CurrentCompetitor);
+                            } 
                         }
                         catch (MySqlException ex)
                         {

@@ -26,7 +26,7 @@ namespace Classics_2014.Accuracy.Reports
             connectedEvent = ConnectedEvent;
             groupBoxReport.Text = NameOfReport;
             this.Close = Close;
-            for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 0; i--)
+            for (int i = landingToDisplay.windDataPrior.Length - 1; i > 0; i--)
            {
                 DisplayWind(landingToDisplay.windDataPrior[i]);
             }

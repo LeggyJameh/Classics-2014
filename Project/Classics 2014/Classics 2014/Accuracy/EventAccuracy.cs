@@ -73,9 +73,26 @@ namespace Classics_2014.Accuracy
             {
                 if (Convert.ToInt16(dataGridViewLandings[0, i].Value) == LandingID)
                 {
+                    AccuracyLanding Landing = FindLandingByID(LandingID);
                     dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings[3, i].Value = "Yes"));
+                    dataGridViewLandings.Invoke((MethodInvoker)(() => FormatLandingToRejumpable(Landing)));
                 }
             }
+        }
+
+        private AccuracyLanding FindLandingByID(int LandingID)
+        {
+            AccuracyLanding Landing = new AccuracyLanding();
+
+            for (int i = 0; i < Connected_Event.CompletedLandings.Count; i++)
+            {
+                if (Connected_Event.CompletedLandings[i].ID == LandingID)
+                {
+                    return Connected_Event.CompletedLandings[i];
+                }
+            }
+
+            return Landing;
         }
 
         private void LoadTeamsIntoGrid()
@@ -138,7 +155,7 @@ namespace Classics_2014.Accuracy
                             dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightBlue;
                         }
 
-                        if (Landings[i].isRejumpable == true)
+                        if (Landings[i].isRejumpable) // If the landing is rejumpable, format it to show.
                         {
                             dataGridViewScore.Rows[i2].Cells[Column].Style.ForeColor = Color.Red;
                             dataGridViewScore.Rows[i2].Cells[Column].Style.Font = new Font(DefaultFont, FontStyle.Bold);
@@ -477,10 +494,13 @@ namespace Classics_2014.Accuracy
                         dataGridViewScore.SelectedCells[0].ReadOnly = true;
                         dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightGreen;
 
-                        if (Connected_Event.Rejumpable(CurrentLanding))
+                        if (SelectedLandingIsComplete == "Yes")
                         {
-                            dataGridViewScore.SelectedCells[0].Style.ForeColor = Color.Red;
-                            dataGridViewScore.SelectedCells[0].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+                            if (Connected_Event.Rejumpable(CurrentLanding))
+                            {
+                                dataGridViewScore.SelectedCells[0].Style.ForeColor = Color.Red;
+                                dataGridViewScore.SelectedCells[0].Style.Font = new Font(DefaultFont, FontStyle.Bold);
+                            }
                         }
 
                         Connected_Event.SQL_Controller.AssignCompetitorToLanding(Convert.ToInt16(dataGridViewScore.SelectedCells[0].OwningRow.Cells[0].Value), RoundNumber,

@@ -9,6 +9,7 @@ using System.IO;
 using System.Collections.Concurrent;
 namespace Classics_2014.Accuracy
 {
+    // TODO: Fake competitor ID's.
     class Accuracy_Event :Event 
     {
         #region variables and the such like
@@ -50,10 +51,10 @@ namespace Classics_2014.Accuracy
                 if (DataA != null)
                 {
                    if (lostSerial)
-                {
-                    lostSerial = false;
-                    LostSerial(new TWind { time = DataA.Time, speed = Data.Speed, direction = DataA.Direction });
-                }
+                    {
+                        lostSerial = false;
+                        LostSerial(new TWind { time = DataA.Time, speed = Data.Speed, direction = DataA.Direction });
+                    }
                     for (int i = IncomingData.Length; i > 0; i--)
                     {
                         if (i != IncomingData.Length && i >= 1)
@@ -78,13 +79,14 @@ namespace Classics_2014.Accuracy
                         {
                             EventTab.MakeLandingComplete(currentLanding.ID);
                             LandingsToRemove.Add(currentLanding);
-                            CompletedLandings.Add(currentLanding);
+                            currentLanding.isRejumpable = false;
                             if (Rejumpable(currentLanding))
                             {
                                 currentLanding.isRejumpable = true;
                                 EventTab.FormatLandingToRejumpable(currentLanding);
                             }
                             SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding),currentLanding.isRejumpable ,currentLanding.ID);
+                            CompletedLandings.Add(currentLanding);
                         }
                         else
                         {
@@ -273,30 +275,30 @@ namespace Classics_2014.Accuracy
             if (L.windDataPrior != null && L.WindDataAfter != null)
             {
                 #region SpeedChecks
-                for (int i = 0; i < L.windDataPrior.Length-1; i++)
+                for (int i = 0; i < L.windDataPrior.Length; i++)
                 {
-                    if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
+                    if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out before
                 }
-                for (int ii = 0; ii < L.WindDataAfter.Length-1; ii++)
+                for (int ii = 0; ii < L.WindDataAfter.Length; ii++)
                 {
-                    if (L.WindDataAfter[ii].speed > ruleSet.windout) { return true; } //If wind out  
+                    if (L.WindDataAfter[ii].speed > ruleSet.windout) { return true; } //If wind out after
                 }
                 #endregion
                 #region DirectionChecks
                 bool WindSpeedOverInTimePeriod = false;
-                for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
+                for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++) // Check speeds before in Angle check time period
                 {
                     if (L.windDataPrior[i].speed > ruleSet.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
                 }
-                for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
+                for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++) // Check speeds after in Angle check time period
                 {
                     if (L.WindDataAfter[i].speed > ruleSet.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
                 }
-                if (WindSpeedOverInTimePeriod == true)
+                if (WindSpeedOverInTimePeriod == true) // If the speed was over in the angle check time period
                 {
                     List<int> AnglesBefore = new List<int>();
                     List<int> AnglesAfter = new List<int>();
-                    for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++)
+                    for (int i = 0; i < ruleSet.timeCheckAngleChangePrior; i++) // Check the angles before.
                     {
                         TWind currentWind = L.windDataPrior[i];
                         for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
@@ -306,7 +308,7 @@ namespace Classics_2014.Accuracy
                             { AnglesBefore.Add(currentWind.direction); }
                         }
                     }
-                    for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++)
+                    for (int i = 0; i < ruleSet.timeCheckAngleChangeAfter; i++) // Check the angles after.
                     {
                         TWind currentWind = L.WindDataAfter[i];
                         for (int i2 = 0; i2 < ruleSet.timeCheckAngleChangeAfter; i2++)
@@ -319,8 +321,8 @@ namespace Classics_2014.Accuracy
                 }
                 #endregion
             }
-            return false;
-        }
+            return false; // If the landing is clean, return that the landing is not rejumpable.
+       }
 
         private bool IsDirectionOut(TWind wind, int prevData)
         {

@@ -56,6 +56,11 @@ namespace Classics_2014
                         Data data;
                         while (IO_Controller.Data_queue.TryDequeue(out data))
                         {
+                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
+                            {
+                                activeEvent.Data_queueEvent.Enqueue(data);
+                            }
+
                             switch (data.dataType)
                             {
                                 case EventType.Accuracy:
@@ -63,11 +68,6 @@ namespace Classics_2014
                                     WriteToMasterFile(DatA);
                                     UpdateWindMetrics(DatA);
                                     break;
-                            }
-
-                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                            {
-                                activeEvent.Data_queueEvent.Enqueue(data);
                             }
                         }
                     }
@@ -184,20 +184,26 @@ namespace Classics_2014
                 args = input.Split(':');
                 if (args.Length >= 5)
                 {
-                    DateTime pointTime = Convert.ToDateTime(args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2)));
-                    if ((loopTwo) && (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString())&&(previousData.AddSeconds(1)< pointTime))
+                    try
                     {
-                        do
+                        DateTime pointTime = Convert.ToDateTime(args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2)));
+                        if ((loopTwo) && (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString()) && (previousData.AddSeconds(1) < pointTime))
                         {
-                            previousData.AddSeconds(1);
-                            windGraph.UpdateWindGraph(new TWind {time = (previousData.Hour +":"+previousData.Minute+":" + previousData.Second), speed = 0, direction = 0 });
-                            previousData.AddSeconds(1);
-                            previousData = previousData.AddSeconds(1);
-                        } while (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString());
+                            do
+                            {
+                                previousData.AddSeconds(1);
+                                windGraph.UpdateWindGraph(new TWind { time = (previousData.Hour + ":" + previousData.Minute + ":" + previousData.Second), speed = 0, direction = 0 });
+                                previousData.AddSeconds(1);
+                                previousData = previousData.AddSeconds(1);
+                            } while (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString());
+                        }
+                        previousData = pointTime;
+                        loopTwo = true;
+                        windGraph.UpdateWindGraph(new TWind { time = (args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
                     }
-                    previousData = pointTime;
-                    loopTwo = true;
-                    windGraph.UpdateWindGraph(new TWind { time = (args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
+                    catch
+                    {
+                    }
                 }
             }
             Thread.CurrentThread.Abort();

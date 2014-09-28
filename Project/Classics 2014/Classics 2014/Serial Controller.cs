@@ -103,7 +103,7 @@ namespace Classics_2014
             buffer = new byte[19];
             do
             {
-                try
+                try // TODO: Remove try-catch
                 {
                     Data_Accuracy Data = new Data_Accuracy();
                     if (port.BytesToRead >= 19)

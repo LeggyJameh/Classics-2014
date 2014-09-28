@@ -47,6 +47,14 @@ namespace Classics_2014.Accuracy.Reports
                 {
                     r.Cells[Round + 3] = (DataGridViewCell)newCell.Clone();
                     r.Cells[Round + 3].Value = newCell.Value;
+                    //for (int i = 0; i < landings.Count; i++)
+                    //{
+                        //if (landings[i].ID == newLanding.ID)
+                        //{
+                        //    landings.Remove(landings[i]);
+                        //}
+                        //    landings.Add((MySqlReturnLanding)newLanding);
+                    //}
                 }
             }
             foreach (Leaderboard l in LeaderboardReports)
@@ -149,7 +157,7 @@ namespace Classics_2014.Accuracy.Reports
                         }
                         foreach (LandingReport l in LandingReports)
                         {
-                            if (listBoxEventList.SelectedItem.ToString() == l.NameOfReport) //Also Change these Rob
+                            if (listBoxEventList.SelectedItem.ToString() == l.NameOfReport) 
                             {
                                 ActiveReport.Visible = false;
                                 ActiveReport.Enabled = false;

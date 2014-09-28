@@ -209,7 +209,7 @@ namespace Classics_2014.Accuracy.Reports
             // Here we are calculating the first max round to calculate to;
                 for (int iii = 0; iii < teams.Count; iii++)
                 {
-                    for (int x = 5; x < CurrentRoundIndex; x++)
+                    for (int x = 5; x <= CurrentRoundIndex; x++)
                     {
                         uidInfo[iii, 2] += TeamScoresAdd(teams[iii], x);
                     }
@@ -231,8 +231,11 @@ namespace Classics_2014.Accuracy.Reports
                                 uidInfoSwap[0, y] = uidInfo[x - 1, y]; // The value of the comeptitor dropping down is stored
                                 uidInfo[x - 1, y] = uidInfo[x, y];// The value just saved is overwritten by the victor
                                 uidInfo[x, y] = uidInfoSwap[0, y];//And the backup is replaced where the previous value was, and the process is repeated for all values
-
+                                
                             }
+                            String teamToReplace = teams[x - 1];
+                            teams[x - 1] = teams[x];
+                            teams[x] = teamToReplace;
                             x--;//X is decremented by one, to allow the round another chance to be moved up as otherwise it would only ever increase once
                         }
 
@@ -253,6 +256,9 @@ namespace Classics_2014.Accuracy.Reports
                                             uidInfo[x, y] = uidInfoSwap[0, y];//And the backup is replaced where the previous value was, and the process is repeated for all values
 
                                         }
+                                        String teamToReplace = teams[x - 1];
+                                        teams[x - 1] = teams[x];
+                                        teams[x] = teamToReplace;
                                         x--;//X is decremented by one, to allow the round another chance to be moved up as otherwise it would only ever increase once
                                     }
 

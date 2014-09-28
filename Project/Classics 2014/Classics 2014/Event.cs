@@ -52,7 +52,10 @@ namespace Classics_2014
         }
         public void EndThread()
         {
-            ListenThread.Abort();
+            if (ListenThread != null)
+            {
+                ListenThread.Abort();
+            }
         }
         public virtual TWind ReturnWindLimits()
         {

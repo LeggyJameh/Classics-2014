@@ -20,5 +20,8 @@ namespace Classics_2014.Accuracy
         public TWind LandingWind;
         public TWind[] WindDataAfter;
         public bool isRejumpable;
+        public bool isComplete;
+        public bool LostInput;
+        public int eventID;
     }
 }

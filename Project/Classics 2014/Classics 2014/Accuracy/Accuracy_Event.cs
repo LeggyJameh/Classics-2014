@@ -19,92 +19,23 @@ namespace Classics_2014.Accuracy
         public Rulesets.AccuracyRuleset ruleSet;
         public List<Competitor> Competitors;
         public List<string> ActiveTeams;
-        TWind[] IncomingData;
-        int NumberOfLandings = 0;
-        public List<Accuracy.AccuracyLanding> LandingInProgress = new List<Accuracy.AccuracyLanding>();
-        public List<Accuracy.AccuracyLanding> CompletedLandings = new List<Accuracy.AccuracyLanding>();
-        List<Accuracy.AccuracyLanding> LandingsToRemove = new List<Accuracy.AccuracyLanding>();
         Boolean lostSerial = false;
+        public AccuracyEventController controller;
         #endregion
-        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
+        public Accuracy_Event(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine, AccuracyEventController controller)
         {
             this.SQL_Controller = SQL_Controller;
             this.IO_Controller = IO_Controller;
             this.engine = engine;
+            this.controller = controller;
             RequiresSerial = true;
             EventType = EventType.Accuracy;
-            ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
 
-        private void ListenProcedure()
+        public bool CloseEvent()
         {
-            IncomingData = new TWind[ruleSet.windSecondsPrior];
-            do
-            {
-            Data Data;
-            Data_Accuracy DataA = new Data_Accuracy();
-            IO_Controller._signal.WaitOne();
-            while (Data_queueEvent.TryDequeue(out Data))
-            {
-                DataA = (Data as Data_Accuracy);
-                if (DataA != null)
-                {
-                   if (lostSerial)
-                {
-                    lostSerial = false;
-                    LostSerial(new TWind { time = DataA.Time, speed = Data.Speed, direction = DataA.Direction });
-                }
-                    for (int i = IncomingData.Length; i > 0; i--)
-                    {
-                        if (i != IncomingData.Length && i >= 1)
-                        {
-                            IncomingData[i] = IncomingData[i - 1];
-                        }
-                    }
-                    IncomingData[0] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }; 
-                    if (DataA.IsLanding)
-                    {
-                        NumberOfLandings++;
-                        AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior =(TWind[])IncomingData.Clone(), WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[ruleSet.windSecondsAfter] };
-                        newLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, newLanding.score);
-                        LandingInProgress.Add(newLanding);
-                        EventTab.MethodAddLanding(newLanding);
-                        EventTab.ScoreEdit(DataA.LandingScore.ToString());
-                    }
-                    for (int i = 0; i < LandingInProgress.Count; i++)
-                    {
-                        AccuracyLanding currentLanding = LandingInProgress[i];
-                        if (currentLanding.WindInputs == currentLanding.WindDataAfter.Length) 
-                        {
-                            EventTab.MakeLandingComplete(currentLanding.ID);
-                            LandingsToRemove.Add(currentLanding);
-                            CompletedLandings.Add(currentLanding);
-                            if (Rejumpable(currentLanding))
-                            {
-                                currentLanding.isRejumpable = true;
-                                EventTab.FormatLandingToRejumpable(currentLanding);
-                            }
-                            SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding),currentLanding.isRejumpable ,currentLanding.ID);
-                        }
-                        else
-                        {
-                            currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
-                            currentLanding.WindInputs++;
-                            LandingInProgress[i] = currentLanding;
-                            
-                        }
-                    }
-                    foreach (AccuracyLanding l in LandingsToRemove)
-                    {
-                         LandingInProgress.Remove(l);
-                    }
-                    LandingsToRemove.Clear();
-                }
-            }
-            }while(true);
-
+            return controller.EndEvent(EventID);
         }
-        
 
         public void ProceedToEventTeams()
         {
@@ -149,24 +80,7 @@ namespace Classics_2014.Accuracy
             stringToConvert += ruleSet.timeCheckAngleChangeAfter + "*";
             return ascii.GetBytes(stringToConvert);
         }
-
-        private byte[] ConvertLandingToByteArray(Accuracy.AccuracyLanding Landing)
-        {
-            //ToDo Override To String
-            BinaryFormatter f = new BinaryFormatter();
-            MemoryStream m = new MemoryStream();
-            f.Serialize(m,Landing);
-            return m.ToArray();
-        }
-        public AccuracyLanding ConvertByteArrayToLanding(byte[] Landing)
-        {
-            MemoryStream m = new MemoryStream();
-            BinaryFormatter f = new BinaryFormatter();
-            m.Write(Landing, 0, Landing.Length);
-            m.Seek(0, SeekOrigin.Begin);
-            AccuracyLanding deSerializedLanding = (AccuracyLanding)f.Deserialize(m);
-            return deSerializedLanding;
-        }
+ 
 
         public void SaveEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors, List<string> SelectedTeams)
         {
@@ -189,24 +103,6 @@ namespace Classics_2014.Accuracy
             EventTeamsTab = null;
         }
 
-        public int GetLandingIDFromCell(DataGridViewCell Cell)
-        {
-            for (int i = 0; i < CompletedLandings.Count; i++)
-			{
-                if (CompletedLandings[i].dataGridCell == Cell)
-                {
-                    return CompletedLandings[i].ID;
-                }
-			}
-            for (int i = 0; i < LandingInProgress.Count; i++)
-            {
-                if (LandingInProgress[i].dataGridCell == Cell)
-                {
-                    return LandingInProgress[i].ID;
-                }
-            }
-            return -1;
-        }
 
         public override void ReturnToOptions()
         {
@@ -222,44 +118,7 @@ namespace Classics_2014.Accuracy
         }
 
 
-        public bool makeActive()
-        {
-            if (ListenThread.IsAlive) { ListenThread.Abort(); }
-            if (engine.MakeActive(this, ref lostSerial))
-            {
 
-                ListenThread = new Thread(new ThreadStart(ListenProcedure));
-                ListenThread.Name = "Test";
-                IsActive = true;
-                ListenThread.Start();
-                return true;
-            }
-            return false;
-        }
-
-        public void makeInactive()
-        {
-            engine.activeEvent = null;
-            IsActive = false;
-            ListenThread = null;
-            
-            //TODO: Gracefully end event thread.
-        }
-        private void LostSerial(TWind incomingData)
-        {
-            if (LandingInProgress.Count != 0)
-            {
-                foreach (AccuracyLanding aL in LandingInProgress)
-                {
-                        for (int i = aL.WindInputs; i < ruleSet.windSecondsAfter; i++)
-                        {
-                            aL.WindDataAfter[i] = new TWind { speed = 0, direction = 0, time = "0" };
-                            aL.WindInputs++;
-                        }
-                    }
-                
-            }
-        }
         public override TWind ReturnWindLimits()
         {
             TWind CurrentWind = new TWind();
@@ -273,11 +132,11 @@ namespace Classics_2014.Accuracy
             if (L.windDataPrior != null && L.WindDataAfter != null)
             {
                 #region SpeedChecks
-                for (int i = 0; i < L.windDataPrior.Length-1; i++)
+                for (int i = 0; i < ruleSet.windSecondsPrior; i++)
                 {
                     if (L.windDataPrior[i].speed > ruleSet.windout) { return true; } //If wind out
                 }
-                for (int ii = 0; ii < L.WindDataAfter.Length-1; ii++)
+                for (int ii = 0; ii < ruleSet.windSecondsAfter; ii++)
                 {
                     if (L.WindDataAfter[ii].speed > ruleSet.windout) { return true; } //If wind out  
                 }
@@ -322,35 +181,5 @@ namespace Classics_2014.Accuracy
             return false;
         }
 
-        private bool IsDirectionOut(TWind wind, int prevData)
-        {
-            int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < ruleSet.directionOut )
-            {
-                minimum = 0;
-                minOverFlow = (360 - (ruleSet.directionOut - prevData));
-                if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
-            }
-            else
-            {
-                minimum = prevData - ruleSet.directionOut;
-                if (wind.direction < minimum) { return true; }
-                else if (prevData > wind.direction) { return false; }
-            }
-            //Max checks
-            if ((prevData + ruleSet.directionOut) > 360)
-            {
-                maximum = 360;
-                maxOverFlow = 0 + ((prevData + ruleSet.directionOut) - 360);
-                if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
-            }
-            else
-            {
-                maximum = prevData + ruleSet.directionOut;
-                if (wind.direction > maximum) { return true; }
-            }
-
-            return false;
-        }
     }
 }

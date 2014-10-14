@@ -13,12 +13,11 @@ namespace Classics_2014
         public IO_Controller IO_Controller;
         public SQL_Controller SQL_Controller;
         private Thread ListenThread;
-        public Event activeEvent;
         Main mainForm;
         TabControl tabControl;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
-        List<Event> eventList = new List<Event>();
+        Accuracy.AccuracyEventController accuracyEventController;
         private StreamWriter writer;
         public FileStream fileStream;
         private StreamReader reader;
@@ -36,6 +35,7 @@ namespace Classics_2014
             AquireMasterFile();
             IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
             SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
+            accuracyEventController = new Accuracy.AccuracyEventController(SQL_Controller, IO_Controller, this);
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((!ListenThread.IsAlive)) 
             {
@@ -65,10 +65,7 @@ namespace Classics_2014
                                     break;
                             }
 
-                            if ((activeEvent != null) && (activeEvent.RequiresSerial))
-                            {
-                                activeEvent.Data_queueEvent.Enqueue(data);
-                            }
+                            accuracyEventController.Data_queueEvent.Enqueue(data);
                         }
                     }
                 }
@@ -79,13 +76,10 @@ namespace Classics_2014
         }
         private void UpdateWindMetrics(Data DatA)
         {
-            TWind windDirection;
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
-            if (activeEvent != null)
-            {
-                windDirection = activeEvent.ReturnWindLimits();
+
                 mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, wind.direction, wind.speed)));
-            }
+
              mainForm.Invoke((MethodInvoker)(()=>mainForm.UpdateWind(wind)));
             windGraph.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
@@ -93,44 +87,26 @@ namespace Classics_2014
 
         public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
         {
-            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
+            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
             NewEvent.TabControl = tabControl;
-            eventList.Add((Event)NewEvent);
             return NewEvent.EventOptionsTab;
         }
 
         public Classics_2014.Accuracy.EventAccuracyOptions LoadExistingAccuracyEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
         {
-            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
+            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
             NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
             NewEvent.TabControl = tabControl;
-            eventList.Add((Event)NewEvent);
             return NewEvent.EventOptionsTab;
         }
 
         public Classics_2014.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
         {
-            Classics_2014.Accuracy.Accuracy_Event NewEvent = new Accuracy.Accuracy_Event(SQL_Controller, IO_Controller, this);
-            eventList.Add((Event)NewEvent);
+            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
             return NewEvent;
         }
 
-
-        public bool MakeActive(Event eventToBeActive, ref bool lostSerial)
-        {
-            if (IO_Controller.Serial_Input)
-            {
-                LostSerialConnection = lostSerial;
-                activeEvent = eventToBeActive;
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("No Serial input detected, check USB and COM ports .", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
         private void WriteToMasterFile(Data_Accuracy data)
         {
             writer.WriteLine(data.ToString()); 
@@ -218,10 +194,7 @@ namespace Classics_2014
         {
             ListenThread.Abort();
             IO_Controller.EndThreads();
-            foreach (Event e in eventList)
-            {
-                e.EndThread();
-            }
+            accuracyEventController.EndThread();
             SQL_Controller.StopDatabase();
         }
         private void CloseSerialInputs()

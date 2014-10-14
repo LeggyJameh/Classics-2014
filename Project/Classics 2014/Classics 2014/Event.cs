@@ -12,7 +12,6 @@ namespace Classics_2014
     abstract class Event
     {
         public string Name;
-        protected  Thread ListenThread;
         public SQL_Controller SQL_Controller;
         public IO_Controller IO_Controller;
         public bool RequiresSerial { get; protected set; } // This is checked to see if Engine can Read the data without waiting (Psuedo Const)
@@ -20,8 +19,6 @@ namespace Classics_2014
         public List<Team> Teams;
         public int EventID;
         public TabControl TabControl;
-        public bool IsActive;
-        public readonly ConcurrentQueue<Data> Data_queueEvent = new ConcurrentQueue<Data>();
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {

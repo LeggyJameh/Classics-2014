@@ -36,6 +36,7 @@ namespace Classics_2014.Accuracy
             Connected_Event = Event;
             tabControl = Main;
             InitializeComponent();
+            groupboxControllerListArea.Controls.Add(Connected_Event.controller.column);
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
              CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
@@ -60,22 +61,6 @@ namespace Classics_2014.Accuracy
             }
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
             LoadTeamsIntoGrid();
-        }
-
-        public void MethodAddLanding(AccuracyLanding Landing)
-        {
-            dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings.Rows.Add(Landing.ID, Landing.TimeOfLanding, Landing.score, "No")));
-        }
-
-        public void MakeLandingComplete(int LandingID)
-        {
-            for (int i = 0; i < dataGridViewLandings.RowCount - 1; i++)
-            {
-                if (Convert.ToInt16(dataGridViewLandings[0, i].Value) == LandingID)
-                {
-                    dataGridViewLandings.Invoke((MethodInvoker)(() => dataGridViewLandings[3, i].Value = "Yes"));
-                }
-            }
         }
 
         private void LoadTeamsIntoGrid()
@@ -110,7 +95,7 @@ namespace Classics_2014.Accuracy
 
             for (int i = 0; i < Landings.Count; i++)
             {
-                Connected_Event.CompletedLandings.Add(Landings[i]);
+                Connected_Event.controller.loadLanding(Landings[i]);
                 for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
                 {
                     while (Landings[i].Round + 4 >= dataGridViewScore.Columns.Count)
@@ -148,7 +133,7 @@ namespace Classics_2014.Accuracy
                     }
                 }
 
-                Connected_Event.CompletedLandings.Add((AccuracyLanding)Landings[i]);
+                Connected_Event.controller.loadLanding((AccuracyLanding)Landings[i]);
                 if (Landings[i].UID == -1)
                 {
                     dataGridViewLandings.Rows.Add(Landings[i].ID, "N/A", Landings[i].score, true);
@@ -159,13 +144,7 @@ namespace Classics_2014.Accuracy
                     dataGridViewLandings.Rows[dataGridViewLandings.Rows.Count - 2].Visible = false;
                 }
             }
-        }
-
-        public void ScoreEdit(String Score)
-        {
-            labelLatestScore.Invoke((MethodInvoker)(() => labelLatestScore.Text = Score));
-            timer1.Start();
-        }
+        } // touch this
 
         public void FormatLandingToRejumpable(AccuracyLanding L)
         {
@@ -186,35 +165,6 @@ namespace Classics_2014.Accuracy
                     return;
                 }
             }
-        }
-
-        private void buttonMakeActive_Click(object sender, EventArgs e)
-        {
-            if ((Connected_Event.IsActive == false)&&((Connected_Event.makeActive())))
-            {
-                Connected_Event.makeActive();
-                buttonMakeActive.BackColor = Color.Green;
-                SelectFirstVisibleRowOnDataGrid(dataGridViewLandings);
-                SelectFirstUncompletedCompetitorScore();
-            }
-            else
-            {
-                if (Connected_Event.LandingInProgress.Count == 0)
-                {
-                    Connected_Event.makeInactive();
-                    buttonMakeActive.BackColor = Color.Red;
-                }
-                else
-                {
-                    MessageBox.Show("Event is active, please make event inactive and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            labelLatestScore.Text = "--";
-            timer1.Stop();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -273,9 +223,9 @@ namespace Classics_2014.Accuracy
                     }
                 }
             }
-        } // Works
+        }
 
-        private void buttonManualLanding_Click(object sender, EventArgs e)//Should Work
+        private void buttonManualLanding_Click(object sender, EventArgs e)
         {
             if (Admin)
             {
@@ -324,7 +274,7 @@ namespace Classics_2014.Accuracy
                     }
                 }
             }
-        } // Will work
+        } 
 
         private void buttonNextRound_Click(object sender, EventArgs e)
         {
@@ -362,9 +312,9 @@ namespace Classics_2014.Accuracy
                 }
                 return false;
             }
-        }//Admin Fixed
+        }
 
-        private void buttonUnassignLanding_Click(object sender, EventArgs e) // Should Work
+        private void buttonUnassignLanding_Click(object sender, EventArgs e) 
         {
             if ((Admin)&&(dataGridViewScore.SelectedCells.Count > 0))
             {
@@ -432,9 +382,9 @@ namespace Classics_2014.Accuracy
             //        }
             //    }
             //}
-        }
+        } //Look at this
 
-        private void buttonConfirm_Click(object sender, EventArgs e)//Should now work
+        private void buttonConfirm_Click(object sender, EventArgs e)
         {
             if ((dataGridViewScore.SelectedCells.Count > 0)&&(Admin))
             {
@@ -564,7 +514,7 @@ namespace Classics_2014.Accuracy
                     }
                 }
             }
-        }
+        }//and this
 
         private void buttonRemoveLanding_Click(object sender, EventArgs e)
         {
@@ -581,7 +531,7 @@ namespace Classics_2014.Accuracy
                     }
                 }
             }
-        }
+        }//and this
 
         private void buttonRenameCompetitor_Click(object sender, EventArgs e)
         {
@@ -646,7 +596,7 @@ namespace Classics_2014.Accuracy
             {
                 MessageBox.Show("Please select a landing to rejump and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
+        } //and here
 
         private void dataGridViewScore_SelectionChanged(object sender, EventArgs e)
         {

@@ -80,6 +80,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Accuracy\AccuracyEventController.cs" />
     <Compile Include="Accuracy\AccuracyLanding.cs" />
     <Compile Include="Accuracy\AccuracyOptionsMenu.cs">
       <SubType>UserControl</SubType>
@@ -123,7 +124,19 @@
     <Compile Include="Accuracy\Reports\CompetitorReport.Designer.cs">
       <DependentUpon>CompetitorReport.cs</DependentUpon>
     </Compile>
+    <Compile Include="Accuracy\accuracyEventLandingColumn.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Accuracy\accuracyEventLandingColumn.Designer.cs">
+      <DependentUpon>accuracyEventLandingColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Competitor.cs" />
+    <Compile Include="DebugIOWINDOW.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DebugIOWINDOW.Designer.cs">
+      <DependentUpon>DebugIOWINDOW.cs</DependentUpon>
+    </Compile>
     <Compile Include="EventCompetitor.cs" />
     <Compile Include="EventPicker.cs">
       <SubType>Form</SubType>
@@ -230,6 +243,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Accuracy\Reports\TeamReport.resx">
       <DependentUpon>TeamReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Accuracy\accuracyEventLandingColumn.resx">
+      <DependentUpon>accuracyEventLandingColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DebugIOWINDOW.resx">
+      <DependentUpon>DebugIOWINDOW.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EventPicker.resx">
       <DependentUpon>EventPicker.cs</DependentUpon>

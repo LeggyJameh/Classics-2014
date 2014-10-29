@@ -7,9 +7,11 @@ using System.Collections.Concurrent;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Windows.Forms;
+using Classics_2014.MySQL;
 
 namespace Classics_2014.Accuracy
 {
+    // Working 29/10/14.
     class AccuracyEventController
     {
         #region variables and the such like
@@ -25,6 +27,7 @@ namespace Classics_2014.Accuracy
         public accuracyEventLandingColumn column;
         public readonly ConcurrentQueue<Data> Data_queueEvent = new ConcurrentQueue<Data>();
         #endregion
+
         public AccuracyEventController(SQL_Controller SQL_Controller, IO_Controller IO_Controller, Engine engine)
         {
             this.SQL_Controller = SQL_Controller;
@@ -33,6 +36,7 @@ namespace Classics_2014.Accuracy
             this.engine = engine;
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
         }
+
         private void ListenProcedure()
         {
             IncomingData = new TWind[60];
@@ -62,8 +66,7 @@ namespace Classics_2014.Accuracy
                         if (DataA.IsLanding)
                         {
                             NumberOfLandings++;
-                            AccuracyLanding newLanding = new AccuracyLanding { Index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = (TWind[])IncomingData.Clone(), WindInputs = 0, TimeOfLanding = DataA.Time, LandingWind = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction }, WindDataAfter = new TWind[60] };
-                            newLanding.ID = SQL_Controller.CreateAccuracyLanding(EventID, newLanding.score);
+                            AccuracyLanding newLanding = new AccuracyLanding { index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = (TWind[])IncomingData.Clone(), time = DataA.Time,  windDataAfter = new TWind[60] };
                             Landings.Add(newLanding);
                             column.AddLanding(newLanding);
                             column.UpdateScore(DataA.LandingScore.ToString());
@@ -71,16 +74,16 @@ namespace Classics_2014.Accuracy
                         for (int i = 0; i < Landings.Count; i++)
                         {
                             AccuracyLanding currentLanding = Landings[i];
-                            if (currentLanding.WindInputs == 60)
+                            if (currentLanding.windEnum == 60)
                             {
-                                SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(currentLanding), currentLanding.isRejumpable, currentLanding.ID);
+                                currentLanding.completed = true;
+                                currentLanding.ID = SQL_Controller.CreateLanding(currentLanding);
                             }
                             else
                             {
-                                currentLanding.WindDataAfter[currentLanding.WindInputs] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
-                                currentLanding.WindInputs++;
+                                currentLanding.windDataAfter[currentLanding.windEnum] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
+                                currentLanding.windEnum++;
                                 Landings[i] = currentLanding;
-
                             }
                         }
                     }
@@ -88,24 +91,26 @@ namespace Classics_2014.Accuracy
             } while (true);
 
         }
+
         private void LostSerial(TWind incomingData)
         {
             if (Landings.Count != 0)
             {
                 foreach (AccuracyLanding aL in Landings)
                 {
-                    for (int i = aL.WindInputs; i < 60; i++)
+                    for (int i = aL.windEnum; i < 60; i++)
                     {
-                        aL.WindDataAfter[i] = new TWind { speed = 0, direction = 0, time = "0" };
-                        aL.WindInputs++;
+                        aL.windDataAfter[i] = new TWind { speed = 0, direction = 0, time = "0" };
+                        aL.windEnum++;
                     }
-                    aL.LostInput = true;
-                    aL.isComplete = true;
-                    SQL_Controller.AssignWindDataToAccuracyLanding(ConvertLandingToByteArray(aL), aL.isRejumpable, aL.ID);
+                    aL.lostInput = true;
+                    aL.completed = true;
+                    SQL_Controller.CreateLanding(aL);
                 }
 
             }
         }
+
         private byte[] ConvertLandingToByteArray(Accuracy.AccuracyLanding Landing)
         {
             //ToDo Override To String
@@ -114,6 +119,7 @@ namespace Classics_2014.Accuracy
             f.Serialize(m, Landing);
             return m.ToArray();
         }
+
         public AccuracyLanding ConvertByteArrayToLanding(byte[] Landing)
         {
             MemoryStream m = new MemoryStream();
@@ -123,36 +129,105 @@ namespace Classics_2014.Accuracy
             AccuracyLanding deSerializedLanding = (AccuracyLanding)f.Deserialize(m);
             return deSerializedLanding;
         }
-        public int GetLandingIDFromCell(DataGridViewCell Cell)
+
+        public AccuracyLanding getLandingFromCell(DataGridViewCell cell)
         {
             for (int i = 0; i < Landings.Count; i++)
             {
-                if (Landings[i].dataGridCell == Cell)
+                if (Landings[i].dataGridCell == cell)
                 {
-                    return Landings[i].ID;
+                    return Landings[i];
                 }
             }
-            return -1;
+            return null;
         }
-        public void loadLanding(AccuracyLanding L)
+
+        /// <summary>
+        /// Adds the landing to the landing list. Has already been assigned and therefore doesn't need to be added to the column.
+        /// </summary>
+        /// <param name="L"></param>
+        public void loadLanding(AccuracyLanding landing)
         {
-            Landings.Add(L);
+            Landings.Add(landing);
         }
+
+        /// <summary>
+        /// Adds the landing to both the column and the landing list, for unassigned loaded landings.
+        /// </summary>
+        /// <param name="Landing"></param>
+        public void addExistingLanding(AccuracyLanding landing)
+        {
+            Landings.Add(landing);
+            column.AddLanding(landing);
+        }
+
+        /// <summary>
+        /// Adds an existing landing to the column.
+        /// </summary>
+        /// <param name="landing"></param>
+        public void unAssignLanding(AccuracyLanding landing)
+        {
+            landing.dataGridCell = null;
+            landing.UID = -1;
+            SQL_Controller.ModifyLanding(landing);
+            column.AddLanding(landing);
+        }
+
+        /// <summary>
+        /// Get's the currently highlighted landing in the column.
+        /// </summary>
+        public AccuracyLanding getColumnLanding()
+        {
+            int ID = column.GetIDOfCurrentLanding();
+            if (ID != -1)
+            {
+                for (int i = 0; i < Landings.Count; i++)
+                {
+                    if (Landings[i].ID == ID)
+                    {
+                        return Landings[i];
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void assignLanding(AccuracyLanding landing)
+        {
+            column.RemoveLanding(landing);
+            SQL_Controller.ModifyLanding(landing);
+        }
+
+        public void removeLanding(int landingID)
+        {
+            for (int i = 0; i < Landings.Count; i++)
+            {
+                if (Landings[i].ID == landingID)
+                {
+                    SQL_Controller.RemoveLanding(landingID);
+                    Landings.Remove(Landings[i]);
+                    i = Landings.Count;
+                }
+            }
+        }
+
         public Accuracy_Event AddEvent()
         {
             Accuracy_Event newEvent =new Accuracy_Event(SQL_Controller, IO_Controller, engine, this);
             Events.Add(newEvent);
             return newEvent;
         }
+
         public void EndThread()
         {
             ListenThread.Abort();
         }
+
         public bool EndEvent(Accuracy_Event endingEvent)
         {
             foreach (AccuracyLanding L in Landings)
             {
-                if (!(L.isComplete)||!(L.LostInput))
+                if (!(L.completed)||!(L.lostInput))
                 {
                     return false;
                 }

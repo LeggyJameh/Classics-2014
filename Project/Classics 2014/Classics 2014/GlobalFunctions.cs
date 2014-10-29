@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Classics_2014.MySQL;
+
 
 namespace Classics_2014
 {
@@ -17,52 +19,32 @@ namespace Classics_2014
                 CurrentCompetitor.name = Competitors[i].name;
                 CurrentCompetitor.nationality = Competitors[i].nationality;
                 CurrentCompetitor.team = Competitors[i].team;
-                CurrentCompetitor.EID = "";
                 EventCompetitors.Add(CurrentCompetitor);
             }
             return EventCompetitors;
         }
 
-        public static Rulesets.AccuracyRuleset ConvertByteArrayToAccuracyRuleSet(byte[] ruleset)
+        public static Ruleset.AccuracyRules ConvertByteArrayToAccuracyRules(byte[] Rules)
         {
-            Rulesets.AccuracyRuleset Rules = new Rulesets.AccuracyRuleset();
+            Ruleset.AccuracyRules CurrentRules = new Ruleset.AccuracyRules();
             ASCIIEncoding ascii = new ASCIIEncoding();
-            string[] args = ascii.GetString(ruleset).Split('*');
-            Rules.Stage = Convert.ToInt16(args[0]);
-            Rules.ScoresUsed = Convert.ToString(args[1]);
-            Rules.compHalt = Convert.ToSingle(args[2]);
-            Rules.directionOut = Convert.ToUInt16(args[3]);
-            Rules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(args[4]);
-            Rules.maxScored = Convert.ToInt16(args[5]);
-            Rules.noOfCompetitorsPerTeam = Convert.ToInt16(args[6]);
-            Rules.preset = args[7];
-            Rules.windout = Convert.ToSingle(args[8]);
-            Rules.windSecondsPrior = Convert.ToInt16(args[9]);
-            Rules.windSecondsAfter = Convert.ToInt16(args[10]);
-            Rules.timeCheckAngleChangePrior = Convert.ToInt16(args[11]);
-            Rules.timeCheckAngleChangeAfter = Convert.ToInt16(args[12]);
-            return Rules;
+            string[] args = ascii.GetString(Rules).Split('*');
+            CurrentRules.Stage = Convert.ToInt16(args[0]);
+            CurrentRules.ScoresUsed = Convert.ToString(args[1]);
+            CurrentRules.compHalt = Convert.ToSingle(args[2]);
+            CurrentRules.directionOut = Convert.ToUInt16(args[3]);
+            CurrentRules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(args[4]);
+            CurrentRules.maxScored = Convert.ToInt16(args[5]);
+            CurrentRules.noOfCompetitorsPerTeam = Convert.ToInt16(args[6]);
+            CurrentRules.preset = args[7];
+            CurrentRules.windout = Convert.ToSingle(args[8]);
+            CurrentRules.windSecondsPrior = Convert.ToInt16(args[9]);
+            CurrentRules.windSecondsAfter = Convert.ToInt16(args[10]);
+            CurrentRules.timeCheckAngleChangePrior = Convert.ToInt16(args[11]);
+            CurrentRules.timeCheckAngleChangeAfter = Convert.ToInt16(args[12]);
+            return CurrentRules;
         }
 
-        public static Accuracy.MySqlReturnLanding CastAccLandingToMySqlReturnLanding(Accuracy.AccuracyLanding Landing)
-        {
-            Accuracy.MySqlReturnLanding NewLanding = new Accuracy.MySqlReturnLanding();
-
-            NewLanding.dataGridCell = Landing.dataGridCell;
-            NewLanding.ID = Landing.ID;
-            NewLanding.Index = Landing.Index;
-            NewLanding.LandingWind = Landing.LandingWind;
-            NewLanding.score = Landing.score;
-            NewLanding.TimeOfLanding = Landing.TimeOfLanding;
-            NewLanding.WindDataAfter = Landing.WindDataAfter;
-            NewLanding.windDataPrior = Landing.windDataPrior;
-            NewLanding.WindInputs = Landing.WindInputs;
-
-            NewLanding.Round = 0;
-            NewLanding.UID = 0;
-            NewLanding.Modified = false;
-
-            return NewLanding;
-        }
+        
     }
 }

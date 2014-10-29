@@ -7,6 +7,8 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Concurrent;
+using Classics_2014.MySQL;
+
 namespace Classics_2014
 {
     abstract class Event
@@ -18,7 +20,9 @@ namespace Classics_2014
         public EventType EventType { get; protected set; }
         public List<Team> Teams;
         public int EventID;
+        public DateTime Date;
         public TabControl TabControl;
+        public Ruleset.Ruleset Rules;
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
@@ -39,17 +43,17 @@ namespace Classics_2014
         {
             throw new NotImplementedException();
         }
-        protected virtual byte[] ConvertRuleSetToByteArray()
+        protected virtual byte[] ConvertRulesToByteArray()
         {
             throw new NotImplementedException();
         }
-        protected virtual void ConvertByteArrayToRuleset()
+        protected virtual void ConvertByteArrayToRules()
         {
             throw new NotImplementedException();
         }
         public void EndThread()
         {
-            ListenThread.Abort();
+            //ListenThread.Abort();
         }
         public virtual TWind ReturnWindLimits()
         {

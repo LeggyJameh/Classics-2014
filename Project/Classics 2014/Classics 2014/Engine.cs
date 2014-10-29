@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
+using Classics_2014.MySQL;
 namespace Classics_2014
 {
     class Engine
@@ -15,9 +16,10 @@ namespace Classics_2014
         private Thread ListenThread;
         Main mainForm;
         TabControl tabControl;
+        UserControl SideController;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
-        Accuracy.AccuracyEventController accuracyEventController;
+        public Accuracy.AccuracyEventController accuracyEventController;
         private StreamWriter writer;
         public FileStream fileStream;
         private StreamReader reader;
@@ -85,21 +87,21 @@ namespace Classics_2014
             ReOrderWindArray(wind);
         }
 
-        public Classics_2014.Accuracy.EventAccuracyOptions StartNewAccuracyEvent()
+        public Classics_2014.Accuracy.EventAccuracyInit StartNewAccuracyEvent()
         {
             Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent);
+            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(NewEvent, tabControl);
             NewEvent.TabControl = tabControl;
             return NewEvent.EventOptionsTab;
         }
 
-        public Classics_2014.Accuracy.EventAccuracyOptions LoadExistingAccuracyEvent(Rulesets.AccuracyRuleset Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
-        {
-            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyOptions(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
-            NewEvent.TabControl = tabControl;
-            return NewEvent.EventOptionsTab;
-        }
+        //public Classics_2014.Accuracy.EventAccuracyInit LoadExistingAccuracyEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
+        //{
+        //    Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
+        //    NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
+        //    NewEvent.TabControl = tabControl;
+        //    return NewEvent.EventOptionsTab;
+        //}
 
         public Classics_2014.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
         {
@@ -200,6 +202,19 @@ namespace Classics_2014
         private void CloseSerialInputs()
         {
             LostSerialConnection = true; //ToDo Make work For Multiple Events;
+        }
+
+        public void AddSideController(UserControl Controller)
+        {
+            SideController = Controller;
+
+            mainForm.MainGrid.Controls.Add(Controller, 2, 0);
+        }
+
+        public void RemoveCurrentSideController()
+        {
+            mainForm.MainGrid.Controls.Remove(SideController);
+            SideController = null;
         }
     }
 }

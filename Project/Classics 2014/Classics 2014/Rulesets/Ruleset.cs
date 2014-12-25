@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.ComponentModel;
 
-namespace Classics_2014.Ruleset
+namespace CMS.Ruleset
 {
     [Serializable]
     public class Ruleset
     {
-        public int Stage;
-        public int noOfCompetitorsPerTeam;
+        public EventStage stage;
+        public int competitorsPerTeam;
         public Ruleset()
         {
-            Stage = 0;
-            noOfCompetitorsPerTeam = 0;
+            stage = EventStage.SetupRules;
+            competitorsPerTeam = 0;
         }
     }
 }

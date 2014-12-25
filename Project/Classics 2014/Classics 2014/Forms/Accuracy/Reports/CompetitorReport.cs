@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014.Accuracy.Reports
+namespace CMS.Accuracy.Reports
 {
     public partial class CompetitorReport : UserControl
     {

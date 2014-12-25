@@ -1,4 +1,4 @@
-﻿namespace Classics_2014.Accuracy.Reports
+﻿namespace CMS.Accuracy.Reports
 {
     partial class CompetitorReport
     {

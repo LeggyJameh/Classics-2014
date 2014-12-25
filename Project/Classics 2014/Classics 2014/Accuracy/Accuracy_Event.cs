@@ -7,9 +7,9 @@ using System.Windows.Forms;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Collections.Concurrent;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014.Accuracy
+namespace CMS.Accuracy
 {
     // Working 28/10/14.
     class Accuracy_Event :Event 
@@ -18,7 +18,7 @@ namespace Classics_2014.Accuracy
         public EventAccuracyInit EventOptionsTab;
         public EventTeams EventTeamsTab;
         public EventAccuracy EventTab;
-        Engine engine;
+        public Engine engine;
         public Ruleset.AccuracyRules Rules;
 
         public List<Competitor> Competitors;
@@ -42,6 +42,7 @@ namespace Classics_2014.Accuracy
             this.controller = controller;
             RequiresSerial = true;
             EventType = EventType.Accuracy;
+            EventID = -1;
         }
 
         /// <summary>
@@ -56,9 +57,10 @@ namespace Classics_2014.Accuracy
             return controller.EndEvent(this);
         }
 
-        public void ProceedToEventTeams()
+        public void proceedToSetupTeams()
         {
-            EventTeamsTab = new EventTeams(this, Competitors, EventID, Rules.noOfCompetitorsPerTeam, ActiveTeams);
+            Rules.stage = EventStage.SetupTeams;
+            EventTeamsTab = new EventTeams(this, Competitors, EventID, Rules.competitorsPerTeam, ActiveTeams);
             TabPage NewPage = new TabPage();
             NewPage.Controls.Add(EventTeamsTab);
             EventTeamsTab.Dock = DockStyle.Fill;
@@ -67,9 +69,9 @@ namespace Classics_2014.Accuracy
             TabControl.SelectedTab = NewPage;
         }
 
-        public override void ProceedToEvent()
+        public void proceedToEvent()
         {
-            Rules.Stage = 2;
+            Rules.stage = EventStage.Ready;
             SQL_Controller.ModifyEvent(this);
             EventTab = new EventAccuracy(this, TabControl);
             TabPage NewPage = new TabPage();
@@ -79,6 +81,66 @@ namespace Classics_2014.Accuracy
             TabControl.TabPages.Add(NewPage);
             TabControl.SelectedTab = NewPage;
         }
+
+        #region Event Saving
+
+        /// <summary>
+        /// Save the event during the Rules stage.
+        /// </summary>
+        public void saveEventRulesStage(List<Competitor> SelectedCompetitors, Ruleset.AccuracyRules Rules, DateTime Date, string EventName)
+        {
+            this.Rules = Rules;
+            this.Date = Date;
+            this.Name = EventName;
+
+            // Stuff to merge over selected competitors so they are carried over.
+            this.Teams = new List<Team>();
+            Team currentTeam = new Team();
+            for (int c = 0; c < SelectedCompetitors.Count; c++)
+            {
+                currentTeam.Competitors.Add(new EventCompetitor(SelectedCompetitors[c]));
+            }
+            this.Teams.Add(currentTeam);
+            // End merger.
+
+            if (EventID != -1)
+            {
+                if (SQL_Controller.GetDoesEventExist(EventID))
+                {
+                    SQL_Controller.ModifyEvent(this);
+                }
+                else
+                {
+                    SQL_Controller.CreateEvent(this);
+                    EventID = SQL_Controller.GetLastInsertKey();
+                }
+            }
+            else
+            {
+                SQL_Controller.CreateEvent(this);
+                EventID = SQL_Controller.GetLastInsertKey();
+            }
+        }
+
+        /// <summary>
+        /// Save the event during the Team selection stage.
+        /// </summary>
+        public void saveEventTeamsStage()
+        {
+        }
+
+        /// <summary>
+        /// Save the event, ready to be started.
+        /// </summary>
+        public void saveEventReadyStage()
+        {
+        }
+
+        #endregion
+
+        #region Event Loading
+
+        #endregion
 
         public void SaveEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors, List<string> SelectedTeams)
         {
@@ -94,8 +156,8 @@ namespace Classics_2014.Accuracy
         public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
             this.Teams = Teams;
-            Rules.noOfCompetitorsPerTeam = CompetitorsPerTeam;
-            SQL_Controller.SaveTeams(EventID, Teams);
+            Rules.competitorsPerTeam = CompetitorsPerTeam;
+            SQL_Controller.CreateSTeams(EventID, Teams);
             SQL_Controller.ModifyEvent(this);
             EventTeamsTab = null;
         }
@@ -119,8 +181,8 @@ namespace Classics_2014.Accuracy
         public override TWind ReturnWindLimits()
         {
             TWind CurrentWind = new TWind();
-            CurrentWind.direction = Convert.ToUInt16(Rules.directionOut);
-            CurrentWind.speed = Rules.windout;
+            CurrentWind.direction = Convert.ToUInt16(Rules.directionChangeFA);
+            CurrentWind.speed = Rules.windspeedRejump;
             return CurrentWind;
         }
 
@@ -129,30 +191,30 @@ namespace Classics_2014.Accuracy
             if (L.windDataPrior != null && L.windDataAfter != null)
             {
                 #region SpeedChecks
-                for (int i = 0; i < Rules.windSecondsPrior; i++)
+                for (int i = 0; i < Rules.windSecondsPriorLand; i++)
                 {
-                    if (L.windDataPrior[i].speed > Rules.windout) { return true; } //If wind out
+                    if (L.windDataPrior[i].speed > Rules.windspeedRejump) { return true; } //If wind out
                 }
-                for (int ii = 0; ii < Rules.windSecondsAfter; ii++)
+                for (int ii = 0; ii < Rules.windSecondsAfterLand; ii++)
                 {
-                    if (L.windDataAfter[ii].speed > Rules.windout) { return true; } //If wind out  
+                    if (L.windDataAfter[ii].speed > Rules.windspeedRejump) { return true; } //If wind out  
                 }
                 #endregion
                 #region DirectionChecks
                 bool WindSpeedOverInTimePeriod = false;
-                for (int i = 0; i < Rules.timeCheckAngleChangePrior; i++)
+                for (int i = 0; i < Rules.timePriorFA; i++)
                 {
-                    if (L.windDataPrior[i].speed > Rules.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
+                    if (L.windDataPrior[i].speed > Rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
                 }
-                for (int i = 0; i < Rules.timeCheckAngleChangeAfter; i++)
+                for (int i = 0; i < Rules.timeAfterFA; i++)
                 {
-                    if (L.windDataAfter[i].speed > Rules.windSpeedNeededForDirectionChangeRujumps) { WindSpeedOverInTimePeriod = true; }
+                    if (L.windDataAfter[i].speed > Rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
                 }
                 if (WindSpeedOverInTimePeriod == true)
                 {
                     List<int> AnglesBefore = new List<int>();
                     List<int> AnglesAfter = new List<int>();
-                    for (int i = 0; i < Rules.timeCheckAngleChangePrior; i++)
+                    for (int i = 0; i < Rules.timePriorFA; i++)
                     {
                         TWind currentWind = L.windDataPrior[i];
                         for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
@@ -162,10 +224,10 @@ namespace Classics_2014.Accuracy
                             { AnglesBefore.Add(currentWind.direction); }
                         }
                     }
-                    for (int i = 0; i < Rules.timeCheckAngleChangeAfter; i++)
+                    for (int i = 0; i < Rules.timeAfterFA; i++)
                     {
                         TWind currentWind = L.windDataAfter[i];
-                        for (int i2 = 0; i2 < Rules.timeCheckAngleChangeAfter; i2++)
+                        for (int i2 = 0; i2 < Rules.timeAfterFA; i2++)
                         {
                             if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
                             else
@@ -181,28 +243,28 @@ namespace Classics_2014.Accuracy
         private bool IsDirectionOut(TWind wind, int prevData)
         {
             int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < Rules.directionOut)
+            if (prevData < Rules.directionChangeFA)
             {
                 minimum = 0;
-                minOverFlow = (360 - (Rules.directionOut - prevData));
+                minOverFlow = (360 - (Rules.directionChangeFA - prevData));
                 if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
             }
             else
             {
-                minimum = prevData - Rules.directionOut;
+                minimum = prevData - Rules.directionChangeFA;
                 if (wind.direction < minimum) { return true; }
                 else if (prevData > wind.direction) { return false; }
             }
             //Max checks
-            if ((prevData + Rules.directionOut) > 360)
+            if ((prevData + Rules.directionChangeFA) > 360)
             {
                 maximum = 360;
-                maxOverFlow = 0 + ((prevData + Rules.directionOut) - 360);
+                maxOverFlow = 0 + ((prevData + Rules.directionChangeFA) - 360);
                 if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
             }
             else
             {
-                maximum = prevData + Rules.directionOut;
+                maximum = prevData + Rules.directionChangeFA;
                 if (wind.direction > maximum) { return true; }
             }
 

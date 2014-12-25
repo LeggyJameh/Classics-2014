@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Classics_2014
+namespace CMS
 {
     class EventCompetitor : Competitor
     {
@@ -11,6 +11,15 @@ namespace Classics_2014
         public EventCompetitor()
         {
             EID = "";
+        }
+
+        public EventCompetitor(Competitor competitor)
+        {
+            EID = "";
+            this.ID = competitor.ID;
+            this.name = competitor.name;
+            this.nationality = competitor.nationality;
+            this.team = competitor.team;
         }
     }
 }

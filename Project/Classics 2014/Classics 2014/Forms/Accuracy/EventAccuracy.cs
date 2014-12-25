@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
-namespace Classics_2014.Accuracy
+namespace CMS.Accuracy
 {
     partial class EventAccuracy : UserControl
     {
@@ -186,7 +186,7 @@ namespace Classics_2014.Accuracy
                     if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
                     {
                         currentLanding = Connected_Event.controller.getLandingFromCell(dataGridViewScore.SelectedCells[0]);
-                        currentLanding.score = CustomMessageBox.Show(Connected_Event.Rules.maxScored);
+                        currentLanding.score = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), Connected_Event.Rules.maxScore);
                         if (currentLanding.score != -1)
                         {
                             dataGridViewScore.SelectedCells[0].Value = currentLanding.score;
@@ -210,7 +210,7 @@ namespace Classics_2014.Accuracy
                 {
                     if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
                     {
-                        int NewScore = CustomMessageBox.Show(Connected_Event.Rules.maxScored);
+                        int NewScore = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), Connected_Event.Rules.maxScore);
                         if (NewScore != -1)
                         {
                             dataGridViewScore.SelectedCells[0].Value = NewScore;
@@ -304,7 +304,7 @@ namespace Classics_2014.Accuracy
 
         private void buttonRenameCompetitor_Click(object sender, EventArgs e)
         {
-            string NewName = CustomMessageBox.Show(ModifyNameTypes.Competitor);
+            string NewName = MessageBoxes.ModifyCompetitorName();
             int UID = Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value);
             string Team = Convert.ToString(dataGridViewScore.SelectedRows[0].Cells[2].Value);
             string Nationality = Convert.ToString(dataGridViewScore.SelectedRows[0].Cells[3].Value);

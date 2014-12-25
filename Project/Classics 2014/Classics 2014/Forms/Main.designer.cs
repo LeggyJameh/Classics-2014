@@ -1,4 +1,4 @@
-﻿namespace Classics_2014
+﻿namespace CMS
 {
     partial class Main
     {
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "T",
             "S",
             "D"}, -1);
@@ -186,6 +186,7 @@
             this.buttonModifyCompetitorData.TabIndex = 6;
             this.buttonModifyCompetitorData.Text = "Modify Competitors";
             this.buttonModifyCompetitorData.UseVisualStyleBackColor = true;
+            this.buttonModifyCompetitorData.Click += new System.EventHandler(this.buttonModifyCompetitorData_Click);
             // 
             // buttonMainSettings
             // 
@@ -323,7 +324,7 @@
             this.listBoxWindLog.ForeColor = System.Drawing.Color.White;
             this.listBoxWindLog.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.listBoxWindLog.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.listBoxWindLog.LabelWrap = false;
             this.listBoxWindLog.Location = new System.Drawing.Point(3, 299);
             this.listBoxWindLog.MultiSelect = false;

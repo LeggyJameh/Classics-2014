@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 
-namespace Classics_2014
+namespace CMS
 {
     class Team
     {
-        public List<EventCompetitor> Competitors;
+        public int ID;
+        public int EventID;
         public string Name;
+        public List<EventCompetitor> Competitors;
+        public Image TeamImage;
         public Team()
         {
             Competitors = new List<EventCompetitor>();

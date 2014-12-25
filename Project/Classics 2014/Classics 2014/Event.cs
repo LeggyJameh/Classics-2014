@@ -7,9 +7,9 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Collections.Concurrent;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014
+namespace CMS
 {
     abstract class Event
     {

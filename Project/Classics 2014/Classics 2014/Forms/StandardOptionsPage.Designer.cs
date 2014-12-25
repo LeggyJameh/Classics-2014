@@ -1,4 +1,4 @@
-﻿namespace Classics_2014
+﻿namespace CMS
 {
     partial class StandardOptionsPage
     {

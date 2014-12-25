@@ -5,12 +5,12 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-namespace Classics_2014.MySQL
+namespace CMS.MySQL
 {
     // Working 29/10/14.
-    class SerialisationFunctions
+    partial class SQL_Controller
     {
-        public MySqlLanding SerialiseLanding(Landing Landing)
+        private MySqlLanding SerialiseLanding(Landing Landing)
         {
             MySqlLanding NewLanding = new MySqlLanding();
 
@@ -25,17 +25,17 @@ namespace Classics_2014.MySQL
             return NewLanding;
         }
 
-        public Classics_2014.Accuracy.AccuracyLanding DeserialiseAccuracyLanding(MySqlLanding Landing, EventType Type) // Should be able to determine which type of landing it is, provided all event types are in and all landings derive from Landing class.
+        private CMS.Accuracy.AccuracyLanding DeserialiseAccuracyLanding(MySqlLanding Landing, EventType Type) // Should be able to determine which type of landing it is, provided all event types are in and all landings derive from Landing class.
         {
             MemoryStream m = new MemoryStream();
             BinaryFormatter f = new BinaryFormatter();
             m.Write(Landing.Data, 0, Landing.Data.Length);
             m.Seek(0, SeekOrigin.Begin);
-            Classics_2014.Accuracy.AccuracyLanding deSerializedLanding = (Classics_2014.Accuracy.AccuracyLanding)f.Deserialize(m);
+            CMS.Accuracy.AccuracyLanding deSerializedLanding = (CMS.Accuracy.AccuracyLanding)f.Deserialize(m);
             return deSerializedLanding;
         }
 
-        public MySqlEvent SerialiseEvent(Event Event)
+        private MySqlEvent SerialiseEvent(Event Event)
         {
             MySqlEvent NewEvent = new MySqlEvent();
 
@@ -57,7 +57,7 @@ namespace Classics_2014.MySQL
             return NewEvent;
         }
 
-        public Event DeserialiseEvent(MySqlEvent Event)
+        private Event DeserialiseEvent(MySqlEvent Event)
         {
             switch (Event.Type)
             {
@@ -77,6 +77,62 @@ namespace Classics_2014.MySQL
                     break;
             }
             return null;
+        }
+
+        private MySqlTeam SerialiseTeam(Team Team)
+        {
+            MySqlTeam NewTeam = new MySqlTeam();
+
+            NewTeam.ID = Team.ID;
+            NewTeam.EventID = Team.EventID;
+            NewTeam.Name = Team.Name;
+
+            BinaryFormatter f = new BinaryFormatter();
+            MemoryStream m = new MemoryStream();
+            try
+            { f.Serialize(m, Team.Competitors); }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+            NewTeam.Data = m.ToArray();
+
+            f = new BinaryFormatter();
+            m = new MemoryStream();
+
+            try
+            { f.Serialize(m, Team.TeamImage); }
+            catch (Exception e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message);
+            }
+
+            NewTeam.Image = m.ToArray();
+
+            return NewTeam;
+        }
+
+        private Team DeserialiseTeam(MySqlTeam Team)
+        {
+            Team deSerialisedTeam = new Team();
+
+            MemoryStream m = new MemoryStream();
+            BinaryFormatter f = new BinaryFormatter();
+            m.Write(Team.Data, 0, Team.Data.Length);
+            m.Seek(0, SeekOrigin.Begin);
+            deSerialisedTeam.Competitors = (List<EventCompetitor>)f.Deserialize(m);
+
+            m = new MemoryStream();
+            f = new BinaryFormatter();
+            m.Write(Team.Image, 0, Team.Image.Length);
+            m.Seek(0, SeekOrigin.Begin);
+            deSerialisedTeam.TeamImage = (System.Drawing.Image)f.Deserialize(m);
+
+            deSerialisedTeam.EventID = Team.EventID;
+            deSerialisedTeam.ID = Team.ID;
+            deSerialisedTeam.Name = Team.Name;
+
+            return deSerialisedTeam;
         }
     }
 }

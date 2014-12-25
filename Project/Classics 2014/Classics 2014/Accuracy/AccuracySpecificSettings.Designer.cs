@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Classics_2014.Accuracy {
+namespace CMS.Accuracy {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

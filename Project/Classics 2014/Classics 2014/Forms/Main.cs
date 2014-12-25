@@ -10,7 +10,7 @@ using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-namespace Classics_2014
+namespace CMS
 {
     public partial class Main : Form
     {
@@ -29,7 +29,7 @@ namespace Classics_2014
             windGraphingControllercs windGraphingControllercs2 = new windGraphingControllercs();
             windGraphingControllercs2.Dock = DockStyle.Fill;
             tabControl.TabPages[1].Controls.Add(windGraphingControllercs2);
-            MainEngine = new Engine(this, tabControl, windGraphingControllercs2);
+            MainEngine = new Engine(this, windGraphingControllercs2);
             for (int i = 0; i < 60; i++)
             {
                 ListViewItem NewItem = (ListViewItem)listBoxWindLog.Items[0].Clone();
@@ -38,6 +38,44 @@ namespace Classics_2014
             listBoxWindLog.Visible = true;
             tableLayoutPanel6.Visible = true;
             MainGrid = tableLayoutPanel5;
+            MainEngine.SQL_Controller.OpenConnection();
+        }
+
+        public void addNewTab(string tabName, UserControl tabContents)
+        {
+            tabContents.Dock = DockStyle.Fill;
+            tabControl.TabPages.Add(new TabPage(tabName));
+            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(tabContents);
+            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+        }
+
+        public void addNewTabDiscrete(string tabName, UserControl tabContents)
+        {
+            tabContents.Dock = DockStyle.Fill;
+            tabControl.TabPages.Add(new TabPage(tabName));
+            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(tabContents);
+
+        }
+
+        public void removeCurrentTab()
+        {
+            tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
+            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+        }
+
+        public void removeTab(TabPage tabToRemove)
+        {
+            tabControl.TabPages.Remove(tabToRemove);
+        }
+
+        public void selectTab(int index)
+        {
+            tabControl.SelectedIndex = index;
+        }
+
+        public void selectTab(TabPage tabPage)
+        {
+            tabControl.SelectedTab = tabPage;
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -49,17 +87,13 @@ namespace Classics_2014
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
             MainEngine.AddSideController(MainEngine.accuracyEventController.column);
-            string EventName = CustomMessageBox.ShowEventPicker();
+            string EventName = EventPickerMessageBox.ShowEventPicker();
             switch (EventName)
             {
                 case "IntAccuracy":
                     TabPage NewPage = new TabPage();
-                    Classics_2014.Accuracy.EventAccuracyInit EventTab = MainEngine.StartNewAccuracyEvent();
-                    NewPage.Controls.Add(EventTab);
-                    EventTab.Dock = DockStyle.Fill;
-                    NewPage.Text = "New Event";
-                    tabControl.TabPages.Add(NewPage);
-                    tabControl.SelectedTab = NewPage;
+                    CMS.Accuracy.EventAccuracyInit EventTab = MainEngine.StartNewAccuracyEvent();
+                    addNewTab("New Event", EventTab);
                     break;
             }
         }
@@ -172,9 +206,7 @@ namespace Classics_2014
 
         private void buttonMainSettings_Click(object sender, EventArgs e)
         {
-            tabControl.TabPages.Add(new TabPage("Options"));
-            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(new StandardOptionsPage(MainEngine.windGraph, tabControl));
-            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+            addNewTab("Options", new StandardOptionsPage(MainEngine.windGraph, this));
         }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)
@@ -188,11 +220,12 @@ namespace Classics_2014
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            EventLoader CurrentEventLoader = new EventLoader(MainEngine, tabControl);
-            CurrentEventLoader.Dock = DockStyle.Fill;
-            tabControl.TabPages.Add(new TabPage("Load Event"));
-            tabControl.TabPages[tabControl.TabPages.Count - 1].Controls.Add(CurrentEventLoader);
-            tabControl.SelectTab(tabControl.TabPages.Count - 1);
+            addNewTab("Load Event", new EventLoader(MainEngine));
+        }
+
+        private void buttonModifyCompetitorData_Click(object sender, EventArgs e)
+        {
+            MainEngine.openCompetitorEditor();
         }
         
     }

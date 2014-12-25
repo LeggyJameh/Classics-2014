@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Classics_2014.MySQL;
+using CMS.MySQL;
+using System.Reflection;
+using System.ComponentModel;
 
 
-namespace Classics_2014
+namespace CMS
 {
     static class GlobalFunctions
     {
@@ -29,22 +31,20 @@ namespace Classics_2014
             Ruleset.AccuracyRules CurrentRules = new Ruleset.AccuracyRules();
             ASCIIEncoding ascii = new ASCIIEncoding();
             string[] args = ascii.GetString(Rules).Split('*');
-            CurrentRules.Stage = Convert.ToInt16(args[0]);
-            CurrentRules.ScoresUsed = Convert.ToString(args[1]);
-            CurrentRules.compHalt = Convert.ToSingle(args[2]);
-            CurrentRules.directionOut = Convert.ToUInt16(args[3]);
-            CurrentRules.windSpeedNeededForDirectionChangeRujumps = Convert.ToSingle(args[4]);
-            CurrentRules.maxScored = Convert.ToInt16(args[5]);
-            CurrentRules.noOfCompetitorsPerTeam = Convert.ToInt16(args[6]);
+            CurrentRules.stage = (EventStage)Convert.ToInt16(args[0]);
+            CurrentRules.scoresUsed = Convert.ToString(args[1]);
+            CurrentRules.windspeedSafe = Convert.ToSingle(args[2]);
+            CurrentRules.directionChangeFA = Convert.ToUInt16(args[3]);
+            CurrentRules.windspeedFA = Convert.ToSingle(args[4]);
+            CurrentRules.maxScore = Convert.ToInt16(args[5]);
+            CurrentRules.competitorsPerTeam = Convert.ToInt16(args[6]);
             CurrentRules.preset = args[7];
-            CurrentRules.windout = Convert.ToSingle(args[8]);
-            CurrentRules.windSecondsPrior = Convert.ToInt16(args[9]);
-            CurrentRules.windSecondsAfter = Convert.ToInt16(args[10]);
-            CurrentRules.timeCheckAngleChangePrior = Convert.ToInt16(args[11]);
-            CurrentRules.timeCheckAngleChangeAfter = Convert.ToInt16(args[12]);
+            CurrentRules.windspeedRejump = Convert.ToSingle(args[8]);
+            CurrentRules.windSecondsPriorLand = Convert.ToInt16(args[9]);
+            CurrentRules.windSecondsAfterLand = Convert.ToInt16(args[10]);
+            CurrentRules.timePriorFA = Convert.ToInt16(args[11]);
+            CurrentRules.timeAfterFA = Convert.ToInt16(args[12]);
             return CurrentRules;
-        }
-
-        
+        }        
     }
 }

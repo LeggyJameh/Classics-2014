@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Collections.Concurrent;
 
-namespace Classics_2014
+namespace CMS
 {
      partial class DebugIOWINDOW : Form
     {

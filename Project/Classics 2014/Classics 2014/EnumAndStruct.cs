@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Collections.Generic;
-namespace Classics_2014
+namespace CMS
 {
     public enum EventType
     {
         Accuracy,
     }
 
-    public enum ModifyNameTypes
+    public enum EventStage
     {
-        Competitor,
-        Team,
-        Scoring_Team
+        SetupRules = 0,
+        SetupTeams = 1,
+        Ready = 2
     }
 
     [Serializable]

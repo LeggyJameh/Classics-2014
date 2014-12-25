@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 
-namespace Classics_2014.Accuracy.Reports
+namespace CMS.Accuracy.Reports
 {
      partial class LandingReport : UserControl
     {
@@ -54,10 +54,10 @@ namespace Classics_2014.Accuracy.Reports
                         itemToAdd.ForeColor = Color.Red;
                     }
                 }
-                else if (windData.speed > connectedEvent.Rules.windout)
+                else if (windData.speed > connectedEvent.Rules.windspeedRejump)
                 {
                     itemToAdd.ForeColor = Color.Red;
-                    if (windData.speed > connectedEvent.Rules.compHalt)
+                    if (windData.speed > connectedEvent.Rules.windspeedSafe)
                     {
                         itemToAdd.BackColor = Color.Black;
                     }
@@ -72,28 +72,28 @@ namespace Classics_2014.Accuracy.Reports
         private bool IsDirectionOut(TWind wind, int prevData)
         {
             int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < connectedEvent.Rules.directionOut)
+            if (prevData < connectedEvent.Rules.directionChangeFA)
             {
                 minimum = 0;
-                minOverFlow = (360 - ((int)connectedEvent.Rules.directionOut - prevData));
+                minOverFlow = (360 - ((int)connectedEvent.Rules.directionChangeFA - prevData));
                 if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
             }
             else
             {
-                minimum = prevData - (int)connectedEvent.Rules.directionOut;
+                minimum = prevData - (int)connectedEvent.Rules.directionChangeFA;
                 if (wind.direction < minimum) { return true; }
                 else if (prevData > wind.direction) { return false; }
             }
             //Max checks
-            if ((prevData + (int)connectedEvent.Rules.directionOut) > 360)
+            if ((prevData + (int)connectedEvent.Rules.directionChangeFA) > 360)
             {
                 maximum = 360;
-                maxOverFlow = 0 + ((prevData + (int)connectedEvent.Rules.directionOut) - 360);
+                maxOverFlow = 0 + ((prevData + (int)connectedEvent.Rules.directionChangeFA) - 360);
                 if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
             }
             else
             {
-                maximum = prevData + (int)connectedEvent.Rules.directionOut;
+                maximum = prevData + (int)connectedEvent.Rules.directionChangeFA;
                 if (wind.direction > maximum) { return true; }
             }
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014
+namespace CMS
 {
     public partial class EventPicker : Form
     {
@@ -71,7 +71,7 @@ namespace Classics_2014
         }
     }
 
-    partial class CustomMessageBox
+    class EventPickerMessageBox
     {
         public static string ShowEventPicker()
         {

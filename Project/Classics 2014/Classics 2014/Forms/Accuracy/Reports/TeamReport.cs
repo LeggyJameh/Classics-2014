@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Printing;
 
-namespace Classics_2014.Accuracy.Reports
+namespace CMS.Accuracy.Reports
 {
     public partial class TeamReport : UserControl
     {

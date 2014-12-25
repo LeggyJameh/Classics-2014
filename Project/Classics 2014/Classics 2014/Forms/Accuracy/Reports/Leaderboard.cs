@@ -8,9 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.IO;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014.Accuracy.Reports
+namespace CMS.Accuracy.Reports
 {
     partial class Leaderboard : UserControl
     {
@@ -34,7 +34,7 @@ namespace Classics_2014.Accuracy.Reports
             autoUpdate = false;
             this.Close = Close;
             Populate();
-            if (connectedEvent.Rules.noOfCompetitorsPerTeam > 1)
+            if (connectedEvent.Rules.competitorsPerTeam > 1)
             {
                 buttonSortAsSingles.Visible = true;
                 buttonSortAsTeam.Visible = true;
@@ -55,7 +55,7 @@ namespace Classics_2014.Accuracy.Reports
                     {
                         r.Cells[Round + 4] = (DataGridViewCell)newCell.Clone();
                         r.Cells[Round + 4].Value  = newCell.Value;
-                        if (connectedEvent.Rules.noOfCompetitorsPerTeam == 1)
+                        if (connectedEvent.Rules.competitorsPerTeam == 1)
                         {
                             complexSingleSort();
                         }
@@ -79,7 +79,7 @@ namespace Classics_2014.Accuracy.Reports
             {
                 dataGridViewLockedLeaderboard.Rows.Clear();
                 Populate();
-                if (connectedEvent.Rules.noOfCompetitorsPerTeam == 1)
+                if (connectedEvent.Rules.competitorsPerTeam == 1)
                 {
                     complexSingleSort();
                 }
@@ -91,7 +91,7 @@ namespace Classics_2014.Accuracy.Reports
         }
         public void Populate()
         {
-            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
+            List<Team> Teams = sqlController.GetSTeamsForEvent(connectedEvent.EventID);
             landings = sqlController.GetLandingsForEvent(eventId, connectedEvent.EventType);
             DataGridViewCell cellToEdit;
             for (int Ti = 0; Ti < Teams.Count; Ti++)
@@ -129,7 +129,7 @@ namespace Classics_2014.Accuracy.Reports
 
             }
 
-            if (connectedEvent.Rules.noOfCompetitorsPerTeam == 1)
+            if (connectedEvent.Rules.competitorsPerTeam == 1)
             {
                 complexSingleSort();
             }
@@ -142,7 +142,7 @@ namespace Classics_2014.Accuracy.Reports
         {
             int total = 0;
             int indexPosition=0;
-            int[] teamScores = new int[connectedEvent.Rules.noOfCompetitorsPerTeam];
+            int[] teamScores = new int[connectedEvent.Rules.competitorsPerTeam];
 
             foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
             {
@@ -155,7 +155,7 @@ namespace Classics_2014.Accuracy.Reports
         
             
             Array.Sort(teamScores);
-            for (int i2 = 0; i2 < Convert.ToInt16(connectedEvent.Rules.ScoresUsed.Substring(5)); i2++)
+            for (int i2 = 0; i2 < Convert.ToInt16(connectedEvent.Rules.scoresUsed.Substring(5)); i2++)
             {
                 total += teamScores[i2];
             }

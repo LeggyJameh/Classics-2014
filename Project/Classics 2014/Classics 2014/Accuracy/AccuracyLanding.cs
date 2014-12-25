@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014.Accuracy
+namespace CMS.Accuracy
 {
     [Serializable]
     class AccuracyLanding : Landing

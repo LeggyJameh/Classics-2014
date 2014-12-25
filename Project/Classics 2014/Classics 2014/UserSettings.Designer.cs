@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Classics_2014 {
+namespace CMS {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

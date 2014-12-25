@@ -7,9 +7,9 @@ using System.Collections.Concurrent;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Windows.Forms;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014.Accuracy
+namespace CMS.Accuracy
 {
     // Working 29/10/14.
     class AccuracyEventController

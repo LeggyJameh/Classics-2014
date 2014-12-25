@@ -7,16 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014
+namespace CMS
 {
     partial class StandardOptionsPage : UserControl
     {
         windGraphingControllercs windGraph;
-        TabControl tabControl;
-        public StandardOptionsPage(windGraphingControllercs windGraph, TabControl tabControl)
+        Main MainForm;
+        public StandardOptionsPage(windGraphingControllercs windGraph, Main main)
         {
-            this.tabControl = tabControl;
             this.windGraph = windGraph;
+            this.MainForm = main;
             InitializeComponent();
             listBoxOptionsMenu.SelectedIndex = 0;
 
@@ -44,7 +44,7 @@ namespace Classics_2014
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            tabControl.TabPages.Remove((TabPage)this.Parent);
+            MainForm.removeTab((TabPage)this.Parent);
         }
     }
 }

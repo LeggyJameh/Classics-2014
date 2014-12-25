@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace Classics_2014
+namespace CMS
 {
     partial class EventTeams : UserControl
     {
@@ -120,7 +120,7 @@ namespace Classics_2014
 
         private void buttonAddTeam_Click(object sender, EventArgs e)
         {
-            string NewTeamName = CustomMessageBox.Show(ModifyNameTypes.Scoring_Team);
+            string NewTeamName = MessageBoxes.ModifyTeamName();
             bool isUnique = true;
             for (int Ti = 0; Ti < Teams.Count; Ti++)
             {

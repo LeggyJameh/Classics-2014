@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading;
 using System.Windows.Forms;
 using System.IO;
-using Classics_2014.MySQL;
-namespace Classics_2014
+using CMS.MySQL;
+namespace CMS
 {
     class Engine
     {
@@ -14,8 +14,7 @@ namespace Classics_2014
         public IO_Controller IO_Controller;
         public SQL_Controller SQL_Controller;
         private Thread ListenThread;
-        Main mainForm;
-        TabControl tabControl;
+        public Main mainForm;
         UserControl SideController;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
@@ -28,10 +27,9 @@ namespace Classics_2014
         bool LostSerialConnection;
         #endregion 
 
-        public Engine(Main mainForm, TabControl tabControl, windGraphingControllercs windGraph)
+        public Engine(Main mainForm, windGraphingControllercs windGraph)
         {
             this.mainForm = mainForm;
-            this.tabControl = tabControl;
             this.windGraph = windGraph;
             windGraph.MainEngine = this;
             AquireMasterFile();
@@ -87,12 +85,16 @@ namespace Classics_2014
             ReOrderWindArray(wind);
         }
 
-        public Classics_2014.Accuracy.EventAccuracyInit StartNewAccuracyEvent()
+        public CMS.Accuracy.EventAccuracyInit StartNewAccuracyEvent()
         {
             Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(NewEvent, tabControl);
-            NewEvent.TabControl = tabControl;
+            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(NewEvent);
             return NewEvent.EventOptionsTab;
+        }
+
+        public void openCompetitorEditor()
+        {
+            mainForm.addNewTab("Competitor Editor", new CompetitorEditor(this));
         }
 
         //public Classics_2014.Accuracy.EventAccuracyInit LoadExistingAccuracyEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
@@ -103,7 +105,7 @@ namespace Classics_2014
         //    return NewEvent.EventOptionsTab;
         //}
 
-        public Classics_2014.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
+        public CMS.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
         {
             Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
             return NewEvent;

@@ -8,7 +8,7 @@
     <ProjectGuid>{EADFE3E8-3E18-44AA-B215-35CB5A0FCEB4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Classics_2014</RootNamespace>
+    <RootNamespace>CMS</RootNamespace>
     <AssemblyName>CMS</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -66,6 +66,10 @@
     <ApplicationIcon>Resources\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CustomMessageBox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\CustomMessageBox.dll</HintPath>
+    </Reference>
     <Reference Include="MySql.Data, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MySql.Data.dll</HintPath>
@@ -139,24 +143,14 @@
     <Compile Include="Forms\Accuracy\accuracyEventLandingColumn.Designer.cs">
       <DependentUpon>accuracyEventLandingColumn.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MessageBoxCreateTeam.cs">
-      <SubType>Form</SubType>
+    <Compile Include="Forms\CompetitorEditor.cs">
+      <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\MessageBoxCreateTeam.Designer.cs">
-      <DependentUpon>MessageBoxCreateTeam.cs</DependentUpon>
+    <Compile Include="Forms\CompetitorEditor.Designer.cs">
+      <DependentUpon>CompetitorEditor.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\MessageBoxCreateCompetitor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\MessageBoxCreateCompetitor.Designer.cs">
-      <DependentUpon>MessageBoxCreateCompetitor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\ApplyFilter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ApplyFilter.Designer.cs">
-      <DependentUpon>ApplyFilter.cs</DependentUpon>
-    </Compile>
+    <Compile Include="MessageBoxes.cs" />
+    <Compile Include="MySQL\MySqlTeam.cs" />
     <Compile Include="Object Only Classes\Competitor.cs" />
     <Compile Include="Forms\DebugIOWINDOW.cs">
       <SubType>Form</SubType>
@@ -174,23 +168,11 @@
     <Compile Include="Object Only Classes\Landing.cs" />
     <Compile Include="MySQL\MySqlEvent.cs" />
     <Compile Include="MySQL\MySqlLanding.cs" />
-    <Compile Include="Forms\ModifyName.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ModifyName.Designer.cs">
-      <DependentUpon>ModifyName.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Accuracy\EventAccuracy.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\Accuracy\EventAccuracy.Designer.cs">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Accuracy\ModifyLanding.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\Accuracy\ModifyLanding.Designer.cs">
-      <DependentUpon>ModifyLanding.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\CommonDisplayOptions.cs">
       <SubType>UserControl</SubType>
@@ -211,12 +193,6 @@
       <DependentUpon>EventTeams.cs</DependentUpon>
     </Compile>
     <Compile Include="Camera Controller.cs" />
-    <Compile Include="Forms\Accuracy\EventAccuracyInitOLD.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Accuracy\EventAccuracyInitOLD.Designer.cs">
-      <DependentUpon>EventAccuracyInitOLD.cs</DependentUpon>
-    </Compile>
     <Compile Include="Object Only Classes\Data.cs" />
     <Compile Include="Accuracy\Data_Accuracy.cs" />
     <Compile Include="Engine.cs" />
@@ -280,11 +256,8 @@
     <EmbeddedResource Include="Forms\Accuracy\accuracyEventLandingColumn.resx">
       <DependentUpon>accuracyEventLandingColumn.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MessageBoxCreateTeam.resx">
-      <DependentUpon>MessageBoxCreateTeam.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MessageBoxCreateCompetitor.resx">
-      <DependentUpon>MessageBoxCreateCompetitor.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\CompetitorEditor.resx">
+      <DependentUpon>CompetitorEditor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebugIOWINDOW.resx">
       <DependentUpon>DebugIOWINDOW.cs</DependentUpon>
@@ -292,17 +265,8 @@
     <EmbeddedResource Include="Forms\EventPicker.resx">
       <DependentUpon>EventPicker.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ModifyName.resx">
-      <DependentUpon>ModifyName.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\EventAccuracy.resx">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Accuracy\EventAccuracyInitOLD.resx">
-      <DependentUpon>EventAccuracyInitOLD.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Accuracy\ModifyLanding.resx">
-      <DependentUpon>ModifyLanding.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
@@ -318,9 +282,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ApplyFilter.resx">
-      <DependentUpon>ApplyFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -397,6 +358,7 @@
   <ItemGroup>
     <None Include="Resources\tex-air.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

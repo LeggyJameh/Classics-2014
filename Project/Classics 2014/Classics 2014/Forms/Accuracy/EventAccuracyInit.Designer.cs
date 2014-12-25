@@ -1,4 +1,4 @@
-﻿namespace Classics_2014.Accuracy
+﻿namespace CMS.Accuracy
 {
     partial class EventAccuracyInit
     {
@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -71,14 +73,6 @@
             this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label19 = new System.Windows.Forms.Label();
-            this.inputTeamSelect = new System.Windows.Forms.Button();
-            this.inputTeamDeselect = new System.Windows.Forms.Button();
-            this.inputTeamAdd = new System.Windows.Forms.Button();
-            this.inputTeamRemove = new System.Windows.Forms.Button();
-            this.inputTeamFilter = new System.Windows.Forms.Button();
-            this.label21 = new System.Windows.Forms.Label();
-            this.inputTeamShow = new System.Windows.Forms.ComboBox();
-            this.labelTeamFilter = new System.Windows.Forms.Label();
             this.dataGridCompetitors = new System.Windows.Forms.DataGridView();
             this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -93,6 +87,15 @@
             this.inputCompetitorEditor = new System.Windows.Forms.Button();
             this.labelCompetitorFilter = new System.Windows.Forms.Label();
             this.inputCompetitorShow = new System.Windows.Forms.CheckBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.inputTeamSelect = new System.Windows.Forms.Button();
+            this.inputTeamDeselect = new System.Windows.Forms.Button();
+            this.inputTeamAdd = new System.Windows.Forms.Button();
+            this.inputTeamRemove = new System.Windows.Forms.Button();
+            this.inputTeamFilter = new System.Windows.Forms.Button();
+            this.labelTeamFilter = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.inputTeamShow = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
@@ -108,17 +111,19 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompetitors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 6;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel1.ColumnCount = 7;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 3);
@@ -155,47 +160,66 @@
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.dataGridTeams, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.label19, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamSelect, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamDeselect, 4, 3);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamAdd, 4, 4);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamRemove, 4, 5);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamFilter, 4, 6);
-            this.tableLayoutPanel1.Controls.Add(this.label21, 4, 8);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamShow, 5, 8);
-            this.tableLayoutPanel1.Controls.Add(this.labelTeamFilter, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.dataGridCompetitors, 3, 10);
             this.tableLayoutPanel1.Controls.Add(this.label20, 3, 9);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorSelect, 4, 11);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorDeselect, 4, 12);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorAdd, 4, 13);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorRemove, 4, 14);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorFilter, 4, 15);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorEditor, 4, 18);
-            this.tableLayoutPanel1.Controls.Add(this.labelCompetitorFilter, 4, 16);
-            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorShow, 4, 17);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorSelect, 5, 11);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorDeselect, 5, 12);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorAdd, 5, 13);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorRemove, 5, 14);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorFilter, 5, 15);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorEditor, 5, 18);
+            this.tableLayoutPanel1.Controls.Add(this.labelCompetitorFilter, 5, 16);
+            this.tableLayoutPanel1.Controls.Add(this.inputCompetitorShow, 5, 17);
+            this.tableLayoutPanel1.Controls.Add(this.pictureBox2, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamSelect, 5, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamDeselect, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamAdd, 5, 3);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamRemove, 5, 4);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamFilter, 5, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelTeamFilter, 5, 6);
+            this.tableLayoutPanel1.Controls.Add(this.label21, 5, 7);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamShow, 6, 7);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 19;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5.025126F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.547738F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 800);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
@@ -205,7 +229,7 @@
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Location = new System.Drawing.Point(3, 40);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(194, 40);
+            this.label1.Size = new System.Drawing.Size(160, 40);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name of Event:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -216,7 +240,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(3, 80);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(194, 40);
+            this.label2.Size = new System.Drawing.Size(160, 40);
             this.label2.TabIndex = 1;
             this.label2.Text = "Date of Event:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -227,7 +251,7 @@
             this.label3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label3.Location = new System.Drawing.Point(3, 120);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(194, 40);
+            this.label3.Size = new System.Drawing.Size(160, 40);
             this.label3.TabIndex = 2;
             this.label3.Text = "Rule Presets:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -235,10 +259,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.SystemColors.Control;
             this.label4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label4.Location = new System.Drawing.Point(3, 160);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(194, 40);
+            this.label4.Size = new System.Drawing.Size(160, 40);
             this.label4.TabIndex = 3;
             this.label4.Text = "Competitors Per Team:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -246,10 +271,11 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.SystemColors.Control;
             this.label5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label5.Location = new System.Drawing.Point(3, 200);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(194, 40);
+            this.label5.Size = new System.Drawing.Size(160, 40);
             this.label5.TabIndex = 4;
             this.label5.Text = "Scores Used in Leaderboard:";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -260,7 +286,7 @@
             this.label6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label6.Location = new System.Drawing.Point(3, 240);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(194, 40);
+            this.label6.Size = new System.Drawing.Size(160, 40);
             this.label6.TabIndex = 5;
             this.label6.Text = "Max Score Possible";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -273,7 +299,7 @@
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(3, 280);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(394, 40);
+            this.label7.Size = new System.Drawing.Size(360, 40);
             this.label7.TabIndex = 6;
             this.label7.Text = "Wind Settings:";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -281,10 +307,11 @@
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.SystemColors.Control;
             this.label8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label8.Location = new System.Drawing.Point(3, 320);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(194, 40);
+            this.label8.Size = new System.Drawing.Size(160, 40);
             this.label8.TabIndex = 7;
             this.label8.Text = "Maximum Safe Windspeed:";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -292,10 +319,11 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.SystemColors.Control;
             this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label13.Location = new System.Drawing.Point(3, 520);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(194, 40);
+            this.label13.Size = new System.Drawing.Size(160, 40);
             this.label13.TabIndex = 12;
             this.label13.Text = "Final approach legal windspeed: ";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -306,7 +334,7 @@
             this.label14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label14.Location = new System.Drawing.Point(3, 560);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(194, 40);
+            this.label14.Size = new System.Drawing.Size(160, 40);
             this.label14.TabIndex = 13;
             this.label14.Text = "Final approach maximum direction change:";
             this.label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -317,7 +345,7 @@
             this.label10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label10.Location = new System.Drawing.Point(3, 360);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(194, 40);
+            this.label10.Size = new System.Drawing.Size(160, 40);
             this.label10.TabIndex = 9;
             this.label10.Text = "Seconds of wind data to be stored before landing:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -328,7 +356,7 @@
             this.label11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label11.Location = new System.Drawing.Point(3, 400);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(194, 40);
+            this.label11.Size = new System.Drawing.Size(160, 40);
             this.label11.TabIndex = 10;
             this.label11.Text = "Seconds of wind data to be stored after landing:";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -341,7 +369,7 @@
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.Location = new System.Drawing.Point(3, 440);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(394, 40);
+            this.label12.Size = new System.Drawing.Size(360, 40);
             this.label12.TabIndex = 11;
             this.label12.Text = "Rejump settings:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -349,10 +377,11 @@
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.SystemColors.Control;
             this.label9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label9.Location = new System.Drawing.Point(3, 480);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(194, 40);
+            this.label9.Size = new System.Drawing.Size(160, 40);
             this.label9.TabIndex = 8;
             this.label9.Text = "Maximum legal windspeed:";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -363,7 +392,7 @@
             this.label15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label15.Location = new System.Drawing.Point(3, 600);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(194, 40);
+            this.label15.Size = new System.Drawing.Size(160, 40);
             this.label15.TabIndex = 14;
             this.label15.Text = "Final approach period before landing:";
             this.label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -374,7 +403,7 @@
             this.label16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label16.Location = new System.Drawing.Point(3, 640);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(194, 40);
+            this.label16.Size = new System.Drawing.Size(160, 40);
             this.label16.TabIndex = 15;
             this.label16.Text = "Final approach period after landing:";
             this.label16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -387,7 +416,7 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(3, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(394, 40);
+            this.label17.Size = new System.Drawing.Size(360, 40);
             this.label17.TabIndex = 16;
             this.label17.Text = "Basic Settings:";
             this.label17.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -400,7 +429,7 @@
             this.labelWarning.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelWarning.Location = new System.Drawing.Point(3, 680);
             this.labelWarning.Name = "labelWarning";
-            this.labelWarning.Size = new System.Drawing.Size(394, 40);
+            this.labelWarning.Size = new System.Drawing.Size(360, 40);
             this.labelWarning.TabIndex = 17;
             this.labelWarning.Text = "Warning: ";
             this.labelWarning.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -412,16 +441,16 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 723);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(394, 74);
+            this.groupBox1.Size = new System.Drawing.Size(360, 74);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 3;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.34F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.Controls.Add(this.buttonCancel, 2, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonSave, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonNext, 0, 0);
@@ -430,16 +459,15 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(388, 55);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(354, 55);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(261, 16);
+            this.buttonCancel.Location = new System.Drawing.Point(239, 16);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(124, 23);
+            this.buttonCancel.Size = new System.Drawing.Size(112, 23);
             this.buttonCancel.TabIndex = 0;
             this.buttonCancel.Text = "Cancel";
             this.buttonCancel.UseVisualStyleBackColor = true;
@@ -448,9 +476,9 @@
             // buttonSave
             // 
             this.buttonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonSave.Location = new System.Drawing.Point(132, 16);
+            this.buttonSave.Location = new System.Drawing.Point(121, 16);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(123, 23);
+            this.buttonSave.Size = new System.Drawing.Size(112, 23);
             this.buttonSave.TabIndex = 1;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -461,16 +489,16 @@
             this.buttonNext.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonNext.Location = new System.Drawing.Point(3, 16);
             this.buttonNext.Name = "buttonNext";
-            this.buttonNext.Size = new System.Drawing.Size(123, 23);
+            this.buttonNext.Size = new System.Drawing.Size(112, 23);
             this.buttonNext.TabIndex = 2;
-            this.buttonNext.Text = "Next";
+            this.buttonNext.Text = "Save + Continue";
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
             // inputName
             // 
             this.inputName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputName.Location = new System.Drawing.Point(203, 50);
+            this.inputName.Location = new System.Drawing.Point(169, 50);
             this.inputName.Name = "inputName";
             this.inputName.Size = new System.Drawing.Size(194, 20);
             this.inputName.TabIndex = 19;
@@ -478,7 +506,7 @@
             // inputDate
             // 
             this.inputDate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputDate.Location = new System.Drawing.Point(203, 90);
+            this.inputDate.Location = new System.Drawing.Point(169, 90);
             this.inputDate.Name = "inputDate";
             this.inputDate.Size = new System.Drawing.Size(194, 20);
             this.inputDate.TabIndex = 20;
@@ -495,11 +523,11 @@
             "C.I.S.M Senior",
             "C.I.S.M Junior",
             "National Senior",
-            "National Pops",
-            "National Intermediate ",
             "National Junior",
+            "National Pops",
+            "National Intermediate",
             "Paragliding"});
-            this.inputRuleSet.Location = new System.Drawing.Point(203, 129);
+            this.inputRuleSet.Location = new System.Drawing.Point(169, 129);
             this.inputRuleSet.Name = "inputRuleSet";
             this.inputRuleSet.Size = new System.Drawing.Size(194, 21);
             this.inputRuleSet.TabIndex = 21;
@@ -507,7 +535,7 @@
             // inputCompetitorsPerTeam
             // 
             this.inputCompetitorsPerTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputCompetitorsPerTeam.Location = new System.Drawing.Point(203, 170);
+            this.inputCompetitorsPerTeam.Location = new System.Drawing.Point(169, 170);
             this.inputCompetitorsPerTeam.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -523,25 +551,29 @@
             this.inputCompetitorsPerTeam.TabIndex = 22;
             this.inputCompetitorsPerTeam.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.inputCompetitorsPerTeam.Value = new decimal(new int[] {
-            1,
+            5,
             0,
             0,
             0});
+            this.inputCompetitorsPerTeam.ValueChanged += new System.EventHandler(this.inputCompetitorsPerTeam_ValueChanged);
             // 
             // inputScoresUsed
             // 
             this.inputScoresUsed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.inputScoresUsed.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inputScoresUsed.FormattingEnabled = true;
-            this.inputScoresUsed.Location = new System.Drawing.Point(203, 209);
+            this.inputScoresUsed.Items.AddRange(new object[] {
+            "Best 1"});
+            this.inputScoresUsed.Location = new System.Drawing.Point(169, 209);
             this.inputScoresUsed.Name = "inputScoresUsed";
             this.inputScoresUsed.Size = new System.Drawing.Size(194, 21);
             this.inputScoresUsed.TabIndex = 23;
+            this.inputScoresUsed.SelectionChangeCommitted += new System.EventHandler(this.inputScoresUsed_SelectedValueChanged);
             // 
             // inputMaxScore
             // 
             this.inputMaxScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputMaxScore.Location = new System.Drawing.Point(203, 250);
+            this.inputMaxScore.Location = new System.Drawing.Point(169, 250);
             this.inputMaxScore.Maximum = new decimal(new int[] {
             100000,
             0,
@@ -566,7 +598,12 @@
             // 
             this.inputMaxWind.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.inputMaxWind.DecimalPlaces = 1;
-            this.inputMaxWind.Location = new System.Drawing.Point(203, 330);
+            this.inputMaxWind.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.inputMaxWind.Location = new System.Drawing.Point(169, 330);
             this.inputMaxWind.Minimum = new decimal(new int[] {
             1,
             0,
@@ -581,11 +618,12 @@
             0,
             0,
             0});
+            this.inputMaxWind.ValueChanged += new System.EventHandler(this.inputMaxWind_ValueChanged);
             // 
             // inputWindDataPrior
             // 
             this.inputWindDataPrior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputWindDataPrior.Location = new System.Drawing.Point(203, 370);
+            this.inputWindDataPrior.Location = new System.Drawing.Point(169, 370);
             this.inputWindDataPrior.Maximum = new decimal(new int[] {
             180,
             0,
@@ -609,7 +647,7 @@
             // inputWindDataAfter
             // 
             this.inputWindDataAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputWindDataAfter.Location = new System.Drawing.Point(203, 410);
+            this.inputWindDataAfter.Location = new System.Drawing.Point(169, 410);
             this.inputWindDataAfter.Maximum = new decimal(new int[] {
             180,
             0,
@@ -628,7 +666,13 @@
             // inputLegalWindspeed
             // 
             this.inputLegalWindspeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputLegalWindspeed.Location = new System.Drawing.Point(203, 490);
+            this.inputLegalWindspeed.DecimalPlaces = 1;
+            this.inputLegalWindspeed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.inputLegalWindspeed.Location = new System.Drawing.Point(169, 490);
             this.inputLegalWindspeed.Minimum = new decimal(new int[] {
             1,
             0,
@@ -643,6 +687,7 @@
             0,
             0,
             0});
+            this.inputLegalWindspeed.ValueChanged += new System.EventHandler(this.inputLegalWindspeed_ValueChanged);
             // 
             // inputFADirectionChange
             // 
@@ -668,7 +713,7 @@
             "160°",
             "170°",
             "180°"});
-            this.inputFADirectionChange.Location = new System.Drawing.Point(203, 569);
+            this.inputFADirectionChange.Location = new System.Drawing.Point(169, 569);
             this.inputFADirectionChange.Name = "inputFADirectionChange";
             this.inputFADirectionChange.Size = new System.Drawing.Size(194, 21);
             this.inputFADirectionChange.TabIndex = 30;
@@ -676,7 +721,18 @@
             // inputFALegalWindspeed
             // 
             this.inputFALegalWindspeed.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputFALegalWindspeed.Location = new System.Drawing.Point(203, 530);
+            this.inputFALegalWindspeed.DecimalPlaces = 1;
+            this.inputFALegalWindspeed.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.inputFALegalWindspeed.Location = new System.Drawing.Point(169, 530);
+            this.inputFALegalWindspeed.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.inputFALegalWindspeed.Name = "inputFALegalWindspeed";
             this.inputFALegalWindspeed.Size = new System.Drawing.Size(194, 20);
             this.inputFALegalWindspeed.TabIndex = 31;
@@ -686,11 +742,12 @@
             0,
             0,
             0});
+            this.inputFALegalWindspeed.ValueChanged += new System.EventHandler(this.inputFALegalWindspeed_ValueChanged);
             // 
             // inputFATimePrior
             // 
             this.inputFATimePrior.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputFATimePrior.Location = new System.Drawing.Point(203, 610);
+            this.inputFATimePrior.Location = new System.Drawing.Point(169, 610);
             this.inputFATimePrior.Name = "inputFATimePrior";
             this.inputFATimePrior.Size = new System.Drawing.Size(194, 20);
             this.inputFATimePrior.TabIndex = 32;
@@ -704,7 +761,7 @@
             // inputFATimeAfter
             // 
             this.inputFATimeAfter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputFATimeAfter.Location = new System.Drawing.Point(203, 650);
+            this.inputFATimeAfter.Location = new System.Drawing.Point(169, 650);
             this.inputFATimeAfter.Name = "inputFATimeAfter";
             this.inputFATimeAfter.Size = new System.Drawing.Size(194, 20);
             this.inputFATimeAfter.TabIndex = 33;
@@ -719,8 +776,8 @@
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.Image = global::Classics_2014.Properties.Resources.SplitterBar;
-            this.pictureBox1.Location = new System.Drawing.Point(403, 3);
+            this.pictureBox1.Image = global::CMS.Properties.Resources.SplitterBar;
+            this.pictureBox1.Location = new System.Drawing.Point(369, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.tableLayoutPanel1.SetRowSpan(this.pictureBox1, 19);
             this.pictureBox1.Size = new System.Drawing.Size(14, 794);
@@ -740,136 +797,49 @@
             this.dataGridTeams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnID,
             this.ColumnTeamName});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridTeams.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridTeams.Location = new System.Drawing.Point(423, 43);
+            this.dataGridTeams.Location = new System.Drawing.Point(389, 43);
             this.dataGridTeams.Name = "dataGridTeams";
+            this.dataGridTeams.ReadOnly = true;
             this.dataGridTeams.RowHeadersVisible = false;
             this.dataGridTeams.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tableLayoutPanel1.SetRowSpan(this.dataGridTeams, 7);
             this.dataGridTeams.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridTeams.Size = new System.Drawing.Size(604, 274);
+            this.dataGridTeams.Size = new System.Drawing.Size(659, 274);
             this.dataGridTeams.TabIndex = 34;
             // 
             // ColumnID
             // 
             this.ColumnID.HeaderText = "ID";
             this.ColumnID.Name = "ColumnID";
+            this.ColumnID.ReadOnly = true;
             this.ColumnID.Visible = false;
             // 
             // ColumnTeamName
             // 
             this.ColumnTeamName.HeaderText = "Team Name";
             this.ColumnTeamName.Name = "ColumnTeamName";
+            this.ColumnTeamName.ReadOnly = true;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label19.Location = new System.Drawing.Point(423, 0);
+            this.label19.Location = new System.Drawing.Point(389, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(604, 40);
+            this.label19.Size = new System.Drawing.Size(659, 40);
             this.label19.TabIndex = 37;
             this.label19.Text = "Teams:";
             this.label19.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // inputTeamSelect
-            // 
-            this.inputTeamSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamSelect, 2);
-            this.inputTeamSelect.Location = new System.Drawing.Point(1033, 88);
-            this.inputTeamSelect.Name = "inputTeamSelect";
-            this.inputTeamSelect.Size = new System.Drawing.Size(244, 23);
-            this.inputTeamSelect.TabIndex = 39;
-            this.inputTeamSelect.Text = "Select";
-            this.inputTeamSelect.UseVisualStyleBackColor = true;
-            this.inputTeamSelect.Click += new System.EventHandler(this.inputTeamSelect_Click);
-            // 
-            // inputTeamDeselect
-            // 
-            this.inputTeamDeselect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamDeselect, 2);
-            this.inputTeamDeselect.Location = new System.Drawing.Point(1033, 128);
-            this.inputTeamDeselect.Name = "inputTeamDeselect";
-            this.inputTeamDeselect.Size = new System.Drawing.Size(244, 23);
-            this.inputTeamDeselect.TabIndex = 40;
-            this.inputTeamDeselect.Text = "Deselect";
-            this.inputTeamDeselect.UseVisualStyleBackColor = true;
-            this.inputTeamDeselect.Click += new System.EventHandler(this.inputTeamDeselect_Click);
-            // 
-            // inputTeamAdd
-            // 
-            this.inputTeamAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamAdd, 2);
-            this.inputTeamAdd.Location = new System.Drawing.Point(1033, 168);
-            this.inputTeamAdd.Name = "inputTeamAdd";
-            this.inputTeamAdd.Size = new System.Drawing.Size(244, 23);
-            this.inputTeamAdd.TabIndex = 41;
-            this.inputTeamAdd.Text = "Add";
-            this.inputTeamAdd.UseVisualStyleBackColor = true;
-            this.inputTeamAdd.Click += new System.EventHandler(this.inputTeamAdd_Click);
-            // 
-            // inputTeamRemove
-            // 
-            this.inputTeamRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamRemove, 2);
-            this.inputTeamRemove.Location = new System.Drawing.Point(1033, 208);
-            this.inputTeamRemove.Name = "inputTeamRemove";
-            this.inputTeamRemove.Size = new System.Drawing.Size(244, 23);
-            this.inputTeamRemove.TabIndex = 42;
-            this.inputTeamRemove.Text = "Remove";
-            this.inputTeamRemove.UseVisualStyleBackColor = true;
-            this.inputTeamRemove.Click += new System.EventHandler(this.inputTeamRemove_Click);
-            // 
-            // inputTeamFilter
-            // 
-            this.inputTeamFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamFilter, 2);
-            this.inputTeamFilter.Enabled = false;
-            this.inputTeamFilter.Location = new System.Drawing.Point(1033, 248);
-            this.inputTeamFilter.Name = "inputTeamFilter";
-            this.inputTeamFilter.Size = new System.Drawing.Size(244, 23);
-            this.inputTeamFilter.TabIndex = 43;
-            this.inputTeamFilter.Text = "Filter";
-            this.inputTeamFilter.UseVisualStyleBackColor = true;
-            this.inputTeamFilter.Click += new System.EventHandler(this.inputTeamFilter_Click);
-            // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label21.Location = new System.Drawing.Point(1033, 320);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(94, 40);
-            this.label21.TabIndex = 44;
-            this.label21.Text = "Show:";
-            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // inputTeamShow
-            // 
-            this.inputTeamShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputTeamShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.inputTeamShow.FormattingEnabled = true;
-            this.inputTeamShow.Items.AddRange(new object[] {
-            "Selected & Unselected",
-            "Selected",
-            "Unselected"});
-            this.inputTeamShow.Location = new System.Drawing.Point(1133, 329);
-            this.inputTeamShow.Name = "inputTeamShow";
-            this.inputTeamShow.Size = new System.Drawing.Size(144, 21);
-            this.inputTeamShow.TabIndex = 45;
-            // 
-            // labelTeamFilter
-            // 
-            this.labelTeamFilter.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.labelTeamFilter, 2);
-            this.labelTeamFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTeamFilter.Location = new System.Drawing.Point(1033, 280);
-            this.labelTeamFilter.Name = "labelTeamFilter";
-            this.labelTeamFilter.Size = new System.Drawing.Size(244, 40);
-            this.labelTeamFilter.TabIndex = 46;
-            this.labelTeamFilter.Text = "Current Filter:";
-            this.labelTeamFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // dataGridCompetitors
             // 
@@ -886,45 +856,58 @@
             this.ColumnName,
             this.ColumnNationality,
             this.ColumnTeam});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ActiveBorder;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridCompetitors.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridCompetitors.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridCompetitors.Location = new System.Drawing.Point(423, 403);
+            this.dataGridCompetitors.Location = new System.Drawing.Point(389, 403);
             this.dataGridCompetitors.Name = "dataGridCompetitors";
+            this.dataGridCompetitors.ReadOnly = true;
             this.dataGridCompetitors.RowHeadersVisible = false;
             this.dataGridCompetitors.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             this.tableLayoutPanel1.SetRowSpan(this.dataGridCompetitors, 9);
             this.dataGridCompetitors.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.dataGridCompetitors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridCompetitors.Size = new System.Drawing.Size(604, 394);
+            this.dataGridCompetitors.Size = new System.Drawing.Size(659, 394);
             this.dataGridCompetitors.TabIndex = 35;
             // 
             // ColumnUID
             // 
             this.ColumnUID.HeaderText = "UID";
             this.ColumnUID.Name = "ColumnUID";
+            this.ColumnUID.ReadOnly = true;
             this.ColumnUID.Visible = false;
             // 
             // ColumnName
             // 
             this.ColumnName.HeaderText = "Competitor Name";
             this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
             // 
             // ColumnNationality
             // 
             this.ColumnNationality.HeaderText = "Nationality";
             this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
             // 
             // ColumnTeam
             // 
             this.ColumnTeam.HeaderText = "Team";
             this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label20.Location = new System.Drawing.Point(423, 360);
+            this.label20.Location = new System.Drawing.Point(389, 360);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(604, 40);
+            this.label20.Size = new System.Drawing.Size(659, 40);
             this.label20.TabIndex = 38;
             this.label20.Text = "Competitors:";
             this.label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -933,9 +916,9 @@
             // 
             this.inputCompetitorSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorSelect, 2);
-            this.inputCompetitorSelect.Location = new System.Drawing.Point(1033, 448);
+            this.inputCompetitorSelect.Location = new System.Drawing.Point(1074, 448);
             this.inputCompetitorSelect.Name = "inputCompetitorSelect";
-            this.inputCompetitorSelect.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorSelect.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorSelect.TabIndex = 47;
             this.inputCompetitorSelect.Text = "Select";
             this.inputCompetitorSelect.UseVisualStyleBackColor = true;
@@ -945,9 +928,9 @@
             // 
             this.inputCompetitorDeselect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorDeselect, 2);
-            this.inputCompetitorDeselect.Location = new System.Drawing.Point(1033, 488);
+            this.inputCompetitorDeselect.Location = new System.Drawing.Point(1074, 488);
             this.inputCompetitorDeselect.Name = "inputCompetitorDeselect";
-            this.inputCompetitorDeselect.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorDeselect.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorDeselect.TabIndex = 48;
             this.inputCompetitorDeselect.Text = "Deselect";
             this.inputCompetitorDeselect.UseVisualStyleBackColor = true;
@@ -957,9 +940,9 @@
             // 
             this.inputCompetitorAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorAdd, 2);
-            this.inputCompetitorAdd.Location = new System.Drawing.Point(1033, 528);
+            this.inputCompetitorAdd.Location = new System.Drawing.Point(1074, 528);
             this.inputCompetitorAdd.Name = "inputCompetitorAdd";
-            this.inputCompetitorAdd.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorAdd.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorAdd.TabIndex = 49;
             this.inputCompetitorAdd.Text = "Add";
             this.inputCompetitorAdd.UseVisualStyleBackColor = true;
@@ -969,9 +952,9 @@
             // 
             this.inputCompetitorRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorRemove, 2);
-            this.inputCompetitorRemove.Location = new System.Drawing.Point(1033, 568);
+            this.inputCompetitorRemove.Location = new System.Drawing.Point(1074, 568);
             this.inputCompetitorRemove.Name = "inputCompetitorRemove";
-            this.inputCompetitorRemove.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorRemove.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorRemove.TabIndex = 50;
             this.inputCompetitorRemove.Text = "Remove";
             this.inputCompetitorRemove.UseVisualStyleBackColor = true;
@@ -982,9 +965,9 @@
             this.inputCompetitorFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorFilter, 2);
             this.inputCompetitorFilter.Enabled = false;
-            this.inputCompetitorFilter.Location = new System.Drawing.Point(1033, 608);
+            this.inputCompetitorFilter.Location = new System.Drawing.Point(1074, 608);
             this.inputCompetitorFilter.Name = "inputCompetitorFilter";
-            this.inputCompetitorFilter.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorFilter.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorFilter.TabIndex = 51;
             this.inputCompetitorFilter.Text = "Filter";
             this.inputCompetitorFilter.UseVisualStyleBackColor = true;
@@ -994,11 +977,11 @@
             // 
             this.inputCompetitorEditor.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorEditor, 2);
-            this.inputCompetitorEditor.Location = new System.Drawing.Point(1033, 748);
+            this.inputCompetitorEditor.Location = new System.Drawing.Point(1074, 748);
             this.inputCompetitorEditor.Name = "inputCompetitorEditor";
-            this.inputCompetitorEditor.Size = new System.Drawing.Size(244, 23);
+            this.inputCompetitorEditor.Size = new System.Drawing.Size(203, 23);
             this.inputCompetitorEditor.TabIndex = 53;
-            this.inputCompetitorEditor.Text = "Enter Competitor Editor";
+            this.inputCompetitorEditor.Text = "Edit Competitors";
             this.inputCompetitorEditor.UseVisualStyleBackColor = true;
             this.inputCompetitorEditor.Click += new System.EventHandler(this.inputCompetitorEditor_Click);
             // 
@@ -1007,9 +990,9 @@
             this.labelCompetitorFilter.AutoSize = true;
             this.tableLayoutPanel1.SetColumnSpan(this.labelCompetitorFilter, 2);
             this.labelCompetitorFilter.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCompetitorFilter.Location = new System.Drawing.Point(1033, 640);
+            this.labelCompetitorFilter.Location = new System.Drawing.Point(1074, 640);
             this.labelCompetitorFilter.Name = "labelCompetitorFilter";
-            this.labelCompetitorFilter.Size = new System.Drawing.Size(244, 40);
+            this.labelCompetitorFilter.Size = new System.Drawing.Size(203, 40);
             this.labelCompetitorFilter.TabIndex = 54;
             this.labelCompetitorFilter.Text = "Current Filter:";
             this.labelCompetitorFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1020,13 +1003,123 @@
             this.inputCompetitorShow.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.tableLayoutPanel1.SetColumnSpan(this.inputCompetitorShow, 2);
             this.inputCompetitorShow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.inputCompetitorShow.Location = new System.Drawing.Point(1033, 683);
+            this.inputCompetitorShow.Location = new System.Drawing.Point(1074, 683);
             this.inputCompetitorShow.Name = "inputCompetitorShow";
-            this.inputCompetitorShow.Size = new System.Drawing.Size(244, 34);
+            this.inputCompetitorShow.Size = new System.Drawing.Size(203, 34);
             this.inputCompetitorShow.TabIndex = 56;
             this.inputCompetitorShow.Text = "Show Competitors from unselected teams?";
             this.inputCompetitorShow.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.inputCompetitorShow.UseVisualStyleBackColor = true;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Image = global::CMS.Properties.Resources.SplitterBar;
+            this.pictureBox2.Location = new System.Drawing.Point(1054, 3);
+            this.pictureBox2.Name = "pictureBox2";
+            this.tableLayoutPanel1.SetRowSpan(this.pictureBox2, 19);
+            this.pictureBox2.Size = new System.Drawing.Size(14, 794);
+            this.pictureBox2.TabIndex = 57;
+            this.pictureBox2.TabStop = false;
+            // 
+            // inputTeamSelect
+            // 
+            this.inputTeamSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamSelect, 2);
+            this.inputTeamSelect.Location = new System.Drawing.Point(1074, 48);
+            this.inputTeamSelect.Name = "inputTeamSelect";
+            this.inputTeamSelect.Size = new System.Drawing.Size(203, 23);
+            this.inputTeamSelect.TabIndex = 39;
+            this.inputTeamSelect.Text = "Select";
+            this.inputTeamSelect.UseVisualStyleBackColor = true;
+            this.inputTeamSelect.Click += new System.EventHandler(this.inputTeamSelect_Click);
+            // 
+            // inputTeamDeselect
+            // 
+            this.inputTeamDeselect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamDeselect, 2);
+            this.inputTeamDeselect.Location = new System.Drawing.Point(1074, 88);
+            this.inputTeamDeselect.Name = "inputTeamDeselect";
+            this.inputTeamDeselect.Size = new System.Drawing.Size(203, 23);
+            this.inputTeamDeselect.TabIndex = 40;
+            this.inputTeamDeselect.Text = "Deselect";
+            this.inputTeamDeselect.UseVisualStyleBackColor = true;
+            this.inputTeamDeselect.Click += new System.EventHandler(this.inputTeamDeselect_Click);
+            // 
+            // inputTeamAdd
+            // 
+            this.inputTeamAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamAdd, 2);
+            this.inputTeamAdd.Location = new System.Drawing.Point(1074, 128);
+            this.inputTeamAdd.Name = "inputTeamAdd";
+            this.inputTeamAdd.Size = new System.Drawing.Size(203, 23);
+            this.inputTeamAdd.TabIndex = 41;
+            this.inputTeamAdd.Text = "Add";
+            this.inputTeamAdd.UseVisualStyleBackColor = true;
+            this.inputTeamAdd.Click += new System.EventHandler(this.inputTeamAdd_Click);
+            // 
+            // inputTeamRemove
+            // 
+            this.inputTeamRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamRemove, 2);
+            this.inputTeamRemove.Location = new System.Drawing.Point(1074, 168);
+            this.inputTeamRemove.Name = "inputTeamRemove";
+            this.inputTeamRemove.Size = new System.Drawing.Size(203, 23);
+            this.inputTeamRemove.TabIndex = 42;
+            this.inputTeamRemove.Text = "Remove";
+            this.inputTeamRemove.UseVisualStyleBackColor = true;
+            this.inputTeamRemove.Click += new System.EventHandler(this.inputTeamRemove_Click);
+            // 
+            // inputTeamFilter
+            // 
+            this.inputTeamFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamFilter, 2);
+            this.inputTeamFilter.Enabled = false;
+            this.inputTeamFilter.Location = new System.Drawing.Point(1074, 208);
+            this.inputTeamFilter.Name = "inputTeamFilter";
+            this.inputTeamFilter.Size = new System.Drawing.Size(203, 23);
+            this.inputTeamFilter.TabIndex = 43;
+            this.inputTeamFilter.Text = "Filter";
+            this.inputTeamFilter.UseVisualStyleBackColor = true;
+            this.inputTeamFilter.Click += new System.EventHandler(this.inputTeamFilter_Click);
+            // 
+            // labelTeamFilter
+            // 
+            this.labelTeamFilter.AutoSize = true;
+            this.tableLayoutPanel1.SetColumnSpan(this.labelTeamFilter, 2);
+            this.labelTeamFilter.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelTeamFilter.Location = new System.Drawing.Point(1074, 240);
+            this.labelTeamFilter.Name = "labelTeamFilter";
+            this.labelTeamFilter.Size = new System.Drawing.Size(203, 40);
+            this.labelTeamFilter.TabIndex = 46;
+            this.labelTeamFilter.Text = "Current Filter:";
+            this.labelTeamFilter.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label21.Location = new System.Drawing.Point(1074, 280);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(77, 40);
+            this.label21.TabIndex = 44;
+            this.label21.Text = "Show:";
+            this.label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // inputTeamShow
+            // 
+            this.inputTeamShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputTeamShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.inputTeamShow.FormattingEnabled = true;
+            this.inputTeamShow.Items.AddRange(new object[] {
+            "Selected & Unselected",
+            "Selected",
+            "Unselected"});
+            this.inputTeamShow.Location = new System.Drawing.Point(1157, 289);
+            this.inputTeamShow.Name = "inputTeamShow";
+            this.inputTeamShow.Size = new System.Drawing.Size(120, 21);
+            this.inputTeamShow.TabIndex = 45;
             // 
             // EventAccuracyInit
             // 
@@ -1051,6 +1144,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompetitors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1122,5 +1216,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamName;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }

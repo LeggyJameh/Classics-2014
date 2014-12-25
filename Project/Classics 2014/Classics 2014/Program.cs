@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.Win32;
 using System.Threading;
-namespace Classics_2014
+namespace CMS
 {
     static class Program
     {

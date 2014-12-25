@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace Classics_2014
+namespace CMS
 {
     class LockScreen : Form
     {

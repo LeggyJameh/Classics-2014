@@ -6,16 +6,12 @@ using System.Text;
 namespace CMS.MySQL
 {
     [Serializable]
-    class MySqlEvent
+    class MySqlTeam
     {
-        [NonSerialized]
         public int ID;
-        [NonSerialized]
+        public int EventID;
         public string Name;
-        [NonSerialized]
-        public EventType Type;
-        [NonSerialized]
-        public DateTime Date;
         public byte[] Data;
+        public byte[] Image;
     }
 }

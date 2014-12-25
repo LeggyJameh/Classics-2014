@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 using System.Threading;
 using System.Collections.Concurrent;
 using Microsoft.Win32;
-namespace Classics_2014
+namespace CMS
 {
     class Serial_Controller
     {

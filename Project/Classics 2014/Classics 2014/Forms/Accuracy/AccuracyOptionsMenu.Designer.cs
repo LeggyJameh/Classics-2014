@@ -1,4 +1,4 @@
-﻿namespace Classics_2014.Accuracy
+﻿namespace CMS.Accuracy
 {
     partial class AccuracyOptionsMenu
     {

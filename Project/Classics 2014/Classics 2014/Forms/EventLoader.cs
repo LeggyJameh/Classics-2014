@@ -6,60 +6,58 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014
+namespace CMS
 {
     partial class EventLoader : UserControl
     {
         Engine Engine;
         List<Event> Events = new List<Event>();
-        TabControl TabControl;
         List<Competitor> CurrentCompetitors;
 
-        public EventLoader(Engine Engine, TabControl TabControl)
+        public EventLoader(Engine Engine)
         {
             InitializeComponent();
             this.Engine = Engine;
-            this.TabControl = TabControl;
             reloadAllEvents();
         }
 
         private void reloadAllEvents()
         {
-            Events.Clear();
-            Events = Engine.SQL_Controller.GetEvents();
+            //Events.Clear();
+            //Events = Engine.SQL_Controller.GetEvents();
 
-            for (int i = 0; i < Events.Count; i++)
-            {
-                EventType CurrentEventType = Events[i].EventType;
+            //for (int i = 0; i < Events.Count; i++)
+            //{
+            //    EventType CurrentEventType = Events[i].EventType;
 
-                switch (CurrentEventType)
-                {
-                    case EventType.Accuracy:
-                        string EventReady = "Yes";
-                        string EventStage = "Complete";
+            //    switch (CurrentEventType)
+            //    {
+            //        case EventType.Accuracy:
+            //            string EventReady = "Yes";
+            //            string EventStage = "Complete";
 
-                        switch (Events[i].Rules.Stage)
-                        {
-                            case 0:
-                                EventReady = "No";
-                                EventStage = "Configure Options";
-                                break;
-                            case 1:
-                                EventReady = "No";
-                                EventStage = "Configure Teams";
-                                break;
-                            case 2:
-                                EventReady = "Yes";
-                                EventStage = "Ready";
-                                break;
-                        }
+            //            switch (Events[i].Rules.stage)
+            //            {
+            //                case 0:
+            //                    EventReady = "No";
+            //                    EventStage = "Configure Options";
+            //                    break;
+            //                case 1:
+            //                    EventReady = "No";
+            //                    EventStage = "Configure Teams";
+            //                    break;
+            //                case 2:
+            //                    EventReady = "Yes";
+            //                    EventStage = "Ready";
+            //                    break;
+            //            }
                         
-                        dataGridViewEvents.Rows.Add(Events[i].EventID, Events[i].Name, Events[i].Date.ToShortDateString(), Events[i].EventType.ToString(), EventReady, EventStage);
-                    break;
-                }
-            }
+            //            dataGridViewEvents.Rows.Add(Events[i].EventID, Events[i].Name, Events[i].Date.ToShortDateString(), Events[i].EventType.ToString(), EventReady, EventStage);
+            //        break;
+            //    }
+            //}
         }
 
 
@@ -76,15 +74,15 @@ namespace Classics_2014
                 case EventType.Accuracy:
                     Ruleset.AccuracyRules CurrentRules = (Ruleset.AccuracyRules)Events[EventIndex].Rules;
                     dataGridViewEventProperties.Rows.Add("Rule Preset", CurrentRules.preset);
-                    dataGridViewEventProperties.Rows.Add("Competitors Per Team", CurrentRules.noOfCompetitorsPerTeam);
-                    dataGridViewEventProperties.Rows.Add("Scores Used", CurrentRules.ScoresUsed);
-                    dataGridViewEventProperties.Rows.Add("Max Safe Windspeed", CurrentRules.compHalt);
-                    dataGridViewEventProperties.Rows.Add("Max Score", CurrentRules.maxScored);
-                    dataGridViewEventProperties.Rows.Add("Rejump Direction Change", CurrentRules.directionOut);
-                    dataGridViewEventProperties.Rows.Add("Rejump Speed Over", CurrentRules.windout);
-                    dataGridViewEventProperties.Rows.Add("Wind data before", CurrentRules.windSecondsPrior);
-                    dataGridViewEventProperties.Rows.Add("Wind data After", CurrentRules.windSecondsAfter);
-                    dataGridViewEventProperties.Rows.Add("Wind Speed for Direction Rejumps", CurrentRules.windSpeedNeededForDirectionChangeRujumps);
+                    dataGridViewEventProperties.Rows.Add("Competitors Per Team", CurrentRules.competitorsPerTeam);
+                    dataGridViewEventProperties.Rows.Add("Scores Used", CurrentRules.scoresUsed);
+                    dataGridViewEventProperties.Rows.Add("Max Safe Windspeed", CurrentRules.windspeedSafe);
+                    dataGridViewEventProperties.Rows.Add("Max Score", CurrentRules.maxScore);
+                    dataGridViewEventProperties.Rows.Add("Rejump Direction Change", CurrentRules.directionChangeFA);
+                    dataGridViewEventProperties.Rows.Add("Rejump Speed Over", CurrentRules.windspeedRejump);
+                    dataGridViewEventProperties.Rows.Add("Wind data before", CurrentRules.windSecondsPriorLand);
+                    dataGridViewEventProperties.Rows.Add("Wind data After", CurrentRules.windSecondsAfterLand);
+                    dataGridViewEventProperties.Rows.Add("Wind Speed for Direction Rejumps", CurrentRules.windspeedFA);
                     break;
             }
 
@@ -106,16 +104,14 @@ namespace Classics_2014
                     int EventIndex = dataGridViewEvents.SelectedRows[0].Index;
                     EventType SelectedEventType = (EventType)Enum.Parse(typeof(EventType), dataGridViewEvents.SelectedRows[0].Cells[3].Value.ToString());
 
-                    TabPage NewPage = new TabPage();
-
                     switch (SelectedEventType)
                     {
 
                         #region Accuracy
                         case EventType.Accuracy:
 
-                            int Stage = Events[EventIndex].Rules.Stage;
-                            Classics_2014.Accuracy.Accuracy_Event CurrentEvent;
+                            int Stage = (int)Events[EventIndex].Rules.stage;
+                            CMS.Accuracy.Accuracy_Event CurrentEvent;
 
                             switch (Stage)
                             {
@@ -138,7 +134,6 @@ namespace Classics_2014
                                     CurrentEvent.Rules = (Ruleset.AccuracyRules)Events[EventIndex].Rules;
                                     CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.EventID = Events[EventIndex].EventID;
-                                    CurrentEvent.TabControl = TabControl;
 
                                     List<string> SelectedTeams = new List<string>();
 
@@ -156,18 +151,16 @@ namespace Classics_2014
                                     }
 
                                     CurrentEvent.ActiveTeams = SelectedTeams;
-                                    CurrentEvent.ProceedToEventTeams();
+                                    //CurrentEvent.ProceedToEventTeams();
                                     break;
 
                                 case 2: // Ready Event
                                     CurrentEvent = Engine.LoadExistingAccuracyEvent();
-                                    List<Team> Teams = Engine.SQL_Controller.GetTeamsForEvent(Events[EventIndex].EventID);
+                                    List<Team> Teams = Engine.SQL_Controller.GetSTeamsForEvent(Events[EventIndex].EventID);
                                     CurrentEvent.Teams = Teams;
                                     CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.EventID = Events[EventIndex].EventID;
                                     CurrentEvent.Rules = (Ruleset.AccuracyRules)Events[EventIndex].Rules;
-                                    NewPage = null;
-                                    CurrentEvent.TabControl = TabControl;
                                     CurrentEvent.ProceedToEvent();
                                     CurrentEvent.EventTab.LoadExistingEventLandings();
                                     break;
@@ -185,13 +178,13 @@ namespace Classics_2014
             {
                 MessageBox.Show("Please select an event to load.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); 
             }
-            TabControl.TabPages.Remove((TabPage)this.Parent);
+            Engine.mainForm.removeTab((TabPage)this.Parent);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            TabControl.TabPages.Remove(TabControl.SelectedTab);
-            TabControl.SelectedTab = TabControl.TabPages[0];
+            Engine.mainForm.removeTab((TabPage)this.Parent);
+            Engine.mainForm.selectTab(0);
         }
     }
 }

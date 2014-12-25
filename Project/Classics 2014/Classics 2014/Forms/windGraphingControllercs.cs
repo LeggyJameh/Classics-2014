@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using System.IO;
 
-namespace Classics_2014
+namespace CMS
 {
      partial class windGraphingControllercs : UserControl
     {

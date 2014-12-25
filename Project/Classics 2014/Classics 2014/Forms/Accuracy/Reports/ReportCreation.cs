@@ -6,9 +6,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using Classics_2014.MySQL;
+using CMS.MySQL;
 
-namespace Classics_2014.Accuracy.Reports
+namespace CMS.Accuracy.Reports
 {
     partial class ReportCreation : UserControl
     {
@@ -25,7 +25,7 @@ namespace Classics_2014.Accuracy.Reports
         {
             InitializeComponent();
             listBoxEventList.Items.AddRange(new String[]{"Leaderboard", "Competitor", "Landing"});
-            if (connectedEvent.Rules.noOfCompetitorsPerTeam != 1)
+            if (connectedEvent.Rules.competitorsPerTeam != 1)
             {
                 listBoxEventList.Items.Add("Team");
             }
@@ -71,7 +71,7 @@ namespace Classics_2014.Accuracy.Reports
                 radioButtonExist.Checked = false;
                 listBoxEventList.Items.Clear();
                 listBoxEventList.Items.AddRange(new String[] { "Leaderboard", "Competitor", "Landing" });
-                if (connectedEvent.Rules.noOfCompetitorsPerTeam != 1)
+                if (connectedEvent.Rules.competitorsPerTeam != 1)
                 {
                     listBoxEventList.Items.Add("Team");
                 }
@@ -169,7 +169,7 @@ namespace Classics_2014.Accuracy.Reports
                         dataGridViewLockedLeaderboard.Enabled = false;
                         selectEntireTeam = false;
                     }
-                    else if ((listBoxEventList.SelectedItem.ToString() == "Team") && (connectedEvent.Rules.noOfCompetitorsPerTeam != 1))
+                    else if ((listBoxEventList.SelectedItem.ToString() == "Team") && (connectedEvent.Rules.competitorsPerTeam != 1))
                     {
                         dataGridViewLockedLeaderboard.ClearSelection();
                         dataGridViewLockedLeaderboard.Enabled = true;
@@ -195,7 +195,7 @@ namespace Classics_2014.Accuracy.Reports
         }
         public void Populate()
         {
-            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
+            List<Team> Teams = sqlController.GetSTeamsForEvent(connectedEvent.EventID);
             landings = sqlController.GetLandingsForEvent(eventId, connectedEvent.EventType);
             DataGridViewCell cellToEdit;
             for (int Ti = 0; Ti < Teams.Count; Ti++)

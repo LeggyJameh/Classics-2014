@@ -13,13 +13,9 @@ namespace CMS.Accuracy
     {
         #region variables and the such like
         Accuracy_Event Connected_Event;
-        List<Competitor> competitors = new List<Competitor>();
-        List<bool> selectedCompetitors = new List<bool>();
-        List<string> teams = new List<string>();
-        List<bool> selectedTeams = new List<bool>();
         Ruleset.AccuracyRules rules = new Ruleset.AccuracyRules();
+        CompetitorSelector competitorSelector;
         string eventName = "";
-        DataGridViewCellStyle SelectedStyle;
         bool scoresUsedShowUnusualOptions = false;
         const float windspeedDiff = 0.5f; /// The minimum difference between safe and rejump windspeeds.
         #endregion
@@ -28,63 +24,11 @@ namespace CMS.Accuracy
         {
             this.Connected_Event = Connected_Event;
             InitializeComponent();
-            getTeams();
             setupInputs();
-            SelectedStyle = dataGridTeams.DefaultCellStyle.Clone();
-            SelectedStyle.BackColor = Color.LightGreen;
-            SelectedStyle.SelectionBackColor = Color.DarkGreen;
-            SelectedStyle.SelectionForeColor = Color.White;
-        }
-
-        /// <summary>
-        /// Pulls the teams from the database and inserts the team names into the team dataGrid.
-        /// </summary>
-        private void getTeams()
-        {
-            teams = Connected_Event.SQL_Controller.GetCTeams(false);
-
-            for (int i = 0; i < teams.Count; i++)
-            {
-                selectedTeams.Add(false);
-                dataGridTeams.Rows.Add(i, teams[i]);
-                List<Competitor> TempCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByCTeam(teams[i], new List<Competitor>());
-                for (int i2 = 0; i2 < TempCompetitors.Count; i2++)
-                {
-                    competitors.Add(TempCompetitors[i2]);
-                    selectedCompetitors.Add(false);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Groups the selected competitors for export & saving.
-        /// </summary>
-        private List<Competitor> getSelectedCompetitors()
-        {
-            List<Competitor> competitorsToReturn = new List<Competitor>();
-
-            for (int i = 0; i < selectedCompetitors.Count; i++)
-            {
-                if (selectedCompetitors[i] == true)
-                {
-                    competitorsToReturn.Add(competitors[i]);
-                }
-            }
-
-            return competitorsToReturn;
-        }
-
-        private List<string> getSelectedTeamNames()
-        {
-            List<string> currentList = new List<string>();
-            for (int i = 0; i < selectedTeams.Count; i++)
-            {
-                if (selectedTeams[i])
-                {
-                    currentList.Add(teams[i]);
-                }
-            }
-            return currentList;
+            competitorSelector = new CompetitorSelector(Connected_Event);
+            this.tableLayoutPanel1.Controls.Add(competitorSelector, 2, 0);
+            competitorSelector.Dock = DockStyle.Fill;
+            tableLayoutPanel1.SetRowSpan(competitorSelector, 19);
         }
 
         /// <summary>
@@ -135,16 +79,18 @@ namespace CMS.Accuracy
         /// <returns>If the rules were valid.</returns>
         private bool compileDataAndSave()
         {
+            bool allowed = true;
             DateTime date = inputDate.Value;
             string eventName = inputName.Text.Trim();
+            List<Competitor> competitors = getSelectedCompetitors();
 
             Ruleset.AccuracyRules rules = new Ruleset.AccuracyRules();
             rules.windspeedSafe = Convert.ToSingle(inputMaxWind.Value);
-            rules.directionChangeFA = getAngle(inputFADirectionChange.SelectedValue.ToString());
+            rules.directionChangeFA = getAngle(inputFADirectionChange.SelectedItem.ToString());
             rules.maxScore = Convert.ToInt16(inputMaxScore.Value);
             rules.competitorsPerTeam = Convert.ToInt16(inputCompetitorsPerTeam.Value);
             rules.preset = inputRuleSet.SelectedText;
-            rules.scoresUsed = inputScoresUsed.SelectedValue.ToString();
+            rules.scoresUsed = inputScoresUsed.SelectedItem.ToString();
             rules.stage = EventStage.SetupRules;
             rules.timeAfterFA = Convert.ToInt16(inputFATimeAfter.Value);
             rules.timePriorFA = Convert.ToInt16(inputFATimePrior.Value);
@@ -153,7 +99,16 @@ namespace CMS.Accuracy
             rules.windSecondsPriorLand = Convert.ToInt16(inputWindDataPrior.Value);
             rules.windspeedFA = Convert.ToSingle(inputFALegalWindspeed.Value);
 
-            if (inputCorrect())
+            if ((competitors.Count % rules.competitorsPerTeam) > 0)
+            {
+                if (MessageBox.Show("The number of competitors is not a multiple of competitors per team. Continue?", "Continue?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.No)
+                {
+                    allowed = false;
+                }
+            }
+
+
+            if (inputCorrect() && allowed == true)
             {
                 Connected_Event.saveEventRulesStage(getSelectedCompetitors(), rules, date, eventName);
                 return true;
@@ -172,231 +127,30 @@ namespace CMS.Accuracy
             inputDate.Value = DateTime.Today;
             inputName.Text = "Accuracy Event " + (Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.Accuracy) + 1).ToString() + " " + DateTime.Today.ToShortDateString();
             inputRuleSet.SelectedIndex = 0;
-            inputScoresUsed.SelectedIndex = 0;
-            inputFADirectionChange.SelectedIndex = 8;
+            inputScoresUsed.SelectedItem = inputScoresUsed.Items[0];
+            inputFADirectionChange.SelectedItem = inputFADirectionChange.Items[8];
             labelWarning.Text = "";
-            inputTeamShow.SelectedIndex = 0;
             windspeedSafe = 5.0f;
             windspeedRejump = 4.0f;
             windspeedFA = 3.0f;
             competitorsPerTeam = 5;
         }
 
-        #region Competitor & Team Grid Functions
-
-        private void organiseCompetitorGrid()
+        /// <summary>
+        /// Pulls the list of selected competitors from the CompetitorSelector Control.
+        /// </summary>
+        private List<Competitor> getSelectedCompetitors()
         {
+            return competitorSelector.GetSelectedCompetitors();
         }
 
         /// <summary>
-        /// Selects the team and adds all of the competitors to the competitor grid.
+        /// Forces the competitor selector to reload teams and competitors due to the competitor editor being used.
         /// </summary>
-        /// <param name="teamID"></param>
-        private void selectTeam(int teamID)
+        public void RefreshGrids()
         {
-            string teamName = teams[teamID];
-
-            for (int i = 0; i < competitors.Count; i++)
-            {
-                if (competitors[i].team == teamName)
-                {
-                    dataGridCompetitors.Rows.Add(competitors[i].ID, competitors[i].name, competitors[i].nationality, competitors[i].team);
-                }
-            }
+            competitorSelector.ReloadData();
         }
-
-        /// <summary>
-        /// Clears the competitor grid and re-adds all selected competitors.
-        /// </summary>
-        private void refreshCompetitorGrid()
-        {
-            dataGridCompetitors.Rows.Clear();
-            for (int Ci = 0; Ci < competitors.Count; Ci++)
-            {
-                for (int Ti = 0; Ti < teams.Count; Ti++)
-                {
-                    if (competitors[Ci].team == teams[Ti])
-                    {
-                        if (selectedTeams[Ti] == true)
-                        {
-                            dataGridCompetitors.Rows.Add(competitors[Ci].ID, competitors[Ci].name, competitors[Ci].nationality, competitors[Ci].team);
-                        }
-                    }
-                }
-            }
-            organiseCompetitorGrid();
-        }
-
-        #region Control Events
-
-        private void inputTeamSelect_Click(object sender, EventArgs e)
-        {
-            if (dataGridTeams.SelectedRows.Count > 0)
-            {
-                for (int i = 0; i < dataGridTeams.SelectedRows.Count; i++)
-                {
-                    int ID = Convert.ToInt16(dataGridTeams.SelectedRows[i].Cells[0].Value);
-                    if (selectedTeams[ID] != true)
-                    {
-                        selectTeam(ID);
-                        selectedTeams[ID] = true;
-                        dataGridTeams.SelectedRows[i].Cells[1].Style = SelectedStyle;
-                    }
-                }
-            }
-        }
-
-        private void inputTeamDeselect_Click(object sender, EventArgs e)
-        {
-            if (dataGridTeams.SelectedRows.Count > 0)
-            {
-                for (int i = 0; i < dataGridTeams.SelectedRows.Count; i++)
-                {
-                    int ID = Convert.ToInt16(dataGridTeams.SelectedRows[i].Cells[0].Value);
-                    if (selectedTeams[ID] == true)
-                    {
-                        selectedTeams[ID] = false;
-                        refreshCompetitorGrid();
-                        dataGridTeams.SelectedRows[i].Cells[1].Style = dataGridTeams.DefaultCellStyle;
-                    }
-                }
-            }
-        }
-
-        private void inputTeamAdd_Click(object sender, EventArgs e)
-        {
-            string Team = MessageBoxes.CreateTeam();
-            if (Team != null)
-            {
-                teams.Add(Team);
-                selectedTeams.Add(false);
-                dataGridTeams.Rows.Add(teams.Count - 1, Team);
-            }
-        }
-
-        private void inputTeamRemove_Click(object sender, EventArgs e)
-        {
-            if (dataGridTeams.SelectedRows.Count > 0)
-            {
-                if (MessageBox.Show(("Are you sure you wish to remove the team " + dataGridTeams.SelectedRows[0].Cells[1].Value + " ?"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    int ID = Convert.ToInt16(dataGridTeams.SelectedRows[0].Cells[0].Value);
-                    Connected_Event.SQL_Controller.RemoveCTeam(teams[ID]);
-                    for (int i = 0; i < competitors.Count; i++)
-                    {
-                        if (competitors[i].team == teams[ID])
-                        {
-                            competitors[i].team = "NO TEAM";
-                            selectedCompetitors[i] = false;
-                        }
-                    }
-                    selectedTeams[ID] = false;
-                    teams[ID] = "";
-                    dataGridTeams.Rows.Remove(dataGridTeams.SelectedRows[0]);
-                }
-            }
-        }
-
-        private void inputTeamFilter_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void inputCompetitorSelect_Click(object sender, EventArgs e)
-        {
-            if (dataGridCompetitors.SelectedRows.Count > 0)
-            {
-                for (int i = 0; i < dataGridCompetitors.SelectedRows.Count; i++)
-                {
-                    int ID = Convert.ToInt16(dataGridCompetitors.SelectedRows[i].Cells[0].Value);
-                    for (int i2 = 0; i2 < competitors.Count; i2++)
-                    {
-                        if (competitors[i2].ID == ID)
-                        {
-                            if (selectedCompetitors[i2] != true)
-                            {
-                                selectedCompetitors[i2] = true;
-                                for (int i3 = 0; i3 < dataGridCompetitors.SelectedRows[i].Cells.Count; i3++)
-                                {
-                                    dataGridCompetitors.SelectedRows[i].Cells[i3].Style = SelectedStyle;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        private void inputCompetitorDeselect_Click(object sender, EventArgs e)
-        {
-            if (dataGridCompetitors.SelectedRows.Count > 0)
-            {
-                for (int i = 0; i < dataGridCompetitors.SelectedRows.Count; i++)
-                {
-                    int ID = Convert.ToInt16(dataGridCompetitors.SelectedRows[i].Cells[0].Value);
-                    for (int i2 = 0; i2 < competitors.Count; i2++)
-                    {
-                        if (competitors[i2].ID == ID)
-                        {
-                            if (selectedCompetitors[i2] == true)
-                            {
-                                selectedCompetitors[i2] = false;
-                                for (int i3 = 0; i3 < dataGridCompetitors.SelectedRows[i].Cells.Count; i3++)
-                                {
-                                    dataGridCompetitors.SelectedRows[i].Cells[i3].Style = dataGridCompetitors.DefaultCellStyle;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-        }
-
-        private void inputCompetitorAdd_Click(object sender, EventArgs e)
-        {
-            Competitor newCompetitor = MessageBoxes.CreateCompetitor(getSelectedTeamNames());
-            if (newCompetitor != null)
-            {
-                Connected_Event.SQL_Controller.CreateCompetitor(newCompetitor);
-                competitors.Add(newCompetitor);
-                selectedCompetitors.Add(false);
-                dataGridCompetitors.Rows.Add(newCompetitor.ID, newCompetitor.name, newCompetitor.nationality, newCompetitor.team);
-            }
-        }
-
-        private void inputCompetitorRemove_Click(object sender, EventArgs e)
-        {
-            if (dataGridCompetitors.SelectedRows.Count > 0)
-            {
-                if (MessageBox.Show(("Are you sure you wish to remove the competitor " + dataGridCompetitors.SelectedRows[0].Cells[1].Value + " ?"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                {
-                    int ID = Convert.ToInt16(dataGridCompetitors.SelectedRows[0].Cells[0].Value);
-                    for (int i = 0; i < competitors.Count; i++)
-                    {
-                        if (competitors[i].ID == ID)
-                        {
-                            competitors[i].team = "";
-                            selectedCompetitors[i] = false;
-                            Connected_Event.SQL_Controller.RemoveCompetitor(ID);
-                            refreshCompetitorGrid();
-                        }
-                    }
-                }
-            }
-        }
-
-        private void inputCompetitorFilter_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void inputCompetitorEditor_Click(object sender, EventArgs e)
-        {
-            Connected_Event.engine.openCompetitorEditor();
-        }
-        #endregion
-        #endregion
 
         #region Control Events
 
@@ -415,6 +169,7 @@ namespace CMS.Accuracy
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            Connected_Event.CloseEvent();
         }
 
         private void inputCompetitorsPerTeam_ValueChanged(object sender, EventArgs e)

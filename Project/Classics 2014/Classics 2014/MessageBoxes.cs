@@ -23,6 +23,10 @@ namespace CMS
             {
                 cb.Items.Add(selectedTeams[i]);
             }
+            if (cb.Items.Count > 0)
+            {
+                cb.SelectedItem = cb.Items[0];
+            }
 
             List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Create competitor", Properties.Resources.Icon, strings, new TextBox(), new TextBox(), cb);
             if (outputs != null)
@@ -125,6 +129,29 @@ namespace CMS
             else
             {
                 return null;
+            }
+        }
+
+        public static string filterString(string oldFilter)
+        {
+            string newFilter;
+
+            string[] strings = new string[1];
+            strings[0] = "Filter keyword:";
+
+            TextBox tb = new TextBox();
+            tb.Text = oldFilter;
+
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Filter", Properties.Resources.Icon, strings, tb);
+
+            if (outputs != null)
+            {
+                newFilter = (string)outputs[0];
+                return newFilter;
+            }
+            else
+            {
+                return oldFilter;
             }
         }
 

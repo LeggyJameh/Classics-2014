@@ -149,6 +149,18 @@
     <Compile Include="Forms\CompetitorEditor.Designer.cs">
       <DependentUpon>CompetitorEditor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\CompetitorSelector.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\CompetitorSelector.Designer.cs">
+      <DependentUpon>CompetitorSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\TeamManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\TeamManager.Designer.cs">
+      <DependentUpon>TeamManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxes.cs" />
     <Compile Include="MySQL\MySqlTeam.cs" />
     <Compile Include="Object Only Classes\Competitor.cs" />
@@ -158,6 +170,7 @@
     <Compile Include="Forms\DebugIOWINDOW.Designer.cs">
       <DependentUpon>DebugIOWINDOW.cs</DependentUpon>
     </Compile>
+    <Compile Include="Object Only Classes\CompetitorSelectorData.cs" />
     <Compile Include="Object Only Classes\EventCompetitor.cs" />
     <Compile Include="Forms\EventPicker.cs">
       <SubType>Form</SubType>
@@ -259,6 +272,9 @@
     <EmbeddedResource Include="Forms\CompetitorEditor.resx">
       <DependentUpon>CompetitorEditor.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CompetitorSelector.resx">
+      <DependentUpon>CompetitorSelector.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DebugIOWINDOW.resx">
       <DependentUpon>DebugIOWINDOW.cs</DependentUpon>
     </EmbeddedResource>
@@ -282,6 +298,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\TeamManager.resx">
+      <DependentUpon>TeamManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

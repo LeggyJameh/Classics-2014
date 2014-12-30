@@ -22,4 +22,11 @@ namespace CMS
         public float speed;
         public ushort direction;
     }
+
+    public enum SelectedOption
+    {
+        All = 0,
+        Selected = 1,
+        Unselected = 2
+    }
 }

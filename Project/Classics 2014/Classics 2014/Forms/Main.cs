@@ -12,7 +12,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 namespace CMS
 {
-    public partial class Main : Form
+    partial class Main : Form
     {
         int flopsToMaintainColourDirection, flopsToMaintainColourSpeed;
         public Boolean Locked=false;
@@ -41,6 +41,7 @@ namespace CMS
             MainEngine.SQL_Controller.OpenConnection();
         }
 
+        #region tab controls
         public void addNewTab(string tabName, UserControl tabContents)
         {
             tabContents.Dock = DockStyle.Fill;
@@ -77,26 +78,19 @@ namespace CMS
         {
             tabControl.SelectedTab = tabPage;
         }
+        #endregion
 
-        private void buttonExit_Click(object sender, EventArgs e)
+        #region generic functions
+        public void openCompetitorEditor()
         {
-            UserSettings.Default.Save();
-            MainEngine.CloseThreads();
-            this.Close();
+            addNewTab("Competitor Editor", new CompetitorEditor(MainEngine));
         }
-        private void buttonCompetition_Click(object sender, EventArgs e)
+
+        public void openSimpleTeamManager(List<string> teams, CompetitorEditor ce)
         {
-            MainEngine.AddSideController(MainEngine.accuracyEventController.column);
-            string EventName = EventPickerMessageBox.ShowEventPicker();
-            switch (EventName)
-            {
-                case "IntAccuracy":
-                    TabPage NewPage = new TabPage();
-                    CMS.Accuracy.EventAccuracyInit EventTab = MainEngine.StartNewAccuracyEvent();
-                    addNewTab("New Event", EventTab);
-                    break;
-            }
+            addNewTab("Team Manager", new TeamManager(MainEngine, teams, ce));
         }
+
         public void UpdateWind(TWind windData)
         {
             if (textBoxSideSpeed.Text != "000") 
@@ -142,13 +136,6 @@ namespace CMS
             listBoxWindLog.Invoke((MethodInvoker)(() => listBoxWindLog.EndUpdate()));
         }
 
-        private void Main_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            MainEngine.CloseThreads();
-            UserSettings.Default.Save();
-            Thread.Sleep(100);
-            
-        }
         private bool IsDirectionOut(TWind wind, int directionLimit)
         {
             int prevData = Convert.ToInt16(textBoxSideDirection.Text);
@@ -203,6 +190,37 @@ namespace CMS
                 textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
             }
         }
+        #endregion
+
+        #region control events
+        private void Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MainEngine.CloseThreads();
+            UserSettings.Default.Save();
+            Thread.Sleep(100);
+            
+        }
+
+        private void buttonExit_Click(object sender, EventArgs e)
+        {
+            UserSettings.Default.Save();
+            MainEngine.CloseThreads();
+            this.Close();
+        }
+
+        private void buttonCompetition_Click(object sender, EventArgs e)
+        {
+            MainEngine.AddSideController(MainEngine.accuracyEventController.column);
+            string EventName = EventPickerMessageBox.ShowEventPicker();
+            switch (EventName)
+            {
+                case "IntAccuracy":
+                    TabPage NewPage = new TabPage();
+                    CMS.Accuracy.EventAccuracyInit EventTab = MainEngine.StartNewAccuracyEvent();
+                    addNewTab("New Event", EventTab);
+                    break;
+            }
+        }
 
         private void buttonMainSettings_Click(object sender, EventArgs e)
         {
@@ -225,9 +243,9 @@ namespace CMS
 
         private void buttonModifyCompetitorData_Click(object sender, EventArgs e)
         {
-            MainEngine.openCompetitorEditor();
+            openCompetitorEditor();
         }
-        
+        #endregion
     }
 }
 

@@ -92,9 +92,12 @@ namespace CMS
             return NewEvent.EventOptionsTab;
         }
 
-        public void openCompetitorEditor()
+        public void RefreshAllCompetitorUsers()
         {
-            mainForm.addNewTab("Competitor Editor", new CompetitorEditor(this));
+            for (int i = 0; i < accuracyEventController.Events.Count; i++)
+            {
+                accuracyEventController.Events[i].RefreshCurrent();
+            }
         }
 
         //public Classics_2014.Accuracy.EventAccuracyInit LoadExistingAccuracyEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)

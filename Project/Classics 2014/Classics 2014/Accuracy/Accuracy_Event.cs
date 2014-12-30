@@ -18,7 +18,6 @@ namespace CMS.Accuracy
         public EventAccuracyInit EventOptionsTab;
         public EventTeams EventTeamsTab;
         public EventAccuracy EventTab;
-        public Engine engine;
         public Ruleset.AccuracyRules Rules;
 
         public List<Competitor> Competitors;
@@ -54,6 +53,53 @@ namespace CMS.Accuracy
 
         public bool CloseEvent()
         {
+            if (Rules != null)
+            {
+                switch (Rules.stage)
+                {
+                    case EventStage.SetupRules:
+                        if (EventOptionsTab != null)
+                        {
+                            if (EventOptionsTab.Parent != null)
+                            {
+                                engine.mainForm.removeTab((TabPage)EventOptionsTab.Parent);
+                                EventOptionsTab = null;
+                            }
+                        }
+                        break;
+                    case EventStage.SetupTeams:
+                        if (EventTeamsTab != null)
+                        {
+                            if (EventTeamsTab.Parent != null)
+                            {
+                                engine.mainForm.removeTab((TabPage)EventTeamsTab.Parent);
+                                EventTeamsTab = null;
+                            }
+                        }
+                        break;
+                    case EventStage.Ready:
+                        if (EventTab != null)
+                        {
+                            if (EventTab.Parent != null)
+                            {
+                                engine.mainForm.removeTab((TabPage)EventTab.Parent);
+                                EventTab = null;
+                            }
+                        }
+                        break;
+                }
+            }
+            else
+            {
+                if (EventOptionsTab != null)
+                {
+                    if (EventOptionsTab.Parent != null)
+                    {
+                        engine.mainForm.removeTab((TabPage)EventOptionsTab.Parent);
+                        EventOptionsTab = null;
+                    }
+                }
+            }
             return controller.EndEvent(this);
         }
 
@@ -80,6 +126,29 @@ namespace CMS.Accuracy
             NewPage.Text = Name;
             TabControl.TabPages.Add(NewPage);
             TabControl.SelectedTab = NewPage;
+        }
+
+        public void RefreshCurrent()
+        {
+            if (Rules != null)
+            {
+                switch (this.Rules.stage)
+                {
+                    case EventStage.SetupRules:
+                        EventOptionsTab.RefreshGrids();
+                        break;
+                    case EventStage.SetupTeams:
+                        //EventTeamsTab.RefreshGrids();
+                        break;
+                    case EventStage.Ready:
+                        //EventTab.RefreshGrids();
+                        break;
+                }
+            }
+            else
+            {
+                EventOptionsTab.RefreshGrids();
+            }
         }
 
         #region Event Saving

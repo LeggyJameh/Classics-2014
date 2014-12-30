@@ -325,9 +325,100 @@ namespace CMS.MySQL
             return ExecuteNonQuery(query);
         }
 
+        public bool SaveCompetitorsOverwriteAndRemoveExcess(List<Competitor> competitors)
+        {
+            string query;
+
+            query = "DELETE FROM `competitors`";
+
+            if (ExecuteNonQuery(query))
+            {
+                bool completed = true;
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    for (int i = 0; i < competitors.Count; i++)
+                    {
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`UID`, `Name`, `Team Name`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].team + "', '" + competitors[i].nationality + "');", connection);
+                        try
+                        {
+                            cmd.ExecuteNonQuery();
+                        }
+                        catch (MySqlException ex)
+                        {
+                            error = ex.Message;
+                            completed = false;
+                        }
+                    }
+                }
+                else
+                    if (this.OpenConnection() == true)
+                    {
+                        for (int i = 0; i < competitors.Count; i++)
+                        {
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`ID`, `Name`, `Team Name`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].team + "', '" + competitors[i].nationality + "');", connection);
+                            try
+                            {
+                                cmd.ExecuteNonQuery();
+                            }
+                            catch (MySqlException ex)
+                            {
+                                error = ex.Message;
+                                completed = false;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                return completed;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         #endregion
 
         #region Get
+        public List<Competitor> GetCompetitorsByCTeam(string Team)
+        {
+            List<Competitor> Competitors = new List<Competitor>();
+            string query = "SELECT * FROM `competitors` WHERE `Team Name` = '" + Team + "'";
+
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        Competitor CurrentCompetitor = new Competitor();
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            switch (i)
+                            {
+                                case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
+                                case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
+                                case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                                case 3: CurrentCompetitor.nationality = DataReader.GetString(i); break;
+                            }
+                            if (i == 3) { Competitors.Add(CurrentCompetitor); }
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+            }
+            return Competitors;
+        }
+
         public List<Competitor> GetCompetitorsByCTeam(string Team, List<Competitor> IgnoreList)
         {
             List<Competitor> Competitors = new List<Competitor>();
@@ -879,6 +970,34 @@ namespace CMS.MySQL
             }
 
             return teamsToReturn;
+        }
+
+        public int GetNumberCompetitorsInTeam(string teamName)
+        {
+            string query = "SELECT COUNT(1) FROM `competitors` WHERE `Team Name`='" + teamName + "'";
+            int number = 0;
+
+            if (connection.State == System.Data.ConnectionState.Open)
+            {
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                try
+                {
+                    MySqlDataReader DataReader = cmd.ExecuteReader();
+                    while (DataReader.Read())
+                    {
+                        for (int i = 0; i < DataReader.FieldCount; i++)
+                        {
+                            number = DataReader.GetInt16(i);
+                        }
+                    }
+                    DataReader.Close();
+                }
+                catch (MySqlException ex)
+                {
+                    error = ex.Message;
+                }
+            }
+            return number;
         }
 
         #endregion

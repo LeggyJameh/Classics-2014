@@ -23,6 +23,7 @@ namespace CMS
         public DateTime Date;
         public TabControl TabControl;
         public Ruleset.Ruleset Rules;
+        public Engine engine;
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {

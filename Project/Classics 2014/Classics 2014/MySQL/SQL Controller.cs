@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace CMS.MySQL
 {
-    partial class SQL_Controller
+    partial class SQL_Controller 
     {
         private string server;
         private string database;
@@ -148,7 +148,8 @@ namespace CMS.MySQL
                     error = (ex.Message);
                 }
             }
-            while (connection.State != System.Data.ConnectionState.Open || connection.State != System.Data.ConnectionState.Closed);
+            while (connection.State != System.Data.ConnectionState.Closed);
+          //  while (connection.State != System.Data.ConnectionState.Open || connection.State != System.Data.ConnectionState.Closed); Your original Code. if connection is not open or is not closed (Every scenario?) Loop.
             return true;
         }
 

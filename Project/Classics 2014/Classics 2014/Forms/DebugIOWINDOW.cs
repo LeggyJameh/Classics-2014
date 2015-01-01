@@ -41,7 +41,10 @@ namespace CMS
             Data_Accuracy Data = new Data_Accuracy();
             if (newScore)
             {
-                Data.IsLanding = true; Data.LandingScore = Convert.ToByte(newScoreVal);
+              
+                Data.IsLanding = true; 
+                Data.LandingScore = Convert.ToByte(newScoreVal);
+                newScore = false;
             }
             Data.Speed = (float)windSpeed;
             Data.Direction = Convert.ToUInt16(windDirection);

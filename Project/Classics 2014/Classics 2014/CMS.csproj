@@ -161,6 +161,31 @@
     <Compile Include="Forms\TeamManager.Designer.cs">
       <DependentUpon>TeamManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Teams\ReportingTeam.cs" />
+    <Compile Include="Forms\Teams\TeamAdvanced.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamAdvanced.Designer.cs">
+      <DependentUpon>TeamAdvanced.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPickAdvanced.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPickAdvanced.Designer.cs">
+      <DependentUpon>TeamPickAdvanced.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPicker.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPicker.Designer.cs">
+      <DependentUpon>TeamPicker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPickSimple.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Teams\TeamPickSimple.Designer.cs">
+      <DependentUpon>TeamPickSimple.cs</DependentUpon>
+    </Compile>
     <Compile Include="MessageBoxes.cs" />
     <Compile Include="MySQL\MySqlTeam.cs" />
     <Compile Include="Object Only Classes\Competitor.cs" />
@@ -237,6 +262,7 @@
       <DependentUpon>StandardOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Object Only Classes\Team.cs" />
+    <Compile Include="UserSettings.cs" />
     <Compile Include="UserSettings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -301,6 +327,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeamManager.resx">
       <DependentUpon>TeamManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teams\TeamAdvanced.resx">
+      <DependentUpon>TeamAdvanced.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Teams\TeamPicker.resx">
+      <DependentUpon>TeamPicker.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

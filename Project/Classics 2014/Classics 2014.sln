@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Classics 2014", "Classics 2014\Classics 2014.csproj", "{EADFE3E8-3E18-44AA-B215-35CB5A0FCEB4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CMS", "Classics 2014\CMS.csproj", "{EADFE3E8-3E18-44AA-B215-35CB5A0FCEB4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

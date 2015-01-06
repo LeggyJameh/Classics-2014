@@ -15,10 +15,12 @@ namespace CMS.MySQL
         private string server;
         private string database;
         private string user;
+        private string password;
         private MySqlConnection connection;
         private string error;
-        private Process localDatabaseMain = new Process();
-        private string CurrentDirectory = Directory.GetCurrentDirectory();
+        private Process localDatabaseMain;
+        private string CurrentDirectory;
+        private bool local;
 
         #region MainControls
         /// <summary>
@@ -33,8 +35,19 @@ namespace CMS.MySQL
             this.server = Server;
             this.database = Database;
             this.user = User;
-            SetupConnection(Password);
-            StartDatabase();
+            this.password = Password;
+            if (Server == "127.0.0.1" || Server == "localhost")
+            {
+                local = true;
+                CurrentDirectory = Directory.GetCurrentDirectory();
+                StartDatabase();
+                SetupConnection();
+            }
+            else
+            {
+                local = false;
+                SetupConnection();
+            }
         }
 
         /// <summary>
@@ -48,8 +61,19 @@ namespace CMS.MySQL
             this.server = Server;
             this.database = Database;
             this.user = User;
-            SetupConnection();
-            StartDatabase();
+            this.password = "";
+            if (Server == "127.0.0.1" || Server == "localhost")
+            {
+                local = true;
+                CurrentDirectory = Directory.GetCurrentDirectory();
+                StartDatabase();
+                SetupConnection();
+            }
+            else
+            {
+                local = false;
+                SetupConnection();
+            }
         }
 
         /// <summary>
@@ -58,6 +82,7 @@ namespace CMS.MySQL
         /// <returns></returns>
         public bool StartDatabase()
         {
+            localDatabaseMain = new Process();
             try
             {
                 localDatabaseMain.StartInfo.FileName = CurrentDirectory + "\\Database\\bin\\mysqld.exe";
@@ -79,21 +104,35 @@ namespace CMS.MySQL
         /// <returns></returns>
         public bool StopDatabase()
         {
-            try
+            if (local == true)
             {
-                CloseConnection();
-                localDatabaseMain.StartInfo.FileName = CurrentDirectory + "\\Database\\bin\\mysqladmin.exe";
-                localDatabaseMain.StartInfo.CreateNoWindow = true;
-                localDatabaseMain.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
-                localDatabaseMain.StartInfo.Arguments = "-u root shutdown";
-                localDatabaseMain.Start();
+                try
+                {
+                    CloseConnection();
+                    localDatabaseMain.StartInfo.FileName = CurrentDirectory + "\\Database\\bin\\mysqladmin.exe";
+                    localDatabaseMain.StartInfo.CreateNoWindow = true;
+                    localDatabaseMain.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+                    if (password != "")
+                    {
+                        localDatabaseMain.StartInfo.Arguments = "-s -u " + user + " -p " + password + " shutdown";
+                    }
+                    else
+                    {
+                        localDatabaseMain.StartInfo.Arguments = "-s -u " + user + " shutdown";
+                    }
+                    localDatabaseMain.Start();
+                    return true;
+                }
+                catch (Win32Exception e)
+                {
+                    error = e.NativeErrorCode.ToString();
+                }
+                return false;
+            }
+            else
+            {
                 return true;
             }
-            catch (Win32Exception e)
-            {
-                error = e.NativeErrorCode.ToString();
-            }
-            return false;
         }
 
         /// <summary>
@@ -149,7 +188,6 @@ namespace CMS.MySQL
                 }
             }
             while (connection.State != System.Data.ConnectionState.Closed);
-          //  while (connection.State != System.Data.ConnectionState.Open || connection.State != System.Data.ConnectionState.Closed); Your original Code. if connection is not open or is not closed (Every scenario?) Loop.
             return true;
         }
 
@@ -159,8 +197,15 @@ namespace CMS.MySQL
         /// <returns></returns>
         public bool SetupConnection()
         {
-            string connectionString;
-            connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user;
+            string connectionString = "";
+            if (password != "")
+            {
+                connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user;
+            }
+            else
+            {
+                connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user + ";PASSWORD=" + password + ";";
+            }
 
             try
             {
@@ -173,29 +218,6 @@ namespace CMS.MySQL
             }
             return false;
         }
-
-        /// <summary>
-        /// Sets up the connection between the database and the client w/ password
-        /// </summary>
-        /// <param name="Password"></param>
-        /// <returns></returns>
-        public bool SetupConnection(string Password)
-        {
-            string connectionString;
-            connectionString = "SERVER=" + server + ";DATABASE=" + database + ";UID=" + user + ";PASSWORD=" + Password + ";";
-
-            try
-            {
-                connection = new MySqlConnection(connectionString);
-                return true;
-            }
-            catch
-            {
-                error = "Could not connect to the database";
-            }
-            return false;
-        }
-
         #endregion
 
         #region Queries

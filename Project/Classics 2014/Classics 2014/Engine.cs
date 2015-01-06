@@ -34,7 +34,7 @@ namespace CMS
             windGraph.MainEngine = this;
             AquireMasterFile();
             IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
-            SQL_Controller = new SQL_Controller("127.0.0.1", "Main", "root");
+            SQL_Controller = new SQL_Controller(UserSettings.Default.mySqlDataBaseServerIP, UserSettings.Default.mySqlDataBaseName, UserSettings.Default.mySqlDataBaseUser, UserSettings.Default.mySqlDataBasePassword);
             accuracyEventController = new Accuracy.AccuracyEventController(SQL_Controller, IO_Controller, this);
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((!ListenThread.IsAlive)) 

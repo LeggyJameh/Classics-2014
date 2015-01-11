@@ -6,42 +6,117 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Collections.Specialized;
+using System.Collections.ObjectModel;
 
-namespace CMS.Forms.Teams
+namespace CMS
 {
     partial class TeamAdvanced : UserControl
     {
-        bool hidden;
-        int maxNumber;
-        ReportingTeam team;
-        public TeamAdvanced(ref Team team, int maxCompPerTeam)
+        public ObservableCollection<Competitor> competitors;
+        private Bitmap NteamImage;
+        private int NteamID;
+        private string NteamName;
+        private int eventID;
+
+        public Bitmap teamImage
         {
-            this.team = (ReportingTeam)team;
-            maxNumber = maxCompPerTeam;
-            hidden = false;
+            get
+            {
+                return NteamImage;
+            }
+            set
+            {
+                pictureBoxTeamImage.Image = value;
+                NteamImage = value;
+            }
+        }
+
+        public int teamID
+        {
+            get
+            {
+                return NteamID;
+            }
+            set
+            {
+                labelID.Text = "ID: " + value;
+                NteamID = value;
+            }
+        }
+
+        public string teamName
+        {
+            get
+            {
+                return NteamName;
+            }
+            set
+            {
+                labelTeamName.Text = value;
+                NteamName = value;
+            }
+        }
+
+        public TeamAdvanced(Team currentTeam)
+        {
+            this.teamName = currentTeam.Name;
+            this.teamID = currentTeam.ID;
+            this.teamImage = currentTeam.TeamImage;
+            this.eventID = currentTeam.EventID;
+            foreach (Competitor c in currentTeam.Competitors)
+            {
+                this.competitors.Add(c);
+            }
             InitializeComponent();
+            competitors.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(competitors_CollectionChanged);
         }
 
-        private void inputShowHide_Click(object sender, EventArgs e)
+        private void competitors_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if (hidden) // If not visible
+            dataGridTeam.Rows.Clear();
+            foreach (EventCompetitor c in competitors)
             {
-                dataGridCompetitors.Visible = true;
-                pictureBoxTeamImage.Visible = true;
-                inputShowHide.Text = "-";
+                dataGridTeam.Rows.Add(c.ID, c.name, c.nationality, c.team);
             }
-            else // If visible
+        }
+
+
+        public Team ReturnTeam()
+        {
+            Team currentTeam = new Team(teamName);
+            currentTeam.ID = teamID;
+            currentTeam.Name = teamName;
+            currentTeam.TeamImage = teamImage;
+            currentTeam.EventID = eventID;
+
+            foreach (EventCompetitor c in competitors)
             {
-                dataGridCompetitors.Visible = false;
+                currentTeam.Competitors.Add(c);
+            }
+
+            return currentTeam;
+        }
+
+        private void inputExit_Click(object sender, EventArgs e)
+        {
+            if (inputClear.Visible == true) // If already visible
+            {
+                inputClear.Visible = false;
+                inputConfirm.Visible = false;
+                inputRemove.Visible = false;
+                dataGridTeam.Visible = false;
                 pictureBoxTeamImage.Visible = false;
-                inputShowHide.Text = "+";
+                inputMinimise.Text = "+";
             }
-        }
-
-        public void onTeamChanged(object sender, NotifyCollectionChangedEventArgs args)
-        {
-            //team.
+            else // If not already visible
+            {
+                inputClear.Visible = true;
+                inputConfirm.Visible = true;
+                inputRemove.Visible = true;
+                dataGridTeam.Visible = true;
+                pictureBoxTeamImage.Visible = true;
+                inputMinimise.Text = "-";
+            }
         }
     }
 }

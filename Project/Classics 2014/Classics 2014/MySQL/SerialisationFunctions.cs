@@ -126,7 +126,7 @@ namespace CMS.MySQL
             f = new BinaryFormatter();
             m.Write(Team.Image, 0, Team.Image.Length);
             m.Seek(0, SeekOrigin.Begin);
-            deSerialisedTeam.TeamImage = (System.Drawing.Image)f.Deserialize(m);
+            deSerialisedTeam.TeamImage = (System.Drawing.Bitmap)f.Deserialize(m);
 
             deSerialisedTeam.EventID = Team.EventID;
             deSerialisedTeam.ID = Team.ID;

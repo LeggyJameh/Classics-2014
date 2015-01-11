@@ -262,5 +262,17 @@ namespace CMS {
                 this["DangerDirectionChange"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public uint DefaultTeamMode {
+            get {
+                return ((uint)(this["DefaultTeamMode"]));
+            }
+            set {
+                this["DefaultTeamMode"] = value;
+            }
+        }
     }
 }

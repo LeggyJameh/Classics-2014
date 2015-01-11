@@ -18,12 +18,11 @@ namespace CMS.Accuracy
         public EventAccuracyInit EventOptionsTab;
         public EventTeams EventTeamsTab;
         public EventAccuracy EventTab;
-        public Ruleset.AccuracyRules Rules;
-
         public List<Competitor> Competitors;
         public List<string> ActiveTeams;
         Boolean lostSerial = false;
         public AccuracyEventController controller;
+        Ruleset.AccuracyRules rules;
         #endregion
 
         /// <summary>
@@ -42,6 +41,7 @@ namespace CMS.Accuracy
             RequiresSerial = true;
             EventType = EventType.Accuracy;
             EventID = -1;
+            rules = (Ruleset.AccuracyRules)Rules;
         }
 
         /// <summary>
@@ -103,21 +103,9 @@ namespace CMS.Accuracy
             return controller.EndEvent(this);
         }
 
-        public void proceedToSetupTeams()
-        {
-            Rules.stage = EventStage.SetupTeams;
-            EventTeamsTab = new EventTeams(this, Competitors, EventID, Rules.competitorsPerTeam, ActiveTeams);
-            TabPage NewPage = new TabPage();
-            NewPage.Controls.Add(EventTeamsTab);
-            EventTeamsTab.Dock = DockStyle.Fill;
-            NewPage.Text = Name + " Team Config";
-            TabControl.TabPages.Add(NewPage);
-            TabControl.SelectedTab = NewPage;
-        }
-
         public void proceedToEvent()
         {
-            Rules.stage = EventStage.Ready;
+            rules.stage = EventStage.Ready;
             SQL_Controller.ModifyEvent(this);
             EventTab = new EventAccuracy(this, TabControl);
             TabPage NewPage = new TabPage();
@@ -132,7 +120,7 @@ namespace CMS.Accuracy
         {
             if (Rules != null)
             {
-                switch (this.Rules.stage)
+                switch (this.rules.stage)
                 {
                     case EventStage.SetupRules:
                         EventOptionsTab.RefreshGrids();
@@ -225,7 +213,7 @@ namespace CMS.Accuracy
         public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
             this.Teams = Teams;
-            Rules.competitorsPerTeam = CompetitorsPerTeam;
+            rules.competitorsPerTeam = CompetitorsPerTeam;
             SQL_Controller.CreateSTeams(EventID, Teams);
             SQL_Controller.ModifyEvent(this);
             EventTeamsTab = null;
@@ -250,8 +238,8 @@ namespace CMS.Accuracy
         public override TWind ReturnWindLimits()
         {
             TWind CurrentWind = new TWind();
-            CurrentWind.direction = Convert.ToUInt16(Rules.directionChangeFA);
-            CurrentWind.speed = Rules.windspeedRejump;
+            CurrentWind.direction = Convert.ToUInt16(rules.directionChangeFA);
+            CurrentWind.speed = rules.windspeedRejump;
             return CurrentWind;
         }
 
@@ -260,30 +248,30 @@ namespace CMS.Accuracy
             if (L.windDataPrior != null && L.windDataAfter != null)
             {
                 #region SpeedChecks
-                for (int i = 0; i < Rules.windSecondsPriorLand; i++)
+                for (int i = 0; i < rules.windSecondsPriorLand; i++)
                 {
-                    if (L.windDataPrior[i].speed > Rules.windspeedRejump) { return true; } //If wind out
+                    if (L.windDataPrior[i].speed > rules.windspeedRejump) { return true; } //If wind out
                 }
-                for (int ii = 0; ii < Rules.windSecondsAfterLand; ii++)
+                for (int ii = 0; ii < rules.windSecondsAfterLand; ii++)
                 {
-                    if (L.windDataAfter[ii].speed > Rules.windspeedRejump) { return true; } //If wind out  
+                    if (L.windDataAfter[ii].speed > rules.windspeedRejump) { return true; } //If wind out  
                 }
                 #endregion
                 #region DirectionChecks
                 bool WindSpeedOverInTimePeriod = false;
-                for (int i = 0; i < Rules.timePriorFA; i++)
+                for (int i = 0; i < rules.timePriorFA; i++)
                 {
-                    if (L.windDataPrior[i].speed > Rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
+                    if (L.windDataPrior[i].speed > rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
                 }
-                for (int i = 0; i < Rules.timeAfterFA; i++)
+                for (int i = 0; i < rules.timeAfterFA; i++)
                 {
-                    if (L.windDataAfter[i].speed > Rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
+                    if (L.windDataAfter[i].speed > rules.windspeedFA) { WindSpeedOverInTimePeriod = true; }
                 }
                 if (WindSpeedOverInTimePeriod == true)
                 {
                     List<int> AnglesBefore = new List<int>();
                     List<int> AnglesAfter = new List<int>();
-                    for (int i = 0; i < Rules.timePriorFA; i++)
+                    for (int i = 0; i < rules.timePriorFA; i++)
                     {
                         TWind currentWind = L.windDataPrior[i];
                         for (int i2 = 0; i2 < AnglesBefore.Count; i2++)
@@ -293,10 +281,10 @@ namespace CMS.Accuracy
                             { AnglesBefore.Add(currentWind.direction); }
                         }
                     }
-                    for (int i = 0; i < Rules.timeAfterFA; i++)
+                    for (int i = 0; i < rules.timeAfterFA; i++)
                     {
                         TWind currentWind = L.windDataAfter[i];
-                        for (int i2 = 0; i2 < Rules.timeAfterFA; i2++)
+                        for (int i2 = 0; i2 < rules.timeAfterFA; i2++)
                         {
                             if (IsDirectionOut(currentWind, AnglesAfter[i2])) { return true; }
                             else
@@ -312,28 +300,28 @@ namespace CMS.Accuracy
         private bool IsDirectionOut(TWind wind, int prevData)
         {
             int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < Rules.directionChangeFA)
+            if (prevData < rules.directionChangeFA)
             {
                 minimum = 0;
-                minOverFlow = (360 - (Rules.directionChangeFA - prevData));
+                minOverFlow = (360 - (rules.directionChangeFA - prevData));
                 if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
             }
             else
             {
-                minimum = prevData - Rules.directionChangeFA;
+                minimum = prevData - rules.directionChangeFA;
                 if (wind.direction < minimum) { return true; }
                 else if (prevData > wind.direction) { return false; }
             }
             //Max checks
-            if ((prevData + Rules.directionChangeFA) > 360)
+            if ((prevData + rules.directionChangeFA) > 360)
             {
                 maximum = 360;
-                maxOverFlow = 0 + ((prevData + Rules.directionChangeFA) - 360);
+                maxOverFlow = 0 + ((prevData + rules.directionChangeFA) - 360);
                 if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
             }
             else
             {
-                maximum = prevData + Rules.directionChangeFA;
+                maximum = prevData + rules.directionChangeFA;
                 if (wind.direction > maximum) { return true; }
             }
 

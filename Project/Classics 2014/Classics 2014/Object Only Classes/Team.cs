@@ -12,7 +12,7 @@ namespace CMS
         public int EventID;
         public string Name;
         public List<EventCompetitor> Competitors;
-        public Image TeamImage;
+        public Bitmap TeamImage;
         public Team()
         {
             Competitors = new List<EventCompetitor>();

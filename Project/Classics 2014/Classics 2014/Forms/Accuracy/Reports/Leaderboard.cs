@@ -24,6 +24,7 @@ namespace CMS.Accuracy.Reports
         Action<Leaderboard> Close;
         Bitmap display;
         public bool CloseOnStart = false;
+        Ruleset.AccuracyRules rules;
         public Leaderboard(int eventID, String reportName, SQL_Controller sqlController, Accuracy_Event connectedEvent,Action<Leaderboard> Close)
         {
             InitializeComponent();
@@ -31,10 +32,11 @@ namespace CMS.Accuracy.Reports
             this.eventId = eventID;
             this.sqlController = sqlController;
             this.connectedEvent = connectedEvent;
+            rules = (Ruleset.AccuracyRules)connectedEvent.Rules;
             autoUpdate = false;
             this.Close = Close;
             Populate();
-            if (connectedEvent.Rules.competitorsPerTeam > 1)
+            if (rules.competitorsPerTeam > 1)
             {
                 buttonSortAsSingles.Visible = true;
                 buttonSortAsTeam.Visible = true;
@@ -55,7 +57,7 @@ namespace CMS.Accuracy.Reports
                     {
                         r.Cells[Round + 4] = (DataGridViewCell)newCell.Clone();
                         r.Cells[Round + 4].Value  = newCell.Value;
-                        if (connectedEvent.Rules.competitorsPerTeam == 1)
+                        if (rules.competitorsPerTeam == 1)
                         {
                             complexSingleSort();
                         }
@@ -79,7 +81,7 @@ namespace CMS.Accuracy.Reports
             {
                 dataGridViewLockedLeaderboard.Rows.Clear();
                 Populate();
-                if (connectedEvent.Rules.competitorsPerTeam == 1)
+                if (rules.competitorsPerTeam == 1)
                 {
                     complexSingleSort();
                 }
@@ -129,7 +131,7 @@ namespace CMS.Accuracy.Reports
 
             }
 
-            if (connectedEvent.Rules.competitorsPerTeam == 1)
+            if (rules.competitorsPerTeam == 1)
             {
                 complexSingleSort();
             }
@@ -142,7 +144,7 @@ namespace CMS.Accuracy.Reports
         {
             int total = 0;
             int indexPosition=0;
-            int[] teamScores = new int[connectedEvent.Rules.competitorsPerTeam];
+            int[] teamScores = new int[rules.competitorsPerTeam];
 
             foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
             {
@@ -155,7 +157,7 @@ namespace CMS.Accuracy.Reports
         
             
             Array.Sort(teamScores);
-            for (int i2 = 0; i2 < Convert.ToInt16(connectedEvent.Rules.scoresUsed.Substring(5)); i2++)
+            for (int i2 = 0; i2 < Convert.ToInt16(rules.scoresUsed.Substring(5)); i2++)
             {
                 total += teamScores[i2];
             }

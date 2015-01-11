@@ -81,15 +81,14 @@ namespace CMS.Accuracy
         {
             bool allowed = true;
             DateTime date = inputDate.Value;
-            string eventName = inputName.Text.Trim();
+            eventName = inputName.Text.Trim();
             List<Competitor> competitors = getSelectedCompetitors();
 
-            Ruleset.AccuracyRules rules = new Ruleset.AccuracyRules();
             rules.windspeedSafe = Convert.ToSingle(inputMaxWind.Value);
             rules.directionChangeFA = getAngle(inputFADirectionChange.SelectedItem.ToString());
             rules.maxScore = Convert.ToInt16(inputMaxScore.Value);
             rules.competitorsPerTeam = Convert.ToInt16(inputCompetitorsPerTeam.Value);
-            rules.preset = inputRuleSet.SelectedText;
+            rules.preset = inputRuleSet.SelectedItem.ToString();
             rules.scoresUsed = inputScoresUsed.SelectedItem.ToString();
             rules.stage = EventStage.SetupRules;
             rules.timeAfterFA = Convert.ToInt16(inputFATimeAfter.Value);
@@ -115,6 +114,7 @@ namespace CMS.Accuracy
             }
             else
             {
+                MessageBox.Show("Settings are invalid.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
         }
@@ -129,6 +129,7 @@ namespace CMS.Accuracy
             inputRuleSet.SelectedIndex = 0;
             inputScoresUsed.SelectedItem = inputScoresUsed.Items[0];
             inputFADirectionChange.SelectedItem = inputFADirectionChange.Items[8];
+            inputRuleSet.SelectedItem = inputRuleSet.Items[0];
             labelWarning.Text = "";
             windspeedSafe = 5.0f;
             windspeedRejump = 4.0f;
@@ -158,7 +159,7 @@ namespace CMS.Accuracy
         {
             if (compileDataAndSave())
             {
-                Connected_Event.proceedToSetupTeams();
+                Connected_Event.ProceedToTeamSetup();
             }
         }
 

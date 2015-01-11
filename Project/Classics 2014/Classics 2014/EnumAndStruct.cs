@@ -29,4 +29,10 @@ namespace CMS
         Selected = 1,
         Unselected = 2
     }
+
+    public enum TeamMode
+    {
+        Simple = 0,
+        Advanced = 1
+    }
 }

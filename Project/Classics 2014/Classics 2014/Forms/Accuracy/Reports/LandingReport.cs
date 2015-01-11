@@ -19,11 +19,13 @@ namespace CMS.Accuracy.Reports
         Action<LandingReport> Close;
         Bitmap display;
         Form undockedForm;
+        Ruleset.AccuracyRules rules;
         public LandingReport(AccuracyLanding landingToDisplay, String Name, Accuracy_Event ConnectedEvent, Action<LandingReport> Close)
         {
             InitializeComponent();
             this.NameOfReport = Name;
             connectedEvent = ConnectedEvent;
+            rules = (Ruleset.AccuracyRules)connectedEvent.Rules;
             groupBoxReport.Text = NameOfReport;
             this.Close = Close;
             for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 0; i--)
@@ -54,10 +56,10 @@ namespace CMS.Accuracy.Reports
                         itemToAdd.ForeColor = Color.Red;
                     }
                 }
-                else if (windData.speed > connectedEvent.Rules.windspeedRejump)
+                else if (windData.speed > rules.windspeedRejump)
                 {
                     itemToAdd.ForeColor = Color.Red;
-                    if (windData.speed > connectedEvent.Rules.windspeedSafe)
+                    if (windData.speed > rules.windspeedSafe)
                     {
                         itemToAdd.BackColor = Color.Black;
                     }
@@ -72,28 +74,28 @@ namespace CMS.Accuracy.Reports
         private bool IsDirectionOut(TWind wind, int prevData)
         {
             int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < connectedEvent.Rules.directionChangeFA)
+            if (prevData < rules.directionChangeFA)
             {
                 minimum = 0;
-                minOverFlow = (360 - ((int)connectedEvent.Rules.directionChangeFA - prevData));
+                minOverFlow = (360 - ((int)rules.directionChangeFA - prevData));
                 if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
             }
             else
             {
-                minimum = prevData - (int)connectedEvent.Rules.directionChangeFA;
+                minimum = prevData - (int)rules.directionChangeFA;
                 if (wind.direction < minimum) { return true; }
                 else if (prevData > wind.direction) { return false; }
             }
             //Max checks
-            if ((prevData + (int)connectedEvent.Rules.directionChangeFA) > 360)
+            if ((prevData + (int)rules.directionChangeFA) > 360)
             {
                 maximum = 360;
-                maxOverFlow = 0 + ((prevData + (int)connectedEvent.Rules.directionChangeFA) - 360);
+                maxOverFlow = 0 + ((prevData + (int)rules.directionChangeFA) - 360);
                 if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
             }
             else
             {
-                maximum = prevData + (int)connectedEvent.Rules.directionChangeFA;
+                maximum = prevData + (int)rules.directionChangeFA;
                 if (wind.direction > maximum) { return true; }
             }
 

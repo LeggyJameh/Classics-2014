@@ -19,6 +19,7 @@ namespace CMS.Accuracy
         int RoundNumber = 1;
         bool Admin = false;
         accuracyEventLandingColumn LandingList;
+        Ruleset.AccuracyRules rules;
 
         #region Loading
 
@@ -35,6 +36,7 @@ namespace CMS.Accuracy
         public EventAccuracy(Accuracy_Event Event, TabControl Main)
         {
             Connected_Event = Event;
+            rules = (Ruleset.AccuracyRules)Event.Rules;
             tabControl = Main;
             InitializeComponent();
             groupboxControllerListArea.Controls.Add(Connected_Event.controller.column);
@@ -186,7 +188,7 @@ namespace CMS.Accuracy
                     if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
                     {
                         currentLanding = Connected_Event.controller.getLandingFromCell(dataGridViewScore.SelectedCells[0]);
-                        currentLanding.score = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), Connected_Event.Rules.maxScore);
+                        currentLanding.score = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), rules.maxScore);
                         if (currentLanding.score != -1)
                         {
                             dataGridViewScore.SelectedCells[0].Value = currentLanding.score;
@@ -210,7 +212,7 @@ namespace CMS.Accuracy
                 {
                     if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
                     {
-                        int NewScore = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), Connected_Event.Rules.maxScore);
+                        int NewScore = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), rules.maxScore);
                         if (NewScore != -1)
                         {
                             dataGridViewScore.SelectedCells[0].Value = NewScore;

@@ -25,6 +25,13 @@ namespace CMS
         public Ruleset.Ruleset Rules;
         public Engine engine;
 
+        public void ProceedToTeamSetup()
+        {
+            Rules.stage = EventStage.SetupTeams;
+            engine.mainForm.removeCurrentTab();
+            engine.mainForm.addNewTab("Scoring team setup", new Forms.TeamPicker(this));
+        }
+
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
         {
             throw new NotImplementedException();

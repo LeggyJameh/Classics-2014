@@ -240,7 +240,7 @@ namespace CMS.MySQL
         public int CreateEvent(Event Event)
         {
             MySqlEvent CurrentEvent = SerialiseEvent(Event);
-            string query = "INSERT INTO `events` (`Name`, `Date`, `Type`, `Stage`, Data`) VALUES ('" + CurrentEvent.Name + "', '" + CurrentEvent.Date.ToShortDateString() + "', '" + CurrentEvent.Type.ToString() + "', '0', '" + ByteArrayToHex(CurrentEvent.Data) + "');";
+            string query = "INSERT INTO `events` (`Name`, `Date`, `Type`, `Data`) VALUES ('" + CurrentEvent.Name + "', '" + CurrentEvent.Date.ToShortDateString() + "', '" + CurrentEvent.Type.ToString() + "', '" + ByteArrayToHex(CurrentEvent.Data) + "');";
             if (ExecuteNonQuery(query))
             {
                 return GetLastInsertKey();

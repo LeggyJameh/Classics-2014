@@ -161,11 +161,10 @@
     <Compile Include="Forms\TeamManager.Designer.cs">
       <DependentUpon>TeamManager.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\Teams\ReportingTeam.cs" />
     <Compile Include="Forms\Teams\TeamAdvanced.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\Teams\TeamAdvanced.Designer.cs">
+    <Compile Include="Forms\Teams\TeamAdvanced.designer.cs">
       <DependentUpon>TeamAdvanced.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Teams\TeamPickAdvanced.cs">
@@ -179,12 +178,6 @@
     </Compile>
     <Compile Include="Forms\Teams\TeamPicker.Designer.cs">
       <DependentUpon>TeamPicker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamPickSimple.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamPickSimple.Designer.cs">
-      <DependentUpon>TeamPickSimple.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageBoxes.cs" />
     <Compile Include="MySQL\MySqlTeam.cs" />
@@ -306,6 +299,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EventPicker.resx">
       <DependentUpon>EventPicker.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\EventAccuracy.resx">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
@@ -324,12 +318,13 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\TeamManager.resx">
       <DependentUpon>TeamManager.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Teams\TeamAdvanced.resx">
-      <DependentUpon>TeamAdvanced.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\Teams\TeamPickAdvanced.resx">
+      <DependentUpon>TeamPickAdvanced.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teams\TeamPicker.resx">
       <DependentUpon>TeamPicker.cs</DependentUpon>

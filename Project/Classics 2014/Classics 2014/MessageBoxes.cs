@@ -78,6 +78,29 @@ namespace CMS
             }
         }
 
+        public static string SwitchTeam(List<string> possibleTeams, string previousTeam)
+        {
+            string finalTeam;
+            string[] strings = new string[1];
+            strings[0] = "Assign competitors to team:";
+            ComboBox cb = new ComboBox();
+            foreach (string s in possibleTeams)
+            {
+                cb.Items.Add(s);
+            }
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Assign team", Properties.Resources.Icon, strings, cb);
+
+            if (outputs != null)
+            {
+                finalTeam = (string)outputs[0];
+                return finalTeam;
+            }
+            else
+            {
+                return previousTeam;
+            }
+        }
+
         public static string ModifyCompetitorName()
         {
             string name;

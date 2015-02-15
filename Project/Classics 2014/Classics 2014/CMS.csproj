@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Accuracy\AccuracyEventController.cs" />
     <Compile Include="Accuracy\AccuracyLanding.cs" />
+    <Compile Include="EventLoader.cs" />
     <Compile Include="Forms\Accuracy\AccuracyOptionsMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +156,12 @@
     <Compile Include="Forms\CompetitorSelector.Designer.cs">
       <DependentUpon>CompetitorSelector.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\LoadScreen.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\LoadScreen.Designer.cs">
+      <DependentUpon>LoadScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\TeamManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -210,12 +217,6 @@
     </Compile>
     <Compile Include="Forms\CommonDisplayOptions.Designer.cs">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EventLoader.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\EventLoader.Designer.cs">
-      <DependentUpon>EventLoader.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\EventTeams.cs">
       <SubType>UserControl</SubType>
@@ -307,11 +308,11 @@
     <EmbeddedResource Include="Forms\CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EventLoader.resx">
-      <DependentUpon>EventLoader.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Forms\EventTeams.resx">
       <DependentUpon>EventTeams.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\LoadScreen.resx">
+      <DependentUpon>LoadScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LockScreen.resx">
       <DependentUpon>LockScreen.cs</DependentUpon>

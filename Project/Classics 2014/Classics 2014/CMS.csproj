@@ -155,23 +155,11 @@
     <Compile Include="Forms\CompetitorSelector.Designer.cs">
       <DependentUpon>CompetitorSelector.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\TeamManager.cs">
+    <Compile Include="Forms\GroupManager.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\TeamManager.Designer.cs">
-      <DependentUpon>TeamManager.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamAdvanced.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamAdvanced.designer.cs">
-      <DependentUpon>TeamAdvanced.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamPickAdvanced.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Teams\TeamPickAdvanced.Designer.cs">
-      <DependentUpon>TeamPickAdvanced.cs</DependentUpon>
+    <Compile Include="Forms\GroupManager.Designer.cs">
+      <DependentUpon>GroupManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Teams\TeamPicker.cs">
       <SubType>UserControl</SubType>
@@ -278,12 +266,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\Reports\Leaderboard.resx">
       <DependentUpon>Leaderboard.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\Reports\ReportCreation.resx">
       <DependentUpon>ReportCreation.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\Reports\TeamReport.resx">
       <DependentUpon>TeamReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\accuracyEventLandingColumn.resx">
       <DependentUpon>accuracyEventLandingColumn.cs</DependentUpon>
@@ -303,6 +294,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\EventAccuracy.resx">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
@@ -320,11 +312,8 @@
       <DependentUpon>Main.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\TeamManager.resx">
-      <DependentUpon>TeamManager.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Teams\TeamPickAdvanced.resx">
-      <DependentUpon>TeamPickAdvanced.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\GroupManager.resx">
+      <DependentUpon>GroupManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Teams\TeamPicker.resx">
       <DependentUpon>TeamPicker.cs</DependentUpon>

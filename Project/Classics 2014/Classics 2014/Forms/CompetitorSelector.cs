@@ -15,16 +15,16 @@ namespace CMS
         private CompetitorSelectorData data;
         private DataGridViewCellStyle selectedStyle;
         private DataGridViewCellStyle defaultStyle;
-        private string noTeamName;
+        private string noGroupName;
 
         public Event Connected_Event;
         #endregion
 
         #region filterVariables
-        string NfilterTeam; // dont reference, use filterTeam instead.
+        string NfilterGroup; // dont reference, use filterGroup instead.
         string NfilterCompetitor; // dont reference, use filterCompetitor instead.
-        SelectedOption selectionShowTeam;
-        bool showCompetitorsUnselectedTeams;
+        SelectedOption selectionShowGroup;
+        bool showCompetitorsUnselectedGroups;
         #endregion
 
         public CompetitorSelector(Event Connected_Event)
@@ -34,7 +34,7 @@ namespace CMS
             setup();
             setupForm();
             ReloadData();
-            inputTeamShow.SelectedIndex = 0;
+            inputGroupShow.SelectedIndex = 0;
         }
 
         /// <summary>
@@ -43,10 +43,10 @@ namespace CMS
         private void setup()
         {
             data = new CompetitorSelectorData();
-            showCompetitorsUnselectedTeams = false;
+            showCompetitorsUnselectedGroups = false;
             NfilterCompetitor = "";
-            NfilterTeam = "";
-            noTeamName = "[No Team]";
+            NfilterGroup = "";
+            noGroupName = "[No Group]";
         }
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace CMS
         /// </summary>
         private void setupForm()
         {
-            selectionShowTeam = SelectedOption.All;
+            selectionShowGroup = SelectedOption.All;
             defaultStyle = dataGridCompetitors.DefaultCellStyle.Clone();
             selectedStyle = dataGridCompetitors.DefaultCellStyle.Clone();
             selectedStyle.BackColor = Color.LightGreen;
@@ -71,11 +71,11 @@ namespace CMS
 
             foreach (Competitor c in data.GetCompetitors())
             {
-                if (data.TeamValue(c.team) || showCompetitorsUnselectedTeams) // If team has been selected or showing unselected teams' competitors.
+                if (data.GroupValue(c.group) || showCompetitorsUnselectedGroups) // If group has been selected or showing unselected groups' competitors.
                 {
-                    if (c.name.ToUpper().Contains(filterCompetitor) || c.nationality.ToUpper().Contains(filterCompetitor) || c.team.ToUpper().Contains(filterCompetitor))
+                    if (c.name.ToUpper().Contains(filterCompetitor) || c.nationality.ToUpper().Contains(filterCompetitor) || c.group.ToUpper().Contains(filterCompetitor))
                     {
-                        int rowIndex = dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.team); // Add the competitor to the grid.
+                        int rowIndex = dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.group); // Add the competitor to the grid.
                         if (data.CompetitorValue(c)) // if the competitor has been selected,
                         {
                             foreach (DataGridViewCell cell in dataGridCompetitors.Rows[rowIndex].Cells) // Get all cells on that row
@@ -109,11 +109,11 @@ namespace CMS
 
             foreach (Competitor c in data.GetCompetitors())
             {
-                if (data.TeamValue(c.team) || showCompetitorsUnselectedTeams) // If team has been selected or showing unselected teams' competitors.
+                if (data.GroupValue(c.group) || showCompetitorsUnselectedGroups) // If group has been selected or showing unselected groups' competitors.
                 {
-                    if (c.name.ToUpper().Contains(filterCompetitor) || c.nationality.ToUpper().Contains(filterCompetitor) || c.team.ToUpper().Contains(filterCompetitor))
+                    if (c.name.ToUpper().Contains(filterCompetitor) || c.nationality.ToUpper().Contains(filterCompetitor) || c.group.ToUpper().Contains(filterCompetitor))
                     {
-                        int rowIndex = dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.team); // Add the competitor to the grid.
+                        int rowIndex = dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.group); // Add the competitor to the grid.
                         if (data.CompetitorValue(c)) // if the competitor has been selected,
                         {
                             foreach (DataGridViewCell cell in dataGridCompetitors.Rows[rowIndex].Cells) // Get all cells on that row
@@ -145,17 +145,17 @@ namespace CMS
         }
 
         /// <summary>
-        /// Deletes all rows from team grid and re-loads from virtual data.
+        /// Deletes all rows from group grid and re-loads from virtual data.
         /// </summary>
-        private void refreshTeamGrid()
+        private void refreshGroupGrid()
         {
-            foreach (string team in data.GetTeams())
+            foreach (string group in data.GetGroups())
             {
-                if (!data.TeamValue(team))
+                if (!data.GroupValue(group))
                 {
                     foreach (Competitor c in data.GetCompetitors())
                     {
-                        if (c.team == team)
+                        if (c.group == group)
                         {
                             data.SetValue(c, false);
                         }
@@ -163,35 +163,35 @@ namespace CMS
                 }
             }
 
-            dataGridTeams.Rows.Clear();
-            List<string> teamsToAdd = new List<string>();
+            dataGridGroups.Rows.Clear();
+            List<string> groupsToAdd = new List<string>();
 
-            foreach (string t in data.GetTeams())
+            foreach (string t in data.GetGroups())
             {
-                if ((data.TeamValue(t) && selectionShowTeam == SelectedOption.Selected)
-                    || (!data.TeamValue(t) && selectionShowTeam == SelectedOption.Unselected)
-                    || selectionShowTeam == SelectedOption.All)
+                if ((data.GroupValue(t) && selectionShowGroup == SelectedOption.Selected)
+                    || (!data.GroupValue(t) && selectionShowGroup == SelectedOption.Unselected)
+                    || selectionShowGroup == SelectedOption.All)
                 {
-                    if (t.ToUpper().Contains(filterTeam))
+                    if (t.ToUpper().Contains(filterGroup))
                     {
-                        teamsToAdd.Add(t);
+                        groupsToAdd.Add(t);
                     }
                 }
             }
 
-            foreach (string t in teamsToAdd)
+            foreach (string t in groupsToAdd)
             {
-                int rowIndex = dataGridTeams.Rows.Add(t, Connected_Event.SQL_Controller.GetNumberCompetitorsInTeam(t));
-                if (data.TeamValue(t)) // If team selected,
+                int rowIndex = dataGridGroups.Rows.Add(t, Connected_Event.SQL_Controller.GetNumberCompetitorsInGroup(t));
+                if (data.GroupValue(t)) // If group selected,
                 {
-                    foreach (DataGridViewCell cell in dataGridTeams.Rows[rowIndex].Cells) // Get all cells on that row
+                    foreach (DataGridViewCell cell in dataGridGroups.Rows[rowIndex].Cells) // Get all cells on that row
                     {
                         cell.Style = selectedStyle; // Switch to selected style.
                     }
                 }
                 else
                 {
-                    foreach (DataGridViewCell cell in dataGridTeams.Rows[rowIndex].Cells) // Get all cells on that row
+                    foreach (DataGridViewCell cell in dataGridGroups.Rows[rowIndex].Cells) // Get all cells on that row
                     {
                         cell.Style = defaultStyle; // Switch to default style.
                     }
@@ -200,18 +200,18 @@ namespace CMS
         }
 
         /// <summary>
-        /// Reloads the competitors and teams from the database.
+        /// Reloads the competitors and groups from the database.
         /// </summary>
         public void ReloadData()
         {
-            List<string> tempTeams = Connected_Event.SQL_Controller.GetCTeams(false);
-            if (data.TeamCount() > 0) // If first load.
+            List<string> tempGroups = Connected_Event.SQL_Controller.GetGroups(false);
+            if (data.GroupCount() > 0) // If first load.
             {
-                data.AddTeam(noTeamName);
-                for (int Ti = 0; Ti < tempTeams.Count; Ti++)
+                data.AddGroup(noGroupName);
+                for (int Ti = 0; Ti < tempGroups.Count; Ti++)
                 {
-                    data.AddTeam(tempTeams[Ti]);
-                    List<Competitor> tempCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByCTeam(tempTeams[Ti]);
+                    data.AddGroup(tempGroups[Ti]);
+                    List<Competitor> tempCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByGroup(tempGroups[Ti]);
 
                     for (int Ci = 0; Ci < tempCompetitors.Count; Ci++)
                     {
@@ -221,14 +221,14 @@ namespace CMS
             }
             else // If reloading
             {
-                for (int Ti = 0; Ti < tempTeams.Count; Ti++)
+                for (int Ti = 0; Ti < tempGroups.Count; Ti++)
                 {
-                    if (!data.Contains(tempTeams[Ti]))  // If the team does not already exist..
+                    if (!data.Contains(tempGroups[Ti]))  // If the group does not already exist..
                     {
-                        data.AddTeam(tempTeams[Ti]);
+                        data.AddGroup(tempGroups[Ti]);
                     }
 
-                    List<Competitor> tempCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByCTeam(tempTeams[Ti]);
+                    List<Competitor> tempCompetitors = Connected_Event.SQL_Controller.GetCompetitorsByGroup(tempGroups[Ti]);
 
                     for (int Ci = 0; Ci < tempCompetitors.Count; Ci++)
                     {
@@ -253,7 +253,7 @@ namespace CMS
                     }
                 }
             }
-            refreshTeamGrid();
+            refreshGroupGrid();
             refreshCompetitorGrid();
         }
 
@@ -275,27 +275,27 @@ namespace CMS
 
         #region get set operators
 
-        private string filterTeam
+        private string filterGroup
         {
             get
             {
-                return NfilterTeam;
+                return NfilterGroup;
             }
             set
             {
                 if (value == "")
                 {
-                    inputTeamFilter.Text = "Filter";
-                    labelTeamCurrentFilter1.Visible = false;
-                    labelTeamCurrentFilter2.Text = "";
+                    inputGroupFilter.Text = "Filter";
+                    labelGroupCurrentFilter1.Visible = false;
+                    labelGroupCurrentFilter2.Text = "";
                 }
                 else
                 {
-                    inputTeamFilter.Text = "Remove Filter";
-                    labelTeamCurrentFilter1.Visible = true;
-                    labelTeamCurrentFilter2.Text = value;
+                    inputGroupFilter.Text = "Remove Filter";
+                    labelGroupCurrentFilter1.Visible = true;
+                    labelGroupCurrentFilter2.Text = value;
                 }
-                NfilterTeam = value.ToUpper();
+                NfilterGroup = value.ToUpper();
             }
         }
 
@@ -326,58 +326,58 @@ namespace CMS
 
         #region Control Events
 
-        private void inputTeamSelect_Click(object sender, EventArgs e)
+        private void inputGroupSelect_Click(object sender, EventArgs e)
         {
-            if (dataGridTeams.SelectedRows.Count > 0)
+            if (dataGridGroups.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow r in dataGridTeams.SelectedRows)
+                foreach (DataGridViewRow r in dataGridGroups.SelectedRows)
                 {
                     data.SetValue(r.Cells[0].Value.ToString(), true);
                 }
             }
-            refreshTeamGrid();
+            refreshGroupGrid();
             refreshCompetitorGridKeepSelection();
         }
 
-        private void inputTeamDeselect_Click(object sender, EventArgs e)
+        private void inputGroupDeselect_Click(object sender, EventArgs e)
         {
-            if (dataGridTeams.SelectedRows.Count > 0)
+            if (dataGridGroups.SelectedRows.Count > 0)
             {
-                foreach (DataGridViewRow r in dataGridTeams.SelectedRows)
+                foreach (DataGridViewRow r in dataGridGroups.SelectedRows)
                 {
                     data.SetValue(r.Cells[0].Value.ToString(), false);
                 }
             }
-            refreshTeamGrid();
+            refreshGroupGrid();
             refreshCompetitorGrid();
         }
 
-        private void inputTeamAdd_Click(object sender, EventArgs e)
+        private void inputGroupAdd_Click(object sender, EventArgs e)
         {
-            string team = MessageBoxes.CreateTeam();
-            if (team != "")
+            string group = MessageBoxes.CreateGroup();
+            if (group != "")
             {
-                data.AddTeam(team, true);
-                refreshTeamGrid();
+                data.AddGroup(group, true);
+                refreshGroupGrid();
                 refreshCompetitorGridKeepSelection();
             }
         }
 
-        private void inputTeamRemove_Click(object sender, EventArgs e)
+        private void inputGroupRemove_Click(object sender, EventArgs e)
         {
             bool remove = false;
-            if (dataGridTeams.SelectedRows.Count > 0)
+            if (dataGridGroups.SelectedRows.Count > 0)
             {
-                if (dataGridTeams.SelectedRows.Count > 1) // Different ones for plurals. Yay. ^.^
+                if (dataGridGroups.SelectedRows.Count > 1) // Different ones for plurals. Yay. ^.^
                 {
-                    if (MessageBox.Show("Are you sure you wish to remove the selected teams?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    if (MessageBox.Show("Are you sure you wish to remove the selected groups?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                     {
                         remove = true;
                     }
                 }
                 else
                 {
-                    if (MessageBox.Show("Are you sure you wish to remove the selected team?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    if (MessageBox.Show("Are you sure you wish to remove the selected group?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
                     {
                         remove = true;
                     }
@@ -385,22 +385,22 @@ namespace CMS
 
                 if (remove) // If the result of the dialog was yes.
                 {
-                    List<string> teamsToRemove = new List<string>();
-                    foreach (DataGridViewRow r in dataGridTeams.SelectedRows)
+                    List<string> groupsToRemove = new List<string>();
+                    foreach (DataGridViewRow r in dataGridGroups.SelectedRows)
                     {
-                        teamsToRemove.Add(r.Cells[0].Value.ToString());
+                        groupsToRemove.Add(r.Cells[0].Value.ToString());
                     }
 
-                    foreach (string t in teamsToRemove)
+                    foreach (string t in groupsToRemove)
                     {
-                        data.RemoveTeam(t);
+                        data.RemoveGroup(t);
 
                         foreach (Competitor c in data.GetCompetitors())
                         {
-                            if (c.team == t)
+                            if (c.group == t)
                             {
                                 Competitor newC = c;
-                                newC.team = noTeamName;
+                                newC.group = noGroupName;
                                 data.AddCompetitor(newC, data.CompetitorValue(c));
                                 data.RemoveCompetitor(c);
                             }
@@ -408,27 +408,27 @@ namespace CMS
                     }
                 }
             }
-            refreshTeamGrid();
+            refreshGroupGrid();
             refreshCompetitorGrid();
         }
 
-        private void inputTeamFilter_Click(object sender, EventArgs e)
+        private void inputGroupFilter_Click(object sender, EventArgs e)
         {
-            if (filterTeam == "")
+            if (filterGroup == "")
             {
-                filterTeam = MessageBoxes.filterString(filterTeam);
+                filterGroup = MessageBoxes.filterString(filterGroup);
             }
             else
             {
-                filterTeam = "";
+                filterGroup = "";
             }
-            refreshTeamGrid();
+            refreshGroupGrid();
         }
 
-        private void inputTeamShow_SelectedIndexChanged(object sender, EventArgs e)
+        private void inputGroupShow_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectionShowTeam = (SelectedOption)inputTeamShow.SelectedIndex;
-            refreshTeamGrid();
+            selectionShowGroup = (SelectedOption)inputGroupShow.SelectedIndex;
+            refreshGroupGrid();
         }
 
         private void inputCompetitorSelect_Click(object sender, EventArgs e)
@@ -441,11 +441,11 @@ namespace CMS
                     c.ID = Convert.ToInt16(r.Cells[0].Value);
                     c.name = r.Cells[1].Value.ToString();
                     c.nationality = r.Cells[2].Value.ToString();
-                    c.team = r.Cells[3].Value.ToString();
+                    c.group = r.Cells[3].Value.ToString();
                     data.SetValue(c, true);
-                    if (!data.TeamValue(c.team))
+                    if (!data.GroupValue(c.group))
                     {
-                        data.SetValue(c.team, true);
+                        data.SetValue(c.group, true);
                     }
                 }
             }
@@ -462,7 +462,7 @@ namespace CMS
                     c.ID = Convert.ToInt16(r.Cells[0].Value);
                     c.name = r.Cells[1].Value.ToString();
                     c.nationality = r.Cells[2].Value.ToString();
-                    c.team = r.Cells[3].Value.ToString();
+                    c.group = r.Cells[3].Value.ToString();
                     data.SetValue(c, false);
                 }
             }
@@ -471,15 +471,15 @@ namespace CMS
 
         private void inputCompetitorAdd_Click(object sender, EventArgs e)
         {
-            List<string> tempTeams = new List<string>();
-            foreach (string t in data.GetTeams())
+            List<string> tempGroups = new List<string>();
+            foreach (string t in data.GetGroups())
             {
-                if (data.TeamValue(t))
+                if (data.GroupValue(t))
                 {
-                    tempTeams.Add(t);
+                    tempGroups.Add(t);
                 }
             }
-            Competitor c = MessageBoxes.CreateCompetitor(tempTeams);
+            Competitor c = MessageBoxes.CreateCompetitor(tempGroups);
             if (c != null)
             {
                 data.AddCompetitor(c, false);
@@ -516,7 +516,7 @@ namespace CMS
                         c.ID = Convert.ToInt16(r.Cells[0].Value);
                         c.name = r.Cells[1].Value.ToString();
                         c.nationality = r.Cells[2].Value.ToString();
-                        c.team = r.Cells[3].Value.ToString();
+                        c.group = r.Cells[3].Value.ToString();
 
                         data.RemoveCompetitor(c);
                         Connected_Event.SQL_Controller.RemoveCompetitor(c.ID);
@@ -541,8 +541,8 @@ namespace CMS
 
         private void inputCompetitorShow_CheckedChanged(object sender, EventArgs e)
         {
-            showCompetitorsUnselectedTeams = inputCompetitorShow.Checked;
-            if (showCompetitorsUnselectedTeams)
+            showCompetitorsUnselectedGroups = inputCompetitorShow.Checked;
+            if (showCompetitorsUnselectedGroups)
             {
                 refreshCompetitorGridKeepSelection();
             }

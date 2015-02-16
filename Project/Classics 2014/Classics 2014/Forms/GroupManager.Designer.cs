@@ -1,6 +1,6 @@
 ﻿namespace CMS
 {
-    partial class TeamManager
+    partial class GroupManager
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dataGridTeams = new System.Windows.Forms.DataGridView();
-            this.ColumnTeamName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnMembers = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inputAddTeam = new System.Windows.Forms.Button();
-            this.inputRemoveTeam = new System.Windows.Forms.Button();
+            this.dataGridGroups = new System.Windows.Forms.DataGridView();
+            this.inputAddGroup = new System.Windows.Forms.Button();
+            this.inputRemoveGroup = new System.Windows.Forms.Button();
             this.inputSave = new System.Windows.Forms.Button();
             this.inputExit = new System.Windows.Forms.Button();
+            this.ColumnGroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnMembers = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridGroups)).BeginInit();
             this.SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -45,9 +45,9 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.Controls.Add(this.dataGridTeams, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.inputAddTeam, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.inputRemoveTeam, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridGroups, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.inputAddGroup, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.inputRemoveGroup, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.inputSave, 1, 2);
             this.tableLayoutPanel1.Controls.Add(this.inputExit, 1, 3);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -63,60 +63,50 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 720);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // dataGridTeams
+            // dataGridGroups
             // 
-            this.dataGridTeams.AllowUserToAddRows = false;
-            this.dataGridTeams.AllowUserToDeleteRows = false;
-            this.dataGridTeams.AllowUserToResizeColumns = false;
-            this.dataGridTeams.AllowUserToResizeRows = false;
-            this.dataGridTeams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridTeams.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridTeams.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTeams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnTeamName,
+            this.dataGridGroups.AllowUserToAddRows = false;
+            this.dataGridGroups.AllowUserToDeleteRows = false;
+            this.dataGridGroups.AllowUserToResizeColumns = false;
+            this.dataGridGroups.AllowUserToResizeRows = false;
+            this.dataGridGroups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridGroups.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridGroups.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridGroups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnGroupName,
             this.ColumnMembers});
-            this.dataGridTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridTeams.Location = new System.Drawing.Point(3, 3);
-            this.dataGridTeams.Name = "dataGridTeams";
-            this.dataGridTeams.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.dataGridTeams, 5);
-            this.dataGridTeams.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridTeams.Size = new System.Drawing.Size(954, 714);
-            this.dataGridTeams.TabIndex = 0;
+            this.dataGridGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridGroups.Location = new System.Drawing.Point(3, 3);
+            this.dataGridGroups.Name = "dataGridGroups";
+            this.dataGridGroups.RowHeadersVisible = false;
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridGroups, 5);
+            this.dataGridGroups.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridGroups.Size = new System.Drawing.Size(954, 714);
+            this.dataGridGroups.TabIndex = 0;
             // 
-            // ColumnTeamName
+            // inputAddGroup
             // 
-            this.ColumnTeamName.HeaderText = "Team Name";
-            this.ColumnTeamName.Name = "ColumnTeamName";
+            this.inputAddGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputAddGroup.Location = new System.Drawing.Point(963, 13);
+            this.inputAddGroup.Name = "inputAddGroup";
+            this.inputAddGroup.Size = new System.Drawing.Size(314, 23);
+            this.inputAddGroup.TabIndex = 1;
+            this.inputAddGroup.Text = "Add Group";
+            this.inputAddGroup.UseVisualStyleBackColor = true;
+            this.inputAddGroup.Click += new System.EventHandler(this.inputAddGroup_Click);
             // 
-            // ColumnMembers
+            // inputRemoveGroup
             // 
-            this.ColumnMembers.HeaderText = "Members";
-            this.ColumnMembers.Name = "ColumnMembers";
-            // 
-            // inputAddTeam
-            // 
-            this.inputAddTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputAddTeam.Location = new System.Drawing.Point(963, 13);
-            this.inputAddTeam.Name = "inputAddTeam";
-            this.inputAddTeam.Size = new System.Drawing.Size(314, 23);
-            this.inputAddTeam.TabIndex = 1;
-            this.inputAddTeam.Text = "Add Team";
-            this.inputAddTeam.UseVisualStyleBackColor = true;
-            this.inputAddTeam.Click += new System.EventHandler(this.inputAddTeam_Click);
-            // 
-            // inputRemoveTeam
-            // 
-            this.inputRemoveTeam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputRemoveTeam.Location = new System.Drawing.Point(963, 63);
-            this.inputRemoveTeam.Name = "inputRemoveTeam";
-            this.inputRemoveTeam.Size = new System.Drawing.Size(314, 23);
-            this.inputRemoveTeam.TabIndex = 2;
-            this.inputRemoveTeam.Text = "Remove Selected";
-            this.inputRemoveTeam.UseVisualStyleBackColor = true;
-            this.inputRemoveTeam.Click += new System.EventHandler(this.inputRemoveTeam_Click);
+            this.inputRemoveGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputRemoveGroup.Location = new System.Drawing.Point(963, 63);
+            this.inputRemoveGroup.Name = "inputRemoveGroup";
+            this.inputRemoveGroup.Size = new System.Drawing.Size(314, 23);
+            this.inputRemoveGroup.TabIndex = 2;
+            this.inputRemoveGroup.Text = "Remove Selected";
+            this.inputRemoveGroup.UseVisualStyleBackColor = true;
+            this.inputRemoveGroup.Click += new System.EventHandler(this.inputRemoveGroup_Click);
             // 
             // inputSave
             // 
@@ -140,15 +130,25 @@
             this.inputExit.UseVisualStyleBackColor = true;
             this.inputExit.Click += new System.EventHandler(this.inputExit_Click);
             // 
-            // TeamManager
+            // ColumnGroupName
+            // 
+            this.ColumnGroupName.HeaderText = "Group Name";
+            this.ColumnGroupName.Name = "ColumnGroupName";
+            // 
+            // ColumnMembers
+            // 
+            this.ColumnMembers.HeaderText = "Members";
+            this.ColumnMembers.Name = "ColumnMembers";
+            // 
+            // GroupManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
-            this.Name = "TeamManager";
+            this.Name = "GroupManager";
             this.Size = new System.Drawing.Size(1280, 720);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridGroups)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -156,12 +156,12 @@
         #endregion
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.DataGridView dataGridTeams;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeamName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMembers;
-        private System.Windows.Forms.Button inputAddTeam;
-        private System.Windows.Forms.Button inputRemoveTeam;
+        private System.Windows.Forms.DataGridView dataGridGroups;
+        private System.Windows.Forms.Button inputAddGroup;
+        private System.Windows.Forms.Button inputRemoveGroup;
         private System.Windows.Forms.Button inputSave;
         private System.Windows.Forms.Button inputExit;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnGroupName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMembers;
     }
 }

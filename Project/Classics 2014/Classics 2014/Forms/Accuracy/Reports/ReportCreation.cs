@@ -195,7 +195,7 @@ namespace CMS.Accuracy.Reports
         }
         public void Populate()
         {
-            List<Team> Teams = sqlController.GetSTeamsForEvent(connectedEvent.EventID);
+            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
             landings = sqlController.GetLandingsForEvent(eventId, connectedEvent.EventType);
             DataGridViewCell cellToEdit;
             for (int Ti = 0; Ti < Teams.Count; Ti++)

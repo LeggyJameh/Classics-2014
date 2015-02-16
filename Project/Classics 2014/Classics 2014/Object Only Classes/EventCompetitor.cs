@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CMS
 {
-    class EventCompetitor : Competitor
+    class EventCompetitor : Competitor, ICloneable
     {
         public string EID;
         public EventCompetitor()
@@ -19,7 +19,14 @@ namespace CMS
             this.ID = competitor.ID;
             this.name = competitor.name;
             this.nationality = competitor.nationality;
-            this.team = competitor.team;
+            this.group = competitor.group;
+        }
+
+        public object Clone()
+        {
+            EventCompetitor newCompetitor = (EventCompetitor)base.Clone();
+            newCompetitor.EID = this.EID;
+            return newCompetitor;
         }
     }
 }

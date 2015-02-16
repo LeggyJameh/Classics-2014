@@ -14,7 +14,7 @@ namespace CMS
         #region variables and the such like
         Engine Engine;
         List<Competitor> competitors = new List<Competitor>();
-        List<string> availableTeams = new List<string>();
+        List<string> availableGroups = new List<string>();
         bool saved = true;
         string Nfilter;
         #endregion
@@ -24,17 +24,17 @@ namespace CMS
             InitializeComponent();
             this.Engine = engine;
             Nfilter = "";
-            loadCompetitorsAndTeams();
+            loadCompetitorsAndGroups();
             refreshGrid();
         }
 
         /// <summary>
         /// Pulls all of the competitors from the database.
         /// </summary>
-        private void loadCompetitorsAndTeams()
+        private void loadCompetitorsAndGroups()
         {
             competitors = Engine.SQL_Controller.GetCompetitors();
-            availableTeams = Engine.SQL_Controller.GetAllTeams();
+            availableGroups = Engine.SQL_Controller.GetAllGroups();
             saved = true;
         }
 
@@ -46,9 +46,9 @@ namespace CMS
             dataGridCompetitors.Rows.Clear();
             foreach (Competitor c in competitors)
             {
-                if (c.name.ToUpper().Contains(filter) || c.nationality.ToUpper().Contains(filter) || c.team.ToUpper().Contains(filter))
+                if (c.name.ToUpper().Contains(filter) || c.nationality.ToUpper().Contains(filter) || c.group.ToUpper().Contains(filter))
                 {
-                    dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.team);
+                    dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.group);
                 }
             }
         }
@@ -67,9 +67,9 @@ namespace CMS
             dataGridCompetitors.Rows.Clear();
             foreach (Competitor c in competitors)
             {
-                if (c.name.ToUpper().Contains(filter) || c.nationality.ToUpper().Contains(filter) || c.team.ToUpper().Contains(filter))
+                if (c.name.ToUpper().Contains(filter) || c.nationality.ToUpper().Contains(filter) || c.group.ToUpper().Contains(filter))
                 {
-                    dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.team);
+                    dataGridCompetitors.Rows.Add(c.ID, c.name, c.nationality, c.group);
                 }
             }
 
@@ -98,7 +98,7 @@ namespace CMS
                 currentCompetitor.ID = Convert.ToInt16(dataGridCompetitors.SelectedRows[i].Cells[0].Value);
                 currentCompetitor.name = dataGridCompetitors.SelectedRows[i].Cells[1].Value.ToString();
                 currentCompetitor.nationality = dataGridCompetitors.SelectedRows[i].Cells[2].Value.ToString();
-                currentCompetitor.team = dataGridCompetitors.SelectedRows[i].Cells[3].Value.ToString();
+                currentCompetitor.group = dataGridCompetitors.SelectedRows[i].Cells[3].Value.ToString();
 
                 if (competitorsToReturn.Count == 0)
                 {
@@ -120,25 +120,25 @@ namespace CMS
         }
 
         /// <summary>
-        /// Function through which team manager returns teams after edits finished.
+        /// Function through which group manager returns groups after edits finished.
         /// </summary>
-        public void teamReturn(List<string> teams)
+        public void groupReturn(List<string> groups)
         {
-            availableTeams = teams;
+            availableGroups = groups;
 
             for (int i = 0; i < competitors.Count; i++)
             {
-                bool teamExists = false;
-                for (int i2 = 0; i2 < teams.Count; i2++)
+                bool groupExists = false;
+                for (int i2 = 0; i2 < groups.Count; i2++)
                 {
-                    if (competitors[i].team == teams[i2])
+                    if (competitors[i].group == groups[i2])
                     {
-                        teamExists = true;
+                        groupExists = true;
                     }
                 }
-                if (!teamExists)
+                if (!groupExists)
                 {
-                    competitors[i].team = "";
+                    competitors[i].group = "";
                 }
             }
 
@@ -201,13 +201,13 @@ namespace CMS
 
         private void inputAddCompetitor_Click(object sender, EventArgs e)
         {
-            Competitor currentCompetitor = MessageBoxes.CreateCompetitor(availableTeams);
+            Competitor currentCompetitor = MessageBoxes.CreateCompetitor(availableGroups);
             if (currentCompetitor != null)
             {
                 bool unique = true;
                 for (int i = 0; i < competitors.Count; i++)
                 {
-                    if (currentCompetitor.name == competitors[i].name && currentCompetitor.nationality == competitors[i].nationality && currentCompetitor.team == competitors[i].team)
+                    if (currentCompetitor.name == competitors[i].name && currentCompetitor.nationality == competitors[i].nationality && currentCompetitor.group == competitors[i].group)
                     {
                         unique = false;
                     }
@@ -247,14 +247,14 @@ namespace CMS
             saved = false;
         }
 
-        private void inputCreateTeam_Click(object sender, EventArgs e)
+        private void inputCreateGroup_Click(object sender, EventArgs e)
         {
-            string teamName = MessageBoxes.CreateTeam();
+            string groupName = MessageBoxes.CreateGroup();
             bool unique = true;
 
-            for (int i = 0; i < availableTeams.Count; i++)
+            for (int i = 0; i < availableGroups.Count; i++)
             {
-                if (teamName == availableTeams[i])
+                if (groupName == availableGroups[i])
                 {
                     unique = false;
                 }
@@ -262,18 +262,18 @@ namespace CMS
 
             if (unique)
             {
-                availableTeams.Add(teamName);
+                availableGroups.Add(groupName);
             }
             else
             {
-                MessageBox.Show("Team name is already taken!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Group name is already taken!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             saved = false;
         }
 
-        private void inputManageTeams_Click(object sender, EventArgs e)
+        private void inputManageGroups_Click(object sender, EventArgs e)
         {
-            Engine.mainForm.openSimpleTeamManager(availableTeams, this);
+            Engine.mainForm.openSimpleGroupManager(availableGroups, this);
         }
         
         private void inputModifySelected_Click(object sender, EventArgs e)
@@ -283,7 +283,7 @@ namespace CMS
             List<Competitor> currentlySelected = getSelectedCompetitors();
             string existingName = "";
             string existingNationality = "";
-            string existingTeam = "";
+            string existingGroup = "";
             bool[] sameVars = new bool[3]
             {
                 true,
@@ -307,7 +307,7 @@ namespace CMS
                         sameVars[1] = false;
                     }
 
-                    if (currentlySelected[i].team != currentlySelected[i2].team)
+                    if (currentlySelected[i].group != currentlySelected[i2].group)
                     {
                         sameVars[2] = false;
                     }
@@ -326,10 +326,10 @@ namespace CMS
 
             if (sameVars[2])
             {
-                existingTeam = currentlySelected[0].team;
+                existingGroup = currentlySelected[0].group;
             }
 
-            currentModelCompetitor = MessageBoxes.ModifyCompetitor(existingName, existingNationality, existingTeam, availableTeams);
+            currentModelCompetitor = MessageBoxes.ModifyCompetitor(existingName, existingNationality, existingGroup, availableGroups);
             #endregion
 
             #region apply changes
@@ -363,7 +363,7 @@ namespace CMS
                     }
                 }
 
-                if (existingTeam != currentModelCompetitor.team)
+                if (existingGroup != currentModelCompetitor.group)
                 {
                     for (int i = 0; i < competitors.Count; i++)
                     {
@@ -371,7 +371,7 @@ namespace CMS
                         {
                             if (competitors[i].ID == currentlySelected[i2].ID)
                             {
-                                competitors[i].team = currentModelCompetitor.team;
+                                competitors[i].group = currentModelCompetitor.group;
                             }
                         }
                     }

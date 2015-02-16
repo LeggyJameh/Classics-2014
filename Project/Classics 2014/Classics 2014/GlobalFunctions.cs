@@ -20,7 +20,7 @@ namespace CMS
                 CurrentCompetitor.ID = Competitors[i].ID;
                 CurrentCompetitor.name = Competitors[i].name;
                 CurrentCompetitor.nationality = Competitors[i].nationality;
-                CurrentCompetitor.team = Competitors[i].team;
+                CurrentCompetitor.group = Competitors[i].group;
                 EventCompetitors.Add(CurrentCompetitor);
             }
             return EventCompetitors;

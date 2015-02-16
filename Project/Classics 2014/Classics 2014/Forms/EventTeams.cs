@@ -61,7 +61,7 @@ namespace CMS
             {
                 for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
-                    if (Competitors[Ci].team == Teams[Ti].Name)
+                    if (Competitors[Ci].group == Teams[Ti].Name)
                     {
                         Teams[Ti].Competitors.Add(Competitors[Ci]);
                     }
@@ -87,11 +87,11 @@ namespace CMS
                 {
                     if (Teams[Ti].Name == "NO TEAM") // If no team, add blank Scoring Team Column.
                     {
-                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].team, Teams[Ti].Competitors[Ci].nationality, "");
+                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].group, Teams[Ti].Competitors[Ci].nationality, "");
                     }
                     else // Otherwise, use scoring team xD
                     {
-                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].team, Teams[Ti].Competitors[Ci].nationality, Teams[Ti].Name);
+                        dataGridViewCompetitors.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].group, Teams[Ti].Competitors[Ci].nationality, Teams[Ti].Name);
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace CMS
 
         private void buttonAddTeam_Click(object sender, EventArgs e)
         {
-            string NewTeamName = MessageBoxes.ModifyTeamName();
+            string NewTeamName = MessageBoxes.ModifyGroupName();
             bool isUnique = true;
             for (int Ti = 0; Ti < Teams.Count; Ti++)
             {
@@ -226,7 +226,7 @@ namespace CMS
             EventCompetitor NewCompetitor = new EventCompetitor();
             NewCompetitor.ID = -1;
             NewCompetitor.name = "Fake Competitor " + LastFakeCompetitor;
-            NewCompetitor.team = "N/A";
+            NewCompetitor.group = "N/A";
             NewCompetitor.nationality = "N/A";
             NewCompetitor.EID = "";
             Teams[TeamIndex].Competitors.Add(NewCompetitor);

@@ -90,7 +90,7 @@ namespace CMS
 
             for (int i = 0; i < CurrentCompetitors.Count; i++)
             {
-                dataGridViewEventCompetitors.Rows.Add(CurrentCompetitors[i].ID, CurrentCompetitors[i].name, CurrentCompetitors[i].team);
+                dataGridViewEventCompetitors.Rows.Add(CurrentCompetitors[i].ID, CurrentCompetitors[i].name, CurrentCompetitors[i].group);
             }
             
         }
@@ -139,7 +139,7 @@ namespace CMS
 
                                     for (int i = 0; i < CurrentCompetitors.Count; i++)
                                     {
-                                        string CurrentTeam = CurrentCompetitors[i].team;
+                                        string CurrentTeam = CurrentCompetitors[i].group;
                                         bool IsUnique = true;
 
                                         for (int i2 = 0; i2 < SelectedTeams.Count; i2++)
@@ -156,7 +156,7 @@ namespace CMS
 
                                 case 2: // Ready Event
                                     CurrentEvent = Engine.LoadExistingAccuracyEvent();
-                                    List<Team> Teams = Engine.SQL_Controller.GetSTeamsForEvent(Events[EventIndex].EventID);
+                                    List<Team> Teams = Engine.SQL_Controller.GetTeamsForEvent(Events[EventIndex].EventID);
                                     CurrentEvent.Teams = Teams;
                                     CurrentEvent.Name = Events[EventIndex].Name;
                                     CurrentEvent.EventID = Events[EventIndex].EventID;

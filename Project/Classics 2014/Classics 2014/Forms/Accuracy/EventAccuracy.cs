@@ -76,7 +76,7 @@ namespace CMS.Accuracy
                 {
                     for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
                     {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].team, Connected_Event.Teams[Ti].Competitors[Ci].nationality, Connected_Event.Teams[Ti].Name);
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].group, Connected_Event.Teams[Ti].Competitors[Ci].nationality, Connected_Event.Teams[Ti].Name);
                     }
                 }
             }
@@ -86,7 +86,7 @@ namespace CMS.Accuracy
                 {
                     for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
                     {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].team, Connected_Event.Teams[Ti].Competitors[Ci].nationality, "N/A");
+                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].group, Connected_Event.Teams[Ti].Competitors[Ci].nationality, "N/A");
                     }
                 }
             }

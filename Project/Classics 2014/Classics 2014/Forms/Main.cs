@@ -86,9 +86,9 @@ namespace CMS
             addNewTab("Competitor Editor", new CompetitorEditor(MainEngine));
         }
 
-        public void openSimpleTeamManager(List<string> teams, CompetitorEditor ce)
+        public void openSimpleGroupManager(List<string> groups, CompetitorEditor ce)
         {
-            addNewTab("Team Manager", new TeamManager(MainEngine, teams, ce));
+            addNewTab("Group Manager", new GroupManager(MainEngine, groups, ce));
         }
 
         public void UpdateWind(TWind windData)

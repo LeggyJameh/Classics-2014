@@ -146,7 +146,7 @@ namespace CMS.Accuracy
         }
 
         /// <summary>
-        /// Forces the competitor selector to reload teams and competitors due to the competitor editor being used.
+        /// Forces the competitor selector to reload groups and competitors due to the competitor editor being used.
         /// </summary>
         public void RefreshGrids()
         {

@@ -214,7 +214,7 @@ namespace CMS.Accuracy
         {
             this.Teams = Teams;
             rules.competitorsPerTeam = CompetitorsPerTeam;
-            SQL_Controller.CreateSTeams(EventID, Teams);
+            SQL_Controller.CreateTeams(EventID, Teams);
             SQL_Controller.ModifyEvent(this);
             EventTeamsTab = null;
         }

@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace CMS
 {
-    class Team
+    class Team : ICloneable
     {
         public int ID;
         public int EventID;
@@ -21,6 +21,21 @@ namespace CMS
         public Team(string Name)
         {
             this.Name = Name;
+        }
+
+        public object Clone()
+        {
+            Team newTeam = new Team();
+            newTeam.Competitors = new List<EventCompetitor>();
+            foreach (EventCompetitor c in Competitors)
+            {
+                newTeam.Competitors.Add((EventCompetitor)c.Clone());
+            }
+            newTeam.EventID = this.EventID;
+            newTeam.ID = this.ID;
+            newTeam.Name = this.Name;
+            newTeam.TeamImage = this.TeamImage;
+            return newTeam;
         }
     }
 }

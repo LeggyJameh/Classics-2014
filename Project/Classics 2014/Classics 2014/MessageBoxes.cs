@@ -9,19 +9,19 @@ namespace CMS
 {
     static class MessageBoxes
     {
-        public static Competitor CreateCompetitor(List<string> selectedTeams)
+        public static Competitor CreateCompetitor(List<string> selectedGroups)
         {
             Competitor currentCompetitor = new Competitor();
             string[] strings = new string[3];
             strings[0] = "Name:";
             strings[1] = "Nationality:";
-            strings[2] = "Team:";
+            strings[2] = "Group:";
 
             ComboBox cb = new ComboBox();
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
-            for (int i = 0; i < selectedTeams.Count; i++)
+            for (int i = 0; i < selectedGroups.Count; i++)
             {
-                cb.Items.Add(selectedTeams[i]);
+                cb.Items.Add(selectedGroups[i]);
             }
             if (cb.Items.Count > 0)
             {
@@ -33,8 +33,26 @@ namespace CMS
             {
                 currentCompetitor.name = outputs[0].ToString();
                 currentCompetitor.nationality = outputs[1].ToString();
-                currentCompetitor.team = outputs[2].ToString();
+                currentCompetitor.group = outputs[2].ToString();
                 return currentCompetitor;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public static string CreateGroup()
+        {
+            string groupName;
+            string[] strings = new string[1];
+            strings[0] = "Group name:";
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Add Group", Properties.Resources.Icon, strings, new TextBox());
+
+            if (outputs != null)
+            {
+                groupName = (string)outputs[0];
+                return groupName;
             }
             else
             {
@@ -60,17 +78,17 @@ namespace CMS
             }
         }
 
-        public static string ModifyTeamName()
+        public static string ModifyGroupName()
         {
-            string teamName;
+            string groupName;
             string[] strings = new string[1];
-            strings[0] = "Team name:";
-            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Modify Team", Properties.Resources.Icon, strings, new TextBox());
+            strings[0] = "Group name:";
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Modify Group", Properties.Resources.Icon, strings, new TextBox());
 
             if (outputs != null)
             {
-                teamName = (string)outputs[0];
-                return teamName;
+                groupName = (string)outputs[0];
+                return groupName;
             }
             else
             {
@@ -78,26 +96,26 @@ namespace CMS
             }
         }
 
-        public static string SwitchTeam(List<string> possibleTeams, string previousTeam)
+        public static string SwitchGroup(List<string> possibleGroups, string previousGroup)
         {
-            string finalTeam;
+            string finalGroup;
             string[] strings = new string[1];
-            strings[0] = "Assign competitors to team:";
+            strings[0] = "Assign competitors to group:";
             ComboBox cb = new ComboBox();
-            foreach (string s in possibleTeams)
+            foreach (string s in possibleGroups)
             {
                 cb.Items.Add(s);
             }
-            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Assign team", Properties.Resources.Icon, strings, cb);
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Assign group", Properties.Resources.Icon, strings, cb);
 
             if (outputs != null)
             {
-                finalTeam = (string)outputs[0];
-                return finalTeam;
+                finalGroup = (string)outputs[0];
+                return finalGroup;
             }
             else
             {
-                return previousTeam;
+                return previousGroup;
             }
         }
 
@@ -119,21 +137,21 @@ namespace CMS
             }
         }
 
-        public static Competitor ModifyCompetitor(string currentName, string currentNationality, string currentTeam, List<string> existingTeams)
+        public static Competitor ModifyCompetitor(string currentName, string currentNationality, string currentGroup, List<string> existingGroups)
         {
             Competitor currentCompetitor = new Competitor();
             string[] strings = new string[3];
             strings[0] = "Name:";
             strings[1] = "Nationality:";
-            strings[2] = "Team:";
+            strings[2] = "Group:";
 
             ComboBox cb = new ComboBox();
             cb.DropDownStyle = ComboBoxStyle.DropDownList;
-            for (int i = 0; i < existingTeams.Count; i++)
+            for (int i = 0; i < existingGroups.Count; i++)
             {
-                cb.Items.Add(existingTeams[i]);
+                cb.Items.Add(existingGroups[i]);
             }
-            cb.SelectedItem = currentTeam;
+            cb.SelectedItem = currentGroup;
 
             TextBox tb1 = new TextBox();
             tb1.Text = currentName;
@@ -146,7 +164,7 @@ namespace CMS
             {
                 currentCompetitor.name = outputs[0].ToString();
                 currentCompetitor.nationality = outputs[1].ToString();
-                currentCompetitor.team = outputs[2].ToString();
+                currentCompetitor.group = outputs[2].ToString();
                 return currentCompetitor;
             }
             else

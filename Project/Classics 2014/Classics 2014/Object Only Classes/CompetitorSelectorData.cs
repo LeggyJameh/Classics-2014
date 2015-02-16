@@ -7,15 +7,15 @@ namespace CMS
 {
     class CompetitorSelectorData
     {
-        List<string> teams;
-        List<bool> teamsSelected;
+        List<string> groups;
+        List<bool> groupsSelected;
         List<Competitor> competitors;
         List<bool> competitorsSelected;
 
         public CompetitorSelectorData()
         {
-            teams = new List<string>();
-            teamsSelected = new List<bool>();
+            groups = new List<string>();
+            groupsSelected = new List<bool>();
             competitors = new List<Competitor>();
             competitorsSelected = new List<bool>();
         }
@@ -143,10 +143,10 @@ namespace CMS
             else return false;
         }
 
-        public int AddTeam(string t)
+        public int AddGroup(string t)
         {
             bool exists = false;
-            foreach (string x in teams)
+            foreach (string x in groups)
             {
                 if (x == t)
                 {
@@ -155,16 +155,16 @@ namespace CMS
             }
             if (exists == false)
             {
-                teams.Add(t);
-                teamsSelected.Add(false);
+                groups.Add(t);
+                groupsSelected.Add(false);
             }
             return indexOf(t);
         }
 
-        public int AddTeam(string t, bool value)
+        public int AddGroup(string t, bool value)
         {
             bool exists = false;
-            foreach (string x in teams)
+            foreach (string x in groups)
             {
                 if (x == t)
                 {
@@ -173,16 +173,16 @@ namespace CMS
             }
             if (exists == false)
             {
-                teams.Add(t);
-                teamsSelected.Add(value);
+                groups.Add(t);
+                groupsSelected.Add(value);
             }
             return indexOf(t);
         }
 
-        public int InsertTeamAt(string t, int index)
+        public int InsertGroupAt(string t, int index)
         {
             bool exists = false;
-            foreach (string x in teams)
+            foreach (string x in groups)
             {
                 if (x == t)
                 {
@@ -191,56 +191,56 @@ namespace CMS
             }
             if (exists == true)
             {
-                teams.Insert(index, t);
-                teamsSelected.Insert(index, false);
+                groups.Insert(index, t);
+                groupsSelected.Insert(index, false);
             }
             return indexOf(t);
         }
 
-        public void RemoveTeam(string t)
+        public void RemoveGroup(string t)
         {
             if (indexOf(t) > 0)
             {
-                teams.Remove(t);
+                groups.Remove(t);
             }
         }
 
-        public void RemoveTeamAt(int index)
+        public void RemoveGroupAt(int index)
         {
-            if (teams[index] != null)
+            if (groups[index] != null)
             {
-                teams.RemoveAt(index);
+                groups.RemoveAt(index);
             }
         }
 
-        public string GetTeamAt(int index)
+        public string GetGroupAt(int index)
         {
-            if (teams[index] != null)
+            if (groups[index] != null)
             {
-                return teams[index];
+                return groups[index];
             }
             else return "";
         }
 
-        public int GetIndexOf(string team)
+        public int GetIndexOf(string group)
         {
-            return indexOf(team);
+            return indexOf(group);
         }
 
-        public bool TeamValue(string team)
+        public bool GroupValue(string group)
         {
-            int index = indexOf(team);
-            return teamsSelected[index];
+            int index = indexOf(group);
+            return groupsSelected[index];
         }
 
-        public bool TeamValue(int index)
+        public bool GroupValue(int index)
         {
-            return teamsSelected[index];
+            return groupsSelected[index];
         }
 
-        public List<string> GetTeams()
+        public List<string> GetGroups()
         {
-            return teams;
+            return groups;
         }
 
         public void SetValue(string t, bool value)
@@ -248,13 +248,13 @@ namespace CMS
             int index = indexOf(t);
             if (index != -1)
             {
-                teamsSelected[index] = value;
+                groupsSelected[index] = value;
             }
         }
 
-        public int TeamCount()
+        public int GroupCount()
         {
-            return teams.Count;
+            return groups.Count;
         }
 
         public bool Contains(string t)
@@ -271,7 +271,7 @@ namespace CMS
             int index = -1;
             foreach (Competitor x in competitors)
             {
-                if (x.ID == c.ID && x.name == c.name && x.nationality == c.nationality && x.team == c.team)
+                if (x.ID == c.ID && x.name == c.name && x.nationality == c.nationality && x.group == c.group)
                 {
                     index = competitors.IndexOf(x);
                 }
@@ -282,11 +282,11 @@ namespace CMS
         private int indexOf(string t)
         {
             int index = -1;
-            foreach (string team in teams)
+            foreach (string group in groups)
             {
-                if (team == t)
+                if (group == t)
                 {
-                    index = teams.IndexOf(team);
+                    index = groups.IndexOf(group);
                 }
             }
             return index;

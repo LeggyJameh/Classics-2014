@@ -5,18 +5,28 @@ using System.Text;
 
 namespace CMS
 {
-    public class Competitor
+    public class Competitor : ICloneable
     {
         public int ID;
         public string name;
-        public string team;
+        public string group;
         public string nationality;
         public Competitor()
         {
             ID = 0;
             name = "";
-            team = "";
+            group = "";
             nationality = "";
+        }
+
+        public object Clone()
+        {
+            Competitor newCompetitor = new Competitor();
+            newCompetitor.ID = this.ID;
+            newCompetitor.name = this.name;
+            newCompetitor.nationality = this.nationality;
+            newCompetitor.group = this.group;
+            return newCompetitor;
         }
     }
 }

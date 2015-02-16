@@ -33,18 +33,18 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridTeams = new System.Windows.Forms.DataGridView();
+            this.dataGridGroups = new System.Windows.Forms.DataGridView();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnMemberCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.inputTeamSelect = new System.Windows.Forms.Button();
-            this.inputTeamDeselect = new System.Windows.Forms.Button();
-            this.inputTeamAdd = new System.Windows.Forms.Button();
-            this.inputTeamRemove = new System.Windows.Forms.Button();
-            this.inputTeamFilter = new System.Windows.Forms.Button();
-            this.labelTeamCurrentFilter1 = new System.Windows.Forms.Label();
-            this.inputTeamShow = new System.Windows.Forms.ComboBox();
+            this.inputGroupSelect = new System.Windows.Forms.Button();
+            this.inputGroupDeselect = new System.Windows.Forms.Button();
+            this.inputGroupAdd = new System.Windows.Forms.Button();
+            this.inputGroupRemove = new System.Windows.Forms.Button();
+            this.inputGroupFilter = new System.Windows.Forms.Button();
+            this.labelGroupCurrentFilter1 = new System.Windows.Forms.Label();
+            this.inputGroupShow = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.labelTeamCurrentFilter2 = new System.Windows.Forms.Label();
+            this.labelGroupCurrentFilter2 = new System.Windows.Forms.Label();
             this.inputCompetitorShow = new System.Windows.Forms.CheckBox();
             this.labelCompetitorCurrentFilter1 = new System.Windows.Forms.Label();
             this.inputCompetitorFilter = new System.Windows.Forms.Button();
@@ -63,7 +63,7 @@
             this.inputEditCompetitors = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridGroups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompetitors)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -78,16 +78,16 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Controls.Add(this.pictureBox1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridTeams, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamSelect, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamDeselect, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamAdd, 3, 3);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamRemove, 3, 4);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamFilter, 3, 5);
-            this.tableLayoutPanel1.Controls.Add(this.labelTeamCurrentFilter1, 3, 6);
-            this.tableLayoutPanel1.Controls.Add(this.inputTeamShow, 4, 7);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridGroups, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupSelect, 3, 1);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupDeselect, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupAdd, 3, 3);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupRemove, 3, 4);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupFilter, 3, 5);
+            this.tableLayoutPanel1.Controls.Add(this.labelGroupCurrentFilter1, 3, 6);
+            this.tableLayoutPanel1.Controls.Add(this.inputGroupShow, 4, 7);
             this.tableLayoutPanel1.Controls.Add(this.label4, 3, 7);
-            this.tableLayoutPanel1.Controls.Add(this.labelTeamCurrentFilter2, 4, 6);
+            this.tableLayoutPanel1.Controls.Add(this.labelGroupCurrentFilter2, 4, 6);
             this.tableLayoutPanel1.Controls.Add(this.inputCompetitorShow, 3, 15);
             this.tableLayoutPanel1.Controls.Add(this.labelCompetitorCurrentFilter1, 3, 14);
             this.tableLayoutPanel1.Controls.Add(this.inputCompetitorFilter, 3, 13);
@@ -145,20 +145,20 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(699, 47);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Teams";
+            this.label1.Text = "Groups";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // dataGridTeams
+            // dataGridGroups
             // 
-            this.dataGridTeams.AllowUserToAddRows = false;
-            this.dataGridTeams.AllowUserToDeleteRows = false;
-            this.dataGridTeams.AllowUserToResizeColumns = false;
-            this.dataGridTeams.AllowUserToResizeRows = false;
-            this.dataGridTeams.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dataGridTeams.BackgroundColor = System.Drawing.SystemColors.Control;
-            this.dataGridTeams.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridTeams.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridTeams.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridGroups.AllowUserToAddRows = false;
+            this.dataGridGroups.AllowUserToDeleteRows = false;
+            this.dataGridGroups.AllowUserToResizeColumns = false;
+            this.dataGridGroups.AllowUserToResizeRows = false;
+            this.dataGridGroups.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridGroups.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridGroups.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridGroups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnName,
             this.ColumnMemberCount});
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -168,21 +168,21 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridTeams.DefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridTeams.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridTeams.Location = new System.Drawing.Point(23, 50);
-            this.dataGridTeams.Name = "dataGridTeams";
-            this.dataGridTeams.ReadOnly = true;
-            this.dataGridTeams.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.dataGridTeams, 7);
-            this.dataGridTeams.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dataGridTeams.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridTeams.Size = new System.Drawing.Size(699, 323);
-            this.dataGridTeams.TabIndex = 4;
+            this.dataGridGroups.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridGroups.Location = new System.Drawing.Point(23, 50);
+            this.dataGridGroups.Name = "dataGridGroups";
+            this.dataGridGroups.ReadOnly = true;
+            this.dataGridGroups.RowHeadersVisible = false;
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridGroups, 7);
+            this.dataGridGroups.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dataGridGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridGroups.Size = new System.Drawing.Size(699, 323);
+            this.dataGridGroups.TabIndex = 4;
             // 
             // ColumnName
             // 
-            this.ColumnName.HeaderText = "Team Name";
+            this.ColumnName.HeaderText = "Group Name";
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
             // 
@@ -192,92 +192,92 @@
             this.ColumnMemberCount.Name = "ColumnMemberCount";
             this.ColumnMemberCount.ReadOnly = true;
             // 
-            // inputTeamSelect
+            // inputGroupSelect
             // 
-            this.inputTeamSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamSelect, 2);
-            this.inputTeamSelect.Location = new System.Drawing.Point(748, 59);
-            this.inputTeamSelect.Name = "inputTeamSelect";
-            this.inputTeamSelect.Size = new System.Drawing.Size(229, 23);
-            this.inputTeamSelect.TabIndex = 6;
-            this.inputTeamSelect.Text = "Select";
-            this.inputTeamSelect.UseVisualStyleBackColor = true;
-            this.inputTeamSelect.Click += new System.EventHandler(this.inputTeamSelect_Click);
+            this.inputGroupSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputGroupSelect, 2);
+            this.inputGroupSelect.Location = new System.Drawing.Point(748, 59);
+            this.inputGroupSelect.Name = "inputGroupSelect";
+            this.inputGroupSelect.Size = new System.Drawing.Size(229, 23);
+            this.inputGroupSelect.TabIndex = 6;
+            this.inputGroupSelect.Text = "Select";
+            this.inputGroupSelect.UseVisualStyleBackColor = true;
+            this.inputGroupSelect.Click += new System.EventHandler(this.inputGroupSelect_Click);
             // 
-            // inputTeamDeselect
+            // inputGroupDeselect
             // 
-            this.inputTeamDeselect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamDeselect, 2);
-            this.inputTeamDeselect.Location = new System.Drawing.Point(748, 106);
-            this.inputTeamDeselect.Name = "inputTeamDeselect";
-            this.inputTeamDeselect.Size = new System.Drawing.Size(229, 23);
-            this.inputTeamDeselect.TabIndex = 7;
-            this.inputTeamDeselect.Text = "Deselect";
-            this.inputTeamDeselect.UseVisualStyleBackColor = true;
-            this.inputTeamDeselect.Click += new System.EventHandler(this.inputTeamDeselect_Click);
+            this.inputGroupDeselect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputGroupDeselect, 2);
+            this.inputGroupDeselect.Location = new System.Drawing.Point(748, 106);
+            this.inputGroupDeselect.Name = "inputGroupDeselect";
+            this.inputGroupDeselect.Size = new System.Drawing.Size(229, 23);
+            this.inputGroupDeselect.TabIndex = 7;
+            this.inputGroupDeselect.Text = "Deselect";
+            this.inputGroupDeselect.UseVisualStyleBackColor = true;
+            this.inputGroupDeselect.Click += new System.EventHandler(this.inputGroupDeselect_Click);
             // 
-            // inputTeamAdd
+            // inputGroupAdd
             // 
-            this.inputTeamAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamAdd, 2);
-            this.inputTeamAdd.Location = new System.Drawing.Point(748, 153);
-            this.inputTeamAdd.Name = "inputTeamAdd";
-            this.inputTeamAdd.Size = new System.Drawing.Size(229, 23);
-            this.inputTeamAdd.TabIndex = 8;
-            this.inputTeamAdd.Text = "Add";
-            this.inputTeamAdd.UseVisualStyleBackColor = true;
-            this.inputTeamAdd.Click += new System.EventHandler(this.inputTeamAdd_Click);
+            this.inputGroupAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputGroupAdd, 2);
+            this.inputGroupAdd.Location = new System.Drawing.Point(748, 153);
+            this.inputGroupAdd.Name = "inputGroupAdd";
+            this.inputGroupAdd.Size = new System.Drawing.Size(229, 23);
+            this.inputGroupAdd.TabIndex = 8;
+            this.inputGroupAdd.Text = "Add";
+            this.inputGroupAdd.UseVisualStyleBackColor = true;
+            this.inputGroupAdd.Click += new System.EventHandler(this.inputGroupAdd_Click);
             // 
-            // inputTeamRemove
+            // inputGroupRemove
             // 
-            this.inputTeamRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamRemove, 2);
-            this.inputTeamRemove.Location = new System.Drawing.Point(748, 200);
-            this.inputTeamRemove.Name = "inputTeamRemove";
-            this.inputTeamRemove.Size = new System.Drawing.Size(229, 23);
-            this.inputTeamRemove.TabIndex = 9;
-            this.inputTeamRemove.Text = "Remove";
-            this.inputTeamRemove.UseVisualStyleBackColor = true;
-            this.inputTeamRemove.Click += new System.EventHandler(this.inputTeamRemove_Click);
+            this.inputGroupRemove.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputGroupRemove, 2);
+            this.inputGroupRemove.Location = new System.Drawing.Point(748, 200);
+            this.inputGroupRemove.Name = "inputGroupRemove";
+            this.inputGroupRemove.Size = new System.Drawing.Size(229, 23);
+            this.inputGroupRemove.TabIndex = 9;
+            this.inputGroupRemove.Text = "Remove";
+            this.inputGroupRemove.UseVisualStyleBackColor = true;
+            this.inputGroupRemove.Click += new System.EventHandler(this.inputGroupRemove_Click);
             // 
-            // inputTeamFilter
+            // inputGroupFilter
             // 
-            this.inputTeamFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.SetColumnSpan(this.inputTeamFilter, 2);
-            this.inputTeamFilter.Location = new System.Drawing.Point(748, 247);
-            this.inputTeamFilter.Name = "inputTeamFilter";
-            this.inputTeamFilter.Size = new System.Drawing.Size(229, 23);
-            this.inputTeamFilter.TabIndex = 10;
-            this.inputTeamFilter.Text = "Filter";
-            this.inputTeamFilter.UseVisualStyleBackColor = true;
-            this.inputTeamFilter.Click += new System.EventHandler(this.inputTeamFilter_Click);
+            this.inputGroupFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.SetColumnSpan(this.inputGroupFilter, 2);
+            this.inputGroupFilter.Location = new System.Drawing.Point(748, 247);
+            this.inputGroupFilter.Name = "inputGroupFilter";
+            this.inputGroupFilter.Size = new System.Drawing.Size(229, 23);
+            this.inputGroupFilter.TabIndex = 10;
+            this.inputGroupFilter.Text = "Filter";
+            this.inputGroupFilter.UseVisualStyleBackColor = true;
+            this.inputGroupFilter.Click += new System.EventHandler(this.inputGroupFilter_Click);
             // 
-            // labelTeamCurrentFilter1
+            // labelGroupCurrentFilter1
             // 
-            this.labelTeamCurrentFilter1.AutoSize = true;
-            this.labelTeamCurrentFilter1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTeamCurrentFilter1.Location = new System.Drawing.Point(748, 282);
-            this.labelTeamCurrentFilter1.Name = "labelTeamCurrentFilter1";
-            this.labelTeamCurrentFilter1.Size = new System.Drawing.Size(88, 47);
-            this.labelTeamCurrentFilter1.TabIndex = 11;
-            this.labelTeamCurrentFilter1.Text = "Current Filter:";
-            this.labelTeamCurrentFilter1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.labelTeamCurrentFilter1.Visible = false;
+            this.labelGroupCurrentFilter1.AutoSize = true;
+            this.labelGroupCurrentFilter1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelGroupCurrentFilter1.Location = new System.Drawing.Point(748, 282);
+            this.labelGroupCurrentFilter1.Name = "labelGroupCurrentFilter1";
+            this.labelGroupCurrentFilter1.Size = new System.Drawing.Size(88, 47);
+            this.labelGroupCurrentFilter1.TabIndex = 11;
+            this.labelGroupCurrentFilter1.Text = "Current Filter:";
+            this.labelGroupCurrentFilter1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.labelGroupCurrentFilter1.Visible = false;
             // 
-            // inputTeamShow
+            // inputGroupShow
             // 
-            this.inputTeamShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputTeamShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.inputTeamShow.FormattingEnabled = true;
-            this.inputTeamShow.Items.AddRange(new object[] {
+            this.inputGroupShow.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputGroupShow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.inputGroupShow.FormattingEnabled = true;
+            this.inputGroupShow.Items.AddRange(new object[] {
             "Both",
             "Selected",
             "Unselected"});
-            this.inputTeamShow.Location = new System.Drawing.Point(842, 342);
-            this.inputTeamShow.Name = "inputTeamShow";
-            this.inputTeamShow.Size = new System.Drawing.Size(135, 21);
-            this.inputTeamShow.TabIndex = 12;
-            this.inputTeamShow.SelectedIndexChanged += new System.EventHandler(this.inputTeamShow_SelectedIndexChanged);
+            this.inputGroupShow.Location = new System.Drawing.Point(842, 342);
+            this.inputGroupShow.Name = "inputGroupShow";
+            this.inputGroupShow.Size = new System.Drawing.Size(135, 21);
+            this.inputGroupShow.TabIndex = 12;
+            this.inputGroupShow.SelectedIndexChanged += new System.EventHandler(this.inputGroupShow_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -290,15 +290,15 @@
             this.label4.Text = "Show:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // labelTeamCurrentFilter2
+            // labelGroupCurrentFilter2
             // 
-            this.labelTeamCurrentFilter2.AutoSize = true;
-            this.labelTeamCurrentFilter2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelTeamCurrentFilter2.Location = new System.Drawing.Point(842, 282);
-            this.labelTeamCurrentFilter2.Name = "labelTeamCurrentFilter2";
-            this.labelTeamCurrentFilter2.Size = new System.Drawing.Size(135, 47);
-            this.labelTeamCurrentFilter2.TabIndex = 14;
-            this.labelTeamCurrentFilter2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.labelGroupCurrentFilter2.AutoSize = true;
+            this.labelGroupCurrentFilter2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelGroupCurrentFilter2.Location = new System.Drawing.Point(842, 282);
+            this.labelGroupCurrentFilter2.Name = "labelGroupCurrentFilter2";
+            this.labelGroupCurrentFilter2.Size = new System.Drawing.Size(135, 47);
+            this.labelGroupCurrentFilter2.TabIndex = 14;
+            this.labelGroupCurrentFilter2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // inputCompetitorShow
             // 
@@ -310,7 +310,7 @@
             this.inputCompetitorShow.Name = "inputCompetitorShow";
             this.inputCompetitorShow.Size = new System.Drawing.Size(229, 17);
             this.inputCompetitorShow.TabIndex = 16;
-            this.inputCompetitorShow.Text = "Show competitors from unselected teams?";
+            this.inputCompetitorShow.Text = "Show competitors from unselected groups?";
             this.inputCompetitorShow.UseVisualStyleBackColor = true;
             this.inputCompetitorShow.CheckedChanged += new System.EventHandler(this.inputCompetitorShow_CheckedChanged);
             // 
@@ -441,7 +441,7 @@
             // 
             // ColumnTeam
             // 
-            this.ColumnTeam.HeaderText = "Team";
+            this.ColumnTeam.HeaderText = "Group";
             this.ColumnTeam.Name = "ColumnTeam";
             this.ColumnTeam.ReadOnly = true;
             // 
@@ -500,7 +500,7 @@
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridTeams)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridGroups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridCompetitors)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -512,16 +512,16 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridTeams;
-        private System.Windows.Forms.Button inputTeamSelect;
-        private System.Windows.Forms.Button inputTeamDeselect;
-        private System.Windows.Forms.Button inputTeamAdd;
-        private System.Windows.Forms.Button inputTeamRemove;
-        private System.Windows.Forms.Button inputTeamFilter;
-        private System.Windows.Forms.Label labelTeamCurrentFilter1;
-        private System.Windows.Forms.ComboBox inputTeamShow;
+        private System.Windows.Forms.DataGridView dataGridGroups;
+        private System.Windows.Forms.Button inputGroupSelect;
+        private System.Windows.Forms.Button inputGroupDeselect;
+        private System.Windows.Forms.Button inputGroupAdd;
+        private System.Windows.Forms.Button inputGroupRemove;
+        private System.Windows.Forms.Button inputGroupFilter;
+        private System.Windows.Forms.Label labelGroupCurrentFilter1;
+        private System.Windows.Forms.ComboBox inputGroupShow;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label labelTeamCurrentFilter2;
+        private System.Windows.Forms.Label labelGroupCurrentFilter2;
         private System.Windows.Forms.Button inputEditCompetitors;
         private System.Windows.Forms.CheckBox inputCompetitorShow;
         private System.Windows.Forms.Label labelCompetitorCurrentFilter1;
@@ -531,14 +531,14 @@
         private System.Windows.Forms.Button inputCompetitorDeselect;
         private System.Windows.Forms.Button inputCompetitorSelect;
         private System.Windows.Forms.DataGridView dataGridCompetitors;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelCompetitorCurrentFilter2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnMemberCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
     }
 }

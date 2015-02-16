@@ -225,11 +225,11 @@ namespace CMS.MySQL
         /// <summary>
         /// Creates a competitor in the `competitors` table
         /// </summary>
-        /// <param name="Competitor">The competitor to be created</param>
+        /// <param name="competitor">The competitor to be created</param>
         /// <returns>Query success</returns>
-        public int CreateCompetitor(Competitor Competitor)
+        public int CreateCompetitor(Competitor competitor)
         {
-            string query = "INSERT INTO `competitors` (`Name`, `Team Name`, `Nationality`) VALUES ('" + Competitor.name + "', '" + Competitor.team + "', '" + Competitor.nationality + "');";
+            string query = "INSERT INTO `competitors` (`Name`, `Group`, `Nationality`) VALUES ('" + competitor.name + "', '" + competitor.group + "', '" + competitor.nationality + "');";
             if (ExecuteNonQuery(query))
             {
                 return GetLastInsertKey();
@@ -249,22 +249,23 @@ namespace CMS.MySQL
         }
 
         /// <summary>
-        /// Save the 'Scoring' Teams.
+        /// Adds the team to the database, and returns it with ID.
         /// </summary>
-        /// <param name="EventID"></param>
-        /// <param name="Teams"></param>
-        /// <returns></returns>
-        public List<Team> CreateSTeams(int EventID, List<Team> Teams)
+        public Team CreateTeam(int eventID, string teamName)
         {
-            string query;
-            for (int Ti = 0; Ti < Teams.Count; Ti++)
+            string query = "INSERT INTO `event teams` (`EventID`, `Name`) VALUES ('" + eventID + "', '" + teamName + "');";
+            if (ExecuteNonQuery(query))
             {
-                MySqlTeam CurrentTeam = SerialiseTeam(Teams[Ti]);
-                query = "INSERT INTO `event teams` (`ID`, `EventID`, `Name`, `Image`, `Data`) VALUES ('" + CurrentTeam.ID + "', '" + CurrentTeam.EventID + "', '" + CurrentTeam.Name + "', '" + ByteArrayToHex(CurrentTeam.Image) + "', '" + ByteArrayToHex(CurrentTeam.Data) + "');";
-                ExecuteNonQuery(query);
-                Teams[Ti].ID = GetLastInsertKey();
+                Team team = new Team();
+                team.Competitors = new List<EventCompetitor>();
+                team.EventID = eventID;
+                team.ID = GetLastInsertKey();
+                team.Name = teamName;
+                team.TeamImage = null;
+
+                return team;
             }
-            return Teams;
+            return null;
         }
 
         public int CreateLanding(Landing Landing)
@@ -281,13 +282,13 @@ namespace CMS.MySQL
         #endregion
 
         #region Remove
-        public bool RemoveEvent(int EventID)
+        public bool RemoveEvent(int eventID)
         {
             string query;
-            query = "DELETE FROM `events` WHERE `ID` = '" + EventID + "';";
+            query = "DELETE FROM `events` WHERE `ID` = '" + eventID + "';";
             if (ExecuteNonQuery(query))
             {
-                query = "DELETE FROM `event teams` WHERE `EventID` = '" + EventID + "';";
+                query = "DELETE FROM `event teams` WHERE `EventID` = '" + eventID + "';";
                 return ExecuteNonQuery(query);
             }
             else
@@ -296,34 +297,34 @@ namespace CMS.MySQL
             }
         }
 
-        public bool RemoveLanding(int LandingID)
+        public bool RemoveLanding(int landingID)
         {
-            string query = "DELETE FROM `landings` WHERE `ID` = '" + LandingID + "';";
+            string query = "DELETE FROM `landings` WHERE `ID` = '" + landingID + "';";
             return ExecuteNonQuery(query);
         }
 
         public bool RemoveCompetitor(int UID)
         {
-            string query = "UPDATE `competitors` SET `Team Name` = '' WHERE `UID` = '" + UID + "';";
+            string query = "UPDATE `competitors` SET `Group` = '' WHERE `UID` = '" + UID + "';";
             return ExecuteNonQuery(query);
         }
 
         /// <summary>
-        /// Remove a 'competitor' Team.
+        /// Remove a competitor group.
         /// </summary>
         /// <param name="Team"></param>
         /// <returns></returns>
-        public bool RemoveCTeam(string Team)
+        public bool RemoveGroup(string group)
         {
-            string query = "UPDATE `competitors` SET `Team Name` = 'NO TEAM' WHERE `Team Name` = '" + Team + "';";
+            string query = "UPDATE `competitors` SET `Group` = 'NO GROUP' WHERE `Group` = '" + group + "';";
             return ExecuteNonQuery(query);
         }
         #endregion
 
         #region Update
-        public bool ModifyLanding(Landing Landing)
+        public bool ModifyLanding(Landing landing)
         {
-            MySqlLanding NewLanding = SerialiseLanding(Landing);
+            MySqlLanding NewLanding = SerialiseLanding(landing);
             string query = "UPDATE `landings` SET `Data` = '" + ByteArrayToHex(NewLanding.Data) + "' WHERE `ID` = '" + NewLanding.ID + "';";
             return ExecuteNonQuery(query);
         }
@@ -335,16 +336,16 @@ namespace CMS.MySQL
             return ExecuteNonQuery(query);
         }
 
-        public bool ModifyCompetitor(int UID, string NewName, string NewTeam, string NewNationality)
+        public bool ModifyCompetitor(int UID, string newName, string newGroup, string newNationality)
         {
-            string query = "UPDATE `competitors` SET `Name` = '" + NewName + "', `Team Name` = '" + NewTeam + "', `Nationality` = '" + NewNationality + "' WHERE `UID` = '" + UID + "';";
+            string query = "UPDATE `competitors` SET `Name` = '" + newName + "', `Group` = '" + newGroup + "', `Nationality` = '" + newNationality + "' WHERE `UID` = '" + UID + "';";
             return ExecuteNonQuery(query);
         }
 
-        public bool ModifyTeam(Team Team)
+        public bool ModifyTeam(Team team)
         {
-            MySqlTeam NewTeam = SerialiseTeam(Team);
-            string query = "UPDATE `event teams` SET `EventID` = '" + NewTeam.EventID + "', `Name` = '" + NewTeam.Name + "', `Image` = '" + NewTeam.Image + "', `Data` = '" + NewTeam.Data + "';";
+            MySqlTeam newTeam = SerialiseTeam(team);
+            string query = "UPDATE `event teams` SET `EventID` = '" + newTeam.EventID + "', `Name` = '" + newTeam.Name + "', `Image` = '" + newTeam.Image + "', `Data` = '" + newTeam.Data + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -362,7 +363,7 @@ namespace CMS.MySQL
                 {
                     for (int i = 0; i < competitors.Count; i++)
                     {
-                        MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`UID`, `Name`, `Team Name`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].team + "', '" + competitors[i].nationality + "');", connection);
+                        MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`UID`, `Name`, `Group`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].group + "', '" + competitors[i].nationality + "');", connection);
                         try
                         {
                             cmd.ExecuteNonQuery();
@@ -379,7 +380,7 @@ namespace CMS.MySQL
                     {
                         for (int i = 0; i < competitors.Count; i++)
                         {
-                            MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`ID`, `Name`, `Team Name`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].team + "', '" + competitors[i].nationality + "');", connection);
+                            MySqlCommand cmd = new MySqlCommand("INSERT INTO `competitors` (`ID`, `Name`, `Group`, `Nationality`) VALUES ('" + competitors[i].ID + "', '" + competitors[i].name + "', '" + competitors[i].group + "', '" + competitors[i].nationality + "');", connection);
                             try
                             {
                                 cmd.ExecuteNonQuery();
@@ -406,10 +407,10 @@ namespace CMS.MySQL
         #endregion
 
         #region Get
-        public List<Competitor> GetCompetitorsByCTeam(string Team)
+        public List<Competitor> GetCompetitorsByGroup(string group)
         {
             List<Competitor> Competitors = new List<Competitor>();
-            string query = "SELECT * FROM `competitors` WHERE `Team Name` = '" + Team + "'";
+            string query = "SELECT * FROM `competitors` WHERE `Group` = '" + group + "'";
 
             if (connection.State == System.Data.ConnectionState.Open)
             {
@@ -426,7 +427,7 @@ namespace CMS.MySQL
                             {
                                 case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
                                 case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
-                                case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                                case 2: CurrentCompetitor.group = DataReader.GetString(i); break;
                                 case 3: CurrentCompetitor.nationality = DataReader.GetString(i); break;
                             }
                             if (i == 3) { Competitors.Add(CurrentCompetitor); }
@@ -442,10 +443,10 @@ namespace CMS.MySQL
             return Competitors;
         }
 
-        public List<Competitor> GetCompetitorsByCTeam(string Team, List<Competitor> IgnoreList)
+        public List<Competitor> GetCompetitorsByGroup(string group, List<Competitor> ignoreList)
         {
             List<Competitor> Competitors = new List<Competitor>();
-            string query = "SELECT * FROM `competitors` WHERE `Team Name` = '" + Team + "'";
+            string query = "SELECT * FROM `competitors` WHERE `Group` = '" + group + "'";
 
             if (connection.State == System.Data.ConnectionState.Open)
             {
@@ -463,13 +464,13 @@ namespace CMS.MySQL
                             {
                                 case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
                                 case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
-                                case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                                case 2: CurrentCompetitor.group = DataReader.GetString(i); break;
                                 case 3: CurrentCompetitor.nationality = DataReader.GetString(i); break;
                             }
 
-                            for (int i2 = 0; i2 < IgnoreList.Count; i2++)
+                            for (int i2 = 0; i2 < ignoreList.Count; i2++)
                             {
-                                if (CurrentCompetitor.ID == IgnoreList[i2].ID) { CanAdd = false; }
+                                if (CurrentCompetitor.ID == ignoreList[i2].ID) { CanAdd = false; }
                             }
 
                             if (i == 3 && CanAdd == true) { Competitors.Add(CurrentCompetitor); }
@@ -513,11 +514,11 @@ namespace CMS.MySQL
             return ID;
         }
 
-        public List<string> GetCTeams(bool IncludeEmpty)
+        public List<string> GetGroups(bool includeEmpty)
         {
-            string query = "SELECT `Team Name` FROM `competitors`";
-            List<string> Teams = new List<string>();
-            Teams.Add("NO TEAM");
+            string query = "SELECT `Group` FROM `competitors`";
+            List<string> Groups = new List<string>();
+            Groups.Add("NO GROUP");
 
             if (connection.State == System.Data.ConnectionState.Open)
             {
@@ -529,19 +530,19 @@ namespace CMS.MySQL
                     {
                         for (int i = 0; i < DataReader.FieldCount; i++)
                         {
-                            bool TeamUnique = true;
-                            string CurrentTeam = DataReader.GetString(i);
-                            if (CurrentTeam == "" && IncludeEmpty == true || CurrentTeam != "")
+                            bool GroupUnique = true;
+                            string CurrentGroup = DataReader.GetString(i);
+                            if (CurrentGroup == "" && includeEmpty == true || CurrentGroup != "")
                             {
-                                for (int i2 = 0; i2 < Teams.Count; i2++)
+                                for (int i2 = 0; i2 < Groups.Count; i2++)
                                 {
-                                    if (Teams[i2] == CurrentTeam || CurrentTeam == "")
+                                    if (Groups[i2] == CurrentGroup || CurrentGroup == "")
                                     {
-                                        TeamUnique = false;
+                                        GroupUnique = false;
                                     }
                                 }
-                                if (TeamUnique == true)
-                                { Teams.Add(CurrentTeam); }
+                                if (GroupUnique == true)
+                                { Groups.Add(CurrentGroup); }
                             }
                         }
                     }
@@ -552,12 +553,12 @@ namespace CMS.MySQL
                     error = ex.Message;
                 }
             }
-            return Teams;
+            return Groups;
         }
 
-        public bool DoesCompetitorExist(Competitor Competitor)
+        public bool DoesCompetitorExist(Competitor competitor)
         {
-            string query = "SELECT UID FROM `competitors` WHERE `Name` = '" + Competitor.name + "' AND `Team Name` = '" + Competitor.team + "' AND `Nationality` = '" + Competitor.nationality + "'";
+            string query = "SELECT UID FROM `competitors` WHERE `Name` = '" + competitor.name + "' AND `Group` = '" + competitor.group + "' AND `Nationality` = '" + competitor.nationality + "'";
             int ID = 0;
 
             if (connection.State == System.Data.ConnectionState.Open)
@@ -585,9 +586,9 @@ namespace CMS.MySQL
             else { return true; }
         }
 
-        public bool DoesCTeamExist(string team)
+        public bool DoesGroupExist(string group)
         {
-            string query = "SELECT UID FROM `competitors` WHERE `Team` = '" + team + "'";
+            string query = "SELECT UID FROM `competitors` WHERE `Group` = '" + group + "'";
             int ID = 0;
 
             if (connection.State == System.Data.ConnectionState.Open)
@@ -615,9 +616,9 @@ namespace CMS.MySQL
             else { return true; }
         }
 
-        public Event GetEvent(int EventID)
+        public Event GetEvent(int eventID)
         {
-            string query = "SELECT * FROM `events` WHERE `ID` = '" + EventID + "'";
+            string query = "SELECT * FROM `events` WHERE `ID` = '" + eventID + "'";
             MySqlEvent Event = new MySqlEvent();
 
             if (connection.State == System.Data.ConnectionState.Open)
@@ -649,9 +650,9 @@ namespace CMS.MySQL
             return DeserialiseEvent(Event);
         }
 
-        public dynamic GetLandingsForEvent(int EventID, EventType Type)
+        public dynamic GetLandingsForEvent(int eventID, EventType type)
         {
-            string query = "SELECT * FROM `landings` WHERE `EventID` = '" + EventID + "'";
+            string query = "SELECT * FROM `landings` WHERE `EventID` = '" + eventID + "'";
             List<MySqlLanding> Landings = new List<MySqlLanding>();
 
             if (connection.State == System.Data.ConnectionState.Open) // Get the landings from the DB
@@ -663,7 +664,7 @@ namespace CMS.MySQL
                     while (DataReader.Read())
                     {
                         MySqlLanding CurrentLanding = new MySqlLanding();
-                        CurrentLanding.eventID = EventID;
+                        CurrentLanding.eventID = eventID;
                         for (int i = 0; i < DataReader.FieldCount; i++)
                         {
                             switch (i)
@@ -687,13 +688,13 @@ namespace CMS.MySQL
             }
 
              // Deserialise the landings' data
-                switch (Type)
+                switch (type)
                 {
                     case (EventType.Accuracy):
                         List<Accuracy.AccuracyLanding> LandingsToReturn = new List<Accuracy.AccuracyLanding>();
                         for (int i = 0; i < Landings.Count; i++)
                         {
-                            LandingsToReturn.Add(DeserialiseAccuracyLanding(Landings[i], Type));
+                            LandingsToReturn.Add(DeserialiseAccuracyLanding(Landings[i], type));
                         }
                         return LandingsToReturn;
                     break;
@@ -702,9 +703,9 @@ namespace CMS.MySQL
                 return null;
         }
 
-        public int GetNoOfEventsByTypeOnDay(DateTime Date, EventType EventType)
+        public int GetNoOfEventsByTypeOnDay(DateTime date, EventType eventType)
         {
-            string query = "SELECT * FROM `events` WHERE `Date` = '" + Date.ToShortDateString() + "' AND `Type` = '" + EventType.ToString() + "'";
+            string query = "SELECT * FROM `events` WHERE `Date` = '" + date.ToShortDateString() + "' AND `Type` = '" + eventType.ToString() + "'";
             int Quantity = 0;
 
             if (connection.State == System.Data.ConnectionState.Open)
@@ -779,9 +780,9 @@ namespace CMS.MySQL
             return EventsToReturn;
         }
 
-        public List<Competitor> GetCompetitorsForEvent(int EventID)
+        public List<Competitor> GetCompetitorsForEvent(int eventID)
         {
-            List<Team> Teams = GetSTeamsForEvent(EventID);
+            List<Team> Teams = GetTeamsForEvent(eventID);
             List<Competitor> Competitors = new List<Competitor>();
 
             for (int Ti = 0; Ti < Teams.Count; Ti++)
@@ -795,7 +796,7 @@ namespace CMS.MySQL
             return Competitors;
         }
 
-        public List<Team> GetSTeamsForEvent(int EventID)
+        public List<Team> GetTeamsForEvent(int eventID)
         {
             string query;
             MySqlCommand cmd;
@@ -807,7 +808,7 @@ namespace CMS.MySQL
             {
                 #region Part A
                 // Getting the teams for the event.
-                query = "SELECT * FROM `event teams` WHERE `EventID` = '" + EventID + "'";
+                query = "SELECT * FROM `event teams` WHERE `EventID` = '" + eventID + "'";
                 cmd = new MySqlCommand(query, connection);
                 try
                 {
@@ -853,7 +854,7 @@ namespace CMS.MySQL
                             {
                                 case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
                                 case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
-                                case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                                case 2: CurrentCompetitor.group = DataReader.GetString(i); break;
                                 case 3:
                                     CurrentCompetitor.nationality = DataReader.GetString(i);
                                     Competitors.Add(CurrentCompetitor);
@@ -880,7 +881,7 @@ namespace CMS.MySQL
                             {
                                 Teams[Ti].Competitors[Ci].name = Competitors[i].name;
                                 Teams[Ti].Competitors[Ci].nationality = Competitors[i].nationality;
-                                Teams[Ti].Competitors[Ci].team = Competitors[i].team;  
+                                Teams[Ti].Competitors[Ci].group = Competitors[i].group;  
                             }
                         }
                     }
@@ -890,9 +891,9 @@ namespace CMS.MySQL
             return Teams;
         }
 
-        public bool GetDoesEventExist(int EventID)
+        public bool GetDoesEventExist(int eventID)
         {
-            string query = "SELECT * FROM `events` WHERE `ID`='" + EventID + "'";
+            string query = "SELECT * FROM `events` WHERE `ID`='" + eventID + "'";
             bool exists = false;
 
             if (connection.State == System.Data.ConnectionState.Open)
@@ -920,7 +921,7 @@ namespace CMS.MySQL
 
         public List<Competitor> GetCompetitors()
         {
-            List<Competitor> Competitors = new List<Competitor>();
+            List<Competitor> competitors = new List<Competitor>();
             string query = "SELECT * FROM `competitors`";
             MySqlCommand cmd = new MySqlCommand(query, connection);
 
@@ -936,10 +937,10 @@ namespace CMS.MySQL
                         {
                             case 0: CurrentCompetitor.ID = DataReader.GetInt16(i); break;
                             case 1: CurrentCompetitor.name = DataReader.GetString(i); break;
-                            case 2: CurrentCompetitor.team = DataReader.GetString(i); break;
+                            case 2: CurrentCompetitor.group = DataReader.GetString(i); break;
                             case 3:
                                 CurrentCompetitor.nationality = DataReader.GetString(i);
-                                Competitors.Add(CurrentCompetitor);
+                                competitors.Add(CurrentCompetitor);
                                 break;
                         }
                     }
@@ -950,13 +951,13 @@ namespace CMS.MySQL
             {
                 error = ex.Message;
             }
-            return Competitors;
+            return competitors;
         }
 
-        public List<string> GetAllTeams()
+        public List<string> GetAllGroups()
         {
-            string query = "SELECT `Team Name` FROM `competitors`";
-            List<string> teamsToReturn = new List<string>();
+            string query = "SELECT `Group` FROM `competitors`";
+            List<string> groupsToReturn = new List<string>();
 
             if (connection.State == System.Data.ConnectionState.Open)
             {
@@ -966,10 +967,10 @@ namespace CMS.MySQL
                     MySqlDataReader DataReader = cmd.ExecuteReader();
                     while (DataReader.Read())
                     {
-                        string currentTeam = DataReader.GetString(0);
-                        if (currentTeam != "")
+                        string currentGroup = DataReader.GetString(0);
+                        if (currentGroup != "")
                         {
-                            teamsToReturn.Add(currentTeam);
+                            groupsToReturn.Add(currentGroup);
                         }
                     }
                     DataReader.Close();
@@ -980,24 +981,24 @@ namespace CMS.MySQL
                 }
             }
 
-            for (int i = 0; i < teamsToReturn.Count; i++)
+            for (int i = 0; i < groupsToReturn.Count; i++)
             {
-                for (int i2 = i + 1; i2 < teamsToReturn.Count; i2++)
+                for (int i2 = i + 1; i2 < groupsToReturn.Count; i2++)
                 {
-                    if (teamsToReturn[i] == teamsToReturn[i2])
+                    if (groupsToReturn[i] == groupsToReturn[i2])
                     {
-                        teamsToReturn.RemoveAt(i2);
+                        groupsToReturn.RemoveAt(i2);
                         i2--;
                     }
                 }
             }
 
-            return teamsToReturn;
+            return groupsToReturn;
         }
 
-        public int GetNumberCompetitorsInTeam(string teamName)
+        public int GetNumberCompetitorsInGroup(string groupName)
         {
-            string query = "SELECT COUNT(1) FROM `competitors` WHERE `Team Name`='" + teamName + "'";
+            string query = "SELECT COUNT(1) FROM `competitors` WHERE `Group`='" + groupName + "'";
             int number = 0;
 
             if (connection.State == System.Data.ConnectionState.Open)

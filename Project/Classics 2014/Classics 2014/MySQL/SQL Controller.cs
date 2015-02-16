@@ -755,7 +755,7 @@ namespace CMS.MySQL
                             {
                                 case 0: CurrentEvent.ID = DataReader.GetInt16(i); break;
                                 case 1: CurrentEvent.Name = DataReader.GetString(i); break;
-                                case 2: CurrentEvent.Date = DataReader.GetDateTime(i); break;
+                                case 2: CurrentEvent.Date = Convert.ToDateTime(DataReader.GetString(i)); break;
                                 case 3: CurrentEvent.Type = (EventType)Enum.Parse(typeof(EventType), DataReader.GetString(i)); break;
                                 case 4:
                                     CurrentEvent.Data = StringToByteArray(DataReader.GetString(i));

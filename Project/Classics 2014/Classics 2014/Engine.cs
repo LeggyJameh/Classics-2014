@@ -100,20 +100,6 @@ namespace CMS
             }
         }
 
-        //public Classics_2014.Accuracy.EventAccuracyInit LoadExistingAccuracyEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors)
-        //{
-        //    Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-        //    NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(tabControl, NewEvent, Rules, EventName, Date, SelectedCompetitors);
-        //    NewEvent.TabControl = tabControl;
-        //    return NewEvent.EventOptionsTab;
-        //}
-
-        public CMS.Accuracy.Accuracy_Event LoadExistingAccuracyEvent()
-        {
-            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-            return NewEvent;
-        }
-
         private void WriteToMasterFile(Data_Accuracy data)
         {
             writer.WriteLine(data.ToString()); 

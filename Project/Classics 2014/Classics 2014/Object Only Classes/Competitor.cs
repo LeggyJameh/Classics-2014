@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CMS
 {
+    [Serializable]
     public class Competitor : ICloneable
     {
         public int ID;

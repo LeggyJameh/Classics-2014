@@ -196,6 +196,32 @@ namespace CMS
             }
         }
 
+        public static string underfilledTeamsCheck()
+        {
+            string result;
+
+            string[] strings = new string[1];
+            strings[0] = "Option:";
+
+            ComboBox cb1 = new ComboBox();
+            cb1.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb1.Items.Add("Fill teams");
+            cb1.Items.Add("Leave teams");
+            cb1.SelectedIndex = 0;
+
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Teams underfilled", Properties.Resources.Icon, strings, cb1);
+
+            if (outputs != null)
+            {
+                result = (string)outputs[0];
+                return result;
+            }
+            else
+            {
+                return "Cancel";
+            }
+        }
+
         public static int ModifyScore(int originalScore, int maximumscore)
         {
             int score;

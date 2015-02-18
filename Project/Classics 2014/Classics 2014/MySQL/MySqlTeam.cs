@@ -13,5 +13,14 @@ namespace CMS.MySQL
         public string Name;
         public byte[] Data;
         public byte[] Image;
+
+        public MySqlTeam()
+        {
+            ID = -1;
+            EventID = -1;
+            Name = "";
+            Data = new byte[1];
+            Image = new byte[1];
+        }
     }
 }

@@ -20,15 +20,25 @@ namespace CMS.Accuracy
         const float windspeedDiff = 0.5f; /// The minimum difference between safe and rejump windspeeds.
         #endregion
 
-        public EventAccuracyInit(Accuracy_Event Connected_Event)
+        public EventAccuracyInit(Accuracy_Event Connected_Event, bool loaded)
         {
             this.Connected_Event = Connected_Event;
             InitializeComponent();
-            setupInputs();
             competitorSelector = new CompetitorSelector(Connected_Event);
+            if (!loaded)
+            {
+                setupInputs();
+            }
+            else
+            {
+                loadInputsFromRules();
+                competitorSelector.LoadCompetitorsFromEvent();
+            }
+            
             this.tableLayoutPanel1.Controls.Add(competitorSelector, 2, 0);
             competitorSelector.Dock = DockStyle.Fill;
             tableLayoutPanel1.SetRowSpan(competitorSelector, 19);
+            tableLayoutPanel1.SetColumnSpan(competitorSelector, 2);
         }
 
         /// <summary>
@@ -64,6 +74,29 @@ namespace CMS.Accuracy
         }
 
         /// <summary>
+        /// Sets the input values to be that of the rules, used in loading.
+        /// </summary>
+        private void loadInputsFromRules()
+        {
+            rules = (Ruleset.AccuracyRules)Connected_Event.Rules;
+
+            inputName.Text = Connected_Event.Name;
+            inputDate.Value = Connected_Event.Date;
+            inputMaxWind.Value = Convert.ToDecimal(rules.windspeedSafe);
+            inputFADirectionChange.SelectedItem = (object)angleToString(rules.directionChangeFA);
+            inputMaxScore.Value = Convert.ToDecimal(rules.maxScore);
+            competitorsPerTeam = rules.competitorsPerTeam;
+            inputCompetitorsPerTeam.Value = Convert.ToDecimal(rules.competitorsPerTeam);
+            inputRuleSet.SelectedItem = (object)rules.preset;
+            inputFATimeAfter.Value = Convert.ToDecimal(rules.timeAfterFA);
+            inputFATimePrior.Value = Convert.ToDecimal(rules.timePriorFA);
+            inputLegalWindspeed.Value = Convert.ToDecimal(rules.windspeedRejump);
+            inputWindDataAfter.Value = Convert.ToDecimal(rules.windSecondsAfterLand);
+            inputWindDataPrior.Value = Convert.ToDecimal(rules.windSecondsPriorLand);
+            inputFALegalWindspeed.Value = Convert.ToDecimal(rules.windspeedFA);
+        }
+
+        /// <summary>
         /// Takes the input from direction change and removes the ° char.
         /// </summary>
         private int getAngle(string degrees)
@@ -71,6 +104,11 @@ namespace CMS.Accuracy
             char[] charsToRemove = new char[1];
             charsToRemove[0] = '°';
             return Convert.ToInt16(degrees.TrimEnd(charsToRemove));
+        }
+
+        private string angleToString(int angle)
+        {
+            return angle.ToString() + '°';
         }
 
         /// <summary>
@@ -106,10 +144,13 @@ namespace CMS.Accuracy
                 }
             }
 
-
             if (inputCorrect() && allowed == true)
             {
-                Connected_Event.saveEventRulesStage(getSelectedCompetitors(), rules, date, eventName);
+                Connected_Event.Rules = rules;
+                Connected_Event.Date = date;
+                Connected_Event.Name = eventName;
+                Connected_Event.UnassignedCompetitors = competitors;
+                Connected_Event.SaveCurrentStage();
                 return true;
             }
             else
@@ -125,7 +166,7 @@ namespace CMS.Accuracy
         private void setupInputs()
         {
             inputDate.Value = DateTime.Today;
-            inputName.Text = "Accuracy Event " + (Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.Accuracy) + 1).ToString() + " " + DateTime.Today.ToShortDateString();
+            inputName.Text = "Accuracy Event " + (Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.INTL_ACCURACY) + 1).ToString() + " " + DateTime.Today.ToShortDateString();
             inputRuleSet.SelectedIndex = 0;
             inputScoresUsed.SelectedItem = inputScoresUsed.Items[0];
             inputFADirectionChange.SelectedItem = inputFADirectionChange.Items[8];
@@ -159,7 +200,7 @@ namespace CMS.Accuracy
         {
             if (compileDataAndSave())
             {
-                Connected_Event.ProceedToTeamSetup();
+                Connected_Event.NextStage();
             }
         }
 
@@ -170,7 +211,17 @@ namespace CMS.Accuracy
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            Connected_Event.CloseEvent();
+            DialogResult result = MessageBox.Show("Would you like to save your changes before exiting?", "Are you sure?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+            switch (result)
+            {
+                case DialogResult.Yes:
+                    Connected_Event.Exit();
+                    break;
+                case DialogResult.No:
+                    compileDataAndSave();
+                    Connected_Event.Exit();
+                    break;
+            }
         }
 
         private void inputCompetitorsPerTeam_ValueChanged(object sender, EventArgs e)

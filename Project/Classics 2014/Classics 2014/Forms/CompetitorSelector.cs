@@ -273,6 +273,28 @@ namespace CMS
             return competitorsToReturn;
         }
 
+        public void LoadCompetitorsFromEvent()
+        {
+            List<Competitor> tempCompetitors = new List<Competitor>();
+            foreach (Competitor c in Connected_Event.UnassignedCompetitors)
+            {
+                int index = data.GetIndexOf(c.ID);
+                if (index != -1)
+                {
+                    tempCompetitors.Add(data.GetCompetitorAt(index));
+                }
+            }
+
+            foreach (Competitor c in tempCompetitors)
+            {
+                data.SetValue(c.group, true);
+                data.SetValue(c, true);
+            }
+
+            refreshCompetitorGrid();
+            refreshGroupGrid();
+        }
+
         #region get set operators
 
         private string filterGroup

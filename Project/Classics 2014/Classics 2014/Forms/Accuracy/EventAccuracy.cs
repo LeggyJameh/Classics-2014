@@ -12,7 +12,6 @@ namespace CMS.Accuracy
     partial class EventAccuracy : UserControl
     {
         Accuracy_Event Connected_Event;
-        TabControl tabControl;
         int CurrentCellValue;
         bool TeamedEvent;
         Reports.ReportCreation CurrentReportForm;
@@ -33,11 +32,10 @@ namespace CMS.Accuracy
 
         #endregion
 
-        public EventAccuracy(Accuracy_Event Event, TabControl Main)
+        public EventAccuracy(Accuracy_Event Event)
         {
             Connected_Event = Event;
             rules = (Ruleset.AccuracyRules)Event.Rules;
-            tabControl = Main;
             InitializeComponent();
             groupboxControllerListArea.Controls.Add(Connected_Event.controller.column);
             labelName.Text = "Accuracy Event " + Connected_Event.Name;
@@ -53,11 +51,10 @@ namespace CMS.Accuracy
             }
         }
 
-        public EventAccuracy(Accuracy_Event Event, TabControl Main, bool Admin)
+        public EventAccuracy(Accuracy_Event Event, bool Admin)
         {
             this.Admin = true;
             Connected_Event = Event;
-            tabControl = Main;
             InitializeComponent();
             if (Admin)
             {
@@ -94,7 +91,7 @@ namespace CMS.Accuracy
 
         public void LoadExistingEventLandings() // Look at
         {
-            List<AccuracyLanding> Landings = (List<AccuracyLanding>)Connected_Event.SQL_Controller.GetLandingsForEvent(Connected_Event.EventID, EventType.Accuracy);
+            List<AccuracyLanding> Landings = (List<AccuracyLanding>)Connected_Event.SQL_Controller.GetLandingsForEvent(Connected_Event.EventID, EventType.INTL_ACCURACY);
 
             for (int i = 0; i < Landings.Count; i++)
             {
@@ -173,9 +170,7 @@ namespace CMS.Accuracy
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            tabControl.TabPages.Remove(tabControl.SelectedTab);
-            tabControl.SelectedTab = tabControl.TabPages[0];
-            Connected_Event.EventTab = null;
+            Connected_Event.Exit();
         }
 
         private void buttonEditLanding_Click(object sender, EventArgs e)

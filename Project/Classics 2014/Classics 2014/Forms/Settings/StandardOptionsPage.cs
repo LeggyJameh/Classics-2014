@@ -13,6 +13,7 @@ namespace CMS
     {
         windGraphingControllercs windGraph;
         Main MainForm;
+        UserControl rightControl;
         public StandardOptionsPage(windGraphingControllercs windGraph, Main main)
         {
             this.windGraph = windGraph;
@@ -23,21 +24,38 @@ namespace CMS
             //ToDo Add
         }
 
+        /// <summary>
+        /// Fits the control to the correct place and dimensions on the options panel.
+        /// </summary>
+        private void fitControl()
+        {
+            rightControl.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Controls.Add(rightControl);
+            tableLayoutPanel1.SetColumn(rightControl, 1);
+            tableLayoutPanel1.SetRow(rightControl, 1);
+            tableLayoutPanel1.SetRowSpan(rightControl, 2);
+        }
+
         private void listBoxOptionsMenu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            splitContainerOptions.Panel2.Controls.Clear();
+            if (rightControl != null)
+            {
+                tableLayoutPanel1.Controls.Remove(rightControl);
+                rightControl = null;
+            }
 
             switch (listBoxOptionsMenu.SelectedItem.ToString())
             {
                 case "Common Display":
                     CommonDisplayOptions optionsDisplay = new CommonDisplayOptions( windGraph);
-                    optionsDisplay.Dock = DockStyle.Fill;
-                    splitContainerOptions.Panel2.Controls.Add(optionsDisplay);
+                    rightControl = optionsDisplay;
+                    fitControl();
                     break;
                 case "Accuracy":
                     Accuracy.AccuracyOptionsMenu aOptionsMenu = new Accuracy.AccuracyOptionsMenu();
                     aOptionsMenu.Dock = DockStyle.Fill;
-                    splitContainerOptions.Panel2.Controls.Add(aOptionsMenu);
+                    rightControl = aOptionsMenu;
+                    fitControl();
                     break;
             }
         }

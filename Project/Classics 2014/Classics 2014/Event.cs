@@ -17,19 +17,162 @@ namespace CMS
         public SQL_Controller SQL_Controller;
         public IO_Controller IO_Controller;
         public bool RequiresSerial { get; protected set; } // This is checked to see if Engine can Read the data without waiting (Psuedo Const)
-        public EventType EventType { get; protected set; }
+        public EventType EventType;
+        public List<Competitor> UnassignedCompetitors; // Used to take competitors from Init to Team picker only.
         public List<Team> Teams;
         public int EventID;
         public DateTime Date;
-        public TabControl TabControl;
         public Ruleset.Ruleset Rules;
         public Engine engine;
+        protected UserControl currentWindow; // The current tabpage that is controlling the event.
+        protected UpdateCompetitorDelegate _updateCompetitorDelegate;
 
-        public void ProceedToTeamSetup()
+        public void Exit()
         {
-            Rules.stage = EventStage.SetupTeams;
-            engine.mainForm.removeCurrentTab();
-            engine.mainForm.addNewTab("Team setup", new Forms.TeamPicker(this));
+            if (Rules != null) // Event specific handlers to end / remove references.
+            {
+                switch (Rules.stage)
+                {
+                    case EventStage.SetupRules:
+                        break;
+                    case EventStage.SetupTeams:
+                        break;
+                    case EventStage.SetupEID:
+                        break;
+                    case EventStage.Ready:
+                        break;
+                }
+            }
+
+            // General stuff that happens when ending event.
+            if (currentWindow != null)
+            {
+                if (currentWindow.Parent != null)
+                {
+                    engine.mainForm.removeTab((TabPage)currentWindow.Parent);
+                }
+                currentWindow = null;
+            }
+            engine.RemoveCompetitorUpdateDelegate(_updateCompetitorDelegate);
+            engine.EndEvent(this);
+        }
+
+        public void NextStage()
+        {
+            if (Rules != null)
+            {
+                switch (Rules.stage)
+                {
+                    case EventStage.SetupRules: // Same for every event, once past Setup rules, init setup teams.
+                        SQL_Controller.RemoveAllTeamsForEvent(EventID);
+                        Teams = new List<Team>();
+                        Rules.stage = EventStage.SetupTeams;
+                        engine.mainForm.removeCurrentTab();
+                        currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
+                        engine.mainForm.addNewTab("Team setup", currentWindow);
+                        break;
+                    case EventStage.SetupTeams: // SetupEID global for all events, so continue.
+                        // Currently skipping EID stage.
+                        Rules.stage = EventStage.Ready;
+                        NextStage();
+                        break;
+                    case EventStage.SetupEID: // Actual event is different for each event type, so switch required.
+                        switch (EventType)
+                        {
+                            case CMS.EventType.INTL_ACCURACY:
+
+                                break;
+                        }
+                        break;
+                }
+            }
+        }
+
+        public void PreviousStage()
+        {
+            if (Rules != null)
+            {
+                switch (Rules.stage)
+                {
+                    case EventStage.SetupTeams: // Event init is seperate for each event.
+                        switch (EventType)
+                        {
+                            case CMS.EventType.INTL_ACCURACY:
+                                currentWindow = new Accuracy.EventAccuracyInit((Accuracy.Accuracy_Event)this, true);
+                                engine.mainForm.addNewTab(Name, currentWindow);
+                                break;
+                        }
+                        break;
+                    case EventStage.SetupEID:
+                        break;
+                    case EventStage.Ready:
+                        break;
+                }
+            }
+        }
+
+        public void SaveCurrentStage()
+        {
+            if (Rules != null)
+            {
+                switch (Rules.stage)
+                {
+                    case EventStage.SetupRules:
+                        if (EventID != -1)
+                        {
+                            if (SQL_Controller.GetDoesEventExist(EventID))
+                            {
+                                SQL_Controller.ModifyEvent(this);
+                            }
+                            else
+                            {
+                                SQL_Controller.CreateEvent(this);
+                                EventID = SQL_Controller.GetLastInsertKey();
+                            }
+                        }
+                        else
+                        {
+                            SQL_Controller.CreateEvent(this);
+                            EventID = SQL_Controller.GetLastInsertKey();
+                        }
+                        break;
+                    case EventStage.SetupTeams:
+                        SQL_Controller.ModifyEvent(this);
+                        break;
+                    case EventStage.SetupEID:
+                        break;
+                    case EventStage.Ready:
+                        break;
+                }
+            }
+        }
+
+        
+
+        public void LoadCurrentStage()
+        {
+            switch (this.Rules.stage)
+            {
+                case EventStage.SetupRules:
+                    switch (EventType)
+                    {
+                        case CMS.EventType.INTL_ACCURACY:
+                            currentWindow = new Accuracy.EventAccuracyInit((Accuracy.Accuracy_Event)this, true);
+                            engine.mainForm.addNewTab(Name, currentWindow);
+                            break;
+                    }
+                    break;
+                case EventStage.SetupTeams:
+                    this.Teams = SQL_Controller.GetTeamsForEvent(EventID);
+                    this.UnassignedCompetitors = new List<Competitor>();
+                    currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
+                    engine.mainForm.addNewTab("Team setup", currentWindow);
+                    break;
+                case EventStage.SetupEID:
+                    break;
+                case EventStage.Ready:
+                    break;
+            }
         }
 
         public virtual void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)

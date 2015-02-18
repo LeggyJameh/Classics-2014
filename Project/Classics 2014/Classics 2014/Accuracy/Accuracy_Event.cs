@@ -12,12 +12,9 @@ using CMS.MySQL;
 namespace CMS.Accuracy
 {
     // Working 28/10/14.
-    class Accuracy_Event :Event 
+    class Accuracy_Event : Event 
     {
         #region variables and the such like
-        public EventAccuracyInit EventOptionsTab;
-        public EventTeams EventTeamsTab;
-        public EventAccuracy EventTab;
         public List<Competitor> Competitors;
         public List<string> ActiveTeams;
         Boolean lostSerial = false;
@@ -39,9 +36,13 @@ namespace CMS.Accuracy
             this.engine = engine;
             this.controller = controller;
             RequiresSerial = true;
-            EventType = EventType.Accuracy;
+            EventType = EventType.INTL_ACCURACY;
             EventID = -1;
-            rules = (Ruleset.AccuracyRules)Rules;
+            rules = new Ruleset.AccuracyRules();
+            base._updateCompetitorDelegate = new UpdateCompetitorDelegate(UpdateCompetitors);
+            controller.AddCompetitorUpdateDelegate(base._updateCompetitorDelegate);
+            currentWindow = new EventAccuracyInit(this, false);
+            controller.AddTab(currentWindow);
         }
 
         /// <summary>
@@ -51,133 +52,40 @@ namespace CMS.Accuracy
         {
         }
 
-        public bool CloseEvent()
-        {
-            if (Rules != null)
-            {
-                switch (Rules.stage)
-                {
-                    case EventStage.SetupRules:
-                        if (EventOptionsTab != null)
-                        {
-                            if (EventOptionsTab.Parent != null)
-                            {
-                                engine.mainForm.removeTab((TabPage)EventOptionsTab.Parent);
-                                EventOptionsTab = null;
-                            }
-                        }
-                        break;
-                    case EventStage.SetupTeams:
-                        if (EventTeamsTab != null)
-                        {
-                            if (EventTeamsTab.Parent != null)
-                            {
-                                engine.mainForm.removeTab((TabPage)EventTeamsTab.Parent);
-                                EventTeamsTab = null;
-                            }
-                        }
-                        break;
-                    case EventStage.Ready:
-                        if (EventTab != null)
-                        {
-                            if (EventTab.Parent != null)
-                            {
-                                engine.mainForm.removeTab((TabPage)EventTab.Parent);
-                                EventTab = null;
-                            }
-                        }
-                        break;
-                }
-            }
-            else
-            {
-                if (EventOptionsTab != null)
-                {
-                    if (EventOptionsTab.Parent != null)
-                    {
-                        engine.mainForm.removeTab((TabPage)EventOptionsTab.Parent);
-                        EventOptionsTab = null;
-                    }
-                }
-            }
-            return controller.EndEvent(this);
-        }
+        //public void proceedToEvent()
+        //{
+        //    rules.stage = EventStage.Ready;
+        //    SQL_Controller.ModifyEvent(this);
+        //    EventTab = new EventAccuracy(this, TabControl);
+        //    TabPage NewPage = new TabPage();
+        //    NewPage.Controls.Add(EventTab);
+        //    EventTab.Dock = DockStyle.Fill;
+        //    NewPage.Text = Name;
+        //    TabControl.TabPages.Add(NewPage);
+        //    TabControl.SelectedTab = NewPage;
+        //}
 
-        public void proceedToEvent()
+        /// <summary>
+        /// Function used in loading to transfer over references that are usually passed on creation.
+        /// </summary>
+        public void AddParents(SQL_Controller sql_controller, IO_Controller io_controller, Engine engine, Accuracy.AccuracyEventController eventController)
         {
-            rules.stage = EventStage.Ready;
-            SQL_Controller.ModifyEvent(this);
-            EventTab = new EventAccuracy(this, TabControl);
-            TabPage NewPage = new TabPage();
-            NewPage.Controls.Add(EventTab);
-            EventTab.Dock = DockStyle.Fill;
-            NewPage.Text = Name;
-            TabControl.TabPages.Add(NewPage);
-            TabControl.SelectedTab = NewPage;
-        }
-
-        public void RefreshCurrent()
-        {
-            if (Rules != null)
+            this.SQL_Controller = sql_controller;
+            this.IO_Controller = io_controller;
+            this.engine = engine;
+            this.controller = eventController;
+            RequiresSerial = true;
+            if (UnassignedCompetitors == null)
             {
-                switch (this.rules.stage)
-                {
-                    case EventStage.SetupRules:
-                        EventOptionsTab.RefreshGrids();
-                        break;
-                    case EventStage.SetupTeams:
-                        //EventTeamsTab.RefreshGrids();
-                        break;
-                    case EventStage.Ready:
-                        //EventTab.RefreshGrids();
-                        break;
-                }
+                UnassignedCompetitors = new List<Competitor>();
             }
-            else
+            if (Teams == null)
             {
-                EventOptionsTab.RefreshGrids();
+                Teams = new List<Team>();
             }
         }
 
         #region Event Saving
-
-        /// <summary>
-        /// Save the event during the Rules stage.
-        /// </summary>
-        public void saveEventRulesStage(List<Competitor> SelectedCompetitors, Ruleset.AccuracyRules Rules, DateTime Date, string EventName)
-        {
-            this.Rules = Rules;
-            this.Date = Date;
-            this.Name = EventName;
-
-            // Stuff to merge over selected competitors so they are carried over.
-            this.Teams = new List<Team>();
-            Team currentTeam = new Team();
-            for (int c = 0; c < SelectedCompetitors.Count; c++)
-            {
-                currentTeam.Competitors.Add(new EventCompetitor(SelectedCompetitors[c]));
-            }
-            this.Teams.Add(currentTeam);
-            // End merger.
-
-            if (EventID != -1)
-            {
-                if (SQL_Controller.GetDoesEventExist(EventID))
-                {
-                    SQL_Controller.ModifyEvent(this);
-                }
-                else
-                {
-                    SQL_Controller.CreateEvent(this);
-                    EventID = SQL_Controller.GetLastInsertKey();
-                }
-            }
-            else
-            {
-                SQL_Controller.CreateEvent(this);
-                EventID = SQL_Controller.GetLastInsertKey();
-            }
-        }
 
         /// <summary>
         /// Save the event during the Team selection stage.
@@ -199,41 +107,50 @@ namespace CMS.Accuracy
 
         #endregion
 
-        public void SaveEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors, List<string> SelectedTeams)
+        //public void SaveEvent(Ruleset.AccuracyRules Rules, string EventName, DateTime Date, List<Competitor> SelectedCompetitors, List<string> SelectedTeams)
+        //{
+        //    Competitors = SelectedCompetitors;
+        //    this.Rules = Rules;
+        //    Name = EventName;
+        //    ActiveTeams = SelectedTeams;
+        //    SQL_Controller.CreateEvent(this);
+        //    EventID = SQL_Controller.GetLastInsertKey();
+        //    EventOptionsTab = null;
+        //}
+
+        //public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
+        //{
+        //    this.Teams = Teams;
+        //    rules.competitorsPerTeam = CompetitorsPerTeam;
+        //    throw new NotImplementedException();
+        //    //SQL_Controller.CreateTeams(EventID, Teams);
+        //    SQL_Controller.ModifyEvent(this);
+        //    EventTeamsTab = null;
+        //}
+
+        /// <summary>
+        /// Called when competitor editor makes a save from engine.
+        /// </summary>
+        public void UpdateCompetitors()
         {
-            Competitors = SelectedCompetitors;
-            this.Rules = Rules;
-            Name = EventName;
-            ActiveTeams = SelectedTeams;
-            SQL_Controller.CreateEvent(this);
-            EventID = SQL_Controller.GetLastInsertKey();
-            EventOptionsTab = null;
+            if (Rules != null)
+            {
+                switch (this.Rules.stage)
+                {
+                    case EventStage.SetupRules:
+                        EventAccuracyInit t = (EventAccuracyInit)base.currentWindow;
+                        t.RefreshGrids();
+                        break;
+                    case EventStage.SetupTeams:
+                        TeamPicker l = (TeamPicker)base.currentWindow;
+                        l.refreshCompetitors();
+                        break;
+                    case EventStage.Ready:
+                        //EventTab.RefreshGrids();
+                        break;
+                }
+            }
         }
-
-        public override void SaveEventTeams(int CompetitorsPerTeam, List<Team> Teams)
-        {
-            this.Teams = Teams;
-            rules.competitorsPerTeam = CompetitorsPerTeam;
-            SQL_Controller.CreateTeams(EventID, Teams);
-            SQL_Controller.ModifyEvent(this);
-            EventTeamsTab = null;
-        }
-
-
-        public override void ReturnToOptions()
-        {
-            TabControl.TabPages.Remove(TabControl.SelectedTab);
-            EventTeamsTab = null;
-            //EventOptionsTab = new EventAccuracyInit(TabControl, this, Rules, Name, DateTime.Today, Competitors);
-            TabPage NewPage = new TabPage();
-            NewPage.Controls.Add(EventOptionsTab);
-            EventOptionsTab.Dock = DockStyle.Fill;
-            NewPage.Text = "New Event";
-            TabControl.TabPages.Add(NewPage);
-            TabControl.SelectedTab = NewPage;
-        }
-
-
 
         public override TWind ReturnWindLimits()
         {

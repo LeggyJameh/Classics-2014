@@ -23,8 +23,9 @@ namespace CMS
         public FileStream fileStream;
         private StreamReader reader;
         public windGraphingControllercs windGraph;
-        TabPage createNewEventTab;
         bool LostSerialConnection;
+        List<UpdateCompetitorDelegate> competitorUpdateDelegates = new List<UpdateCompetitorDelegate>(); // Delegates that are called when competitors are updated via competitor editor.
+        EventLoader eventLoader; // The class used for load execution
         #endregion 
 
         public Engine(Main mainForm, windGraphingControllercs windGraph)
@@ -42,7 +43,74 @@ namespace CMS
                  ListenThread.Start();  
             } 
         }
+
+        public void AddLoader()
+        {
+            eventLoader = new EventLoader(this);
+        }
+
+        public void RemoveLoader()
+        {
+            eventLoader = null;
+        }
+
+        /// <summary>
+        /// Finds the apprropriate controller and loads the event. Called from EventLoader.
+        /// </summary>
+        public void LoadEvent(Event Event)
+        {
+            switch (Event.EventType)
+            {
+                case EventType.INTL_ACCURACY:
+                    accuracyEventController.LoadEvent((Accuracy.Accuracy_Event)Event);
+                    break;
+            }
+        }
         
+        public void StartNewEvent(EventType type)
+        {
+            switch (type)
+            {
+                case EventType.INTL_ACCURACY:
+                    accuracyEventController.AddEvent();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Ends an event. Thrown from event itself, for removing event from appropriate controllers.
+        /// </summary>
+        public void EndEvent(Event Event)
+        {
+            switch (Event.EventType)
+            {
+                case EventType.INTL_ACCURACY:
+                    accuracyEventController.EndEvent((Accuracy.Accuracy_Event)Event);
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Used whenever the competitor editor has a save. Forces all events to reload from database the current competitor data.
+        /// </summary>
+        public void RefreshAllCompetitorUsers()
+        {
+            foreach (UpdateCompetitorDelegate d in competitorUpdateDelegates)
+            {
+                d();
+            }
+        }
+
+        public void AddCompetitorUpdateDelegate(UpdateCompetitorDelegate _delegate)
+        {
+            competitorUpdateDelegates.Add(_delegate);
+        }
+
+        public void RemoveCompetitorUpdateDelegate(UpdateCompetitorDelegate _delegate)
+        {
+            competitorUpdateDelegates.Remove(_delegate);
+        }
+
         private void ListenProcedure()
         {
             Thread.Sleep(100);
@@ -58,7 +126,7 @@ namespace CMS
                         {
                             switch (data.dataType)
                             {
-                                case EventType.Accuracy:
+                                case EventType.INTL_ACCURACY:
                                     Data_Accuracy DatA = (Data_Accuracy)data;
                                     WriteToMasterFile(DatA);
                                     UpdateWindMetrics(DatA);
@@ -74,30 +142,44 @@ namespace CMS
             } while (true);
 
         }
+
+        public void AddSideController(UserControl Controller)
+        {
+            SideController = Controller;
+
+            mainForm.MainGrid.Controls.Add(Controller, 2, 0);
+        }
+
+        public void RemoveCurrentSideController()
+        {
+            mainForm.MainGrid.Controls.Remove(SideController);
+            SideController = null;
+        }
+
+        public void DeSerializeGraph(StreamReader newReader)
+        {
+            this.reader = newReader;
+            Thread th = new Thread(new ThreadStart(DesiralizeGraphThreadProcedure));
+            th.Start();
+        }
+
+        public void CloseThreads()
+        {
+            ListenThread.Abort();
+            IO_Controller.EndThreads();
+            accuracyEventController.EndThread();
+            SQL_Controller.StopDatabase();
+        }
+
         private void UpdateWindMetrics(Data DatA)
         {
             TWind wind = new TWind() { direction = DatA.Direction, speed = DatA.Speed, time = DatA.Time };
 
-                mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, wind.direction, wind.speed)));
+            mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, wind.direction, wind.speed)));
 
-             mainForm.Invoke((MethodInvoker)(()=>mainForm.UpdateWind(wind)));
+            mainForm.Invoke((MethodInvoker)(() => mainForm.UpdateWind(wind)));
             windGraph.UpdateWindGraph(wind);
             ReOrderWindArray(wind);
-        }
-
-        public CMS.Accuracy.EventAccuracyInit StartNewAccuracyEvent()
-        {
-            Accuracy.Accuracy_Event NewEvent = accuracyEventController.AddEvent();
-            NewEvent.EventOptionsTab = new Accuracy.EventAccuracyInit(NewEvent);
-            return NewEvent.EventOptionsTab;
-        }
-
-        public void RefreshAllCompetitorUsers()
-        {
-            for (int i = 0; i < accuracyEventController.Events.Count; i++)
-            {
-                accuracyEventController.Events[i].RefreshCurrent();
-            }
         }
 
         private void WriteToMasterFile(Data_Accuracy data)
@@ -130,12 +212,7 @@ namespace CMS
             DeSerializeGraph(reader);
             //Confirm 
         }
-        public void DeSerializeGraph(StreamReader newReader)
-        {
-            this.reader = newReader;
-            Thread th = new Thread(new ThreadStart(DesiralizeGraphThreadProcedure));
-            th.Start();
-        }
+        
         private void DesiralizeGraphThreadProcedure()
         {
             do
@@ -183,29 +260,12 @@ namespace CMS
             wind[0] = newWind;
             mainForm.UpdatelistBoxWindLog(wind);
         }
-        public void CloseThreads()
-        {
-            ListenThread.Abort();
-            IO_Controller.EndThreads();
-            accuracyEventController.EndThread();
-            SQL_Controller.StopDatabase();
-        }
+        
         private void CloseSerialInputs()
         {
             LostSerialConnection = true; //ToDo Make work For Multiple Events;
         }
 
-        public void AddSideController(UserControl Controller)
-        {
-            SideController = Controller;
-
-            mainForm.MainGrid.Controls.Add(Controller, 2, 0);
-        }
-
-        public void RemoveCurrentSideController()
-        {
-            mainForm.MainGrid.Controls.Remove(SideController);
-            SideController = null;
-        }
+        
     }
 }

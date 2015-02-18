@@ -104,6 +104,18 @@ namespace CMS
             return indexOf(competitor);
         }
 
+        public int GetIndexOf(int competitorID)
+        {
+            foreach (Competitor c in competitors)
+            {
+                if (c.ID == competitorID)
+                {
+                    return GetIndexOf(c);
+                }
+            }
+            return -1;
+        }
+
         public bool CompetitorValue(Competitor competitor)
         {
             int index = indexOf(competitor);

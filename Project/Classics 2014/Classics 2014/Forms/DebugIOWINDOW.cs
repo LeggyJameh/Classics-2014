@@ -55,7 +55,7 @@ namespace CMS
             Data.Time += DateTime.Now.Minute.ToString("00");
             Data.Time += ":";
             Data.Time += DateTime.Now.Second.ToString("00");
-            Data.dataType = EventType.Accuracy;
+            Data.dataType = EventType.INTL_ACCURACY;
             Data_queue.Enqueue(Data);
             _signal.Set();
         }

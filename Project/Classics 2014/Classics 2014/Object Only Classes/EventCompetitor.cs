@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CMS
 {
+    [Serializable]
     class EventCompetitor : Competitor, ICloneable
     {
         public string EID;

@@ -61,11 +61,12 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.comboBoxWindOutColourSide, 1, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxNormalColourSide, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.comboBoxBothOutGraph, 3, 1);
@@ -93,14 +94,16 @@
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(802, 517);
+            this.tableLayoutPanel1.RowCount = 8;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1152, 720);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // comboBoxWindOutColourSide
@@ -218,7 +221,7 @@
             "White",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxWindOutColourSide.Location = new System.Drawing.Point(203, 261);
+            this.comboBoxWindOutColourSide.Location = new System.Drawing.Point(233, 93);
             this.comboBoxWindOutColourSide.Name = "comboBoxWindOutColourSide";
             this.comboBoxWindOutColourSide.Size = new System.Drawing.Size(121, 21);
             this.comboBoxWindOutColourSide.TabIndex = 15;
@@ -339,7 +342,7 @@
             "White",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxNormalColourSide.Location = new System.Drawing.Point(3, 261);
+            this.comboBoxNormalColourSide.Location = new System.Drawing.Point(3, 93);
             this.comboBoxNormalColourSide.Name = "comboBoxNormalColourSide";
             this.comboBoxNormalColourSide.Size = new System.Drawing.Size(121, 21);
             this.comboBoxNormalColourSide.TabIndex = 14;
@@ -459,7 +462,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxBothOutGraph.Location = new System.Drawing.Point(603, 89);
+            this.comboBoxBothOutGraph.Location = new System.Drawing.Point(693, 33);
             this.comboBoxBothOutGraph.Name = "comboBoxBothOutGraph";
             this.comboBoxBothOutGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxBothOutGraph.TabIndex = 13;
@@ -579,7 +582,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxDirectionOutGraph.Location = new System.Drawing.Point(403, 89);
+            this.comboBoxDirectionOutGraph.Location = new System.Drawing.Point(463, 33);
             this.comboBoxDirectionOutGraph.Name = "comboBoxDirectionOutGraph";
             this.comboBoxDirectionOutGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDirectionOutGraph.TabIndex = 12;
@@ -699,7 +702,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxWindOutGraph.Location = new System.Drawing.Point(203, 89);
+            this.comboBoxWindOutGraph.Location = new System.Drawing.Point(233, 33);
             this.comboBoxWindOutGraph.Name = "comboBoxWindOutGraph";
             this.comboBoxWindOutGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxWindOutGraph.TabIndex = 11;
@@ -819,7 +822,7 @@
             "Wheat",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxNormalColourGraph.Location = new System.Drawing.Point(3, 89);
+            this.comboBoxNormalColourGraph.Location = new System.Drawing.Point(3, 33);
             this.comboBoxNormalColourGraph.Name = "comboBoxNormalColourGraph";
             this.comboBoxNormalColourGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxNormalColourGraph.TabIndex = 10;
@@ -828,7 +831,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(603, 0);
+            this.label4.Location = new System.Drawing.Point(693, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(114, 13);
             this.label4.TabIndex = 3;
@@ -837,7 +840,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(403, 0);
+            this.label3.Location = new System.Drawing.Point(463, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 13);
             this.label3.TabIndex = 2;
@@ -846,7 +849,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(203, 0);
+            this.label2.Location = new System.Drawing.Point(233, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 1;
@@ -864,7 +867,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(3, 344);
+            this.label9.Location = new System.Drawing.Point(3, 120);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(128, 13);
             this.label9.TabIndex = 8;
@@ -873,7 +876,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(203, 344);
+            this.label10.Location = new System.Drawing.Point(233, 120);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(145, 13);
             this.label10.TabIndex = 9;
@@ -882,7 +885,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 172);
+            this.label5.Location = new System.Drawing.Point(3, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(134, 13);
             this.label5.TabIndex = 4;
@@ -891,7 +894,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(203, 172);
+            this.label6.Location = new System.Drawing.Point(233, 60);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(146, 13);
             this.label6.TabIndex = 5;
@@ -900,7 +903,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(403, 172);
+            this.label7.Location = new System.Drawing.Point(463, 60);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(126, 13);
             this.label7.TabIndex = 6;
@@ -909,7 +912,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(603, 172);
+            this.label8.Location = new System.Drawing.Point(693, 60);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(111, 13);
             this.label8.TabIndex = 7;
@@ -1030,7 +1033,7 @@
             "White",
             "Yellow",
             "Yellow Green"});
-            this.comboBoxDirectionOutSide.Location = new System.Drawing.Point(403, 261);
+            this.comboBoxDirectionOutSide.Location = new System.Drawing.Point(463, 93);
             this.comboBoxDirectionOutSide.Name = "comboBoxDirectionOutSide";
             this.comboBoxDirectionOutSide.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDirectionOutSide.TabIndex = 16;
@@ -1038,7 +1041,7 @@
             // 
             // numericUpDownWindWarningLength
             // 
-            this.numericUpDownWindWarningLength.Location = new System.Drawing.Point(603, 261);
+            this.numericUpDownWindWarningLength.Location = new System.Drawing.Point(693, 93);
             this.numericUpDownWindWarningLength.Name = "numericUpDownWindWarningLength";
             this.numericUpDownWindWarningLength.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownWindWarningLength.TabIndex = 17;
@@ -1046,7 +1049,7 @@
             // 
             // numericUpDownDirectionWarningLength
             // 
-            this.numericUpDownDirectionWarningLength.Location = new System.Drawing.Point(3, 433);
+            this.numericUpDownDirectionWarningLength.Location = new System.Drawing.Point(3, 153);
             this.numericUpDownDirectionWarningLength.Name = "numericUpDownDirectionWarningLength";
             this.numericUpDownDirectionWarningLength.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownDirectionWarningLength.TabIndex = 18;
@@ -1054,7 +1057,7 @@
             // 
             // numericUpDownStandDownWarningLength
             // 
-            this.numericUpDownStandDownWarningLength.Location = new System.Drawing.Point(203, 433);
+            this.numericUpDownStandDownWarningLength.Location = new System.Drawing.Point(233, 153);
             this.numericUpDownStandDownWarningLength.Name = "numericUpDownStandDownWarningLength";
             this.numericUpDownStandDownWarningLength.Size = new System.Drawing.Size(120, 20);
             this.numericUpDownStandDownWarningLength.TabIndex = 19;
@@ -1062,7 +1065,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(403, 433);
+            this.buttonSave.Location = new System.Drawing.Point(463, 153);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(75, 23);
             this.buttonSave.TabIndex = 20;
@@ -1073,7 +1076,7 @@
             // checkBoxIsAdvancedUser
             // 
             this.checkBoxIsAdvancedUser.AutoSize = true;
-            this.checkBoxIsAdvancedUser.Location = new System.Drawing.Point(403, 347);
+            this.checkBoxIsAdvancedUser.Location = new System.Drawing.Point(463, 123);
             this.checkBoxIsAdvancedUser.Name = "checkBoxIsAdvancedUser";
             this.checkBoxIsAdvancedUser.Size = new System.Drawing.Size(154, 17);
             this.checkBoxIsAdvancedUser.TabIndex = 21;
@@ -1086,7 +1089,7 @@
             this.checkBoxEnableSounds.AutoSize = true;
             this.checkBoxEnableSounds.Checked = true;
             this.checkBoxEnableSounds.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxEnableSounds.Location = new System.Drawing.Point(603, 347);
+            this.checkBoxEnableSounds.Location = new System.Drawing.Point(693, 123);
             this.checkBoxEnableSounds.Name = "checkBoxEnableSounds";
             this.checkBoxEnableSounds.Size = new System.Drawing.Size(135, 17);
             this.checkBoxEnableSounds.TabIndex = 22;
@@ -1097,7 +1100,7 @@
             // textBoxPassWord
             // 
             this.textBoxPassWord.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.textBoxPassWord.Location = new System.Drawing.Point(603, 433);
+            this.textBoxPassWord.Location = new System.Drawing.Point(693, 153);
             this.textBoxPassWord.Name = "textBoxPassWord";
             this.textBoxPassWord.Size = new System.Drawing.Size(170, 20);
             this.textBoxPassWord.TabIndex = 23;
@@ -1109,7 +1112,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "CommonDisplayOptions";
-            this.Size = new System.Drawing.Size(802, 517);
+            this.Size = new System.Drawing.Size(1152, 720);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownWindWarningLength)).EndInit();

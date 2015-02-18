@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Drawing;
+using System.Collections.ObjectModel;
 
 namespace CMS
 {
@@ -11,22 +12,49 @@ namespace CMS
         public int ID;
         public int EventID;
         public string Name;
-        public List<EventCompetitor> Competitors;
+        public ObservableCollection<EventCompetitor> Competitors;
         public Bitmap TeamImage;
+        SubCollectionUpdatedDelegate updateDelegate;
+
         public Team()
         {
-            Competitors = new List<EventCompetitor>();
+            Competitors = new ObservableCollection<EventCompetitor>();
             Name = "";
+            ID = -1;
         }
         public Team(string Name)
         {
+            Competitors = new ObservableCollection<EventCompetitor>();
             this.Name = Name;
+            ID = -1;
+        }
+        public Team(SubCollectionUpdatedDelegate updateDelegate)
+        {
+            Competitors = new ObservableCollection<EventCompetitor>();
+            Name = "";
+            ID = -1;
+            this.updateDelegate = updateDelegate;
+            Competitors.CollectionChanged +=new System.Collections.Specialized.NotifyCollectionChangedEventHandler(updateDelegate);
+        }
+        public Team(string Name, SubCollectionUpdatedDelegate updateDelegate)
+        {
+            Competitors = new ObservableCollection<EventCompetitor>();
+            this.Name = Name;
+            ID = -1;
+            this.updateDelegate = updateDelegate;
+            Competitors.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(updateDelegate);
+        }
+
+        public void addUpdateDelegate(SubCollectionUpdatedDelegate updateDelegate)
+        {
+            this.updateDelegate = updateDelegate;
+            Competitors.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(updateDelegate);
         }
 
         public object Clone()
         {
-            Team newTeam = new Team();
-            newTeam.Competitors = new List<EventCompetitor>();
+            Team newTeam = new Team(updateDelegate);
+            newTeam.Competitors = new ObservableCollection<EventCompetitor>();
             foreach (EventCompetitor c in Competitors)
             {
                 newTeam.Competitors.Add((EventCompetitor)c.Clone());

@@ -89,6 +89,7 @@
   <ItemGroup>
     <Compile Include="Accuracy\AccuracyEventController.cs" />
     <Compile Include="Accuracy\AccuracyLanding.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="EventLoader.cs" />
     <Compile Include="Forms\Accuracy\AccuracyOptionsMenu.cs">
       <SubType>UserControl</SubType>
@@ -157,14 +158,13 @@
       <DependentUpon>CompetitorSelector.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GroupManager.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Forms\LoadScreen.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\LoadScreen.Designer.cs">
       <DependentUpon>LoadScreen.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\TeamManager.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Forms\GroupManager.Designer.cs">
       <DependentUpon>GroupManager.cs</DependentUpon>
@@ -176,6 +176,7 @@
       <DependentUpon>TeamPicker.cs</DependentUpon>
     </Compile>
     <Compile Include="MessageBoxes.cs" />
+    <Compile Include="MySQL\MySqlEventData.cs" />
     <Compile Include="MySQL\MySqlTeam.cs" />
     <Compile Include="Object Only Classes\Competitor.cs" />
     <Compile Include="Forms\DebugIOWINDOW.cs">
@@ -201,17 +202,11 @@
     <Compile Include="Forms\Accuracy\EventAccuracy.Designer.cs">
       <DependentUpon>EventAccuracy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\CommonDisplayOptions.cs">
+    <Compile Include="Forms\Settings\CommonDisplayOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\CommonDisplayOptions.Designer.cs">
+    <Compile Include="Forms\Settings\CommonDisplayOptions.Designer.cs">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\EventTeams.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\EventTeams.Designer.cs">
-      <DependentUpon>EventTeams.cs</DependentUpon>
     </Compile>
     <Compile Include="Camera Controller.cs" />
     <Compile Include="Object Only Classes\Data.cs" />
@@ -238,10 +233,10 @@
     <Compile Include="Rulesets\Ruleset.cs" />
     <Compile Include="Serial Controller.cs" />
     <Compile Include="MySQL\SQL Controller.cs" />
-    <Compile Include="Forms\StandardOptionsPage.cs">
+    <Compile Include="Forms\Settings\StandardOptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\StandardOptionsPage.Designer.cs">
+    <Compile Include="Forms\Settings\StandardOptionsPage.Designer.cs">
       <DependentUpon>StandardOptionsPage.cs</DependentUpon>
     </Compile>
     <Compile Include="Object Only Classes\Team.cs" />
@@ -298,11 +293,8 @@
       <DependentUpon>EventAccuracy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\CommonDisplayOptions.resx">
+    <EmbeddedResource Include="Forms\Settings\CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\EventTeams.resx">
-      <DependentUpon>EventTeams.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoadScreen.resx">
       <DependentUpon>LoadScreen.cs</DependentUpon>
@@ -330,7 +322,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Forms\StandardOptionsPage.resx">
+    <EmbeddedResource Include="Forms\Settings\StandardOptionsPage.resx">
       <DependentUpon>StandardOptionsPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\windGraphingControllercs.resx">
@@ -395,7 +387,15 @@
   <ItemGroup>
     <None Include="Resources\tex-air.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\AddImage.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Refresh.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\RefreshLowRes.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

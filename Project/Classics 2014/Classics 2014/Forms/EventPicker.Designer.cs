@@ -162,6 +162,7 @@
             this.radioButtonIntParaski.Size = new System.Drawing.Size(91, 17);
             this.radioButtonIntParaski.TabIndex = 9;
             this.radioButtonIntParaski.TabStop = true;
+            this.radioButtonIntParaski.Tag = "20";
             this.radioButtonIntParaski.Text = "Paraski Event";
             this.radioButtonIntParaski.UseVisualStyleBackColor = true;
             this.radioButtonIntParaski.Click += new System.EventHandler(this.SelectionChange);
@@ -174,6 +175,7 @@
             this.radioButtonIntArtistic.Size = new System.Drawing.Size(87, 17);
             this.radioButtonIntArtistic.TabIndex = 3;
             this.radioButtonIntArtistic.TabStop = true;
+            this.radioButtonIntArtistic.Tag = "13";
             this.radioButtonIntArtistic.Text = "Artistic Event";
             this.radioButtonIntArtistic.UseVisualStyleBackColor = true;
             this.radioButtonIntArtistic.Click += new System.EventHandler(this.SelectionChange);
@@ -187,6 +189,7 @@
             this.radioButtonIntAccuracy.Size = new System.Drawing.Size(101, 17);
             this.radioButtonIntAccuracy.TabIndex = 0;
             this.radioButtonIntAccuracy.TabStop = true;
+            this.radioButtonIntAccuracy.Tag = "12";
             this.radioButtonIntAccuracy.Text = "Accuracy Event";
             this.radioButtonIntAccuracy.UseVisualStyleBackColor = true;
             this.radioButtonIntAccuracy.Click += new System.EventHandler(this.SelectionChange);
@@ -199,6 +202,7 @@
             this.radioButtonIntCanopyPiloting.Size = new System.Drawing.Size(129, 17);
             this.radioButtonIntCanopyPiloting.TabIndex = 4;
             this.radioButtonIntCanopyPiloting.TabStop = true;
+            this.radioButtonIntCanopyPiloting.Tag = "16";
             this.radioButtonIntCanopyPiloting.Text = "Canopy Piloting Event";
             this.radioButtonIntCanopyPiloting.UseVisualStyleBackColor = true;
             this.radioButtonIntCanopyPiloting.Click += new System.EventHandler(this.SelectionChange);
@@ -211,6 +215,7 @@
             this.radioButtonIntSpeed.Size = new System.Drawing.Size(87, 17);
             this.radioButtonIntSpeed.TabIndex = 10;
             this.radioButtonIntSpeed.TabStop = true;
+            this.radioButtonIntSpeed.Tag = "21";
             this.radioButtonIntSpeed.Text = "Speed Event";
             this.radioButtonIntSpeed.UseVisualStyleBackColor = true;
             this.radioButtonIntSpeed.Click += new System.EventHandler(this.SelectionChange);
@@ -250,6 +255,7 @@
             this.radioButtonIntCF2Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonIntCF2Way.TabIndex = 4;
             this.radioButtonIntCF2Way.TabStop = true;
+            this.radioButtonIntCF2Way.Tag = "14";
             this.radioButtonIntCF2Way.Text = "C.F. 2 Way Event";
             this.radioButtonIntCF2Way.UseVisualStyleBackColor = true;
             this.radioButtonIntCF2Way.Click += new System.EventHandler(this.SelectionChange);
@@ -262,6 +268,7 @@
             this.radioButtonIntCF4Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonIntCF4Way.TabIndex = 5;
             this.radioButtonIntCF4Way.TabStop = true;
+            this.radioButtonIntCF4Way.Tag = "15";
             this.radioButtonIntCF4Way.Text = "C.F. 4 Way Event";
             this.radioButtonIntCF4Way.UseVisualStyleBackColor = true;
             this.radioButtonIntCF4Way.Click += new System.EventHandler(this.SelectionChange);
@@ -285,6 +292,7 @@
             this.radioButtonIntStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
             this.radioButtonIntStyleAndAccuracy.TabIndex = 15;
             this.radioButtonIntStyleAndAccuracy.TabStop = true;
+            this.radioButtonIntStyleAndAccuracy.Tag = "22";
             this.radioButtonIntStyleAndAccuracy.Text = "Style and Accuracy Event";
             this.radioButtonIntStyleAndAccuracy.UseVisualStyleBackColor = true;
             this.radioButtonIntStyleAndAccuracy.Click += new System.EventHandler(this.SelectionChange);
@@ -297,6 +305,7 @@
             this.radioButtonIntVFS.Size = new System.Drawing.Size(76, 17);
             this.radioButtonIntVFS.TabIndex = 16;
             this.radioButtonIntVFS.TabStop = true;
+            this.radioButtonIntVFS.Tag = "23";
             this.radioButtonIntVFS.Text = "VFS Event";
             this.radioButtonIntVFS.UseVisualStyleBackColor = true;
             this.radioButtonIntVFS.Click += new System.EventHandler(this.SelectionChange);
@@ -309,6 +318,7 @@
             this.radioButtonIntWingsuit.Size = new System.Drawing.Size(97, 17);
             this.radioButtonIntWingsuit.TabIndex = 17;
             this.radioButtonIntWingsuit.TabStop = true;
+            this.radioButtonIntWingsuit.Tag = "24";
             this.radioButtonIntWingsuit.Text = "Wingsuit Event";
             this.radioButtonIntWingsuit.UseVisualStyleBackColor = true;
             this.radioButtonIntWingsuit.Click += new System.EventHandler(this.SelectionChange);
@@ -339,6 +349,7 @@
             this.radioButtonIntFS4Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonIntFS4Way.TabIndex = 4;
             this.radioButtonIntFS4Way.TabStop = true;
+            this.radioButtonIntFS4Way.Tag = "17";
             this.radioButtonIntFS4Way.Text = "F.S. 4 Way Event";
             this.radioButtonIntFS4Way.UseVisualStyleBackColor = true;
             this.radioButtonIntFS4Way.Click += new System.EventHandler(this.SelectionChange);
@@ -351,6 +362,7 @@
             this.radioButtonIntFS8Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonIntFS8Way.TabIndex = 5;
             this.radioButtonIntFS8Way.TabStop = true;
+            this.radioButtonIntFS8Way.Tag = "18";
             this.radioButtonIntFS8Way.Text = "F.S. 8 Way Event";
             this.radioButtonIntFS8Way.UseVisualStyleBackColor = true;
             this.radioButtonIntFS8Way.Click += new System.EventHandler(this.SelectionChange);
@@ -363,6 +375,7 @@
             this.radioButtonIntFSSpeed.Size = new System.Drawing.Size(109, 17);
             this.radioButtonIntFSSpeed.TabIndex = 6;
             this.radioButtonIntFSSpeed.TabStop = true;
+            this.radioButtonIntFSSpeed.Tag = "19";
             this.radioButtonIntFSSpeed.Text = "F.S. Speed Event";
             this.radioButtonIntFSSpeed.UseVisualStyleBackColor = true;
             this.radioButtonIntFSSpeed.Click += new System.EventHandler(this.SelectionChange);
@@ -410,6 +423,7 @@
             this.radioButtonFAIVFS.Size = new System.Drawing.Size(76, 17);
             this.radioButtonFAIVFS.TabIndex = 9;
             this.radioButtonFAIVFS.TabStop = true;
+            this.radioButtonFAIVFS.Tag = "10";
             this.radioButtonFAIVFS.Text = "VFS Event";
             this.radioButtonFAIVFS.UseVisualStyleBackColor = true;
             this.radioButtonFAIVFS.Click += new System.EventHandler(this.SelectionChange);
@@ -422,6 +436,7 @@
             this.radioButtonFAIStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
             this.radioButtonFAIStyleAndAccuracy.TabIndex = 8;
             this.radioButtonFAIStyleAndAccuracy.TabStop = true;
+            this.radioButtonFAIStyleAndAccuracy.Tag = "9";
             this.radioButtonFAIStyleAndAccuracy.Text = "Style and Accuracy Event";
             this.radioButtonFAIStyleAndAccuracy.UseVisualStyleBackColor = true;
             this.radioButtonFAIStyleAndAccuracy.Click += new System.EventHandler(this.SelectionChange);
@@ -434,6 +449,7 @@
             this.radioButtonFAISpeed.Size = new System.Drawing.Size(87, 17);
             this.radioButtonFAISpeed.TabIndex = 7;
             this.radioButtonFAISpeed.TabStop = true;
+            this.radioButtonFAISpeed.Tag = "8";
             this.radioButtonFAISpeed.Text = "Speed Event";
             this.radioButtonFAISpeed.UseVisualStyleBackColor = true;
             this.radioButtonFAISpeed.Click += new System.EventHandler(this.SelectionChange);
@@ -446,6 +462,7 @@
             this.radioButtonFAICanopyPiloting.Size = new System.Drawing.Size(129, 17);
             this.radioButtonFAICanopyPiloting.TabIndex = 3;
             this.radioButtonFAICanopyPiloting.TabStop = true;
+            this.radioButtonFAICanopyPiloting.Tag = "4";
             this.radioButtonFAICanopyPiloting.Text = "Canopy Piloting Event";
             this.radioButtonFAICanopyPiloting.UseVisualStyleBackColor = true;
             this.radioButtonFAICanopyPiloting.Click += new System.EventHandler(this.SelectionChange);
@@ -458,6 +475,7 @@
             this.radioButtonFAIArtistic.Size = new System.Drawing.Size(87, 17);
             this.radioButtonFAIArtistic.TabIndex = 0;
             this.radioButtonFAIArtistic.TabStop = true;
+            this.radioButtonFAIArtistic.Tag = "0";
             this.radioButtonFAIArtistic.Text = "Artistic Event";
             this.radioButtonFAIArtistic.UseVisualStyleBackColor = true;
             this.radioButtonFAIArtistic.Click += new System.EventHandler(this.SelectionChange);
@@ -470,6 +488,7 @@
             this.radioButtonFAIParaski.Size = new System.Drawing.Size(91, 17);
             this.radioButtonFAIParaski.TabIndex = 4;
             this.radioButtonFAIParaski.TabStop = true;
+            this.radioButtonFAIParaski.Tag = "7";
             this.radioButtonFAIParaski.Text = "Paraski Event";
             this.radioButtonFAIParaski.UseVisualStyleBackColor = true;
             this.radioButtonFAIParaski.Click += new System.EventHandler(this.SelectionChange);
@@ -482,6 +501,7 @@
             this.radioButtonFAIWingsuit.Size = new System.Drawing.Size(97, 17);
             this.radioButtonFAIWingsuit.TabIndex = 10;
             this.radioButtonFAIWingsuit.TabStop = true;
+            this.radioButtonFAIWingsuit.Tag = "11";
             this.radioButtonFAIWingsuit.Text = "Wingsuit Event";
             this.radioButtonFAIWingsuit.UseVisualStyleBackColor = true;
             this.radioButtonFAIWingsuit.Click += new System.EventHandler(this.SelectionChange);
@@ -532,6 +552,7 @@
             this.radioButtonFAIFS4Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonFAIFS4Way.TabIndex = 4;
             this.radioButtonFAIFS4Way.TabStop = true;
+            this.radioButtonFAIFS4Way.Tag = "5";
             this.radioButtonFAIFS4Way.Text = "F.S. 4 Way Event";
             this.radioButtonFAIFS4Way.UseVisualStyleBackColor = true;
             this.radioButtonFAIFS4Way.Click += new System.EventHandler(this.SelectionChange);
@@ -544,6 +565,7 @@
             this.radioButtonFAIFS8Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonFAIFS8Way.TabIndex = 5;
             this.radioButtonFAIFS8Way.TabStop = true;
+            this.radioButtonFAIFS8Way.Tag = "6";
             this.radioButtonFAIFS8Way.Text = "F.S. 8 Way Event";
             this.radioButtonFAIFS8Way.UseVisualStyleBackColor = true;
             this.radioButtonFAIFS8Way.Click += new System.EventHandler(this.SelectionChange);
@@ -574,6 +596,7 @@
             this.radioButtonFAICF2Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonFAICF2Way.TabIndex = 4;
             this.radioButtonFAICF2Way.TabStop = true;
+            this.radioButtonFAICF2Way.Tag = "1";
             this.radioButtonFAICF2Way.Text = "C.F. 2 Way Event";
             this.radioButtonFAICF2Way.UseVisualStyleBackColor = true;
             this.radioButtonFAICF2Way.Click += new System.EventHandler(this.SelectionChange);
@@ -586,6 +609,7 @@
             this.radioButtonFAICF4Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonFAICF4Way.TabIndex = 5;
             this.radioButtonFAICF4Way.TabStop = true;
+            this.radioButtonFAICF4Way.Tag = "2";
             this.radioButtonFAICF4Way.Text = "C.F. 4 Way Event";
             this.radioButtonFAICF4Way.UseVisualStyleBackColor = true;
             this.radioButtonFAICF4Way.Click += new System.EventHandler(this.SelectionChange);
@@ -598,6 +622,7 @@
             this.radioButtonFAICF8Way.Size = new System.Drawing.Size(109, 17);
             this.radioButtonFAICF8Way.TabIndex = 6;
             this.radioButtonFAICF8Way.TabStop = true;
+            this.radioButtonFAICF8Way.Tag = "3";
             this.radioButtonFAICF8Way.Text = "C.F. 8 Way Event";
             this.radioButtonFAICF8Way.UseVisualStyleBackColor = true;
             this.radioButtonFAICF8Way.Click += new System.EventHandler(this.SelectionChange);

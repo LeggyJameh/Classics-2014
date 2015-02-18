@@ -11,7 +11,7 @@ namespace CMS
 {
     public partial class EventPicker : Form
     {
-        public string EventName;
+        public EventType eventType;
         public EventPicker()
         {
             InitializeComponent();
@@ -61,26 +61,26 @@ namespace CMS
             radioButtonIntWingsuit.Checked = false;
             CurrentButton.Checked = true;
 
-            EventName = CurrentButton.Name.Substring(11);
+            eventType = (EventType)Convert.ToInt16(CurrentButton.Tag);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            EventName = "Cancel";
+            eventType = EventType.NONE;
             this.Close();
         }
     }
 
     class EventPickerMessageBox
     {
-        public static string ShowEventPicker()
+        public static EventType ShowEventPicker()
         {
             // using construct ensures the resources are freed when form is closed
             using (var form = new EventPicker())
             {
                 form.ShowDialog();
                 {
-                    return form.EventName;
+                    return form.eventType;
                 }
             }
         }

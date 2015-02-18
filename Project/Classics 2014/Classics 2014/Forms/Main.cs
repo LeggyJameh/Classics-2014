@@ -16,7 +16,7 @@ namespace CMS
     {
         int flopsToMaintainColourDirection, flopsToMaintainColourSpeed;
         public Boolean Locked=false;
-        Engine MainEngine;
+        Engine Engine;
         public TableLayoutPanel MainGrid;
         
         public Main()
@@ -29,7 +29,7 @@ namespace CMS
             windGraphingControllercs windGraphingControllercs2 = new windGraphingControllercs();
             windGraphingControllercs2.Dock = DockStyle.Fill;
             tabControl.TabPages[1].Controls.Add(windGraphingControllercs2);
-            MainEngine = new Engine(this, windGraphingControllercs2);
+            Engine = new Engine(this, windGraphingControllercs2);
             for (int i = 0; i < 60; i++)
             {
                 ListViewItem NewItem = (ListViewItem)listBoxWindLog.Items[0].Clone();
@@ -38,7 +38,7 @@ namespace CMS
             listBoxWindLog.Visible = true;
             tableLayoutPanel6.Visible = true;
             MainGrid = tableLayoutPanel5;
-            MainEngine.SQL_Controller.OpenConnection();
+            Engine.SQL_Controller.OpenConnection();
         }
 
         #region tab controls
@@ -83,12 +83,12 @@ namespace CMS
         #region generic functions
         public void openCompetitorEditor()
         {
-            addNewTab("Competitor Editor", new CompetitorEditor(MainEngine));
+            addNewTab("Competitor Editor", new CompetitorEditor(Engine));
         }
 
         public void openSimpleGroupManager(List<string> groups, CompetitorEditor ce)
         {
-            addNewTab("Group Manager", new GroupManager(MainEngine, groups, ce));
+            addNewTab("Group Manager", new GroupManager(Engine, groups, ce));
         }
 
         public void UpdateWind(TWind windData)
@@ -195,7 +195,7 @@ namespace CMS
         #region control events
         private void Main_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainEngine.CloseThreads();
+            Engine.CloseThreads();
             UserSettings.Default.Save();
             Thread.Sleep(100);
             
@@ -204,27 +204,20 @@ namespace CMS
         private void buttonExit_Click(object sender, EventArgs e)
         {
             UserSettings.Default.Save();
-            MainEngine.CloseThreads();
+            Engine.CloseThreads();
             this.Close();
         }
 
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
-            MainEngine.AddSideController(MainEngine.accuracyEventController.column);
-            string EventName = EventPickerMessageBox.ShowEventPicker();
-            switch (EventName)
-            {
-                case "IntAccuracy":
-                    TabPage NewPage = new TabPage();
-                    CMS.Accuracy.EventAccuracyInit EventTab = MainEngine.StartNewAccuracyEvent();
-                    addNewTab("New Event", EventTab);
-                    break;
-            }
+            Engine.AddSideController(Engine.accuracyEventController.column);
+            EventType eventType = EventPickerMessageBox.ShowEventPicker();
+            Engine.StartNewEvent(eventType);
         }
 
         private void buttonMainSettings_Click(object sender, EventArgs e)
         {
-            addNewTab("Options", new StandardOptionsPage(MainEngine.windGraph, this));
+            addNewTab("Options", new StandardOptionsPage(Engine.windGraph, this));
         }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)
@@ -238,7 +231,7 @@ namespace CMS
 
         private void buttonLoad_Click(object sender, EventArgs e)
         {
-            addNewTab("Load Event", new EventLoader(MainEngine));
+            Engine.AddLoader();
         }
 
         private void buttonModifyCompetitorData_Click(object sender, EventArgs e)

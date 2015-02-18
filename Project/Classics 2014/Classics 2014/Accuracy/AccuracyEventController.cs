@@ -142,6 +142,23 @@ namespace CMS.Accuracy
             return null;
         }
 
+        public void LoadEvent(Accuracy_Event _event)
+        {
+            _event.AddParents(SQL_Controller, IO_Controller, engine, this);
+            _event.LoadCurrentStage();
+            Events.Add(_event);
+        }
+
+        public void AddCompetitorUpdateDelegate(UpdateCompetitorDelegate _delegate)
+        {
+            engine.AddCompetitorUpdateDelegate(_delegate);
+        }
+
+        public void RemoveCompetitorUpdateDelegate(UpdateCompetitorDelegate _delegate)
+        {
+            engine.RemoveCompetitorUpdateDelegate(_delegate);
+        }
+
         /// <summary>
         /// Adds the landing to the landing list. Has already been assigned and therefore doesn't need to be added to the column.
         /// </summary>
@@ -214,6 +231,7 @@ namespace CMS.Accuracy
         public Accuracy_Event AddEvent()
         {
             Accuracy_Event newEvent =new Accuracy_Event(SQL_Controller, IO_Controller, engine, this);
+            newEvent.EventID = SQL_Controller.CreateEvent(newEvent);
             Events.Add(newEvent);
             return newEvent;
         }
@@ -242,6 +260,11 @@ namespace CMS.Accuracy
             }
             return false;
 
+        }
+
+        public void AddTab(UserControl tab)
+        {
+            engine.mainForm.addNewTab("New Event", tab);
         }
     }
 }

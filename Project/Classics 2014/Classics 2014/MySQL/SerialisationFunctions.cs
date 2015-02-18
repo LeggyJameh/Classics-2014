@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Collections.ObjectModel;
 
 namespace CMS.MySQL
 {
@@ -46,35 +47,47 @@ namespace CMS.MySQL
 
             BinaryFormatter f = new BinaryFormatter();
             MemoryStream m = new MemoryStream();
-            try
-            { f.Serialize(m, Event.Rules); }
-            catch (Exception e)
+            if (Event.Rules != null)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message);
+                MySqlEventData data = new MySqlEventData();
+                data.rules = Event.Rules;
+                data.competitors = Event.UnassignedCompetitors;
+                try
+                { f.Serialize(m, data); }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message);
+                }
+                NewEvent.Data = m.ToArray();
             }
-            NewEvent.Data = m.ToArray();
 
             return NewEvent;
         }
 
         private Event DeserialiseEvent(MySqlEvent Event)
         {
-            switch (Event.Type)
+            if (Event.Name != "" && Event.Name != null)
             {
-                case EventType.Accuracy:
-                    Accuracy.Accuracy_Event deSerialisedEvent = new Accuracy.Accuracy_Event();
+                switch (Event.Type)
+                {
+                    case EventType.INTL_ACCURACY:
+                        Accuracy.Accuracy_Event deSerialisedEvent = new Accuracy.Accuracy_Event();
 
-                    MemoryStream m = new MemoryStream();
-                    BinaryFormatter f = new BinaryFormatter();
-                    m.Write(Event.Data, 0, Event.Data.Length);
-                    m.Seek(0, SeekOrigin.Begin);
+                        MemoryStream m = new MemoryStream();
+                        BinaryFormatter f = new BinaryFormatter();
+                        m.Write(Event.Data, 0, Event.Data.Length);
+                        m.Seek(0, SeekOrigin.Begin);
 
-                    deSerialisedEvent.Rules = (Ruleset.AccuracyRules)f.Deserialize(m);
-                    deSerialisedEvent.EventID = Event.ID;
-                    deSerialisedEvent.Name = Event.Name;
-                    deSerialisedEvent.Date = Event.Date;
-                    return deSerialisedEvent;
-                    break;
+                        MySqlEventData data = (MySqlEventData)f.Deserialize(m);
+                        deSerialisedEvent.Rules = data.rules;
+                        deSerialisedEvent.UnassignedCompetitors = data.competitors;
+                        deSerialisedEvent.EventType = Event.Type;
+                        deSerialisedEvent.EventID = Event.ID;
+                        deSerialisedEvent.Name = Event.Name;
+                        deSerialisedEvent.Date = Event.Date;
+                        return deSerialisedEvent;
+                        break;
+                }
             }
             return null;
         }
@@ -100,14 +113,17 @@ namespace CMS.MySQL
             f = new BinaryFormatter();
             m = new MemoryStream();
 
-            try
-            { f.Serialize(m, Team.TeamImage); }
-            catch (Exception e)
+            if (Team.TeamImage != null)
             {
-                System.Windows.Forms.MessageBox.Show(e.Message);
-            }
+                try
+                { f.Serialize(m, Team.TeamImage); }
+                catch (Exception e)
+                {
+                    System.Windows.Forms.MessageBox.Show(e.Message);
+                }
 
-            NewTeam.Image = m.ToArray();
+                NewTeam.Image = m.ToArray();
+            }
 
             return NewTeam;
         }
@@ -120,13 +136,23 @@ namespace CMS.MySQL
             BinaryFormatter f = new BinaryFormatter();
             m.Write(Team.Data, 0, Team.Data.Length);
             m.Seek(0, SeekOrigin.Begin);
-            deSerialisedTeam.Competitors = (List<EventCompetitor>)f.Deserialize(m);
+            deSerialisedTeam.Competitors = (ObservableCollection<EventCompetitor>)f.Deserialize(m);
 
             m = new MemoryStream();
             f = new BinaryFormatter();
             m.Write(Team.Image, 0, Team.Image.Length);
             m.Seek(0, SeekOrigin.Begin);
-            deSerialisedTeam.TeamImage = (System.Drawing.Bitmap)f.Deserialize(m);
+            if (m.Length >= 2) // If image exists...
+            {
+                try
+                {
+                    deSerialisedTeam.TeamImage = (System.Drawing.Bitmap)f.Deserialize(m);
+                }
+                catch
+                {
+                    System.Windows.Forms.MessageBox.Show("Image failed to load", "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
 
             deSerialisedTeam.EventID = Team.EventID;
             deSerialisedTeam.ID = Team.ID;

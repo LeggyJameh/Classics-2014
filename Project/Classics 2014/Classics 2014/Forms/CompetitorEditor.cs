@@ -73,7 +73,11 @@ namespace CMS
                 }
             }
 
-            foreach (DataGridViewRow r in dataGridCompetitors.Rows)
+            foreach (DataGridViewRow r in dataGridCompetitors.SelectedRows) // Deselect default selected row(s).
+            {
+                r.Selected = false;
+            }
+            foreach (DataGridViewRow r in dataGridCompetitors.Rows) // Select the previously selected row(s).
             {
                 foreach (int c in selectedRowUID)
                 {
@@ -330,6 +334,7 @@ namespace CMS
             }
 
             currentModelCompetitor = MessageBoxes.ModifyCompetitor(existingName, existingNationality, existingGroup, availableGroups);
+            
             #endregion
 
             #region apply changes
@@ -337,44 +342,69 @@ namespace CMS
             {
                 if (existingName != currentModelCompetitor.name)
                 {
-                    for (int i = 0; i < competitors.Count; i++)
+                    for (int i = 0; i < currentlySelected.Count; i++)
                     {
-                        for (int i2 = 0; i2 < currentlySelected.Count; i2++)
-                        {
-                            if (competitors[i].ID == currentlySelected[i2].ID)
-                            {
-                                competitors[i].name = currentModelCompetitor.name;
-                            }
-                        }
+                        currentlySelected[i].name = currentModelCompetitor.name;
                     }
                 }
 
                 if (existingNationality != currentModelCompetitor.nationality)
                 {
-                    for (int i = 0; i < competitors.Count; i++)
+                    for (int i = 0; i < currentlySelected.Count; i++)
                     {
-                        for (int i2 = 0; i2 < currentlySelected.Count; i2++)
-                        {
-                            if (competitors[i].ID == currentlySelected[i2].ID)
-                            {
-                                competitors[i].nationality = currentModelCompetitor.nationality;
-                            }
-                        }
+                        currentlySelected[i].nationality = currentModelCompetitor.nationality;
                     }
                 }
 
                 if (existingGroup != currentModelCompetitor.group)
                 {
-                    for (int i = 0; i < competitors.Count; i++)
+                    for (int i = 0; i < currentlySelected.Count; i++)
                     {
-                        for (int i2 = 0; i2 < currentlySelected.Count; i2++)
+                        currentlySelected[i].group = currentModelCompetitor.group;
+                    }
+                }
+
+                bool AllUnique = true;
+                foreach (Competitor c in currentlySelected)
+                {
+                    foreach (Competitor k in currentlySelected)
+                    {
+                        if (c.name == k.name && c.nationality == k.nationality && c.group == k.group && c.ID != k.ID) // If all but the ID are the same between two competitors
                         {
-                            if (competitors[i].ID == currentlySelected[i2].ID)
+                            AllUnique = false; // Don't apply the changes.
+                        }
+                    }
+                }
+
+                foreach (Competitor c in currentlySelected)
+                {
+                    foreach (Competitor k in competitors)
+                    {
+                        if (c.name == k.name && c.nationality == k.nationality && c.group == k.group && c.ID != k.ID) // If all but the ID are the same between two competitors
+                        {
+                            AllUnique = false; // Don't apply the changes.
+                        }
+                    }
+                }
+
+                if (AllUnique)
+                {
+                    foreach (Competitor c in currentlySelected)
+                    {
+                        foreach (Competitor k in competitors)
+                        {
+                            if (c.ID == k.ID)
                             {
-                                competitors[i].group = currentModelCompetitor.group;
+                                k.name = c.name;
+                                k.nationality = c.nationality;
+                                k.group = c.group;
                             }
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Modification would result in duplicate competitors, edit failed.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 refreshGridKeepSelection();
             }

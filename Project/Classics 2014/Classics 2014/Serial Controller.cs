@@ -86,7 +86,7 @@ namespace CMS
         {
             //ToDo Determine Connections
             ReadOperation = new System.Action(AccuracyReadAndSplit);
-            incomingType = EventType.Accuracy;
+            incomingType = EventType.INTL_ACCURACY;
             WindDirection = true;
             WindSpeed = true;
             

@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace CMS
 {
@@ -28,7 +29,7 @@ namespace CMS
             Teams = new List<Team>();
             Team newTeam = new Team();
             newTeam.Name = "NO TEAM";
-            newTeam.Competitors = new List<EventCompetitor>();
+            newTeam.Competitors = new ObservableCollection<EventCompetitor>();
             Teams.Add(newTeam);
             for (int i = 0; i < SelectedTeams.Count; i++)
             {
@@ -37,7 +38,7 @@ namespace CMS
                 {
                     Team CurrentTeam = new Team();
                     CurrentTeam.Name = Name;
-                    CurrentTeam.Competitors = new List<EventCompetitor>();
+                    CurrentTeam.Competitors = new ObservableCollection<EventCompetitor>();
                     Teams.Add(CurrentTeam);
                 }
             }
@@ -133,7 +134,7 @@ namespace CMS
             {
                 Team NewTeam = new Team();
                 NewTeam.Name = NewTeamName;
-                NewTeam.Competitors = new List<EventCompetitor>();
+                NewTeam.Competitors = new ObservableCollection<EventCompetitor>();
                 Teams.Add(NewTeam);
                 RefreshAll();
             }
@@ -313,7 +314,7 @@ namespace CMS
                         Connected_Event.ProceedToEvent();
                         switch (Connected_Event.EventType)
                         {
-                            case EventType.Accuracy:
+                            case EventType.INTL_ACCURACY:
                                 Accuracy.Accuracy_Event accEvent = (Connected_Event as Accuracy.Accuracy_Event);
                                 break;
                         }

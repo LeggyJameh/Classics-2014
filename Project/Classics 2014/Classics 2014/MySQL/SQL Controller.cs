@@ -7,6 +7,7 @@ using System.Diagnostics;
 using MySql.Data.MySqlClient;
 using System.ComponentModel;
 using System.Windows.Forms;
+using System.Collections.ObjectModel;
 
 namespace CMS.MySQL
 {
@@ -237,6 +238,9 @@ namespace CMS.MySQL
             return 0;
         }
 
+        /// <summary>
+        /// Creates the event, returns the eventID.
+        /// </summary>
         public int CreateEvent(Event Event)
         {
             MySqlEvent CurrentEvent = SerialiseEvent(Event);
@@ -257,7 +261,7 @@ namespace CMS.MySQL
             if (ExecuteNonQuery(query))
             {
                 Team team = new Team();
-                team.Competitors = new List<EventCompetitor>();
+                team.Competitors = new ObservableCollection<EventCompetitor>();
                 team.EventID = eventID;
                 team.ID = GetLastInsertKey();
                 team.Name = teamName;
@@ -309,6 +313,24 @@ namespace CMS.MySQL
             return ExecuteNonQuery(query);
         }
 
+        public bool RemoveTeam(Team team)
+        {
+            string query = "DELETE FROM `event teams` WHERE `ID` = '" + team.ID + "';";
+            return ExecuteNonQuery(query);
+        }
+
+        public bool RemoveTeam(int teamID)
+        {
+            string query = "DELETE FROM `event teams` WHERE `ID` = '" + teamID + "';";
+            return ExecuteNonQuery(query);
+        }
+
+        public bool RemoveAllTeamsForEvent(int eventID)
+        {
+            string query = "DELETE FROM `event teams` WHERE `EventID` = '" + eventID + "';";
+            return ExecuteNonQuery(query);
+        }
+
         /// <summary>
         /// Remove a competitor group.
         /// </summary>
@@ -345,7 +367,7 @@ namespace CMS.MySQL
         public bool ModifyTeam(Team team)
         {
             MySqlTeam newTeam = SerialiseTeam(team);
-            string query = "UPDATE `event teams` SET `EventID` = '" + newTeam.EventID + "', `Name` = '" + newTeam.Name + "', `Image` = '" + newTeam.Image + "', `Data` = '" + newTeam.Data + "';";
+            string query = "UPDATE `event teams` SET `EventID` = '" + newTeam.EventID + "', `Name` = '" + newTeam.Name + "', `Image` = '" + ByteArrayToHex(newTeam.Image) + "', `Data` = '" + ByteArrayToHex(newTeam.Data) + "' WHERE `ID`='" + newTeam.ID + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -407,6 +429,49 @@ namespace CMS.MySQL
         #endregion
 
         #region Get
+        public List<Competitor> GetCompetitorsByIDList(List<int> IDs)
+        {
+            List<Competitor> competitors = new List<Competitor>();
+            string query;
+            MySqlCommand cmd;
+            MySqlDataReader DataReader;
+
+            foreach (int id in IDs)
+            {
+                query = "SELECT * FROM `competitors` WHERE `UID`='" + id + "'";
+
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    cmd = new MySqlCommand(query, connection);
+                    try
+                    {
+                        DataReader = cmd.ExecuteReader();
+                        while (DataReader.Read())
+                        {
+                            Competitor currentCompetitor = new Competitor();
+                            for (int i = 0; i < DataReader.FieldCount; i++)
+                            {
+                                switch (i)
+                                {
+                                    case 0: currentCompetitor.ID = DataReader.GetInt16(i); break;
+                                    case 1: currentCompetitor.name = DataReader.GetString(i); break;
+                                    case 2: currentCompetitor.group = DataReader.GetString(i); break;
+                                    case 3: currentCompetitor.nationality = DataReader.GetString(i); break;
+                                }
+                                if (i == 3) { competitors.Add(currentCompetitor); }
+                            }
+                        }
+                        DataReader.Close();
+                    }
+                    catch (MySqlException ex)
+                    {
+                        error = ex.Message;
+                    }
+                }
+            }
+            return competitors;
+        }
+
         public List<Competitor> GetCompetitorsByGroup(string group)
         {
             List<Competitor> Competitors = new List<Competitor>();
@@ -690,7 +755,7 @@ namespace CMS.MySQL
              // Deserialise the landings' data
                 switch (type)
                 {
-                    case (EventType.Accuracy):
+                    case (EventType.INTL_ACCURACY):
                         List<Accuracy.AccuracyLanding> LandingsToReturn = new List<Accuracy.AccuracyLanding>();
                         for (int i = 0; i < Landings.Count; i++)
                         {
@@ -862,6 +927,7 @@ namespace CMS.MySQL
                             }
 			            }
                     }
+                    DataReader.Close();
                 }
                 catch (MySqlException ex)
                 {
@@ -873,11 +939,12 @@ namespace CMS.MySQL
                 // Using the team information from the previous query, get the actual competitor data from the competitor table.
                 for (int Ti = 0; Ti < Teams.Count; Ti++)
                 {
+                    Teams[Ti].EventID = eventID;
                     for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
                     {
                         for (int i = 0; i < Competitors.Count; i++)
                         {
-                           if (Teams[Ti].Competitors[Ci].ID == Competitors[i].ID);
+                            if (Teams[Ti].Competitors[Ci].ID == Competitors[i].ID)
                             {
                                 Teams[Ti].Competitors[Ci].name = Competitors[i].name;
                                 Teams[Ti].Competitors[Ci].nationality = Competitors[i].nationality;
@@ -1085,7 +1152,7 @@ namespace CMS.MySQL
                              .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
                              .ToArray();
         }
-
+        
         /// <summary>
         /// Converts a serialised byte array into a hexadecimal string
         /// </summary>

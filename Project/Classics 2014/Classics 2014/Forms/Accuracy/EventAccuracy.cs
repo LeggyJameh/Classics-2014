@@ -43,8 +43,9 @@ namespace CMS.Accuracy
             labelEventName.Text = Connected_Event.Name;
             loadLandingsAndCompetitors(landings);
             loadData();
+            checkEventIDStatus();
             addControllerColumn();
-            addReportFormToTab();
+            //addReportFormToTab(); -- REPORTS NEED CREATING
             refreshGrid();
         }
 
@@ -64,6 +65,26 @@ namespace CMS.Accuracy
             currentReportForm = new Reports.ReportCreation(Connected_Event);
             currentReportForm.Dock = DockStyle.Fill;
             tabControlEvent.TabPages[1].Controls.Add(currentReportForm);
+        }
+
+        /// <summary>
+        /// Checks all of the competitors for existance of an event ID. If no EID exists, disables the eventID column in the main datagrid.
+        /// </summary>
+        private void checkEventIDStatus()
+        {
+            bool eventIDsExist = false;
+            foreach (EventCompetitor c in data.Keys)
+            {
+                if (c.EID != "" && c.EID != null)
+                {
+                    eventIDsExist = true;
+                }
+            }
+
+            if (!eventIDsExist) // If no competitor has an event ID...
+            {
+                dataGridScores.Columns[1].Visible = false;
+            }
         }
 
         #endregion
@@ -137,7 +158,6 @@ namespace CMS.Accuracy
         /// </summary>
         private void refreshGrid()
         {
-            List<DataGridViewCell> selectedCells = getSelectedCells();
             dataGridScores.SuspendLayout();
             dataGridScores.Rows.Clear();
 
@@ -177,12 +197,8 @@ namespace CMS.Accuracy
                 }
             }
 
-            foreach (DataGridViewCell c in selectedCells)
-            {
-                dataGridScores.Rows[c.RowIndex].Cells[c.ColumnIndex].Selected = true;
-            }
-            selectedCells = null;
             dataGridScores.ResumeLayout();
+            selectFirstBlankCell();
         }
 
         /// <summary>
@@ -208,15 +224,18 @@ namespace CMS.Accuracy
         /// </summary>
         private void selectFirstBlankCell()
         {
-            DataGridViewCell bestCell = dataGridScores.Rows[0].Cells[columnCountUptofirstRound - 1];
+            DataGridViewCell bestCell = dataGridScores.Rows[0].Cells[columnCountUptofirstRound];
 
             foreach (DataGridViewRow r in dataGridScores.Rows)
             {
                 foreach (DataGridViewCell c in r.Cells)
                 {
-                    if (c.ColumnIndex < bestCell.ColumnIndex)
+                    if (c.Value == null || c.Value.ToString() == "")
                     {
-                        bestCell = c;
+                        if ((c.ColumnIndex < bestCell.ColumnIndex || bestCell.Value != null) && c.ColumnIndex >= (columnCountUptofirstRound - 1))
+                        {
+                            bestCell = c;
+                        }
                     }
                 }
             }
@@ -348,6 +367,8 @@ namespace CMS.Accuracy
         {
             if (landing.windDataPrior == null) // If manual
             {
+                landing.UID = competitor.ID;
+                landing.eventID = Connected_Event.EventID;
                 landing.ID = Connected_Event.SQL_Controller.CreateLanding(landing);
                 data[competitor].Add(landing);
                 Connected_Event.controller.loadLanding(landing);
@@ -392,7 +413,7 @@ namespace CMS.Accuracy
             if (cell != null)
             {
                 competitor = getCompetitorFromCell(cell);
-                getRoundFromCell(cell);
+                round = getRoundFromCell(cell);
                 if (round > 0)
                 {
                     newLanding = MessageBoxes.CreateAccuracyLanding(Connected_Event, round);

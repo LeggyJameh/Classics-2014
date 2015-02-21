@@ -67,24 +67,28 @@ namespace CMS
                         SQL_Controller.RemoveAllTeamsForEvent(EventID);
                         Teams = new List<Team>();
                         Rules.stage = EventStage.SetupTeams;
-                        engine.mainForm.removeCurrentTab();
+                        engine.mainForm.removeTab((TabPage)currentWindow.Parent);
                         currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
                         engine.mainForm.addNewTab("Team setup", currentWindow);
                         break;
                     case EventStage.SetupTeams: // SetupEID global for all events, so continue.
                         // Currently skipping EID stage.
-                        Rules.stage = EventStage.Ready;
+                        Rules.stage = EventStage.SetupEID;
                         NextStage();
                         break;
                     case EventStage.SetupEID: // Actual event is different for each event type, so switch required.
                         switch (EventType)
                         {
                             case CMS.EventType.INTL_ACCURACY:
-
+                                Rules.stage = EventStage.Ready;
+                                engine.mainForm.removeTab((TabPage)currentWindow.Parent);
+                                currentWindow = new Accuracy.EventAccuracy((Accuracy.Accuracy_Event)this, new List<Accuracy.AccuracyLanding>());
+                                engine.mainForm.addNewTab(Name, currentWindow);
                                 break;
                         }
-                        break;
+                        break; 
                 }
+                SQL_Controller.ModifyEvent(this);
             }
         }
 
@@ -171,6 +175,15 @@ namespace CMS
                 case EventStage.SetupEID:
                     break;
                 case EventStage.Ready:
+                    switch (EventType)
+                    {
+                        case CMS.EventType.INTL_ACCURACY:
+                                this.Teams = SQL_Controller.GetTeamsForEvent(EventID);
+                                Rules.stage = EventStage.Ready;
+                                currentWindow = new Accuracy.EventAccuracy((Accuracy.Accuracy_Event)this, SQL_Controller.GetLandingsForEvent(this.EventID, CMS.EventType.INTL_ACCURACY));
+                                engine.mainForm.addNewTab(Name, currentWindow);
+                            break;
+                    }
                     break;
             }
         }

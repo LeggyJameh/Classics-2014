@@ -241,7 +241,7 @@ namespace CMS
 
             if (outputs != null)
             {
-                score = (int)outputs[0];
+                score = Convert.ToInt16(outputs[0]);
                 return score;
             }
             else
@@ -270,7 +270,7 @@ namespace CMS
 
             if (outputs != null)
             {
-                landing = new Accuracy.AccuracyLanding((int)outputs[0], round);
+                landing = new Accuracy.AccuracyLanding(Convert.ToInt16(outputs[0]), round);
                 return landing;
             }
             return null;

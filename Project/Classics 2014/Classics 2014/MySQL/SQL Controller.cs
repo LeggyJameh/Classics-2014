@@ -762,7 +762,11 @@ namespace CMS.MySQL
                         List<Accuracy.AccuracyLanding> LandingsToReturn = new List<Accuracy.AccuracyLanding>();
                         for (int i = 0; i < Landings.Count; i++)
                         {
-                            LandingsToReturn.Add(DeserialiseAccuracyLanding(Landings[i], type));
+                            Accuracy.AccuracyLanding currentLanding = DeserialiseLanding(Landings[i], type);
+                            currentLanding.ID = Landings[i].ID;
+                            currentLanding.UID = Landings[i].UID;
+                            currentLanding.eventID = Landings[i].eventID;
+                            LandingsToReturn.Add(currentLanding);
                         }
                         return LandingsToReturn;
                     break;

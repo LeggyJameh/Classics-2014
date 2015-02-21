@@ -38,13 +38,13 @@
             this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnR1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.inputConfirm = new System.Windows.Forms.Button();
-            this.inputRejump = new System.Windows.Forms.Button();
-            this.inputClose = new System.Windows.Forms.Button();
-            this.inputNextRound = new System.Windows.Forms.Button();
             this.inputManualLanding = new System.Windows.Forms.Button();
             this.inputEditScore = new System.Windows.Forms.Button();
             this.inputUnassignLanding = new System.Windows.Forms.Button();
+            this.inputRejump = new System.Windows.Forms.Button();
+            this.inputNextRound = new System.Windows.Forms.Button();
+            this.inputConfirm = new System.Windows.Forms.Button();
+            this.inputClose = new System.Windows.Forms.Button();
             this.tabControlEvent = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
@@ -58,17 +58,17 @@
             // tableLayoutPanelEvent
             // 
             this.tableLayoutPanelEvent.ColumnCount = 11;
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12F));
             this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.tableLayoutPanelEvent.Controls.Add(this.labelEventName, 0, 0);
             this.tableLayoutPanelEvent.Controls.Add(this.dataGridScores, 0, 1);
             this.tableLayoutPanelEvent.Controls.Add(this.pictureBox1, 8, 0);
@@ -97,7 +97,7 @@
             this.labelEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEventName.Location = new System.Drawing.Point(3, 0);
             this.labelEventName.Name = "labelEventName";
-            this.labelEventName.Size = new System.Drawing.Size(986, 30);
+            this.labelEventName.Size = new System.Drawing.Size(1236, 30);
             this.labelEventName.TabIndex = 10;
             this.labelEventName.Text = "WHERE THE EVENT NAME BE AT? IS IT WITH DA G\'S?";
             this.labelEventName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -133,7 +133,7 @@
             this.dataGridScores.Name = "dataGridScores";
             this.dataGridScores.RowHeadersVisible = false;
             this.dataGridScores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridScores.Size = new System.Drawing.Size(986, 622);
+            this.dataGridScores.Size = new System.Drawing.Size(1236, 622);
             this.dataGridScores.TabIndex = 11;
             // 
             // ColumnUID
@@ -171,7 +171,7 @@
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::CMS.Properties.Resources.SplitterBar;
-            this.pictureBox1.Location = new System.Drawing.Point(995, 3);
+            this.pictureBox1.Location = new System.Drawing.Point(1245, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.tableLayoutPanelEvent.SetRowSpan(this.pictureBox1, 3);
             this.pictureBox1.Size = new System.Drawing.Size(14, 682);
@@ -179,56 +179,12 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // inputConfirm
-            // 
-            this.inputConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputConfirm.Location = new System.Drawing.Point(499, 661);
-            this.inputConfirm.Name = "inputConfirm";
-            this.inputConfirm.Size = new System.Drawing.Size(118, 23);
-            this.inputConfirm.TabIndex = 5;
-            this.inputConfirm.Text = "Confirm";
-            this.inputConfirm.UseVisualStyleBackColor = true;
-            this.inputConfirm.Click += new System.EventHandler(this.inputConfirm_Click);
-            // 
-            // inputRejump
-            // 
-            this.inputRejump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputRejump.Location = new System.Drawing.Point(375, 661);
-            this.inputRejump.Name = "inputRejump";
-            this.inputRejump.Size = new System.Drawing.Size(118, 23);
-            this.inputRejump.TabIndex = 6;
-            this.inputRejump.Text = "Rejump";
-            this.inputRejump.UseVisualStyleBackColor = true;
-            this.inputRejump.Click += new System.EventHandler(this.inputRejump_Click);
-            // 
-            // inputClose
-            // 
-            this.inputClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputClose.Location = new System.Drawing.Point(871, 661);
-            this.inputClose.Name = "inputClose";
-            this.inputClose.Size = new System.Drawing.Size(118, 23);
-            this.inputClose.TabIndex = 9;
-            this.inputClose.Text = "Close";
-            this.inputClose.UseVisualStyleBackColor = true;
-            this.inputClose.Click += new System.EventHandler(this.inputClose_Click);
-            // 
-            // inputNextRound
-            // 
-            this.inputNextRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputNextRound.Location = new System.Drawing.Point(623, 661);
-            this.inputNextRound.Name = "inputNextRound";
-            this.inputNextRound.Size = new System.Drawing.Size(118, 23);
-            this.inputNextRound.TabIndex = 3;
-            this.inputNextRound.Text = "Next Round";
-            this.inputNextRound.UseVisualStyleBackColor = true;
-            this.inputNextRound.Click += new System.EventHandler(this.inputNextRound_Click);
-            // 
             // inputManualLanding
             // 
             this.inputManualLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.inputManualLanding.Location = new System.Drawing.Point(3, 661);
             this.inputManualLanding.Name = "inputManualLanding";
-            this.inputManualLanding.Size = new System.Drawing.Size(118, 23);
+            this.inputManualLanding.Size = new System.Drawing.Size(143, 23);
             this.inputManualLanding.TabIndex = 0;
             this.inputManualLanding.Text = "Manual Landing";
             this.inputManualLanding.UseVisualStyleBackColor = true;
@@ -237,9 +193,9 @@
             // inputEditScore
             // 
             this.inputEditScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputEditScore.Location = new System.Drawing.Point(127, 661);
+            this.inputEditScore.Location = new System.Drawing.Point(152, 661);
             this.inputEditScore.Name = "inputEditScore";
-            this.inputEditScore.Size = new System.Drawing.Size(118, 23);
+            this.inputEditScore.Size = new System.Drawing.Size(143, 23);
             this.inputEditScore.TabIndex = 1;
             this.inputEditScore.Text = "Edit Score";
             this.inputEditScore.UseVisualStyleBackColor = true;
@@ -248,13 +204,57 @@
             // inputUnassignLanding
             // 
             this.inputUnassignLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputUnassignLanding.Location = new System.Drawing.Point(251, 661);
+            this.inputUnassignLanding.Location = new System.Drawing.Point(301, 661);
             this.inputUnassignLanding.Name = "inputUnassignLanding";
-            this.inputUnassignLanding.Size = new System.Drawing.Size(118, 23);
+            this.inputUnassignLanding.Size = new System.Drawing.Size(143, 23);
             this.inputUnassignLanding.TabIndex = 2;
             this.inputUnassignLanding.Text = "Unassign Landing";
             this.inputUnassignLanding.UseVisualStyleBackColor = true;
             this.inputUnassignLanding.Click += new System.EventHandler(this.inputUnassignLanding_Click);
+            // 
+            // inputRejump
+            // 
+            this.inputRejump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputRejump.Location = new System.Drawing.Point(450, 661);
+            this.inputRejump.Name = "inputRejump";
+            this.inputRejump.Size = new System.Drawing.Size(143, 23);
+            this.inputRejump.TabIndex = 6;
+            this.inputRejump.Text = "Rejump";
+            this.inputRejump.UseVisualStyleBackColor = true;
+            this.inputRejump.Click += new System.EventHandler(this.inputRejump_Click);
+            // 
+            // inputNextRound
+            // 
+            this.inputNextRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputNextRound.Location = new System.Drawing.Point(748, 661);
+            this.inputNextRound.Name = "inputNextRound";
+            this.inputNextRound.Size = new System.Drawing.Size(143, 23);
+            this.inputNextRound.TabIndex = 3;
+            this.inputNextRound.Text = "Next Round";
+            this.inputNextRound.UseVisualStyleBackColor = true;
+            this.inputNextRound.Click += new System.EventHandler(this.inputNextRound_Click);
+            // 
+            // inputConfirm
+            // 
+            this.inputConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputConfirm.Location = new System.Drawing.Point(599, 661);
+            this.inputConfirm.Name = "inputConfirm";
+            this.inputConfirm.Size = new System.Drawing.Size(143, 23);
+            this.inputConfirm.TabIndex = 5;
+            this.inputConfirm.Text = "Confirm";
+            this.inputConfirm.UseVisualStyleBackColor = true;
+            this.inputConfirm.Click += new System.EventHandler(this.inputConfirm_Click);
+            // 
+            // inputClose
+            // 
+            this.inputClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputClose.Location = new System.Drawing.Point(1096, 661);
+            this.inputClose.Name = "inputClose";
+            this.inputClose.Size = new System.Drawing.Size(143, 23);
+            this.inputClose.TabIndex = 9;
+            this.inputClose.Text = "Close";
+            this.inputClose.UseVisualStyleBackColor = true;
+            this.inputClose.Click += new System.EventHandler(this.inputClose_Click);
             // 
             // tabControlEvent
             // 
@@ -290,12 +290,12 @@
             this.tabPage2.Text = "Reports";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // EventAccuracyNew
+            // EventAccuracy
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControlEvent);
-            this.Name = "EventAccuracyNew";
+            this.Name = "EventAccuracy";
             this.Size = new System.Drawing.Size(1280, 720);
             this.tableLayoutPanelEvent.ResumeLayout(false);
             this.tableLayoutPanelEvent.PerformLayout();

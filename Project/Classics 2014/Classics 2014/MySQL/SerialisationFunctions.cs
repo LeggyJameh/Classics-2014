@@ -26,14 +26,20 @@ namespace CMS.MySQL
             return NewLanding;
         }
 
-        private CMS.Accuracy.AccuracyLanding DeserialiseAccuracyLanding(MySqlLanding Landing, EventType Type) // Should be able to determine which type of landing it is, provided all event types are in and all landings derive from Landing class.
+        private dynamic DeserialiseLanding(MySqlLanding Landing, EventType Type) // Should be able to determine which type of landing it is, provided all event types are in and all landings derive from Landing class.
         {
             MemoryStream m = new MemoryStream();
             BinaryFormatter f = new BinaryFormatter();
             m.Write(Landing.Data, 0, Landing.Data.Length);
             m.Seek(0, SeekOrigin.Begin);
-            CMS.Accuracy.AccuracyLanding deSerializedLanding = (CMS.Accuracy.AccuracyLanding)f.Deserialize(m);
-            return deSerializedLanding;
+            switch (Type)
+            {
+                case EventType.INTL_ACCURACY:
+                    CMS.Accuracy.AccuracyLanding deSerializedLanding = (CMS.Accuracy.AccuracyLanding)f.Deserialize(m);
+                    return deSerializedLanding;
+                    break;
+            }
+            return null;
         }
 
         private MySqlEvent SerialiseEvent(Event Event)

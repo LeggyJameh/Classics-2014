@@ -68,8 +68,22 @@ namespace CMS
                         Teams = new List<Team>();
                         Rules.stage = EventStage.SetupTeams;
                         engine.mainForm.removeTab((TabPage)currentWindow.Parent);
-                        currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
-                        engine.mainForm.addNewTab("Team setup", currentWindow);
+                        if (Rules.competitorsPerTeam > 1) // If teamed
+                        {
+                            currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
+                            engine.mainForm.addNewTab("Team setup", currentWindow);
+                        }
+                        else // If singles...
+                        {
+                            foreach (Competitor c in UnassignedCompetitors)
+                            {
+                                Team newTeam = SQL_Controller.CreateTeam(EventID, c.name);
+                                newTeam.Competitors.Add(new EventCompetitor(c));
+                                SQL_Controller.ModifyTeam(newTeam);
+                                Teams.Add(newTeam);
+                            }
+                            NextStage();
+                        }
                         break;
                     case EventStage.SetupTeams: // SetupEID global for all events, so continue.
                         // Currently skipping EID stage.

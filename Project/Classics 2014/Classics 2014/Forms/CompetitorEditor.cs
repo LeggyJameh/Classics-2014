@@ -162,7 +162,7 @@ namespace CMS
             }
             else
             {
-                if (showMessages) { MessageBox.Show("An error occured and saving was aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); }
+                if (showMessages) { MBox.Generic.Show(MBox.GenericMBoxType.SavingFailed); }
                 return false;
             }
         }
@@ -438,7 +438,7 @@ namespace CMS
             }
             else
             {
-                DialogResult checker = MessageBox.Show("Save before exiting?", "Are you sure?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk);
+                DialogResult checker = MBox.Generic.Show(MBox.GenericMBoxType.ClosingCheckSave);
 
                 switch (checker)
                 {
@@ -449,7 +449,7 @@ namespace CMS
                         }
                         else
                         {
-                            MessageBox.Show("An error occured and saving was aborted.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MBox.Generic.Show(MBox.GenericMBoxType.SavingFailed);
                         }
                         break;
                     case DialogResult.No:

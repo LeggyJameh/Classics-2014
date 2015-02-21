@@ -517,14 +517,14 @@ namespace CMS
             {
                 if (dataGridCompetitors.SelectedRows.Count > 1) // Different ones for plurals. Yay. ^.^
                 {
-                    if (MessageBox.Show("Are you sure you wish to remove the selected competitors?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    if (MBox.Generic.Show(MBox.GenericMBoxType.RemoveCompetitors) == DialogResult.Yes)
                     {
                         remove = true;
                     }
                 }
                 else
                 {
-                    if (MessageBox.Show("Are you sure you wish to remove the selected competitor?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+                    if (MBox.Generic.Show(MBox.GenericMBoxType.RemoveCompetitor) == DialogResult.Yes)
                     {
                         remove = true;
                     }

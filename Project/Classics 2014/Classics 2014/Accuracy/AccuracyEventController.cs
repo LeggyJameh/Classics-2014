@@ -8,6 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Windows.Forms;
 using CMS.MySQL;
+using System.Collections.ObjectModel;
 
 namespace CMS.Accuracy
 {
@@ -19,7 +20,7 @@ namespace CMS.Accuracy
         TWind[] IncomingData;
         int NumberOfLandings = 0;
         public List<Accuracy.AccuracyLanding> Landings = new List<Accuracy.AccuracyLanding>();
-        public List<Accuracy_Event> Events = new List<Accuracy_Event>();
+        public ObservableCollection<Accuracy_Event> Events = new ObservableCollection<Accuracy_Event>();
         Boolean lostSerial = false;
         SQL_Controller SQL_Controller;
         IO_Controller IO_Controller;
@@ -35,6 +36,25 @@ namespace CMS.Accuracy
             this.IO_Controller = IO_Controller;
             this.engine = engine;
             ListenThread = new Thread(new ThreadStart(ListenProcedure));
+            Events.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(Events_CollectionChanged);
+        }
+
+        void Events_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (Events.Count > 0)
+            {
+                if (ListenThread.ThreadState == ThreadState.Stopped)
+                {
+                    ListenThread.Start();
+                }
+            }
+            else
+            {
+                if (ListenThread.ThreadState == ThreadState.Running)
+                {
+                    ListenThread.Abort();
+                }
+            }
         }
 
         private void ListenProcedure()
@@ -68,8 +88,8 @@ namespace CMS.Accuracy
                             NumberOfLandings++;
                             AccuracyLanding newLanding = new AccuracyLanding { index = NumberOfLandings, ID = 0, score = DataA.LandingScore, windDataPrior = (TWind[])IncomingData.Clone(), time = DataA.Time,  windDataAfter = new TWind[60] };
                             Landings.Add(newLanding);
-                            column.AddLanding(newLanding);
-                            column.UpdateScore(DataA.LandingScore.ToString());
+                            column.Invoke((MethodInvoker)(() => column.AddLanding(newLanding)));
+                            column.Invoke((MethodInvoker)(() => column.UpdateScore(DataA.LandingScore.ToString())));
                         }
                         for (int i = 0; i < Landings.Count; i++)
                         {
@@ -78,12 +98,16 @@ namespace CMS.Accuracy
                             {
                                 currentLanding.completed = true;
                                 currentLanding.ID = SQL_Controller.CreateLanding(currentLanding);
+                                currentLanding.windEnum++;
                             }
                             else
                             {
-                                currentLanding.windDataAfter[currentLanding.windEnum] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
-                                currentLanding.windEnum++;
-                                Landings[i] = currentLanding;
+                                if (currentLanding.windEnum < 60)
+                                {
+                                    currentLanding.windDataAfter[currentLanding.windEnum] = new TWind { time = Data.Time, speed = DataA.Speed, direction = DataA.Direction };
+                                    currentLanding.windEnum++;
+                                    Landings[i] = currentLanding;
+                                }
                             }
                         }
                     }
@@ -182,12 +206,12 @@ namespace CMS.Accuracy
         /// </summary>
         public AccuracyLanding getColumnLanding()
         {
-            int ID = column.GetIDOfCurrentLanding();
-            if (ID != -1)
+            int index = column.GetIndexOfCurrentLanding();
+            if (index != -1)
             {
                 for (int i = 0; i < Landings.Count; i++)
                 {
-                    if (Landings[i].ID == ID)
+                    if (Landings[i].index == index)
                     {
                         return Landings[i];
                     }
@@ -202,13 +226,13 @@ namespace CMS.Accuracy
             SQL_Controller.ModifyLanding(landing);
         }
 
-        public void removeLanding(int landingID)
+        public void removeLanding(int landingIndex)
         {
             for (int i = 0; i < Landings.Count; i++)
             {
-                if (Landings[i].ID == landingID)
+                if (Landings[i].index == landingIndex)
                 {
-                    SQL_Controller.RemoveLanding(landingID);
+                    SQL_Controller.RemoveLanding(Landings[i].ID);
                     Landings.Remove(Landings[i]);
                     i = Landings.Count;
                 }

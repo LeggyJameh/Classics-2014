@@ -210,7 +210,6 @@ namespace CMS
 
         private void buttonCompetition_Click(object sender, EventArgs e)
         {
-            Engine.AddSideController(Engine.accuracyEventController.column);
             EventType eventType = EventPickerMessageBox.ShowEventPicker();
             Engine.StartNewEvent(eventType);
         }

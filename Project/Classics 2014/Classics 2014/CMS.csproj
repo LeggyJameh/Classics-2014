@@ -175,6 +175,7 @@
     <Compile Include="Forms\GroupManager.Designer.cs">
       <DependentUpon>GroupManager.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\MessageBoxStrings.cs" />
     <Compile Include="Forms\Teams\TeamPicker.cs">
       <SubType>UserControl</SubType>
     </Compile>

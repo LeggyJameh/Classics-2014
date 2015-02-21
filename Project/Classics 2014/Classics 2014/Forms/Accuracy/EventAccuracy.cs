@@ -44,6 +44,7 @@ namespace CMS.Accuracy
             loadLandingsAndCompetitors(landings);
             loadData();
             checkEventIDStatus();
+            checkIsSingles();
             addControllerColumn();
             //addReportFormToTab(); -- REPORTS NEED CREATING
             refreshGrid();
@@ -68,7 +69,7 @@ namespace CMS.Accuracy
         }
 
         /// <summary>
-        /// Checks all of the competitors for existance of an event ID. If no EID exists, disables the eventID column in the main datagrid.
+        /// Checks all of the competitors for existance of an event ID. If no EID exists, hides the eventID column in the main datagrid.
         /// </summary>
         private void checkEventIDStatus()
         {
@@ -84,6 +85,27 @@ namespace CMS.Accuracy
             if (!eventIDsExist) // If no competitor has an event ID...
             {
                 dataGridScores.Columns[1].Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Checks all of the teams for count. If all are equal to one, hides team column in main datagrid.
+        /// </summary>
+        private void checkIsSingles()
+        {
+            bool singles = true;
+
+            foreach (Team t in Connected_Event.Teams)
+            {
+                if (t.Competitors.Count > 1)
+                {
+                    singles = false;
+                }
+            }
+
+            if (singles)
+            {
+                dataGridScores.Columns[3].Visible = false;
             }
         }
 
@@ -140,9 +162,10 @@ namespace CMS.Accuracy
 
             if (currentHighestRoundNum > (dataGridScores.Columns.Count - columnCountUptofirstRound)) // Adding additional columns if required.
             {
-                for (int i = 0; i < currentHighestRoundNum - (dataGridScores.Columns.Count - columnCountUptofirstRound); i++)
+                int roundsToAdd = currentHighestRoundNum - (dataGridScores.Columns.Count - columnCountUptofirstRound);
+                for (int i = 0; i < roundsToAdd; i++)
                 {
-                    dataGridScores.Columns.Add("ColumnR" + currentHighestRoundNum, "Round " + currentHighestRoundNum);
+                    dataGridScores.Columns.Add("ColumnR" + (2 + i), "Round " + (2 + i));
                 }
             }
 
@@ -356,6 +379,7 @@ namespace CMS.Accuracy
         {
             landing.UID = competitor.ID;
             landing.round = getRoundFromCell(cell);
+            landing.eventID = Connected_Event.EventID;
             data[competitor].Add(landing);
             Connected_Event.controller.assignLanding(landing);
         }
@@ -384,21 +408,6 @@ namespace CMS.Accuracy
             data[competitor].Remove(landing);
         }
 
-        /// <summary>
-        /// Returns true if the cell is clear and ready for a landing to be assigned.
-        /// </summary>
-        private bool isCellClear(DataGridViewCell cell)
-        {
-            if (cell.ColumnIndex >= columnCountUptofirstRound) // Ensure that it's a score cell by tag contents.
-            {
-                if (cell.Value == null || cell.Value.ToString() == "")
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
-
         #endregion
 
         #region Control Events
@@ -412,19 +421,34 @@ namespace CMS.Accuracy
 
             if (cell != null)
             {
-                competitor = getCompetitorFromCell(cell);
-                round = getRoundFromCell(cell);
-                if (round > 0)
+                if (getLandingFromCell(cell) == null)
                 {
-                    newLanding = MessageBoxes.CreateAccuracyLanding(Connected_Event, round);
-                    if (newLanding != null)
+                    competitor = getCompetitorFromCell(cell);
+                    round = getRoundFromCell(cell);
+                    if (round > 0)
                     {
-                        if (competitor != null)
+                        newLanding = MessageBoxes.CreateAccuracyLanding(Connected_Event, round);
+                        if (newLanding != null)
                         {
-                            addLanding(newLanding, competitor);
+                            if (competitor != null)
+                            {
+                                addLanding(newLanding, competitor);
+                            }
                         }
                     }
+                    else
+                    {
+                        MBox.Generic.Show(MBox.GenericMBoxType.CellNotValid);
+                    }
                 }
+                else
+                {
+                    MBox.Generic.Show(MBox.GenericMBoxType.LandingAlreadyExists);
+                }
+            }
+            else
+            {
+                MBox.Generic.Show(MBox.GenericMBoxType.NoScoreSelected);
             }
             refreshGrid();
         }
@@ -442,10 +466,14 @@ namespace CMS.Accuracy
                     currentlanding.score = MessageBoxes.ModifyScore(currentlanding.score, rules.maxScore);
                     currentlanding.modified = true;
                 }
+                else
+                {
+                    MBox.Generic.Show(MBox.GenericMBoxType.NoScoreSelected);
+                }
             }
             else
             {
-                MessageBox.Show("Please select a valid cell.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                MBox.Generic.Show(MBox.GenericMBoxType.NoScoreSelected);
             }
             refreshGrid();
         }
@@ -468,6 +496,14 @@ namespace CMS.Accuracy
                         unAssignLanding(landing, competitor);
                     }
                 }
+                else
+                {
+                    MBox.Generic.Show(MBox.GenericMBoxType.NoLandingSelected);
+                }
+            }
+            else
+            {
+                MBox.Generic.Show(MBox.GenericMBoxType.NoLandingSelected);
             }
             refreshGrid();
         }
@@ -488,15 +524,23 @@ namespace CMS.Accuracy
             {
                 if (cell != null)
                 {
-                    competitor = getCompetitorFromCell(cell);
-                    if (competitor != null)
+                    if (getLandingFromCell(cell) == null)
                     {
-                        if (isCellClear(cell))
+                        competitor = getCompetitorFromCell(cell);
+                        if (competitor != null)
                         {
                             assignLanding(landing, competitor, cell);
                         }
                     }
                 }
+                else
+                {
+                    MBox.Generic.Show(MBox.GenericMBoxType.CellNotValid);
+                }
+            }
+            else
+            {
+                MBox.Generic.Show(MBox.GenericMBoxType.NoLandingSelected);
             }
             refreshGrid();
         }
@@ -525,7 +569,7 @@ namespace CMS.Accuracy
         private void inputClose_Click(object sender, EventArgs e)
         {
             // Check for landings in progress?
-            if (MessageBox.Show("Are you sure you wish to close the current event? No data will be lost.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            if (MBox.Generic.Show(MBox.GenericMBoxType.ClosingCheckNoSave) == DialogResult.Yes)
             {
                 Connected_Event.Exit();
             }

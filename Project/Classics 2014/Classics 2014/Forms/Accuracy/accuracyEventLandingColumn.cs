@@ -20,14 +20,14 @@ namespace CMS.Accuracy
         }
         public void AddLanding(AccuracyLanding newLanding)
         {
-            dataGridViewLandings.Rows.Add(newLanding.ID, newLanding.time, newLanding.score);
+            dataGridViewLandings.Rows.Add(newLanding.index, newLanding.time, newLanding.score);
         }
 
         public void RemoveLanding(AccuracyLanding landing)
         {
             for (int i = 0; i < dataGridViewLandings.Rows.Count; i++)
             {
-                if (landing.ID == Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value))
+                if (landing.index == Convert.ToInt16(dataGridViewLandings.Rows[i].Cells[0].Value))
                 {
                     dataGridViewLandings.Rows.RemoveAt(i);
                     i = dataGridViewLandings.Rows.Count; // End the loop
@@ -36,7 +36,7 @@ namespace CMS.Accuracy
             // TODO: Select next row for convenience.
         }
 
-        public int GetIDOfCurrentLanding()
+        public int GetIndexOfCurrentLanding()
         {
             if (dataGridViewLandings.SelectedRows.Count > 0)
             {
@@ -61,9 +61,9 @@ namespace CMS.Accuracy
         {
             if (dataGridViewLandings.SelectedRows.Count > 0)
             {
-                int landingID = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
+                int landingIndex = Convert.ToInt16(dataGridViewLandings.SelectedRows[0].Cells[0].Value);
                 dataGridViewLandings.Rows.Remove(dataGridViewLandings.SelectedRows[0]);
-                controller.removeLanding(landingID);
+                controller.removeLanding(landingIndex);
             }
         }
     }

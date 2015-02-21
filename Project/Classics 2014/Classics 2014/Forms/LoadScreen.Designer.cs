@@ -50,37 +50,36 @@
             // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnCount = 6;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanel1.Controls.Add(this.inputLoad, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.inputCancel, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.inputDelete, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.dataGridEvents, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridProperties, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridProperties, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.inputRefresh, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.inputDelete, 4, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 720);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // inputLoad
             // 
-            this.inputLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputLoad.Location = new System.Drawing.Point(3, 687);
+            this.inputLoad.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputLoad.Location = new System.Drawing.Point(3, 693);
             this.inputLoad.Name = "inputLoad";
-            this.inputLoad.Size = new System.Drawing.Size(122, 30);
+            this.inputLoad.Size = new System.Drawing.Size(122, 23);
             this.inputLoad.TabIndex = 0;
             this.inputLoad.Text = "Load";
             this.inputLoad.UseVisualStyleBackColor = true;
@@ -88,12 +87,10 @@
             // 
             // inputCancel
             // 
-            this.inputCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputCancel.Location = new System.Drawing.Point(131, 687);
+            this.inputCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputCancel.Location = new System.Drawing.Point(131, 693);
             this.inputCancel.Name = "inputCancel";
-            this.inputCancel.Size = new System.Drawing.Size(122, 30);
+            this.inputCancel.Size = new System.Drawing.Size(122, 23);
             this.inputCancel.TabIndex = 1;
             this.inputCancel.Text = "Cancel";
             this.inputCancel.UseVisualStyleBackColor = true;
@@ -101,12 +98,10 @@
             // 
             // inputDelete
             // 
-            this.inputDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.inputDelete.Location = new System.Drawing.Point(1027, 687);
+            this.inputDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputDelete.Location = new System.Drawing.Point(899, 693);
             this.inputDelete.Name = "inputDelete";
-            this.inputDelete.Size = new System.Drawing.Size(250, 30);
+            this.inputDelete.Size = new System.Drawing.Size(122, 23);
             this.inputDelete.TabIndex = 2;
             this.inputDelete.Text = "Delete";
             this.inputDelete.UseVisualStyleBackColor = true;
@@ -127,7 +122,7 @@
             this.ColumnName,
             this.ColumnDate,
             this.ColumnType});
-            this.tableLayoutPanel1.SetColumnSpan(this.dataGridEvents, 4);
+            this.tableLayoutPanel1.SetColumnSpan(this.dataGridEvents, 5);
             this.dataGridEvents.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dataGridEvents.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridEvents.Location = new System.Drawing.Point(3, 33);
@@ -135,7 +130,7 @@
             this.dataGridEvents.Name = "dataGridEvents";
             this.dataGridEvents.RowHeadersVisible = false;
             this.dataGridEvents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridEvents.Size = new System.Drawing.Size(1018, 648);
+            this.dataGridEvents.Size = new System.Drawing.Size(1018, 654);
             this.dataGridEvents.TabIndex = 3;
             this.dataGridEvents.SelectionChanged += new System.EventHandler(this.dataGridEvents_SelectionChanged);
             // 
@@ -185,7 +180,7 @@
             this.dataGridProperties.ReadOnly = true;
             this.dataGridProperties.RowHeadersVisible = false;
             this.dataGridProperties.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dataGridProperties.Size = new System.Drawing.Size(250, 648);
+            this.dataGridProperties.Size = new System.Drawing.Size(250, 654);
             this.dataGridProperties.TabIndex = 4;
             // 
             // ColumnPropertyName
@@ -203,7 +198,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.tableLayoutPanel1.SetColumnSpan(this.label1, 5);
+            this.tableLayoutPanel1.SetColumnSpan(this.label1, 6);
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(3, 0);
@@ -215,14 +210,12 @@
             // 
             // inputRefresh
             // 
-            this.inputRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
             this.inputRefresh.Image = ((System.Drawing.Image)(resources.GetObject("inputRefresh.Image")));
             this.inputRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.inputRefresh.Location = new System.Drawing.Point(259, 687);
+            this.inputRefresh.Location = new System.Drawing.Point(259, 693);
             this.inputRefresh.Name = "inputRefresh";
-            this.inputRefresh.Size = new System.Drawing.Size(122, 30);
+            this.inputRefresh.Size = new System.Drawing.Size(122, 23);
             this.inputRefresh.TabIndex = 6;
             this.inputRefresh.Text = "Refresh";
             this.inputRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;

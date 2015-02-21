@@ -257,7 +257,7 @@ namespace CMS.MySQL
         /// </summary>
         public Team CreateTeam(int eventID, string teamName)
         {
-            string query = "INSERT INTO `event teams` (`EventID`, `Name`) VALUES ('" + eventID + "', '" + teamName + "');";
+            string query = "INSERT INTO `event teams` (`EventID`, `Name`, `Image`, `Data`) VALUES ('" + eventID + "', '" + teamName + "', '" + ByteArrayToHex(new byte[1]) + "', '" + ByteArrayToHex(new byte[1]) + "');";
             if (ExecuteNonQuery(query))
             {
                 Team team = new Team();

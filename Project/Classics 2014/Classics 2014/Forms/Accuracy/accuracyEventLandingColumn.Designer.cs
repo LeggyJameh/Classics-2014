@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.tableLayoutPanelLayout = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonRemoveLanding = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.labelLatestScore = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,8 +38,8 @@
             this.ColumnTime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnScore = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.buttonRemoveLanding = new System.Windows.Forms.Button();
             this.tableLayoutPanelLayout.SuspendLayout();
-            this.tableLayoutPanel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,7 +48,7 @@
             this.tableLayoutPanelLayout.BackColor = System.Drawing.Color.White;
             this.tableLayoutPanelLayout.ColumnCount = 1;
             this.tableLayoutPanelLayout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelLayout.Controls.Add(this.tableLayoutPanel3, 0, 4);
+            this.tableLayoutPanelLayout.Controls.Add(this.buttonRemoveLanding, 0, 4);
             this.tableLayoutPanelLayout.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanelLayout.Controls.Add(this.labelLatestScore, 0, 1);
             this.tableLayoutPanelLayout.Controls.Add(this.label2, 0, 2);
@@ -66,31 +64,6 @@
             this.tableLayoutPanelLayout.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanelLayout.Size = new System.Drawing.Size(214, 658);
             this.tableLayoutPanelLayout.TabIndex = 0;
-            // 
-            // tableLayoutPanel3
-            // 
-            this.tableLayoutPanel3.ColumnCount = 3;
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel3.Controls.Add(this.buttonRemoveLanding, 1, 0);
-            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 613);
-            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
-            this.tableLayoutPanel3.RowCount = 1;
-            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(208, 44);
-            this.tableLayoutPanel3.TabIndex = 10;
-            // 
-            // buttonRemoveLanding
-            // 
-            this.buttonRemoveLanding.Location = new System.Drawing.Point(57, 3);
-            this.buttonRemoveLanding.Name = "buttonRemoveLanding";
-            this.buttonRemoveLanding.Size = new System.Drawing.Size(94, 38);
-            this.buttonRemoveLanding.TabIndex = 0;
-            this.buttonRemoveLanding.Text = "Remove Landing";
-            this.buttonRemoveLanding.UseVisualStyleBackColor = true;
-            this.buttonRemoveLanding.Click += new System.EventHandler(this.buttonRemoveLanding_Click);
             // 
             // label1
             // 
@@ -177,6 +150,16 @@
             this.timer1.Interval = 1500;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // buttonRemoveLanding
+            // 
+            this.buttonRemoveLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonRemoveLanding.Location = new System.Drawing.Point(3, 622);
+            this.buttonRemoveLanding.Name = "buttonRemoveLanding";
+            this.buttonRemoveLanding.Size = new System.Drawing.Size(208, 23);
+            this.buttonRemoveLanding.TabIndex = 10;
+            this.buttonRemoveLanding.Text = "Remove Landing";
+            this.buttonRemoveLanding.UseVisualStyleBackColor = true;
+            // 
             // accuracyEventLandingColumn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -186,7 +169,6 @@
             this.Size = new System.Drawing.Size(214, 658);
             this.tableLayoutPanelLayout.ResumeLayout(false);
             this.tableLayoutPanelLayout.PerformLayout();
-            this.tableLayoutPanel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLandings)).EndInit();
             this.ResumeLayout(false);
 
@@ -199,12 +181,11 @@
         private System.Windows.Forms.Label labelLatestScore;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dataGridViewLandings;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button buttonRemoveLanding;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTime;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnScore;
+        private System.Windows.Forms.Button buttonRemoveLanding;
 
     }
 }

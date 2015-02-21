@@ -14,20 +14,22 @@ namespace CMS.Accuracy
         #region Variables and the such like
         private Accuracy_Event Connected_Event;
         private accuracyEventLandingColumn landingList;
-        private int roundNumber = 1;
         private Reports.ReportCreation currentReportForm;
         private Dictionary<EventCompetitor, List<AccuracyLanding>> data;
         private Ruleset.AccuracyRules rules;
 
         // Colours that are used in the grid to display properties about the landings.
-        private Color modifiedScoreColour = Color.Yellow;
-        private Color modifiedScoreSelectedColor = Color.Olive;
-        private Color manualScoreColour = Color.LightBlue;
-        private Color manualScoreSelectedColor = Color.SteelBlue;
-        private Color rejumpableColour = Color.Red;
-        private Color rejumpableSelectedColor = Color.DarkRed;
-        private Color goodLandingColour = Color.LightGreen;
-        private Color goodLandingSelectedColor = Color.ForestGreen;
+        public Color modifiedScoreColour = Color.Yellow;
+        public Color modifiedScoreSelectedColor = Color.Olive;
+        public Color manualScoreColour = Color.LightBlue;
+        public Color manualScoreSelectedColor = Color.SteelBlue;
+        public Color rejumpableColour = Color.Red;
+        public Color rejumpableSelectedColor = Color.DarkRed;
+        public Color goodLandingColour = Color.LightGreen;
+        public Color goodLandingSelectedColor = Color.ForestGreen;
+
+        public UpdateAccuracyDataDelegate reportsUpdateDelegate;
+        public int roundNumber = 1;
 
         const int columnCountUptofirstRound = 4;
         #endregion
@@ -183,6 +185,11 @@ namespace CMS.Accuracy
         {
             dataGridScores.SuspendLayout();
             dataGridScores.Rows.Clear();
+
+            if (reportsUpdateDelegate != null)
+            {
+                reportsUpdateDelegate(data);
+            }
 
             foreach (EventCompetitor c in data.Keys)
             {

@@ -10,4 +10,9 @@ namespace CMS
     /// Used for re-pulling competitors from the database whenever there is an update.
     /// </summary>
     delegate void UpdateCompetitorDelegate();
+
+    /// <summary>
+    /// Used whenever a forced update is required.
+    /// </summary>
+    delegate void UpdateAccuracyDataDelegate(Dictionary<EventCompetitor, List<Accuracy.AccuracyLanding>> eventData);
 }

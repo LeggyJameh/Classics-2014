@@ -7,42 +7,229 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using CMS.MySQL;
+using System.Collections.ObjectModel;
 
 namespace CMS.Accuracy.Reports
 {
     partial class ReportCreation : UserControl
     {
-        List<Leaderboard> LeaderboardReports = new List<Leaderboard>();
-        List<TeamReport> TeamReports = new List<TeamReport>();
-        List<LandingReport> LandingReports = new List<LandingReport>();
-        SQL_Controller sqlController;
-        Accuracy_Event connectedEvent;
-        Control ActiveReport;
-        List<AccuracyLanding> landings;
-        int eventId;
-        bool selectEntireTeam;
-        public ReportCreation(Accuracy_Event connectedEvent)
+        #region Variables and such like
+        public Dictionary<EventCompetitor, ObservableCollection<AccuracyLanding>> data;
+        public Ruleset.AccuracyRules rules;
+        public ObservableCollection<Team> teams;
+
+        private List<Leaderboard> LeaderboardReports = new List<Leaderboard>();
+        private List<TeamReport> TeamReports = new List<TeamReport>();
+        private List<LandingReport> LandingReports = new List<LandingReport>();
+        private Accuracy_Event Connected_Event;
+        private EventAccuracy MainEvent;
+        private UserControl ActiveReport;
+        private List<AccuracyLanding> landings;
+        private bool selectEntireTeam;
+        #endregion
+
+        public ReportCreation(Accuracy_Event connectedEvent, EventAccuracy accEvent, Dictionary<EventCompetitor, List<AccuracyLanding>> eventData)
         {
+            this.Connected_Event = connectedEvent;
+            this.MainEvent = accEvent;
             InitializeComponent();
+            loadTeams();
+            loadData(eventData);
+            loadRules();
+            MainEvent.reportsUpdateDelegate = new UpdateAccuracyDataDelegate(reloadData);
+            refreshLeaderboard();
             listBoxEventList.Items.AddRange(new String[]{"Leaderboard", "Competitor", "Landing"});
             if (connectedEvent.Rules.competitorsPerTeam != 1)
             {
                 listBoxEventList.Items.Add("Team");
             }
-            connectedEvent.SQL_Controller = sqlController;
-            this.connectedEvent = connectedEvent;
-            this.eventId = connectedEvent.EventID;
-            ActiveReport = dataGridViewLockedLeaderboard;
-            Populate();
             listBoxEventList.SelectedIndex = 0;
         }
+
+        #region Loading
+
+        /// <summary>
+        /// Initialises teams, adds them from the event and adds the event handler for updating.
+        /// </summary>
+        private void loadTeams()
+        {
+            teams = new ObservableCollection<Team>();
+
+            foreach (Team t in Connected_Event.Teams)
+            {
+                teams.Add(t);
+            }
+
+            teams.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(teams_CollectionChanged);
+        }
+
+        /// <summary>
+        /// Initialises data and adds it from the event.
+        /// </summary>
+        private void loadData(Dictionary<EventCompetitor, List<AccuracyLanding>> eventData)
+        {
+            data = new Dictionary<EventCompetitor, ObservableCollection<AccuracyLanding>>();
+
+            foreach (EventCompetitor c in eventData.Keys)
+            {
+                ObservableCollection<AccuracyLanding> currentLandingList = new ObservableCollection<AccuracyLanding>();
+                currentLandingList.CollectionChanged += new System.Collections.Specialized.NotifyCollectionChangedEventHandler(landingsUpdate);
+
+                foreach (AccuracyLanding l in eventData[c])
+                {
+                    currentLandingList.Add(l);
+                }
+                data.Add(c, currentLandingList);
+            }
+        }
+
+        /// <summary>
+        /// Loads the rules from the connected event and allows access to them by child controls.
+        /// </summary>
+        private void loadRules()
+        {
+            rules = (Ruleset.AccuracyRules)Connected_Event.Rules;
+        }
+
+        /// <summary>
+        /// Called whenever there is a landing update.
+        /// </summary>
+        private void reloadData(Dictionary<EventCompetitor, List<AccuracyLanding>> eventData)
+        {
+            foreach (EventCompetitor c in data.Keys)
+            {
+                data[c].Clear();
+
+                foreach (AccuracyLanding l in eventData[c])
+                {
+                    data[c].Add(l);
+                }
+            }
+        }
+
+        #endregion
+
+        /// <summary>
+        /// Makes the ActiveReport appear over the dataGridLeaderboard.
+        /// </summary>
+        private void swapLeaderboardForReport()
+        {
+            tableLayoutPanel1.Controls.Add(ActiveReport);
+            tableLayoutPanel1.SetColumn(ActiveReport, 2);
+            tableLayoutPanel1.SetRow(ActiveReport, 2);
+            tableLayoutPanel1.SetColumnSpan(ActiveReport, 1);
+            tableLayoutPanel1.SetRowSpan(ActiveReport, 4);
+            ActiveReport.Dock = DockStyle.Fill;
+            dataGridLeaderboard.Enabled = false;
+            dataGridLeaderboard.Visible = false;
+            ActiveReport.Enabled = true;
+            ActiveReport.Visible = true;
+        }
+
+        /// <summary>
+        /// Replaces the dataGridLeaderboard in its rightful place and removes the ActiveReport.
+        /// </summary>
+        private void swapReportForLeaderboard()
+        {
+            ActiveReport.Enabled = false;
+            ActiveReport.Visible = false;
+            dataGridLeaderboard.Enabled = true;
+            dataGridLeaderboard.Visible = true;
+            tableLayoutPanel1.Controls.Remove(ActiveReport);
+        }
+
+
+        void teams_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            refreshLeaderboard();
+            foreach (Leaderboard l in LeaderboardReports)
+            {
+                //l.Refresh_Teams();
+            }
+
+            foreach (TeamReport tr in TeamReports)
+            {
+                //tr.Refresh_Teams();
+            }
+
+            foreach (LandingReport lr in LandingReports)
+            {
+                //lr.Refresh_Teams();
+            }
+        }
+
+        void landingsUpdate(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            refreshLeaderboard();
+
+            foreach (Leaderboard l in LeaderboardReports)
+            {
+                //l.Refresh_Data();
+            }
+
+            foreach (TeamReport tr in TeamReports)
+            {
+                //tr.Refresh_Data();
+            }
+
+            foreach (LandingReport lr in LandingReports)
+            {
+                //lr.Refresh_Data();
+            }
+        }
+
+        /// <summary>
+        /// Completely updates the main datagrid.
+        /// </summary>
+        private void refreshLeaderboard()
+        {
+            dataGridLeaderboard.Rows.Clear();
+
+            while (MainEvent.roundNumber >= dataGridLeaderboard.Columns.Count - 3)
+            {
+                dataGridLeaderboard.Columns.Add("Round" + (dataGridLeaderboard.Columns.Count - 3), "Round " + (dataGridLeaderboard.Columns.Count - 3));
+            }
+
+            foreach (Team t in teams)
+            {
+                foreach (EventCompetitor c in t.Competitors)
+                {
+                    int currentRow = dataGridLeaderboard.Rows.Add(c.ID, c.name, c.nationality, t.Name);
+                    foreach (AccuracyLanding l in data[c])
+                    {
+                        DataGridViewCell currentCell = dataGridLeaderboard.Rows[currentRow].Cells[3 + l.round];
+                        currentCell.Value = l.score;
+
+                        if (l.rejumpable) // If rejumpable
+                        {
+                            currentCell.Style.BackColor = MainEvent.rejumpableColour;
+                            currentCell.Style.SelectionBackColor = MainEvent.rejumpableSelectedColor;
+                        }
+
+                        if (l.windDataPrior == null) // If no wind data and therefore manual
+                        {
+                            currentCell.Style.BackColor = MainEvent.manualScoreColour;
+                            currentCell.Style.SelectionBackColor = MainEvent.manualScoreSelectedColor;
+                        }
+
+                        if (l.modified) // If Modified score
+                        {
+                            currentCell.Style.BackColor = MainEvent.modifiedScoreColour;
+                            currentCell.Style.SelectionBackColor = MainEvent.modifiedScoreSelectedColor;
+                        }
+                    }
+                }
+            }
+        }
+
+
         public void Update(int UserID, int Round, DataGridViewCell newCell)
         {
-            while (Round >= dataGridViewLockedLeaderboard.Columns.Count -3)
+            while (Round >= dataGridLeaderboard.Columns.Count -3)
             {
-                dataGridViewLockedLeaderboard.Columns.Add("Round" + (dataGridViewLockedLeaderboard.Columns.Count - 3), "Round" + (dataGridViewLockedLeaderboard.Columns.Count - 3));
+                dataGridLeaderboard.Columns.Add("Round" + (dataGridLeaderboard.Columns.Count - 3), "Round" + (dataGridLeaderboard.Columns.Count - 3));
             }
-            foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
+            foreach (DataGridViewRow r in dataGridLeaderboard.Rows)
             {
                 if (r.Cells[0].Value.ToString() == UserID.ToString())
                 {
@@ -55,15 +242,16 @@ namespace CMS.Accuracy.Reports
                 l.Update(UserID, Round, newCell);
             }
         }
+
         /// <summary>
         /// If a non Landing change has occured to the Event Leaderboard
         /// </summary>
         /// <param name="Repop"></param>
         public void Update()
         {
-            dataGridViewLockedLeaderboard.Rows.Clear();
-            Populate();
+            refreshLeaderboard();
         }
+
         private void radioButtonNew_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonNew.Checked) 
@@ -71,7 +259,7 @@ namespace CMS.Accuracy.Reports
                 radioButtonExist.Checked = false;
                 listBoxEventList.Items.Clear();
                 listBoxEventList.Items.AddRange(new String[] { "Leaderboard", "Competitor", "Landing" });
-                if (connectedEvent.Rules.competitorsPerTeam != 1)
+                if (Connected_Event.Rules.competitorsPerTeam != 1)
                 {
                     listBoxEventList.Items.Add("Team");
                 }
@@ -79,11 +267,7 @@ namespace CMS.Accuracy.Reports
                 textBoxReportName.Enabled = true;
                 buttonCreateReport.Enabled = true;
                 listBoxEventList.SelectedIndex = 0;
-                ActiveReport.Visible = false;
-                ActiveReport.Enabled = false;
-                dataGridViewLockedLeaderboard.Visible = true;
-                dataGridViewLockedLeaderboard.Enabled = true;
-                ActiveReport = dataGridViewLockedLeaderboard;
+                swapReportForLeaderboard();
             }
         }
 
@@ -143,9 +327,9 @@ namespace CMS.Accuracy.Reports
                                 t.Enabled = true;
                                 ActiveReport = t;
 
-                                dataGridViewLockedLeaderboard.ClearSelection();
-                                dataGridViewLockedLeaderboard.Enabled = true;
-                                dataGridViewLockedLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                                dataGridLeaderboard.ClearSelection();
+                                dataGridLeaderboard.Enabled = true;
+                                dataGridLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                             }
                         }
                         foreach (LandingReport l in LandingReports)
@@ -164,73 +348,33 @@ namespace CMS.Accuracy.Reports
                 {
                     if (listBoxEventList.SelectedItem.ToString() == "Leaderboard")
                     {
-                        dataGridViewLockedLeaderboard.ClearSelection();
-                        dataGridViewLockedLeaderboard.SelectAll();
-                        dataGridViewLockedLeaderboard.Enabled = false;
+                        dataGridLeaderboard.ClearSelection();
+                        dataGridLeaderboard.SelectAll();
+                        dataGridLeaderboard.Enabled = false;
                         selectEntireTeam = false;
                     }
-                    else if ((listBoxEventList.SelectedItem.ToString() == "Team") && (connectedEvent.Rules.competitorsPerTeam != 1))
+                    else if ((listBoxEventList.SelectedItem.ToString() == "Team") && (Connected_Event.Rules.competitorsPerTeam != 1))
                     {
-                        dataGridViewLockedLeaderboard.ClearSelection();
-                        dataGridViewLockedLeaderboard.Enabled = true;
-                        dataGridViewLockedLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                        dataGridLeaderboard.ClearSelection();
+                        dataGridLeaderboard.Enabled = true;
+                        dataGridLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         selectEntireTeam = true;
                     }
                     else if (listBoxEventList.SelectedItem.ToString() == "Landing")
                     {
-                        dataGridViewLockedLeaderboard.ClearSelection();
-                        dataGridViewLockedLeaderboard.Enabled = true;
-                        dataGridViewLockedLeaderboard.SelectionMode = DataGridViewSelectionMode.CellSelect;
+                        dataGridLeaderboard.ClearSelection();
+                        dataGridLeaderboard.Enabled = true;
+                        dataGridLeaderboard.SelectionMode = DataGridViewSelectionMode.CellSelect;
                         selectEntireTeam = false;
                     }
                     else
                     {
-                        dataGridViewLockedLeaderboard.ClearSelection();
-                        dataGridViewLockedLeaderboard.Enabled = true;
-                        dataGridViewLockedLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                        dataGridLeaderboard.ClearSelection();
+                        dataGridLeaderboard.Enabled = true;
+                        dataGridLeaderboard.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                         selectEntireTeam = false;
                     }
                 }
-            }
-        }
-        public void Populate()
-        {
-            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
-            landings = sqlController.GetLandingsForEvent(eventId, connectedEvent.EventType);
-            DataGridViewCell cellToEdit;
-            for (int Ti = 0; Ti < Teams.Count; Ti++)
-            {
-                for (int Ci = 0; Ci < Teams[Ti].Competitors.Count; Ci++)
-                {
-                    dataGridViewLockedLeaderboard.Rows.Add(Teams[Ti].Competitors[Ci].ID, Teams[Ti].Competitors[Ci].name, Teams[Ti].Competitors[Ci].nationality, Teams[Ti].Name);
-                    foreach (AccuracyLanding l in landings)
-                    {
-                        if (l.UID == Teams[Ti].Competitors[Ci].ID)
-                        {
-                            while (l.round > dataGridViewLockedLeaderboard.ColumnCount - 4)
-                            {
-                                dataGridViewLockedLeaderboard.Columns.Add("columnRound" + (l.round), "Round " + (l.round));
-                            }
-                            cellToEdit = dataGridViewLockedLeaderboard[l.round + 3, dataGridViewLockedLeaderboard.Rows.Count - 1];
-                            cellToEdit.Value = l.score;
-                            cellToEdit.Style.BackColor = Color.LightGreen;
-                            if (l.modified == true)
-                            {
-                                cellToEdit.Style.BackColor = Color.Yellow;
-                                if (l.windDataPrior == null) { cellToEdit.Style.BackColor = Color.LightBlue; }
-                            }
-                            if (l.windDataPrior == null)
-                            {
-                                cellToEdit.Style.BackColor = Color.LightBlue;
-                            }
-                            else if (l.rejumpable)
-                            {
-                                cellToEdit.Style.ForeColor = Color.Red;
-                            }
-                        }
-                    }
-                }
-
             }
         }
 
@@ -239,19 +383,19 @@ namespace CMS.Accuracy.Reports
             string teamName;
             if (listBoxEventList.SelectedItem != null)
             {
-                if ((selectEntireTeam)&&(dataGridViewLockedLeaderboard.SelectedRows.Count != 0))
+                if ((selectEntireTeam)&&(dataGridLeaderboard.SelectedRows.Count != 0))
                 {
-                    teamName = dataGridViewLockedLeaderboard.SelectedRows[0].Cells["ColumnCompetitorTeam"].Value.ToString();
-                    foreach (DataGridViewRow c in dataGridViewLockedLeaderboard.Rows)
+                    teamName = dataGridLeaderboard.SelectedRows[0].Cells["ColumnCompetitorTeam"].Value.ToString();
+                    foreach (DataGridViewRow c in dataGridLeaderboard.Rows)
                     {
                         if (c.Cells["ColumnCompetitorTeam"].Value.ToString() == teamName) { c.Selected = true; }
                     }
                 }
                 else if (listBoxEventList.SelectedItem.ToString() == "Landing")
                 {
-                    if ((dataGridViewLockedLeaderboard.SelectedCells.Count == 0) || (dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 3))
+                    if ((dataGridLeaderboard.SelectedCells.Count == 0) || (dataGridLeaderboard.SelectedCells[0].ColumnIndex < 3))
                     {
-                        dataGridViewLockedLeaderboard.ClearSelection();
+                        dataGridLeaderboard.ClearSelection();
                     }
                 }
             }
@@ -266,67 +410,43 @@ namespace CMS.Accuracy.Reports
                 switch (listBoxEventList.SelectedItem.ToString())
                 {
                     case "Leaderboard":
-                        Leaderboard newLeaderBoard = new Leaderboard(connectedEvent.EventID, reportName, sqlController, connectedEvent, new Action<Leaderboard>(RemoveReport));
+                        Leaderboard newLeaderBoard = new Leaderboard(Connected_Event.EventID, reportName, Connected_Event.SQL_Controller, Connected_Event, new Action<Leaderboard>(RemoveReport));
                         if (!newLeaderBoard.CloseOnStart)
-                          {
-                        splitContainer1.Panel2.Controls.Add(newLeaderBoard);
-                        newLeaderBoard.Dock = DockStyle.Fill;
-                        LeaderboardReports.Add(newLeaderBoard);
-                        ActiveReport.Visible = false;
-                        ActiveReport.Enabled = false;
-                        newLeaderBoard.Visible = true;
-                        newLeaderBoard.Enabled = true;
-                        ActiveReport = newLeaderBoard;
-                        radioButtonExist.Checked = true;
+                        {
+                            LeaderboardReports.Add(newLeaderBoard);
+                            ActiveReport = newLeaderBoard;
+                            swapLeaderboardForReport();
                         }
-                            break;
+                        break;
                     case "Team":
-                            if (dataGridViewLockedLeaderboard.SelectedRows.Count > 0)
+                            if (dataGridLeaderboard.SelectedRows.Count > 0)
                             {
-                                TeamReport report = new TeamReport(dataGridViewLockedLeaderboard.SelectedRows, dataGridViewLockedLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
-                                splitContainer1.Panel2.Controls.Add(report);
-                                report.Dock = DockStyle.Fill;
+                                TeamReport report = new TeamReport(dataGridLeaderboard.SelectedRows, dataGridLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
                                 TeamReports.Add(report);
-                                ActiveReport.Visible = false;
-                                ActiveReport.Enabled = false;
-                                report.Visible = true;
-                                report.Enabled = true;
                                 ActiveReport = report;
-                                radioButtonExist.Checked = true;
+                                swapLeaderboardForReport();
                             }
                         break;
                     case "Competitor":
-                        if (dataGridViewLockedLeaderboard.SelectedRows.Count > 0)
+                        if (dataGridLeaderboard.SelectedRows.Count > 0)
                         {
-                            TeamReport report = new TeamReport(dataGridViewLockedLeaderboard.SelectedRows, dataGridViewLockedLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
-                            splitContainer1.Panel2.Controls.Add(report);
-                            report.Dock = DockStyle.Fill;
+                            TeamReport report = new TeamReport(dataGridLeaderboard.SelectedRows, dataGridLeaderboard.Columns.Count, reportName, new Action<TeamReport>(RemoveReport));
                             TeamReports.Add(report);
-                            ActiveReport.Visible = false;
-                            ActiveReport.Enabled = false;
-                            report.Visible = true;
-                            report.Enabled = true;
                             ActiveReport = report;
-                            radioButtonExist.Checked = true;
+                            swapLeaderboardForReport();
                         }
                         break;
                     case "Landing":
-                        if (!(dataGridViewLockedLeaderboard.SelectedCells.Count == 0) && !(dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex < 4)&& (dataGridViewLockedLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
+                        if (!(dataGridLeaderboard.SelectedCells.Count == 0) && !(dataGridLeaderboard.SelectedCells[0].ColumnIndex < 4)&& (dataGridLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
                         {
                             foreach (AccuracyLanding l in landings)
                             {
-                                if ((l.UID == Convert.ToInt16(dataGridViewLockedLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value)) && (l.round == dataGridViewLockedLeaderboard.SelectedCells[0].ColumnIndex - 3)) 
+                                if ((l.UID == Convert.ToInt16(dataGridLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value)) && (l.round == dataGridLeaderboard.SelectedCells[0].ColumnIndex - 3)) 
                                 {
-                                    LandingReport newReport = new LandingReport(l, reportName, connectedEvent, new Action<LandingReport>(RemoveReport));
-                                    splitContainer1.Panel2.Controls.Add(newReport);
-                                    newReport.Dock = DockStyle.Fill;
+                                    LandingReport newReport = new LandingReport(l, reportName, Connected_Event, new Action<LandingReport>(RemoveReport));
                                     LandingReports.Add(newReport);
-                                    ActiveReport.Visible = false;
-                                    ActiveReport.Enabled = false;
-                                    newReport.Visible = true;
-                                    newReport.Enabled = true;
                                     ActiveReport = newReport;
-                                    radioButtonExist.Checked = true;
+                                    swapLeaderboardForReport();
                                 }
                             }
                         }
@@ -334,21 +454,25 @@ namespace CMS.Accuracy.Reports
                 }
             }
         }
+
         public void RemoveReport(LandingReport l)
         {
             LandingReports.Remove(l);
             radioButtonNew.Checked = true;
         }
-                public void RemoveReport(TeamReport l)
+
+        public void RemoveReport(TeamReport l)
         {
             TeamReports.Remove(l);
             radioButtonNew.Checked = true;
         }
-                public void RemoveReport(Leaderboard l)
+
+        public void RemoveReport(Leaderboard l)
         {
             LeaderboardReports.Remove(l);
             radioButtonNew.Checked = true;
         }
+
         private bool GetReportName(ref string strToInsert)
         {
              strToInsert = textBoxReportName.Text;

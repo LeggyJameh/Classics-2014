@@ -7,38 +7,38 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using Microsoft.Office.Interop.Excel;
 
 namespace CMS.Accuracy.Reports
 {
      partial class LandingReport : UserControl
     {
-        Accuracy_Event connectedEvent;
         public string NameOfReport;
         ushort previousWindData;
         bool started = false;
-        Action<LandingReport> Close;
         Bitmap display;
         Form undockedForm;
-        Ruleset.AccuracyRules rules;
-        public LandingReport(AccuracyLanding landingToDisplay, String Name, Accuracy_Event ConnectedEvent, Action<LandingReport> Close)
+        ReportCreation reportCreator;
+        AccuracyLanding landingToDisplay;
+        Microsoft.Office.Interop.Excel.Application xlApp; 
+        public LandingReport(ReportCreation reportCreator, AccuracyLanding landingToDisplay)
         {
             InitializeComponent();
             this.NameOfReport = Name;
-            connectedEvent = ConnectedEvent;
-            rules = (Ruleset.AccuracyRules)connectedEvent.Rules;
+            this.reportCreator = reportCreator;
             groupBoxReport.Text = NameOfReport;
-            this.Close = Close;
-            for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 0; i--)
+            this.landingToDisplay = landingToDisplay;
+            for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 1; i--)
            {
-                DisplayWind(landingToDisplay.windDataPrior[i]);
+                DisplayWind(landingToDisplay.windDataPrior[i]); //Cycle through to 
             }
-            //ListViewItem LandingTime = new ListViewItem(new string[]{ landingToDisplay.time, landingToDisplay.LandingWind.speed.ToString(), landingToDisplay.LandingWind.direction.ToString(),landingToDisplay.score.ToString()});
-            //LandingTime.BackColor = Color.LightBlue;
-            //listBoxWindLog.Items.Add(LandingTime);
-            //for (int i = 1; i < landingToDisplay.windDataAfter.Length; i++)
-            //{
-            //    DisplayWind(landingToDisplay.windDataAfter[i]);
-            //}
+            ListViewItem LandingItem = new ListViewItem(new string[] { landingToDisplay.time, landingToDisplay.windDataPrior[0].speed.ToString(), landingToDisplay.windDataPrior[0].direction.ToString(), landingToDisplay.score.ToString() });
+            LandingItem.BackColor = Color.LightBlue;
+            listBoxWindLog.Items.Add(LandingItem);
+            for (int i = 1; i < landingToDisplay.windDataAfter.Length; i++)
+            {
+                DisplayWind(landingToDisplay.windDataAfter[i]); 
+            }
         }
         private void DisplayWind(TWind windData)
         {
@@ -47,64 +47,17 @@ namespace CMS.Accuracy.Reports
             {
                 return;
             }
-            if (started)
-            {
-                if (IsDirectionOut(windData, previousWindData))
+             if (windData.speed > 3)
                 {
-                    if (windData.speed > 3)
-                    {
-                        itemToAdd.ForeColor = Color.Red;
-                    }
+                  itemToAdd.ForeColor = Color.Red;
                 }
-                else if (windData.speed > rules.windspeedRejump)
-                {
-                    itemToAdd.ForeColor = Color.Red;
-                    if (windData.speed > rules.windspeedSafe)
-                    {
-                        itemToAdd.BackColor = Color.Black;
-                    }
-                }
-
-            }
-            started = true;
+                    
             listBoxWindLog.Items.Add(itemToAdd);
-            previousWindData = windData.direction;
-
         }
-        private bool IsDirectionOut(TWind wind, int prevData)
-        {
-            int minimum, maximum, minOverFlow, maxOverFlow;
-            if (prevData < rules.directionChangeFA)
-            {
-                minimum = 0;
-                minOverFlow = (360 - ((int)rules.directionChangeFA - prevData));
-                if ((wind.direction <= prevData) || (wind.direction > minOverFlow)) { return false; }
-            }
-            else
-            {
-                minimum = prevData - (int)rules.directionChangeFA;
-                if (wind.direction < minimum) { return true; }
-                else if (prevData > wind.direction) { return false; }
-            }
-            //Max checks
-            if ((prevData + (int)rules.directionChangeFA) > 360)
-            {
-                maximum = 360;
-                maxOverFlow = 0 + ((prevData + (int)rules.directionChangeFA) - 360);
-                if ((wind.direction >= prevData) || (wind.direction < maxOverFlow)) { return false; }
-            }
-            else
-            {
-                maximum = prevData + (int)rules.directionChangeFA;
-                if (wind.direction > maximum) { return true; }
-            }
-
-            return false;
-        }
-
+        
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close(this);
+           // reportCreator.Close(this);
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
@@ -117,12 +70,22 @@ namespace CMS.Accuracy.Reports
             {
                  printDocument1.Print();
             }             
-            display.Save("Test.BMP");
         }
          
          private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
          {
-             e.Graphics.DrawImage(display, 0, 0);
+             System.Drawing.Image img = display;
+             System.Drawing.Rectangle m = e.MarginBounds;
+
+             if ((double)img.Width / (double)img.Height > (double)m.Width / (double)m.Height) // image is wider
+             {
+                 m.Height = (int)((double)img.Height / (double)img.Width * (double)m.Width);
+             }
+             else
+             {
+                 m.Width = (int)((double)img.Width / (double)img.Height * (double)m.Height);
+             }
+             e.Graphics.DrawImage(img, m);
          }
 
          private void buttonSave_Click(object sender, EventArgs e)
@@ -165,6 +128,37 @@ namespace CMS.Accuracy.Reports
              splitContainer1.Panel1.Controls.Add(groupBoxReport);
              undockedForm = null;
              buttonUndock.Text = "Undock";
+         }
+
+         private void button1_Click(object sender, EventArgs e)
+         {
+             xlApp = new Microsoft.Office.Interop.Excel.Application();
+             Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+             Worksheet ws = (Worksheet)wb.Worksheets[1];
+
+             ws.Cells[1, 1].Value2 = "Time";
+             ws.Cells[1, 2].Value2 = "Speed";
+             ws.Cells[1, 3].Value2 = "Direction";
+             ws.Cells[1, 4].Value2 = "Score";
+             ws.Cells[1, 1].EntireRow.Font.Bold = true;
+
+             for (int i = landingToDisplay.windDataPrior.Length - 1; i >= 1; i--)
+             {
+                 ws.Cells[(landingToDisplay.windDataPrior.Length + 1) - i ,1].Value2 = landingToDisplay.windDataPrior[i].time;
+                 ws.Cells[(landingToDisplay.windDataPrior.Length + 1) - i, 2].Value2 = landingToDisplay.windDataPrior[i].speed;
+                 ws.Cells[(landingToDisplay.windDataPrior.Length + 1) - i, 3].Value2 = landingToDisplay.windDataPrior[i].direction;//Cycle through to 
+             }
+             ws.Cells[landingToDisplay.windDataPrior.Length + 1, 1] = landingToDisplay.windDataPrior[0].time;
+             ws.Cells[landingToDisplay.windDataPrior.Length + 1, 2] = landingToDisplay.windDataPrior[0].speed;
+             ws.Cells[landingToDisplay.windDataPrior.Length + 1, 3] = landingToDisplay.windDataPrior[0].direction;
+             ws.Cells[landingToDisplay.windDataPrior.Length + 1, 4] = landingToDisplay.score;
+             for (int i = 1; i < landingToDisplay.windDataAfter.Length; i++)
+             {
+                 ws.Cells[landingToDisplay.windDataPrior.Length+ i + 2, 1].Value2 = landingToDisplay.windDataAfter[i].time;
+                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 2, 2].Value2 = landingToDisplay.windDataAfter[i].speed;
+                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 2, 3].Value2 = landingToDisplay.windDataAfter[i].direction;
+             }
+             xlApp.Visible = true;
          }
     }
 }

@@ -35,6 +35,10 @@
             this.Speed = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Direction = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnScore = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.buttonUndock = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.buttonDeselect = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -45,18 +49,17 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.printDialog = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonUndock = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBoxReport.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBoxPrint.SuspendLayout();
             this.groupBoxClose.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -71,6 +74,7 @@
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.Controls.Add(this.groupBox3);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox6);
@@ -134,6 +138,48 @@
             // columnScore
             // 
             this.columnScore.Text = "Score";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox3.Location = new System.Drawing.Point(0, 228);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(82, 46);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.button1.Location = new System.Drawing.Point(3, 16);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(76, 27);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "Export";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.buttonUndock);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox2.Location = new System.Drawing.Point(0, 182);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(82, 46);
+            this.groupBox2.TabIndex = 9;
+            this.groupBox2.TabStop = false;
+            // 
+            // buttonUndock
+            // 
+            this.buttonUndock.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUndock.Location = new System.Drawing.Point(3, 16);
+            this.buttonUndock.Name = "buttonUndock";
+            this.buttonUndock.Size = new System.Drawing.Size(76, 27);
+            this.buttonUndock.TabIndex = 0;
+            this.buttonUndock.Text = "Undock";
+            this.buttonUndock.UseVisualStyleBackColor = true;
+            this.buttonUndock.Click += new System.EventHandler(this.buttonUndock_Click);
             // 
             // groupBox1
             // 
@@ -228,27 +274,6 @@
             // 
             this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonUndock);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(0, 182);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(82, 46);
-            this.groupBox2.TabIndex = 9;
-            this.groupBox2.TabStop = false;
-            // 
-            // buttonUndock
-            // 
-            this.buttonUndock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUndock.Location = new System.Drawing.Point(3, 16);
-            this.buttonUndock.Name = "buttonUndock";
-            this.buttonUndock.Size = new System.Drawing.Size(76, 27);
-            this.buttonUndock.TabIndex = 0;
-            this.buttonUndock.Text = "Undock";
-            this.buttonUndock.UseVisualStyleBackColor = true;
-            this.buttonUndock.Click += new System.EventHandler(this.buttonUndock_Click);
-            // 
             // LandingReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -261,11 +286,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBoxReport.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBoxPrint.ResumeLayout(false);
             this.groupBoxClose.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -291,5 +317,7 @@
         private System.Windows.Forms.Button buttonDeselect;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button buttonUndock;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -46,7 +46,7 @@ namespace CMS.Accuracy
             checkEventIDStatus();
             checkIsSingles();
             addControllerColumn();
-            //addReportFormToTab(); -- REPORTS NEED CREATING
+            addReportFormToTab();
             refreshGrid();
         }
 

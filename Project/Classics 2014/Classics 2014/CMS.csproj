@@ -85,6 +85,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindGrapher, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\WindGrapher.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accuracy\AccuracyEventController.cs" />
@@ -247,12 +251,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>UserSettings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Forms\windGraphingControllercs.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\windGraphingControllercs.Designer.cs">
-      <DependentUpon>windGraphingControllercs.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="Forms\Accuracy\AccuracyOptionsMenu.resx">
       <DependentUpon>AccuracyOptionsMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -324,9 +322,6 @@
     </Compile>
     <EmbeddedResource Include="Forms\Settings\StandardOptionsPage.resx">
       <DependentUpon>StandardOptionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\windGraphingControllercs.resx">
-      <DependentUpon>windGraphingControllercs.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Accuracy\AccuracySpecificSettings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

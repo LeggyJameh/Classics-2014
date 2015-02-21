@@ -26,10 +26,7 @@ namespace CMS
             System.Media.SoundPlayer audioPlayer = new System.Media.SoundPlayer();
             textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextStandarColour;
             textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
-            windGraphingControllercs windGraphingControllercs2 = new windGraphingControllercs();
-            windGraphingControllercs2.Dock = DockStyle.Fill;
-            tabControl.TabPages[1].Controls.Add(windGraphingControllercs2);
-            Engine = new Engine(this, windGraphingControllercs2);
+            Engine = new Engine(this, tabControl.TabPages[1]);
             for (int i = 0; i < 60; i++)
             {
                 ListViewItem NewItem = (ListViewItem)listBoxWindLog.Items[0].Clone();
@@ -216,7 +213,7 @@ namespace CMS
 
         private void buttonMainSettings_Click(object sender, EventArgs e)
         {
-            addNewTab("Options", new StandardOptionsPage(Engine.windGraph, this));
+            addNewTab("Options", new StandardOptionsPage(this));
         }
 
         private void Main_KeyDown(object sender, KeyEventArgs e)

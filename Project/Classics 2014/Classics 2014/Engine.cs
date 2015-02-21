@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.IO;
 using CMS.MySQL;
+using WindGrapher;
 namespace CMS
 {
     class Engine
@@ -14,25 +15,24 @@ namespace CMS
         public IO_Controller IO_Controller;
         public SQL_Controller SQL_Controller;
         private Thread ListenThread;
+        private WindGrapher.WindGraphController windGraphController;
         public Main mainForm;
         UserControl SideController;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
         public Accuracy.AccuracyEventController accuracyEventController;
         private StreamWriter writer;
+        private TabPage pageForGraph;
         public FileStream fileStream;
-        private StreamReader reader;
-        public windGraphingControllercs windGraph;
         bool LostSerialConnection;
         List<UpdateCompetitorDelegate> competitorUpdateDelegates = new List<UpdateCompetitorDelegate>(); // Delegates that are called when competitors are updated via competitor editor.
         EventLoader eventLoader; // The class used for load execution
         #endregion 
 
-        public Engine(Main mainForm, windGraphingControllercs windGraph)
+        public Engine(Main mainForm, TabPage pageForGraph)
         {
+            this.pageForGraph = pageForGraph;
             this.mainForm = mainForm;
-            this.windGraph = windGraph;
-            windGraph.MainEngine = this;
             AquireMasterFile();
             IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
             SQL_Controller = new SQL_Controller(UserSettings.Default.mySqlDataBaseServerIP, UserSettings.Default.mySqlDataBaseName, UserSettings.Default.mySqlDataBaseUser, UserSettings.Default.mySqlDataBasePassword);
@@ -118,6 +118,7 @@ namespace CMS
             {
                 if (mainForm.IsHandleCreated)
                 {
+                    if (windGraphController == null) { windGraphController = new WindGraphController(pageForGraph, fileStream); }
                     IO_Controller._signal.WaitOne();
                     while ((IO_Controller.CheckIO()[0]) && (mainForm.IsHandleCreated))//If Serial is active
                     {
@@ -156,13 +157,6 @@ namespace CMS
             SideController = null;
         }
 
-        public void DeSerializeGraph(StreamReader newReader)
-        {
-            this.reader = newReader;
-            Thread th = new Thread(new ThreadStart(DesiralizeGraphThreadProcedure));
-            th.Start();
-        }
-
         public void CloseThreads()
         {
             ListenThread.Abort();
@@ -178,7 +172,7 @@ namespace CMS
             mainForm.Invoke((MethodInvoker)(() => mainForm.SetColoursForText(wind, wind.direction, wind.speed)));
 
             mainForm.Invoke((MethodInvoker)(() => mainForm.UpdateWind(wind)));
-            windGraph.UpdateWindGraph(wind);
+            windGraphController.AddData(wind.time, wind.speed, wind.direction);
             ReOrderWindArray(wind);
         }
 
@@ -208,46 +202,9 @@ namespace CMS
             }
             fileStream = new FileStream(Directory.GetCurrentDirectory() + "\\RecentMasterFile\\RecentMasterFile.txt", FileMode.OpenOrCreate, FileAccess.ReadWrite);//ToDo Move this file
             writer = new StreamWriter(fileStream);
-            reader = new StreamReader(fileStream);
-            DeSerializeGraph(reader);
-            //Confirm 
         }
         
-        private void DesiralizeGraphThreadProcedure()
-        {
-            do
-            {
-                Thread.Sleep(100);
-            } while (!mainForm.IsHandleCreated);
-            string input;
-            string[] args;
-            DateTime previousData = new DateTime();
-            bool loopTwo = false;
-            reader.BaseStream.Position = 0;
-            while (!reader.EndOfStream)
-            {
-                input = reader.ReadLine();
-                args = input.Split(':');
-                if (args.Length >= 5)
-                {
-                    DateTime pointTime = Convert.ToDateTime(args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2)));
-                    if ((loopTwo) && (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString())&&(previousData.AddSeconds(1)< pointTime))
-                    {
-                        do
-                        {
-                            previousData.AddSeconds(1);
-                            windGraph.UpdateWindGraph(new TWind {time = (previousData.Hour +":"+previousData.Minute+":" + previousData.Second), speed = 0, direction = 0 });
-                            previousData.AddSeconds(1);
-                            previousData = previousData.AddSeconds(1);
-                        } while (previousData.AddSeconds(1).ToShortTimeString() != pointTime.ToShortTimeString());
-                    }
-                    previousData = pointTime;
-                    loopTwo = true;
-                    windGraph.UpdateWindGraph(new TWind { time = (args[0] + ":" + args[1] + ":" + (args[2].Substring(0, 2))), speed = Convert.ToSingle(args[3]), direction = Convert.ToUInt16(args[4]) });
-                }
-            }
-            Thread.CurrentThread.Abort();
-        }
+
         
         private void ReOrderWindArray(TWind newWind)
         {
@@ -258,7 +215,7 @@ namespace CMS
 
             }
             wind[0] = newWind;
-            mainForm.UpdatelistBoxWindLog(wind);
+            mainForm.UpdatelistBoxWindLog(wind); 
         }
         
         private void CloseSerialInputs()

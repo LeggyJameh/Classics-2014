@@ -11,15 +11,9 @@ namespace CMS
 {
      partial class CommonDisplayOptions : UserControl
     {
-        windGraphingControllercs windGraph;
-        public CommonDisplayOptions(windGraphingControllercs windGraph)
+        public CommonDisplayOptions()
         {
-            this.windGraph = windGraph;
             InitializeComponent();
-            comboBoxNormalColourGraph.SelectedItem = spaceSolvedName(UserSettings.Default.graphNormal.Name);
-            comboBoxWindOutGraph.SelectedItem =spaceSolvedName( UserSettings.Default.graphWindOut.Name);
-            comboBoxDirectionOutGraph.SelectedItem =spaceSolvedName( UserSettings.Default.graphDirectionOut.Name);
-            comboBoxBothOutGraph.SelectedItem = spaceSolvedName(UserSettings.Default.graphBothOut.Name);
             comboBoxDirectionOutSide.SelectedItem =spaceSolvedName( UserSettings.Default.sideTextDirectionOutColour.Name);
             comboBoxNormalColourSide.SelectedItem = spaceSolvedName(UserSettings.Default.sideTextStandarColour.Name);
             comboBoxWindOutColourSide.SelectedItem = spaceSolvedName(UserSettings.Default.sideTextWindOutColour.Name);
@@ -31,7 +25,6 @@ namespace CMS
         private void buttonSave_Click(object sender, EventArgs e)
         {
             UserSettings.Default.Save();
-            windGraph.ResetGraphColours();
         }
         private string spaceSolvedName(string colourName)
         {

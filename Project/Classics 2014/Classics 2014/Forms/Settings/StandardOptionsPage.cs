@@ -11,12 +11,10 @@ namespace CMS
 {
     partial class StandardOptionsPage : UserControl
     {
-        windGraphingControllercs windGraph;
         Main MainForm;
         UserControl rightControl;
-        public StandardOptionsPage(windGraphingControllercs windGraph, Main main)
+        public StandardOptionsPage( Main main)
         {
-            this.windGraph = windGraph;
             this.MainForm = main;
             InitializeComponent();
             listBoxOptionsMenu.SelectedIndex = 0;
@@ -47,7 +45,7 @@ namespace CMS
             switch (listBoxOptionsMenu.SelectedItem.ToString())
             {
                 case "Common Display":
-                    CommonDisplayOptions optionsDisplay = new CommonDisplayOptions( windGraph);
+                    CommonDisplayOptions optionsDisplay = new CommonDisplayOptions();
                     rightControl = optionsDisplay;
                     fitControl();
                     break;

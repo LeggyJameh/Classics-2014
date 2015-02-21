@@ -6,346 +6,509 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using System.Threading;
+
 namespace CMS.Accuracy
 {
     partial class EventAccuracy : UserControl
     {
-        Accuracy_Event Connected_Event;
-        int CurrentCellValue;
-        bool TeamedEvent;
-        Reports.ReportCreation CurrentReportForm;
-        int RoundNumber = 1;
-        bool Admin = false;
-        accuracyEventLandingColumn LandingList;
-        Ruleset.AccuracyRules rules;
+        #region Variables and the such like
+        private Accuracy_Event Connected_Event;
+        private accuracyEventLandingColumn landingList;
+        private int roundNumber = 1;
+        private Reports.ReportCreation currentReportForm;
+        private Dictionary<EventCompetitor, List<AccuracyLanding>> data;
+        private Ruleset.AccuracyRules rules;
+
+        // Colours that are used in the grid to display properties about the landings.
+        private Color modifiedScoreColour = Color.Yellow;
+        private Color modifiedScoreSelectedColor = Color.Olive;
+        private Color manualScoreColour = Color.LightBlue;
+        private Color manualScoreSelectedColor = Color.SteelBlue;
+        private Color rejumpableColour = Color.Red;
+        private Color rejumpableSelectedColor = Color.DarkRed;
+        private Color goodLandingColour = Color.LightGreen;
+        private Color goodLandingSelectedColor = Color.ForestGreen;
+
+        const int columnCountUptofirstRound = 4;
+        #endregion
+
+        /// <summary>
+        /// Init for event. landings can be null if event is new.
+        /// </summary>
+        public EventAccuracy(Accuracy_Event connected_Event, List<AccuracyLanding> landings)
+        {
+            this.Connected_Event = connected_Event;
+            rules = (Ruleset.AccuracyRules)Connected_Event.Rules;
+            InitializeComponent();
+            labelEventName.Text = Connected_Event.Name;
+            loadLandingsAndCompetitors(landings);
+            loadData();
+            addControllerColumn();
+            addReportFormToTab();
+            refreshGrid();
+        }
+
+        #region Setup and layout
+        private void addControllerColumn()
+        {
+            landingList = Connected_Event.controller.column;
+            tableLayoutPanelEvent.Controls.Add(landingList);
+            tableLayoutPanelEvent.SetColumn(landingList, 9);
+            tableLayoutPanelEvent.SetColumnSpan(landingList, 2);
+            tableLayoutPanelEvent.SetRow(landingList, 0);
+            tableLayoutPanelEvent.SetRowSpan(landingList, 3);
+        }
+
+        private void addReportFormToTab()
+        {
+            currentReportForm = new Reports.ReportCreation(Connected_Event);
+            currentReportForm.Dock = DockStyle.Fill;
+            tabControlEvent.TabPages[1].Controls.Add(currentReportForm);
+        }
+
+        #endregion
 
         #region Loading
+
+        /// <summary>
+        /// Creates the dictionary, loads all of the competitors into it and adds any existing landings.
+        /// </summary>
+        private void loadLandingsAndCompetitors(List<AccuracyLanding> landings)
+        {
+            data = new Dictionary<EventCompetitor, List<AccuracyLanding>>();
+            foreach (Team t in Connected_Event.Teams)
+            {
+                foreach (EventCompetitor c in t.Competitors)
+                {
+                    data.Add(c, new List<AccuracyLanding>());
+                }
+            }
+
+            if (landings != null)
+            {
+                foreach (AccuracyLanding l in landings)
+                {
+                    foreach (EventCompetitor c in data.Keys)
+                    {
+                        if (l.UID == c.ID)
+                        {
+                            data[c].Add(l);
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets the round to the highest created value and creates enough columns in the datagrid to support it.
+        /// </summary>
+        private void loadData()
+        {
+            int currentHighestRoundNum = roundNumber;
+
+            foreach (EventCompetitor c in data.Keys)
+            {
+                foreach (AccuracyLanding l in data[c])
+                {
+                    if (l.round > currentHighestRoundNum) // Getting the round that the event is on via the highest round counter on the landings.
+                    {
+                        currentHighestRoundNum = l.round;
+                    }
+                }
+            }
+
+            if (currentHighestRoundNum > (dataGridScores.Columns.Count - columnCountUptofirstRound)) // Adding additional columns if required.
+            {
+                for (int i = 0; i < currentHighestRoundNum - (dataGridScores.Columns.Count - columnCountUptofirstRound); i++)
+                {
+                    dataGridScores.Columns.Add("ColumnR" + currentHighestRoundNum, "Round " + currentHighestRoundNum);
+                }
+            }
+
+            roundNumber = currentHighestRoundNum;
+        }
 
         #endregion
 
         #region General
 
+        /// <summary>
+        /// Completely refreshes the score grid and maintains the selection.
+        /// </summary>
+        private void refreshGrid()
+        {
+            List<DataGridViewCell> selectedCells = getSelectedCells();
+            dataGridScores.SuspendLayout();
+            dataGridScores.Rows.Clear();
+
+            foreach (EventCompetitor c in data.Keys)
+            {
+                string currentTeam = getCompetitorTeamName(c);
+
+                if (currentTeam != "") // Previous function can return "" so check to ensure it doesn't.
+                {
+                    dataGridScores.Rows.Add(c.ID, c.EID, c.name, currentTeam);
+                    foreach (AccuracyLanding l in data[c])
+                    {
+                        DataGridViewCell currentCell = dataGridScores.Rows[dataGridScores.Rows.Count - 1].Cells[l.round + (columnCountUptofirstRound -1 /* -1 because index not count */)];
+                        currentCell.Value = l.score;
+                        currentCell.Tag = "ID" + l.ID + "|UID" + l.UID; // Tagging up the cell for reference points.
+                        currentCell.Style.BackColor = goodLandingColour;
+                        currentCell.Style.SelectionBackColor = goodLandingSelectedColor;
+
+                        if (l.rejumpable) // If rejumpable
+                        {
+                            currentCell.Style.BackColor = rejumpableColour;
+                            currentCell.Style.SelectionBackColor = rejumpableSelectedColor;
+                        }
+
+                        if (l.windDataPrior == null) // If no wind data and therefore manual
+                        {
+                            currentCell.Style.BackColor = manualScoreColour;
+                            currentCell.Style.SelectionBackColor = manualScoreSelectedColor;
+                        }
+
+                        if (l.modified) // If Modified score
+                        {
+                            currentCell.Style.BackColor = modifiedScoreColour;
+                            currentCell.Style.SelectionBackColor = modifiedScoreSelectedColor;
+                        }
+                    }
+                }
+            }
+
+            foreach (DataGridViewCell c in selectedCells)
+            {
+                dataGridScores.Rows[c.RowIndex].Cells[c.ColumnIndex].Selected = true;
+            }
+            selectedCells = null;
+            dataGridScores.ResumeLayout();
+        }
+
+        /// <summary>
+        /// Returns the name of the team for the competitor.
+        /// </summary>
+        private string getCompetitorTeamName(EventCompetitor competitor)
+        {
+            foreach (Team t in Connected_Event.Teams)
+            {
+                foreach (EventCompetitor c in t.Competitors)
+                {
+                    if (c.ID == competitor.ID)
+                    {
+                        return t.Name;
+                    }
+                }
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// Selects the first blank cell in the table.
+        /// </summary>
+        private void selectFirstBlankCell()
+        {
+            DataGridViewCell bestCell = dataGridScores.Rows[0].Cells[columnCountUptofirstRound - 1];
+
+            foreach (DataGridViewRow r in dataGridScores.Rows)
+            {
+                foreach (DataGridViewCell c in r.Cells)
+                {
+                    if (c.ColumnIndex < bestCell.ColumnIndex)
+                    {
+                        bestCell = c;
+                    }
+                }
+            }
+
+            dataGridScores.ClearSelection();
+            bestCell.Selected = true;
+        }
+
+        /// <summary>
+        /// Gets a list of the currently selected cells. Will return an empty list if none.
+        /// </summary>
+        private List<DataGridViewCell> getSelectedCells()
+        {
+            List<DataGridViewCell> cells = new List<DataGridViewCell>();
+
+            foreach (DataGridViewCell c in dataGridScores.SelectedCells)
+            {
+                cells.Add(c);
+            }
+
+            return cells;
+        }
+
+        /// <summary>
+        /// Gets the first selected score cell and returns it. Returns null if none found.
+        /// </summary>
+        private DataGridViewCell getFirstScoreCell()
+        {
+            List<DataGridViewCell> cells = getSelectedCells();
+
+            if (cells.Count > 0) // If previous function did not return empty.
+            {
+                foreach (DataGridViewCell c in cells)
+                {
+                    if (c.ColumnIndex >= columnCountUptofirstRound) // Ensure that it's a score cell column index.
+                    {
+                        return c;
+                    }
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the landing from a cell. Returns null if none can be found.
+        /// </summary>
+        private AccuracyLanding getLandingFromCell(DataGridViewCell cell)
+        {
+            string tag = cell.Tag.ToString();
+            int seperator = tag.IndexOf("|");
+
+            int ID = Convert.ToInt16(tag.Substring(2, seperator - 2));
+            int UID = Convert.ToInt16(tag.Substring(seperator + 4));
+
+            foreach (EventCompetitor c in data.Keys)
+            {
+                if (c.ID == UID)
+                {
+                    foreach (AccuracyLanding l in data[c])
+                    {
+                        if (l.ID == ID)
+                        {
+                            return l;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Gets the round from the currently selected cell. Returns -1 if unknown.
+        /// </summary>
+        private int getRoundFromCell(DataGridViewCell cell)
+        {
+            string name = dataGridScores.Columns[cell.ColumnIndex].Name;
+            if (name.Substring(0, 7) == "ColumnR")
+            {
+                return Convert.ToInt16(name.Substring(7));
+            }
+            return -1;
+        }
+
+        /// <summary>
+        /// Gets the competitor associated with the selected cell. Returns null if none is found.
+        /// </summary>
+        /// <param name="cell"></param>
+        /// <returns></returns>
+        private EventCompetitor getCompetitorFromCell(DataGridViewCell cell)
+        {
+            int UID = Convert.ToInt16(dataGridScores.Rows[cell.RowIndex].Cells[0].Value);
+
+            foreach (EventCompetitor c in data.Keys)
+            {
+                if (c.ID == UID)
+                {
+                    return c;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Removes the specified landing from the event, the controller and the database.
+        /// </summary>
+        private void removeLanding(AccuracyLanding landing, EventCompetitor competitor)
+        {
+            data[competitor].Remove(landing);
+            refreshGrid();
+            Connected_Event.controller.removeLanding(landing.ID);
+            landing = null;
+        }
+
+        /// <summary>
+        /// Assigns the landing in the event, the controller and the database.
+        /// </summary>
+        private void assignLanding(AccuracyLanding landing, EventCompetitor competitor, DataGridViewCell cell)
+        {
+            landing.UID = competitor.ID;
+            landing.round = getRoundFromCell(cell);
+            data[competitor].Add(landing);
+            Connected_Event.controller.assignLanding(landing);
+        }
+
+        /// <summary>
+        /// Adds a manual landing to the event, the controller and the database. MANUAL LANDINGS ONLY.
+        /// </summary>
+        private void addLanding(AccuracyLanding landing, EventCompetitor competitor)
+        {
+            if (landing.windDataPrior == null) // If manual
+            {
+                landing.ID = Connected_Event.SQL_Controller.CreateLanding(landing);
+                data[competitor].Add(landing);
+                Connected_Event.controller.loadLanding(landing);
+            }
+        }
+
+        /// <summary>
+        /// Unassigns the landing in the event, the controller and the database.
+        /// </summary>
+        private void unAssignLanding(AccuracyLanding landing, EventCompetitor competitor)
+        {
+            Connected_Event.controller.unAssignLanding(landing);
+            data[competitor].Remove(landing);
+        }
+
+        /// <summary>
+        /// Returns true if the cell is clear and ready for a landing to be assigned.
+        /// </summary>
+        private bool isCellClear(DataGridViewCell cell)
+        {
+            if (cell.ColumnIndex >= columnCountUptofirstRound) // Ensure that it's a score cell by tag contents.
+            {
+                if (cell.Value == null || cell.Value.ToString() == "")
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         #endregion
 
         #region Control Events
 
-        #endregion
-
-        public EventAccuracy(Accuracy_Event Event)
+        private void inputManualLanding_Click(object sender, EventArgs e)
         {
-            Connected_Event = Event;
-            rules = (Ruleset.AccuracyRules)Event.Rules;
-            InitializeComponent();
-            groupboxControllerListArea.Controls.Add(Connected_Event.controller.column);
-            labelName.Text = "Accuracy Event " + Connected_Event.Name;
-            LoadTeamsIntoGrid();
-             CurrentReportForm = new Reports.ReportCreation(Connected_Event.SQL_Controller, Connected_Event, Connected_Event.EventID);
-            CurrentReportForm.Dock = DockStyle.Fill;
-            tabControlEvent.TabPages[1].Controls.Add(CurrentReportForm);
-            Admin = true;
-            LandingList = Connected_Event.controller.column;
-            if (Admin)
-            {
-                dataGridViewScore.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            }
-        }
+            DataGridViewCell cell = getFirstScoreCell();
+            AccuracyLanding newLanding;
+            EventCompetitor competitor;
+            int round = 0;
 
-        public EventAccuracy(Accuracy_Event Event, bool Admin)
-        {
-            this.Admin = true;
-            Connected_Event = Event;
-            InitializeComponent();
-            if (Admin)
+            if (cell != null)
             {
-                dataGridViewScore.SelectionMode = DataGridViewSelectionMode.CellSelect;
-            }
-            labelName.Text = "Accuracy Event " + Connected_Event.Name;
-            LoadTeamsIntoGrid();
-        }
-
-        private void LoadTeamsIntoGrid()
-        {
-            if (Connected_Event.Teams.Count > 1) // If teams, not singles.
-            {
-                TeamedEvent = true;
-                for (int Ti = 0; Ti < Connected_Event.Teams.Count; Ti++)
+                competitor = getCompetitorFromCell(cell);
+                getRoundFromCell(cell);
+                if (round > 0)
                 {
-                    for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
+                    newLanding = MessageBoxes.CreateAccuracyLanding(Connected_Event, round);
+                    if (newLanding != null)
                     {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].group, Connected_Event.Teams[Ti].Competitors[Ci].nationality, Connected_Event.Teams[Ti].Name);
-                    }
-                }
-            }
-            else // If singles
-            {
-                for (int Ti = 0; Ti < Connected_Event.Teams.Count; Ti++)
-                {
-                    for (int Ci = 0; Ci < Connected_Event.Teams[Ti].Competitors.Count; Ci++)
-                    {
-                        dataGridViewScore.Rows.Add(Connected_Event.Teams[Ti].Competitors[Ci].ID, Connected_Event.Teams[Ti].Competitors[Ci].name, Connected_Event.Teams[Ti].Competitors[Ci].group, Connected_Event.Teams[Ti].Competitors[Ci].nationality, "N/A");
-                    }
-                }
-            }
-        }
-
-        public void LoadExistingEventLandings() // Look at
-        {
-            List<AccuracyLanding> Landings = (List<AccuracyLanding>)Connected_Event.SQL_Controller.GetLandingsForEvent(Connected_Event.EventID, EventType.INTL_ACCURACY);
-
-            for (int i = 0; i < Landings.Count; i++)
-            {
-                Connected_Event.controller.loadLanding(Landings[i]);
-                for (int i2 = 0; i2 < dataGridViewScore.Rows.Count; i2++)
-                {
-                    while (Landings[i].round + 4 >= dataGridViewScore.Columns.Count)
-                    {
-                        RoundNumber++;
-                        DataGridViewColumn NewColumn = (DataGridViewColumn)dataGridViewScore.Columns[4].Clone();
-                        NewColumn.Name = "ColumnRound" + RoundNumber;
-                        NewColumn.HeaderText = "Round " + RoundNumber;
-                        dataGridViewScore.Columns.Add(NewColumn);
-                    }
-                    if (Convert.ToInt16(dataGridViewScore.Rows[i2].Cells[0].Value) == Landings[i].UID)
-                    {
-                        int Column = Landings[i].round + 4;
-
-                        dataGridViewScore.Rows[i2].Cells[Column].Value = Landings[i].score;
-                        dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightGreen;
-
-                        if (Landings[i].modified == true) // If score has been manually reset
+                        if (competitor != null)
                         {
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.Yellow;
-                        }
-
-                        if (Landings[i].windDataPrior == null) // If there is no wind data and therefore a manual entry.
-                        {
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.BackColor = Color.LightBlue;
-                        }
-
-                        if (Landings[i].rejumpable == true)
-                        {
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.ForeColor = Color.Red;
-                            dataGridViewScore.Rows[i2].Cells[Column].Style.Font = new Font(DefaultFont, FontStyle.Bold);
-                        }
-
-                        Landings[i].dataGridCell = dataGridViewScore.Rows[i2].Cells[Column];
-                    }
-                }
-
-                Connected_Event.controller.loadLanding((AccuracyLanding)Landings[i]);
-                //if (Landings[i].UID == -1)
-                //{
-                //    Connected_Event.controller.column.AddLanding(
-                //    dataGridViewLandings.Rows.Add(Landings[i].ID, "N/A", Landings[i].score, true);
-                //}
-                //else
-                //{
-                //    dataGridViewLandings.Rows.Add(Landings[i].ID, "N/A", Landings[i].score, true);
-                //    dataGridViewLandings.Rows[dataGridViewLandings.Rows.Count - 2].Visible = false;
-                //}
-            }
-        }
-
-        public void FormatLandingToRejumpable(AccuracyLanding L)
-        {
-            if (L.dataGridCell != null)
-            {
-                dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.ForeColor = Color.Red;
-                dataGridViewScore[L.dataGridCell.ColumnIndex, L.dataGridCell.RowIndex].Style.Font = new Font(DefaultFont, FontStyle.Bold);
-            }
-        }
-
-        private void SelectFirstUncompletedCompetitorScore()
-        {
-            for (int i = 0; i < dataGridViewScore.Rows.Count; i++)
-            {
-                if (dataGridViewScore.Rows[i].Cells[4 + RoundNumber].Value == null)
-                {
-                    dataGridViewScore.Rows[i].Selected = true;
-                    return;
-                }
-            }
-        }
-
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            Connected_Event.Exit();
-        }
-
-        private void buttonEditLanding_Click(object sender, EventArgs e)
-        {
-            AccuracyLanding currentLanding;
-            if(dataGridViewScore.SelectedCells.Count != 0)
-            {
-                if (dataGridViewScore.SelectedCells[0].Value != null)
-                {
-                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
-                    {
-                        currentLanding = Connected_Event.controller.getLandingFromCell(dataGridViewScore.SelectedCells[0]);
-                        currentLanding.score = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), rules.maxScore);
-                        if (currentLanding.score != -1)
-                        {
-                            dataGridViewScore.SelectedCells[0].Value = currentLanding.score;
-                            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.Yellow;
-                            currentLanding.modified = true;
-
-                            Connected_Event.SQL_Controller.ModifyLanding(currentLanding);
-                            CurrentReportForm.Update(currentLanding.UID, currentLanding.round, currentLanding.dataGridCell);
+                            addLanding(newLanding, competitor);
                         }
                     }
                 }
             }
+            refreshGrid();
         }
 
-        private void buttonManualLanding_Click(object sender, EventArgs e)
+        private void inputEditScore_Click(object sender, EventArgs e)
         {
-            AccuracyLanding CurrentLanding;
-            if (dataGridViewScore.SelectedCells.Count != 0)
+            DataGridViewCell currentCell = getFirstScoreCell();
+            AccuracyLanding currentlanding;
+            if (currentCell != null)
             {
-                if (dataGridViewScore.SelectedCells[0].Value == null)
+                currentlanding = getLandingFromCell(currentCell);
+
+                if (currentlanding != null)
                 {
-                    if (dataGridViewScore.SelectedCells[0].ColumnIndex >= 4)
-                    {
-                        int NewScore = MessageBoxes.ModifyScore(Convert.ToInt16(dataGridViewScore.SelectedCells[0].Value), rules.maxScore);
-                        if (NewScore != -1)
-                        {
-                            dataGridViewScore.SelectedCells[0].Value = NewScore;
-                            dataGridViewScore.SelectedCells[0].Style.BackColor = Color.LightBlue;
-
-                            CurrentLanding = new AccuracyLanding(DateTime.Now.ToLongTimeString(), NewScore, false, false, true, dataGridViewScore.SelectedCells[0].ColumnIndex - 4, null, null);
-                            CurrentLanding.UID = Convert.ToInt16(dataGridViewScore.SelectedCells[0].OwningRow.Cells[0].Value);
-                            CurrentLanding.eventID = Connected_Event.EventID;
-                            CurrentLanding.ID = Connected_Event.SQL_Controller.CreateLanding(CurrentLanding);
-                            CurrentLanding.dataGridCell = dataGridViewScore.SelectedCells[0];
-
-                            Connected_Event.controller.loadLanding(CurrentLanding);
-
-                            CurrentReportForm.Update(CurrentLanding.UID, CurrentLanding.round , CurrentLanding.dataGridCell);
-                        }
-                    }
-                }
-            }
-        } 
-
-        private void buttonNextRound_Click(object sender, EventArgs e)
-        {
-            RoundNumber++;
-            DataGridViewColumn NewColumn = (DataGridViewColumn)dataGridViewScore.Columns[4].Clone();
-            NewColumn.Name = "ColumnRound" + RoundNumber;
-            NewColumn.HeaderText = "Round " + RoundNumber;
-            dataGridViewScore.Columns.Add(NewColumn);
-        }
-
-        private bool SelectFirstVisibleRowOnDataGrid(DataGridView dataGrid)
-        {
-            if (Admin)
-            {
-                for (int i = 0; i < dataGrid.Rows.Count; i++)
-                {
-                    if (dataGrid.Rows[i].Visible == true)
-                    {
-                            dataGrid.ClearSelection();
-                            dataGrid.Rows[i].Selected = true;
-                    }
-                }
-                return false;
-            }
-            else
-            {
-                dataGrid.ClearSelection();
-                for (int i = 0; i < dataGrid.Rows.Count; i++)
-                {
-                    if (dataGrid.Rows[i].Visible == true)
-                    {
-                        dataGrid.Rows[i].Selected = true;
-                        return true;
-                    }
-                }
-                return false;
-            }
-        }
-
-        private void buttonUnassignLanding_Click(object sender, EventArgs e) 
-        {
-            if (dataGridViewScore.SelectedCells.Count > 0)
-            {
-                if (dataGridViewScore.SelectedCells[0].ColumnIndex > 4)
-                {
-                    AccuracyLanding currentLanding = Connected_Event.controller.getLandingFromCell(dataGridViewScore.SelectedCells[0]);
-                    Connected_Event.controller.unAssignLanding(currentLanding);
-                }
-            }
-        }
-
-        private void buttonConfirm_Click(object sender, EventArgs e)
-        {
-            if ((dataGridViewScore.SelectedCells.Count > 0) && (Admin))
-            {
-                if (dataGridViewScore.SelectedCells[0].Value == null)
-                {
-                    AccuracyLanding currentLanding = Connected_Event.controller.getColumnLanding();
-                    if (currentLanding != null)
-                    {
-                        int UID = Convert.ToInt16(dataGridViewScore.Rows[dataGridViewScore.SelectedCells[0].RowIndex].Cells[0]);
-
-                        currentLanding.UID = UID;
-                        currentLanding.dataGridCell = dataGridViewScore.SelectedCells[0];
-                        currentLanding.round = dataGridViewScore.SelectedCells[0].ColumnIndex - 4;
-                        Connected_Event.controller.assignLanding(currentLanding);
-                        CurrentReportForm.Update(UID, currentLanding.round, currentLanding.dataGridCell);
-                    }
-                }
-            }
-        }
-
-        private void buttonRenameCompetitor_Click(object sender, EventArgs e)
-        {
-            string NewName = MessageBoxes.ModifyCompetitorName();
-            int UID = Convert.ToInt16(dataGridViewScore.SelectedRows[0].Cells[0].Value);
-            string Team = Convert.ToString(dataGridViewScore.SelectedRows[0].Cells[2].Value);
-            string Nationality = Convert.ToString(dataGridViewScore.SelectedRows[0].Cells[3].Value);
-
-            if (Connected_Event.SQL_Controller.ModifyCompetitor(UID, NewName, Team, Nationality))
-            {
-                dataGridViewScore.SelectedRows[0].Cells[1].Value = NewName;
-            }
-            CurrentReportForm.Update();
-        }
-
-        private void buttonRejump_Click(object sender, EventArgs e)
-        {
-            if (dataGridViewScore.SelectedCells.Count > 0)
-            {
-                if (dataGridViewScore.SelectedCells[0].ColumnIndex > 4)
-                {
-                    if (dataGridViewScore.SelectedCells[0].Value != null)
-                    {
-                        AccuracyLanding landing = Connected_Event.controller.getLandingFromCell(dataGridViewScore.SelectedCells[0]);
-
-                        Connected_Event.controller.removeLanding(landing.ID);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Please select a landing to rejump and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    currentlanding.score = MessageBoxes.ModifyScore(currentlanding.score, rules.maxScore);
+                    currentlanding.modified = true;
                 }
             }
             else
             {
-                MessageBox.Show("Please select a landing to rejump and try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please select a valid cell.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
-        } //and here
+            refreshGrid();
+        }
 
-        private void dataGridViewScore_SelectionChanged(object sender, EventArgs e)
+        private void inputUnassignLanding_Click(object sender, EventArgs e)
         {
-            if (Admin)
+            DataGridViewCell cell = getFirstScoreCell();
+            AccuracyLanding landing;
+            EventCompetitor competitor;
+
+            if (cell != null)
             {
-                if ((dataGridViewScore.SelectedCells.Count > 0)&&(dataGridViewScore.SelectedCells[0].ColumnIndex < 5))
+                landing = getLandingFromCell(cell);
+                competitor = getCompetitorFromCell(cell);
+
+                if (landing != null)
                 {
-                    dataGridViewScore.ClearSelection();
+                    if (competitor != null)
+                    {
+                        unAssignLanding(landing, competitor);
+                    }
                 }
+            }
+            refreshGrid();
+        }
+
+        private void inputNextRound_Click(object sender, EventArgs e)
+        {
+            roundNumber++;
+            dataGridScores.Columns.Add("ColumnR" + roundNumber, "Round " + roundNumber);
+        }
+
+        private void inputConfirm_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = getFirstScoreCell();
+            AccuracyLanding landing = Connected_Event.controller.getColumnLanding();
+            EventCompetitor competitor;
+
+            if (landing != null)
+            {
+                if (cell != null)
+                {
+                    competitor = getCompetitorFromCell(cell);
+                    if (competitor != null)
+                    {
+                        if (isCellClear(cell))
+                        {
+                            assignLanding(landing, competitor, cell);
+                        }
+                    }
+                }
+            }
+            refreshGrid();
+        }
+
+        private void inputRejump_Click(object sender, EventArgs e)
+        {
+            DataGridViewCell cell = getFirstScoreCell();
+            AccuracyLanding landing;
+            EventCompetitor competitor;
+
+            if (cell != null)
+            {
+                landing = getLandingFromCell(cell);
+                competitor = getCompetitorFromCell(cell);
+                if (landing != null)
+                {
+                    if (competitor != null)
+                    {
+                        removeLanding(landing, competitor);
+                    }
+                }
+            }
+            refreshGrid();
+        }
+
+        private void inputClose_Click(object sender, EventArgs e)
+        {
+            // Check for landings in progress?
+            if (MessageBox.Show("Are you sure you wish to close the current event? No data will be lost.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) == DialogResult.Yes)
+            {
+                Connected_Event.Exit();
             }
         }
     }
+        #endregion
 }

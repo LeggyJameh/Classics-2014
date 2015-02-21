@@ -109,6 +109,12 @@
     <Compile Include="Forms\Accuracy\EventAccuracyInit.Designer.cs">
       <DependentUpon>EventAccuracyInit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Accuracy\EventAccuracy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\Accuracy\EventAccuracy.Designer.cs">
+      <DependentUpon>EventAccuracy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Accuracy\Reports\LandingReport.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -196,12 +202,6 @@
     <Compile Include="Object Only Classes\Landing.cs" />
     <Compile Include="MySQL\MySqlEvent.cs" />
     <Compile Include="MySQL\MySqlLanding.cs" />
-    <Compile Include="Forms\Accuracy\EventAccuracy.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Forms\Accuracy\EventAccuracy.Designer.cs">
-      <DependentUpon>EventAccuracy.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\Settings\CommonDisplayOptions.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -258,6 +258,9 @@
     <EmbeddedResource Include="Forms\Accuracy\EventAccuracyInit.resx">
       <DependentUpon>EventAccuracyInit.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Accuracy\EventAccuracy.resx">
+      <DependentUpon>EventAccuracy.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accuracy\Reports\LandingReport.resx">
       <DependentUpon>LandingReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -287,10 +290,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\EventPicker.resx">
       <DependentUpon>EventPicker.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\Accuracy\EventAccuracy.resx">
-      <DependentUpon>EventAccuracy.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\CommonDisplayOptions.resx">

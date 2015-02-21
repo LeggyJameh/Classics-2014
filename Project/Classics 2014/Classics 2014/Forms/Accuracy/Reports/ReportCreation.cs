@@ -21,7 +21,7 @@ namespace CMS.Accuracy.Reports
         List<AccuracyLanding> landings;
         int eventId;
         bool selectEntireTeam;
-        public ReportCreation(SQL_Controller sqlController, Accuracy_Event connectedEvent, int eventId)
+        public ReportCreation(Accuracy_Event connectedEvent)
         {
             InitializeComponent();
             listBoxEventList.Items.AddRange(new String[]{"Leaderboard", "Competitor", "Landing"});
@@ -29,9 +29,9 @@ namespace CMS.Accuracy.Reports
             {
                 listBoxEventList.Items.Add("Team");
             }
-            this.sqlController = sqlController;
+            connectedEvent.SQL_Controller = sqlController;
             this.connectedEvent = connectedEvent;
-            this.eventId = eventId;
+            this.eventId = connectedEvent.EventID;
             ActiveReport = dataGridViewLockedLeaderboard;
             Populate();
             listBoxEventList.SelectedIndex = 0;

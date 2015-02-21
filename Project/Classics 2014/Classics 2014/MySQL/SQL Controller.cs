@@ -272,6 +272,9 @@ namespace CMS.MySQL
             return null;
         }
 
+        /// <summary>
+        /// Adds the landing to the database, and returns the ID.
+        /// </summary>
         public int CreateLanding(Landing Landing)
         {
             MySqlLanding CurrentLanding = SerialiseLanding(Landing);

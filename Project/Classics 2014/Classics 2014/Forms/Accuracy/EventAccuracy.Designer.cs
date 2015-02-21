@@ -29,343 +29,304 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.tabControlEvent = new System.Windows.Forms.TabControl();
-            this.tabPageScores = new System.Windows.Forms.TabPage();
-            this.groupboxControllerListArea = new System.Windows.Forms.GroupBox();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.labelName = new System.Windows.Forms.Label();
-            this.dataGridViewScore = new System.Windows.Forms.DataGridView();
+            this.tableLayoutPanelEvent = new System.Windows.Forms.TableLayoutPanel();
+            this.labelEventName = new System.Windows.Forms.Label();
+            this.dataGridScores = new System.Windows.Forms.DataGridView();
             this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnIntermixTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnRound1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonNextRound = new System.Windows.Forms.Button();
-            this.buttonRenameCompetitor = new System.Windows.Forms.Button();
-            this.buttonUnassignLanding = new System.Windows.Forms.Button();
-            this.buttonEditLanding = new System.Windows.Forms.Button();
-            this.buttonManualLanding = new System.Windows.Forms.Button();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.buttonConfirm = new System.Windows.Forms.Button();
-            this.buttonRejump = new System.Windows.Forms.Button();
-            this.tabPageReports = new System.Windows.Forms.TabPage();
+            this.ColumnR1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.inputConfirm = new System.Windows.Forms.Button();
+            this.inputRejump = new System.Windows.Forms.Button();
+            this.inputClose = new System.Windows.Forms.Button();
+            this.inputNextRound = new System.Windows.Forms.Button();
+            this.inputManualLanding = new System.Windows.Forms.Button();
+            this.inputEditScore = new System.Windows.Forms.Button();
+            this.inputUnassignLanding = new System.Windows.Forms.Button();
+            this.tabControlEvent = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanelEvent.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridScores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tabControlEvent.SuspendLayout();
-            this.tabPageScores.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).BeginInit();
-            this.tableLayoutPanel2.SuspendLayout();
+            this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControlEvent
+            // tableLayoutPanelEvent
             // 
-            this.tabControlEvent.Alignment = System.Windows.Forms.TabAlignment.Bottom;
-            this.tabControlEvent.Controls.Add(this.tabPageScores);
-            this.tabControlEvent.Controls.Add(this.tabPageReports);
-            this.tabControlEvent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControlEvent.Location = new System.Drawing.Point(0, 0);
-            this.tabControlEvent.Name = "tabControlEvent";
-            this.tabControlEvent.SelectedIndex = 0;
-            this.tabControlEvent.Size = new System.Drawing.Size(1280, 800);
-            this.tabControlEvent.TabIndex = 0;
+            this.tableLayoutPanelEvent.ColumnCount = 11;
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.tableLayoutPanelEvent.Controls.Add(this.labelEventName, 0, 0);
+            this.tableLayoutPanelEvent.Controls.Add(this.dataGridScores, 0, 1);
+            this.tableLayoutPanelEvent.Controls.Add(this.pictureBox1, 8, 0);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputManualLanding, 0, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputEditScore, 1, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputUnassignLanding, 2, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputRejump, 3, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputNextRound, 5, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputConfirm, 4, 2);
+            this.tableLayoutPanelEvent.Controls.Add(this.inputClose, 7, 2);
+            this.tableLayoutPanelEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanelEvent.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanelEvent.Name = "tableLayoutPanelEvent";
+            this.tableLayoutPanelEvent.RowCount = 3;
+            this.tableLayoutPanelEvent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanelEvent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanelEvent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
+            this.tableLayoutPanelEvent.Size = new System.Drawing.Size(1266, 688);
+            this.tableLayoutPanelEvent.TabIndex = 0;
             // 
-            // tabPageScores
+            // labelEventName
             // 
-            this.tabPageScores.Controls.Add(this.groupboxControllerListArea);
-            this.tabPageScores.Controls.Add(this.tableLayoutPanel1);
-            this.tabPageScores.Location = new System.Drawing.Point(4, 4);
-            this.tabPageScores.Name = "tabPageScores";
-            this.tabPageScores.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageScores.Size = new System.Drawing.Size(1272, 774);
-            this.tabPageScores.TabIndex = 0;
-            this.tabPageScores.Text = "Scores";
-            this.tabPageScores.UseVisualStyleBackColor = true;
+            this.labelEventName.AutoSize = true;
+            this.tableLayoutPanelEvent.SetColumnSpan(this.labelEventName, 8);
+            this.labelEventName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.labelEventName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEventName.Location = new System.Drawing.Point(3, 0);
+            this.labelEventName.Name = "labelEventName";
+            this.labelEventName.Size = new System.Drawing.Size(986, 30);
+            this.labelEventName.TabIndex = 10;
+            this.labelEventName.Text = "WHERE THE EVENT NAME BE AT? IS IT WITH DA G\'S?";
+            this.labelEventName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // groupboxControllerListArea
+            // dataGridScores
             // 
-            this.groupboxControllerListArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupboxControllerListArea.Location = new System.Drawing.Point(1069, 3);
-            this.groupboxControllerListArea.Name = "groupboxControllerListArea";
-            this.groupboxControllerListArea.Size = new System.Drawing.Size(200, 768);
-            this.groupboxControllerListArea.TabIndex = 1;
-            this.groupboxControllerListArea.TabStop = false;
-            // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.labelName, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dataGridViewScore, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 4);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 5;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(1066, 768);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // labelName
-            // 
-            this.labelName.AutoSize = true;
-            this.labelName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelName.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelName.Location = new System.Drawing.Point(3, 0);
-            this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(1060, 50);
-            this.labelName.TabIndex = 0;
-            this.labelName.Text = "Accuracy Event --";
-            this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // dataGridViewScore
-            // 
-            this.dataGridViewScore.AllowUserToAddRows = false;
-            this.dataGridViewScore.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.White;
-            this.dataGridViewScore.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewScore.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewScore.BackgroundColor = System.Drawing.Color.White;
-            this.dataGridViewScore.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewScore.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridScores.AllowUserToAddRows = false;
+            this.dataGridScores.AllowUserToDeleteRows = false;
+            this.dataGridScores.AllowUserToResizeColumns = false;
+            this.dataGridScores.AllowUserToResizeRows = false;
+            this.dataGridScores.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridScores.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridScores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridScores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnUID,
+            this.ColumnEID,
             this.ColumnName,
             this.ColumnTeam,
-            this.ColumnNationality,
-            this.ColumnIntermixTeam,
-            this.ColumnRound1});
-            this.dataGridViewScore.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewScore.Location = new System.Drawing.Point(3, 53);
-            this.dataGridViewScore.MultiSelect = false;
-            this.dataGridViewScore.Name = "dataGridViewScore";
-            this.dataGridViewScore.RowHeadersVisible = false;
-            this.tableLayoutPanel1.SetRowSpan(this.dataGridViewScore, 3);
-            this.dataGridViewScore.RowTemplate.Height = 20;
-            this.dataGridViewScore.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewScore.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewScore.Size = new System.Drawing.Size(1060, 662);
-            this.dataGridViewScore.TabIndex = 1;
-            this.dataGridViewScore.SelectionChanged += new System.EventHandler(this.dataGridViewScore_SelectionChanged);
+            this.ColumnR1});
+            this.tableLayoutPanelEvent.SetColumnSpan(this.dataGridScores, 8);
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridScores.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridScores.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridScores.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridScores.Location = new System.Drawing.Point(3, 33);
+            this.dataGridScores.MultiSelect = false;
+            this.dataGridScores.Name = "dataGridScores";
+            this.dataGridScores.RowHeadersVisible = false;
+            this.dataGridScores.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.dataGridScores.Size = new System.Drawing.Size(986, 622);
+            this.dataGridScores.TabIndex = 11;
             // 
             // ColumnUID
             // 
-            this.ColumnUID.HeaderText = "ID";
+            this.ColumnUID.HeaderText = "UID";
             this.ColumnUID.Name = "ColumnUID";
             this.ColumnUID.ReadOnly = true;
             this.ColumnUID.Visible = false;
-            this.ColumnUID.Width = 24;
+            // 
+            // ColumnEID
+            // 
+            this.ColumnEID.HeaderText = "Event ID";
+            this.ColumnEID.Name = "ColumnEID";
+            this.ColumnEID.ReadOnly = true;
             // 
             // ColumnName
             // 
-            this.ColumnName.HeaderText = "Competitor Name";
-            this.ColumnName.MinimumWidth = 50;
+            this.ColumnName.HeaderText = "Name";
             this.ColumnName.Name = "ColumnName";
             this.ColumnName.ReadOnly = true;
-            this.ColumnName.Width = 104;
             // 
             // ColumnTeam
             // 
             this.ColumnTeam.HeaderText = "Team";
             this.ColumnTeam.Name = "ColumnTeam";
             this.ColumnTeam.ReadOnly = true;
-            this.ColumnTeam.Visible = false;
-            this.ColumnTeam.Width = 59;
             // 
-            // ColumnNationality
+            // ColumnR1
             // 
-            this.ColumnNationality.HeaderText = "Nationality";
-            this.ColumnNationality.Name = "ColumnNationality";
-            this.ColumnNationality.ReadOnly = true;
-            this.ColumnNationality.Width = 81;
+            this.ColumnR1.HeaderText = "Round 1";
+            this.ColumnR1.Name = "ColumnR1";
+            this.ColumnR1.ReadOnly = true;
             // 
-            // ColumnIntermixTeam
+            // pictureBox1
             // 
-            this.ColumnIntermixTeam.HeaderText = "Scoring Team";
-            this.ColumnIntermixTeam.Name = "ColumnIntermixTeam";
-            this.ColumnIntermixTeam.ReadOnly = true;
-            this.ColumnIntermixTeam.Width = 90;
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = global::CMS.Properties.Resources.SplitterBar;
+            this.pictureBox1.Location = new System.Drawing.Point(995, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.tableLayoutPanelEvent.SetRowSpan(this.pictureBox1, 3);
+            this.pictureBox1.Size = new System.Drawing.Size(14, 682);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.pictureBox1.TabIndex = 12;
+            this.pictureBox1.TabStop = false;
             // 
-            // ColumnRound1
+            // inputConfirm
             // 
-            this.ColumnRound1.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.AllCells;
-            this.ColumnRound1.HeaderText = "Round 1";
-            this.ColumnRound1.Name = "ColumnRound1";
-            this.ColumnRound1.ReadOnly = true;
-            this.ColumnRound1.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.ColumnRound1.Width = 68;
+            this.inputConfirm.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputConfirm.Location = new System.Drawing.Point(499, 661);
+            this.inputConfirm.Name = "inputConfirm";
+            this.inputConfirm.Size = new System.Drawing.Size(118, 23);
+            this.inputConfirm.TabIndex = 5;
+            this.inputConfirm.Text = "Confirm";
+            this.inputConfirm.UseVisualStyleBackColor = true;
+            this.inputConfirm.Click += new System.EventHandler(this.inputConfirm_Click);
             // 
-            // tableLayoutPanel2
+            // inputRejump
             // 
-            this.tableLayoutPanel2.ColumnCount = 11;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Controls.Add(this.buttonNextRound, 6, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonRenameCompetitor, 5, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonUnassignLanding, 4, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonEditLanding, 3, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonManualLanding, 2, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonClose, 1, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonConfirm, 8, 0);
-            this.tableLayoutPanel2.Controls.Add(this.buttonRejump, 9, 0);
-            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 721);
-            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-            this.tableLayoutPanel2.RowCount = 1;
-            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(1060, 44);
-            this.tableLayoutPanel2.TabIndex = 5;
+            this.inputRejump.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputRejump.Location = new System.Drawing.Point(375, 661);
+            this.inputRejump.Name = "inputRejump";
+            this.inputRejump.Size = new System.Drawing.Size(118, 23);
+            this.inputRejump.TabIndex = 6;
+            this.inputRejump.Text = "Rejump";
+            this.inputRejump.UseVisualStyleBackColor = true;
+            this.inputRejump.Click += new System.EventHandler(this.inputRejump_Click);
             // 
-            // buttonNextRound
+            // inputClose
             // 
-            this.buttonNextRound.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonNextRound.Location = new System.Drawing.Point(583, 3);
-            this.buttonNextRound.Name = "buttonNextRound";
-            this.buttonNextRound.Size = new System.Drawing.Size(94, 38);
-            this.buttonNextRound.TabIndex = 1;
-            this.buttonNextRound.Text = "Next Round";
-            this.buttonNextRound.UseVisualStyleBackColor = true;
-            this.buttonNextRound.Click += new System.EventHandler(this.buttonNextRound_Click);
+            this.inputClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputClose.Location = new System.Drawing.Point(871, 661);
+            this.inputClose.Name = "inputClose";
+            this.inputClose.Size = new System.Drawing.Size(118, 23);
+            this.inputClose.TabIndex = 9;
+            this.inputClose.Text = "Close";
+            this.inputClose.UseVisualStyleBackColor = true;
+            this.inputClose.Click += new System.EventHandler(this.inputClose_Click);
             // 
-            // buttonRenameCompetitor
+            // inputNextRound
             // 
-            this.buttonRenameCompetitor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRenameCompetitor.Location = new System.Drawing.Point(483, 3);
-            this.buttonRenameCompetitor.Name = "buttonRenameCompetitor";
-            this.buttonRenameCompetitor.Size = new System.Drawing.Size(94, 38);
-            this.buttonRenameCompetitor.TabIndex = 4;
-            this.buttonRenameCompetitor.Text = "Rename Competitor";
-            this.buttonRenameCompetitor.UseVisualStyleBackColor = true;
-            this.buttonRenameCompetitor.Click += new System.EventHandler(this.buttonRenameCompetitor_Click);
+            this.inputNextRound.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputNextRound.Location = new System.Drawing.Point(623, 661);
+            this.inputNextRound.Name = "inputNextRound";
+            this.inputNextRound.Size = new System.Drawing.Size(118, 23);
+            this.inputNextRound.TabIndex = 3;
+            this.inputNextRound.Text = "Next Round";
+            this.inputNextRound.UseVisualStyleBackColor = true;
+            this.inputNextRound.Click += new System.EventHandler(this.inputNextRound_Click);
             // 
-            // buttonUnassignLanding
+            // inputManualLanding
             // 
-            this.buttonUnassignLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUnassignLanding.Enabled = false;
-            this.buttonUnassignLanding.Location = new System.Drawing.Point(383, 3);
-            this.buttonUnassignLanding.Name = "buttonUnassignLanding";
-            this.buttonUnassignLanding.Size = new System.Drawing.Size(94, 38);
-            this.buttonUnassignLanding.TabIndex = 6;
-            this.buttonUnassignLanding.Text = "Unassign Landing";
-            this.buttonUnassignLanding.UseVisualStyleBackColor = true;
-            this.buttonUnassignLanding.Click += new System.EventHandler(this.buttonUnassignLanding_Click);
+            this.inputManualLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputManualLanding.Location = new System.Drawing.Point(3, 661);
+            this.inputManualLanding.Name = "inputManualLanding";
+            this.inputManualLanding.Size = new System.Drawing.Size(118, 23);
+            this.inputManualLanding.TabIndex = 0;
+            this.inputManualLanding.Text = "Manual Landing";
+            this.inputManualLanding.UseVisualStyleBackColor = true;
+            this.inputManualLanding.Click += new System.EventHandler(this.inputManualLanding_Click);
             // 
-            // buttonEditLanding
+            // inputEditScore
             // 
-            this.buttonEditLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonEditLanding.Location = new System.Drawing.Point(283, 3);
-            this.buttonEditLanding.Name = "buttonEditLanding";
-            this.buttonEditLanding.Size = new System.Drawing.Size(94, 38);
-            this.buttonEditLanding.TabIndex = 3;
-            this.buttonEditLanding.Text = "Edit Score";
-            this.buttonEditLanding.UseVisualStyleBackColor = true;
-            this.buttonEditLanding.Click += new System.EventHandler(this.buttonEditLanding_Click);
+            this.inputEditScore.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputEditScore.Location = new System.Drawing.Point(127, 661);
+            this.inputEditScore.Name = "inputEditScore";
+            this.inputEditScore.Size = new System.Drawing.Size(118, 23);
+            this.inputEditScore.TabIndex = 1;
+            this.inputEditScore.Text = "Edit Score";
+            this.inputEditScore.UseVisualStyleBackColor = true;
+            this.inputEditScore.Click += new System.EventHandler(this.inputEditScore_Click);
             // 
-            // buttonManualLanding
+            // inputUnassignLanding
             // 
-            this.buttonManualLanding.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonManualLanding.Location = new System.Drawing.Point(183, 3);
-            this.buttonManualLanding.Name = "buttonManualLanding";
-            this.buttonManualLanding.Size = new System.Drawing.Size(94, 38);
-            this.buttonManualLanding.TabIndex = 7;
-            this.buttonManualLanding.Text = "Manual Landing";
-            this.buttonManualLanding.UseVisualStyleBackColor = true;
-            this.buttonManualLanding.Click += new System.EventHandler(this.buttonManualLanding_Click);
+            this.inputUnassignLanding.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputUnassignLanding.Location = new System.Drawing.Point(251, 661);
+            this.inputUnassignLanding.Name = "inputUnassignLanding";
+            this.inputUnassignLanding.Size = new System.Drawing.Size(118, 23);
+            this.inputUnassignLanding.TabIndex = 2;
+            this.inputUnassignLanding.Text = "Unassign Landing";
+            this.inputUnassignLanding.UseVisualStyleBackColor = true;
+            this.inputUnassignLanding.Click += new System.EventHandler(this.inputUnassignLanding_Click);
             // 
-            // buttonClose
+            // tabControlEvent
             // 
-            this.buttonClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonClose.Location = new System.Drawing.Point(83, 3);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(94, 38);
-            this.buttonClose.TabIndex = 5;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
+            this.tabControlEvent.Alignment = System.Windows.Forms.TabAlignment.Bottom;
+            this.tabControlEvent.Controls.Add(this.tabPage1);
+            this.tabControlEvent.Controls.Add(this.tabPage2);
+            this.tabControlEvent.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabControlEvent.Location = new System.Drawing.Point(0, 0);
+            this.tabControlEvent.Multiline = true;
+            this.tabControlEvent.Name = "tabControlEvent";
+            this.tabControlEvent.SelectedIndex = 0;
+            this.tabControlEvent.Size = new System.Drawing.Size(1280, 720);
+            this.tabControlEvent.TabIndex = 1;
             // 
-            // buttonConfirm
+            // tabPage1
             // 
-            this.buttonConfirm.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonConfirm.Location = new System.Drawing.Point(783, 3);
-            this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(94, 38);
-            this.buttonConfirm.TabIndex = 8;
-            this.buttonConfirm.Text = "Confirm";
-            this.buttonConfirm.UseVisualStyleBackColor = true;
-            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
+            this.tabPage1.Controls.Add(this.tableLayoutPanelEvent);
+            this.tabPage1.Location = new System.Drawing.Point(4, 4);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(1272, 694);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Score Table";
+            this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // buttonRejump
+            // tabPage2
             // 
-            this.buttonRejump.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRejump.Location = new System.Drawing.Point(883, 3);
-            this.buttonRejump.Name = "buttonRejump";
-            this.buttonRejump.Size = new System.Drawing.Size(94, 38);
-            this.buttonRejump.TabIndex = 9;
-            this.buttonRejump.Text = "Rejump";
-            this.buttonRejump.UseVisualStyleBackColor = true;
-            this.buttonRejump.Click += new System.EventHandler(this.buttonRejump_Click);
+            this.tabPage2.Location = new System.Drawing.Point(4, 4);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1272, 694);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Reports";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPageReports
-            // 
-            this.tabPageReports.Location = new System.Drawing.Point(4, 4);
-            this.tabPageReports.Name = "tabPageReports";
-            this.tabPageReports.Size = new System.Drawing.Size(1272, 774);
-            this.tabPageReports.TabIndex = 2;
-            this.tabPageReports.Text = "Reports";
-            this.tabPageReports.UseVisualStyleBackColor = true;
-            // 
-            // EventAccuracy
+            // EventAccuracyNew
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.tabControlEvent);
-            this.Name = "EventAccuracy";
-            this.Size = new System.Drawing.Size(1280, 800);
+            this.Name = "EventAccuracyNew";
+            this.Size = new System.Drawing.Size(1280, 720);
+            this.tableLayoutPanelEvent.ResumeLayout(false);
+            this.tableLayoutPanelEvent.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridScores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tabControlEvent.ResumeLayout(false);
-            this.tabPageScores.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewScore)).EndInit();
-            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanelEvent;
+        private System.Windows.Forms.Button inputManualLanding;
+        private System.Windows.Forms.Button inputEditScore;
+        private System.Windows.Forms.Button inputUnassignLanding;
+        private System.Windows.Forms.Button inputClose;
+        private System.Windows.Forms.Label labelEventName;
+        private System.Windows.Forms.Button inputRejump;
+        private System.Windows.Forms.Button inputConfirm;
+        private System.Windows.Forms.Button inputNextRound;
+        private System.Windows.Forms.DataGridView dataGridScores;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.TabControl tabControlEvent;
-        private System.Windows.Forms.TabPage tabPageScores;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.Label labelName;
-        private System.Windows.Forms.DataGridView dataGridViewScore;
-        private System.Windows.Forms.TabPage tabPageReports;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.Button buttonNextRound;
-        private System.Windows.Forms.Button buttonEditLanding;
-        private System.Windows.Forms.Button buttonRenameCompetitor;
-        private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.Button buttonUnassignLanding;
-        private System.Windows.Forms.Button buttonManualLanding;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEID;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnIntermixTeam;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRound1;
-        private System.Windows.Forms.Button buttonConfirm;
-        private System.Windows.Forms.Button buttonRejump;
-        private System.Windows.Forms.GroupBox groupboxControllerListArea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnR1;
     }
 }

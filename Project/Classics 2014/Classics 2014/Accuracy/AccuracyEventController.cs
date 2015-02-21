@@ -130,18 +130,6 @@ namespace CMS.Accuracy
             return deSerializedLanding;
         }
 
-        public AccuracyLanding getLandingFromCell(DataGridViewCell cell)
-        {
-            for (int i = 0; i < Landings.Count; i++)
-            {
-                if (Landings[i].dataGridCell == cell)
-                {
-                    return Landings[i];
-                }
-            }
-            return null;
-        }
-
         public void LoadEvent(Accuracy_Event _event)
         {
             _event.AddParents(SQL_Controller, IO_Controller, engine, this);
@@ -184,7 +172,6 @@ namespace CMS.Accuracy
         /// <param name="landing"></param>
         public void unAssignLanding(AccuracyLanding landing)
         {
-            landing.dataGridCell = null;
             landing.UID = -1;
             SQL_Controller.ModifyLanding(landing);
             column.AddLanding(landing);

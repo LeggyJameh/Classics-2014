@@ -222,6 +222,9 @@ namespace CMS
             }
         }
 
+        /// <summary>
+        /// Shows a message box for changing scores. If cancelled, will return original score, and will prevent user from going over the maximum available score.
+        /// </summary>
         public static int ModifyScore(int originalScore, int maximumscore)
         {
             int score;
@@ -234,7 +237,7 @@ namespace CMS
             nud.Maximum = maximumscore;
             nud.DecimalPlaces = 0;
 
-            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Modify Score", Properties.Resources.Icon, strings, new NumericUpDown());
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Modify Score", Properties.Resources.Icon, strings, nud);
 
             if (outputs != null)
             {
@@ -245,6 +248,32 @@ namespace CMS
             {
                 return originalScore;
             }
+        }
+
+        /// <summary>
+        /// Creates and returns a manual landing. Returns null if for whatever reason it fails.
+        /// </summary>
+        public static Accuracy.AccuracyLanding CreateAccuracyLanding(Accuracy.Accuracy_Event _event, int round)
+        {
+            Ruleset.AccuracyRules rules = (Ruleset.AccuracyRules)_event.Rules;
+            Accuracy.AccuracyLanding landing;
+            string[] strings = new string[1];
+            strings[0] = "Score:";
+
+            NumericUpDown nud = new NumericUpDown();
+            nud.Minimum = 0;
+            nud.Value = rules.maxScore;
+            nud.Maximum = rules.maxScore;
+            nud.DecimalPlaces = 0;
+
+            List<object> outputs = CustomMessageBox.CustomMessageBox.Show("Create Landing", Properties.Resources.Icon, strings, nud);
+
+            if (outputs != null)
+            {
+                landing = new Accuracy.AccuracyLanding((int)outputs[0], round);
+                return landing;
+            }
+            return null;
         }
     }
 }

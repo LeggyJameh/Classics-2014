@@ -10,8 +10,6 @@ namespace CMS.Accuracy
     class AccuracyLanding : Landing
     {
         [NonSerialized]
-        public DataGridViewCell dataGridCell;
-        [NonSerialized]
         public int index;
         [NonSerialized]
         public int windEnum; // Wind Enumerator.
@@ -43,8 +41,6 @@ namespace CMS.Accuracy
         /// <summary>
         /// Used for manual landings
         /// </summary>
-        /// <param name="score"></param>
-        /// <param name="round"></param>
         public AccuracyLanding(int score, int round)
         {
             this.score = score;

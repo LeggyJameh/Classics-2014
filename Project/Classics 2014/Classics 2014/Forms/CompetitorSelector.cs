@@ -172,9 +172,12 @@ namespace CMS
                     || (!data.GroupValue(t) && selectionShowGroup == SelectedOption.Unselected)
                     || selectionShowGroup == SelectedOption.All)
                 {
-                    if (t.ToUpper().Contains(filterGroup))
+                    if (filterGroup != null)
                     {
-                        groupsToAdd.Add(t);
+                        if (t.ToUpper().Contains(filterGroup))
+                        {
+                            groupsToAdd.Add(t);
+                        }
                     }
                 }
             }

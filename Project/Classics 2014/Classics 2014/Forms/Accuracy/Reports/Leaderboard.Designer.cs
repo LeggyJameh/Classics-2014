@@ -36,6 +36,8 @@
             this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.splitContainerLeaderboard = new System.Windows.Forms.SplitContainer();
+            this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.buttonExportToExcel = new System.Windows.Forms.Button();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.buttonDeselect = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
@@ -52,11 +54,14 @@
             this.buttonUndock = new System.Windows.Forms.Button();
             this.groupBoxPrint = new System.Windows.Forms.GroupBox();
             this.buttonPrint = new System.Windows.Forms.Button();
+            this.printDialog = new System.Windows.Forms.PrintDialog();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLockedLeaderboard)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).BeginInit();
             this.splitContainerLeaderboard.Panel1.SuspendLayout();
             this.splitContainerLeaderboard.Panel2.SuspendLayout();
             this.splitContainerLeaderboard.SuspendLayout();
+            this.groupBox8.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -90,7 +95,7 @@
             this.dataGridViewLockedLeaderboard.Name = "dataGridViewLockedLeaderboard";
             this.dataGridViewLockedLeaderboard.ReadOnly = true;
             this.dataGridViewLockedLeaderboard.RowHeadersVisible = false;
-            this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(783, 524);
+            this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(1145, 720);
             this.dataGridViewLockedLeaderboard.TabIndex = 1;
             // 
             // ColumnHiddenUID
@@ -140,6 +145,7 @@
             // 
             // splitContainerLeaderboard.Panel2
             // 
+            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox8);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox7);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox6);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox5);
@@ -148,9 +154,30 @@
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox2);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox1);
             this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBoxPrint);
-            this.splitContainerLeaderboard.Size = new System.Drawing.Size(875, 524);
-            this.splitContainerLeaderboard.SplitterDistance = 783;
+            this.splitContainerLeaderboard.Size = new System.Drawing.Size(1280, 720);
+            this.splitContainerLeaderboard.SplitterDistance = 1145;
             this.splitContainerLeaderboard.TabIndex = 2;
+            // 
+            // groupBox8
+            // 
+            this.groupBox8.Controls.Add(this.buttonExportToExcel);
+            this.groupBox8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupBox8.Location = new System.Drawing.Point(0, 535);
+            this.groupBox8.Name = "groupBox8";
+            this.groupBox8.Size = new System.Drawing.Size(131, 71);
+            this.groupBox8.TabIndex = 8;
+            this.groupBox8.TabStop = false;
+            // 
+            // buttonExportToExcel
+            // 
+            this.buttonExportToExcel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonExportToExcel.Location = new System.Drawing.Point(3, 16);
+            this.buttonExportToExcel.Name = "buttonExportToExcel";
+            this.buttonExportToExcel.Size = new System.Drawing.Size(125, 52);
+            this.buttonExportToExcel.TabIndex = 1;
+            this.buttonExportToExcel.Text = "Export To Excel";
+            this.buttonExportToExcel.UseVisualStyleBackColor = true;
+            this.buttonExportToExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
             // 
             // groupBox7
             // 
@@ -158,7 +185,7 @@
             this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox7.Location = new System.Drawing.Point(0, 464);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(88, 71);
+            this.groupBox7.Size = new System.Drawing.Size(131, 71);
             this.groupBox7.TabIndex = 7;
             this.groupBox7.TabStop = false;
             // 
@@ -167,7 +194,7 @@
             this.buttonDeselect.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDeselect.Location = new System.Drawing.Point(3, 16);
             this.buttonDeselect.Name = "buttonDeselect";
-            this.buttonDeselect.Size = new System.Drawing.Size(82, 52);
+            this.buttonDeselect.Size = new System.Drawing.Size(125, 52);
             this.buttonDeselect.TabIndex = 1;
             this.buttonDeselect.Text = "Deselect Grid";
             this.buttonDeselect.UseVisualStyleBackColor = true;
@@ -179,7 +206,7 @@
             this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox6.Location = new System.Drawing.Point(0, 393);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(88, 71);
+            this.groupBox6.Size = new System.Drawing.Size(131, 71);
             this.groupBox6.TabIndex = 6;
             this.groupBox6.TabStop = false;
             // 
@@ -188,7 +215,7 @@
             this.buttonSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSave.Location = new System.Drawing.Point(3, 16);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(82, 52);
+            this.buttonSave.Size = new System.Drawing.Size(125, 52);
             this.buttonSave.TabIndex = 0;
             this.buttonSave.Text = "Save";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -201,7 +228,7 @@
             this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox5.Location = new System.Drawing.Point(0, 322);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(88, 71);
+            this.groupBox5.Size = new System.Drawing.Size(131, 71);
             this.groupBox5.TabIndex = 5;
             this.groupBox5.TabStop = false;
             // 
@@ -210,7 +237,7 @@
             this.buttonSortAsTeam.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSortAsTeam.Location = new System.Drawing.Point(3, 16);
             this.buttonSortAsTeam.Name = "buttonSortAsTeam";
-            this.buttonSortAsTeam.Size = new System.Drawing.Size(82, 52);
+            this.buttonSortAsTeam.Size = new System.Drawing.Size(125, 52);
             this.buttonSortAsTeam.TabIndex = 1;
             this.buttonSortAsTeam.Text = "Sort as Team";
             this.buttonSortAsTeam.UseVisualStyleBackColor = true;
@@ -223,7 +250,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox4.Location = new System.Drawing.Point(0, 251);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(88, 71);
+            this.groupBox4.Size = new System.Drawing.Size(131, 71);
             this.groupBox4.TabIndex = 4;
             this.groupBox4.TabStop = false;
             // 
@@ -232,7 +259,7 @@
             this.buttonSortAsSingles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonSortAsSingles.Location = new System.Drawing.Point(3, 16);
             this.buttonSortAsSingles.Name = "buttonSortAsSingles";
-            this.buttonSortAsSingles.Size = new System.Drawing.Size(82, 52);
+            this.buttonSortAsSingles.Size = new System.Drawing.Size(125, 52);
             this.buttonSortAsSingles.TabIndex = 1;
             this.buttonSortAsSingles.Text = "Sort as Singles";
             this.buttonSortAsSingles.UseVisualStyleBackColor = true;
@@ -245,7 +272,7 @@
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox3.Location = new System.Drawing.Point(0, 180);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(88, 71);
+            this.groupBox3.Size = new System.Drawing.Size(131, 71);
             this.groupBox3.TabIndex = 3;
             this.groupBox3.TabStop = false;
             // 
@@ -254,7 +281,7 @@
             this.buttonClose.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonClose.Location = new System.Drawing.Point(3, 16);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(82, 52);
+            this.buttonClose.Size = new System.Drawing.Size(125, 52);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "Close";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -266,7 +293,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox2.Location = new System.Drawing.Point(0, 120);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(88, 60);
+            this.groupBox2.Size = new System.Drawing.Size(131, 60);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             // 
@@ -276,11 +303,10 @@
             this.buttonAutoUpdate.ForeColor = System.Drawing.Color.Crimson;
             this.buttonAutoUpdate.Location = new System.Drawing.Point(3, 16);
             this.buttonAutoUpdate.Name = "buttonAutoUpdate";
-            this.buttonAutoUpdate.Size = new System.Drawing.Size(82, 41);
+            this.buttonAutoUpdate.Size = new System.Drawing.Size(125, 41);
             this.buttonAutoUpdate.TabIndex = 1;
             this.buttonAutoUpdate.Text = "AutoUpdate";
             this.buttonAutoUpdate.UseVisualStyleBackColor = true;
-            this.buttonAutoUpdate.Click += new System.EventHandler(this.buttonAutoUpdate_Click);
             // 
             // groupBox1
             // 
@@ -288,7 +314,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBox1.Location = new System.Drawing.Point(0, 60);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(88, 60);
+            this.groupBox1.Size = new System.Drawing.Size(131, 60);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -297,7 +323,7 @@
             this.buttonUndock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonUndock.Location = new System.Drawing.Point(3, 16);
             this.buttonUndock.Name = "buttonUndock";
-            this.buttonUndock.Size = new System.Drawing.Size(82, 41);
+            this.buttonUndock.Size = new System.Drawing.Size(125, 41);
             this.buttonUndock.TabIndex = 1;
             this.buttonUndock.Text = "Undock";
             this.buttonUndock.UseVisualStyleBackColor = true;
@@ -309,7 +335,7 @@
             this.groupBoxPrint.Dock = System.Windows.Forms.DockStyle.Top;
             this.groupBoxPrint.Location = new System.Drawing.Point(0, 0);
             this.groupBoxPrint.Name = "groupBoxPrint";
-            this.groupBoxPrint.Size = new System.Drawing.Size(88, 60);
+            this.groupBoxPrint.Size = new System.Drawing.Size(131, 60);
             this.groupBoxPrint.TabIndex = 0;
             this.groupBoxPrint.TabStop = false;
             // 
@@ -318,11 +344,20 @@
             this.buttonPrint.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonPrint.Location = new System.Drawing.Point(3, 16);
             this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(82, 41);
+            this.buttonPrint.Size = new System.Drawing.Size(125, 41);
             this.buttonPrint.TabIndex = 0;
             this.buttonPrint.Text = "Print";
             this.buttonPrint.UseVisualStyleBackColor = true;
             this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
+            // 
+            // printDialog
+            // 
+            this.printDialog.AllowPrintToFile = false;
+            this.printDialog.UseEXDialog = true;
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // Leaderboard
             // 
@@ -330,12 +365,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.splitContainerLeaderboard);
             this.Name = "Leaderboard";
-            this.Size = new System.Drawing.Size(875, 524);
+            this.Size = new System.Drawing.Size(1280, 720);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLockedLeaderboard)).EndInit();
             this.splitContainerLeaderboard.Panel1.ResumeLayout(false);
             this.splitContainerLeaderboard.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).EndInit();
             this.splitContainerLeaderboard.ResumeLayout(false);
+            this.groupBox8.ResumeLayout(false);
             this.groupBox7.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
@@ -373,5 +409,9 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.GroupBox groupBox7;
         private System.Windows.Forms.Button buttonDeselect;
+        private System.Windows.Forms.PrintDialog printDialog;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private System.Windows.Forms.GroupBox groupBox8;
+        private System.Windows.Forms.Button buttonExportToExcel;
     }
 }

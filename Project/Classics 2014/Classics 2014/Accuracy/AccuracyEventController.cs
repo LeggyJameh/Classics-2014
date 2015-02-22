@@ -43,14 +43,15 @@ namespace CMS.Accuracy
         {
             if (Events.Count > 0)
             {
-                if (ListenThread.ThreadState == ThreadState.Stopped)
+                if (!ListenThread.IsAlive)
                 {
+                    ListenThread = new Thread(new ThreadStart(ListenProcedure));
                     ListenThread.Start();
                 }
             }
             else
             {
-                if (ListenThread.ThreadState == ThreadState.Running)
+                if (ListenThread.IsAlive)
                 {
                     ListenThread.Abort();
                 }

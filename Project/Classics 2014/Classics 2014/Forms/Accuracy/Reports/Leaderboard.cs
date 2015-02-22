@@ -9,79 +9,49 @@ using System.Windows.Forms;
 using System.Drawing.Printing;
 using System.IO;
 using CMS.MySQL;
+using System.Collections.ObjectModel;
+using Microsoft.Office.Interop.Excel;
 
 namespace CMS.Accuracy.Reports
 {
     partial class Leaderboard : UserControl
     {
         public string reportName;
-        private SQL_Controller sqlController;
         public bool autoUpdate = false;
         private Form undockedForm = null;
-        private int eventId;
-        private Accuracy_Event connectedEvent;
-        List<AccuracyLanding> landings;
-        Action<Leaderboard> Close;
         Bitmap display;
+        ReportCreation reportCreator;
         public bool CloseOnStart = false;
-        Ruleset.AccuracyRules rules;
-        public Leaderboard(int eventID, String reportName, SQL_Controller sqlController, Accuracy_Event connectedEvent,Action<Leaderboard> Close)
+        Microsoft.Office.Interop.Excel.Application xlApp; 
+        public Leaderboard(ReportCreation reportCreator, string ReportName)
         {
             InitializeComponent();
-            this.reportName = reportName;
-            this.eventId = eventID;
-            this.sqlController = sqlController;
-            this.connectedEvent = connectedEvent;
-            rules = (Ruleset.AccuracyRules)connectedEvent.Rules;
+            this.reportName = ReportName;
+            this.reportCreator = reportCreator;
             autoUpdate = false;
-            this.Close = Close;
             Populate();
-            if (rules.competitorsPerTeam > 1)
+            if (reportCreator.rules.competitorsPerTeam > 1)
             {
                 buttonSortAsSingles.Visible = true;
                 buttonSortAsTeam.Visible = true;
             }
             
         }
-        public void Update(int UserID, int Round, DataGridViewCell newCell)
+        public void Refresh_Teams()
         {
-            if (autoUpdate)
-            {
-                foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
-                {
-                    while (Round > dataGridViewLockedLeaderboard.ColumnCount - 5)
-                    {
-                        dataGridViewLockedLeaderboard.Columns.Add("Round" + (dataGridViewLockedLeaderboard.ColumnCount - 5), "Round" + (dataGridViewLockedLeaderboard.ColumnCount - 5));
-                    }
-                    if (r.Cells[0].Value.ToString() == UserID.ToString())
-                    {
-                        r.Cells[Round + 4] = (DataGridViewCell)newCell.Clone();
-                        r.Cells[Round + 4].Value  = newCell.Value;
-                        if (rules.competitorsPerTeam == 1)
-                        {
-                            complexSingleSort();
-                        }
-                        else
-                        {
-                            TeamSort();
-                        }
-                    }
-
-                }
-                dataGridViewLockedLeaderboard.Refresh();
-            }
+            Refresh();
         }
-        /// <summary>
-        /// If a non Landing change has occured to the Event Leaderboard
-        /// </summary>
-        /// <param name="Repop"></param>
-        public void Update()
+        public void Refresh_Data()
+        {
+            Refresh();
+        }
+        public void Refresh()
         {
             if (autoUpdate)
             {
                 dataGridViewLockedLeaderboard.Rows.Clear();
                 Populate();
-                if (rules.competitorsPerTeam == 1)
+                if (reportCreator.rules.competitorsPerTeam == 1)
                 {
                     complexSingleSort();
                 }
@@ -91,10 +61,21 @@ namespace CMS.Accuracy.Reports
                 }
             }
         }
+        /// <summary>
+        /// If a non Landing change has occured to the Event Leaderboard
+        /// </summary>
+        /// <param name="Repop"></param>
         public void Populate()
         {
-            List<Team> Teams = sqlController.GetTeamsForEvent(connectedEvent.EventID);
-            landings = sqlController.GetLandingsForEvent(eventId, connectedEvent.EventType);
+            List<Team> Teams = reportCreator.teams.ToList<Team>();
+            List<Landing> landings = new List<Landing>();
+            foreach (KeyValuePair<EventCompetitor, ObservableCollection<AccuracyLanding>> pair in reportCreator.data)
+            {
+                foreach (AccuracyLanding l in pair.Value)
+                {
+                    landings.Add(l);
+                }
+            }
             DataGridViewCell cellToEdit;
             for (int Ti = 0; Ti < Teams.Count; Ti++)
             {
@@ -131,7 +112,7 @@ namespace CMS.Accuracy.Reports
 
             }
 
-            if (rules.competitorsPerTeam == 1)
+            if (reportCreator.rules.competitorsPerTeam == 1)
             {
                 complexSingleSort();
             }
@@ -144,7 +125,7 @@ namespace CMS.Accuracy.Reports
         {
             int total = 0;
             int indexPosition=0;
-            int[] teamScores = new int[rules.competitorsPerTeam];
+            int[] teamScores = new int[reportCreator.rules.competitorsPerTeam];
 
             foreach (DataGridViewRow r in dataGridViewLockedLeaderboard.Rows)
             {
@@ -157,7 +138,7 @@ namespace CMS.Accuracy.Reports
         
             
             Array.Sort(teamScores);
-            for (int i2 = 0; i2 < Convert.ToInt16(rules.scoresUsed.Substring(5)); i2++)
+            for (int i2 = 0; i2 < Convert.ToInt16(reportCreator.rules.scoresUsed.Substring(5)); i2++)
             {
                 total += teamScores[i2];
             }
@@ -343,7 +324,7 @@ namespace CMS.Accuracy.Reports
                 uidInfo[i, 2] = 0;
                 uidInfo[i, 3] = GetMaxIndex(i);
                 uidInfo[i, 4] = i;
-                if (uidInfo[i, 3] < 4) { MessageBox.Show("Cannot order Leaderboard Prior to atleast 1 finished round, if required please insert and later remove manual landings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); Close(this); return; } // If we returned 4 it means that it cut the moment it hit 5, I.E When we started and so no round is ready
+                if (uidInfo[i, 3] < 4) { MessageBox.Show("Cannot order Leaderboard Prior to atleast 1 finished round, if required please insert and later remove manual landings.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); reportCreator.RemoveReport(this); return; } // If we returned 4 it means that it cut the moment it hit 5, I.E When we started and so no round is ready
                  i++;
             } //Here we assigning all of the basic variables such as ID max scored round, and position
             CurrentRoundIndex = uidInfo[1,3];
@@ -510,7 +491,7 @@ namespace CMS.Accuracy.Reports
 
         private void buttonClose_Click(object sender, EventArgs e)
         {
-            Close(this);
+           reportCreator.RemoveReport(this);
         }
 
         private void buttonSortAsSingles_Click(object sender, EventArgs e)
@@ -523,20 +504,21 @@ namespace CMS.Accuracy.Reports
             TeamSort();
         }
 
-        private void buttonPrint_Click(object sender, EventArgs e)
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            
-                PrintDialog printDialog = new PrintDialog();
-                PrintDocument printDocument1 = new PrintDocument();
-                display = new Bitmap(dataGridViewLockedLeaderboard.Width, dataGridViewLockedLeaderboard.Height);
-                dataGridViewLockedLeaderboard.DrawToBitmap(display, dataGridViewLockedLeaderboard.ClientRectangle);
-                DialogResult result = printDialog.ShowDialog();
-                printDialog.Document = printDocument1;
-                if (result == DialogResult.OK)
-                {
-                    printDocument1.Print();
-                }
-            
+            System.Drawing.Image img = display;
+            System.Drawing.Rectangle m = e.MarginBounds;
+
+            if ((double)img.Width / (double)img.Height > (double)m.Width / (double)m.Height) // image is wider
+            {
+                m.Height = (int)((double)img.Height / (double)img.Width * (double)m.Width);
+            }
+            else
+            {
+                m.Width = (int)((double)img.Width / (double)img.Height * (double)m.Height);
+            }
+            e.Graphics.DrawImage(img, m);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -556,6 +538,45 @@ namespace CMS.Accuracy.Reports
         private void buttonDeselect_Click(object sender, EventArgs e)
         {
             dataGridViewLockedLeaderboard.ClearSelection();
+        }
+
+        private void buttonPrint_Click(object sender, EventArgs e)
+        {
+            display = new Bitmap(dataGridViewLockedLeaderboard.DisplayRectangle.Height, dataGridViewLockedLeaderboard.DisplayRectangle.Width);
+            dataGridViewLockedLeaderboard.DrawToBitmap(display, dataGridViewLockedLeaderboard.DisplayRectangle);
+            DialogResult result = printDialog.ShowDialog();
+            printDialog.Document = printDocument1;
+            if (result == DialogResult.OK)
+            {
+                printDocument1.Print();
+            }      
+        }
+        private void buttonExportExcel_Click(object sender, EventArgs e)
+        {
+            xlApp = new Microsoft.Office.Interop.Excel.Application();
+            Workbook wb = xlApp.Workbooks.Add(XlWBATemplate.xlWBATWorksheet);
+            Worksheet ws = (Worksheet)wb.Worksheets[1];
+
+            foreach (DataGridViewColumn col in dataGridViewLockedLeaderboard.Columns)
+            {
+                if (col.Index !=0)
+                {
+                    ws.Cells[1, col.Index].Value = col.HeaderText;
+                }
+            }
+            ws.Cells[1, 1].EntireRow.Font.Bold = true;
+
+            foreach (DataGridViewRow row in dataGridViewLockedLeaderboard.Rows)
+            {
+                foreach (DataGridViewCell c in row.Cells)
+                {
+                    if (c.ColumnIndex != 0)
+                    {
+                        ws.Cells[row.Index + 2, c.ColumnIndex].Value2 = c.Value;
+                    }
+                }
+            }
+            xlApp.Visible = true;
         }
     }
 }

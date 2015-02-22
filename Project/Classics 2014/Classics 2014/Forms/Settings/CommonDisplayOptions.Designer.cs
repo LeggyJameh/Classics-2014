@@ -471,6 +471,7 @@
             // comboBoxDirectionOutGraph
             // 
             this.comboBoxDirectionOutGraph.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDirectionOutGraph.Enabled = false;
             this.comboBoxDirectionOutGraph.FormattingEnabled = true;
             this.comboBoxDirectionOutGraph.Items.AddRange(new object[] {
             "Aqua",
@@ -586,11 +587,13 @@
             this.comboBoxDirectionOutGraph.Name = "comboBoxDirectionOutGraph";
             this.comboBoxDirectionOutGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxDirectionOutGraph.TabIndex = 12;
+            this.comboBoxDirectionOutGraph.Visible = false;
             this.comboBoxDirectionOutGraph.SelectedIndexChanged += new System.EventHandler(this.comboBoxDirectionOutGraph_SelectedIndexChanged);
             // 
             // comboBoxWindOutGraph
             // 
             this.comboBoxWindOutGraph.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxWindOutGraph.Enabled = false;
             this.comboBoxWindOutGraph.FormattingEnabled = true;
             this.comboBoxWindOutGraph.Items.AddRange(new object[] {
             "Aqua",
@@ -706,11 +709,13 @@
             this.comboBoxWindOutGraph.Name = "comboBoxWindOutGraph";
             this.comboBoxWindOutGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxWindOutGraph.TabIndex = 11;
+            this.comboBoxWindOutGraph.Visible = false;
             this.comboBoxWindOutGraph.SelectedIndexChanged += new System.EventHandler(this.comboBoxWindOutGraph_SelectedIndexChanged);
             // 
             // comboBoxNormalColourGraph
             // 
             this.comboBoxNormalColourGraph.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxNormalColourGraph.Enabled = false;
             this.comboBoxNormalColourGraph.FormattingEnabled = true;
             this.comboBoxNormalColourGraph.Items.AddRange(new object[] {
             "Aqua",
@@ -826,6 +831,7 @@
             this.comboBoxNormalColourGraph.Name = "comboBoxNormalColourGraph";
             this.comboBoxNormalColourGraph.Size = new System.Drawing.Size(121, 21);
             this.comboBoxNormalColourGraph.TabIndex = 10;
+            this.comboBoxNormalColourGraph.Visible = false;
             this.comboBoxNormalColourGraph.SelectedIndexChanged += new System.EventHandler(this.comboBoxNormalColourGraph_SelectedIndexChanged);
             // 
             // label4
@@ -840,29 +846,35 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Enabled = false;
             this.label3.Location = new System.Drawing.Point(463, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(134, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Graph Direction Out Colour";
+            this.label3.Visible = false;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.Enabled = false;
             this.label2.Location = new System.Drawing.Point(233, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(117, 13);
             this.label2.TabIndex = 1;
             this.label2.Text = "Graph Wind Out Colour";
+            this.label2.Visible = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Enabled = false;
             this.label1.Location = new System.Drawing.Point(3, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Graph Normal Colour";
+            this.label1.Visible = false;
             // 
             // label9
             // 

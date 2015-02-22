@@ -65,7 +65,7 @@ namespace CMS.Accuracy
 
         private void addReportFormToTab()
         {
-            currentReportForm = new Reports.ReportCreation(Connected_Event);
+            currentReportForm = new Reports.ReportCreation(Connected_Event, this, data);
             currentReportForm.Dock = DockStyle.Fill;
             tabControlEvent.TabPages[1].Controls.Add(currentReportForm);
         }
@@ -314,24 +314,28 @@ namespace CMS.Accuracy
         /// </summary>
         private AccuracyLanding getLandingFromCell(DataGridViewCell cell)
         {
-            string tag = cell.Tag.ToString();
-            int seperator = tag.IndexOf("|");
-
-            int ID = Convert.ToInt16(tag.Substring(2, seperator - 2));
-            int UID = Convert.ToInt16(tag.Substring(seperator + 4));
-
-            foreach (EventCompetitor c in data.Keys)
+            
+            if (cell.Tag != null)
             {
-                if (c.ID == UID)
+                string tag = cell.Tag.ToString();
+                int seperator = tag.IndexOf("|");
+
+                int ID = Convert.ToInt16(tag.Substring(2, seperator - 2));
+                int UID = Convert.ToInt16(tag.Substring(seperator + 4));
+
+                foreach (EventCompetitor c in data.Keys)
                 {
-                    foreach (AccuracyLanding l in data[c])
+                    if (c.ID == UID)
                     {
-                        if (l.ID == ID)
+                        foreach (AccuracyLanding l in data[c])
                         {
-                            return l;
+                            if (l.ID == ID)
+                            {
+                                return l;
                         }
                     }
                 }
+            }
             }
             return null;
         }

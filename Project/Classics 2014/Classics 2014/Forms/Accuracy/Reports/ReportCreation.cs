@@ -131,8 +131,11 @@ namespace CMS.Accuracy.Reports
         /// </summary>
         private void swapReportForLeaderboard()
         {
-            ActiveReport.Enabled = false;
-            ActiveReport.Visible = false;
+            if (ActiveReport != null)
+            {
+                ActiveReport.Enabled = false;
+                ActiveReport.Visible = false;
+            }
             dataGridLeaderboard.Enabled = true;
             dataGridLeaderboard.Visible = true;
             tableLayoutPanel1.Controls.Remove(ActiveReport);
@@ -144,7 +147,7 @@ namespace CMS.Accuracy.Reports
             refreshLeaderboard();
             foreach (Leaderboard l in LeaderboardReports)
             {
-                //l.Refresh_Teams();
+                l.Refresh_Teams();
             }
 
             foreach (TeamReport tr in TeamReports)
@@ -164,7 +167,7 @@ namespace CMS.Accuracy.Reports
 
             foreach (Leaderboard l in LeaderboardReports)
             {
-                //l.Refresh_Data();
+                l.Refresh_Data();
             }
 
             foreach (TeamReport tr in TeamReports)
@@ -195,27 +198,40 @@ namespace CMS.Accuracy.Reports
                 foreach (EventCompetitor c in t.Competitors)
                 {
                     int currentRow = dataGridLeaderboard.Rows.Add(c.ID, c.name, c.nationality, t.Name);
-                    foreach (AccuracyLanding l in data[c])
+                    EventCompetitor currentCompetitor = null;
+
+                    foreach (EventCompetitor k in data.Keys)
                     {
-                        DataGridViewCell currentCell = dataGridLeaderboard.Rows[currentRow].Cells[3 + l.round];
-                        currentCell.Value = l.score;
-
-                        if (l.rejumpable) // If rejumpable
+                        if (c.ID == k.ID)
                         {
-                            currentCell.Style.BackColor = MainEvent.rejumpableColour;
-                            currentCell.Style.SelectionBackColor = MainEvent.rejumpableSelectedColor;
+                            currentCompetitor = k;
                         }
+                    }
 
-                        if (l.windDataPrior == null) // If no wind data and therefore manual
+                    if (currentCompetitor != null)
+                    {
+                        foreach (AccuracyLanding l in data[c])
                         {
-                            currentCell.Style.BackColor = MainEvent.manualScoreColour;
-                            currentCell.Style.SelectionBackColor = MainEvent.manualScoreSelectedColor;
-                        }
+                            DataGridViewCell currentCell = dataGridLeaderboard.Rows[currentRow].Cells[3 + l.round];
+                            currentCell.Value = l.score;
 
-                        if (l.modified) // If Modified score
-                        {
-                            currentCell.Style.BackColor = MainEvent.modifiedScoreColour;
-                            currentCell.Style.SelectionBackColor = MainEvent.modifiedScoreSelectedColor;
+                            if (l.rejumpable) // If rejumpable
+                            {
+                                currentCell.Style.BackColor = MainEvent.rejumpableColour;
+                                currentCell.Style.SelectionBackColor = MainEvent.rejumpableSelectedColor;
+                            }
+
+                            if (l.windDataPrior == null) // If no wind data and therefore manual
+                            {
+                                currentCell.Style.BackColor = MainEvent.manualScoreColour;
+                                currentCell.Style.SelectionBackColor = MainEvent.manualScoreSelectedColor;
+                            }
+
+                            if (l.modified) // If Modified score
+                            {
+                                currentCell.Style.BackColor = MainEvent.modifiedScoreColour;
+                                currentCell.Style.SelectionBackColor = MainEvent.modifiedScoreSelectedColor;
+                            }
                         }
                     }
                 }
@@ -236,10 +252,6 @@ namespace CMS.Accuracy.Reports
                     r.Cells[Round + 3] = (DataGridViewCell)newCell.Clone();
                     r.Cells[Round + 3].Value = newCell.Value;
                 }
-            }
-            foreach (Leaderboard l in LeaderboardReports)
-            {
-                l.Update(UserID, Round, newCell);
             }
         }
 
@@ -293,10 +305,6 @@ namespace CMS.Accuracy.Reports
             }
             textBoxReportName.Enabled = false;
             buttonCreateReport.Enabled = false;
-            if (listBoxEventList.Items.Count > 0)
-            {
-                listBoxEventList.SelectedIndex = 0;
-            }
         }
 
         private void listBoxEventList_SelectedIndexChanged(object sender, EventArgs e)
@@ -343,6 +351,7 @@ namespace CMS.Accuracy.Reports
                                 ActiveReport = l;
                             }
                         }
+                        swapLeaderboardForReport();
                 }
                 else
                 {
@@ -410,12 +419,13 @@ namespace CMS.Accuracy.Reports
                 switch (listBoxEventList.SelectedItem.ToString())
                 {
                     case "Leaderboard":
-                        Leaderboard newLeaderBoard = new Leaderboard(Connected_Event.EventID, reportName, Connected_Event.SQL_Controller, Connected_Event, new Action<Leaderboard>(RemoveReport));
-                        if (!newLeaderBoard.CloseOnStart)
-                        {
+                        Leaderboard newLeaderBoard = new Leaderboard(this,textBoxReportName.Text);
+                          if (!newLeaderBoard.CloseOnStart)
+                         {
                             LeaderboardReports.Add(newLeaderBoard);
-                            ActiveReport = newLeaderBoard;
+                             ActiveReport = newLeaderBoard;
                             swapLeaderboardForReport();
+                            radioButtonExist.Checked = true;
                         }
                         break;
                     case "Team":
@@ -439,14 +449,18 @@ namespace CMS.Accuracy.Reports
                     case "Landing":
                         if (!(dataGridLeaderboard.SelectedCells.Count == 0) && !(dataGridLeaderboard.SelectedCells[0].ColumnIndex < 4)&& (dataGridLeaderboard.SelectedCells[0].Style.BackColor != Color.LightBlue ))
                         {
-                            foreach (AccuracyLanding l in landings)
+                            foreach (KeyValuePair<EventCompetitor, ObservableCollection<AccuracyLanding>> pair in data)
                             {
-                                if ((l.UID == Convert.ToInt16(dataGridLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value)) && (l.round == dataGridLeaderboard.SelectedCells[0].ColumnIndex - 3)) 
+                                foreach (AccuracyLanding l in pair.Value)
                                 {
-                                    LandingReport newReport = new LandingReport(l, reportName, Connected_Event, new Action<LandingReport>(RemoveReport));
-                                    LandingReports.Add(newReport);
-                                    ActiveReport = newReport;
-                                    swapLeaderboardForReport();
+                                    if ((l.UID == Convert.ToInt16(dataGridLeaderboard.SelectedCells[0].OwningRow.Cells[0].Value)) && (l.round == dataGridLeaderboard.SelectedCells[0].ColumnIndex - 3))
+                                    {
+                                        LandingReport newReport = new LandingReport(this, l, textBoxReportName.Text);
+                                        LandingReports.Add(newReport);
+                                        ActiveReport = newReport;
+                                        swapLeaderboardForReport();
+                                        radioButtonExist.Checked = true;
+                                    }
                                 }
                             }
                         }

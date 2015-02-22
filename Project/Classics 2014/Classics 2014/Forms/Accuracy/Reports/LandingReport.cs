@@ -14,14 +14,12 @@ namespace CMS.Accuracy.Reports
      partial class LandingReport : UserControl
     {
         public string NameOfReport;
-        ushort previousWindData;
-        bool started = false;
         Bitmap display;
         Form undockedForm;
         ReportCreation reportCreator;
         AccuracyLanding landingToDisplay;
         Microsoft.Office.Interop.Excel.Application xlApp; 
-        public LandingReport(ReportCreation reportCreator, AccuracyLanding landingToDisplay)
+        public LandingReport(ReportCreation reportCreator, AccuracyLanding landingToDisplay, string Name)
         {
             InitializeComponent();
             this.NameOfReport = Name;
@@ -57,7 +55,7 @@ namespace CMS.Accuracy.Reports
         
         private void buttonClose_Click(object sender, EventArgs e)
         {
-           // reportCreator.Close(this);
+            reportCreator.RemoveReport(this);
         }
 
         private void buttonPrint_Click(object sender, EventArgs e)
@@ -154,9 +152,9 @@ namespace CMS.Accuracy.Reports
              ws.Cells[landingToDisplay.windDataPrior.Length + 1, 4] = landingToDisplay.score;
              for (int i = 1; i < landingToDisplay.windDataAfter.Length; i++)
              {
-                 ws.Cells[landingToDisplay.windDataPrior.Length+ i + 2, 1].Value2 = landingToDisplay.windDataAfter[i].time;
-                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 2, 2].Value2 = landingToDisplay.windDataAfter[i].speed;
-                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 2, 3].Value2 = landingToDisplay.windDataAfter[i].direction;
+                 ws.Cells[landingToDisplay.windDataPrior.Length+ i + 1, 1].Value2 = landingToDisplay.windDataAfter[i].time;
+                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 1, 2].Value2 = landingToDisplay.windDataAfter[i].speed;
+                 ws.Cells[landingToDisplay.windDataPrior.Length + i + 1, 3].Value2 = landingToDisplay.windDataAfter[i].direction;
              }
              xlApp.Visible = true;
          }

@@ -98,6 +98,15 @@
     <Compile Include="Accuracy\AccuracyLanding.cs" />
     <Compile Include="Delegates.cs" />
     <Compile Include="EventLoader.cs" />
+    <Compile Include="FAI CP\Data_FAI_CP.cs" />
+    <Compile Include="FAI CP\FAI_CPEventController.cs" />
+    <Compile Include="FAI CP\FAI_CPLanding.cs" />
+    <Compile Include="FAI CP\FAI_CPSpecificSettings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>FAI_CPSpecificSettings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="FAI CP\FAI_CP_Event.cs" />
     <Compile Include="Forms\Accuracy\AccuracyOptionsMenu.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -133,6 +142,12 @@
     </Compile>
     <Compile Include="Forms\Accuracy\Reports\Leaderboard.Designer.cs">
       <DependentUpon>Leaderboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CPInit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CPInit.Designer.cs">
+      <DependentUpon>EventFAI_CPInit.cs</DependentUpon>
     </Compile>
     <Compile Include="Object Only Classes\LeaderboardCompetitor.cs" />
     <Compile Include="Forms\Accuracy\Reports\LeaderboardOLD.cs">
@@ -246,6 +261,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rulesets\AccuracyRuleset.cs" />
+    <Compile Include="Rulesets\FAI_CPRuleset.cs" />
     <Compile Include="Rulesets\Ruleset.cs" />
     <Compile Include="Serial Controller.cs" />
     <Compile Include="MySQL\SQL Controller.cs" />
@@ -305,6 +321,9 @@
       <DependentUpon>EventPicker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FAI CP\EventFAI_CPInit.resx">
+      <DependentUpon>EventFAI_CPInit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Settings\CommonDisplayOptions.resx">
       <DependentUpon>CommonDisplayOptions.cs</DependentUpon>
     </EmbeddedResource>
@@ -342,6 +361,10 @@
       <LastGenOutput>AccuracySpecificSettings.Designer.cs</LastGenOutput>
     </None>
     <None Include="app.config" />
+    <None Include="FAI CP\FAI_CPSpecificSettings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>FAI_CPSpecificSettings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -431,10 +454,7 @@
   <ItemGroup>
     <None Include="Resources\Logo2.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FAI CP\" />
-    <Folder Include="Forms\FAI CP\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

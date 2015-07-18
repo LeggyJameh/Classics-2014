@@ -16,6 +16,9 @@ namespace CMS
         {
             InitializeComponent();
             this.KeyDown += new KeyEventHandler(EventPickerKeyDown);
+
+            // Temp code
+            eventType = EventType.FAI_CP;
         }
 
         private void buttonStartEvent_Click(object sender, EventArgs e)
@@ -34,31 +37,14 @@ namespace CMS
         private void SelectionChange(object sender, EventArgs e)
         {
             RadioButton CurrentButton = (RadioButton)sender;
-            radioButtonFAIArtistic.Checked = false;
-            radioButtonFAICanopyPiloting.Checked = false;
-            radioButtonFAICF2Way.Checked = false;
-            radioButtonFAICF4Way.Checked = false;
-            radioButtonFAICF8Way.Checked = false;
-            radioButtonFAIFS4Way.Checked = false;
-            radioButtonFAIFS8Way.Checked = false;
-            radioButtonFAIParaski.Checked = false;
-            radioButtonFAISpeed.Checked = false;
-            radioButtonFAIStyleAndAccuracy.Checked = false;
-            radioButtonFAIVFS.Checked = false;
-            radioButtonFAIWingsuit.Checked = false;
-            radioButtonIntAccuracy.Checked = false;
-            radioButtonIntArtistic.Checked = false;
-            radioButtonIntCanopyPiloting.Checked = false;
-            radioButtonIntCF2Way.Checked = false;
-            radioButtonIntCF4Way.Checked = false;
-            radioButtonIntFS4Way.Checked = false;
-            radioButtonIntFS8Way.Checked = false;
-            radioButtonIntFSSpeed.Checked = false;
-            radioButtonIntParaski.Checked = false;
-            radioButtonIntSpeed.Checked = false;
-            radioButtonIntStyleAndAccuracy.Checked = false;
-            radioButtonIntVFS.Checked = false;
-            radioButtonIntWingsuit.Checked = false;
+            foreach (Control c in this.Controls)
+            {
+                if (c is RadioButton)
+                {
+                    RadioButton rb = (RadioButton)c;
+                    rb.Checked = false;
+                }
+            }
             CurrentButton.Checked = true;
 
             eventType = (EventType)Convert.ToInt16(CurrentButton.Tag);

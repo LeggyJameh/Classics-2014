@@ -147,7 +147,7 @@ namespace CMS.Accuracy.Reports
             refreshLeaderboard();
             foreach (Leaderboard l in LeaderboardReports)
             {
-                l.Refresh_Teams();
+                l.RefreshGrid();
             }
 
             foreach (TeamReport tr in TeamReports)
@@ -167,7 +167,7 @@ namespace CMS.Accuracy.Reports
 
             foreach (Leaderboard l in LeaderboardReports)
             {
-                l.Refresh_Data();
+                l.RefreshGrid();
             }
 
             foreach (TeamReport tr in TeamReports)
@@ -421,12 +421,12 @@ namespace CMS.Accuracy.Reports
                     case "Leaderboard":
                         Leaderboard newLeaderBoard = new Leaderboard(this,textBoxReportName.Text);
                           if (!newLeaderBoard.CloseOnStart)
-                         {
-                            LeaderboardReports.Add(newLeaderBoard);
-                             ActiveReport = newLeaderBoard;
-                            swapLeaderboardForReport();
-                            radioButtonExist.Checked = true;
-                        }
+                          {
+                              LeaderboardReports.Add(newLeaderBoard);
+                              ActiveReport = newLeaderBoard;
+                              swapLeaderboardForReport();
+                              radioButtonExist.Checked = true;
+                          }
                         break;
                     case "Team":
                             if (dataGridLeaderboard.SelectedRows.Count > 0)

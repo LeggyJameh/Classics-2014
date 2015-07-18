@@ -278,5 +278,19 @@ namespace CMS.Accuracy
         {
             engine.mainForm.addNewTab("New Event", tab);
         }
+
+        public void tabChanged(int tabIndex)
+        {
+            foreach (Accuracy_Event e in Events)
+            {
+                if (e.getTabIndex() == tabIndex)
+                {
+                    if (!e.containsColumn())
+                    {
+                        e.addColumn();
+                    }
+                }
+            }
+        }
     }
 }

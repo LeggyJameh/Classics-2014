@@ -19,14 +19,14 @@ namespace CMS.Accuracy
         private Ruleset.AccuracyRules rules;
 
         // Colours that are used in the grid to display properties about the landings.
-        public Color modifiedScoreColour = Color.Yellow;
-        public Color modifiedScoreSelectedColor = Color.Olive;
-        public Color manualScoreColour = Color.LightBlue;
-        public Color manualScoreSelectedColor = Color.SteelBlue;
-        public Color rejumpableColour = Color.Red;
-        public Color rejumpableSelectedColor = Color.DarkRed;
-        public Color goodLandingColour = Color.LightGreen;
-        public Color goodLandingSelectedColor = Color.ForestGreen;
+        public Color modifiedScoreColour = UserSettings.Default.scoreModifiedColour;
+        public Color modifiedScoreSelectedColor = UserSettings.Default.scoreModifiedSelectedColour;
+        public Color manualScoreColour = UserSettings.Default.scoreManualColour;
+        public Color manualScoreSelectedColor = UserSettings.Default.scoreManualSelectedColour;
+        public Color rejumpableColour = UserSettings.Default.scoreRejumpableColour;
+        public Color rejumpableSelectedColor = UserSettings.Default.scoreRejumpableSelectedColour;
+        public Color goodLandingColour = UserSettings.Default.scoreGoodLandingColour;
+        public Color goodLandingSelectedColor = UserSettings.Default.scoreGoodLandingSelectedColour;
 
         public UpdateAccuracyDataDelegate reportsUpdateDelegate;
         public int roundNumber = 1;
@@ -53,7 +53,7 @@ namespace CMS.Accuracy
         }
 
         #region Setup and layout
-        private void addControllerColumn()
+        public void addControllerColumn()
         {
             landingList = Connected_Event.controller.column;
             tableLayoutPanelEvent.Controls.Add(landingList);

@@ -350,7 +350,7 @@ namespace CMS.MySQL
         public bool ModifyLanding(Landing landing)
         {
             MySqlLanding NewLanding = SerialiseLanding(landing);
-            string query = "UPDATE `landings` SET `Data` = '" + ByteArrayToHex(NewLanding.Data) + "' WHERE `ID` = '" + NewLanding.ID + "';";
+            string query = "UPDATE `landings` SET `EventID`='" + landing.eventID + "', `UID`='" + landing.UID + "', `Data` = '" + ByteArrayToHex(NewLanding.Data) + "' WHERE `ID` = '" + NewLanding.ID + "';";
             return ExecuteNonQuery(query);
         }
 
@@ -769,6 +769,9 @@ namespace CMS.MySQL
                             LandingsToReturn.Add(currentLanding);
                         }
                         return LandingsToReturn;
+                    break;
+                    case (EventType.FAI_CP):
+                        // TODO: Add the deserialisation process for CP.
                     break;
                 }
 

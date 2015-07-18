@@ -65,5 +65,35 @@
     <Setting Name="DefaultTeamMode" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
+    <Setting Name="scoreModifiedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Yellow</Value>
+    </Setting>
+    <Setting Name="scoreModifiedSelectedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Olive</Value>
+    </Setting>
+    <Setting Name="scoreManualColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">LightBlue</Value>
+    </Setting>
+    <Setting Name="scoreManualSelectedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">SteelBlue</Value>
+    </Setting>
+    <Setting Name="scoreRejumpableColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">Red</Value>
+    </Setting>
+    <Setting Name="scoreRejumpableSelectedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">DarkRed</Value>
+    </Setting>
+    <Setting Name="scoreGoodLandingColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">LightGreen</Value>
+    </Setting>
+    <Setting Name="scoreGoodLandingSelectedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">ForestGreen</Value>
+    </Setting>
+    <Setting Name="leaderboardTeamNameRowColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">GradientInactiveCaption</Value>
+    </Setting>
+    <Setting Name="leaderboardTeamNameRowSelectedColour" Type="System.Drawing.Color" Scope="User">
+      <Value Profile="(Default)">GradientActiveCaption</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -29,389 +29,304 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.dataGridViewLockedLeaderboard = new System.Windows.Forms.DataGridView();
-            this.ColumnHiddenUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnPosition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCompetitorName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnCompetitorNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ColumnCompetitorTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.splitContainerLeaderboard = new System.Windows.Forms.SplitContainer();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.buttonExportToExcel = new System.Windows.Forms.Button();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.buttonDeselect = new System.Windows.Forms.Button();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.buttonSave = new System.Windows.Forms.Button();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.buttonSortAsTeam = new System.Windows.Forms.Button();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.buttonSortAsSingles = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.buttonClose = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.buttonAutoUpdate = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.buttonUndock = new System.Windows.Forms.Button();
-            this.groupBoxPrint = new System.Windows.Forms.GroupBox();
-            this.buttonPrint = new System.Windows.Forms.Button();
-            this.printDialog = new System.Windows.Forms.PrintDialog();
-            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLockedLeaderboard)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).BeginInit();
-            this.splitContainerLeaderboard.Panel1.SuspendLayout();
-            this.splitContainerLeaderboard.Panel2.SuspendLayout();
-            this.splitContainerLeaderboard.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBoxPrint.SuspendLayout();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.inputPrint = new System.Windows.Forms.Button();
+            this.inputClose = new System.Windows.Forms.Button();
+            this.inputAutoUpdate = new System.Windows.Forms.Button();
+            this.inputToggleDock = new System.Windows.Forms.Button();
+            this.inputSortSwitch = new System.Windows.Forms.Button();
+            this.labelSortType = new System.Windows.Forms.Label();
+            this.inputDeselectGrid = new System.Windows.Forms.Button();
+            this.inputExportToExcel = new System.Windows.Forms.Button();
+            this.inputSave = new System.Windows.Forms.Button();
+            this.inputHighlighting = new System.Windows.Forms.CheckBox();
+            this.inputTeamJumpOffDisable = new System.Windows.Forms.CheckBox();
+            this.dataGridLeaderboard = new System.Windows.Forms.DataGridView();
+            this.ColumnUID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnRanking = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnEID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnNationality = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColumnTeam = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLeaderboard)).BeginInit();
             this.SuspendLayout();
             // 
-            // dataGridViewLockedLeaderboard
+            // tableLayoutPanel1
             // 
-            this.dataGridViewLockedLeaderboard.AllowUserToAddRows = false;
-            this.dataGridViewLockedLeaderboard.AllowUserToDeleteRows = false;
-            this.dataGridViewLockedLeaderboard.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Info;
-            this.dataGridViewLockedLeaderboard.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewLockedLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dataGridViewLockedLeaderboard.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
-            this.dataGridViewLockedLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewLockedLeaderboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ColumnHiddenUID,
-            this.ColumnPosition,
-            this.ColumnCompetitorName,
-            this.columnCompetitorNationality,
-            this.ColumnCompetitorTeam});
-            this.dataGridViewLockedLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridViewLockedLeaderboard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewLockedLeaderboard.Enabled = false;
-            this.dataGridViewLockedLeaderboard.Location = new System.Drawing.Point(0, 0);
-            this.dataGridViewLockedLeaderboard.Name = "dataGridViewLockedLeaderboard";
-            this.dataGridViewLockedLeaderboard.ReadOnly = true;
-            this.dataGridViewLockedLeaderboard.RowHeadersVisible = false;
-            this.dataGridViewLockedLeaderboard.Size = new System.Drawing.Size(1145, 720);
-            this.dataGridViewLockedLeaderboard.TabIndex = 1;
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 85F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.Controls.Add(this.inputPrint, 1, 9);
+            this.tableLayoutPanel1.Controls.Add(this.inputClose, 1, 10);
+            this.tableLayoutPanel1.Controls.Add(this.inputAutoUpdate, 1, 3);
+            this.tableLayoutPanel1.Controls.Add(this.inputToggleDock, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.inputSortSwitch, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.labelSortType, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.inputDeselectGrid, 1, 4);
+            this.tableLayoutPanel1.Controls.Add(this.inputExportToExcel, 1, 8);
+            this.tableLayoutPanel1.Controls.Add(this.inputSave, 1, 7);
+            this.tableLayoutPanel1.Controls.Add(this.inputHighlighting, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.inputTeamJumpOffDisable, 1, 6);
+            this.tableLayoutPanel1.Controls.Add(this.dataGridLeaderboard, 0, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 11;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.090909F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(1280, 800);
+            this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // ColumnHiddenUID
+            // inputPrint
             // 
-            this.ColumnHiddenUID.HeaderText = "This should be invisible";
-            this.ColumnHiddenUID.Name = "ColumnHiddenUID";
-            this.ColumnHiddenUID.ReadOnly = true;
-            this.ColumnHiddenUID.Visible = false;
+            this.inputPrint.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputPrint.Location = new System.Drawing.Point(1091, 672);
+            this.inputPrint.Name = "inputPrint";
+            this.inputPrint.Size = new System.Drawing.Size(186, 23);
+            this.inputPrint.TabIndex = 1;
+            this.inputPrint.Text = "Print";
+            this.inputPrint.UseVisualStyleBackColor = true;
+            this.inputPrint.Click += new System.EventHandler(this.inputPrint_Click);
             // 
-            // ColumnPosition
+            // inputClose
             // 
-            this.ColumnPosition.HeaderText = "Position";
-            this.ColumnPosition.Name = "ColumnPosition";
-            this.ColumnPosition.ReadOnly = true;
-            this.ColumnPosition.Width = 69;
+            this.inputClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputClose.Location = new System.Drawing.Point(1091, 748);
+            this.inputClose.Name = "inputClose";
+            this.inputClose.Size = new System.Drawing.Size(186, 23);
+            this.inputClose.TabIndex = 4;
+            this.inputClose.Text = "Close";
+            this.inputClose.UseVisualStyleBackColor = true;
+            this.inputClose.Click += new System.EventHandler(this.inputClose_Click);
             // 
-            // ColumnCompetitorName
+            // inputAutoUpdate
             // 
-            this.ColumnCompetitorName.HeaderText = "Competitor Name";
-            this.ColumnCompetitorName.Name = "ColumnCompetitorName";
-            this.ColumnCompetitorName.ReadOnly = true;
-            this.ColumnCompetitorName.Width = 104;
+            this.inputAutoUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputAutoUpdate.ForeColor = System.Drawing.Color.Red;
+            this.inputAutoUpdate.Location = new System.Drawing.Point(1091, 240);
+            this.inputAutoUpdate.Name = "inputAutoUpdate";
+            this.inputAutoUpdate.Size = new System.Drawing.Size(186, 23);
+            this.inputAutoUpdate.TabIndex = 3;
+            this.inputAutoUpdate.Text = "Auto-Update";
+            this.inputAutoUpdate.UseVisualStyleBackColor = true;
+            this.inputAutoUpdate.Click += new System.EventHandler(this.inputAutoUpdate_Click);
             // 
-            // columnCompetitorNationality
+            // inputToggleDock
             // 
-            this.columnCompetitorNationality.HeaderText = "Competitor Nationality";
-            this.columnCompetitorNationality.Name = "columnCompetitorNationality";
-            this.columnCompetitorNationality.ReadOnly = true;
-            this.columnCompetitorNationality.Width = 123;
+            this.inputToggleDock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputToggleDock.Location = new System.Drawing.Point(1091, 168);
+            this.inputToggleDock.Name = "inputToggleDock";
+            this.inputToggleDock.Size = new System.Drawing.Size(186, 23);
+            this.inputToggleDock.TabIndex = 2;
+            this.inputToggleDock.Text = "Undock";
+            this.inputToggleDock.UseVisualStyleBackColor = true;
+            this.inputToggleDock.Click += new System.EventHandler(this.inputToggleDock_Click);
             // 
-            // ColumnCompetitorTeam
+            // inputSortSwitch
             // 
-            this.ColumnCompetitorTeam.HeaderText = "Competitor Team";
-            this.ColumnCompetitorTeam.Name = "ColumnCompetitorTeam";
-            this.ColumnCompetitorTeam.ReadOnly = true;
-            this.ColumnCompetitorTeam.Width = 103;
+            this.inputSortSwitch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputSortSwitch.Location = new System.Drawing.Point(1091, 96);
+            this.inputSortSwitch.Name = "inputSortSwitch";
+            this.inputSortSwitch.Size = new System.Drawing.Size(186, 23);
+            this.inputSortSwitch.TabIndex = 5;
+            this.inputSortSwitch.Text = "Sort as Teams";
+            this.inputSortSwitch.UseVisualStyleBackColor = true;
+            this.inputSortSwitch.Click += new System.EventHandler(this.inputSortSwitch_Click);
             // 
-            // splitContainerLeaderboard
+            // labelSortType
             // 
-            this.splitContainerLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerLeaderboard.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerLeaderboard.Name = "splitContainerLeaderboard";
+            this.labelSortType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSortType.AutoSize = true;
+            this.labelSortType.Location = new System.Drawing.Point(1091, 29);
+            this.labelSortType.Name = "labelSortType";
+            this.labelSortType.Size = new System.Drawing.Size(186, 13);
+            this.labelSortType.TabIndex = 9;
+            this.labelSortType.Text = "Current Sorting: Singles";
+            this.labelSortType.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // splitContainerLeaderboard.Panel1
+            // inputDeselectGrid
             // 
-            this.splitContainerLeaderboard.Panel1.Controls.Add(this.dataGridViewLockedLeaderboard);
+            this.inputDeselectGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputDeselectGrid.Location = new System.Drawing.Point(1091, 312);
+            this.inputDeselectGrid.Name = "inputDeselectGrid";
+            this.inputDeselectGrid.Size = new System.Drawing.Size(186, 23);
+            this.inputDeselectGrid.TabIndex = 7;
+            this.inputDeselectGrid.Text = "Deselect Grid";
+            this.inputDeselectGrid.UseVisualStyleBackColor = true;
+            this.inputDeselectGrid.Click += new System.EventHandler(this.inputDeselectGrid_Click);
             // 
-            // splitContainerLeaderboard.Panel2
+            // inputExportToExcel
             // 
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox8);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox7);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox6);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox5);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox4);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox3);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainerLeaderboard.Panel2.Controls.Add(this.groupBoxPrint);
-            this.splitContainerLeaderboard.Size = new System.Drawing.Size(1280, 720);
-            this.splitContainerLeaderboard.SplitterDistance = 1145;
-            this.splitContainerLeaderboard.TabIndex = 2;
+            this.inputExportToExcel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputExportToExcel.Location = new System.Drawing.Point(1091, 600);
+            this.inputExportToExcel.Name = "inputExportToExcel";
+            this.inputExportToExcel.Size = new System.Drawing.Size(186, 23);
+            this.inputExportToExcel.TabIndex = 8;
+            this.inputExportToExcel.Text = "Export To Excel";
+            this.inputExportToExcel.UseVisualStyleBackColor = true;
+            this.inputExportToExcel.Click += new System.EventHandler(this.inputExportToExcel_Click);
             // 
-            // groupBox8
+            // inputSave
             // 
-            this.groupBox8.Controls.Add(this.buttonExportToExcel);
-            this.groupBox8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox8.Location = new System.Drawing.Point(0, 535);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(131, 71);
-            this.groupBox8.TabIndex = 8;
-            this.groupBox8.TabStop = false;
+            this.inputSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputSave.Location = new System.Drawing.Point(1091, 528);
+            this.inputSave.Name = "inputSave";
+            this.inputSave.Size = new System.Drawing.Size(186, 23);
+            this.inputSave.TabIndex = 6;
+            this.inputSave.Text = "Save";
+            this.inputSave.UseVisualStyleBackColor = true;
+            this.inputSave.Click += new System.EventHandler(this.inputSave_Click);
             // 
-            // buttonExportToExcel
+            // inputHighlighting
             // 
-            this.buttonExportToExcel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonExportToExcel.Location = new System.Drawing.Point(3, 16);
-            this.buttonExportToExcel.Name = "buttonExportToExcel";
-            this.buttonExportToExcel.Size = new System.Drawing.Size(125, 52);
-            this.buttonExportToExcel.TabIndex = 1;
-            this.buttonExportToExcel.Text = "Export To Excel";
-            this.buttonExportToExcel.UseVisualStyleBackColor = true;
-            this.buttonExportToExcel.Click += new System.EventHandler(this.buttonExportExcel_Click);
+            this.inputHighlighting.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputHighlighting.AutoSize = true;
+            this.inputHighlighting.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.inputHighlighting.Location = new System.Drawing.Point(1091, 380);
+            this.inputHighlighting.Name = "inputHighlighting";
+            this.inputHighlighting.Size = new System.Drawing.Size(186, 31);
+            this.inputHighlighting.TabIndex = 10;
+            this.inputHighlighting.Text = "Enable Highlighting";
+            this.inputHighlighting.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.inputHighlighting.UseVisualStyleBackColor = true;
+            this.inputHighlighting.CheckedChanged += new System.EventHandler(this.inputHighlighting_CheckedChanged);
             // 
-            // groupBox7
+            // inputTeamJumpOffDisable
             // 
-            this.groupBox7.Controls.Add(this.buttonDeselect);
-            this.groupBox7.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox7.Location = new System.Drawing.Point(0, 464);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(131, 71);
-            this.groupBox7.TabIndex = 7;
-            this.groupBox7.TabStop = false;
+            this.inputTeamJumpOffDisable.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.inputTeamJumpOffDisable.AutoSize = true;
+            this.inputTeamJumpOffDisable.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.inputTeamJumpOffDisable.Location = new System.Drawing.Point(1091, 446);
+            this.inputTeamJumpOffDisable.Name = "inputTeamJumpOffDisable";
+            this.inputTeamJumpOffDisable.Size = new System.Drawing.Size(186, 44);
+            this.inputTeamJumpOffDisable.TabIndex = 11;
+            this.inputTeamJumpOffDisable.Text = "Lock Team Positions to\r\nlast full round";
+            this.inputTeamJumpOffDisable.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.inputTeamJumpOffDisable.UseVisualStyleBackColor = true;
+            this.inputTeamJumpOffDisable.CheckedChanged += new System.EventHandler(this.inputTeamJumpOffDisable_CheckedChanged);
             // 
-            // buttonDeselect
+            // dataGridLeaderboard
             // 
-            this.buttonDeselect.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonDeselect.Location = new System.Drawing.Point(3, 16);
-            this.buttonDeselect.Name = "buttonDeselect";
-            this.buttonDeselect.Size = new System.Drawing.Size(125, 52);
-            this.buttonDeselect.TabIndex = 1;
-            this.buttonDeselect.Text = "Deselect Grid";
-            this.buttonDeselect.UseVisualStyleBackColor = true;
-            this.buttonDeselect.Click += new System.EventHandler(this.buttonDeselect_Click);
+            this.dataGridLeaderboard.AllowUserToAddRows = false;
+            this.dataGridLeaderboard.AllowUserToDeleteRows = false;
+            this.dataGridLeaderboard.AllowUserToResizeColumns = false;
+            this.dataGridLeaderboard.AllowUserToResizeRows = false;
+            this.dataGridLeaderboard.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dataGridLeaderboard.BackgroundColor = System.Drawing.SystemColors.Control;
+            this.dataGridLeaderboard.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridLeaderboard.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridLeaderboard.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnUID,
+            this.ColumnRanking,
+            this.ColumnEID,
+            this.ColumnName,
+            this.ColumnNationality,
+            this.ColumnTeam});
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridLeaderboard.DefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridLeaderboard.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dataGridLeaderboard.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridLeaderboard.Location = new System.Drawing.Point(3, 3);
+            this.dataGridLeaderboard.MultiSelect = false;
+            this.dataGridLeaderboard.Name = "dataGridLeaderboard";
+            this.dataGridLeaderboard.ReadOnly = true;
+            this.dataGridLeaderboard.RowHeadersVisible = false;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            this.dataGridLeaderboard.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            this.tableLayoutPanel1.SetRowSpan(this.dataGridLeaderboard, 11);
+            this.dataGridLeaderboard.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridLeaderboard.Size = new System.Drawing.Size(1082, 794);
+            this.dataGridLeaderboard.TabIndex = 0;
             // 
-            // groupBox6
+            // ColumnUID
             // 
-            this.groupBox6.Controls.Add(this.buttonSave);
-            this.groupBox6.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox6.Location = new System.Drawing.Point(0, 393);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(131, 71);
-            this.groupBox6.TabIndex = 6;
-            this.groupBox6.TabStop = false;
+            this.ColumnUID.HeaderText = "UID";
+            this.ColumnUID.Name = "ColumnUID";
+            this.ColumnUID.ReadOnly = true;
+            this.ColumnUID.Visible = false;
             // 
-            // buttonSave
+            // ColumnRanking
             // 
-            this.buttonSave.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSave.Location = new System.Drawing.Point(3, 16);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(125, 52);
-            this.buttonSave.TabIndex = 0;
-            this.buttonSave.Text = "Save";
-            this.buttonSave.UseVisualStyleBackColor = true;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            this.ColumnRanking.HeaderText = "Ranking";
+            this.ColumnRanking.Name = "ColumnRanking";
+            this.ColumnRanking.ReadOnly = true;
             // 
-            // groupBox5
+            // ColumnEID
             // 
-            this.groupBox5.Controls.Add(this.buttonSortAsTeam);
-            this.groupBox5.Cursor = System.Windows.Forms.Cursors.Default;
-            this.groupBox5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox5.Location = new System.Drawing.Point(0, 322);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(131, 71);
-            this.groupBox5.TabIndex = 5;
-            this.groupBox5.TabStop = false;
+            this.ColumnEID.HeaderText = "Event ID";
+            this.ColumnEID.Name = "ColumnEID";
+            this.ColumnEID.ReadOnly = true;
             // 
-            // buttonSortAsTeam
+            // ColumnName
             // 
-            this.buttonSortAsTeam.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSortAsTeam.Location = new System.Drawing.Point(3, 16);
-            this.buttonSortAsTeam.Name = "buttonSortAsTeam";
-            this.buttonSortAsTeam.Size = new System.Drawing.Size(125, 52);
-            this.buttonSortAsTeam.TabIndex = 1;
-            this.buttonSortAsTeam.Text = "Sort as Team";
-            this.buttonSortAsTeam.UseVisualStyleBackColor = true;
-            this.buttonSortAsTeam.Visible = false;
-            this.buttonSortAsTeam.Click += new System.EventHandler(this.buttonSortAsTeam_Click);
+            this.ColumnName.HeaderText = "Name";
+            this.ColumnName.Name = "ColumnName";
+            this.ColumnName.ReadOnly = true;
             // 
-            // groupBox4
+            // ColumnNationality
             // 
-            this.groupBox4.Controls.Add(this.buttonSortAsSingles);
-            this.groupBox4.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox4.Location = new System.Drawing.Point(0, 251);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(131, 71);
-            this.groupBox4.TabIndex = 4;
-            this.groupBox4.TabStop = false;
+            this.ColumnNationality.HeaderText = "Nationality";
+            this.ColumnNationality.Name = "ColumnNationality";
+            this.ColumnNationality.ReadOnly = true;
             // 
-            // buttonSortAsSingles
+            // ColumnTeam
             // 
-            this.buttonSortAsSingles.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonSortAsSingles.Location = new System.Drawing.Point(3, 16);
-            this.buttonSortAsSingles.Name = "buttonSortAsSingles";
-            this.buttonSortAsSingles.Size = new System.Drawing.Size(125, 52);
-            this.buttonSortAsSingles.TabIndex = 1;
-            this.buttonSortAsSingles.Text = "Sort as Singles";
-            this.buttonSortAsSingles.UseVisualStyleBackColor = true;
-            this.buttonSortAsSingles.Visible = false;
-            this.buttonSortAsSingles.Click += new System.EventHandler(this.buttonSortAsSingles_Click);
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.buttonClose);
-            this.groupBox3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox3.Location = new System.Drawing.Point(0, 180);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(131, 71);
-            this.groupBox3.TabIndex = 3;
-            this.groupBox3.TabStop = false;
-            // 
-            // buttonClose
-            // 
-            this.buttonClose.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonClose.Location = new System.Drawing.Point(3, 16);
-            this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(125, 52);
-            this.buttonClose.TabIndex = 0;
-            this.buttonClose.Text = "Close";
-            this.buttonClose.UseVisualStyleBackColor = true;
-            this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.buttonAutoUpdate);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox2.Location = new System.Drawing.Point(0, 120);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(131, 60);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            // 
-            // buttonAutoUpdate
-            // 
-            this.buttonAutoUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonAutoUpdate.ForeColor = System.Drawing.Color.Crimson;
-            this.buttonAutoUpdate.Location = new System.Drawing.Point(3, 16);
-            this.buttonAutoUpdate.Name = "buttonAutoUpdate";
-            this.buttonAutoUpdate.Size = new System.Drawing.Size(125, 41);
-            this.buttonAutoUpdate.TabIndex = 1;
-            this.buttonAutoUpdate.Text = "AutoUpdate";
-            this.buttonAutoUpdate.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.buttonUndock);
-            this.groupBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBox1.Location = new System.Drawing.Point(0, 60);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(131, 60);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            // 
-            // buttonUndock
-            // 
-            this.buttonUndock.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUndock.Location = new System.Drawing.Point(3, 16);
-            this.buttonUndock.Name = "buttonUndock";
-            this.buttonUndock.Size = new System.Drawing.Size(125, 41);
-            this.buttonUndock.TabIndex = 1;
-            this.buttonUndock.Text = "Undock";
-            this.buttonUndock.UseVisualStyleBackColor = true;
-            this.buttonUndock.Click += new System.EventHandler(this.buttonUndock_Click);
-            // 
-            // groupBoxPrint
-            // 
-            this.groupBoxPrint.Controls.Add(this.buttonPrint);
-            this.groupBoxPrint.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxPrint.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxPrint.Name = "groupBoxPrint";
-            this.groupBoxPrint.Size = new System.Drawing.Size(131, 60);
-            this.groupBoxPrint.TabIndex = 0;
-            this.groupBoxPrint.TabStop = false;
-            // 
-            // buttonPrint
-            // 
-            this.buttonPrint.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonPrint.Location = new System.Drawing.Point(3, 16);
-            this.buttonPrint.Name = "buttonPrint";
-            this.buttonPrint.Size = new System.Drawing.Size(125, 41);
-            this.buttonPrint.TabIndex = 0;
-            this.buttonPrint.Text = "Print";
-            this.buttonPrint.UseVisualStyleBackColor = true;
-            this.buttonPrint.Click += new System.EventHandler(this.buttonPrint_Click);
-            // 
-            // printDialog
-            // 
-            this.printDialog.AllowPrintToFile = false;
-            this.printDialog.UseEXDialog = true;
-            // 
-            // printDocument1
-            // 
-            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
+            this.ColumnTeam.HeaderText = "Team";
+            this.ColumnTeam.Name = "ColumnTeam";
+            this.ColumnTeam.ReadOnly = true;
             // 
             // Leaderboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.splitContainerLeaderboard);
+            this.Controls.Add(this.tableLayoutPanel1);
             this.Name = "Leaderboard";
-            this.Size = new System.Drawing.Size(1280, 720);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewLockedLeaderboard)).EndInit();
-            this.splitContainerLeaderboard.Panel1.ResumeLayout(false);
-            this.splitContainerLeaderboard.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerLeaderboard)).EndInit();
-            this.splitContainerLeaderboard.ResumeLayout(false);
-            this.groupBox8.ResumeLayout(false);
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBoxPrint.ResumeLayout(false);
+            this.Size = new System.Drawing.Size(1280, 800);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridLeaderboard)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridViewLockedLeaderboard;
-        private System.Windows.Forms.SplitContainer splitContainerLeaderboard;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button buttonAutoUpdate;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button buttonUndock;
-        private System.Windows.Forms.GroupBox groupBoxPrint;
-        private System.Windows.Forms.Button buttonPrint;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnHiddenUID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnPosition;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnCompetitorNationality;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnCompetitorTeam;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.Button buttonSortAsSingles;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Button buttonClose;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.Button buttonSortAsTeam;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Button buttonSave;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.Button buttonDeselect;
-        private System.Windows.Forms.PrintDialog printDialog;
-        private System.Drawing.Printing.PrintDocument printDocument1;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private System.Windows.Forms.Button buttonExportToExcel;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.DataGridView dataGridLeaderboard;
+        private System.Windows.Forms.Button inputPrint;
+        private System.Windows.Forms.Button inputClose;
+        private System.Windows.Forms.Button inputAutoUpdate;
+        private System.Windows.Forms.Button inputToggleDock;
+        private System.Windows.Forms.Button inputSortSwitch;
+        private System.Windows.Forms.Label labelSortType;
+        private System.Windows.Forms.Button inputDeselectGrid;
+        private System.Windows.Forms.Button inputExportToExcel;
+        private System.Windows.Forms.Button inputSave;
+        private System.Windows.Forms.CheckBox inputHighlighting;
+        private System.Windows.Forms.CheckBox inputTeamJumpOffDisable;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnUID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnRanking;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnEID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnNationality;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnTeam;
     }
 }

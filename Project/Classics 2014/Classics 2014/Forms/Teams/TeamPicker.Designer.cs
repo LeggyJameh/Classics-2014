@@ -218,7 +218,7 @@
             this.inputFillRemaining.Name = "inputFillRemaining";
             this.inputFillRemaining.Size = new System.Drawing.Size(194, 23);
             this.inputFillRemaining.TabIndex = 4;
-            this.inputFillRemaining.Text = "Fill Remaining Teams";
+            this.inputFillRemaining.Text = "Fill Teams with fake competitors";
             this.inputFillRemaining.UseVisualStyleBackColor = true;
             this.inputFillRemaining.Click += new System.EventHandler(this.inputFillRemaining_Click);
             // 

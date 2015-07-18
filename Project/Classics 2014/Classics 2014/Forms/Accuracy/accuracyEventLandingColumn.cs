@@ -33,7 +33,7 @@ namespace CMS.Accuracy
                     i = dataGridViewLandings.Rows.Count; // End the loop
                 }
             }
-            // TODO: Select next row for convenience.
+            dataGridViewLandings.Rows[dataGridViewLandings.Rows.Count - 1].Selected = true;
         }
 
         public int GetIndexOfCurrentLanding()

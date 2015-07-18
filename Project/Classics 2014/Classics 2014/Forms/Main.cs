@@ -23,6 +23,7 @@ namespace CMS
         {
             this.KeyPreview = true;
             InitializeComponent();
+            tabControl.SelectedIndexChanged += new EventHandler(tabControl_TabIndexChanged);
             System.Media.SoundPlayer audioPlayer = new System.Media.SoundPlayer();
             textBoxSideSpeed.ForeColor = UserSettings.Default.sideTextStandarColour;
             textBoxSideDirection.ForeColor = UserSettings.Default.sideTextStandarColour;
@@ -37,6 +38,8 @@ namespace CMS
             MainGrid = tableLayoutPanel5;
             Engine.SQL_Controller.OpenConnection();
         }
+
+        
 
         #region tab controls
         public void addNewTab(string tabName, UserControl tabContents)
@@ -74,6 +77,26 @@ namespace CMS
         public void selectTab(TabPage tabPage)
         {
             tabControl.SelectedTab = tabPage;
+        }
+
+        public int getTabIndexOf(Control control)
+        {
+            foreach (TabPage page in tabControl.TabPages)
+            {
+                foreach (Control c in page.Controls)
+                {
+                    if (c == control)
+                    {
+                        return tabControl.TabPages.IndexOf(page);
+                    }
+                }
+            }
+            return -1;
+        }
+
+        void tabControl_TabIndexChanged(object sender, EventArgs e)
+        {
+            Engine.accuracyEventController.tabChanged(tabControl.SelectedIndex);
         }
         #endregion
 

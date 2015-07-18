@@ -113,6 +113,9 @@ namespace CMS
                     properties.Add("FA time after land");
                     properties.Add(rules.timeAfterFA.ToString());
                     break;
+                case EventType.INTL_CP:
+                    // TODO: Loading properties for CP events.
+                    break;
             }
 
             return properties;

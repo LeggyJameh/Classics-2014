@@ -63,26 +63,35 @@ namespace CMS
             {
                 switch (Rules.stage)
                 {
-                    case EventStage.SetupRules: // Same for every event, once past Setup rules, init setup teams.
-                        SQL_Controller.RemoveAllTeamsForEvent(EventID);
-                        Teams = new List<Team>();
-                        Rules.stage = EventStage.SetupTeams;
-                        engine.mainForm.removeTab((TabPage)currentWindow.Parent);
-                        if (Rules.competitorsPerTeam > 1) // If teamed
+                    case EventStage.SetupRules: // Same for most events, once past Setup rules, init setup teams.
+                        switch (EventType) // Check for event type. Some don't use teams.
                         {
-                            currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
-                            engine.mainForm.addNewTab("Team setup", currentWindow);
-                        }
-                        else // If singles...
-                        {
-                            foreach (Competitor c in UnassignedCompetitors)
-                            {
-                                Team newTeam = SQL_Controller.CreateTeam(EventID, c.name);
-                                newTeam.Competitors.Add(new EventCompetitor(c));
-                                SQL_Controller.ModifyTeam(newTeam);
-                                Teams.Add(newTeam);
-                            }
-                            NextStage();
+                            case CMS.EventType.INTL_ACCURACY:
+                                SQL_Controller.RemoveAllTeamsForEvent(EventID);
+                                Teams = new List<Team>();
+                                Rules.stage = EventStage.SetupTeams;
+                                engine.mainForm.removeTab((TabPage)currentWindow.Parent);
+                                if (Rules.competitorsPerTeam > 1) // If teamed
+                                {
+                                currentWindow = new TeamPicker(this, Rules.competitorsPerTeam);
+                                    engine.mainForm.addNewTab("Team setup", currentWindow);
+                                }
+                                else // If singles...
+                                {
+                                    foreach (Competitor c in UnassignedCompetitors)
+                                    {
+                                        Team newTeam = SQL_Controller.CreateTeam(EventID, c.name);
+                                        newTeam.Competitors.Add(new EventCompetitor(c));
+                                        SQL_Controller.ModifyTeam(newTeam);
+                                        Teams.Add(newTeam);
+                                    }
+                                    NextStage();
+                                }
+                                break;
+                            case CMS.EventType.INTL_CP:
+                                Rules.stage = EventStage.SetupTeams;
+                                NextStage();
+                                break;
                         }
                         break;
                     case EventStage.SetupTeams: // SetupEID global for all events, so continue.
@@ -98,6 +107,9 @@ namespace CMS
                                 engine.mainForm.removeTab((TabPage)currentWindow.Parent);
                                 currentWindow = new Accuracy.EventAccuracy((Accuracy.Accuracy_Event)this, new List<Accuracy.AccuracyLanding>());
                                 engine.mainForm.addNewTab(Name, currentWindow);
+                                break;
+                            case CMS.EventType.FAI_CP:
+                                // TODO: Go to CP Event
                                 break;
                         }
                         break; 
@@ -118,6 +130,9 @@ namespace CMS
                             case CMS.EventType.INTL_ACCURACY:
                                 currentWindow = new Accuracy.EventAccuracyInit((Accuracy.Accuracy_Event)this, true);
                                 engine.mainForm.addNewTab(Name, currentWindow);
+                                break;
+                            case CMS.EventType.INTL_CP:
+                                // TODO: Go back to event init.
                                 break;
                         }
                         break;
@@ -178,6 +193,9 @@ namespace CMS
                             currentWindow = new Accuracy.EventAccuracyInit((Accuracy.Accuracy_Event)this, true);
                             engine.mainForm.addNewTab(Name, currentWindow);
                             break;
+                        case CMS.EventType.INTL_CP:
+                            // TODO: CP Stuff
+                            break;
                     }
                     break;
                 case EventStage.SetupTeams:
@@ -196,6 +214,9 @@ namespace CMS
                                 Rules.stage = EventStage.Ready;
                                 currentWindow = new Accuracy.EventAccuracy((Accuracy.Accuracy_Event)this, SQL_Controller.GetLandingsForEvent(this.EventID, CMS.EventType.INTL_ACCURACY));
                                 engine.mainForm.addNewTab(Name, currentWindow);
+                            break;
+                        case CMS.EventType.INTL_CP:
+                            // TODO: CP Stuff
                             break;
                     }
                     break;

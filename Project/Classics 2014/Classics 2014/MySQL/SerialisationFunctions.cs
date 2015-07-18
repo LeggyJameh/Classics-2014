@@ -38,6 +38,9 @@ namespace CMS.MySQL
                     CMS.Accuracy.AccuracyLanding deSerializedLanding = (CMS.Accuracy.AccuracyLanding)f.Deserialize(m);
                     return deSerializedLanding;
                     break;
+                case EventType.FAI_CP:
+                    // TODO:
+                    break;
             }
             return null;
         }
@@ -92,6 +95,9 @@ namespace CMS.MySQL
                         deSerialisedEvent.Name = Event.Name;
                         deSerialisedEvent.Date = Event.Date;
                         return deSerialisedEvent;
+                        break;
+                    case EventType.FAI_CP:
+                        // TODO:
                         break;
                 }
             }

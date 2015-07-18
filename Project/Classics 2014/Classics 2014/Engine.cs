@@ -64,6 +64,9 @@ namespace CMS
                 case EventType.INTL_ACCURACY:
                     accuracyEventController.LoadEvent((Accuracy.Accuracy_Event)Event);
                     break;
+                case EventType.FAI_CP:
+                    // TODO: Loading for CP.
+                    break;
             }
         }
         
@@ -73,6 +76,9 @@ namespace CMS
             {
                 case EventType.INTL_ACCURACY:
                     accuracyEventController.AddEvent();
+                    break;
+                case EventType.FAI_CP:
+                    // TODO: Starting CP
                     break;
             }
         }

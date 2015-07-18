@@ -20,6 +20,7 @@ namespace CMS
         private ObservableCollection<Competitor> unassignedCompetitors;
         private FilterOption filterOption;
         private const string fakeCompetitorName = "Fake Competitor";
+        private int fakeCompetitorCount = 0;
         #endregion
 
         public TeamPicker(Event connected_event, int competitorsPerTeam)
@@ -157,10 +158,11 @@ namespace CMS
                     EventCompetitor fake = new EventCompetitor();
                     fake.EID = "";
                     fake.group = "";
-                    fake.ID = -1;
+                    fake.ID = -(fakeCompetitorCount + 1);
                     fake.name = fakeCompetitorName;
                     fake.nationality = "Zerg";
                     t.Competitors.Add(fake);
+                    fakeCompetitorCount++;
                 }
             }
         }

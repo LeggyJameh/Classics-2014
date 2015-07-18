@@ -157,6 +157,7 @@
             // radioButtonIntParaski
             // 
             this.radioButtonIntParaski.AutoSize = true;
+            this.radioButtonIntParaski.Enabled = false;
             this.radioButtonIntParaski.Location = new System.Drawing.Point(3, 295);
             this.radioButtonIntParaski.Name = "radioButtonIntParaski";
             this.radioButtonIntParaski.Size = new System.Drawing.Size(91, 17);
@@ -170,6 +171,7 @@
             // radioButtonIntArtistic
             // 
             this.radioButtonIntArtistic.AutoSize = true;
+            this.radioButtonIntArtistic.Enabled = false;
             this.radioButtonIntArtistic.Location = new System.Drawing.Point(3, 33);
             this.radioButtonIntArtistic.Name = "radioButtonIntArtistic";
             this.radioButtonIntArtistic.Size = new System.Drawing.Size(87, 17);
@@ -197,6 +199,7 @@
             // radioButtonIntCanopyPiloting
             // 
             this.radioButtonIntCanopyPiloting.AutoSize = true;
+            this.radioButtonIntCanopyPiloting.Enabled = false;
             this.radioButtonIntCanopyPiloting.Location = new System.Drawing.Point(3, 149);
             this.radioButtonIntCanopyPiloting.Name = "radioButtonIntCanopyPiloting";
             this.radioButtonIntCanopyPiloting.Size = new System.Drawing.Size(129, 17);
@@ -210,6 +213,7 @@
             // radioButtonIntSpeed
             // 
             this.radioButtonIntSpeed.AutoSize = true;
+            this.radioButtonIntSpeed.Enabled = false;
             this.radioButtonIntSpeed.Location = new System.Drawing.Point(3, 325);
             this.radioButtonIntSpeed.Name = "radioButtonIntSpeed";
             this.radioButtonIntSpeed.Size = new System.Drawing.Size(87, 17);
@@ -250,6 +254,7 @@
             // radioButtonIntCF2Way
             // 
             this.radioButtonIntCF2Way.AutoSize = true;
+            this.radioButtonIntCF2Way.Enabled = false;
             this.radioButtonIntCF2Way.Location = new System.Drawing.Point(33, 3);
             this.radioButtonIntCF2Way.Name = "radioButtonIntCF2Way";
             this.radioButtonIntCF2Way.Size = new System.Drawing.Size(109, 17);
@@ -263,6 +268,7 @@
             // radioButtonIntCF4Way
             // 
             this.radioButtonIntCF4Way.AutoSize = true;
+            this.radioButtonIntCF4Way.Enabled = false;
             this.radioButtonIntCF4Way.Location = new System.Drawing.Point(33, 33);
             this.radioButtonIntCF4Way.Name = "radioButtonIntCF4Way";
             this.radioButtonIntCF4Way.Size = new System.Drawing.Size(109, 17);
@@ -287,6 +293,7 @@
             // radioButtonIntStyleAndAccuracy
             // 
             this.radioButtonIntStyleAndAccuracy.AutoSize = true;
+            this.radioButtonIntStyleAndAccuracy.Enabled = false;
             this.radioButtonIntStyleAndAccuracy.Location = new System.Drawing.Point(3, 355);
             this.radioButtonIntStyleAndAccuracy.Name = "radioButtonIntStyleAndAccuracy";
             this.radioButtonIntStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
@@ -300,6 +307,7 @@
             // radioButtonIntVFS
             // 
             this.radioButtonIntVFS.AutoSize = true;
+            this.radioButtonIntVFS.Enabled = false;
             this.radioButtonIntVFS.Location = new System.Drawing.Point(3, 385);
             this.radioButtonIntVFS.Name = "radioButtonIntVFS";
             this.radioButtonIntVFS.Size = new System.Drawing.Size(76, 17);
@@ -313,6 +321,7 @@
             // radioButtonIntWingsuit
             // 
             this.radioButtonIntWingsuit.AutoSize = true;
+            this.radioButtonIntWingsuit.Enabled = false;
             this.radioButtonIntWingsuit.Location = new System.Drawing.Point(3, 415);
             this.radioButtonIntWingsuit.Name = "radioButtonIntWingsuit";
             this.radioButtonIntWingsuit.Size = new System.Drawing.Size(97, 17);
@@ -344,6 +353,7 @@
             // radioButtonIntFS4Way
             // 
             this.radioButtonIntFS4Way.AutoSize = true;
+            this.radioButtonIntFS4Way.Enabled = false;
             this.radioButtonIntFS4Way.Location = new System.Drawing.Point(33, 3);
             this.radioButtonIntFS4Way.Name = "radioButtonIntFS4Way";
             this.radioButtonIntFS4Way.Size = new System.Drawing.Size(109, 17);
@@ -357,6 +367,7 @@
             // radioButtonIntFS8Way
             // 
             this.radioButtonIntFS8Way.AutoSize = true;
+            this.radioButtonIntFS8Way.Enabled = false;
             this.radioButtonIntFS8Way.Location = new System.Drawing.Point(33, 33);
             this.radioButtonIntFS8Way.Name = "radioButtonIntFS8Way";
             this.radioButtonIntFS8Way.Size = new System.Drawing.Size(109, 17);
@@ -370,6 +381,7 @@
             // radioButtonIntFSSpeed
             // 
             this.radioButtonIntFSSpeed.AutoSize = true;
+            this.radioButtonIntFSSpeed.Enabled = false;
             this.radioButtonIntFSSpeed.Location = new System.Drawing.Point(33, 63);
             this.radioButtonIntFSSpeed.Name = "radioButtonIntFSSpeed";
             this.radioButtonIntFSSpeed.Size = new System.Drawing.Size(109, 17);
@@ -418,6 +430,7 @@
             // radioButtonFAIVFS
             // 
             this.radioButtonFAIVFS.AutoSize = true;
+            this.radioButtonFAIVFS.Enabled = false;
             this.radioButtonFAIVFS.Location = new System.Drawing.Point(3, 355);
             this.radioButtonFAIVFS.Name = "radioButtonFAIVFS";
             this.radioButtonFAIVFS.Size = new System.Drawing.Size(76, 17);
@@ -431,6 +444,7 @@
             // radioButtonFAIStyleAndAccuracy
             // 
             this.radioButtonFAIStyleAndAccuracy.AutoSize = true;
+            this.radioButtonFAIStyleAndAccuracy.Enabled = false;
             this.radioButtonFAIStyleAndAccuracy.Location = new System.Drawing.Point(3, 325);
             this.radioButtonFAIStyleAndAccuracy.Name = "radioButtonFAIStyleAndAccuracy";
             this.radioButtonFAIStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
@@ -444,6 +458,7 @@
             // radioButtonFAISpeed
             // 
             this.radioButtonFAISpeed.AutoSize = true;
+            this.radioButtonFAISpeed.Enabled = false;
             this.radioButtonFAISpeed.Location = new System.Drawing.Point(3, 295);
             this.radioButtonFAISpeed.Name = "radioButtonFAISpeed";
             this.radioButtonFAISpeed.Size = new System.Drawing.Size(87, 17);
@@ -470,6 +485,7 @@
             // radioButtonFAIArtistic
             // 
             this.radioButtonFAIArtistic.AutoSize = true;
+            this.radioButtonFAIArtistic.Enabled = false;
             this.radioButtonFAIArtistic.Location = new System.Drawing.Point(3, 3);
             this.radioButtonFAIArtistic.Name = "radioButtonFAIArtistic";
             this.radioButtonFAIArtistic.Size = new System.Drawing.Size(87, 17);
@@ -483,6 +499,7 @@
             // radioButtonFAIParaski
             // 
             this.radioButtonFAIParaski.AutoSize = true;
+            this.radioButtonFAIParaski.Enabled = false;
             this.radioButtonFAIParaski.Location = new System.Drawing.Point(3, 265);
             this.radioButtonFAIParaski.Name = "radioButtonFAIParaski";
             this.radioButtonFAIParaski.Size = new System.Drawing.Size(91, 17);
@@ -496,6 +513,7 @@
             // radioButtonFAIWingsuit
             // 
             this.radioButtonFAIWingsuit.AutoSize = true;
+            this.radioButtonFAIWingsuit.Enabled = false;
             this.radioButtonFAIWingsuit.Location = new System.Drawing.Point(3, 385);
             this.radioButtonFAIWingsuit.Name = "radioButtonFAIWingsuit";
             this.radioButtonFAIWingsuit.Size = new System.Drawing.Size(97, 17);
@@ -547,6 +565,7 @@
             // radioButtonFAIFS4Way
             // 
             this.radioButtonFAIFS4Way.AutoSize = true;
+            this.radioButtonFAIFS4Way.Enabled = false;
             this.radioButtonFAIFS4Way.Location = new System.Drawing.Point(33, 3);
             this.radioButtonFAIFS4Way.Name = "radioButtonFAIFS4Way";
             this.radioButtonFAIFS4Way.Size = new System.Drawing.Size(109, 17);
@@ -560,6 +579,7 @@
             // radioButtonFAIFS8Way
             // 
             this.radioButtonFAIFS8Way.AutoSize = true;
+            this.radioButtonFAIFS8Way.Enabled = false;
             this.radioButtonFAIFS8Way.Location = new System.Drawing.Point(33, 33);
             this.radioButtonFAIFS8Way.Name = "radioButtonFAIFS8Way";
             this.radioButtonFAIFS8Way.Size = new System.Drawing.Size(109, 17);
@@ -591,6 +611,7 @@
             // radioButtonFAICF2Way
             // 
             this.radioButtonFAICF2Way.AutoSize = true;
+            this.radioButtonFAICF2Way.Enabled = false;
             this.radioButtonFAICF2Way.Location = new System.Drawing.Point(33, 3);
             this.radioButtonFAICF2Way.Name = "radioButtonFAICF2Way";
             this.radioButtonFAICF2Way.Size = new System.Drawing.Size(109, 17);
@@ -604,6 +625,7 @@
             // radioButtonFAICF4Way
             // 
             this.radioButtonFAICF4Way.AutoSize = true;
+            this.radioButtonFAICF4Way.Enabled = false;
             this.radioButtonFAICF4Way.Location = new System.Drawing.Point(33, 33);
             this.radioButtonFAICF4Way.Name = "radioButtonFAICF4Way";
             this.radioButtonFAICF4Way.Size = new System.Drawing.Size(109, 17);
@@ -617,6 +639,7 @@
             // radioButtonFAICF8Way
             // 
             this.radioButtonFAICF8Way.AutoSize = true;
+            this.radioButtonFAICF8Way.Enabled = false;
             this.radioButtonFAICF8Way.Location = new System.Drawing.Point(33, 63);
             this.radioButtonFAICF8Way.Name = "radioButtonFAICF8Way";
             this.radioButtonFAICF8Way.Size = new System.Drawing.Size(109, 17);

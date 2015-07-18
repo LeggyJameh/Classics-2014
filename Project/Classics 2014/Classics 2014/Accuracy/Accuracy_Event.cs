@@ -85,6 +85,34 @@ namespace CMS.Accuracy
             }
         }
 
+        /// <summary>
+        /// Returns the tab index of the UserControl for this event in the main tab control.
+        /// </summary>
+        public int getTabIndex()
+        {
+            return engine.mainForm.getTabIndexOf(currentWindow);
+        }
+
+        /// <summary>
+        /// Adds the accuracy column to this event's control
+        /// </summary>
+        public void addColumn()
+        {
+            if (currentWindow is EventAccuracy)
+            {
+                EventAccuracy e = (EventAccuracy)currentWindow;
+                e.addControllerColumn();
+            }
+        }
+
+        /// <summary>
+        /// Returns whether or not this event contains the accuracy landing column.
+        /// </summary>
+        public bool containsColumn()
+        {
+            return this.currentWindow.Controls.Contains(controller.column);
+        }
+
         #region Event Saving
 
         /// <summary>

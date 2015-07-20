@@ -20,14 +20,18 @@ namespace CMS
         UserControl SideController;
         TWind[] wind = new TWind[60];
         List<TWind> windList = new List<TWind>();
-        public Accuracy.AccuracyEventController accuracyEventController;
         private StreamWriter writer;
         private TabPage pageForGraph;
         public FileStream fileStream;
         bool LostSerialConnection;
         List<UpdateCompetitorDelegate> competitorUpdateDelegates = new List<UpdateCompetitorDelegate>(); // Delegates that are called when competitors are updated via competitor editor.
         EventLoader eventLoader; // The class used for load execution
-        #endregion 
+
+        #region EventControllers
+        public Accuracy.AccuracyEventController accuracyEventController;
+        public FAI_CP.FAI_CPEventController fai_cpEventController;
+        #endregion
+        #endregion
 
         public Engine(Main mainForm, TabPage pageForGraph)
         {
@@ -37,6 +41,7 @@ namespace CMS
             IO_Controller = new IO_Controller(new Action(CloseSerialInputs));
             SQL_Controller = new SQL_Controller(UserSettings.Default.mySqlDataBaseServerIP, UserSettings.Default.mySqlDataBaseName, UserSettings.Default.mySqlDataBaseUser, UserSettings.Default.mySqlDataBasePassword);
             accuracyEventController = new Accuracy.AccuracyEventController(SQL_Controller, IO_Controller, this);
+            fai_cpEventController = new FAI_CP.FAI_CPEventController(SQL_Controller, IO_Controller, this);
             ListenThread = new Thread(new ThreadStart(ListenProcedure));  
             while ((!ListenThread.IsAlive)) 
             {
@@ -78,7 +83,7 @@ namespace CMS
                     accuracyEventController.AddEvent();
                     break;
                 case EventType.FAI_CP:
-                    // TODO: Starting CP
+                    fai_cpEventController.AddEvent();
                     break;
             }
         }

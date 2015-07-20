@@ -37,7 +37,7 @@ namespace CMS.FAI_CP
             
             this.tableLayoutPanel1.Controls.Add(competitorSelector, 2, 0);
             competitorSelector.Dock = DockStyle.Fill;
-            tableLayoutPanel1.SetRowSpan(competitorSelector, 19);
+            tableLayoutPanel1.SetRowSpan(competitorSelector, 13);
             tableLayoutPanel1.SetColumnSpan(competitorSelector, 2);
         }
 
@@ -50,19 +50,14 @@ namespace CMS.FAI_CP
                 eventName != "" &&
                 eventName.Length < 255 &&
                 rules.preset != null &&
-                rules.competitorsPerTeam >= 1 &&
                 rules.windspeedSafe >= 1 &&
                 rules.windspeedSafe <= 100 &&
-                rules.maxScore >= 1 &&
-                rules.maxScore <= 100 &&
                 rules.windspeedRejump >= 1 &&
                 rules.windspeedRejump <= 100 &&
                 rules.windSecondsPriorLand >= 1 &&
                 rules.windSecondsPriorLand <= 300 &&
                 rules.windSecondsAfterLand >= 1 &&
-                rules.windSecondsAfterLand <= 300 &&
-                rules.directionChangeFA >= 10 &&
-                rules.directionChangeFA <= 180
+                rules.windSecondsAfterLand <= 300
                 )
             {
                 return true;
@@ -78,22 +73,16 @@ namespace CMS.FAI_CP
         /// </summary>
         private void loadInputsFromRules()
         {
-            rules = (Ruleset.AccuracyRules)Connected_Event.Rules;
+            rules = (Ruleset.FAI_CPRules)Connected_Event.Rules;
 
             inputName.Text = Connected_Event.Name;
             inputDate.Value = Connected_Event.Date;
             inputMaxWind.Value = Convert.ToDecimal(rules.windspeedSafe);
-            inputFADirectionChange.SelectedItem = (object)angleToString(rules.directionChangeFA);
-            inputMaxScore.Value = Convert.ToDecimal(rules.maxScore);
-            competitorsPerTeam = rules.competitorsPerTeam;
-            inputCompetitorsPerTeam.Value = Convert.ToDecimal(rules.competitorsPerTeam);
+            inputDirectionChange.SelectedItem = (object)angleToString(rules.directionChange);
             inputRuleSet.SelectedItem = (object)rules.preset;
-            inputFATimeAfter.Value = Convert.ToDecimal(rules.timeAfterFA);
-            inputFATimePrior.Value = Convert.ToDecimal(rules.timePriorFA);
             inputLegalWindspeed.Value = Convert.ToDecimal(rules.windspeedRejump);
             inputWindDataAfter.Value = Convert.ToDecimal(rules.windSecondsAfterLand);
             inputWindDataPrior.Value = Convert.ToDecimal(rules.windSecondsPriorLand);
-            inputFALegalWindspeed.Value = Convert.ToDecimal(rules.windspeedFA);
         }
 
         /// <summary>
@@ -123,18 +112,11 @@ namespace CMS.FAI_CP
             List<Competitor> competitors = getSelectedCompetitors();
 
             rules.windspeedSafe = Convert.ToSingle(inputMaxWind.Value);
-            rules.directionChangeFA = getAngle(inputFADirectionChange.SelectedItem.ToString());
-            rules.maxScore = Convert.ToInt16(inputMaxScore.Value);
-            rules.competitorsPerTeam = Convert.ToInt16(inputCompetitorsPerTeam.Value);
             rules.preset = inputRuleSet.SelectedItem.ToString();
-            rules.scoresUsed = inputScoresUsed.SelectedItem.ToString();
             rules.stage = EventStage.SetupRules;
-            rules.timeAfterFA = Convert.ToInt16(inputFATimeAfter.Value);
-            rules.timePriorFA = Convert.ToInt16(inputFATimePrior.Value);
             rules.windspeedRejump = Convert.ToSingle(inputLegalWindspeed.Value);
             rules.windSecondsAfterLand = Convert.ToInt16(inputWindDataAfter.Value);
             rules.windSecondsPriorLand = Convert.ToInt16(inputWindDataPrior.Value);
-            rules.windspeedFA = Convert.ToSingle(inputFALegalWindspeed.Value);
 
             if ((competitors.Count % rules.competitorsPerTeam) > 0)
             {
@@ -166,16 +148,13 @@ namespace CMS.FAI_CP
         private void setupInputs()
         {
             inputDate.Value = DateTime.Today;
-            inputName.Text = "Accuracy Event " + (Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.INTL_ACCURACY) + 1).ToString() + " " + DateTime.Today.ToShortDateString();
+            inputName.Text = "Canopy Piloting Event " + (Connected_Event.SQL_Controller.GetNoOfEventsByTypeOnDay(DateTime.Today, EventType.FAI_CP) + 1).ToString() + " " + DateTime.Today.ToShortDateString();
             inputRuleSet.SelectedIndex = 0;
-            inputScoresUsed.SelectedItem = inputScoresUsed.Items[0];
-            inputFADirectionChange.SelectedItem = inputFADirectionChange.Items[8];
+            inputDirectionChange.SelectedItem = inputDirectionChange.Items[8];
             inputRuleSet.SelectedItem = inputRuleSet.Items[0];
             labelWarning.Text = "";
             windspeedSafe = 5.0f;
             windspeedRejump = 4.0f;
-            windspeedFA = 3.0f;
-            competitorsPerTeam = 5;
         }
 
         /// <summary>
@@ -224,11 +203,6 @@ namespace CMS.FAI_CP
             }
         }
 
-        private void inputCompetitorsPerTeam_ValueChanged(object sender, EventArgs e)
-        {
-            competitorsPerTeam = Convert.ToInt16(inputCompetitorsPerTeam.Value);
-        }
-
         private void inputMaxWind_ValueChanged(object sender, EventArgs e)
         {
             windspeedSafe = Convert.ToSingle(inputMaxWind.Value);
@@ -239,64 +213,9 @@ namespace CMS.FAI_CP
             windspeedRejump = Convert.ToSingle(inputLegalWindspeed.Value);
         }
 
-        private void inputFALegalWindspeed_ValueChanged(object sender, EventArgs e)
-        {
-            windspeedFA = Convert.ToSingle(inputFALegalWindspeed.Value);
-        }
-
-        private void inputScoresUsed_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (inputScoresUsed.SelectedItem.ToString() == "More...")
-            {
-                scoresUsedShowUnusualOptions = true;
-
-                // Force update the UI. xD
-                int temp = competitorsPerTeam;
-                competitorsPerTeam = 1;
-                competitorsPerTeam = temp;
-            }
-        }
-
         #endregion
 
         #region Rules variables get set operators
-
-        private int competitorsPerTeam
-        {
-            get
-            {
-                return rules.competitorsPerTeam;
-            }
-            set
-            {
-                inputScoresUsed.Items.Clear();
-                if (!scoresUsedShowUnusualOptions)
-                {
-                    if (value > 6)
-                    {
-                        inputScoresUsed.Items.Add("Top " + value);
-                        inputScoresUsed.Items.Add("Top " + (value - 1));
-                        inputScoresUsed.Items.Add("Top 5");
-                        inputScoresUsed.Items.Add("More...");
-                    }
-                    else
-                    {
-                        inputScoresUsed.Items.Add("Top " + value);
-                        inputScoresUsed.Items.Add("Top " + (value - 1));
-                        inputScoresUsed.Items.Add("More...");
-                    }
-                }
-                else
-                {
-                    for (int i = value; i > 0; i--)
-                    {
-                        inputScoresUsed.Items.Add("Top " + i);
-                    }
-                }
-                inputScoresUsed.SelectedIndex = 0;
-                rules.competitorsPerTeam = value;
-            }
-        }
 
         private float windspeedSafe
         {
@@ -327,29 +246,8 @@ namespace CMS.FAI_CP
                 {
                     windspeedSafe = Convert.ToSingle(value + windspeedDiff);
                 }
-                if (windspeedFA > value)
-                {
-                    windspeedFA = value;
-                }
                 inputLegalWindspeed.Value = (decimal)value;
                 rules.windspeedRejump = value;
-            }
-        }
-
-        private float windspeedFA
-        {
-            get
-            {
-                return rules.windspeedFA;
-            }
-            set
-            {
-                if (value > windspeedRejump)
-                {
-                    windspeedRejump = value;
-                }
-                inputFALegalWindspeed.Value = (decimal)value;
-                rules.windspeedFA = value;
             }
         }
 

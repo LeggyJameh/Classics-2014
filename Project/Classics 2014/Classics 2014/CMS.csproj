@@ -143,6 +143,27 @@
     <Compile Include="Forms\Accuracy\Reports\Leaderboard.Designer.cs">
       <DependentUpon>Leaderboard.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CPDistance.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CPSpeed.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CPAccuracy.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\CPAccuracyScorer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\CPAccuracyScorer.Designer.cs">
+      <DependentUpon>CPAccuracyScorer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CP.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\FAI CP\EventFAI_CP.Designer.cs">
+      <DependentUpon>EventFAI_CP.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FAI CP\EventFAI_CPInit.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -321,6 +342,12 @@
       <DependentUpon>EventPicker.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FAI CP\CPAccuracyScorer.resx">
+      <DependentUpon>CPAccuracyScorer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FAI CP\EventFAI_CP.resx">
+      <DependentUpon>EventFAI_CP.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FAI CP\EventFAI_CPInit.resx">
       <DependentUpon>EventFAI_CPInit.cs</DependentUpon>
     </EmbeddedResource>
@@ -454,7 +481,15 @@
   <ItemGroup>
     <None Include="Resources\Logo2.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\SplitterBarHorizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CPAccuracy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\CPAccuracyHD.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

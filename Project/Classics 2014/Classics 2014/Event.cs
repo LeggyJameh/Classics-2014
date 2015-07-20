@@ -18,6 +18,7 @@ namespace CMS
         public IO_Controller IO_Controller;
         public bool RequiresSerial { get; protected set; } // This is checked to see if Engine can Read the data without waiting (Psuedo Const)
         public EventType EventType;
+        public List<Competitor> Competitors;
         public List<Competitor> UnassignedCompetitors; // Used to take competitors from Init to Team picker only.
         public List<Team> Teams;
         public int EventID;
@@ -88,7 +89,7 @@ namespace CMS
                                     NextStage();
                                 }
                                 break;
-                            case CMS.EventType.INTL_CP:
+                            case CMS.EventType.FAI_CP:
                                 Rules.stage = EventStage.SetupTeams;
                                 NextStage();
                                 break;
@@ -109,7 +110,10 @@ namespace CMS
                                 engine.mainForm.addNewTab(Name, currentWindow);
                                 break;
                             case CMS.EventType.FAI_CP:
-                                // TODO: Go to CP Event
+                                Rules.stage = EventStage.Ready;
+                                engine.mainForm.removeCurrentTab();
+                                currentWindow = new FAI_CP.EventFAI_CP((FAI_CP.FAI_CP_Event)this, new List<FAI_CP.FAI_CPLanding>());
+                                engine.mainForm.addNewTab(Name, currentWindow);
                                 break;
                         }
                         break; 
@@ -131,7 +135,7 @@ namespace CMS
                                 currentWindow = new Accuracy.EventAccuracyInit((Accuracy.Accuracy_Event)this, true);
                                 engine.mainForm.addNewTab(Name, currentWindow);
                                 break;
-                            case CMS.EventType.INTL_CP:
+                            case CMS.EventType.FAI_CP:
                                 // TODO: Go back to event init.
                                 break;
                         }

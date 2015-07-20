@@ -37,17 +37,65 @@ namespace CMS
         private void SelectionChange(object sender, EventArgs e)
         {
             RadioButton CurrentButton = (RadioButton)sender;
-            foreach (Control c in this.Controls)
+            if (CurrentButton.Checked)
             {
-                if (c is RadioButton)
+                foreach (Control c in this.tableLayoutPanel2.Controls)
                 {
-                    RadioButton rb = (RadioButton)c;
-                    rb.Checked = false;
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
                 }
-            }
-            CurrentButton.Checked = true;
 
-            eventType = (EventType)Convert.ToInt16(CurrentButton.Tag);
+                foreach (Control c in this.tableLayoutPanel3.Controls)
+                {
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
+                }
+
+                foreach (Control c in this.tableLayoutPanel4.Controls)
+                {
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
+                }
+
+                foreach (Control c in this.tableLayoutPanel5.Controls)
+                {
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
+                }
+
+                foreach (Control c in this.tableLayoutPanel6.Controls)
+                {
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
+                }
+
+                foreach (Control c in this.tableLayoutPanel7.Controls)
+                {
+                    if (c is RadioButton)
+                    {
+                        RadioButton rb = (RadioButton)c;
+                        rb.Checked = false;
+                    }
+                }
+                CurrentButton.Checked = true;
+
+                eventType = (EventType)Convert.ToInt16(CurrentButton.Tag);
+            }
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

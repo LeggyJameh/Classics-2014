@@ -162,7 +162,6 @@
             this.radioButtonIntParaski.Name = "radioButtonIntParaski";
             this.radioButtonIntParaski.Size = new System.Drawing.Size(91, 17);
             this.radioButtonIntParaski.TabIndex = 9;
-            this.radioButtonIntParaski.TabStop = true;
             this.radioButtonIntParaski.Tag = "20";
             this.radioButtonIntParaski.Text = "Paraski Event";
             this.radioButtonIntParaski.UseVisualStyleBackColor = true;
@@ -176,7 +175,6 @@
             this.radioButtonIntArtistic.Name = "radioButtonIntArtistic";
             this.radioButtonIntArtistic.Size = new System.Drawing.Size(87, 17);
             this.radioButtonIntArtistic.TabIndex = 3;
-            this.radioButtonIntArtistic.TabStop = true;
             this.radioButtonIntArtistic.Tag = "13";
             this.radioButtonIntArtistic.Text = "Artistic Event";
             this.radioButtonIntArtistic.UseVisualStyleBackColor = true;
@@ -185,12 +183,10 @@
             // radioButtonIntAccuracy
             // 
             this.radioButtonIntAccuracy.AutoSize = true;
-            this.radioButtonIntAccuracy.Checked = true;
             this.radioButtonIntAccuracy.Location = new System.Drawing.Point(3, 3);
             this.radioButtonIntAccuracy.Name = "radioButtonIntAccuracy";
             this.radioButtonIntAccuracy.Size = new System.Drawing.Size(101, 17);
             this.radioButtonIntAccuracy.TabIndex = 0;
-            this.radioButtonIntAccuracy.TabStop = true;
             this.radioButtonIntAccuracy.Tag = "12";
             this.radioButtonIntAccuracy.Text = "Accuracy Event";
             this.radioButtonIntAccuracy.UseVisualStyleBackColor = true;
@@ -204,7 +200,6 @@
             this.radioButtonIntCanopyPiloting.Name = "radioButtonIntCanopyPiloting";
             this.radioButtonIntCanopyPiloting.Size = new System.Drawing.Size(129, 17);
             this.radioButtonIntCanopyPiloting.TabIndex = 4;
-            this.radioButtonIntCanopyPiloting.TabStop = true;
             this.radioButtonIntCanopyPiloting.Tag = "16";
             this.radioButtonIntCanopyPiloting.Text = "Canopy Piloting Event";
             this.radioButtonIntCanopyPiloting.UseVisualStyleBackColor = true;
@@ -218,7 +213,6 @@
             this.radioButtonIntSpeed.Name = "radioButtonIntSpeed";
             this.radioButtonIntSpeed.Size = new System.Drawing.Size(87, 17);
             this.radioButtonIntSpeed.TabIndex = 10;
-            this.radioButtonIntSpeed.TabStop = true;
             this.radioButtonIntSpeed.Tag = "21";
             this.radioButtonIntSpeed.Text = "Speed Event";
             this.radioButtonIntSpeed.UseVisualStyleBackColor = true;
@@ -298,7 +292,6 @@
             this.radioButtonIntStyleAndAccuracy.Name = "radioButtonIntStyleAndAccuracy";
             this.radioButtonIntStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
             this.radioButtonIntStyleAndAccuracy.TabIndex = 15;
-            this.radioButtonIntStyleAndAccuracy.TabStop = true;
             this.radioButtonIntStyleAndAccuracy.Tag = "22";
             this.radioButtonIntStyleAndAccuracy.Text = "Style and Accuracy Event";
             this.radioButtonIntStyleAndAccuracy.UseVisualStyleBackColor = true;
@@ -312,7 +305,6 @@
             this.radioButtonIntVFS.Name = "radioButtonIntVFS";
             this.radioButtonIntVFS.Size = new System.Drawing.Size(76, 17);
             this.radioButtonIntVFS.TabIndex = 16;
-            this.radioButtonIntVFS.TabStop = true;
             this.radioButtonIntVFS.Tag = "23";
             this.radioButtonIntVFS.Text = "VFS Event";
             this.radioButtonIntVFS.UseVisualStyleBackColor = true;
@@ -326,7 +318,6 @@
             this.radioButtonIntWingsuit.Name = "radioButtonIntWingsuit";
             this.radioButtonIntWingsuit.Size = new System.Drawing.Size(97, 17);
             this.radioButtonIntWingsuit.TabIndex = 17;
-            this.radioButtonIntWingsuit.TabStop = true;
             this.radioButtonIntWingsuit.Tag = "24";
             this.radioButtonIntWingsuit.Text = "Wingsuit Event";
             this.radioButtonIntWingsuit.UseVisualStyleBackColor = true;
@@ -435,7 +426,6 @@
             this.radioButtonFAIVFS.Name = "radioButtonFAIVFS";
             this.radioButtonFAIVFS.Size = new System.Drawing.Size(76, 17);
             this.radioButtonFAIVFS.TabIndex = 9;
-            this.radioButtonFAIVFS.TabStop = true;
             this.radioButtonFAIVFS.Tag = "10";
             this.radioButtonFAIVFS.Text = "VFS Event";
             this.radioButtonFAIVFS.UseVisualStyleBackColor = true;
@@ -449,7 +439,6 @@
             this.radioButtonFAIStyleAndAccuracy.Name = "radioButtonFAIStyleAndAccuracy";
             this.radioButtonFAIStyleAndAccuracy.Size = new System.Drawing.Size(148, 17);
             this.radioButtonFAIStyleAndAccuracy.TabIndex = 8;
-            this.radioButtonFAIStyleAndAccuracy.TabStop = true;
             this.radioButtonFAIStyleAndAccuracy.Tag = "9";
             this.radioButtonFAIStyleAndAccuracy.Text = "Style and Accuracy Event";
             this.radioButtonFAIStyleAndAccuracy.UseVisualStyleBackColor = true;
@@ -463,7 +452,6 @@
             this.radioButtonFAISpeed.Name = "radioButtonFAISpeed";
             this.radioButtonFAISpeed.Size = new System.Drawing.Size(87, 17);
             this.radioButtonFAISpeed.TabIndex = 7;
-            this.radioButtonFAISpeed.TabStop = true;
             this.radioButtonFAISpeed.Tag = "8";
             this.radioButtonFAISpeed.Text = "Speed Event";
             this.radioButtonFAISpeed.UseVisualStyleBackColor = true;
@@ -472,6 +460,7 @@
             // radioButtonFAICanopyPiloting
             // 
             this.radioButtonFAICanopyPiloting.AutoSize = true;
+            this.radioButtonFAICanopyPiloting.Checked = true;
             this.radioButtonFAICanopyPiloting.Location = new System.Drawing.Point(3, 149);
             this.radioButtonFAICanopyPiloting.Name = "radioButtonFAICanopyPiloting";
             this.radioButtonFAICanopyPiloting.Size = new System.Drawing.Size(129, 17);
@@ -490,7 +479,6 @@
             this.radioButtonFAIArtistic.Name = "radioButtonFAIArtistic";
             this.radioButtonFAIArtistic.Size = new System.Drawing.Size(87, 17);
             this.radioButtonFAIArtistic.TabIndex = 0;
-            this.radioButtonFAIArtistic.TabStop = true;
             this.radioButtonFAIArtistic.Tag = "0";
             this.radioButtonFAIArtistic.Text = "Artistic Event";
             this.radioButtonFAIArtistic.UseVisualStyleBackColor = true;
@@ -504,7 +492,6 @@
             this.radioButtonFAIParaski.Name = "radioButtonFAIParaski";
             this.radioButtonFAIParaski.Size = new System.Drawing.Size(91, 17);
             this.radioButtonFAIParaski.TabIndex = 4;
-            this.radioButtonFAIParaski.TabStop = true;
             this.radioButtonFAIParaski.Tag = "7";
             this.radioButtonFAIParaski.Text = "Paraski Event";
             this.radioButtonFAIParaski.UseVisualStyleBackColor = true;
@@ -518,7 +505,6 @@
             this.radioButtonFAIWingsuit.Name = "radioButtonFAIWingsuit";
             this.radioButtonFAIWingsuit.Size = new System.Drawing.Size(97, 17);
             this.radioButtonFAIWingsuit.TabIndex = 10;
-            this.radioButtonFAIWingsuit.TabStop = true;
             this.radioButtonFAIWingsuit.Tag = "11";
             this.radioButtonFAIWingsuit.Text = "Wingsuit Event";
             this.radioButtonFAIWingsuit.UseVisualStyleBackColor = true;

@@ -15,9 +15,6 @@ namespace CMS.Accuracy
     class Accuracy_Event : Event 
     {
         #region variables and the such like
-        public List<Competitor> Competitors;
-        public List<string> ActiveTeams;
-        Boolean lostSerial = false;
         public AccuracyEventController controller;
         Ruleset.AccuracyRules rules;
         #endregion

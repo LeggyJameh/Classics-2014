@@ -41,6 +41,13 @@ namespace CMS
         Ready = 3
     }
 
+    public enum CPLandingType
+    {
+        Accuracy = 0,
+        Speed = 1,
+        Distance = 2
+    }
+
     [Serializable]
     public struct TWind
     {

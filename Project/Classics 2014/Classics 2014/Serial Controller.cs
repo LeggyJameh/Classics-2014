@@ -85,10 +85,17 @@ namespace CMS
         private void DetermineConnection()
         {
             //ToDo Determine Connections
-            ReadOperation = new System.Action(AccuracyReadAndSplit);
-            incomingType = EventType.INTL_ACCURACY;
-            WindDirection = true;
-            WindSpeed = true;
+            if (port.BytesToRead / 19 == 1)
+            {
+                ReadOperation = new System.Action(AccuracyReadAndSplit);
+                incomingType = EventType.INTL_ACCURACY;
+                WindDirection = true;
+                WindSpeed = true;
+            }
+            else
+            {
+                 
+            }
             
         }
         public void CloseThread()
